@@ -1,0 +1,127 @@
+.delegations-container {
+    margin: auto;
+    
+    width: 75%;
+    height: 80%;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.hide {
+    visibility: hidden;
+    transition: 200ms;
+}
+
+.px18 {
+    font-size: 18px;
+}
+
+/*-----------LEFT UI-----------*/
+.UI-left {
+    width: 30%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.UI-topleft {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.delcount-container{
+    width: 80%;
+    height: 200px;
+
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #F7F7F7;
+
+    margin-bottom: 20px;
+}
+.delcount-subcont {
+    padding: 30px;
+}
+.delcount-num {
+    font-size: 72px;
+    font-weight: 600;
+}
+
+.btt-add-country {
+    width: 80%;
+    height: 50px;
+
+    background-color: #BAE4FA;
+    color: #378DCC;
+    font-weight: 500;
+    border-radius: 25px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 10px;
+}
+.btt-add-country:hover {
+    background-color: #378DCC;
+    color: #FFFFFF;
+    transition: 200ms;
+}
+
+.btt-remove-selected {
+    width: 80%;
+    height: 50px;
+
+    background-color: #F3B9C9;
+    color: #FF4343;
+    font-weight: 500;
+    border-radius: 25px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 10px;
+}
+.btt-remove-selected:hover {
+    background-color: #FF4343;
+    color: #FFFFFF;
+    transition: 200ms;
+}
+
+.export-delegations {
+    width: 80%;
+    color: black;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+.export-delegations:hover {
+    color: #686868;
+    transition: 200ms;
+}
+.export-codes {
+    padding-left: 15px;
+}
+
+/*-----------RIGHT UI-----------*/
+.UI-right {
+    width: 70%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    overflow-y: scroll;
+}

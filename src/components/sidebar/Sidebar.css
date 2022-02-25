@@ -1,0 +1,45 @@
+.Sidebar-container {
+    width: 60px;
+    height: 100%;
+
+    background-color: #FFFFFF;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Sidebar-topicons {
+    width: 100%;
+    height: 400px;
+    padding-top: 45px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.Sidebar-boticons {
+    width: 100%;
+    padding-bottom: 45px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.Sidebar-option {
+    width: 100%;
+    height: 60px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: 150ms;
+}
+.Sidebar-option:hover {
+    background-color: #EEEEEE;
+    transition: 150ms;
+}
