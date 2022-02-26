@@ -37,7 +37,7 @@ function Delegations() {
                 </div>
 
                 <div className="export-delegations">
-                    <BsIcons.BsDownload size={25}/>
+                    <BsIcons.BsDownload size={22}/>
                     <p className="export-codes">Export Codes (.xlsx)</p>
                 </div>
             </div>

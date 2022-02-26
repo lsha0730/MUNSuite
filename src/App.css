@@ -23,12 +23,12 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(170, 170, 170);
+  background: #BCBCBC;
   border-radius: 5px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(126, 126, 126);
+  background: rgb(160, 160, 160);
   transition: 200ms;
 }

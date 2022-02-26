@@ -1,15 +1,36 @@
+import React, { useEffect, useState } from "react";
 import './App.css';
 import Delegations from './components/delegations/Delegations.js';
 import Sidebar from './components/sidebar/Sidebar.js';
+import { pageContext } from './Context.js';
 
 function App() {
-  let Interface = <Delegations/>;
+  const [page, setPage] = useState("delegations");
+  const [UI, setUI] = useState(<Delegations/>);
+
+  useEffect(() => {
+    console.log(page);
+    setUI(() => {
+      switch (page) {
+        case "delegations": return <Delegations/>
+        case "editor": return <h1>Editor</h1>
+        case "inbox": return <h1>Inbox</h1>
+        case "history": return <h1>History</h1>
+        case "statistics": return <h1>Statistics</h1>
+        case "notes": return <h1>Notes</h1>
+        case "settings": return <h1>Settings</h1>
+        default: return <Delegations/>
+      }
+    })
+  }, [page])
 
   return (
-    <div className="App-container">
+    <pageContext.Provider value={{page, setPage}}>
+      <div className="App-container">
         <Sidebar/>
-        {Interface}
-    </div>
+        {UI}
+      </div>
+    </pageContext.Provider>
   )
 }
 

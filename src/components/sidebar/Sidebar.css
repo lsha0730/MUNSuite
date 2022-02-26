@@ -2,12 +2,31 @@
     width: 60px;
     height: 100%;
 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.Sidebar-subcontainer {
+    width: 100%;
+    height: 100%;
+
     background-color: #FFFFFF;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+}
+.Sidebar-indicator {
+    width: 3px;
+    height: 40px;
+
+    position: absolute;
+    left: 58px;
+    transition: 300ms;
+
+    background-color: #3C8CC9;
 }
 
 .Sidebar-topicons {
@@ -42,4 +61,13 @@
 .Sidebar-option:hover {
     background-color: #EEEEEE;
     transition: 150ms;
+}
+
+.active {
+    fill: #3C8CC9;
+    transition: 200ms;
+}
+.inactive {
+    fill: #CDCDCD;
+    transition: 200ms;
 }
