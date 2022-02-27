@@ -3,13 +3,14 @@ import './App.css';
 import Delegations from './components/delegations/Delegations.js';
 import Sidebar from './components/sidebar/Sidebar.js';
 import { pageContext } from './Context.js';
+import { delContext } from './components/delegations/DelContext.js';
 
 function App() {
   const [page, setPage] = useState("delegations");
   const [UI, setUI] = useState(<Delegations/>);
+  const [selections, setSelections] = useState([]);
 
   useEffect(() => {
-    console.log(page);
     setUI(() => {
       switch (page) {
         case "delegations": return <Delegations/>
@@ -26,10 +27,12 @@ function App() {
 
   return (
     <pageContext.Provider value={{page, setPage}}>
-      <div className="App-container">
-        <Sidebar/>
-        {UI}
-      </div>
+      <delContext.Provider value={{selections, setSelections}}>
+        <div className="App-container">
+          <Sidebar/>
+          {UI}
+        </div>
+      </delContext.Provider>
     </pageContext.Provider>
   )
 }

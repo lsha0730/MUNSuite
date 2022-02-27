@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Delegations.css";
-import DelegateBar from "./DelegateBar.js";
-import Delegates from "./Delegates.js";
+import DelegateBar from "./DelBar.js";
+import Delegates from "./DelData.js";
 import * as BsIcons from "react-icons/bs";
+import { delContext } from './DelContext.js';
 
 function Delegations() {
-    let countriesSelected = ["Canada"];
-    let delegateList = Delegates.map(delegate =>
+    const {selections, setSelections} = useContext(delContext);
+    let delegateBars = Delegates.map(delegate =>
         <DelegateBar
         key = {delegate.id}
         name = {delegate.name}
-        code = {delegate.code}/>);
+        code = {delegate.code}
+        />);
+
+    function deselectAll() { setSelections([]); }
+    function selectAll() {
+        var allDels = [];
+        Delegates.map(delegate => allDels.push(delegate.name));
+        setSelections(allDels);
+    }
 
     return (
         <div className="delegations-container">
@@ -31,7 +40,16 @@ function Delegations() {
                         <p>Add Custom Country</p>
                     </div>
 
-                    <div className={!(countriesSelected.length<1) ? "btt-remove-selected" : "btt-remove-selected hide"}>
+                    <div className="btt-deselect-all" onClick={selectAll}>
+                        <p>Select All</p>
+                    </div>
+
+                    <div className={!(selections.length<1) ? "btt-deselect-all" : "btt-deselect-all hide"}
+                    onClick={deselectAll}>
+                        <p>Deselect All</p>
+                    </div>
+
+                    <div className={!(selections.length<1) ? "btt-remove-selected" : "btt-remove-selected hide"}>
                         <p>Remove Selected</p>
                     </div>
                 </div>
@@ -43,7 +61,7 @@ function Delegations() {
             </div>
 
             <div className="UI-right">
-                {delegateList}
+                {delegateBars}
             </div>
         </div>
     )
