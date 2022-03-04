@@ -57,6 +57,7 @@
     align-items: center;
 
     transition: 150ms;
+    cursor: pointer;
 }
 .Sidebar-option:hover {
     background-color: #EEEEEE;

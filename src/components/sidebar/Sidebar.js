@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./Sidebar.css";
-import { pageContext } from "../../Context.js";
+import { appContext } from "../../Context.js";
 import * as BsIcons from "react-icons/bs";
 import * as IoIcons from "react-icons/io"
 import { IconContext } from "react-icons";
 
 function Sidebar() {
-    const {page, setPage} = useContext(pageContext);
+    const {page, setPage} = useContext(appContext);
     const [indOffset, setIndOffset] = useState(100);
 
     var resizeTimeout;
@@ -35,7 +35,7 @@ function Sidebar() {
             case "statistics": setIndOffset(base + diff*4); break;
             case "notes": setIndOffset(base + diff*5); break;
             case "settings": setIndOffset(window.innerHeight - 95); break;
-            default: return setIndOffset(base);
+            default: setIndOffset(base);
         }
     }, [page])
     

@@ -11,7 +11,12 @@
 
 .hide {
     opacity: 0%;
+    visibility: hidden;
     transition: 200ms;
+}
+
+.disappear {
+    display: none !important;
 }
 
 .px18 {
@@ -59,7 +64,7 @@
 
 .btt-add-country {
     width: 80%;
-    height: 50px;
+    height: 40px;
 
     background-color: #BAE4FA;
     color: #378DCC;
@@ -70,7 +75,8 @@
     justify-content: center;
     align-items: center;
 
-    margin-top: 10px;
+    margin-top: 7px;
+    cursor: pointer;
 }
 .btt-add-country:hover {
     background-color: #7eb6df;
@@ -78,9 +84,9 @@
     transition: 200ms;
 }
 
-.btt-deselect-all {
+.btt-select-all {
     width: 80%;
-    height: 50px;
+    height: 40px;
 
     background-color: #ffe49a;
     color: #daa000;
@@ -91,11 +97,12 @@
     justify-content: center;
     align-items: center;
 
-    margin-top: 10px;
+    margin-top: 7px;
 
     transition: 200ms;
+    cursor: pointer;
 }
-.btt-deselect-all:hover {
+.btt-select-all:hover {
     background-color: #ffca39;
     color: #FFFFFF;
     transition: 200ms;
@@ -103,7 +110,7 @@
 
 .btt-remove-selected {
     width: 80%;
-    height: 50px;
+    height: 40px;
 
     background-color: #F3B9C9;
     color: #FF4343;
@@ -114,9 +121,10 @@
     justify-content: center;
     align-items: center;
 
-    margin-top: 10px;
+    margin-top: 7px;
 
     transition: 200ms;
+    cursor: pointer;
 }
 .btt-remove-selected:hover {
     background-color: #ff7979;
@@ -132,6 +140,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+
+    cursor: pointer;
 }
 .export-delegations:hover {
     color: #686868;
@@ -151,4 +161,136 @@
     align-items: center;
 
     overflow-y: auto;
+}
+.UI-right:hover::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 1);
+    opacity: 100%;
+    transition: 200ms;
+}
+.UI-right:hover::-webkit-scrollbar-thumb {
+    background: rgba(188, 188, 188, 1);
+    opacity: 100%;
+    transition: 200ms;
+}
+.no-del-container {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+    background-color: #F3F3F3;
+}
+.no-del-message {
+    font-weight: 500;
+    font-size: 24px;
+    color: #BCBCBC;
+}
+
+
+/*---------DELBAR---------*/
+.delegate-container{
+    width: 100%;
+    min-width: 250px;
+    min-height: 45px;
+    margin-bottom: 10px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: #FFFFFF;
+    border-radius: 10px;
+
+    transition: 200ms;
+    cursor: pointer;
+}
+.delegate-container:hover {
+    background-color: #F7F7F7;
+    transition: 200ms;
+}
+
+.delegate-container-selected{
+    width: 100%;
+    min-width: 250px;
+    min-height: 45px;
+    margin-bottom: 10px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: #FFFFFF;
+    border-radius: 10px;
+
+    background-color: #BAE4FA;
+    transition: 200ms;
+    cursor: pointer;
+}
+.delegate-container-selected:hover {
+    background-color: #7eb6df;
+    transition: 200ms;
+}
+
+.del-name {
+    font-weight: 600;
+    margin-left: 30px;
+}
+
+.code-container {
+    width: 80px;
+    height: 35px;
+
+    border-radius: 10px;
+    background-color: #F7F7F7;
+
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 400;
+
+    transition: 200ms;
+    cursor: pointer;
+}
+.code-container-selected {
+    width: 80px;
+    height: 35px;
+
+    border-radius: 10px;
+    background-color: #e2f5ff;
+    opacity: 80%;
+
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 400;
+
+    transition: 200ms;
+    cursor: pointer;
+}
+
+
+/*----------MODAL UI-----------*/
+.modal-background {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.3);
 }

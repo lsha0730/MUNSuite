@@ -1,3 +1,4 @@
 import { createContext } from "react";
 
-export const pageContext = createContext({});
+export const appContext = createContext({});
+export const delegationsContext = createContext({});
