@@ -1,5 +1,5 @@
 .Sidebar-container {
-    width: 60px;
+    min-width: 60px;
     height: 100%;
 
     display: flex;

@@ -75,7 +75,9 @@ function AddUNCountries() {
             </div>
 
             <div className="modal-body">
-                {countriesNotInListRenders}
+                <div className="countries-list-container">
+                    {countriesNotInListRenders}
+                </div>
             </div>
 
             <div className="modal-bottom">

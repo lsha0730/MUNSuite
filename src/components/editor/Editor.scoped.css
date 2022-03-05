@@ -1,14 +1,44 @@
 .editor-container {
-    margin: auto;
-    
-    width: 75%;
-    height: 80%;
-    max-width: 1600px;
+    width: 100%;
+    height: 100%;
 
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
+/*------------LEFT SIDE------------*/
 .UI-left {
+    width: 75%;
 
+    display: flex;
+    justify-content: center;
+
+    overflow-y: scroll;
+}
+
+.preview-container {
+    width: 700px;
+}
+
+.preview-hat {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.preview-hat-heading {
+    font-size: 32px;
+    font-weight: 500;
+    color: #BCBCBC;
+}
+.preview-hat-subheading {
+    color: #BCBCBC;
+}
+
+
+/*------------RIGHT SIDE------------*/
+.UI-right {
+    background-color: rebeccapurple;
+    width: 25%;
 }
