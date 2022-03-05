@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Delegations.css";
+import "./Delegations.scoped.css";
 import { AddUNCountries, AddCustomCountry } from "./modal-ui/modal-ui.js";
 import * as BsIcons from "react-icons/bs";
 import { delegationsContext } from "../../Context";

@@ -1,0 +1,14 @@
+.editor-container {
+    margin: auto;
+    
+    width: 75%;
+    height: 80%;
+    max-width: 1600px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.UI-left {
+
+}

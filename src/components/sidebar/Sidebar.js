@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import "./Sidebar.css";
+import "./Sidebar.scoped.css";
 import { appContext } from "../../Context.js";
 import * as BsIcons from "react-icons/bs";
 import * as IoIcons from "react-icons/io"
@@ -25,7 +25,7 @@ function Sidebar() {
 
     useEffect(() => {
         const base = 55;
-        const diff = 68;
+        const diff = 59;//68;
 
         switch(page) {
             case "delegations": setIndOffset(base); break;
@@ -45,37 +45,37 @@ function Sidebar() {
                 <div className="Sidebar-topicons">
                     <div className="Sidebar-option" onClick={() => {setPage("delegations")}}>
                         <IconContext.Provider value={{color: "BCBCBC"}}>
-                            <BsIcons.BsPeopleFill size={25} className={page==="delegations"? "active":"inactive"}/>
+                            <BsIcons.BsPeopleFill size={22} className={page==="delegations"? "active":"inactive"}/>
                         </IconContext.Provider>
                     </div>
 
                     <div className="Sidebar-option" onClick={() => {setPage("editor")}}>
                         <IconContext.Provider value={{color: "BCBCBC"}}>
-                            <BsIcons.BsPencilFill size={25} className={page==="editor"? "active":"inactive"}/>
+                            <BsIcons.BsPencilFill size={22} className={page==="editor"? "active":"inactive"}/>
                         </IconContext.Provider>
                     </div>
                     
                     <div className="Sidebar-option" onClick={() => {setPage("inbox")}}>
                         <IconContext.Provider value={{color: "BCBCBC"}}>
-                            <BsIcons.BsInboxFill size={25} className={page==="inbox"? "active":"inactive"}/>
+                            <BsIcons.BsInboxFill size={22} className={page==="inbox"? "active":"inactive"}/>
                         </IconContext.Provider>
                     </div>
 
                     <div className="Sidebar-option" onClick={() => {setPage("history")}}>
                         <IconContext.Provider value={{color: "BCBCBC"}}>
-                            <BsIcons.BsClockFill size={23} className={page==="history"? "active":"inactive"}/>
+                            <BsIcons.BsClockFill size={20} className={page==="history"? "active":"inactive"}/>
                         </IconContext.Provider>
                     </div>
 
                     <div className="Sidebar-option" onClick={() => {setPage("statistics")}}>
                         <IconContext.Provider value={{color: "BCBCBC"}}>
-                            <BsIcons.BsBarChartFill size={25} className={page==="statistics"? "active":"inactive"}/>
+                            <BsIcons.BsBarChartFill size={22} className={page==="statistics"? "active":"inactive"}/>
                         </IconContext.Provider>
                     </div>
 
                     <div className="Sidebar-option" onClick={() => {setPage("notes")}}>
                         <IconContext.Provider value={{color: "BCBCBC"}}>
-                            <IoIcons.IoIosJournal size={28} className={page==="notes"? "active":"inactive"}/>
+                            <IoIcons.IoIosJournal size={25} className={page==="notes"? "active":"inactive"}/>
                         </IconContext.Provider>
                     </div>
                 </div>
@@ -83,7 +83,7 @@ function Sidebar() {
                 <div className="Sidebar-boticons">
                     <div className="Sidebar-option" onClick={() => {setPage("settings")}}>
                         <IconContext.Provider value={page==="settings"? {color: "3C8CC9"} : {color: "BCBCBC"}}>
-                            <BsIcons.BsGearFill size={25}/>
+                            <BsIcons.BsGearFill size={22}/>
                         </IconContext.Provider>
                     </div>
                 </div>

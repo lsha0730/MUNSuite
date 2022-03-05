@@ -68,16 +68,14 @@ function AddUNCountries() {
     }
 
     return (
-        <div className="modal-container">
+        <div className="modal-container-un">
             <div className="modal-top">
                 <p className="modal-header">Add UN Countries</p>
                 <p className="modal-subheader">Select countries, then click "Add Countries" to add them.</p>
             </div>
 
             <div className="modal-body">
-                <div className="country-list-container">
-                    {countriesNotInListRenders}
-                </div>
+                {countriesNotInListRenders}
             </div>
 
             <div className="modal-bottom">
@@ -110,7 +108,7 @@ function AddCustomCountry() {
     }
 
     return (
-        <div className="modal-container">
+        <div className="modal-container-custom">
             <div className="modal-top">
                 <p className="modal-header">Add Custom Country</p>
                 <p className="modal-subheader">Add your own country.</p>

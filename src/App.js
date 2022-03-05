@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './App.css';
 import Delegations from './components/delegations/Delegations.js';
+import Editor from './components/editor/Editor.js';
 import Sidebar from './components/sidebar/Sidebar.js';
 import { appContext } from './Context.js';
 
@@ -12,7 +13,7 @@ function App() {
     setUI(() => {
       switch (page) {
         case "delegations": return <Delegations/>
-        case "editor": return <h1>Editor</h1>
+        case "editor": return <Editor/>
         case "inbox": return <h1>Inbox</h1>
         case "history": return <h1>History</h1>
         case "statistics": return <h1>Statistics</h1>

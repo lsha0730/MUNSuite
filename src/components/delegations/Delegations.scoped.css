@@ -3,7 +3,7 @@
     
     width: 75%;
     height: 80%;
-    max-width: 1800px;
+    max-width: 1600px;
 
     display: flex;
     flex-direction: row;
@@ -26,12 +26,12 @@
 /*-----------LEFT UI-----------*/
 .UI-left {
     min-width: 300px;
-    width: 30%;
+    width: 25%;
     height: 100%;
 
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
 }
 .UI-topleft {
@@ -39,11 +39,11 @@
 
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .delcount-container{
-    width: 80%;
+    width: 90%;
     height: 200px;
 
     background-color: #FFFFFF;
@@ -63,7 +63,7 @@
 }
 
 .btt-add-country {
-    width: 80%;
+    width: 90%;
     height: 40px;
 
     background-color: #BAE4FA;
@@ -85,7 +85,7 @@
 }
 
 .btt-select-all {
-    width: 80%;
+    width: 90%;
     height: 40px;
 
     background-color: #ffe49a;
@@ -109,7 +109,7 @@
 }
 
 .btt-remove-selected {
-    width: 80%;
+    width: 90%;
     height: 40px;
 
     background-color: #F3B9C9;
@@ -153,7 +153,7 @@
 
 /*-----------RIGHT UI-----------*/
 .UI-right {
-    width: 70%;
+    width: 75%;
     height: 100%;
 
     display: flex;
