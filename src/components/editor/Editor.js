@@ -5,34 +5,34 @@ import DefaultFormData from "./DefaultFormData.js";
 import { Header, Radio, MultipleChoice, Content, ShortText, LongText, Dropdown, DropdownMultiple } from "./preview-components/PreviewComponents.js";
 
 function Editor() {
-    const [previewArr, setPreviewArr] = useState(DefaultFormData);
+    const [formArr, setFormArr] = useState(DefaultFormData);
     const [previewRenders, setPreviewRenders] = useState([]);
 
     useEffect(() => {
-        setPreviewRenders(previewArr.map(item => {
+        setPreviewRenders(formArr.map(item => {
             switch (item.type) {
                 case "header":
-                    return <Header id={item.id} required={item.required} image={item.image} heading={item.heading} subheading={item.subheading}/>;
+                    return <Header key={item.id} required={item.required} image={item.image} heading={item.heading} subheading={item.subheading}/>;
                 case "radio":
-                    return <Radio id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
+                    return <Radio key={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
                 case "multiplechoice":
-                    return <MultipleChoice id={item.id} required={item.required} heading={item.heading} options={item.options}/>;
+                    return <MultipleChoice key={item.id} required={item.required} heading={item.heading} options={item.options}/>;
                 case "content":
-                    return <Content id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} text={item.text} image={item.image}/>;
+                    return <Content key={item.id} required={item.required} heading={item.heading} subheading={item.subheading} text={item.text} image={item.image}/>;
                 case "shorttext":
-                    return <ShortText id={item.id} required={item.required} heading={item.heading} subheading={item.subheading}/>;
+                    return <ShortText key={item.id} required={item.required} heading={item.heading} subheading={item.subheading}/>;
                 case "longtext":
-                    return <LongText id={item.id} required={item.required} heading={item.heading} subheading={item.subheading}/>;
+                    return <LongText key={item.id} required={item.required} heading={item.heading} subheading={item.subheading}/>;
                 case "dropdown":
-                    return <Dropdown id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
+                    return <Dropdown key={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
                 case "dropdown-multiple":
-                    return <DropdownMultiple id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
+                    return <DropdownMultiple key={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
                 default:
                     console.log("Could not render question block.")
             }
         }))
 
-    }, [previewArr]);
+    }, [formArr]);
 
     return (
         <div className="editor-container">

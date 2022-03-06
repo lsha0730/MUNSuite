@@ -16,6 +16,16 @@
 
     overflow-y: scroll;
 }
+.UI-left:hover::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 1);
+    opacity: 100%;
+    transition: 200ms;
+}
+.UI-left:hover::-webkit-scrollbar-thumb {
+    background: rgba(188, 188, 188, 1);
+    opacity: 100%;
+    transition: 200ms;
+}
 
 .preview-container {
     width: 700px;

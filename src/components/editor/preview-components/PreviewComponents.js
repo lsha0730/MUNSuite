@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./PreviewComponents.scoped.css";
 
 function Header(props) {
     return (
         <div className="header-container">
             <div className="header-image-container">
-                <img src={props.image} className="header-image"/>
+                <img src={props.image} alt="form-banner" className="header-image"/>
             </div>
             <div className="header-text-container">
                 <p className="header-heading">{props.heading}</p>
@@ -16,57 +16,80 @@ function Header(props) {
 }
 
 function Radio(props) {
+    const [selected, setSelected] = useState();
+    const [renders, setRenders] = useState([]);
+
+    useEffect(() => {
+        let i = -1;
+        setRenders(props.options.map(option => {
+            i++;
+            return (
+                <div className="radio-single-container">
+                    <input type="radio" value={i}
+                        checked={selected==i}
+                        onChange={e => {setSelected(e.target.value)}}
+                        className="radio-button"
+                    />
+                    <p className="radio-option-label">{option}</p>
+                </div>
+            )
+        }));
+    }, [selected, props.options])
+
     return (
-        <div className="radio-container">
-            <p>Radio</p>
+        <div className="block-container">
+            <p className="heading">{props.heading}</p>
+            <p className="subheading">{props.subheading}</p>
+            <div className="radio-options-container">
+                {renders}
+            </div>
         </div>
     )
 }
 
 function MultipleChoice(props) {
     return (
-        <div className="multiplechoice-container">
-            <p>Multiple Choice</p>
+        <div className="block-container">
+            <p className="heading">{props.heading}</p>
+            <p className="subheading">{props.subheading}</p>
         </div>
     )
 }
 
 function Content(props) {
     return (
-        <div className="content-container">
-            <p>Content</p>
+        <div className="block-container">
+            <p className="heading">{props.heading}</p>
+            <p className="subheading">{props.subheading}</p>
         </div>
     )
 }
 
 function ShortText(props) {
     return (
-        <div className="shorttext-container">
-            <div className="shorttext-subcontainer">
-                <p className="shorttext-heading">{props.heading}</p>
-                <p className="shorttext-subheading">{props.subheading}</p>
-                <input type="text" placeholder="Input here..." className="shorttext-input"></input>
-            </div>
+        <div className="block-container">
+            <p className="heading">{props.heading}</p>
+            <p className="subheading">{props.subheading}</p>
+            <input type="text" placeholder="Input here..." className="shorttext-input"></input>
         </div>
     )
 }
 
 function LongText(props) {
     return (
-        <div className="longtext-container">
-            <div className="longtext-subcontainer">
-                <p className="longtext-heading">{props.heading}</p>
-                <p className="longtext-subheading">{props.subheading}</p>
-                <input type="text" placeholder="Input here..." className="longtext-input"></input>
-            </div>
+        <div className="block-container">
+            <p className="heading">{props.heading}</p>
+            <p className="subheading">{props.subheading}</p>
+            <textarea type="text" placeholder="Input here..." className="longtext-input"></textarea>
         </div>
     )
 }
 
 function Dropdown(props) {
     return (
-        <div className="dropdown-container">
-            <p>Dropdown</p>
+        <div className="block-container">
+            <p className="heading">{props.heading}</p>
+            <p className="subheading">{props.subheading}</p>
         </div>
     )
 }
@@ -74,8 +97,9 @@ function Dropdown(props) {
 
 function DropdownMultiple(props) {
     return (
-        <div className="dropdown-multiple-container">
-            <p>Dropdown Multiple</p>
+        <div className="block-container">
+            <p className="heading">{props.heading}</p>
+            <p className="subheading">{props.subheading}</p>
         </div>
     )
 }
