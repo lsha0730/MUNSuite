@@ -32,7 +32,7 @@ const DefaultFormData = [
     {
         id: 5,
         type: "shorttext",
-        required: false,
+        required: true,
         heading: "Signatory Signatures",
         subheading: "Only applicable to public directives. Please enter all signatory names, separated by commas (Ex. France, Germany, US)."
     },
@@ -53,7 +53,7 @@ const DefaultFormData = [
     {
         id: 8,
         type: "multiplechoice",
-        required: false,
+        required: true,
         heading: "Test Multiple Choice",
         options: ["One", "Two", "Three"]
     },

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Delegations.scoped.css";
-import { AddUNCountries, AddCustomCountry } from "./modal-ui/modal-ui.js";
+import { AddUNCountries, AddCustomCountry, AddViaSpreadsheet } from "./modal-ui/modal-ui.js";
 import * as BsIcons from "react-icons/bs";
 import { delegationsContext } from "../../Context";
 
@@ -16,6 +16,8 @@ function Delegations() {
                 return <AddUNCountries/>;
             case "add-custom-country":
                 return <AddCustomCountry/>;
+            case "add-via-spreadsheet":
+                return <AddViaSpreadsheet/>
             default:
                 break;
         }
@@ -126,6 +128,10 @@ function Delegations() {
 
                         <div className="btt-add-country" onClick={() => {setModal("add-custom-country")}}>
                             <p>Add Custom Country</p>
+                        </div>
+
+                        <div className="btt-add-country" onClick={() => {setModal("add-via-spreadsheet")}}>
+                            <p>Spreadsheet Import</p>
                         </div>
 
                         <div className={!(delegations.length<1) ? "btt-select-all" : "btt-select-all hide"} onClick={selectAll}>

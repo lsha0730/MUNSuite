@@ -24,16 +24,30 @@
     background-color: #FFFFFF;
 }
 
+.modal-container-spreadsheet {
+    height: 80%;
+    max-height: 800px;
+    width: 500px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    border-radius: 10px;
+    background-color: #FFFFFF;
+}
+
 .modal-top {
     width: 100%;
 }
 
 .modal-body {
     width: 90%;
+    flex-grow: 1;
 
     margin: auto;
-    margin-top: 10px;
-    margin-bottom: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -122,7 +136,7 @@
 
 .modal-subheader {
     margin-top: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     margin-left: 25px;
     font-size: 16px;
     font-weight: 300;
@@ -201,6 +215,74 @@
     cursor: pointer;
 }
 .btt-custom-add-countries:hover {
+    background-color: #7eb6df;
+    color: #FFFFFF;
+    transition: 200ms;
+}
+
+
+/*-----------MODAL SPREADSHEET IMPORT----------*/
+.pastebin {
+    width: 100%;
+    min-height: 100%;
+
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    padding-top: 5px;
+
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+
+    border-color: rgba(0,0,0,0);
+    border-radius: 10px;
+    background-color: #F7F7F7;
+
+    resize: vertical;
+    overflow-y: auto;
+}
+.pastebin::placeholder {
+    font-size: 16px;
+    color: #C0C0C0;
+}
+.pastebin:focus {
+    outline: none !important;
+    border-color: rgba(0,0,0,0);
+    background-color: #F7F7F7;
+}
+.pastebin:hover {
+    background-color: #EEEEEE;
+}
+.pastebin:hover::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 1);
+    opacity: 100%;
+    transition: 200ms;
+}
+.pastebin:hover::-webkit-scrollbar-thumb {
+    background: rgba(188, 188, 188, 1);
+    opacity: 100%;
+    transition: 200ms;
+}
+
+.btt-import {
+    width: 80px;
+    height: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 10px;
+    background-color: #BAE4FA;
+    color: #378DCC;
+    font-weight: 500;
+    border-radius: 5px;
+
+    transition: 200ms;
+    cursor: pointer;
+}
+.btt-import:hover {
     background-color: #7eb6df;
     color: #FFFFFF;
     transition: 200ms;

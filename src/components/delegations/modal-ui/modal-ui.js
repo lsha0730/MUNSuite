@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./modal-ui.css";
+import "./modal-ui.scoped.css";
 import UNCountriesData from "./UNCountriesData.js";
 import { delegationsContext } from "../../../Context.js";
 
@@ -135,4 +135,50 @@ function AddCustomCountry() {
     )
 }
 
-export { AddUNCountries, AddCustomCountry };
+
+function AddViaSpreadsheet() {
+    const {setModal} = useContext(delegationsContext);
+    const {delegations, setDelegations} = useContext(delegationsContext);
+
+    function importSpreadsheet() {
+        setModal(false);
+        let fullString = document.getElementById("pastebin").value;
+        let countryArr = fullString.split('\n');
+        let objectArr = [];
+        
+        for (let i=0; i<countryArr.length; i++) {
+            let newObject = {};
+            newObject.id = delegations.length + objectArr.length;
+            newObject.name = countryArr[i];
+            newObject.code = makeUniqueCode(5, delegations.concat(objectArr));
+            objectArr.push(newObject);
+        }
+
+        setDelegations(delegations.concat(objectArr));
+    }
+
+    return (
+        <div className="modal-container-spreadsheet">
+            <div className="modal-top">
+                <p className="modal-header">Import from Spreadsheet</p>
+                <p className="modal-subheader">Copy and paste in a single column from a spreadsheet below. Each country should be on its own line.</p>
+            </div>
+
+            <div className="modal-body">
+                <textarea id="pastebin" className="pastebin">
+                </textarea>
+            </div>
+
+            <div className="modal-bottom">
+                <div className="btt-import" onClick={importSpreadsheet}>
+                    <p>Import</p>
+                </div>
+                <div className="btt-cancel" onClick={() => {setModal(false)}}>
+                    <p>Cancel</p>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export { AddUNCountries, AddCustomCountry, AddViaSpreadsheet };

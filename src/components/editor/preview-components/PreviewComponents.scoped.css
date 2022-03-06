@@ -36,6 +36,7 @@
 .block-container {
     width: 100%;
     margin-bottom: 10px;
+    position: relative;
 
     background-color: white;
     border-radius: 10px;
@@ -56,6 +57,19 @@
     color: #C4C4C4;
 }
 
+.required-star {
+    color: #ff4141;
+    position: absolute;
+    right: 40px;
+    top: 20px;
+
+    font-size: 18px;
+}
+
+.hidden {
+    display: none;
+}
+
 /*--------RADIO--------*/
 .radio-single-container {
     display: flex;
@@ -67,8 +81,6 @@
 
 .radio-option-label {
     margin-left: 10px;
-    position: relative;
-    bottom: 2px;
 }
 
 .radio-options-container {
@@ -127,6 +139,7 @@
     background-color: #F7F7F7;
 
     resize: vertical;
+    overflow-y: auto;
 }
 .longtext-input::placeholder {
     font-size: 16px;
@@ -140,9 +153,41 @@
 .longtext-input:hover {
     background-color: #EEEEEE;
 }
-
+.longtext-input:hover::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 1);
+    opacity: 100%;
+    transition: 200ms;
+}
+.longtext-input:hover::-webkit-scrollbar-thumb {
+    background: rgba(188, 188, 188, 1);
+    opacity: 100%;
+    transition: 200ms;
+}
 
 /*--------DROPDOWN--------*/
+.dropdown-box {
+    width: 30%;
+    height: 30px;
+
+    margin-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    font-size: 16px;
+
+    border-color: rgba(0,0,0,0);
+    border-radius: 10px;
+    background-color: #F7F7F7;
+}
+.dropdown-box:focus {
+    outline: none !important;
+    border-color: rgba(0,0,0,0);
+    background-color: #F7F7F7;
+}
+.dropdown-box:hover {
+    background-color: #EEEEEE;
+}
+
 
 
 /*--------DROPDOWN MULTIPLE--------*/

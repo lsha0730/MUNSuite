@@ -64,7 +64,7 @@
 
 .btt-add-country {
     width: 90%;
-    height: 40px;
+    height: 35px;
 
     background-color: #BAE4FA;
     color: #378DCC;
@@ -86,7 +86,7 @@
 
 .btt-select-all {
     width: 90%;
-    height: 40px;
+    height: 35px;
 
     background-color: #ffe49a;
     color: #daa000;
@@ -110,7 +110,7 @@
 
 .btt-remove-selected {
     width: 90%;
-    height: 40px;
+    height: 35px;
 
     background-color: #F3B9C9;
     color: #FF4343;

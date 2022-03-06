@@ -40,6 +40,7 @@ function Radio(props) {
         <div className="block-container">
             <p className="heading">{props.heading}</p>
             <p className="subheading">{props.subheading}</p>
+            <p className={props.required? "required-star":"hidden"}>*</p>
             <div className="radio-options-container">
                 {renders}
             </div>
@@ -52,6 +53,7 @@ function MultipleChoice(props) {
         <div className="block-container">
             <p className="heading">{props.heading}</p>
             <p className="subheading">{props.subheading}</p>
+            <p className={props.required? "required-star":"hidden"}>*</p>
         </div>
     )
 }
@@ -61,6 +63,7 @@ function Content(props) {
         <div className="block-container">
             <p className="heading">{props.heading}</p>
             <p className="subheading">{props.subheading}</p>
+            <p className={props.required? "required-star":"hidden"}>*</p>
         </div>
     )
 }
@@ -70,6 +73,7 @@ function ShortText(props) {
         <div className="block-container">
             <p className="heading">{props.heading}</p>
             <p className="subheading">{props.subheading}</p>
+            <p className={props.required? "required-star":"hidden"}>*</p>
             <input type="text" placeholder="Input here..." className="shorttext-input"></input>
         </div>
     )
@@ -80,16 +84,31 @@ function LongText(props) {
         <div className="block-container">
             <p className="heading">{props.heading}</p>
             <p className="subheading">{props.subheading}</p>
+            <p className={props.required? "required-star":"hidden"}>*</p>
             <textarea type="text" placeholder="Input here..." className="longtext-input"></textarea>
         </div>
     )
 }
 
 function Dropdown(props) {
+    const [optionElems, setOptionElems] = useState([]);
+
+    useEffect(() => {
+        let i = -1;
+        setOptionElems([<option value="default"></option>].concat(props.options.map(option => {
+            i++;
+            return <option value={i}>{option}</option>
+        })))
+    }, [props.options])
+
     return (
         <div className="block-container">
             <p className="heading">{props.heading}</p>
             <p className="subheading">{props.subheading}</p>
+            <p className={props.required? "required-star":"hidden"}>*</p>
+            <select className="dropdown-box">
+                {optionElems}
+            </select>
         </div>
     )
 }
@@ -100,6 +119,7 @@ function DropdownMultiple(props) {
         <div className="block-container">
             <p className="heading">{props.heading}</p>
             <p className="subheading">{props.subheading}</p>
+            <p className={props.required? "required-star":"hidden"}>*</p>
         </div>
     )
 }
