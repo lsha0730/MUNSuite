@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./PreviewComponents.scoped.css";
+import { GoTriangleDown } from "react-icons/go";
+import { IconContext } from "react-icons";
 
 function Header(props) {
     return (
@@ -16,7 +18,7 @@ function Header(props) {
 }
 
 function Radio(props) {
-    const [selected, setSelected] = useState();
+    const [selected, setSelected] = useState(); // Stores the index of selected in props.options
     const [renders, setRenders] = useState([]);
 
     useEffect(() => {
@@ -28,7 +30,7 @@ function Radio(props) {
                     <input type="radio" value={i}
                         checked={selected==i}
                         onChange={e => {setSelected(e.target.value)}}
-                        className="radio-button"
+                        className="clickable"
                     />
                     <p className="radio-option-label">{option}</p>
                 </div>
@@ -49,11 +51,45 @@ function Radio(props) {
 }
 
 function MultipleChoice(props) {
+    const [selected, setSelected] = useState([]); // Stores the indices of selected in props.options
+    const [renders, setRenders] = useState([]);
+
+    function handleClick(e) {
+        let optionVal = parseInt(e.target.value);
+        if (selected.includes(optionVal)) {
+            setSelected(selected.filter(item => {
+                return item !== optionVal;
+            }))
+        } else {
+            setSelected(selected.concat(optionVal));
+        }
+    }
+
+    useEffect(() => {
+        let i = -1;
+        setRenders(props.options.map(option => {
+            i++;
+            return (
+                <div className="mc-single-container">
+                    <input type="checkbox" value={i}
+                        checked={selected.includes(i)}
+                        onChange={e => handleClick(e)}
+                        className="clickable"
+                    />
+                    <p className="mc-option-label">{option}</p>
+                </div>
+            )
+        }));
+    }, [selected, props.options])
+
     return (
         <div className="block-container">
             <p className="heading">{props.heading}</p>
             <p className="subheading">{props.subheading}</p>
             <p className={props.required? "required-star":"hidden"}>*</p>
+            <div className="mc-options-container">
+                {renders}
+            </div>
         </div>
     )
 }
@@ -91,24 +127,51 @@ function LongText(props) {
 }
 
 function Dropdown(props) {
-    const [optionElems, setOptionElems] = useState([]);
+    const [value, setValue] = useState(); // Stores the index of the item in props.options
+    const [dropVisible, setDropVisible] = useState(false);
+    const [dropRender, setDropRender] = useState();
+
+    let optionRenders = [];
+    for (let i=0; i<props.options.length; i++) {
+        let option = props.options[i];
+        console.log(option)
+        optionRenders.push(
+            <div className="dropdown-option-container" onClick={() => {
+                setDropVisible(!dropVisible);
+                setValue(i);
+                }}>
+                <div className="dropdown-option-text-container">
+                    <p className="nowrap">{option}</p>
+                </div>
+            </div>
+        )
+    }
 
     useEffect(() => {
-        let i = -1;
-        setOptionElems([<option value="default"></option>].concat(props.options.map(option => {
-            i++;
-            return <option value={i}>{option}</option>
-        })))
-    }, [props.options])
+        console.log(optionRenders)
+        if (dropVisible) {
+            setDropRender(
+                <div className="dropdown-field">
+                    {optionRenders}
+                </div>
+            );
+        } else {
+            setDropRender();
+        }
+    }, [dropVisible])
 
     return (
         <div className="block-container">
             <p className="heading">{props.heading}</p>
             <p className="subheading">{props.subheading}</p>
             <p className={props.required? "required-star":"hidden"}>*</p>
-            <select className="dropdown-box">
-                {optionElems}
-            </select>
+            <div className="dropdown-bar" onClick={() => setDropVisible(!dropVisible)}>
+                <div className="dropdown-text-container">
+                    <p className="nowrap">{props.options[value]}</p>
+                </div>
+                <GoTriangleDown size={10} className="dropdown-triangle"/>
+                {dropRender}
+            </div>
         </div>
     )
 }

@@ -43,6 +43,11 @@ function Editor() {
                         <p className="preview-hat-subheading">[Delegation Name]</p>
                     </div>
                     {previewRenders}
+                    <div className="btt-submit-block">
+                        <div className="btt-submit">
+                            <p>Submit</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="UI-right">

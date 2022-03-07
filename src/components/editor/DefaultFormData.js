@@ -32,7 +32,7 @@ const DefaultFormData = [
     {
         id: 5,
         type: "shorttext",
-        required: true,
+        required: false,
         heading: "Signatory Signatures",
         subheading: "Only applicable to public directives. Please enter all signatory names, separated by commas (Ex. France, Germany, US)."
     },
@@ -46,7 +46,7 @@ const DefaultFormData = [
     {
         id: 7,
         type: "longtext",
-        required: true,
+        required: false,
         heading: "Additional Notes",
         subheading: false
     },
@@ -72,7 +72,7 @@ const DefaultFormData = [
         required: false,
         heading: "Test Dropdown",
         subheading: "Select your country",
-        options: ["Afghanistan", "Belarus", "Canada", "Denmark"]
+        options: ["Afghanistan", "Belarus", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Publius Licinius Crassus Dives", "Commander of the US Air Force Tactical Air Command - William W. Momyer"]
     },
     {
         id: 11,
