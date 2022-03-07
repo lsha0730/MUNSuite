@@ -60,7 +60,6 @@ const DefaultFormData = [
     {
         id: 9,
         type: "content",
-        required: false,
         heading: "Test Content",
         subheading: false,
         content: [{type: "text", heading:"History of the United Nations", value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."},
@@ -76,10 +75,11 @@ const DefaultFormData = [
     },
     {
         id: 11,
-        type: "dropdown-multiple",
+        type: "select-multiple",
         required: false,
-        heading: "Test Dropdown Multiple",
+        heading: "Test Select Multiple",
         subheading: "Select all sponsor countries",
+        max: 3,
         options: ["Afghanistan", "Belarus", "Canada", "Denmark"]
     }
 ]

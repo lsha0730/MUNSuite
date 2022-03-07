@@ -161,7 +161,7 @@ function AddViaSpreadsheet() {
         <div className="modal-container-spreadsheet">
             <div className="modal-top">
                 <p className="modal-header">Import from Spreadsheet</p>
-                <p className="modal-subheader">Copy and paste in a single column from a spreadsheet below. Each country should be on its own line.</p>
+                <p className="modal-subheader">Copy and paste in a single column from a spreadsheet below such that each country is on its own line.</p>
             </div>
 
             <div className="modal-body">

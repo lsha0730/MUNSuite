@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./PreviewComponents.scoped.css";
-import { GoTriangleDown } from "react-icons/go";
+import { GoTriangleDown, GoSearch } from "react-icons/go";
 import { IconContext } from "react-icons";
 
 function Header(props) {
@@ -157,7 +157,6 @@ function Dropdown(props) {
     let optionRenders = [];
     for (let i=0; i<props.options.length; i++) {
         let option = props.options[i];
-        console.log(option)
         optionRenders.push(
             <div className="dropdown-option-container" onClick={() => {
                 setDropVisible(!dropVisible);
@@ -171,7 +170,6 @@ function Dropdown(props) {
     }
 
     useEffect(() => {
-        console.log(optionRenders)
         if (dropVisible) {
             setDropRender(
                 <div className="dropdown-field">
@@ -185,6 +183,7 @@ function Dropdown(props) {
 
     return (
         <div className="block-container">
+            <div className={dropVisible? "dropdown-defocuser":"hidden"} onClick={() => setDropVisible(false)}></div>
             <p className="heading">{props.heading}</p>
             <p className="subheading">{props.subheading}</p>
             <p className={props.required? "required-star":"hidden"}>*</p>
@@ -200,15 +199,102 @@ function Dropdown(props) {
 }
 
 
-function DropdownMultiple(props) {
+function SelectMultiple(props) {
+    const [options, setOptions] = useState(props.options);
+    const [search, setSearch] = useState('');
+    const [renderOptions, setRenderOptions] = useState([]);
+    const [isShowingOptions, setIsShowingOptions] = useState(false);
+    const [selected, setSelected] = useState([]);
+    const [trigger, setTrigger] = useState(false);
+    const [renderSelected, setRenderSelected] = useState([]);
+
+    const selectOption = (option) => {
+        let currentSelected = selected;
+        let currentOptions = options;
+        
+        currentOptions.splice(currentOptions.indexOf(option), 1);
+        currentSelected.push(option);
+        
+        setSelected(currentSelected);
+        setOptions(currentOptions)
+
+        setIsShowingOptions(false)
+        setTrigger(!trigger);
+    }
+
+    const deselectOption = (option) => {
+        let currentSelected = selected;
+        let currentOptions = options;
+
+        currentSelected.splice(currentSelected.indexOf(option), 1);
+        currentOptions.push(option);
+
+        setSelected(currentSelected);
+        setOptions(currentOptions);
+
+        setTrigger(!trigger);
+    }
+
+    // for rendering options
+    useEffect(() => {
+        let renderArray = [];
+
+        for(let i = 0; i < options.length; i++) {
+            if(search === "" || options[i].toLowerCase().includes(search.toLowerCase())) {
+                renderArray.push(
+                    <div className="dropdown-option-container" onClick={()=>{
+                        selectOption(options[i])
+                        setIsShowingOptions(false)}}>
+                        <div className="dropdown-text-container">
+                            {options[i]}
+                        </div>
+                    </div>
+                )
+            }
+        }
+
+        setRenderOptions(renderArray);
+
+        
+        let returnRenderSelected = [];
+
+        for(let j = 0; j < selected.length; j++) {
+            returnRenderSelected.push(
+                <div onClick={()=>deselectOption(selected[j])} className="selmult-selection">
+                    <p>-  {selected[j]}</p>
+                </div>
+            );
+        }
+
+        setRenderSelected(returnRenderSelected)
+
+    }, [search, isShowingOptions, selected, trigger])
+
     return (
         <div className="block-container">
+            <div className={isShowingOptions? "dropdown-defocuser":"hidden"} onClick={() => setIsShowingOptions(false)}></div>
             <p className="heading">{props.heading}</p>
             <p className="subheading">{props.subheading}</p>
             <p className={props.required? "required-star":"hidden"}>*</p>
+            <div className={renderSelected.length==0? "hidden":"selmult-selections-container"}>
+                {renderSelected}
+            </div>
+            <div className="selmult-searchbar">
+                <input    
+                  type="text" 
+                  placeholder="Search" 
+                  className="selmult-subbar"
+                  value={search}
+                  onChange={(e)=>setSearch(e.target.value)}
+                  onFocus={() => setIsShowingOptions(true)} />
+                <GoSearch size={15} className="selmult-icon"/>
+                <div className={!isShowingOptions||(options.length === 0)? "hidden":"selmult-drop-field"}>
+                    {isShowingOptions && renderOptions}
+                </div>
+            </div>
         </div>
     )
 }
 
 
-export { Header, Radio, MultipleChoice, Content, ShortText, LongText, Dropdown, DropdownMultiple };
+export { Header, Radio, MultipleChoice, Content, ShortText, LongText, Dropdown, SelectMultiple };

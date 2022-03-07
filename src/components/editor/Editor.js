@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Editor.scoped.css";
 
 import DefaultFormData from "./DefaultFormData.js";
-import { Header, Radio, MultipleChoice, Content, ShortText, LongText, Dropdown, DropdownMultiple } from "./preview-components/PreviewComponents.js";
+import { Header, Radio, MultipleChoice, Content, ShortText, LongText, Dropdown, SelectMultiple } from "./preview-components/PreviewComponents.js";
 
 function Editor() {
     const [formArr, setFormArr] = useState(DefaultFormData);
@@ -25,8 +25,8 @@ function Editor() {
                     return <LongText key={item.id} required={item.required} heading={item.heading} subheading={item.subheading}/>;
                 case "dropdown":
                     return <Dropdown key={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
-                case "dropdown-multiple":
-                    return <DropdownMultiple key={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
+                case "select-multiple":
+                    return <SelectMultiple key={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options}/>;
                 default:
                     console.log("Could not render question block.")
             }
