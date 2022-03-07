@@ -18,7 +18,7 @@ function Editor() {
                 case "multiplechoice":
                     return <MultipleChoice key={item.id} required={item.required} heading={item.heading} options={item.options}/>;
                 case "content":
-                    return <Content key={item.id} required={item.required} heading={item.heading} subheading={item.subheading} text={item.text} image={item.image}/>;
+                    return <Content key={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content}/>;
                 case "shorttext":
                     return <ShortText key={item.id} required={item.required} heading={item.heading} subheading={item.subheading}/>;
                 case "longtext":

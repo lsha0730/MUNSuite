@@ -63,8 +63,8 @@ const DefaultFormData = [
         required: false,
         heading: "Test Content",
         subheading: false,
-        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/0/05/UN_General_Assembly_hall.jpg"
+        content: [{type: "text", heading:"History of the United Nations", value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."},
+                {type: "image", heading: "The United Nations", value: "https://upload.wikimedia.org/wikipedia/commons/0/05/UN_General_Assembly_hall.jpg"}]
     },
     {
         id: 10,
@@ -72,7 +72,7 @@ const DefaultFormData = [
         required: false,
         heading: "Test Dropdown",
         subheading: "Select your country",
-        options: ["Afghanistan", "Belarus", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Publius Licinius Crassus Dives", "Commander of the US Air Force Tactical Air Command - William W. Momyer"]
+        options: ["Afghanistan", "Belarus", "Canada", "Publius Licinius Crassus Dives", "Commander of the US Air Force Tactical Air Command - William W. Momyer"]
     },
     {
         id: 11,

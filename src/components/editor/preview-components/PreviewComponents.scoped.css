@@ -114,7 +114,19 @@
 }
 
 /*--------CONTENT--------*/
+.content-item-container {
+    margin-top: 20px;
+}
+.content-image {
+    width: 100%;
+    border-radius: 10px;
+}
 
+.content-heading {
+    font-weight: 500;
+    color: #BCBCBC;
+    margin-bottom: 5px;
+}
 
 /*--------SHORT TEXT--------*/
 .shorttext-input {
