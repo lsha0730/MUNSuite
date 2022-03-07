@@ -187,7 +187,7 @@ function Dropdown(props) {
             <p className="heading">{props.heading}</p>
             <p className="subheading">{props.subheading}</p>
             <p className={props.required? "required-star":"hidden"}>*</p>
-            <div className="dropdown-bar" onClick={() => setDropVisible(!dropVisible)}>
+            <div className="dropdown-bar master-z" onClick={() => setDropVisible(!dropVisible)}>
                 <div className="dropdown-text-container">
                     <p className="nowrap">{props.options[value]}</p>
                 </div>
@@ -237,6 +237,7 @@ function SelectMultiple(props) {
 
     // for rendering options
     useEffect(() => {
+        setOptions(options.sort((a, b) => a.localeCompare(b)));
         let renderArray = [];
 
         for(let i = 0; i < options.length; i++) {
