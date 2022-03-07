@@ -72,11 +72,7 @@ const DefaultFormData = [
         required: false,
         heading: "Test Dropdown",
         subheading: "Select your country",
-<<<<<<< HEAD
         options: ["Afghanistan", "Belarus", "Canada", "Publius Licinius Crassus Dives", "Commander of the US Air Force Tactical Air Command - William W. Momyer"]
-=======
-        options: ["Afghanistan", "Belarus", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Canada", "Publius Licinius Crassus Dives", "Commander of the US Air Force Tactical Air Command - William W. Momyer"]
->>>>>>> master
     },
     {
         id: 11,
