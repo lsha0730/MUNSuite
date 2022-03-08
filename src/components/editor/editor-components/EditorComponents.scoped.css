@@ -1,0 +1,382 @@
+/*-------BLOCK FORMATTING------*/
+.block-container {
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+
+    background-color: white;
+    border-radius: 10px;
+
+    padding: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.heading {
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.subheading {
+    font-weight: 500;
+    font-size: 14px;
+    color: #C4C4C4;
+
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+
+.fade {
+    opacity: 0%;
+    transition: 200ms;
+}
+
+.overflow-wrapper {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.overflow-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/*Textfield*/
+.textfield-container {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    font-size: 14px;
+
+    border-color: rgba(0,0,0,0);
+    border-radius: 10px;
+    background-color: #F7F7F7;
+}
+.textfield-container::placeholder {
+    font-size: 14px;
+    color: #C0C0C0;
+}
+.textfield-container:focus {
+    outline: none !important;
+    border-color: rgba(0,0,0,0);
+    background-color: #F7F7F7;
+}
+.textfield-container:hover {
+    background-color: #EEEEEE;
+}
+
+/*Toggle*/
+.toggle-set {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    cursor: pointer;
+}
+.toggle-bar {
+    position: relative;
+    width: 35px;
+    height: 15px;
+
+    border-radius: 10px;
+}
+.toggle-circle {
+    position: absolute;
+    left: 0px;
+
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+.toggle-greybg {
+    background-color: #F7F7F7;
+    transition: 200ms;
+}
+.toggle-greybtt {
+    background-color: #C4C4C4;
+    transition: 200ms;
+}
+.toggle-redbg {
+    background-color: #ffc6c6;
+    transition: 200ms;
+}
+.toggle-redbtt {
+    background-color: #ff7070;
+    transition: 200ms;
+}
+.toggle-text-red {
+    margin-right: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #ff7070;
+    transition: 200ms;
+}
+.toggle-text-grey {
+    margin-right: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #C4C4C4;
+    transition: 200ms;
+}
+
+/*Add Option Button*/
+.btt-add-option {
+    width: fit-content;
+
+    padding: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 5px;
+    background-color: #BAE4FA;
+    color: #00A3FF;
+
+    font-size: 10px;
+    cursor: pointer;
+}
+.btt-add-option:hover {
+    background-color: #7eb6df;
+    color: #FFFFFF;
+    transition: 200ms;
+}
+
+/*Option Handling*/
+.option-container {
+    width: 100%;
+    padding: 2px;
+    margin-bottom: 5px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+.option-container:hover {
+    background-color: #ffc6c6;
+    transition: 200ms;
+}
+
+.option-text {
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.option-adder {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+}
+.option-input {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 5px;
+
+    font-size: 14px;
+
+    border-color: rgba(0,0,0,0);
+    border-radius: 5px;
+    background-color: #e6e6e6;
+}
+.option-input:focus {
+    outline: none !important;
+    border-color: rgba(0,0,0,0);
+    background-color: #EEEEEE;
+}
+.option-input:hover {
+    background-color: #EEEEEE;
+}
+
+.option-none-ind {
+    font-size: 12px;
+    font-weight: 500;
+    color: #BCBCBC
+}
+
+
+
+
+.dummy-block {
+    height: 200px;
+    width: 100%;
+    margin: auto;
+    margin-top: 10px;
+
+    border-radius: 10px;
+    background-color: #F7F7F7;
+}
+
+/*-------FORM LINK------*/
+.formlink-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.formlink-link-container {
+    width: 90%;
+
+    display: flex;
+    align-items: center;
+
+    margin-top: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    font-size: 14px;
+
+    border-radius: 10px;
+    background-color: #F7F7F7;
+}
+.formlink-link-container:hover {
+    background-color: #EEEEEE;
+}
+
+.formlink-icon {
+    fill: #C4C4C4;
+    cursor: pointer;
+
+    position: relative;
+    top: 2px;
+}
+.formlink-icon:hover {
+    fill: #3C8CC9;
+}
+
+.formlink-confirmation-container {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    background-color: #BAE4FA;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: 200ms;
+}
+.formlink-confirmation-text {
+    font-size: 10px;
+    font-weight: 500;
+}
+
+
+/*-------HEADER------*/
+.header-imgsrc-container {
+    width: 70%;
+
+    display: flex;
+    align-items: center;
+
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    font-size: 14px;
+
+    border-radius: 10px;
+    background-color: #F7F7F7;
+}
+
+.header-imgbar-n-btt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-btt-upload {
+    width: fit-content;
+    padding: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 5px;
+    background-color: #BAE4FA;
+    color: #00A3FF;
+
+    font-size: 12px;
+    cursor: pointer;
+}
+.header-btt-upload:hover {
+    background-color: #7eb6df;
+    color: #FFFFFF;
+    transition: 200ms;
+}
+
+
+/*-------RADIO------*/
+.radio-options-container {
+    width: 100%;
+
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: #F7F7F7;
+    border-radius: 10px;
+}
+
+
+/*-------MULTIPLE CHOICE------*/
+.mc-options-container {
+    width: 100%;
+    min-height: 100px;
+
+    background-color: #F7F7F7;
+    border-radius: 10px;
+}
+
+
+/*-------CONTENT BLOCK------*/
+
+
+/*-------DROPDOWN------*/
+.dropdown-options-container {
+    width: 100%;
+    min-height: 100px;
+
+    background-color: #F7F7F7;
+    border-radius: 10px;
+}
+
+/*-------SELECT MULTIPLE------*/

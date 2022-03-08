@@ -9,22 +9,17 @@
 
 /*------------LEFT SIDE------------*/
 .UI-left {
-    width: 75%;
+    padding-left: 50px;
+    padding-right: 50px;
 
     display: flex;
+    flex-grow: 1;
     justify-content: center;
 
-    overflow-y: scroll;
+    overflow-y: auto;
 }
-.UI-left:hover::-webkit-scrollbar-track {
-    background: rgba(241, 241, 241, 1);
-    opacity: 100%;
-    transition: 200ms;
-}
-.UI-left:hover::-webkit-scrollbar-thumb {
-    background: rgba(188, 188, 188, 1);
-    opacity: 100%;
-    transition: 200ms;
+.UI-left::-webkit-scrollbar {
+    display: none;
 }
 
 .preview-container {
@@ -83,6 +78,18 @@
 
 /*------------RIGHT SIDE------------*/
 .UI-right {
-    background-color: rebeccapurple;
-    width: 25%;
+    width: 400px;
+    padding-top: 10px;
+    padding-right: 20px;
+    overflow-y: auto;
+}
+.UI-right:hover::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 1);
+    opacity: 100%;
+    transition: 200ms;
+}
+.UI-right:hover::-webkit-scrollbar-thumb {
+    background: rgba(188, 188, 188, 1);
+    opacity: 100%;
+    transition: 200ms;
 }

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./PreviewComponents.scoped.css";
 import { GoTriangleDown, GoSearch } from "react-icons/go";
-import { IconContext } from "react-icons";
 
 function Header(props) {
     return (

@@ -382,6 +382,7 @@
     color: #00A3FF;
 
     font-size: 10px;
+    cursor: pointer;
 }
 .selmult-selection:hover {
     background-color: #7eb6df;
