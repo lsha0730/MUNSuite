@@ -9,27 +9,31 @@ function Editor() {
     const [formArr, setFormArr] = useState(DefaultFormData);
     const [previewRenders, setPreviewRenders] = useState([]);
     const [editorRenders, setEditorRenders] = useState([]);
-    const [formLink, setFormLink] = useState("https://forms.gle/jEErPPyXrHJ3YEpz8dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+    const [formLink, setFormLink] = useState("https://forms.gle/jEErPPyXrHJ3YEpz8");
+
+    useEffect(() => {
+        console.log("form updated!")
+    }, [formArr])
 
     useEffect(() => {
         setPreviewRenders(formArr.map(item => {
             switch (item.type) {
                 case "header":
-                    return <Header key={item.id} image={item.image} heading={item.heading} subheading={item.subheading}/>;
+                    return <Header key={item.id} id={item.id} image={item.image} heading={item.heading} subheading={item.subheading}/>;
                 case "radio":
-                    return <Radio key={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
+                    return <Radio key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
                 case "multiplechoice":
-                    return <MultipleChoice key={item.id} required={item.required} heading={item.heading} options={item.options}/>;
+                    return <MultipleChoice key={item.id} id={item.id} required={item.required} heading={item.heading} options={item.options}/>;
                 case "content":
-                    return <Content key={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content}/>;
+                    return <Content key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content}/>;
                 case "shorttext":
-                    return <ShortText key={item.id} required={item.required} heading={item.heading} subheading={item.subheading}/>;
+                    return <ShortText key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading}/>;
                 case "longtext":
-                    return <LongText key={item.id} required={item.required} heading={item.heading} subheading={item.subheading}/>;
+                    return <LongText key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading}/>;
                 case "dropdown":
-                    return <Dropdown key={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
+                    return <Dropdown key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
                 case "select-multiple":
-                    return <SelectMultiple key={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options}/>;
+                    return <SelectMultiple key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options}/>;
                 default:
                     console.log("Could not render question block.")
             }
@@ -38,21 +42,21 @@ function Editor() {
         setEditorRenders(formArr.map(item => {
             switch (item.type) {
                 case "header":
-                    return <EditHeader key={item.id} image={item.image} heading={item.heading} subheading={item.subheading}/>;
+                    return <EditHeader form={formArr} setForm={setFormArr} key={item.id} id={item.id} image={item.image} heading={item.heading} subheading={item.subheading}/>;
                 case "radio":
-                    return <EditRadio key={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
+                    return <EditRadio form={formArr} setForm={setFormArr} key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
                 case "multiplechoice":
-                    return <EditMultipleChoice key={item.id} required={item.required} heading={item.heading} options={item.options}/>;
+                    return <EditMultipleChoice form={formArr} setForm={setFormArr} key={item.id} id={item.id} required={item.required} heading={item.heading} options={item.options}/>;
                 case "content":
-                    return <EditContent key={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content}/>;
+                    return <EditContent form={formArr} setForm={setFormArr} key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content}/>;
                 case "shorttext":
-                    return <EditShortText key={item.id} required={item.required} heading={item.heading} subheading={item.subheading}/>;
+                    return <EditShortText form={formArr} setForm={setFormArr} key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading}/>;
                 case "longtext":
-                    return <EditLongText key={item.id} required={item.required} heading={item.heading} subheading={item.subheading}/>;
+                    return <EditLongText form={formArr} setForm={setFormArr} key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading}/>;
                 case "dropdown":
-                    return <EditDropdown key={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
+                    return <EditDropdown form={formArr} setForm={setFormArr} key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
                 case "select-multiple":
-                    return <EditSelectMultiple key={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options}/>;
+                    return <EditSelectMultiple form={formArr} setForm={setFormArr} key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options}/>;
                 default:
                     console.log("Could not render editor block.")
             }

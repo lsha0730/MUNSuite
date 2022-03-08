@@ -70,6 +70,10 @@
     display: none;
 }
 
+.fade {
+    opacity: 0%;
+}
+
 .nowrap {
     white-space: nowrap;
 }
@@ -387,5 +391,17 @@
 .selmult-selection:hover {
     background-color: #7eb6df;
     color: #FFFFFF;
+    transition: 200ms;
+}
+
+.selmult-max-warning {
+    width: 200px;
+
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+
+    color: #ff7070;
+    font-size: 12px;
     transition: 200ms;
 }

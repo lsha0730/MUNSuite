@@ -134,11 +134,10 @@
 
 /*Add Option Button*/
 .btt-add-option {
-    width: fit-content;
-
+    width: 15%;
     padding: 3px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 7px;
+    padding-right: 7px;
 
     display: flex;
     justify-content: center;
@@ -161,6 +160,9 @@
 .option-container {
     width: 100%;
     padding: 2px;
+    padding-left: 20px;
+    padding-right: 20px;
+
     margin-bottom: 5px;
 
     display: flex;
@@ -178,7 +180,6 @@
 
 .option-text {
     font-size: 14px;
-    margin-left: 10px;
 }
 
 .option-adder {
@@ -186,11 +187,13 @@
     flex-direction: row;
     align-items: center;
     margin-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 .option-input {
     display: flex;
-    flex-grow: 1;
     align-items: center;
+    width: 85%;
 
     padding-left: 10px;
     padding-right: 10px;
@@ -214,6 +217,7 @@
 .option-none-ind {
     font-size: 12px;
     font-weight: 500;
+    padding-left: 20px;
     color: #BCBCBC
 }
 
@@ -345,9 +349,8 @@
 .radio-options-container {
     width: 100%;
 
-    padding: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 
     display: flex;
     flex-direction: column;
@@ -360,7 +363,12 @@
 /*-------MULTIPLE CHOICE------*/
 .mc-options-container {
     width: 100%;
-    min-height: 100px;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    display: flex;
+    flex-direction: column;
 
     background-color: #F7F7F7;
     border-radius: 10px;
@@ -373,7 +381,12 @@
 /*-------DROPDOWN------*/
 .dropdown-options-container {
     width: 100%;
-    min-height: 100px;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    display: flex;
+    flex-direction: column;
 
     background-color: #F7F7F7;
     border-radius: 10px;
