@@ -1,5 +1,6 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import { IoClipboard } from "react-icons/io5";
+import { appContext } from '../../../Context.js';
 import "./EditorComponents.scoped.css";
 
 // Custom hook that avoids run on initial mount
@@ -78,8 +79,14 @@ function EditRadio(props) {
     const [toggleRender, setToggleRender] = useState();
     const [options, setOptions] = useState(props.options)
     const [optionsRender, setOptionsRender] = useState([]);
-    const [heading, setHeading] = useState("");
-    const [subheading, setSubheading] = useState("");
+    const [heading, setHeading] = useState(props.heading);
+    const [subheading, setSubheading] = useState(props.subheading);
+    const {formArr, setFormArr} = useContext(appContext);
+
+    useEffect(() => {
+        console.log("bruh!")
+        // Debugging, delete later
+    }, [formArr])
 
     useEffect(() => {
         if (props.heading) {
@@ -100,9 +107,11 @@ function EditRadio(props) {
         newObj.subheading = subheading==""? false:subheading;
         newObj.options = options;
 
-        let newForm = props.form;
+        let newForm = formArr;
         newForm.splice(props.id, 1, newObj);
-        props.setForm(newForm);
+        setFormArr(newForm);
+        // Add timing based optimization to prevent setState on every keystorke
+        console.log("internal update") //Debug
     }, [require, options, heading, subheading])
 
 

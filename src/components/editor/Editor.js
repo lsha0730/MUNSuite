@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Editor.scoped.css";
+import { appContext } from '../../Context.js';
 
 import DefaultFormData from "./DefaultFormData.js";
 import { Header, Radio, MultipleChoice, Content, ShortText, LongText, Dropdown, SelectMultiple } from "./preview-components/PreviewComponents.js";
@@ -42,21 +43,21 @@ function Editor() {
         setEditorRenders(formArr.map(item => {
             switch (item.type) {
                 case "header":
-                    return <EditHeader form={formArr} setForm={setFormArr} key={item.id} id={item.id} image={item.image} heading={item.heading} subheading={item.subheading}/>;
+                    return <EditHeader key={item.id} id={item.id} image={item.image} heading={item.heading} subheading={item.subheading}/>;
                 case "radio":
-                    return <EditRadio form={formArr} setForm={setFormArr} key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
+                    return <EditRadio key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
                 case "multiplechoice":
-                    return <EditMultipleChoice form={formArr} setForm={setFormArr} key={item.id} id={item.id} required={item.required} heading={item.heading} options={item.options}/>;
+                    return <EditMultipleChoice key={item.id} id={item.id} required={item.required} heading={item.heading} options={item.options}/>;
                 case "content":
-                    return <EditContent form={formArr} setForm={setFormArr} key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content}/>;
+                    return <EditContent key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content}/>;
                 case "shorttext":
-                    return <EditShortText form={formArr} setForm={setFormArr} key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading}/>;
+                    return <EditShortText key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading}/>;
                 case "longtext":
-                    return <EditLongText form={formArr} setForm={setFormArr} key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading}/>;
+                    return <EditLongText key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading}/>;
                 case "dropdown":
-                    return <EditDropdown form={formArr} setForm={setFormArr} key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
+                    return <EditDropdown key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
                 case "select-multiple":
-                    return <EditSelectMultiple form={formArr} setForm={setFormArr} key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options}/>;
+                    return <EditSelectMultiple key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options}/>;
                 default:
                     console.log("Could not render editor block.")
             }
@@ -72,7 +73,9 @@ function Editor() {
                         <p className="preview-hat-heading">DISEC</p>
                         <p className="preview-hat-subheading">[Delegation Name]</p>
                     </div>
-                    {previewRenders}
+                    <appContext.Provider value={{formArr, setFormArr}}>
+                        {previewRenders}
+                    </appContext.Provider>
                     <div className="btt-submit-block">
                         <div className="btt-submit">
                             <p>Submit</p>
@@ -82,7 +85,9 @@ function Editor() {
             </div>
             <div className="UI-right">
                 <FormLink link={formLink}/>
-                {editorRenders}
+                <appContext.Provider value={{formArr, setFormArr}}>
+                    {editorRenders}
+                </appContext.Provider>
             </div>
         </div>
     )

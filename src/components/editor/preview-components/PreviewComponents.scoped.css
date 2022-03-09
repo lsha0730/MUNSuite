@@ -82,6 +82,10 @@
     cursor: pointer;
 }
 
+.super-z {
+    z-index: 10;
+}
+
 /*--------RADIO--------*/
 .radio-single-container {
     display: flex;
@@ -267,7 +271,7 @@
     position: fixed;
     left: 0;
     top: 0;
-    z-index: 1;
+    z-index: 2;
 }
 
 .dropdown-option-container {
@@ -278,6 +282,11 @@
     padding-right: 25px;
     overflow-x: hidden;
     cursor: pointer;
+
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 .dropdown-option-container:hover {
     background-color: #EEEEEE;
@@ -368,6 +377,7 @@
     margin-top: 10px;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .selmult-selection {
@@ -376,6 +386,7 @@
     padding-left: 10px;
     padding-right: 10px;
     margin-right: 5px;
+    margin-bottom: 3px;
 
     display: flex;
     justify-content: center;
@@ -387,6 +398,11 @@
 
     font-size: 10px;
     cursor: pointer;
+
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 .selmult-selection:hover {
     background-color: #7eb6df;

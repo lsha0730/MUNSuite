@@ -186,7 +186,7 @@ function Dropdown(props) {
             <p className="heading">{props.heading}</p>
             <p className="subheading">{props.subheading}</p>
             <p className={props.required? "required-star":"hidden"}>*</p>
-            <div className="dropdown-bar master-z" onClick={() => setDropVisible(!dropVisible)}>
+            <div className={dropVisible? "dropdown-bar super-z":"dropdown-bar"} onClick={() => setDropVisible(!dropVisible)}>
                 <div className="dropdown-text-container">
                     <p className="nowrap">{props.options[value]}</p>
                 </div>
@@ -209,7 +209,7 @@ function SelectMultiple(props) {
     const [maxWarning, setMaxWarning] = useState(false);
 
     const selectOption = (option) => {
-        if (selected.length < props.max) {
+        if (selected.length < props.max || !props.max) {
             let currentSelected = selected;
             let currentOptions = options;
             
@@ -286,7 +286,7 @@ function SelectMultiple(props) {
                 {renderSelected}
             </div>
             <p className={maxWarning? "selmult-max-warning":"selmult-max-warning fade"}>You have selected the maximum number of selections.</p>
-            <div className="selmult-searchbar">
+            <div className={isShowingOptions? "selmult-searchbar super-z":"selmult-searchbar"}>
                 <input    
                   type="text" 
                   placeholder="Search" 

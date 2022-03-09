@@ -23,17 +23,21 @@ const DefaultFormData = [
     },
     {
         id: 3,
-        type: "shorttext",
+        type: "select-multiple",
         required: true,
-        heading: "Sponsor Signatures",
-        subheading: "Please enter all sponsor names, separated by commas (Ex. France, Germany, US)."
+        heading: "Sponsors",
+        subheading: "Please enter all sponsor coutries.",
+        max: 3,
+        options: ["Afghanistan", "Belarus", "Canada", "Denmark"]
     },
     {
         id: 4,
-        type: "shorttext",
+        type: "select-multiple",
         required: false,
-        heading: "Signatory Signatures",
-        subheading: "Only applicable to public directives. Please enter all signatory names, separated by commas (Ex. France, Germany, US)."
+        heading: "Signatories",
+        subheading: "Only applicable to public directives. Please enter all signatory coutries.",
+        max: false,
+        options: ["Afghanistan", "Belarus", "Canada", "Denmark", "AAA", "BBB", "CCC", "DDD", "Afghanistan", "Belarus", "Canada", "Denmark", "AAA", "BBB", "CCC", "DDD"]
     },
     {
         id: 5,
