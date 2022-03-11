@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import "./Editor.scoped.css";
-import { appContext } from '../../Context.js';
+import { editorContext } from '../../Context.js';
 
 import DefaultFormData from "./DefaultFormData.js";
 import { Header, Radio, MultipleChoice, Content, ShortText, LongText, Dropdown, SelectMultiple } from "./preview-components/PreviewComponents.js";
@@ -10,7 +10,7 @@ function Editor() {
     const [formArr, setFormArr] = useState(DefaultFormData);
     const [previewRenders, setPreviewRenders] = useState([]);
     const [editorRenders, setEditorRenders] = useState([]);
-    const [formLink, setFormLink] = useState("https://forms.gle/jEErPPyXrHJ3YEpz8");
+    const [formLink, setFormLink] = useState("https://forms.gle/jEErPPyXrHJ3YEpz8");    
 
     useEffect(() => {
         console.log("form updated!")
@@ -73,9 +73,9 @@ function Editor() {
                         <p className="preview-hat-heading">DISEC</p>
                         <p className="preview-hat-subheading">[Delegation Name]</p>
                     </div>
-                    <appContext.Provider value={{formArr, setFormArr}}>
+                    <editorContext.Provider>
                         {previewRenders}
-                    </appContext.Provider>
+                    </editorContext.Provider>
                     <div className="btt-submit-block">
                         <div className="btt-submit">
                             <p>Submit</p>
@@ -85,9 +85,9 @@ function Editor() {
             </div>
             <div className="UI-right">
                 <FormLink link={formLink}/>
-                <appContext.Provider value={{formArr, setFormArr}}>
+                <editorContext.Provider value={{formArr, setFormArr}}>
                     {editorRenders}
-                </appContext.Provider>
+                </editorContext.Provider>
             </div>
         </div>
     )

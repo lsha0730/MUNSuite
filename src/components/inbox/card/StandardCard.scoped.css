@@ -1,0 +1,153 @@
+.card-container {
+    min-width: 350px;
+    height: 100%;
+
+    margin-right: 20px;
+
+    border-radius: 10px;
+}
+
+/*-------OPERATIONS-------*/
+.card-operations {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.btt-pass {
+    width: 40px;
+    height: 40px;
+
+    margin: 5px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20%;
+    cursor: pointer;
+}
+.btt-pass:hover {
+    background-color: #CFF9C3;
+    transition: 200ms;
+}
+
+.btt-fail {
+    width: 40px;
+    height: 40px;
+
+    margin: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20%;
+    cursor: pointer;
+}
+.btt-fail:hover {
+    background-color: #FFC6C6;
+    transition: 200ms;
+}
+
+
+/*-------TOP-------*/
+.card-top {
+    padding: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    border-radius: 10px 10px 0px 0px;
+    background-color: #3C8CC9;
+}
+
+.card-top-bottom {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.type {
+    color: #FFFFFF;
+    font-size: 14px;
+}
+
+.id-tag {
+    color: #FFFFFF;
+    font-size: 10px;
+}
+
+.title {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+
+    margin-bottom: 10px;
+}
+
+
+/*-------TIE-------*/
+.card-tie {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+
+    font-size: 12px;
+    background-color: #F7F7F7;
+}
+
+.tie-set {
+    display: flex;
+    flex-direction: row;
+
+    margin-bottom: 5px;
+}
+
+.card-icon {
+    fill: #b1b1b1;
+    min-width: 18px;
+    margin-right: 10px;
+}
+
+.signatories-list {
+    color: #b1b1b1;
+}
+
+
+/*-------BODY-------*/
+.card-body {
+    height: 100%;
+
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 20px;
+
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    overflow-y: auto;
+}
+.card-body:hover::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 1);
+    opacity: 100%;
+    transition: 200ms;
+}
+.card-body:hover::-webkit-scrollbar-thumb {
+    background: rgba(188, 188, 188, 1);
+    opacity: 100%;
+    transition: 200ms;
+}
+
+.block-heading {
+    color: #A9A9A9;
+    font-size: 14px;
+    font-weight: 500;
+
+    margin-bottom: 3px;
+}
+
+.block-text {
+    font-size: 14px;
+    margin-bottom: 20px;
+}

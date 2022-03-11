@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useContext } from "react";
 import { IoClipboard } from "react-icons/io5";
-import { appContext } from '../../../Context.js';
+import { editorContext } from '../../../Context.js';
 import "./EditorComponents.scoped.css";
 
 // Custom hook that avoids run on initial mount
@@ -81,7 +81,7 @@ function EditRadio(props) {
     const [optionsRender, setOptionsRender] = useState([]);
     const [heading, setHeading] = useState(props.heading);
     const [subheading, setSubheading] = useState(props.subheading);
-    const {formArr, setFormArr} = useContext(appContext);
+    const {formArr, setFormArr} = useContext(editorContext);
 
     useEffect(() => {
         console.log("bruh!")
@@ -108,8 +108,14 @@ function EditRadio(props) {
         newObj.options = options;
 
         let newForm = formArr;
+        // why has the value already been set to the header?
+        // object not yet declared.
+        // TODO
+        console.log(newForm)
         newForm.splice(props.id, 1, newObj);
+        console.log(newForm);
         setFormArr(newForm);
+        
         // Add timing based optimization to prevent setState on every keystorke
         console.log("internal update") //Debug
     }, [require, options, heading, subheading])

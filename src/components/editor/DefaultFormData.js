@@ -37,7 +37,7 @@ const DefaultFormData = [
         heading: "Signatories",
         subheading: "Only applicable to public directives. Please enter all signatory coutries.",
         max: false,
-        options: ["Afghanistan", "Belarus", "Canada", "Denmark", "AAA", "BBB", "CCC", "DDD", "Afghanistan", "Belarus", "Canada", "Denmark", "AAA", "BBB", "CCC", "DDD"]
+        options: ["Afghanistan", "Belarus", "Canada", "Denmark"]
     },
     {
         id: 5,
@@ -75,15 +75,6 @@ const DefaultFormData = [
         heading: "Test Dropdown",
         subheading: "Select your country",
         options: ["Afghanistan", "Belarus", "Canada", "Publius Licinius Crassus Dives", "Commander of the US Air Force Tactical Air Command - William W. Momyer"]
-    },
-    {
-        id: 10,
-        type: "select-multiple",
-        required: false,
-        heading: "Test Select Multiple",
-        subheading: "Select all sponsor countries",
-        max: 3,
-        options: ["Afghanistan", "Belarus", "Canada", "Denmark"]
     }
 ]
 

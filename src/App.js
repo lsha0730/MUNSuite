@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import './App.css';
+
+import Sidebar from './components/sidebar/Sidebar.js';
 import Delegations from './components/delegations/Delegations.js';
 import Editor from './components/editor/Editor.js';
-import Sidebar from './components/sidebar/Sidebar.js';
+import Inbox from './components/inbox/Inbox.js';
+import History from './components/history/History.js';
+
 import { appContext } from './Context.js';
 
 function App() {
@@ -14,8 +18,8 @@ function App() {
       switch (page) {
         case "delegations": return <Delegations/>
         case "editor": return <Editor/>
-        case "inbox": return <h1>Inbox</h1>
-        case "history": return <h1>History</h1>
+        case "inbox": return <Inbox/>
+        case "history": return <History/>
         case "statistics": return <h1>Statistics</h1>
         case "notes": return <h1>Notes</h1>
         case "settings": return <h1>Settings</h1>
@@ -28,7 +32,9 @@ function App() {
     <appContext.Provider value={{page, setPage}}>
       <div className="App-container">
         <Sidebar/>
-        {UI}
+        <div className="UI-container">
+          {UI}
+        </div>
       </div>
     </appContext.Provider>
   )

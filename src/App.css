@@ -11,6 +11,13 @@
   flex-direction: row;
 }
 
+.UI-container {
+  width: calc(100% - 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 7px;

@@ -1,0 +1,72 @@
+.history-container {
+    margin: auto;
+    
+    width: 75%;
+    height: 80%;
+    max-width: 1600px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+/*--------UI DOM--------*/
+.UI-left {
+    height: 100%;
+    width: 350px;
+}
+
+.UI-right {
+    height: 100%;
+    width: 100%;
+
+    margin-left: 50px;
+    overflow-y: auto;
+}
+.UI-right:hover::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 1);
+    opacity: 100%;
+    transition: 200ms;
+}
+.UI-right:hover::-webkit-scrollbar-thumb {
+    background: rgba(188, 188, 188, 1);
+    opacity: 100%;
+    transition: 200ms;
+}
+
+
+/*--------RIGHT-UI--------*/
+.cardbar-container {
+    width: 100%;
+
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 5px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+
+.cardbar-deck-container {
+    width: 100%;
+    height: 100%;
+}
+
+.cardbar-indicator {
+    width: 15px;
+    height: 15px;
+
+    margin-right: 10px;
+
+    border-radius: 50%;
+}
+
+.selected {
+    background-color: #BAE4FA;
+    transition: 200ms;
+}
