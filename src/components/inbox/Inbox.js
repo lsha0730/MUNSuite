@@ -42,6 +42,7 @@ function Inbox() {
             <div className="UI-bottom">
                 <div className="spacer"></div>
                 {cardArrRender}
+                <div className="spacer2"></div>
             </div>
         </div>
     )
