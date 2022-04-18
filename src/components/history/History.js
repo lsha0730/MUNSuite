@@ -62,7 +62,7 @@ function History() {
             <div className="UI-right">
                 <div className="UI-topright">
                     <div className="filter-group">
-                        <FaFilter size={20} className="filter-icon"/>
+                        <FaFilter size={18} className="filter-icon"/>
                         <Dropdown options={["Passed", "Failed", "Starred"]}/>
                     </div>
                 </div>

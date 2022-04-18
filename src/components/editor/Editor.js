@@ -22,7 +22,7 @@ function Editor() {
                 case "header":
                     return <Header key={item.id} id={item.id} image={item.image} heading={item.heading} subheading={item.subheading}/>;
                 case "radio":
-                    return <Radio key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options}/>;
+                    return <Radio key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} formArr={formArr} setForm={() => {console.log("Hi")}}/>;
                 case "multiplechoice":
                     return <MultipleChoice key={item.id} id={item.id} required={item.required} heading={item.heading} options={item.options}/>;
                 case "content":

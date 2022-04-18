@@ -2,7 +2,7 @@ const DefaultFormData = [
     {
         id: 0,
         type: "header",
-        image: "https://scontent-sea1-1.xx.fbcdn.net/v/t1.15752-9/274524207_464177512055429_6306242286224824430_n.png?_nc_cat=102&ccb=1-5&_nc_sid=ae9488&_nc_ohc=5OVlT-NLNN0AX_lvPLR&_nc_ht=scontent-sea1-1.xx&oh=03_AVIpPRSos-CncvdigKewmQdRzQsAHYgf3-_kiRzTN80GXQ&oe=624975E0",
+        image: require("./defaultBanner.png"),
         heading: "Midnight Crisis",
         subheading: "Directive Submission Form"
     },

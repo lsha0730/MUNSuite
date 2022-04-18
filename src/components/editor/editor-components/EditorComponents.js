@@ -81,12 +81,12 @@ function EditRadio(props) {
     const [optionsRender, setOptionsRender] = useState([]);
     const [heading, setHeading] = useState(props.heading);
     const [subheading, setSubheading] = useState(props.subheading);
-    const {formArr, setFormArr} = useContext(editorContext);
+    //const {formArr, setFormArr} = useContext(editorContext);
 
     useEffect(() => {
         console.log("bruh!")
         // Debugging, delete later
-    }, [formArr])
+    }, [props.formArr])
 
     useEffect(() => {
         if (props.heading) {
@@ -98,27 +98,28 @@ function EditRadio(props) {
     }, [])
 
     // Form Updater
-    useEffect(() => {
-        let newObj = {}
-        newObj.id = props.id;
-        newObj.type = "radio";
-        newObj.required = require;
-        newObj.heading = heading==""? false:heading;
-        newObj.subheading = subheading==""? false:subheading;
-        newObj.options = options;
+    // useEffect(() => {
+    //     let newObj = {}
+    //     newObj.id = props.id;
+    //     newObj.type = "radio";
+    //     newObj.required = require;
+    //     newObj.heading = heading==""? false:heading;
+    //     newObj.subheading = subheading==""? false:subheading;
+    //     newObj.options = options;
 
-        let newForm = formArr;
-        // why has the value already been set to the header?
-        // object not yet declared.
-        // TODO
-        console.log(newForm)
-        newForm.splice(props.id, 1, newObj);
-        console.log(newForm);
-        setFormArr(newForm);
+    //     let newForm = props.formArr;
+    //     // why has the value already been set to the header?
+    //     // object not yet declared.
+    //     // TODO
+    //     console.log(newForm)
+    //     console.log(props.id)
+    //     // newForm.splice(props.id, 1, newObj);
+    //     console.log(newForm);
+    //     props.setForm(newForm);
         
-        // Add timing based optimization to prevent setState on every keystorke
-        console.log("internal update") //Debug
-    }, [require, options, heading, subheading])
+    //     // Add timing based optimization to prevent setState on every keystorke
+    //     console.log("internal update") //Debug
+    // }, [require, options, heading, subheading])
 
 
     useEffect(() => {
@@ -169,10 +170,9 @@ function EditRadio(props) {
         }
     }, [options])
 
-
     return (
         <div className="block-container">
-            <p className="heading">Radio Buttons</p>
+            <p className="heading" onClick={() => props.setForm()}>Radio Buttons</p>
             {toggleRender}
 
             <p className="subheading">Heading</p>
