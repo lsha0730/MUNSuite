@@ -24,11 +24,11 @@
 }
 .header-heading {
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 5px;
 }
 .header-subheading {
-    font-weight: 300;
+    font-weight: 500;
     color: #C4C4C4;
 }
 
@@ -290,6 +290,11 @@
 }
 .dropdown-option-container:hover {
     background-color: #EEEEEE;
+}
+
+.dropdown-selection-text {
+    white-space: nowrap;
+    font-size: 16px;
 }
 
 .dropdown-text-container {

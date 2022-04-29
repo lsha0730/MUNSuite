@@ -61,6 +61,11 @@
     font-size: 72px;
     font-weight: 600;
 }
+.delcount-desc {
+    font-size: 18px;
+    font-weight: 700;
+    color: #BCBCBC;
+}
 
 .btt-add-country {
     width: 90%;
@@ -68,7 +73,7 @@
 
     background-color: #BAE4FA;
     color: #378DCC;
-    font-weight: 500;
+    font-weight: 600;
     border-radius: 25px;
 
     display: flex;
@@ -90,7 +95,7 @@
 
     background-color: #ffe49a;
     color: #daa000;
-    font-weight: 500;
+    font-weight: 600;
     border-radius: 25px;
 
     display: flex;
@@ -114,7 +119,7 @@
 
     background-color: #F3B9C9;
     color: #FF4343;
-    font-weight: 500;
+    font-weight: 600;
     border-radius: 25px;
 
     display: flex;
@@ -149,6 +154,7 @@
 }
 .export-codes {
     padding-left: 15px;
+    font-weight: 500;
 }
 
 /*-----------RIGHT UI-----------*/
@@ -184,7 +190,7 @@
     background-color: #F3F3F3;
 }
 .no-del-message {
-    font-weight: 500;
+    font-weight: 600;
     font-size: 24px;
     color: #BCBCBC;
 }

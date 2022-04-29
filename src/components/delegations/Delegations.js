@@ -57,7 +57,7 @@ function Delegations() {
         } else {
             setDelegateBars(
                 <div className="no-del-container">
-                    <p className="no-del-message">No Delegations Yet!</p>
+                    <p className="no-del-message">No delegations yet!</p>
                 </div>
             );
         }
@@ -118,7 +118,8 @@ function Delegations() {
                         <div className="delcount-container">
                             <div className="delcount-subcont">
                                 <p className="delcount-num">{delegations.length}</p>
-                                <p className="px18">Active Delegations</p>
+                                <p className="delcount-desc">Active</p>
+                                <p className="delcount-desc">Delegations</p>
                             </div>
                         </div>
 

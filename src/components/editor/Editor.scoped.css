@@ -35,10 +35,11 @@
 }
 .preview-hat-heading {
     font-size: 32px;
-    font-weight: 500;
+    font-weight: 600;
     color: #BCBCBC;
 }
 .preview-hat-subheading {
+    font-weight: 500;
     color: #BCBCBC;
 }
 
