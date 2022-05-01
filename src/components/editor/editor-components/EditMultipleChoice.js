@@ -103,7 +103,7 @@ function EditMultipleChoice(props) {
                     <p>Add</p>
                 </div>
             </div>
-            <div className="mc-options-container">
+            <div className="options-container">
                 {optionsRender}
             </div>
         </div>

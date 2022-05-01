@@ -9,8 +9,8 @@ function EditDropdown(props) {
     const [optionsRender, setOptionsRender] = useState([]);
     const [heading, setHeading] = useState(props.heading);
     const [subheading, setSubheading] = useState(props.subheading);
-    const {delegations} = useContext(delegationsContext);
     const isMounted = useRef(false);
+    let delegations = JSON.parse(localStorage.getItem("delegations")).map(del => del.name);
 
     useEffect(() => {
         if (props.heading) {
@@ -116,7 +116,7 @@ function EditDropdown(props) {
                 </div>
             </div>
 
-            <div className="dropdown-options-container">
+            <div className="options-container">
                 {optionsRender}
             </div>
         </div>

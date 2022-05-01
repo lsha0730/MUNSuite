@@ -25,7 +25,7 @@ import EditDropdown from "./editor-components/EditDropdown.js";
 import EditSelectMultiple from "./editor-components/EditSelectMultiple.js";
 
 function Editor() {
-    const [formArr, setFormArr] = useState(DefaultFormData);
+    const [formArr, setFormArr] = useState(JSON.parse(localStorage.getItem("form"))||DefaultFormData);
     const [editing, setEditing] = useState(false);
     const [formRender, setFormRender] = useState([]);
     const [formLink, setFormLink] = useState("https://forms.gle/jEErPPyXrHJ3YEpz8");
@@ -114,12 +114,10 @@ function Editor() {
         }
 
         tempArr.push(newObj);
-        console.log(tempArr);
         setFormArr(tempArr);
     }
 
-    useEffect(() => {
-        console.log("form rerendered")
+    function rerenderForm() {
         setFormRender(formArr.map(item => {
             switch (item.type) {
                 case "header":
@@ -174,7 +172,7 @@ function Editor() {
                 case "select-multiple":
                     return (
                         <div className="preview-editor-pair">
-                            <SelectMultiple key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options} editing={editing} setEditing={setEditing} updateForm={updateForm}/>
+                            <SelectMultiple key={item.options.length} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options} editing={editing} setEditing={setEditing} updateForm={updateForm}/>
                             <EditSelectMultiple key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options} editing={editing} updateForm={updateForm}/>
                         </div>
                     )
@@ -182,6 +180,12 @@ function Editor() {
                     console.log("Could not render form block.")
             }
         }))
+    }
+
+    useEffect(() => {
+        rerenderForm();
+        localStorage.setItem("form", JSON.stringify(formArr));
+        dispatchEvent(new Event("form updated"));
     }, [formArr, editing]);
 
     return (

@@ -43,7 +43,7 @@ function EditHeader(props) {
                     </div>
                 </div>
                 <div className="header-btt-upload">
-                    <p>+ Upload</p>
+                    <p>Upload</p>
                 </div>
             </div>
 

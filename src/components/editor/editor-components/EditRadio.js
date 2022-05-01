@@ -104,7 +104,7 @@ function EditRadio(props) {
                 </div>
             </div>
 
-            <div className="radio-options-container">
+            <div className="options-container">
                 {optionsRender}
             </div>
         </div>

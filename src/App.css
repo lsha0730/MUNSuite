@@ -49,6 +49,16 @@
    box-sizing: border-box; 
 }
 
+::-moz-selection { /* Code for Firefox */
+  color: #378DCC;
+  background: #BAE4FA;
+}
+
+::selection {
+  color: #378DCC;
+  background: #BAE4FA;
+}
+
 input[type="radio"] {
   /* remove standard background appearance */
   -webkit-appearance: none;

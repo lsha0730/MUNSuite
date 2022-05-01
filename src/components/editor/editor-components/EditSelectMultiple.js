@@ -10,8 +10,8 @@ function EditSelectMultiple(props) {
     const [heading, setHeading] = useState(props.heading);
     const [subheading, setSubheading] = useState(props.subheading);
     const [maxcount, setMaxcount] = useState(props.max);
-    const {delegations} = useContext(delegationsContext);
     const isMounted = useRef(false);
+    let delegations = JSON.parse(localStorage.getItem("delegations")).map(del => del.name);
 
     useEffect(() => {
         if (props.heading) {
@@ -73,11 +73,11 @@ function EditSelectMultiple(props) {
         setOptions(newArr);
     }
 
-    function addAll() {
+    function addAll() {      
         if (delegations.length !== 0) {
             setOptions(options.concat(delegations))
         }
-        console.log(delegations)
+        console.log(options.concat(delegations))
     }
 
     useEffect(() => {
@@ -96,7 +96,7 @@ function EditSelectMultiple(props) {
             }
             setOptionsRender(renderArr);
         }
-    }, [options])
+    }, [ options ])
 
     return (
         <div className={props.editing==props.id? "block-container":"hidden"}>
@@ -124,7 +124,7 @@ function EditSelectMultiple(props) {
                 </div>
             </div>
 
-            <div className="radio-options-container">
+            <div className="options-container">
                 {optionsRender}
             </div>
         </div>

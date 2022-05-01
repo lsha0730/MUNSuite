@@ -8,7 +8,7 @@ function Delegations() {
     const [selections, setSelections] = useState([]);
     const [modal, setModal] = useState(false);
     const [delegateBars, setDelegateBars] = useState([]);
-    const [delegations, setDelegations] = useState([]);
+    const [delegations, setDelegations] = useState(JSON.parse(localStorage.getItem("delegations"))||[]);
 
     function modalUI() {
         switch (modal) {
@@ -23,10 +23,10 @@ function Delegations() {
         }
     }
 
-    useEffect(() => {
-        let delHolder = delegations;
-        delHolder.sort((a, b) => a.name.localeCompare(b.name));
-        setDelegations(delHolder);
+    function rerenderDels() {
+        let delList = delegations;
+        delList.sort((a, b) => a.name.localeCompare(b.name));
+        setDelegations(delList);
 
         for (let i=0; i<delegations.length; i++) {
             let delegate = delegations[i];
@@ -61,10 +61,16 @@ function Delegations() {
                 </div>
             );
         }
+    }
 
-        
-
+    useEffect(() => {
+        rerenderDels();
     }, [delegations, selections]);
+
+    useEffect(() => {
+        localStorage.setItem("delegations", JSON.stringify(delegations));
+        dispatchEvent(new Event("delegations updated"));
+    }, [delegations])
 
     function deselectAll() { setSelections([]); }
     function selectAll() {
