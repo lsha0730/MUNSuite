@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./StandardCard.scoped.css"
 import { BsPeopleFill, BsEyeglasses, BsCheckLg, BsXLg } from "react-icons/bs";
-
+import { IoIosFastforward } from "react-icons/io";
 
 function StandardCard(props) {
     const [bodyRenders, setBodyRenders] = useState();
@@ -28,13 +28,17 @@ function StandardCard(props) {
     }, [])
 
     function passDirective() {
+        props.updateCards("delete", props.id);
         //!!!
-        console.log("Passed: " + props.title)
+    }
+
+    function tableDirective() {
+        props.updateCards("table", props.id);
     }
 
     function failDirective() {
+        props.updateCards("delete", props.id);
         //!!!
-        console.log("Failed: " + props.title)
     }
 
     return (
@@ -45,6 +49,9 @@ function StandardCard(props) {
                 </div>
                 <div className="btt-fail" onClick={failDirective}>
                     <BsXLg size={20} style={{fill: "#FF7070"}}/>
+                </div>
+                <div className="btt-table" onClick={tableDirective}>
+                    <IoIosFastforward size={25} style={{fill: "#FFCA39"}}/>
                 </div>
             </div>
 

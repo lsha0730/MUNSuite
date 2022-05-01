@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./CustomCard.scoped.css";
 import { BsPersonFill, BsCheckLg, BsXLg } from "react-icons/bs";
+import { IoIosFastforward } from "react-icons/io";
 
 function CustomCard(props) {
     const [bodyRenders, setBodyRenders] = useState();
@@ -27,13 +28,17 @@ function CustomCard(props) {
     }, [])
 
     function passDirective() {
+        props.updateCards("delete", props.id);
         //!!!
-        console.log("Passed: " + props.author)
+    }
+
+    function tableDirective() {
+        props.updateCards("table", props.id);
     }
 
     function failDirective() {
+        props.updateCards("delete", props.id);
         //!!!
-        console.log("Failed: " + props.author)
     }
 
     return (
@@ -44,6 +49,9 @@ function CustomCard(props) {
                 </div>
                 <div className="btt-fail" onClick={failDirective}>
                     <BsXLg size={20} style={{fill: "#FF7070"}}/>
+                </div>
+                <div className="btt-table" onClick={tableDirective}>
+                    <IoIosFastforward size={25} style={{fill: "#FFCA39"}}/>
                 </div>
             </div>
 

@@ -10,6 +10,28 @@ function Inbox() {
     const [cardArr, setCardArr] = useState(MockSubmissions);
     const [cardArrRender, setCardArrRender] = useState([]);
 
+    function updateCards(operation, submissionID) {
+        let cardIndex;
+        for (let i=0; i<cardArr.length; i++) {
+            if (cardArr[i].submissionID == submissionID) {
+                cardIndex = i;
+            }
+        }
+
+        let tempArr = cardArr.slice();
+        switch (operation) {
+            case "delete":
+                tempArr.splice(cardIndex, 1);
+                break;
+            case "table":
+                let tempObj = tempArr[cardIndex];
+                tempArr.splice(cardIndex, 1);
+                tempArr.push(tempObj);
+        }
+
+        setCardArr(tempArr);
+    }
+
     useEffect(() => {
         let toggleOffset = accepting? 0:25;
 
@@ -26,9 +48,9 @@ function Inbox() {
     useEffect(() => {
         setCardArrRender(cardArr.map(directive => {
             if (directive.standard) {
-                return <StandardCard key={directive.submissionID} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors} signatories={directive.signatories} body={directive.body}/>
+                return <StandardCard key={directive.submissionID} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors} signatories={directive.signatories} body={directive.body} updateCards={updateCards}/>
             } else {
-                return <CustomCard key={directive.submissionID} id={directive.submissionID} author={directive.author} body={directive.body}/>
+                return <CustomCard key={directive.submissionID} id={directive.submissionID} author={directive.author} body={directive.body} updateCards={updateCards}/>
             }
         }))
     }, [cardArr])

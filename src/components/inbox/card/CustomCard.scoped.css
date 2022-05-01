@@ -1,5 +1,6 @@
 .card-container {
     min-width: 350px;
+    max-width: 350px;
     height: 100%;
     
     display: flex;
@@ -32,6 +33,23 @@
 }
 .btt-pass:hover {
     background-color: #CFF9C3;
+    transition: 200ms;
+}
+
+.btt-table {
+    width: 40px;
+    height: 40px;
+
+    margin: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20%;
+    cursor: pointer;
+}
+.btt-table:hover {
+    background-color: #FFE49A;
     transition: 200ms;
 }
 
