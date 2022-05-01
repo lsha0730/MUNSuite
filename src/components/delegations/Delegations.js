@@ -62,6 +62,8 @@ function Delegations() {
             );
         }
 
+        
+
     }, [delegations, selections]);
 
     function deselectAll() { setSelections([]); }

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
+import { delegationsContext } from "../../../Context";
 import "./EditorComponents.scoped.css";
 
 function EditSelectMultiple(props) {
@@ -9,6 +10,8 @@ function EditSelectMultiple(props) {
     const [heading, setHeading] = useState(props.heading);
     const [subheading, setSubheading] = useState(props.subheading);
     const [maxcount, setMaxcount] = useState(props.max);
+    const {delegations} = useContext(delegationsContext);
+    const isMounted = useRef(false);
 
     useEffect(() => {
         if (props.heading) {
@@ -24,16 +27,20 @@ function EditSelectMultiple(props) {
 
     // Form Updater
     useEffect(() => {
-        let newObj = {}
-        newObj.id = props.id;
-        newObj.type = "select-multiple";
-        newObj.required = require;
-        newObj.heading = heading==""? false:heading;
-        newObj.subheading = subheading==""? false:subheading;
-        newObj.max = maxcount==""? false:parseInt(maxcount);
-        newObj.options = options;
+        if (isMounted.current) {
+            let newObj = {}
+            newObj.id = props.id;
+            newObj.type = "select-multiple";
+            newObj.required = require;
+            newObj.heading = heading==""? false:heading;
+            newObj.subheading = subheading==""? false:subheading;
+            newObj.max = maxcount==""? false:parseInt(maxcount);
+            newObj.options = options;
 
-        props.updateForm(false, props.id, newObj);
+            props.updateForm("update", props.id, newObj);
+        } else {
+            isMounted.current = true;
+        }
     }, [require, options, heading, subheading, maxcount])
 
     useEffect(() => {
@@ -66,6 +73,13 @@ function EditSelectMultiple(props) {
         setOptions(newArr);
     }
 
+    function addAll() {
+        if (delegations.length !== 0) {
+            setOptions(options.concat(delegations))
+        }
+        console.log(delegations)
+    }
+
     useEffect(() => {
         if (options.length == 0) {
             setOptionsRender(<p className="option-none-ind">No options yet!</p>)
@@ -85,7 +99,7 @@ function EditSelectMultiple(props) {
     }, [options])
 
     return (
-        <div className="block-container">
+        <div className={props.editing==props.id? "block-container":"hidden"}>
             <p className="heading">Select Multiple</p>
             {toggleRender}
 
@@ -99,15 +113,19 @@ function EditSelectMultiple(props) {
             <input type="number" id={"maxcount" + props.id} placeholder="Unlimited" className="textfield-container" onChange={() => {setMaxcount(document.getElementById("maxcount" + props.id).value)}}></input>
 
             <p className="subheading">Options</p>
+
+            <div className="option-adder">
+                <input type="text" id={"multipleSelect" + props.id} className="option-input" onKeyDown={(e) => {if (e.key === 'Enter') addOption()}}></input>
+                <div className="btt-add-option" onClick={addOption}>
+                    <p>Add</p>
+                </div>
+                <div className="btt-add-all" onClick={addAll}>
+                    <p>Add All</p>
+                </div>
+            </div>
+
             <div className="radio-options-container">
                 {optionsRender}
-
-                <div className="option-adder">
-                    <input type="text" id={"multipleSelect" + props.id} className="option-input"></input>
-                    <div className="btt-add-option" onClick={addOption}>
-                        <p>Add</p>
-                    </div>
-                </div>
             </div>
         </div>
     )

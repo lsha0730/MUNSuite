@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./EditorComponents.scoped.css";
 
 function EditHeader(props) {
     const [heading, setHeading] = useState(props.heading);
     const [subheading, setSubheading] = useState(props.subheading);
+    const isMounted = useRef(false);
 
     useEffect(() => {
         if (props.heading) {
@@ -16,18 +17,22 @@ function EditHeader(props) {
 
     // Form Updater
     useEffect(() => {
-        let newObj = {}
-        newObj.id = props.id;
-        newObj.type = "header";
-        newObj.image = props.image;
-        newObj.heading = heading==""? false:heading;
-        newObj.subheading = subheading==""? false:subheading;
+        if (isMounted.current) {
+            let newObj = {}
+            newObj.id = props.id;
+            newObj.type = "header";
+            newObj.image = props.image;
+            newObj.heading = heading==""? false:heading;
+            newObj.subheading = subheading==""? false:subheading;
 
-        props.updateForm(false, props.id, newObj);
+            props.updateForm("update", props.id, newObj);
+        } else {
+            isMounted.current = true;
+        }
     }, [heading, subheading])
 
     return (
-        <div className="block-container">
+        <div className={props.editing==props.id? "block-container":"hidden"}>
             <p className="heading">Header</p>
 
             <p className="subheading">Image</p>

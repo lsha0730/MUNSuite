@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./EditorComponents.scoped.css";
 
 function EditDropdown(props) {
@@ -8,6 +8,7 @@ function EditDropdown(props) {
     const [optionsRender, setOptionsRender] = useState([]);
     const [heading, setHeading] = useState(props.heading);
     const [subheading, setSubheading] = useState(props.subheading);
+    const isMounted = useRef(false);
 
     useEffect(() => {
         if (props.heading) {
@@ -68,19 +69,23 @@ function EditDropdown(props) {
 
     // Form Updater
     useEffect(() => {
-        let newObj = {}
-        newObj.id = props.id;
-        newObj.type = "dropdown";
-        newObj.required = require;
-        newObj.heading = heading==""? false:heading;
-        newObj.subheading = subheading==""? false:subheading;
-        newObj.options = options;
-
-        props.updateForm(false, props.id, newObj);
+        if (isMounted.current) {
+            let newObj = {}
+            newObj.id = props.id;
+            newObj.type = "dropdown";
+            newObj.required = require;
+            newObj.heading = heading==""? false:heading;
+            newObj.subheading = subheading==""? false:subheading;
+            newObj.options = options;
+    
+            props.updateForm("update", props.id, newObj);
+        } else {
+            isMounted.current = true;
+        }
     }, [require, options, heading, subheading])
 
     return (
-        <div className="block-container">
+        <div className={props.editing==props.id? "block-container":"hidden"}>
             <p className="heading">Dropdown</p>
             {toggleRender}
 
@@ -95,7 +100,7 @@ function EditDropdown(props) {
                 {optionsRender}
 
                 <div className="option-adder">
-                    <input type="text" id={"dropdown" + props.id} className="option-input"></input>
+                    <input type="text" id={"dropdown" + props.id} className="option-input" onKeyDown={(e) => {if (e.key === 'Enter') addOption()}}></input>
                     <div className="btt-add-option" onClick={addOption}>
                         <p>Add</p>
                     </div>

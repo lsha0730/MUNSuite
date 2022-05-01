@@ -3,94 +3,113 @@
     height: 100%;
 
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
 }
 
-/*------------LEFT SIDE------------*/
-.UI-left {
-    padding-left: 50px;
-    padding-right: 50px;
+.main-UI {
+    width: 1170px;
+    height: 100%;
+    overflow-y: auto;
+    transform: translate(-50px);
 
     display: flex;
-    flex-grow: 1;
-    justify-content: center;
-
-    overflow-y: auto;
+    flex-direction: column;
 }
-.UI-left::-webkit-scrollbar {
+.main-UI::-webkit-scrollbar {
     display: none;
 }
 
-.preview-container {
-    width: 700px;
-    height: fit-content;
-}
-
 .preview-hat {
-    height: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    transform: translate(50px);
 }
 .preview-hat-heading {
     font-size: 32px;
     font-weight: 600;
     color: #BCBCBC;
+    margin-top: 30px;
 }
 .preview-hat-subheading {
     font-weight: 500;
     color: #BCBCBC;
+    margin-bottom: 20px;
 }
 
-.btt-submit-block {
-    width: 100%;
-
+.preview-editor-pair {
     position: relative;
-
-    padding-top: 10px;
-    padding-bottom: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    overflow: visible;
 }
-.btt-submit {
-    width: 120px;
-    height: 40px;
 
+/*----------ADD QUESTION----------*/
+.addQ-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    transform: translate(50px);
+}
+
+.addQ-icon-container {
+    width: 40px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    position: relative;
+}
+.addQ-icon-backdrop {
+    width: 30px;
+    height: 30px;
+    background-color: #378DCC;
+    border-radius: 50%;
+}
+.addQ-icon {
     position: absolute;
-    right: 0px;
+    z-index: 2;
+    width: 50px;
+    height: 50px;
+    fill: #BAE4FA;
+}
+
+.addQ-options-container {
+    width: 500px;
+    height: fit-content;
+
+    padding: 10px;
+    margin-left: 20px;
+    margin-bottom: 100px;
+
+    background-color: #FFFFFF;
+    border-radius: 10px;
+
+    display: flex;
+    flex-wrap: wrap;
+}
+.btt-addQ {
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 5px;
 
     background-color: #BAE4FA;
+    border-radius: 10px;
+
     color: #378DCC;
     font-weight: 500;
-    border-radius: 5px;
+    text-align: center;
 
-    transition: 200ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     cursor: pointer;
 }
-.btt-submit:hover {
+.btt-addQ:hover {
     background-color: #7eb6df;
     color: #FFFFFF;
-    transition: 200ms;
-}
-
-
-/*------------RIGHT SIDE------------*/
-.UI-right {
-    width: 400px;
-    padding-top: 10px;
-    padding-right: 20px;
-    overflow-y: auto;
-}
-.UI-right:hover::-webkit-scrollbar-track {
-    background: rgba(241, 241, 241, 1);
-    opacity: 100%;
-    transition: 200ms;
-}
-.UI-right:hover::-webkit-scrollbar-thumb {
-    background: rgba(188, 188, 188, 1);
-    opacity: 100%;
     transition: 200ms;
 }

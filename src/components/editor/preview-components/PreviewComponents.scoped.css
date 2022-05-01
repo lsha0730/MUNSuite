@@ -1,14 +1,38 @@
+/*-------GENERIC OPERATIONS-------*/
+.hidden {
+    display: none;
+}
+
+.fade {
+    opacity: 0%;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.super-z {
+    z-index: 10;
+}
+
 /*--------HEADER--------*/
 .header-container {
-    width: 100%;
+    width: 700px;
+    height: fit-content;
     margin-bottom: 25px;
+
+    position: relative;
 
     background-color: white;
     border-radius: 10px;
 }
 
 .header-image-container {
-    padding: 10px;
+    padding: 15px;
 }
 .header-image {
     width: 100%;
@@ -34,7 +58,8 @@
 
 /*-------BLOCK FORMATTING------*/
 .block-container {
-    width: 100%;
+    width: 700px;
+    height: fit-content;
     margin-bottom: 10px;
     position: relative;
 
@@ -66,25 +91,68 @@
     font-size: 18px;
 }
 
-.hidden {
-    display: none;
+.editing-indicator {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 10px;
+    height: 100%;
+    border-radius: 10px 0px 0px 10px;
+    background-color: #378DCC;
+    transition: 200ms;
 }
 
-.fade {
+/*Question Modifier Buttons*/
+#Qmod-icons {
     opacity: 0%;
+    width: fit-content;
+    height: 100%;
+
+    transform: translate(0px, -5px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#Qmod-icons:hover {
+    opacity: 100%;
+    transition: 200ms;
+}
+#block-container:hover ~ #Qmod-icons {
+    opacity: 100%;
+    transition: 200ms;
 }
 
-.nowrap {
-    white-space: nowrap;
-}
+.btt-delQ {
+    width: 25px;
+    height: 25px;
 
-.clickable {
+    margin-top: 10px;
+    margin-right: 20px;
+
+    fill: #cecece;
     cursor: pointer;
 }
-
-.super-z {
-    z-index: 10;
+.btt-delQ:hover {
+    fill: #ff7070;
+    transition: 200ms;
 }
+
+.btt-moveQ {
+    width: 30px;
+    height: 30px;
+
+    margin-right: 20px;
+
+    fill: #cecece;
+    cursor: pointer;
+}
+.btt-moveQ:hover {
+    fill: #378DCC;
+    transition: 200ms;
+}
+
 
 /*--------RADIO--------*/
 .radio-single-container {

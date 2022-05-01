@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./EditorComponents.scoped.css";
 
 function EditMultipleChoice(props) {
@@ -8,6 +8,7 @@ function EditMultipleChoice(props) {
     const [optionsRender, setOptionsRender] = useState([]);
     const [heading, setHeading] = useState(props.heading);
     const [subheading, setSubheading] = useState(props.subheading);
+    const isMounted = useRef(false);
 
     useEffect(() => {
         if (props.heading) {
@@ -68,19 +69,23 @@ function EditMultipleChoice(props) {
 
     // Form Updater
     useEffect(() => {
-        let newObj = {}
-        newObj.id = props.id;
-        newObj.type = "multiplechoice";
-        newObj.required = require;
-        newObj.heading = heading==""? false:heading;
-        newObj.subheading = subheading==""? false:subheading;
-        newObj.options = options;
+        if (isMounted.current) {
+            let newObj = {}
+            newObj.id = props.id;
+            newObj.type = "multiplechoice";
+            newObj.required = require;
+            newObj.heading = heading==""? false:heading;
+            newObj.subheading = subheading==""? false:subheading;
+            newObj.options = options;
 
-        props.updateForm(false, props.id, newObj);
+            props.updateForm("update", props.id, newObj);
+        } else {
+            isMounted.current = true;
+        }
     }, [require, options, heading, subheading])
 
     return (
-        <div className="block-container">
+        <div className={props.editing==props.id? "block-container":"hidden"}>
             <p className="heading">Multiple Choice</p>
             {toggleRender}
 
@@ -91,15 +96,15 @@ function EditMultipleChoice(props) {
             <input type="text" id={"subheading" + props.id} placeholder="Input here..." className="textfield-container" onChange={() => {setSubheading(document.getElementById("subheading" + props.id).value)}}></input>
 
             <p className="subheading">Options</p>
+
+            <div className="option-adder">
+                <input type="text" id={"mc" + props.id} className="option-input" onKeyDown={(e) => {if (e.key === 'Enter') addOption()}}></input>
+                <div className="btt-add-option" onClick={addOption}>
+                    <p>Add</p>
+                </div>
+            </div>
             <div className="mc-options-container">
                 {optionsRender}
-
-                <div className="option-adder">
-                    <input type="text" id={"mc" + props.id} className="option-input"></input>
-                    <div className="btt-add-option" onClick={addOption}>
-                        <p>Add</p>
-                    </div>
-                </div>
             </div>
         </div>
     )
