@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
+import { delegationsContext } from "../../../Context";
 import "./EditorComponents.scoped.css";
 
 function EditDropdown(props) {
@@ -8,6 +9,7 @@ function EditDropdown(props) {
     const [optionsRender, setOptionsRender] = useState([]);
     const [heading, setHeading] = useState(props.heading);
     const [subheading, setSubheading] = useState(props.subheading);
+    const {delegations} = useContext(delegationsContext);
     const isMounted = useRef(false);
 
     useEffect(() => {
@@ -47,6 +49,13 @@ function EditDropdown(props) {
             }
         }
         setOptions(newArr);
+    }
+
+    function addAll() {
+        if (delegations.length !== 0) {
+            setOptions(options.concat(delegations))
+        }
+        console.log(delegations)
     }
 
     useEffect(() => {
@@ -96,15 +105,19 @@ function EditDropdown(props) {
             <input type="text" id={"subheading" + props.id} placeholder="Input here..." className="textfield-container" onChange={() => setSubheading(document.getElementById("subheading" + props.id).value)}></input>
 
             <p className="subheading">Options</p>
+
+            <div className="option-adder">
+                <input type="text" id={"dropdown" + props.id} className="option-input" onKeyDown={(e) => {if (e.key === 'Enter') addOption()}}></input>
+                <div className="btt-add-option" onClick={addOption}>
+                    <p>Add</p>
+                </div>
+                <div className="btt-add-all" onClick={addAll}>
+                    <p>Add Dels</p>
+                </div>
+            </div>
+
             <div className="dropdown-options-container">
                 {optionsRender}
-
-                <div className="option-adder">
-                    <input type="text" id={"dropdown" + props.id} className="option-input" onKeyDown={(e) => {if (e.key === 'Enter') addOption()}}></input>
-                    <div className="btt-add-option" onClick={addOption}>
-                        <p>Add</p>
-                    </div>
-                </div>
             </div>
         </div>
     )

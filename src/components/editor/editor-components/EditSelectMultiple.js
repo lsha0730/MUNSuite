@@ -120,7 +120,7 @@ function EditSelectMultiple(props) {
                     <p>Add</p>
                 </div>
                 <div className="btt-add-all" onClick={addAll}>
-                    <p>Add All</p>
+                    <p>Add Dels</p>
                 </div>
             </div>
 
