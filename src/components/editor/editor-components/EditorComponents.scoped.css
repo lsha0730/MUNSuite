@@ -135,6 +135,7 @@
     transition: 200ms;
 }
 
+
 /*Add Option Button*/
 .btt-add-option {
     width: 15%;
@@ -149,6 +150,7 @@
     border-radius: 5px;
     background-color: #BAE4FA;
     color: #00A3FF;
+    transition: 200ms;
 
     font-size: 10px;
     cursor: pointer;
@@ -161,6 +163,27 @@
     background-color: #7eb6df;
     color: #FFFFFF;
     transition: 200ms;
+}
+.btt-add-option-bricked {
+    width: 15%;
+    padding: 3px;
+    padding-left: 7px;
+    padding-right: 7px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 5px;
+    background-color: #F0F0F0;
+    color: #BCBCBC;
+    transition: 200ms;
+
+    font-size: 10px;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 .btt-add-all {
@@ -175,8 +198,6 @@
     align-items: center;
 
     border-radius: 5px;
-    background-color: #FFE49A;
-    color: #DAA000;
 
     font-size: 10px;
     cursor: pointer;
@@ -189,6 +210,14 @@
     background-color: #FFCA39;
     color: #FFFFFF;
     transition: 200ms;
+}
+.btt-add-all-off {
+    background-color: #FFE49A;
+    color: #DAA000;
+}
+.btt-add-all-on {
+    color: #FFE49A;
+    background-color: #DAA000;
 }
 
 /*Option Handling*/
@@ -211,6 +240,20 @@
 .option-container:hover {
     background-color: #ffc6c6;
     transition: 200ms;
+}
+.option-container-bricked {
+    width: 100%;
+    padding: 2px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    margin-bottom: 5px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    border-radius: 5px;
 }
 
 .option-text {
@@ -250,6 +293,22 @@
 .option-input:hover {
     background-color: #EEEEEE;
 }
+.option-input-bricked {
+    display: flex;
+    align-items: center;
+    width: 85%;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 5px;
+
+    font-size: 14px;
+
+    border-color: rgba(0,0,0,0);
+    border-radius: 5px;
+    background-color: #F0F0F0;
+}
+
 
 .option-none-ind {
     font-size: 12px;
@@ -400,6 +459,7 @@
 
     background-color: #F7F7F7;
     border-radius: 10px;
+    transition: 200ms;
 }
 .options-container:hover::-webkit-scrollbar-track {
     background: rgba(241, 241, 241, 1);
@@ -409,6 +469,10 @@
 .options-container::-webkit-scrollbar-thumb {
     background: rgba(188, 188, 188, 1);
     opacity: 100%;
+    transition: 200ms;
+}
+.options-container-bricked {
+    background-color: #F0F0F0;
     transition: 200ms;
 }
 

@@ -48,6 +48,7 @@ function SelectMultiple(props) {
 
     // for rendering options
     useEffect(() => {
+        console.log(options)
         setOptions(options.sort((a, b) => a.localeCompare(b)));
         let renderArray = [];
 
@@ -104,7 +105,9 @@ function SelectMultiple(props) {
                     onFocus={() => setIsShowingOptions(true)} />
                     <GoSearch size={15} className="selmult-icon"/>
                     <div className={!isShowingOptions||(options.length === 0)? "hidden":"selmult-drop-field"}>
-                        {isShowingOptions && renderOptions}
+                        <div className="selmult-subdropfield">
+                            {isShowingOptions && renderOptions}
+                        </div>
                     </div>
                 </div>
             </div>

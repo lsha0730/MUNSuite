@@ -1,17 +1,17 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
-import { delegationsContext } from "../../../Context";
+import React, { useEffect, useState, useRef } from "react";
 import "./EditorComponents.scoped.css";
 
 function EditSelectMultiple(props) {
+    let delegations = JSON.parse(localStorage.getItem("delegations")).map(del => del.name);
     const [require, setRequire] = useState(props.required);
     const [toggleRender, setToggleRender] = useState();
+    const [useDels, setUseDels] = useState(JSON.stringify(props.options) == JSON.stringify(delegations));
     const [options, setOptions] = useState(props.options);
     const [optionsRender, setOptionsRender] = useState([]);
     const [heading, setHeading] = useState(props.heading);
     const [subheading, setSubheading] = useState(props.subheading);
     const [maxcount, setMaxcount] = useState(props.max);
     const isMounted = useRef(false);
-    let delegations = JSON.parse(localStorage.getItem("delegations")).map(del => del.name);
 
     useEffect(() => {
         if (props.heading) {
@@ -57,27 +57,28 @@ function EditSelectMultiple(props) {
     }, [require])
 
     function addOption() {
-        if (document.getElementById("multipleSelect" + props.id).value !== "") {
+        if (!useDels && document.getElementById("multipleSelect" + props.id).value !== "") {
             setOptions(options.concat(document.getElementById("multipleSelect" + props.id).value))
             document.getElementById("multipleSelect" + props.id).value = "";
         }
     }
 
     function removeOption(target) {
-        let newArr = [];
-        for (let i=0; i<options.length; i++) {
-            if (i !== target) {
-                newArr.push(options[i])
+        if (!useDels) {
+            let newArr = [];
+            for (let i=0; i<options.length; i++) {
+                if (i !== target) {
+                    newArr.push(options[i])
+                }
             }
+            setOptions(newArr);
         }
-        setOptions(newArr);
     }
 
-    function addAll() {      
-        if (delegations.length !== 0) {
-            setOptions(options.concat(delegations))
-        }
-        console.log(options.concat(delegations))
+    function toggleUseAll() {
+        if (!useDels) setOptions(delegations);
+        setUseDels(!useDels);
+        document.getElementById("multipleSelect" + props.id).value = "";
     }
 
     useEffect(() => {
@@ -87,7 +88,7 @@ function EditSelectMultiple(props) {
             let renderArr = [];
             for (let i=0; i<options.length; i++) {
                 renderArr.push(
-                    <div className="option-container" onClick={() => removeOption(i)}>
+                    <div className={useDels? "option-container-bricked":"option-container"} onClick={() => removeOption(i)}>
                         <div className="overflow-wrapper">
                             <p className="option-text">{options[i]}</p>
                         </div>
@@ -96,7 +97,7 @@ function EditSelectMultiple(props) {
             }
             setOptionsRender(renderArr);
         }
-    }, [ options ])
+    }, [options, useDels])
 
     return (
         <div className={props.editing==props.id? "block-container":"hidden"}>
@@ -115,16 +116,16 @@ function EditSelectMultiple(props) {
             <p className="subheading">Options</p>
 
             <div className="option-adder">
-                <input type="text" id={"multipleSelect" + props.id} className="option-input" onKeyDown={(e) => {if (e.key === 'Enter') addOption()}}></input>
-                <div className="btt-add-option" onClick={addOption}>
+                <input type="text" id={"multipleSelect" + props.id} className={useDels? "option-input-bricked":"option-input"} disabled={useDels} onKeyDown={(e) => {if (e.key === 'Enter') addOption()}}></input>
+                <div className={useDels? "btt-add-option-bricked":"btt-add-option"} onClick={addOption}>
                     <p>Add</p>
                 </div>
-                <div className="btt-add-all" onClick={addAll}>
-                    <p>Add Dels</p>
+                <div className={useDels? "btt-add-all btt-add-all-on":"btt-add-all btt-add-all-off"} onClick={toggleUseAll}>
+                    <p>Use Dels</p>
                 </div>
             </div>
 
-            <div className="options-container">
+            <div className={useDels? "options-container options-container-bricked":"options-container"}>
                 {optionsRender}
             </div>
         </div>

@@ -11,7 +11,8 @@ function Dropdown(props) {
 
     let optionRenders = [];
     for (let i=0; i<props.options.length; i++) {
-        let option = props.options[i];
+        let sortedOptions = props.options.sort((a, b) => a.localeCompare(b));
+        let option = sortedOptions[i];
         optionRenders.push(
             <div className="dropdown-option-container" onClick={() => {
                 setDropVisible(!dropVisible);
