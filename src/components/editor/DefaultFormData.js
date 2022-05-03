@@ -10,7 +10,7 @@ const DefaultFormData = [
         id: 1,
         type: "shorttext",
         required: true,
-        heading: "Directive Title",
+        heading: "Barack Obama",
         subheading: false
     },
     {
@@ -75,7 +75,6 @@ const DefaultFormData = [
         heading: "Test Dropdown",
         subheading: "Select your country",
         options: ["Afghanistan", "Belarus", "Canada", "Publius Licinius Crassus Dives", "Commander of the US Air Force Tactical Air Command - William W. Momyer"]
-    }
-]
+    }]
 
 export default DefaultFormData;

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Editor.scoped.css";
 import DefaultFormData from "./DefaultFormData.js";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
+import { BiLink } from "react-icons/bi";
 
 // Preview Imports
 import Header from "./preview-components/Header.js";
@@ -14,7 +15,6 @@ import Dropdown from "./preview-components/Dropdown.js";
 import SelectMultiple from "./preview-components/SelectMultiple.js";
 
 // Editor Imports
-import FormLink from "./editor-components/FormLink.js";
 import EditHeader from "./editor-components/EditHeader.js";
 import EditRadio from "./editor-components/EditRadio.js";
 import EditMultipleChoice from "./editor-components/EditMultipleChoice.js";
@@ -25,17 +25,115 @@ import EditDropdown from "./editor-components/EditDropdown.js";
 import EditSelectMultiple from "./editor-components/EditSelectMultiple.js";
 
 function Editor() {
-    const [formArr, setFormArr] = useState(JSON.parse(localStorage.getItem("form"))||DefaultFormData);
+    let rawFormData = JSON.parse(localStorage.getItem("form")) || DefaultFormData;
+    const [formData, setFormData] = useState(rawFormData);
     const [editing, setEditing] = useState(false);
     const [formRender, setFormRender] = useState([]);
     const [formLink, setFormLink] = useState("https://forms.gle/jEErPPyXrHJ3YEpz8");
+    const [isDisplayingConfirmation, setIsDisplayingConfirmation] = useState(false);
+    const [standardized, setStandardized] = useState(checkStandardized(rawFormData));
+    const [toggleRender, setToggleRender] = useState();
+    const [bruh, setBruh] = useState();
+
+    function copyLink() {
+        navigator.clipboard.writeText(formLink);
+        setIsDisplayingConfirmation(true);
+        setTimeout(() => setIsDisplayingConfirmation(false), 1000);
+    }
+
+    function toggleStandardized() {
+        if (!standardized) console.log("Custom --> Standard")
+        if (standardized) console.log("Standard --> Custom")
+
+        if (!standardized) {
+            let frontArr = [];
+
+            frontArr.push(makeNewBlock("header", 0, "New Header"));
+            frontArr.push(makeNewBlock("shorttext", 1, "Directive Title"));
+            frontArr.push(makeNewBlock("radio", 2, "Directive Type"));
+            frontArr.push(makeNewBlock("select-multiple", 3, "Sponsors"));
+            frontArr.push(makeNewBlock("select-multiple", 4, "Signatories"));
+
+            let tempArr = frontArr.concat(formData);
+            for (let i = 0; i<tempArr.length; i++) {
+                tempArr[i].id = i;
+            }
+
+            setFormData(tempArr)
+        }
+        setStandardized(!standardized);
+        console.log("toggled!")
+    }
+
+    function makeNewBlock(type, id, heading = null) {
+        let newObj = {};
+        newObj.id = id;
+        newObj.type = type;
+        newObj.subheading = false;
+
+        switch (type) {
+            case "header":
+                newObj.heading = "New Header";
+                newObj.image = require("./defaultBanner.png");
+                break;
+            case "radio":
+                newObj.heading = "New Radio";
+                newObj.required = false;
+                newObj.options = ["Option 1", "Option 2", "Option 3"];
+                break;
+            case "multiplechoice":
+                newObj.heading = "New Multiple Choice";
+                newObj.required = false;
+                newObj.options = ["Option 1", "Option 2", "Option 3"];
+                break;
+            case "content":
+                newObj.heading = "New Content Block";
+                break;
+            case "shorttext":
+                newObj.heading = "New Short Text";
+                newObj.required = false;
+                break;
+            case "longtext":
+                newObj.heading = "New Long Text";
+                newObj.required = false;
+                break;
+            case "dropdown":
+                newObj.heading = "New Dropdown";
+                newObj.required = false;
+                newObj.options = ["Option 1", "Option 2", "Option 3"];
+                break;
+            case "select-multiple":
+                newObj.heading = "New Select Multiple";
+                newObj.required = false;
+                newObj.options = ["Option 1", "Option 2", "Option 3"];
+                newObj.max = false;
+                break;
+            default:
+                console.log("Could not make form block.")
+        }
+
+        if (heading) newObj.heading = heading;
+        return newObj;
+    }
+
+    function addNewBlock(type) {
+        let tempArr = formData.slice();
+        let newObj = makeNewBlock(type, tempArr.length);
+
+        tempArr.push(newObj);
+        for (let i = 0; i<tempArr.length; i++) {
+            tempArr[i].id = i;
+        }
+
+        setFormData(tempArr);
+    }
 
     function updateForm(operation, index, newObj = null) {
-        let tempArr = formArr.slice();
+        let tempArr = formData.slice();
         switch (operation) {
             case "delete":
                 tempArr.splice(index, 1);
-                for (let i = 0; i<formArr.length-1; i++) {
+                for (let i = 0; i<tempArr.length; i++) {
                     tempArr[i].id = i;
                 }
                 break;
@@ -48,7 +146,7 @@ function Editor() {
                     tempArr[index - 1] = tempArr[index];
                     tempArr[index] = tempObj;
 
-                    for (let i = 0; i<formArr.length; i++) {
+                    for (let i = 0; i<tempArr.length; i++) {
                         tempArr[i].id = i;
                     }
 
@@ -61,7 +159,7 @@ function Editor() {
                     tempArr[index + 1] = tempArr[index];
                     tempArr[index] = tempObj;
 
-                    for (let i = 0; i<formArr.length; i++) {
+                    for (let i = 0; i<tempArr.length; i++) {
                         tempArr[i].id = i;
                     }
 
@@ -69,111 +167,71 @@ function Editor() {
                 }
                 break;
         }
-        setFormArr(tempArr);
+
+        setFormData(tempArr);
     }
 
-    function addNewBlock(type) {
-        let tempArr = formArr.slice();
-        let newObj = {}
-        newObj.id = formArr.length;
-        newObj.type = type;
-        newObj.heading = `New ${type}`;
-        newObj.subheading = false;
-
-        switch (type) {
-            case "header":
-                newObj.image = require("./defaultBanner.png");
-                break;
-            case "radio":
-                newObj.required = false;
-                newObj.options = ["Option 1", "Option 2", "Option 3"];
-                break;
-            case "multiplechoice":
-                newObj.required = false;
-                newObj.options = ["Option 1", "Option 2", "Option 3"];
-                break;
-            case "content":
-                break;
-            case "shorttext":
-                newObj.required = false;
-                break;
-            case "longtext":
-                newObj.required = false;
-                break;
-            case "dropdown":
-                newObj.required = false;
-                newObj.options = ["Option 1", "Option 2", "Option 3"];
-                break;
-            case "select-multiple":
-                newObj.required = false;
-                newObj.options = ["Option 1", "Option 2", "Option 3"];
-                newObj.max = false;
-                break;
-            default:
-                console.log("Could not render form block.")
-        }
-
-        tempArr.push(newObj);
-        setFormArr(tempArr);
-    }
+    useEffect(() => {
+        setBruh(JSON.stringify(formData) + checkStandardized(formData))
+    }, [formData])
 
     function rerenderForm() {
-        setFormRender(formArr.map(item => {
+        setFormRender(formData.map(item => {
             switch (item.type) {
                 case "header":
                     return (
                         <div className="preview-editor-pair">
-                            <Header key={item.id} id={item.id} image={item.image} heading={item.heading} subheading={item.subheading} editing={editing} setEditing={setEditing} updateForm={updateForm}/>
-                            <EditHeader key={`editor${item.id}`} id={item.id} image={item.image} heading={item.heading} subheading={item.subheading} editing={editing} updateForm={updateForm}/>
+                            <Header key={`preview${item.id}`} id={item.id} image={item.image} heading={item.heading} subheading={item.subheading} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized && item.id == 0}/>
+                            <EditHeader key={`editor${item.id}`} id={item.id} image={item.image} heading={item.heading} subheading={item.subheading} editing={editing} updateForm={updateForm} locked={standardized && item.id == 0}/>
                         </div>
                     )
                 case "radio":
                     return (
                         <div className="preview-editor-pair">
-                            <Radio key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} editing={editing} setEditing={setEditing} updateForm={updateForm}/>
-                            <EditRadio key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} editing={editing} updateForm={updateForm}/>
+                            <Radio key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized && item.id == 2}/>
+                            <EditRadio key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} editing={editing} updateForm={updateForm} locked={standardized && item.id == 2}/>
                         </div>
                     )
                 case "multiplechoice":
                     return (
                         <div className="preview-editor-pair">
-                            <MultipleChoice key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} editing={editing} setEditing={setEditing} updateForm={updateForm}/>
-                            <EditMultipleChoice key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} editing={editing} updateForm={updateForm}/>
+                            <MultipleChoice key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized}/>
+                            <EditMultipleChoice key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} editing={editing} updateForm={updateForm} locked={standardized}/>
                         </div>
                     )
                 case "content":
                     return (
                         <div className="preview-editor-pair">
-                            <Content key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content} editing={editing} setEditing={setEditing} updateForm={updateForm}/>
-                            <EditContent key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content} editing={editing} updateForm={updateForm}/>
+                            <Content key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized}/>
+                            <EditContent key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content} editing={editing} updateForm={updateForm} locked={standardized}/>
                         </div>
                     )
                 case "shorttext":
                     return (
                         <div className="preview-editor-pair">
-                            <ShortText key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} editing={editing} setEditing={setEditing} updateForm={updateForm}/>
-                            <EditShortText key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} editing={editing} updateForm={updateForm}/>
+                            <ShortText key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized && item.id == 1}/>
+                            <EditShortText key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} editing={editing} updateForm={updateForm} locked={standardized && item.id == 1}/>
                         </div>
                     )
                 case "longtext":
                     return (
                         <div className="preview-editor-pair">
-                            <LongText key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} editing={editing} setEditing={setEditing} updateForm={updateForm}/>
-                            <EditLongText key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} editing={editing} updateForm={updateForm}/>
+                            <LongText key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized}/>
+                            <EditLongText key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} editing={editing} updateForm={updateForm} locked={standardized}/>
                         </div>
                     )
                 case "dropdown":
                     return (
                         <div className="preview-editor-pair">
-                            <Dropdown key={item.id} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} editing={editing} setEditing={setEditing} updateForm={updateForm}/>
-                            <EditDropdown key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} editing={editing} updateForm={updateForm}/>
+                            <Dropdown key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized}/>
+                            <EditDropdown key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} editing={editing} updateForm={updateForm} locked={standardized}/>
                         </div>
                     )
                 case "select-multiple":
                     return (
                         <div className="preview-editor-pair">
-                            <SelectMultiple key={item.options.length} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options} editing={editing} setEditing={setEditing} updateForm={updateForm}/>
-                            <EditSelectMultiple key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options} editing={editing} updateForm={updateForm}/>
+                            <SelectMultiple key={item.options.length} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized && (item.id == 3 || item.id == 4)}/>
+                            <EditSelectMultiple key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options} editing={editing} updateForm={updateForm} locked={standardized && (item.id == 3 || item.id == 4)}/>
                         </div>
                     )
                 default:
@@ -182,18 +240,69 @@ function Editor() {
         }))
     }
 
+    function checkStandardized(formArr) {
+        return (
+            formArr.length >= 5 &&
+            formArr[0].type == "header" &&
+            formArr[1].type == "shorttext" &&
+            formArr[1].heading == "Directive Title" &&
+            formArr[2].type == "radio" &&
+            formArr[2].heading == "Directive Type" &&
+            formArr[3].type == "select-multiple" &&
+            formArr[3].heading == "Sponsors" &&
+            formArr[4].type == "select-multiple" &&
+            formArr[4].heading == "Signatories"
+        )
+    }
+
+    useEffect(() => {
+        setStandardized(checkStandardized(formData));
+    }, [formData])
+
     useEffect(() => {
         rerenderForm();
-        localStorage.setItem("form", JSON.stringify(formArr));
+    }, [formData, editing]);
+
+    useEffect(() => {
+        localStorage.setItem("form", JSON.stringify(formData));
         dispatchEvent(new Event("form updated"));
-    }, [formArr, editing]);
+    }, [formData, standardized])
+
+    useEffect(() => {
+        let toggleOffset = standardized? 25:0;
+
+        setToggleRender(
+            <div className="toggle-set" onClick={toggleStandardized}>
+                <p className={standardized? "toggle-text-green":"toggle-text-red"}>{standardized? "Standardized for MUN":"Custom Form"}</p>
+                <div className={standardized? "toggle-bar toggle-greenbg":"toggle-bar toggle-redbg"}>
+                    <div className={standardized? "toggle-circle toggle-greenbtt":"toggle-circle toggle-redbtt"} style={{left: toggleOffset}}></div>
+                </div>
+            </div>
+        )
+
+        rerenderForm();
+    }, [standardized])
 
     return (
         <div className="editor-container">
             <div className="main-UI">
-                <div className="preview-hat">
-                    <p className="preview-hat-heading">DISEC</p>
-                    <p className="preview-hat-subheading">[Delegation Name]</p>
+
+                <div className="hat-UI">
+                    <div className="preview-hat">
+                        <div className="preview-hat-top">
+                            <p className="preview-hat-heading">DISEC</p>
+                            {bruh}
+                            <div className="preview-hat-link-icon-container" onClick={copyLink}>
+                                <BiLink className="preview-hat-link-icon"/>
+                            </div>
+                            <div className={isDisplayingConfirmation? "formlink-confirmation-container":"formlink-confirmation-container fade"}>
+                                <p className="formlink-confirmation-text">Share Link Copied!</p>
+                            </div>
+                        </div>
+                        <p className="preview-hat-subheading">[Delegation Name]</p>
+                    </div>
+
+                    {toggleRender}
                 </div>
 
                 {formRender}

@@ -90,7 +90,7 @@ function EditRadio(props) {
             {toggleRender}
 
             <p className="subheading">Heading</p>
-            <input type="text" id={"heading" + props.id} placeholder="Input here..." className="textfield-container" onChange={() => {setHeading(document.getElementById("heading" + props.id).value)}}></input>
+            <input type="text" id={"heading" + props.id} className={props.locked? "textfield-container-bricked":"textfield-container"} disabled={props.locked} placeholder="Input here..." onChange={() => {setHeading(document.getElementById("heading" + props.id).value)}}></input>
 
             <p className="subheading">Subheading</p>
             <input type="text" id={"subheading" + props.id} placeholder="Input here..." className="textfield-container" onChange={() => setSubheading(document.getElementById("subheading" + props.id).value)}></input>

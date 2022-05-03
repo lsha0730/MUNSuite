@@ -1,3 +1,4 @@
+/*----------PAGE UI----------*/
 .editor-container {
     width: 100%;
     height: 100%;
@@ -19,22 +20,84 @@
     display: none;
 }
 
+.fade {
+    opacity: 0%;
+    transition: 200ms;
+}
+
+
+/*----------FORM UI----------*/
+.hat-UI {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding-right: 430px;
+}
+
 .preview-hat {
     display: flex;
     flex-direction: column;
     justify-content: center;
     transform: translate(50px);
 }
+.preview-hat-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 30px;
+}
 .preview-hat-heading {
     font-size: 32px;
     font-weight: 600;
     color: #BCBCBC;
-    margin-top: 30px;
+}
+.preview-hat-link-icon-container {
+    width: 35px;
+    height: 35px;
+
+    margin-left: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    transition: 200ms;
+    cursor: pointer;
+}
+.preview-hat-link-icon-container:hover {
+    background-color: #BAE4FA;
+    transition: 200ms;
+}
+.preview-hat-link-icon {
+    width: 30px;
+    height: 30px;
+    fill: #378DCC;
 }
 .preview-hat-subheading {
     font-weight: 500;
     color: #BCBCBC;
     margin-bottom: 20px;
+}
+
+.formlink-confirmation-container {
+    margin-left: 10px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: 200ms;
+}
+.formlink-confirmation-text {
+    font-size: 10px;
+    font-weight: 500;
 }
 
 .preview-editor-pair {
@@ -111,5 +174,61 @@
 .btt-addQ:hover {
     background-color: #7eb6df;
     color: #FFFFFF;
+    transition: 200ms;
+}
+
+/*Toggle*/
+.toggle-set {
+    height: fit-content;
+    margin-top: 70px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    cursor: pointer;
+}
+.toggle-bar {
+    position: relative;
+    width: 45px;
+    height: 20px;
+
+    margin-left: 15px;
+    border-radius: 10px;
+}
+.toggle-circle {
+    position: absolute;
+    left: 0px;
+
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+.toggle-greenbg {
+    background-color: #CFF9C3;
+    transition: 200ms;
+}
+.toggle-greenbtt {
+    background-color: #3CDC27;
+    transition: 200ms;
+}
+.toggle-redbg {
+    background-color: #ffc6c6;
+    transition: 200ms;
+}
+.toggle-redbtt {
+    background-color: #ff7070;
+    transition: 200ms;
+}
+.toggle-text-red {
+    font-size: 16px;
+    font-weight: 500;
+    color: #ff7070;
+    transition: 200ms;
+}
+.toggle-text-green {
+    font-size: 16px;
+    font-weight: 500;
+    color: #3CDC27;
     transition: 200ms;
 }

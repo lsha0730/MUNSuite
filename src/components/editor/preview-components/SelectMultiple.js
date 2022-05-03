@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./PreviewComponents.scoped.css";
 import { GoSearch } from "react-icons/go";
 import { FaTrash } from "react-icons/fa";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp, IoIosLock } from "react-icons/io";
 
 function SelectMultiple(props) {
     const [options, setOptions] = useState(props.options);
@@ -48,7 +48,6 @@ function SelectMultiple(props) {
 
     // for rendering options
     useEffect(() => {
-        console.log(options)
         setOptions(options.sort((a, b) => a.localeCompare(b)));
         let renderArray = [];
 
@@ -83,6 +82,23 @@ function SelectMultiple(props) {
 
     }, [search, isShowingOptions, selected, trigger])
 
+    let qmodIcons;
+    if (props.locked) {
+        qmodIcons = (
+            <div className="locked-icon-container">
+                <IoIosLock className="locked-icon"/>
+            </div>
+        )
+    } else {
+        qmodIcons = [
+            <div id="Qmod-icons">
+                <div onClick={() => props.updateForm("move-up", props.id)}><IoIosArrowUp className="btt-moveQ"/></div>
+                <div onClick={() => props.updateForm("move-down", props.id)}><IoIosArrowDown className="btt-moveQ"/></div>
+                <div onClick={() => props.updateForm("delete", props.id)}><FaTrash className="btt-delQ"/></div>
+            </div>
+        ]
+    }
+
     return (
         <div style={{display: "flex", flexDirection: "row-reverse"}}>
             <div className="block-container" id="block-container" onClick={()=>props.setEditing(props.id)}>
@@ -112,11 +128,7 @@ function SelectMultiple(props) {
                 </div>
             </div>
             
-            <div id="Qmod-icons">
-                <div onClick={() => props.updateForm("move-up", props.id)}><IoIosArrowUp className="btt-moveQ"/></div>
-                <div onClick={() => props.updateForm("move-down", props.id)}><IoIosArrowDown className="btt-moveQ"/></div>
-                <div onClick={() => props.updateForm("delete", props.id)}><FaTrash className="btt-delQ"/></div>
-            </div>
+            {qmodIcons}
         </div>
     )
 }

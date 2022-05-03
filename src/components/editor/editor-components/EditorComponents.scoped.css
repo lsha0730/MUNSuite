@@ -34,7 +34,6 @@
     display: none;
 }
 
-
 .fade {
     opacity: 0%;
     transition: 200ms;
@@ -75,6 +74,22 @@
     background-color: #F7F7F7;
 }
 .textfield-container:hover {
+    background-color: #EEEEEE;
+}
+.textfield-container-bricked {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    font-size: 14px;
+
+    border-color: rgba(0,0,0,0);
+    border-radius: 10px;
     background-color: #EEEEEE;
 }
 
@@ -175,7 +190,7 @@
     align-items: center;
 
     border-radius: 5px;
-    background-color: #F0F0F0;
+    background-color: #EEEEEE;
     color: #BCBCBC;
     transition: 200ms;
 
@@ -306,7 +321,7 @@
 
     border-color: rgba(0,0,0,0);
     border-radius: 5px;
-    background-color: #F0F0F0;
+    background-color: #EEEEEE;
 }
 
 
@@ -328,68 +343,6 @@
 
     border-radius: 10px;
     background-color: #F7F7F7;
-}
-
-/*-------FORM LINK------*/
-.formlink-container {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.formlink-link-container {
-    width: 90%;
-
-    display: flex;
-    align-items: center;
-
-    margin-top: 5px;
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-
-    font-size: 14px;
-
-    border-radius: 10px;
-    background-color: #F7F7F7;
-}
-.formlink-link-container:hover {
-    background-color: #EEEEEE;
-}
-
-.formlink-icon {
-    fill: #C4C4C4;
-    cursor: pointer;
-
-    position: relative;
-    top: 2px;
-}
-.formlink-icon:hover {
-    fill: #3C8CC9;
-}
-
-.formlink-confirmation-container {
-    position: absolute;
-    top: 20px;
-    right: 15px;
-
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 5px;
-    background-color: #BAE4FA;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    transition: 200ms;
-}
-.formlink-confirmation-text {
-    font-size: 10px;
-    font-weight: 500;
 }
 
 
@@ -472,7 +425,7 @@
     transition: 200ms;
 }
 .options-container-bricked {
-    background-color: #F0F0F0;
+    background-color: #EEEEEE;
     transition: 200ms;
 }
 
