@@ -111,7 +111,7 @@ function EditSelectMultiple(props) {
             <input type="text" id={"subheading" + props.id} placeholder="Input here..." className="textfield-container" onChange={() => setSubheading(document.getElementById("subheading" + props.id).value)}></input>
 
             <p className="subheading">Max Selectable</p>
-            <input type="number" id={"maxcount" + props.id} placeholder="Unlimited" className="textfield-container" onChange={() => {setMaxcount(document.getElementById("maxcount" + props.id).value)}}></input>
+            <input type="number" min="1" id={"maxcount" + props.id} placeholder="Unlimited" className="textfield-container" onChange={() => {setMaxcount(document.getElementById("maxcount" + props.id).value)}}></input>
 
             <p className="subheading">Options</p>
 
