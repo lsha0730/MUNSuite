@@ -1,0 +1,225 @@
+.page-container {
+    width: 75%;
+    height: 85%;
+    max-width: 1600px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+/*-----------LEFT UI----------*/
+.UI-left {
+    display: flex;
+    flex-direction: column;
+
+    width: 70%;
+    margin-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 0px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    border-radius: 10px;
+    background-color: #FFFFFF;
+}
+
+.UI-left-top {
+    display: flex;
+    flex-direction: column;
+}
+
+.notes-container {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 20px;
+
+    overflow-y: auto;
+}
+
+
+/*Header*/
+.header-pair {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-bottom: 10px;
+}
+
+.header-text {
+    margin-left: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #3C8CC9;
+}
+
+.person-icon {
+    width: 30px;
+    height: 30px;
+    fill: #3C8CC9;
+}
+
+/*Searchbar*/
+.searchbar {
+    position: relative;
+    width: 300px;
+}
+
+.subbar {
+    width: 100%;
+    height: 30px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+
+    padding-left: 15px;
+    padding-right: 30px;
+
+    font-size: 16px;
+
+    outline: none !important;
+    border-color: rgba(0,0,0,0);
+    border-radius: 10px;
+    background-color: #F7F7F7;
+}
+.subbar::placeholder {
+    font-size: 16px;
+    color: #C0C0C0;
+}
+.subbar:focus {
+    outline: none !important;
+    border-color: rgba(0,0,0,0);
+    background-color: #EEEEEE;
+}
+.subbar:hover {
+    background-color: #EEEEEE;
+}
+
+.search-icon {
+    position: absolute;
+    z-index: 2;
+    right: 10px;
+    top: 8px;
+    fill: #BCBCBC;
+}
+
+
+/*Noteblock*/
+.noteblock-container {
+    width: 100%;
+    height: 200px;
+
+    margin-bottom: 20px;
+
+    display: flex;
+    flex-direction: column;
+}
+.noteblock-title {
+    font-size: 18px;
+    font-weight: 500;
+
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+.noteblock-textfield {
+    flex-grow: 1;
+
+    background-color: #F7F7F7;
+    border-radius: 10px;
+
+    padding: 10px;
+    padding-top: 5px;
+
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+
+    border-color: rgba(0,0,0,0);
+    border-radius: 10px;
+    background-color: #F7F7F7;
+
+    resize: vertical;
+    overflow-y: auto;
+}
+.noteblock-textfield::placeholder {
+    font-size: 16px;
+    color: #C0C0C0;
+}
+.noteblock-textfield:focus {
+    outline: none !important;
+    border-color: rgba(0,0,0,0);
+    background-color: #F7F7F7;
+}
+.noteblock-textfield:hover {
+    background-color: #EEEEEE;
+}
+.noteblock-textfield::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 1);
+    opacity: 100%;
+    transition: 200ms;
+}
+.noteblock-textfield::-webkit-scrollbar-thumb {
+    background: rgba(188, 188, 188, 1);
+    opacity: 100%;
+    transition: 200ms;
+}
+
+
+/*-----------RIGHT UI----------*/
+.UI-right {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    border-radius: 10px;
+    background-color: #FFFFFF;
+}
+
+.UI-right-input {
+    flex-grow: 1;
+
+    background-color: #F7F7F7;
+    border-radius: 10px;
+
+    margin-top: 20px;
+    padding: 10px;
+    padding-top: 5px;
+
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+
+    border-color: rgba(0,0,0,0);
+    border-radius: 10px;
+    background-color: #F7F7F7;
+
+    resize: vertical;
+    overflow-y: auto;
+}
+.UI-right-input::placeholder {
+    font-size: 16px;
+    color: #C0C0C0;
+}
+.UI-right-input:focus {
+    outline: none !important;
+    border-color: rgba(0,0,0,0);
+    background-color: #F7F7F7;
+}
+.UI-right-input:hover {
+    background-color: #EEEEEE;
+}
+.UI-right-input:hover::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 1);
+    opacity: 100%;
+    transition: 200ms;
+}
+.UI-right-input:hover::-webkit-scrollbar-thumb {
+    background: rgba(188, 188, 188, 1);
+    opacity: 100%;
+    transition: 200ms;
+}

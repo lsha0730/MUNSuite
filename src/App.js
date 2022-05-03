@@ -6,24 +6,25 @@ import Delegations from './components/delegations/Delegations.js';
 import Editor from './components/editor/Editor.js';
 import Inbox from './components/inbox/Inbox.js';
 import History from './components/history/History.js';
+import Notes from './components/notes/Notes.js';
 
 import { appContext } from './Context.js';
 
 function App() {
   const [page, setPage] = useState("delegations");
-  const [UI, setUI] = useState(<Delegations/>);
+  const [UI, setUI] = useState(<Delegations key="delegations"/>);
 
   useEffect(() => {
     setUI(() => {
       switch (page) {
-        case "delegations": return <Delegations/>
-        case "editor": return <Editor/>
-        case "inbox": return <Inbox/>
-        case "history": return <History/>
+        case "delegations": return <Delegations key="delegations"/>
+        case "editor": return <Editor key="editor"/>
+        case "inbox": return <Inbox key="inbox"/>
+        case "history": return <History key="history"/>
         case "statistics": return <h1>Statistics</h1>
-        case "notes": return <h1>Notes</h1>
+        case "notes": return <Notes key="notes"/>
         case "settings": return <h1>Settings</h1>
-        default: return <Delegations/>
+        default: return <Delegations key="delegations"/>
       }
     })
   }, [page])

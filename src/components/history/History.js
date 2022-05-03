@@ -13,7 +13,6 @@ function History() {
     const [selection, setSelection] = useState(0);
     const [selectionRender, setSelectionRender] = useState();
     const [search, setSearch] = useState('');
-    const [isShowingOptions, setIsShowingOptions] = useState(false);
     const [dropdownValue, setDropdownValue] = useState("No Filter");
 
     useEffect(() => {
@@ -69,9 +68,8 @@ function History() {
             </div>
             <div className="UI-right">
                 <div className="UI-topright">
-                    <div className={isShowingOptions? "dropdown-defocuser":"hidden"} onClick={() => setIsShowingOptions(false)}></div>
-                    <div className={isShowingOptions? "searchbar super-z":"searchbar"}>
-                        <input type="text" placeholder="Search" className="subbar" value={search} onChange={(e)=>setSearch(e.target.value)} onFocus={() => setIsShowingOptions(true)}/>
+                    <div className="searchbar">
+                        <input type="text" placeholder="Search" className="subbar" value={search} onChange={(e)=>setSearch(e.target.value)}/>
                         <GoSearch size={15} className="search-icon"/>
                     </div>
 
