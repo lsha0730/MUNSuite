@@ -33,7 +33,6 @@ function Editor() {
     const [isDisplayingConfirmation, setIsDisplayingConfirmation] = useState(false);
     const [standardized, setStandardized] = useState(checkStandardized(rawFormData));
     const [toggleRender, setToggleRender] = useState();
-    const [bruh, setBruh] = useState();
 
     function copyLink() {
         navigator.clipboard.writeText(formLink);
@@ -45,7 +44,7 @@ function Editor() {
         if (!standardized) console.log("Custom --> Standard")
         if (standardized) console.log("Standard --> Custom")
 
-        if (!standardized) {
+        if (!standardized && !checkStandardized(JSON.parse(localStorage.getItem("form")))) {
             let frontArr = [];
 
             frontArr.push(makeNewBlock("header", 0, "New Header"));
@@ -54,7 +53,7 @@ function Editor() {
             frontArr.push(makeNewBlock("select-multiple", 3, "Sponsors"));
             frontArr.push(makeNewBlock("select-multiple", 4, "Signatories"));
 
-            let tempArr = frontArr.concat(formData);
+            let tempArr = frontArr.concat(JSON.parse(localStorage.getItem("form")));
             for (let i = 0; i<tempArr.length; i++) {
                 tempArr[i].id = i;
             }
@@ -62,7 +61,6 @@ function Editor() {
             setFormData(tempArr)
         }
         setStandardized(!standardized);
-        console.log("toggled!")
     }
 
     function makeNewBlock(type, id, heading = null) {
@@ -171,10 +169,6 @@ function Editor() {
         setFormData(tempArr);
     }
 
-    useEffect(() => {
-        setBruh(JSON.stringify(formData) + checkStandardized(formData))
-    }, [formData])
-
     function rerenderForm() {
         setFormRender(formData.map(item => {
             switch (item.type) {
@@ -256,17 +250,14 @@ function Editor() {
     }
 
     useEffect(() => {
+        localStorage.setItem("form", JSON.stringify(formData));
+        dispatchEvent(new Event("form updated"));
         setStandardized(checkStandardized(formData));
     }, [formData])
 
     useEffect(() => {
         rerenderForm();
     }, [formData, editing]);
-
-    useEffect(() => {
-        localStorage.setItem("form", JSON.stringify(formData));
-        dispatchEvent(new Event("form updated"));
-    }, [formData, standardized])
 
     useEffect(() => {
         let toggleOffset = standardized? 25:0;
@@ -291,7 +282,6 @@ function Editor() {
                     <div className="preview-hat">
                         <div className="preview-hat-top">
                             <p className="preview-hat-heading">DISEC</p>
-                            {bruh}
                             <div className="preview-hat-link-icon-container" onClick={copyLink}>
                                 <BiLink className="preview-hat-link-icon"/>
                             </div>
