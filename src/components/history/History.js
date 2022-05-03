@@ -3,7 +3,7 @@ import "./History.scoped.css";
 import MockSubmissions from "../inbox/MockSubmissions.js";
 import StandardCard from "../inbox/card/StandardCard.js";
 import CustomCard from "../inbox/card/CustomCard.js";
-import { GoTriangleDown } from "react-icons/go";
+import { GoTriangleDown, GoSearch } from "react-icons/go";
 import { FaFilter } from "react-icons/fa";
 
 function History() {
@@ -12,6 +12,9 @@ function History() {
     const [cardArrRender, setCardArrRender] = useState([]);
     const [selection, setSelection] = useState(0);
     const [selectionRender, setSelectionRender] = useState();
+    const [search, setSearch] = useState('');
+    const [isShowingOptions, setIsShowingOptions] = useState(false);
+    const [dropdownValue, setDropdownValue] = useState("No Filter");
 
     useEffect(() => {
         setCardTitles(cardArr.map(card => {return card.title}))
@@ -19,25 +22,30 @@ function History() {
 
         for (let i=0; i<cardArr.length; i++) {
             let card = cardArr[i];
+            let filterBoolean = card.status == dropdownValue || dropdownValue == "No Filter";
             if (card.standard) {
-                renderArr.push(
-                    <div className={selection==i? "cardbar-container selected":"cardbar-container"} onClick={() => setSelection(i)}>
-                        <div className="cardbar-indicator" style={card.status=="Passed"? {backgroundColor: "#7AFF69"}:{backgroundColor: "#FF6C6C"}}></div>
-                        <p>{card.title}</p>
-                    </div>
-                )
+                if (filterBoolean && (search === "" || card.title.toLowerCase().includes(search.toLowerCase()))) {
+                    renderArr.push(
+                        <div className={selection==i? "cardbar-container selected":"cardbar-container"} onClick={() => setSelection(i)}>
+                            <div className="cardbar-indicator" style={card.status=="Passed"? {backgroundColor: "#7AFF69"}:{backgroundColor: "#FF8080"}}></div>
+                            <p>{card.title}</p>
+                        </div>
+                    )
+                }
             } else {
-                renderArr.push(
-                    <div className={selection==i? "cardbar-container selected":"cardbar-container"} onClick={() => setSelection(i)}>
-                        <div className="cardbar-indicator" style={card.status=="Passed"? {backgroundColor: "#7AFF69"}:{backgroundColor: "#FF6C6C"}}></div>
-                        <p>Submission {card.submissionID}</p>{/*Better alternativr? !!!*/}
-                    </div>
-                )
+                if (filterBoolean && (search === "" || `Submission ${card.submissionID}`.toLowerCase().includes(search.toLowerCase()))) {
+                    renderArr.push(
+                        <div className={selection==i? "cardbar-container selected":"cardbar-container"} onClick={() => setSelection(i)}>
+                            <div className="cardbar-indicator" style={card.status=="Passed"? {backgroundColor: "#7AFF69"}:{backgroundColor: "#FF8080"}}></div>
+                            <p>Submission {card.submissionID}</p>{/*Better alternativr? !!!*/}
+                        </div>
+                    )
+                }
             }
         }
 
         setCardArrRender(renderArr)
-    }, [cardArr])
+    }, [search, cardArr, selection, dropdownValue])
 
 
     useEffect(() => {
@@ -61,9 +69,15 @@ function History() {
             </div>
             <div className="UI-right">
                 <div className="UI-topright">
+                    <div className={isShowingOptions? "dropdown-defocuser":"hidden"} onClick={() => setIsShowingOptions(false)}></div>
+                    <div className={isShowingOptions? "searchbar super-z":"searchbar"}>
+                        <input type="text" placeholder="Search" className="subbar" value={search} onChange={(e)=>setSearch(e.target.value)} onFocus={() => setIsShowingOptions(true)}/>
+                        <GoSearch size={15} className="search-icon"/>
+                    </div>
+
                     <div className="filter-group">
-                        <FaFilter size={18} className="filter-icon"/>
-                        <Dropdown options={["Passed", "Failed", "Starred"]}/>
+                        <Dropdown options={["No Filter", "Passed", "Failed", "Starred"]} setSelection={setDropdownValue}/>
+                        <FaFilter size={15} className="filter-icon"/>
                     </div>
                 </div>
                 <div className="cardbar-deck-container">
@@ -76,7 +90,7 @@ function History() {
 
 
 function Dropdown(props) {
-    const [value, setValue] = useState(); // Stores the index of the item in options
+    const [value, setValue] = useState(0); // Stores the index of the item in options
     const [dropVisible, setDropVisible] = useState(false);
     const [dropRender, setDropRender] = useState();
 
@@ -106,6 +120,10 @@ function Dropdown(props) {
             setDropRender();
         }
     }, [dropVisible])
+
+    useEffect(() => {
+        props.setSelection(props.options[value]);
+    }, [value])
 
     return (
         <div>
