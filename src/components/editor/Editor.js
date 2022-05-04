@@ -41,9 +41,6 @@ function Editor() {
     }
 
     function toggleStandardized() {
-        if (!standardized) console.log("Custom --> Standard")
-        if (standardized) console.log("Standard --> Custom")
-
         if (!standardized && !checkStandardized(JSON.parse(localStorage.getItem("form")))) {
             let frontArr = [];
 
@@ -281,7 +278,7 @@ function Editor() {
                 <div className="hat-UI">
                     <div className="preview-hat">
                         <div className="preview-hat-top">
-                            <p className="preview-hat-heading">DISEC</p>
+                            <p className="preview-hat-heading">UNWOMEN</p>
                             <div className="preview-hat-link-icon-container" onClick={copyLink}>
                                 <BiLink className="preview-hat-link-icon"/>
                             </div>
@@ -314,7 +311,6 @@ function Editor() {
                     </div>
                 </div>
             </div>
-            {/* <FormLink link={formLink}/> */}
         </div>
     )
 }

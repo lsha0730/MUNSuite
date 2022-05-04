@@ -69,7 +69,7 @@ function Delegations() {
 
     useEffect(() => {
         localStorage.setItem("delegations", JSON.stringify(delegations));
-        dispatchEvent(new Event("delegations updated"));
+        window.dispatchEvent(new Event("delegations updated"));
     }, [delegations])
 
     function deselectAll() { setSelections([]); }

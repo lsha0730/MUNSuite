@@ -31,8 +31,10 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: flex-end;
 
     padding-right: 430px;
+    padding-bottom: 30px;
 }
 
 .preview-hat {
@@ -48,6 +50,7 @@
     margin-top: 30px;
 }
 .preview-hat-heading {
+    max-width: 400px;
     font-size: 32px;
     font-weight: 600;
     color: #BCBCBC;
@@ -78,7 +81,6 @@
 .preview-hat-subheading {
     font-weight: 500;
     color: #BCBCBC;
-    margin-bottom: 20px;
 }
 
 .formlink-confirmation-container {
