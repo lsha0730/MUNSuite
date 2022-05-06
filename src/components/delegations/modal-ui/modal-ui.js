@@ -119,7 +119,7 @@ function AddCustomCountry() {
             <div className="modal-body">
                 <div className="modal-input-container">
                     <p style={{fontWeight: 500, marginBottom: 10}}>Country Name</p>
-                    <input className="modal-custom-input" id="custom-country-input"></input>
+                    <input className="modal-custom-input" id="custom-country-input" onKeyDown={(e) => {if (e.key === 'Enter') addCustom()}}></input>
                 </div>
             </div>
 

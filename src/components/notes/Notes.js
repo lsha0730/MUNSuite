@@ -8,7 +8,7 @@ import MockNotes from "./MockNotes.js";
 function Notes() {
     const [notesIndv, setNotesIndv] = useState(JSON.parse(localStorage.getItem("notes-individual")) || MockNotes);
     const [notesIndvRenders, setNotesIndvRenders] = useState();
-    const [notesQuick, setNotesQuick] = useState(JSON.parse(localStorage.getItem("notes-quick")) || "Bruh");
+    const [notesQuick, setNotesQuick] = useState(JSON.parse(localStorage.getItem("notes-quick")) || "");
     const [options, setOptions] = useState(notesIndv.map(item => item.delegate));
     const [search, setSearch] = useState('');
     const [renderOptions, setRenderOptions] = useState([]);
@@ -41,12 +41,12 @@ function Notes() {
         }
         for (let j=0; j<toAdd.length; j++) {
             newNotesList.push({
-                id: newNotesList.length + j + 1,
                 delegate: toAdd[j],
                 text: ""
             })
         }
         newNotesList.sort((a, b) => a.delegate.toLowerCase().localeCompare(b.delegate.toLowerCase()));
+        for (let k=0; k<newNotesList.length; k++) newNotesList[k].id = k;
         setNotesIndv(newNotesList);
 
         // Updating the options list
@@ -137,14 +137,14 @@ function Notes() {
                 tempArr.push(
                     <div className="noteblock-container">
                         <p className="noteblock-title">{note.delegate}</p>
-                        <textarea id={`textfield ${note.id}`} type="text" placeholder="Input here..." className="noteblock-textfield" value={note.text} onChange={() => updateNotes(note.id, document.getElementById(`textfield ${note.id}`).value)}></textarea>
+                        <textarea id={`textfield ${note.id}`} type="text" placeholder="Input here..." className="noteblock-textfield" onChange={() => updateNotes(note.id, document.getElementById(`textfield ${note.id}`).value)}>{note.text}</textarea>
                     </div>
                 )
             }
         }
 
         setNotesIndvRenders(tempArr);
-    }, [selected.length, notesIndv])
+    }, [selected.length])
 
     useEffect(() => {
         localStorage.setItem("notes-individual", JSON.stringify(notesIndv));
@@ -192,7 +192,7 @@ function Notes() {
                     <p className="header-text">Quick Notes</p>
                 </div>
 
-                <textarea type="text" placeholder="Input here..." value={notesQuick} onChange={e => setNotesQuick(e.target.value)} className="UI-right-input"></textarea>
+                <textarea type="text" placeholder="Input here..." onChange={e => setNotesQuick(e.target.value)} className="UI-right-input">{notesQuick}</textarea>
             </div>
         </div>
     )
