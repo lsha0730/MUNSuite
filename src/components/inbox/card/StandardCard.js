@@ -28,8 +28,7 @@ function StandardCard(props) {
     }, [])
 
     function passDirective() {
-        props.updateCards("delete", props.id);
-        //!!!
+        props.updateCards("pass", props.id);
     }
 
     function tableDirective() {
@@ -37,8 +36,7 @@ function StandardCard(props) {
     }
 
     function failDirective() {
-        props.updateCards("delete", props.id);
-        //!!!
+        props.updateCards("fail", props.id);
     }
 
     return (

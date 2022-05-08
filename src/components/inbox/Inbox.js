@@ -20,13 +20,26 @@ function Inbox() {
 
         let tempArr = cardArr.slice();
         switch (operation) {
-            case "delete":
-                tempArr.splice(cardIndex, 1);
+            case "pass":
+                let passedCard = tempArr.splice(cardIndex, 1)[0];
+                passedCard.status = "Passed";
+                pushToProcessed(passedCard);
+                break;
+            case "fail":
+                let failedCard = tempArr.splice(cardIndex, 1)[0];
+                failedCard.status = "Failed";
+                pushToProcessed(failedCard);
                 break;
             case "table":
                 let tempObj = tempArr[cardIndex];
                 tempArr.splice(cardIndex, 1);
                 tempArr.push(tempObj);
+        }
+
+        function pushToProcessed(card) {
+            let tempProcessedArr = JSON.parse(localStorage.getItem("processed"));
+            tempProcessedArr.push(card);
+            localStorage.setItem("processed", JSON.stringify(tempProcessedArr));
         }
 
         setCardArr(tempArr);
