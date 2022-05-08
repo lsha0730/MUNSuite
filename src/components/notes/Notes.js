@@ -6,9 +6,10 @@ import { GoSearch } from "react-icons/go";
 import MockNotes from "./MockNotes.js";
 
 function Notes() {
-    const [notesIndv, setNotesIndv] = useState(JSON.parse(localStorage.getItem("notes-individual")) || MockNotes);
+    const notes = JSON.parse(localStorage.getItem("notes")) || MockNotes;
+    const [notesIndv, setNotesIndv] = useState(notes.individual);
     const [notesIndvRenders, setNotesIndvRenders] = useState();
-    const [notesQuick, setNotesQuick] = useState(JSON.parse(localStorage.getItem("notes-quick")) || "");
+    const [notesQuick, setNotesQuick] = useState(notes.quick);
     const [options, setOptions] = useState(notesIndv.map(item => item.delegate));
     const [search, setSearch] = useState('');
     const [renderOptions, setRenderOptions] = useState([]);
@@ -147,14 +148,12 @@ function Notes() {
     }, [selected.length])
 
     useEffect(() => {
-        localStorage.setItem("notes-individual", JSON.stringify(notesIndv));
-        dispatchEvent(new Event("individual notes updated"));
-    }, [notesIndv])
-
-    useEffect(() => {
-        localStorage.setItem("notes-quick", JSON.stringify(notesQuick));
-        dispatchEvent(new Event("quick notes updated"));
-    }, [notesQuick])
+        localStorage.setItem("notes", JSON.stringify({
+            individual: notesIndv,
+            quick: notesQuick
+        }));
+        dispatchEvent(new Event("notes updated"));
+    }, [notesIndv, notesQuick])
 
     return (
         <div className="page-container">

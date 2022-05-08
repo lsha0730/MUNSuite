@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Inbox.scoped.css";
-import MockSubmissions from "./MockSubmissions.js";
+import MockPendings from "./MockPendings.js";
 import StandardCard from "./card/StandardCard.js";
 import CustomCard from "./card/CustomCard.js";
 
 function Inbox() {
     const [accepting, setAccepting] = useState(true);
     const [toggleRender, setToggleRender] = useState();
-    const [cardArr, setCardArr] = useState(MockSubmissions);
+    const [cardArr, setCardArr] = useState(JSON.parse(localStorage.getItem("pendings")) || MockPendings);
     const [cardArrRender, setCardArrRender] = useState([]);
 
     function updateCards(operation, submissionID) {
@@ -53,6 +53,9 @@ function Inbox() {
                 return <CustomCard key={directive.submissionID} id={directive.submissionID} author={directive.author} body={directive.body} updateCards={updateCards}/>
             }
         }))
+
+        localStorage.setItem("pendings", JSON.stringify(cardArr));
+        dispatchEvent(new Event("pendings updated"));
     }, [cardArr])
 
     return (

@@ -1,4 +1,4 @@
-const MockSubmissions = [
+const MockPendings = [
     {   submissionID: 0,
         status: "Passed",
         author: "Djbouti",
@@ -1224,7 +1224,7 @@ const MockSubmissions = [
             ]
     },
     {   submissionID: 20,
-        status: "Passed",
+        status: "Pending",
         author: "Canada",
         standard: true,
         title: "Operation Directify.app",
@@ -1307,7 +1307,7 @@ const MockSubmissions = [
             ]
     },
     {   submissionID: 21,
-        status: "Passed",
+        status: "Pending",
         author: "Canada",
         standard: true,
         title: "Operation Directify.app",
@@ -1473,7 +1473,7 @@ const MockSubmissions = [
             ]
     },
     {   submissionID: 23,
-        status: "Passed",
+        status: "Pending",
         author: "Canada",
         standard: true,
         title: "Operation Directify.app",
@@ -1639,7 +1639,7 @@ const MockSubmissions = [
             ]
     },
     {   submissionID: 25,
-        status: "Passed",
+        status: "Pending",
         author: "Canada",
         standard: true,
         title: "Operation Directify.app",
@@ -1722,7 +1722,7 @@ const MockSubmissions = [
             ]
     },
     {   submissionID: 26,
-        status: "Passed",
+        status: "Pending",
         author: "Canada",
         standard: true,
         title: "Operation Directify.app",
@@ -1806,4 +1806,4 @@ const MockSubmissions = [
     }
 ]
 
-export default MockSubmissions;
+export default MockPendings;

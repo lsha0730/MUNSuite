@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./History.scoped.css";
-import MockSubmissions from "../inbox/MockSubmissions.js";
+import MockProcessed from "./MockProcessed.js";
 import StandardCard from "../inbox/card/StandardCard.js";
 import CustomCard from "../inbox/card/CustomCard.js";
 import { GoTriangleDown, GoSearch } from "react-icons/go";
 import { FaFilter } from "react-icons/fa";
 
 function History() {
-    const [cardArr, setCardArr] = useState(MockSubmissions);
+    const [cardArr, setCardArr] = useState(JSON.parse(localStorage.getItem("processed")) || MockProcessed);
     const [cardTitles, setCardTitles] = useState(cardArr.map(card => {return card.title}));
     const [cardArrRender, setCardArrRender] = useState([]);
     const [selection, setSelection] = useState(0);
     const [selectionRender, setSelectionRender] = useState();
     const [search, setSearch] = useState('');
     const [dropdownValue, setDropdownValue] = useState("No Filter");
+
+    useEffect(() => {
+        localStorage.setItem("processed", JSON.stringify(cardArr));
+        dispatchEvent(new Event("processed updated"));
+    }, [cardArr])
 
     useEffect(() => {
         setCardTitles(cardArr.map(card => {return card.title}))
@@ -36,7 +41,7 @@ function History() {
                     renderArr.push(
                         <div className={selection==i? "cardbar-container selected":"cardbar-container"} onClick={() => setSelection(i)}>
                             <div className="cardbar-indicator" style={card.status=="Passed"? {backgroundColor: "#7AFF69"}:{backgroundColor: "#FF8080"}}></div>
-                            <p>Submission {card.submissionID}</p>{/*Better alternativr? !!!*/}
+                            <p>Submission {card.submissionID}</p>{/*Better alternative? !!!*/}
                         </div>
                     )
                 }

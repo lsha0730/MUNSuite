@@ -1,4 +1,5 @@
-const MockNotes = [
+const MockNotes = {
+    individual: [
     {
         id: 0,
         delegate: "Albania",
@@ -48,7 +49,9 @@ const MockNotes = [
         id: 9,
         delegate: "Jamaica",
         text: "Struggles to participate but has good ideas. Need to encourage more and may contribute significantly to their block."
-    }
-]
+    }],
+
+    quick: "Topics left to cover: A B C D"
+}
 
 export default MockNotes;

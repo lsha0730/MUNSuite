@@ -7,13 +7,14 @@ function Settings() {
     const settings = JSON.parse(localStorage.getItem("settings")) || {conference: "MUNSuite", committee: "Committee"}
 
     function updateSettings() {
-        localStorage.setItem("settings", JSON.stringify(
-            {
-                conference: document.getElementById("conference-name").value,
-                committee: document.getElementById("committee-name").value
-            }
-        ));
+        let confName = document.getElementById("conference-name").value == ""? "MUNSuite":document.getElementById("conference-name").value;
+        let commName = document.getElementById("committee-name").value == ""? "Commitee":document.getElementById("committee-name").value;
 
+        let settingsObj = {};
+        settingsObj.conference = confName;
+        settingsObj.committee = commName;
+
+        localStorage.setItem("settings", JSON.stringify(settingsObj));
         dispatchEvent(new Event("settings updated"));
     }
 

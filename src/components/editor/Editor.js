@@ -25,6 +25,7 @@ import EditDropdown from "./editor-components/EditDropdown.js";
 import EditSelectMultiple from "./editor-components/EditSelectMultiple.js";
 
 function Editor() {
+    let settings = JSON.parse(localStorage.getItem("settings")) || {conference: "MUNSuite", committee: "Committee"};
     let rawFormData = JSON.parse(localStorage.getItem("form")) || DefaultFormData;
     const [formData, setFormData] = useState(rawFormData);
     const [editing, setEditing] = useState(false);
@@ -278,7 +279,7 @@ function Editor() {
                 <div className="hat-UI">
                     <div className="preview-hat">
                         <div className="preview-hat-top">
-                            <p className="preview-hat-heading">UNWOMEN</p>
+                            <p className="preview-hat-heading">{settings.committee}</p>
                             <div className="preview-hat-link-icon-container" onClick={copyLink}>
                                 <BiLink className="preview-hat-link-icon"/>
                             </div>
