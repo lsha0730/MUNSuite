@@ -6,6 +6,7 @@ import Delegations from './components/delegations/Delegations.js';
 import Editor from './components/editor/Editor.js';
 import Inbox from './components/inbox/Inbox.js';
 import History from './components/history/History.js';
+import Statistics from './components/statistics/Statistics.js';
 import Notes from './components/notes/Notes.js';
 
 import { appContext } from './Context.js';
@@ -21,7 +22,7 @@ function App() {
         case "editor": return <Editor key="editor"/>
         case "inbox": return <Inbox key="inbox"/>
         case "history": return <History key="history"/>
-        case "statistics": return <h1>Statistics</h1>
+        case "statistics": return <Statistics key="statistics"/>
         case "notes": return <Notes key="notes"/>
         case "settings": return <h1>Settings</h1>
         default: return <Delegations key="delegations"/>

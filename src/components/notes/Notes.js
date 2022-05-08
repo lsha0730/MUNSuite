@@ -161,7 +161,7 @@ function Notes() {
             <div className="UI-left">
                 <div className="UI-left-top">
                     <div className="header-pair">
-                        <BsPersonFill className="person-icon"/>
+                        <BsPersonFill className="header-icon"/>
                         <p className="header-text">Individual Notes</p>
                     </div>
 
@@ -188,7 +188,7 @@ function Notes() {
 
             <div className="UI-right">
                 <div className="header-pair">
-                    <IoClipboard className="person-icon"/>
+                    <IoClipboard className="header-icon"/>
                     <p className="header-text">Quick Notes</p>
                 </div>
 
