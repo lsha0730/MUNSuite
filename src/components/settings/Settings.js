@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { getDatabase, onValue, ref, set } from "firebase/database";
 import "./Settings.scoped.css";
 import { BsGearFill } from "react-icons/bs";
 import { FaGitAlt } from "react-icons/fa";
 
 function Settings() {
-    const settings = JSON.parse(localStorage.getItem("settings")) || {conference: "MUNSuite", committee: "Committee"}
+    const db = getDatabase();
+    const [settings, setSettings] = useState(JSON.parse(localStorage.getItem("settings")) || {conference: "MUNSuite", committee: "Committee"});
 
     function updateSettings() {
         let confName = document.getElementById("conference-name").value == ""? "MUNSuite":document.getElementById("conference-name").value;
@@ -14,9 +16,20 @@ function Settings() {
         settingsObj.conference = confName;
         settingsObj.committee = commName;
 
-        localStorage.setItem("settings", JSON.stringify(settingsObj));
-        dispatchEvent(new Event("settings updated"));
+        setSettings(settingsObj);
     }
+
+    useEffect(() => {
+        set(ref(db, 'test/settings'), settings);
+        localStorage.setItem("settings", JSON.stringify(settings));
+        dispatchEvent(new Event("settings updated"));
+    }, [settings])
+
+    useEffect(() => {
+        onValue(ref(db, 'test/settings'), (snapshot) => {
+            setSettings(snapshot.val());
+        })
+    }, [])
 
     return (
         <div className="page-container">

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { getDatabase, onValue, ref, set } from "firebase/database";
 import "./Delegations.scoped.css";
 import { AddUNCountries, AddCustomCountry, AddViaSpreadsheet } from "./modal-ui/modal-ui.js";
 import * as BsIcons from "react-icons/bs";
 import { delegationsContext } from "../../Context";
 
 function Delegations() {
+    const db = getDatabase();
     const [selections, setSelections] = useState([]);
     const [modal, setModal] = useState(false);
     const [delegateBars, setDelegateBars] = useState([]);
@@ -68,6 +70,17 @@ function Delegations() {
     }, [delegations, selections]);
 
     useEffect(() => {
+        onValue(ref(db, 'test/delegations'), (snapshot) => {
+            if (snapshot.val() == null) {
+                setDelegations([]);
+            } else {
+                setDelegations(snapshot.val());
+            }
+        })
+    }, [])
+
+    useEffect(() => {
+        set(ref(db, 'test/delegations'), delegations);
         localStorage.setItem("delegations", JSON.stringify(delegations));
         window.dispatchEvent(new Event("delegations updated"));
     }, [delegations])

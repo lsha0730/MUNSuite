@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getDatabase, onValue, ref, set } from "firebase/database";
 import "./Editor.scoped.css";
 import DefaultFormData from "./DefaultFormData.js";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
@@ -25,6 +26,7 @@ import EditDropdown from "./editor-components/EditDropdown.js";
 import EditSelectMultiple from "./editor-components/EditSelectMultiple.js";
 
 function Editor() {
+    const db = getDatabase();
     let settings = JSON.parse(localStorage.getItem("settings")) || {conference: "MUNSuite", committee: "Committee"};
     let rawFormData = JSON.parse(localStorage.getItem("form")) || DefaultFormData;
     const [formData, setFormData] = useState(rawFormData);
@@ -248,6 +250,17 @@ function Editor() {
     }
 
     useEffect(() => {
+        onValue(ref(db, 'test/form'), (snapshot) => {
+            if (snapshot.val() == null) {
+                setFormData([]);
+            } else {
+                setFormData(snapshot.val());
+            }
+        })
+    }, [])
+
+    useEffect(() => {
+        set(ref(db, 'test/form'), formData);
         localStorage.setItem("form", JSON.stringify(formData));
         dispatchEvent(new Event("form updated"));
         setStandardized(checkStandardized(formData));

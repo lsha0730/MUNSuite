@@ -10,11 +10,35 @@ import Statistics from './components/statistics/Statistics.js';
 import Notes from './components/notes/Notes.js';
 import Settings from './components/settings/Settings.js';
 
+import { initializeApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
+import { getAnalytics } from "firebase/analytics";
+
 import { appContext } from './Context.js';
 
 function App() {
   const [page, setPage] = useState("delegations");
   const [UI, setUI] = useState(<Delegations key="delegations"/>);
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDlwJk3ZyuuQEz9xH71E16luTakuOBCfzg",
+    authDomain: "munsuite-d1d0c.firebaseapp.com",
+    databaseURL: "https://munsuite-d1d0c-default-rtdb.firebaseio.com",
+    projectId: "munsuite-d1d0c",
+    storageBucket: "munsuite-d1d0c.appspot.com",
+    messagingSenderId: "679459991121",
+    appId: "1:679459991121:web:dc8aadabadab0e13309270",
+    measurementId: "G-41D98K4YRG"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+
+  // Get a reference to the database service
+  const database = getDatabase(app);
 
   useEffect(() => {
     setUI(() => {

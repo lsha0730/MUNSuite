@@ -57,7 +57,7 @@
 }
 
 .inputs-container {
-    width: 90%;
+    width: 700px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

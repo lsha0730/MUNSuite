@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { getDatabase, onValue, ref, set } from "firebase/database";
 import "./Inbox.scoped.css";
 import MockPendings from "./MockPendings.js";
 import StandardCard from "./card/StandardCard.js";
 import CustomCard from "./card/CustomCard.js";
 
 function Inbox() {
+    const db = getDatabase();
     const [accepting, setAccepting] = useState(true);
     const [toggleRender, setToggleRender] = useState();
     const [cardArr, setCardArr] = useState(JSON.parse(localStorage.getItem("pendings")) || MockPendings);
@@ -59,6 +61,16 @@ function Inbox() {
     }, [accepting])
 
     useEffect(() => {
+        onValue(ref(db, 'test/pendings'), (snapshot) => {
+            if (snapshot.val() == null) {
+                setCardArr([]);
+            } else {
+                setCardArr(snapshot.val());
+            }
+        })
+    }, [])
+
+    useEffect(() => {
         setCardArrRender(cardArr.map(directive => {
             if (directive.standard) {
                 return <StandardCard key={directive.submissionID} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors} signatories={directive.signatories} body={directive.body} updateCards={updateCards}/>
@@ -67,6 +79,7 @@ function Inbox() {
             }
         }))
 
+        set(ref(db, 'test/pendings'), cardArr);
         localStorage.setItem("pendings", JSON.stringify(cardArr));
         dispatchEvent(new Event("pendings updated"));
     }, [cardArr])

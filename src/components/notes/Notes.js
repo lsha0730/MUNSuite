@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
+import { getDatabase, onValue, ref, set } from "firebase/database";
 import "./Notes.scoped.css";
 import { BsPersonFill } from "react-icons/bs";
 import { IoClipboard } from "react-icons/io5";
@@ -6,6 +7,7 @@ import { GoSearch } from "react-icons/go";
 import MockNotes from "./MockNotes.js";
 
 function Notes() {
+    const db = getDatabase();
     const notes = JSON.parse(localStorage.getItem("notes")) || MockNotes;
     const [notesIndv, setNotesIndv] = useState(notes.individual);
     const [notesIndvRenders, setNotesIndvRenders] = useState();
@@ -148,10 +150,25 @@ function Notes() {
     }, [selected.length])
 
     useEffect(() => {
-        localStorage.setItem("notes", JSON.stringify({
+        onValue(ref(db, 'test/notes'), (snapshot) => {
+            if (snapshot.val().individual == null) {
+                setNotesIndv([]);
+            } else {
+                setNotesIndv(snapshot.val().individual);
+            }
+
+            setNotesQuick(snapshot.val().quick);
+        })
+    }, [])
+
+    useEffect(() => {
+        let notesObj = {
             individual: notesIndv,
             quick: notesQuick
-        }));
+        }
+
+        set(ref(db, 'test/notes'), notesObj);
+        localStorage.setItem("notes", JSON.stringify(notesObj));
         dispatchEvent(new Event("notes updated"));
     }, [notesIndv, notesQuick])
 
