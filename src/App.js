@@ -8,6 +8,7 @@ import Inbox from './components/inbox/Inbox.js';
 import History from './components/history/History.js';
 import Statistics from './components/statistics/Statistics.js';
 import Notes from './components/notes/Notes.js';
+import Settings from './components/settings/Settings.js';
 
 import { appContext } from './Context.js';
 
@@ -24,7 +25,7 @@ function App() {
         case "history": return <History key="history"/>
         case "statistics": return <Statistics key="statistics"/>
         case "notes": return <Notes key="notes"/>
-        case "settings": return <h1>Settings</h1>
+        case "settings": return <Settings key="settings"/>
         default: return <Delegations key="delegations"/>
       }
     })

@@ -1,0 +1,154 @@
+.page-container {
+    width: 75%;
+    height: 85%;
+    max-width: 1600px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+/*-----------LEFT UI----------*/
+.UI-left {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 70%;
+    margin-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    border-radius: 10px;
+    background-color: #FFFFFF;
+}
+
+.UI-left-top {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+/*Header*/
+.header-pair {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-bottom: 10px;
+}
+
+.header-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: #3C8CC9;
+    margin-left: 15px;
+}
+
+.header-icon {
+    fill: #3C8CC9;
+}
+
+/*Committee Information*/
+.setting-header {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.inputs-container {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-subheader {
+    font-size: 16px;
+    font-weight: 500;
+    color: #BCBCBC;
+}
+
+.input-field {
+    width: 300px;
+    height: 30px;
+
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    font-size: 16px;
+
+    border-color: rgba(0,0,0,0);
+    border-radius: 10px;
+    background-color: #F7F7F7;
+}
+.input-field:focus {
+    outline: none !important;
+    border-color: rgba(0,0,0,0);
+    background-color: #F7F7F7;
+}
+.input-field:hover {
+    background-color: #EEEEEE;
+}
+
+/*-----------RIGHT UI----------*/
+.UI-right {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    border-radius: 10px;
+    background-color: #FFFFFF;
+}
+
+.release-notes-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    background-color: #F7F7F7;
+    border-radius: 10px;
+
+    margin-top: 10px;
+    padding: 20px;
+
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+
+    border-color: rgba(0,0,0,0);
+    border-radius: 10px;
+    background-color: #F7F7F7;
+
+    overflow-y: auto;
+}
+
+.version-note-heading {
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.version-note-subheading {
+    font-size: 16px;
+    color: #BCBCBC;
+    margin-bottom: 25px;
+}
+
+.metadata {
+    color: #BCBCBC;
+    margin-top: 15px;
+}
+
+.signature {
+    margin-top: 10px;
+}
