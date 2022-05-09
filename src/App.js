@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { getDatabase, onValue, ref, set } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { isEmpty } from "@firebase/util";
 import './App.css';
 
 import Sidebar from './components/sidebar/Sidebar.js';
@@ -25,6 +26,7 @@ function App() {
   const [processed, setProcessed] = useState([]);
   const [notes, setNotes] = useState({});
   const [settings, setSettings] = useState({});
+  const isMounted = useRef(false);
 
   // Configuring Firebase
   const firebaseConfig = {
@@ -44,71 +46,72 @@ function App() {
   // Firebase: Reading
   useEffect(() => {
     onValue(ref(database, 'test/delegations'), (snapshot) => {
-      if (snapshot.val() == null) {
-          setDelegations([]);
+      if (!snapshot.val()) {
+        setDelegations([]);
       } else {
-          let tempArr = snapshot.val();
-          for (let i=0; i<tempArr.length; i++) {
-              if (Object.keys(tempArr[i]).length === 0) tempArr.splice(i, 1);
-          }
-          setDelegations(tempArr);
+        let tempArr = snapshot.val();
+        for (let i=0; i<tempArr.length; i++) {
+          if (!tempArr[i]) tempArr.splice(i, 1);
+        }
+        setDelegations(tempArr);
+        console.log(tempArr)
       }
     })
 
     onValue(ref(database, 'test/form'), (snapshot) => {
-      if (snapshot.val() == null) {
-          setForm([]);
+      if (!snapshot.val()) {
+        setForm([]);
       } else {
-          let tempArr = snapshot.val();
-          for (let i=0; i<tempArr.length; i++) {
-              if (Object.keys(tempArr[i]).length === 0) tempArr.splice(i, 1);
-          }
-          for (let j=0; j<tempArr.length; j++) {
-              tempArr[j].id = j;
-          }
-          setForm(tempArr);
+        let tempArr = snapshot.val();
+        for (let i=0; i<tempArr.length; i++) {
+            if (!tempArr[i]) tempArr.splice(i, 1);
+        }
+        for (let j=0; j<tempArr.length; j++) {
+            tempArr[j].id = j;
+        }
+        setForm(tempArr);
       }
     })
 
     onValue(ref(database, 'test/pendings'), (snapshot) => {
-      if (snapshot.val() == null) {
-          setPendings([]);
+      if (!snapshot.val()) {
+        setPendings([]);
       } else {
-          let tempArr = snapshot.val();
-          for (let i=0; i<tempArr.length; i++) {
-              if (Object.keys(tempArr[i]).length === 0) tempArr.splice(i, 1);
-          }
-          setPendings(tempArr);
+        let tempArr = snapshot.val();
+        for (let i=0; i<tempArr.length; i++) {
+            if (!tempArr[i]) tempArr.splice(i, 1);
+        }
+        setPendings(tempArr);
       }
     })
 
     onValue(ref(database, 'test/processed'), (snapshot) => {
-      if (snapshot.val() == null) {
-          setProcessed([]);
+      if (!snapshot.val()) {
+        setProcessed([]);
       } else {
-          let tempArr = snapshot.val();
-          for (let i=0; i<tempArr.length; i++) {
-              if (Object.keys(tempArr[i]).length === 0) tempArr.splice(i, 1);
-          }
-          setProcessed(tempArr);
+        let tempArr = snapshot.val();
+        for (let i=0; i<tempArr.length; i++) {
+            if (!tempArr[i]) tempArr.splice(i, 1);
+        }
+        setProcessed(tempArr);
       }
     })
 
     onValue(ref(database, 'test/notes'), (snapshot) => {
-      if (snapshot.val() == null || Object.keys(snapshot.val()).length === 0) {
+      if (!snapshot.val()) {
         setNotes({
           individual: [],
           quick: ""
         });
-      } else if (snapshot.val().individual == null) {
+      } else if (!snapshot.val().individual) {
         setNotes({
           individual: [],
           quick: snapshot.val().quick
         });
-      } else if (snapshot.val().quick == null) {
+      } else if (!snapshot.val().quick) {
         setNotes({
-          individual: [],
-          quick: snapshot.val().quick
+          individual: snapshot.val().individual,
+          quick: ""
         });
       } else {
         setNotes(snapshot.val());
@@ -116,37 +119,61 @@ function App() {
     })
 
     onValue(ref(database, 'test/settings'), (snapshot) => {
-      if (snapshot.val() == null || Object.keys(snapshot.val()).length === 0) {
-          setSettings({conference: "MUNSuite", committee: "Committee"});
+      if (!snapshot.val()) {
+        setSettings({conference: "MUNSuite", committee: "Committee"});
       } else {
-          setSettings(snapshot.val());
+        setSettings(snapshot.val());
       }
     })
   }, [])
 
   // Firebase: Writing
   useEffect(() => {
-    set(ref(database, 'test/delegations'), delegations);
+    if (isMounted.current) {
+      set(ref(database, 'test/delegations'), delegations);
+    } else {
+      isMounted.current = true;
+    }
   }, [delegations])
 
   useEffect(() => {
-    set(ref(database, 'test/form'), form);
+    if (isMounted.current) {
+      set(ref(database, 'test/form'), form);
+    } else {
+      isMounted.current = true;
+    }
   }, [form])
 
   useEffect(() => {
-    set(ref(database, 'test/pendings'), pendings);
+    if (isMounted.current) {
+      set(ref(database, 'test/pendings'), pendings);
+    } else {
+      isMounted.current = true;
+    }
   }, [pendings])
 
   useEffect(() => {
-    set(ref(database, 'test/processed'), processed);
+    if (isMounted.current) {
+      set(ref(database, 'test/processed'), processed);
+    } else {
+      isMounted.current = true;
+    }
   }, [processed])
 
   useEffect(() => {
-    set(ref(database, 'test/notes'), notes);
+    if (isMounted.current) {
+      set(ref(database, 'test/notes'), notes);
+    } else {
+      isMounted.current = true;
+    }
   }, [notes])
 
   useEffect(() => {
-    set(ref(database, 'test/settings'), settings);
+    if (isMounted.current) {
+      set(ref(database, 'test/settings'), settings);
+    } else {
+      isMounted.current = true;
+    }
   }, [settings])
 
 
