@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from "react";
 import "./Statistics.scoped.css";
-import MockStatistics from "./MockStatistics.js";
+import MockProcessed from "../history/MockProcessed.js";
 import { BsPersonFill, BsFillEnvelopeOpenFill } from "react-icons/bs";
 import { AiFillPieChart } from "react-icons/ai";
 
 
 function Statistics() {
-    const statsData = JSON.parse(localStorage.getItem("statistics")) || MockStatistics;
-    const [statBarsRenders, setStatBarsRenders] = useState([]);
+    const [processedData, setProcessedData] = useState(JSON.parse(localStorage.getItem("processed")) || MockProcessed);
+    const [statsData, setStatsData] = useState([]);
     const [topSubCount, setTopSubCount] = useState();
     const [passedCount, setPassedCount] = useState();
     const [failedCount, setFailedCount] = useState();
+    const [statBarsRenders, setStatBarsRenders] = useState([]);
 
     useEffect (() => {
-        setCommitteeStats();
-        reRenderStatBars();
-    }, [statsData])
+        setStats();
+    }, [processedData])
 
     useEffect(() => {
-        localStorage.setItem("statistics", JSON.stringify(statsData));
-        dispatchEvent(new Event("statistics updated"));
-    }, [statsData])
+        reRenderStatBars();
+    }, [statsData, topSubCount, passedCount, failedCount])
 
     return (
         <div className="page-container">
@@ -84,8 +83,7 @@ function Statistics() {
 
         for (let i = 0; i < sortedData.length; i++) {
             let stat = sortedData[i];
-            let widthMultiplier = (100/topSubCount).toFixed(1); // How many percent of total width each submission is worth relative to 
-            let passWidth = (stat.passed / (stat.passed + stat.failed) * 100).toFixed(1);
+            let widthMultiplier = (100/topSubCount).toFixed(1); // How many percent of total width each submission is worth relative to
             renderArr.push(
                 <div className="statbar-container">
                     <p className="delname">{stat.delegate}</p>
@@ -103,19 +101,62 @@ function Statistics() {
         setStatBarsRenders(renderArr);
     }
 
-    function setCommitteeStats() {
+    function setStats() {
         let tempTopPassedCount = 0;
         let tempFailedCounter = 0;
         let tempPassedCounter = 0;
-        for (let i = 0; i < statsData.length; i++) {
-            let stat = statsData[i];
-            tempPassedCounter += stat.passed;
-            tempFailedCounter += stat.failed;
-            if (stat.passed + stat.failed > tempTopPassedCount) tempTopPassedCount = stat.passed + stat.failed;
+        let tempDelStats = [];
+
+        for (let i=0; i<processedData.length; i++) {
+            let submission = processedData[i];
+
+            // Credit the directive authors
+            let authors = [];
+            if (submission.standard) {
+                authors = submission.sponsors;
+            } else {
+                authors = [submission.author];
+            }
+
+            for (let j=0; j<authors.length; j++) {
+                let author = authors[j];
+
+                let delStatsNames = tempDelStats.map(item => item.delegate);
+                if (delStatsNames.includes(author)) {
+                    let delStat = tempDelStats[delStatsNames.indexOf(author)];
+                    switch (submission.status) {
+                        case "Passed":
+                            delStat.passed++;
+                            break;
+                        case "Failed":
+                            delStat.failed++;
+                            break;
+                    }
+                } else {
+                    tempDelStats.push({
+                        delegate: author,
+                        passed: submission.status == "Passed"? 1:0,
+                        failed: submission.status == "Failed"? 1:0
+                    })
+                }
+            }
+
+            // Increment the committee-wide counters
+            if (submission.status == "Passed") tempPassedCounter++;
+            if (submission.status == "Failed") tempFailedCounter++;
         }
+
+        for (let i=0; i<tempDelStats.length; i++) {
+            let delStat = tempDelStats[i];
+            if (delStat.passed + delStat.failed > tempTopPassedCount) {
+                tempTopPassedCount = delStat.passed + delStat.failed;
+            }
+        }
+
         setPassedCount(tempPassedCounter);
         setFailedCount(tempFailedCounter);
         setTopSubCount(tempTopPassedCount);
+        setStatsData(tempDelStats);
     }
 }
 

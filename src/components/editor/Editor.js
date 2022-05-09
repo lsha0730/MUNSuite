@@ -254,7 +254,14 @@ function Editor() {
             if (snapshot.val() == null) {
                 setFormData([]);
             } else {
-                setFormData(snapshot.val());
+                let tempArr = snapshot.val();
+                for (let i=0; i<tempArr.length; i++) {
+                    if (tempArr[i] == null) tempArr.splice(i, 1);
+                }
+                for (let j=0; j<tempArr.length; j++) {
+                    tempArr[j].id = j;
+                }
+                setFormData(tempArr);
             }
         })
     }, [])

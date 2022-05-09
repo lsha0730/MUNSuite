@@ -65,7 +65,11 @@ function Inbox() {
             if (snapshot.val() == null) {
                 setCardArr([]);
             } else {
-                setCardArr(snapshot.val());
+                let tempArr = snapshot.val();
+                for (let i=0; i<tempArr.length; i++) {
+                    if (tempArr[i] == null) tempArr.splice(i, 1);
+                }
+                setCardArr(tempArr);
             }
         })
     }, [])

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { getDatabase, onValue, ref, set } from "firebase/database";
 import "./History.scoped.css";
 import MockProcessed from "./MockProcessed.js";
 import StandardCard from "../inbox/card/StandardCard.js";
@@ -7,6 +8,7 @@ import { GoTriangleDown, GoSearch } from "react-icons/go";
 import { FaFilter } from "react-icons/fa";
 
 function History() {
+    const db = getDatabase();
     const [cardArr, setCardArr] = useState(JSON.parse(localStorage.getItem("processed")) || MockProcessed);
     const [cardTitles, setCardTitles] = useState(cardArr.map(card => {return card.title}));
     const [cardArrRender, setCardArrRender] = useState([]);
@@ -16,16 +18,33 @@ function History() {
     const [dropdownValue, setDropdownValue] = useState("No Filter");
 
     useEffect(() => {
+        onValue(ref(db, 'test/processed'), (snapshot) => {
+            if (snapshot.val() == null) {
+                setCardArr([]);
+            } else {
+                let tempArr = snapshot.val();
+                for (let i=0; i<tempArr.length; i++) {
+                    if (tempArr[i] == null) tempArr.splice(i, 1);
+                }
+                setCardArr(tempArr);
+            }
+        })
+    }, [])
+
+    useEffect(() => {
+        set(ref(db, 'test/processed'), cardArr);
         localStorage.setItem("processed", JSON.stringify(cardArr));
         dispatchEvent(new Event("processed updated"));
     }, [cardArr])
 
     useEffect(() => {
-        setCardTitles(cardArr.map(card => {return card.title}))
+        let reverseArr = cardArr.slice().reverse();
+
+        setCardTitles(reverseArr.map(card => {return card.title}))
         let renderArr = [];
 
-        for (let i=0; i<cardArr.length; i++) {
-            let card = cardArr[i];
+        for (let i=0; i<reverseArr.length; i++) {
+            let card = reverseArr[i];
             let filterBoolean = card.status == dropdownValue || dropdownValue == "No Filter";
             if (card.standard) {
                 if (filterBoolean && (search === "" || card.title.toLowerCase().includes(search.toLowerCase()))) {
@@ -53,7 +72,7 @@ function History() {
 
 
     useEffect(() => {
-        let directive = cardArr[selection];
+        let directive = cardArr.slice().reverse()[selection];
         if (directive.standard) {
             setSelectionRender (
                 <StandardCard key={directive.submissionID} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors} signatories={directive.signatories} body={directive.body} hide={true}/>

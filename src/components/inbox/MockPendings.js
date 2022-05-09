@@ -1,4 +1,4 @@
-const MockProcessed = [
+const MockPendings = [
     {   submissionID: 20,
         status: "Pending",
         author: "Canada",
@@ -416,4 +416,4 @@ const MockProcessed = [
     }
 ]
 
-export default MockProcessed;
+export default MockPendings;

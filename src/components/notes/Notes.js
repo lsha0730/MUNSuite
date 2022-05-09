@@ -140,14 +140,13 @@ function Notes() {
                 tempArr.push(
                     <div className="noteblock-container">
                         <p className="noteblock-title">{note.delegate}</p>
-                        <textarea id={`textfield ${note.id}`} type="text" placeholder="Input here..." className="noteblock-textfield" onChange={() => updateNotes(note.id, document.getElementById(`textfield ${note.id}`).value)}>{note.text}</textarea>
+                        <textarea id={`textfield ${note.id}`} type="text" defaultValue={note.text} placeholder="Input here..." className="noteblock-textfield" onChange={() => updateNotes(note.id, document.getElementById(`textfield ${note.id}`).value)}></textarea>
                     </div>
                 )
             }
         }
-
         setNotesIndvRenders(tempArr);
-    }, [selected.length])
+    }, [selected.length, notesIndv])
 
     useEffect(() => {
         onValue(ref(db, 'test/notes'), (snapshot) => {
@@ -208,7 +207,7 @@ function Notes() {
                     <p className="header-text">Quick Notes</p>
                 </div>
 
-                <textarea type="text" placeholder="Input here..." onChange={e => setNotesQuick(e.target.value)} className="UI-right-input">{notesQuick}</textarea>
+                <textarea type="text" placeholder="Input here..." defaultValue={notesQuick} onChange={e => setNotesQuick(e.target.value)} className="UI-right-input"></textarea>
             </div>
         </div>
     )

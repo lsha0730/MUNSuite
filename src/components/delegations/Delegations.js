@@ -74,7 +74,11 @@ function Delegations() {
             if (snapshot.val() == null) {
                 setDelegations([]);
             } else {
-                setDelegations(snapshot.val());
+                let tempArr = snapshot.val();
+                for (let i=0; i<tempArr.length; i++) {
+                    if (tempArr[i] == null) tempArr.splice(i, 1);
+                }
+                setDelegations(tempArr);
             }
         })
     }, [])
