@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { getDatabase, onValue, ref, set } from "firebase/database";
+import React, { useState, useEffect, useContext } from "react";
 import "./Editor.scoped.css";
-import DefaultFormData from "./DefaultFormData.js";
+import { appContext } from "../../Context";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { BiLink } from "react-icons/bi";
 
@@ -26,16 +25,80 @@ import EditDropdown from "./editor-components/EditDropdown.js";
 import EditSelectMultiple from "./editor-components/EditSelectMultiple.js";
 
 function Editor() {
-    const db = getDatabase();
-    let settings = JSON.parse(localStorage.getItem("settings")) || {conference: "MUNSuite", committee: "Committee"};
-    let rawFormData = JSON.parse(localStorage.getItem("form")) || DefaultFormData;
-    const [formData, setFormData] = useState(rawFormData);
+    const {settings} = useContext(appContext);
+    const {form, setForm} = useContext(appContext);
     const [editing, setEditing] = useState(false);
     const [formRender, setFormRender] = useState([]);
     const [formLink, setFormLink] = useState("https://forms.gle/jEErPPyXrHJ3YEpz8");
     const [isDisplayingConfirmation, setIsDisplayingConfirmation] = useState(false);
-    const [standardized, setStandardized] = useState(checkStandardized(rawFormData));
+    const [standardized, setStandardized] = useState(checkStandardized(form));
     const [toggleRender, setToggleRender] = useState();
+
+    useEffect(() => {
+        setStandardized(checkStandardized(form));
+    }, [form])
+
+    useEffect(() => {
+        rerenderForm();
+    }, [form, editing]);
+
+    useEffect(() => {
+        let toggleOffset = standardized? 25:0;
+
+        setToggleRender(
+            <div className="toggle-set" onClick={toggleStandardized}>
+                <p className={standardized? "toggle-text-green":"toggle-text-red"}>{standardized? "Standardized for MUN":"Custom Form"}</p>
+                <div className={standardized? "toggle-bar toggle-greenbg":"toggle-bar toggle-redbg"}>
+                    <div className={standardized? "toggle-circle toggle-greenbtt":"toggle-circle toggle-redbtt"} style={{left: toggleOffset}}></div>
+                </div>
+            </div>
+        )
+
+        rerenderForm();
+    }, [standardized])
+
+    return (
+        <div className="editor-container">
+            <div className="main-UI">
+
+                <div className="hat-UI">
+                    <div className="preview-hat">
+                        <div className="preview-hat-top">
+                            <p className="preview-hat-heading">{settings.committee}</p>
+                            <div className="preview-hat-link-icon-container" onClick={copyLink}>
+                                <BiLink className="preview-hat-link-icon"/>
+                            </div>
+                            <div className={isDisplayingConfirmation? "formlink-confirmation-container":"formlink-confirmation-container fade"}>
+                                <p className="formlink-confirmation-text">Share Link Copied!</p>
+                            </div>
+                        </div>
+                        <p className="preview-hat-subheading">[Delegation Name]</p>
+                    </div>
+
+                    {toggleRender}
+                </div>
+
+                {formRender}
+
+                <div className="addQ-container">
+                    <div className="addQ-icon-container">
+                        <div className="addQ-icon-backdrop"></div>
+                        <IoIosArrowDroprightCircle className="addQ-icon"/>
+                    </div>
+                    <div className="addQ-options-container">
+                        <div className="btt-addQ" onClick={()=>addNewBlock("shorttext")}>Short Text</div>
+                        <div className="btt-addQ" onClick={()=>addNewBlock("longtext")}>Long Text</div>
+                        <div className="btt-addQ" onClick={()=>addNewBlock("radio")}>Radio</div>
+                        <div className="btt-addQ" onClick={()=>addNewBlock("multiplechoice")}>Multiple Choice</div>
+                        <div className="btt-addQ" onClick={()=>addNewBlock("select-multiple")}>Select Multiple</div>
+                        <div className="btt-addQ" onClick={()=>addNewBlock("dropdown")}>Dropdown</div>
+                        <div className="btt-addQ" onClick={()=>addNewBlock("content")}>Content Block</div>
+                        <div className="btt-addQ" onClick={()=>addNewBlock("header")}>Header</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
 
     function copyLink() {
         navigator.clipboard.writeText(formLink);
@@ -44,7 +107,7 @@ function Editor() {
     }
 
     function toggleStandardized() {
-        if (!standardized && !checkStandardized(JSON.parse(localStorage.getItem("form")))) {
+        if (!standardized && !checkStandardized(form)) {
             let frontArr = [];
 
             frontArr.push(makeNewBlock("header", 0, "New Header"));
@@ -53,12 +116,12 @@ function Editor() {
             frontArr.push(makeNewBlock("select-multiple", 3, "Sponsors"));
             frontArr.push(makeNewBlock("select-multiple", 4, "Signatories"));
 
-            let tempArr = frontArr.concat(JSON.parse(localStorage.getItem("form")));
+            let tempArr = frontArr.concat(form);
             for (let i = 0; i<tempArr.length; i++) {
                 tempArr[i].id = i;
             }
 
-            setFormData(tempArr)
+            setForm(tempArr)
         }
         setStandardized(!standardized);
     }
@@ -115,7 +178,7 @@ function Editor() {
     }
 
     function addNewBlock(type) {
-        let tempArr = formData.slice();
+        let tempArr = form.slice();
         let newObj = makeNewBlock(type, tempArr.length);
 
         tempArr.push(newObj);
@@ -123,11 +186,11 @@ function Editor() {
             tempArr[i].id = i;
         }
 
-        setFormData(tempArr);
+        setForm(tempArr);
     }
 
     function updateForm(operation, index, newObj = null) {
-        let tempArr = formData.slice();
+        let tempArr = form.slice();
         switch (operation) {
             case "delete":
                 tempArr.splice(index, 1);
@@ -166,11 +229,11 @@ function Editor() {
                 break;
         }
 
-        setFormData(tempArr);
+        setForm(tempArr);
     }
 
     function rerenderForm() {
-        setFormRender(formData.map(item => {
+        setFormRender(form.map(item => {
             switch (item.type) {
                 case "header":
                     return (
@@ -248,92 +311,6 @@ function Editor() {
             formArr[4].heading == "Signatories"
         )
     }
-
-    useEffect(() => {
-        onValue(ref(db, 'test/form'), (snapshot) => {
-            if (snapshot.val() == null) {
-                setFormData([]);
-            } else {
-                let tempArr = snapshot.val();
-                for (let i=0; i<tempArr.length; i++) {
-                    if (tempArr[i] == null) tempArr.splice(i, 1);
-                }
-                for (let j=0; j<tempArr.length; j++) {
-                    tempArr[j].id = j;
-                }
-                setFormData(tempArr);
-            }
-        })
-    }, [])
-
-    useEffect(() => {
-        set(ref(db, 'test/form'), formData);
-        localStorage.setItem("form", JSON.stringify(formData));
-        dispatchEvent(new Event("form updated"));
-        setStandardized(checkStandardized(formData));
-    }, [formData])
-
-    useEffect(() => {
-        rerenderForm();
-    }, [formData, editing]);
-
-    useEffect(() => {
-        let toggleOffset = standardized? 25:0;
-
-        setToggleRender(
-            <div className="toggle-set" onClick={toggleStandardized}>
-                <p className={standardized? "toggle-text-green":"toggle-text-red"}>{standardized? "Standardized for MUN":"Custom Form"}</p>
-                <div className={standardized? "toggle-bar toggle-greenbg":"toggle-bar toggle-redbg"}>
-                    <div className={standardized? "toggle-circle toggle-greenbtt":"toggle-circle toggle-redbtt"} style={{left: toggleOffset}}></div>
-                </div>
-            </div>
-        )
-
-        rerenderForm();
-    }, [standardized])
-
-    return (
-        <div className="editor-container">
-            <div className="main-UI">
-
-                <div className="hat-UI">
-                    <div className="preview-hat">
-                        <div className="preview-hat-top">
-                            <p className="preview-hat-heading">{settings.committee}</p>
-                            <div className="preview-hat-link-icon-container" onClick={copyLink}>
-                                <BiLink className="preview-hat-link-icon"/>
-                            </div>
-                            <div className={isDisplayingConfirmation? "formlink-confirmation-container":"formlink-confirmation-container fade"}>
-                                <p className="formlink-confirmation-text">Share Link Copied!</p>
-                            </div>
-                        </div>
-                        <p className="preview-hat-subheading">[Delegation Name]</p>
-                    </div>
-
-                    {toggleRender}
-                </div>
-
-                {formRender}
-
-                <div className="addQ-container">
-                    <div className="addQ-icon-container">
-                        <div className="addQ-icon-backdrop"></div>
-                        <IoIosArrowDroprightCircle className="addQ-icon"/>
-                    </div>
-                    <div className="addQ-options-container">
-                        <div className="btt-addQ" onClick={()=>addNewBlock("shorttext")}>Short Text</div>
-                        <div className="btt-addQ" onClick={()=>addNewBlock("longtext")}>Long Text</div>
-                        <div className="btt-addQ" onClick={()=>addNewBlock("radio")}>Radio</div>
-                        <div className="btt-addQ" onClick={()=>addNewBlock("multiplechoice")}>Multiple Choice</div>
-                        <div className="btt-addQ" onClick={()=>addNewBlock("select-multiple")}>Select Multiple</div>
-                        <div className="btt-addQ" onClick={()=>addNewBlock("dropdown")}>Dropdown</div>
-                        <div className="btt-addQ" onClick={()=>addNewBlock("content")}>Content Block</div>
-                        <div className="btt-addQ" onClick={()=>addNewBlock("header")}>Header</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
 }
 
 export default Editor;

@@ -1,35 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { getDatabase, onValue, ref, set } from "firebase/database";
+import React, { useContext } from "react";
 import "./Settings.scoped.css";
 import { BsGearFill } from "react-icons/bs";
 import { FaGitAlt } from "react-icons/fa";
+import { appContext } from "../../Context";
 
 function Settings() {
-    const db = getDatabase();
-    const [settings, setSettings] = useState(JSON.parse(localStorage.getItem("settings")) || {conference: "MUNSuite", committee: "Committee"});
-
-    function updateSettings() {
-        let confName = document.getElementById("conference-name").value == ""? "MUNSuite":document.getElementById("conference-name").value;
-        let commName = document.getElementById("committee-name").value == ""? "Commitee":document.getElementById("committee-name").value;
-
-        let settingsObj = {};
-        settingsObj.conference = confName;
-        settingsObj.committee = commName;
-
-        setSettings(settingsObj);
-    }
-
-    useEffect(() => {
-        set(ref(db, 'test/settings'), settings);
-        localStorage.setItem("settings", JSON.stringify(settings));
-        dispatchEvent(new Event("settings updated"));
-    }, [settings])
-
-    useEffect(() => {
-        onValue(ref(db, 'test/settings'), (snapshot) => {
-            setSettings(snapshot.val());
-        })
-    }, [])
+    const {settings, setSettings} = useContext(appContext);
 
     return (
         <div className="page-container">
@@ -75,6 +51,17 @@ function Settings() {
             </div>
         </div>
     )
+
+    function updateSettings() {
+        let confName = document.getElementById("conference-name").value == ""? "MUNSuite":document.getElementById("conference-name").value;
+        let commName = document.getElementById("committee-name").value == ""? "Commitee":document.getElementById("committee-name").value;
+
+        let settingsObj = {};
+        settingsObj.conference = confName;
+        settingsObj.committee = commName;
+
+        setSettings(settingsObj);
+    }
 }
 
 export default Settings;

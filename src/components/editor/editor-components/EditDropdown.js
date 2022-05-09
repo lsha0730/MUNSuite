@@ -1,17 +1,22 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
-import { delegationsContext } from "../../../Context";
+import { appContext } from "../../../Context";
 import "./EditorComponents.scoped.css";
 
 function EditDropdown(props) {
-    let delegations = JSON.parse(localStorage.getItem("delegations")).map(del => del.name);
+    const {delegations} = useContext(appContext);
+    const [delNames, setDelNames] = useState(delegations.map(del => del.name));
     const [require, setRequire] = useState(props.required);
     const [toggleRender, setToggleRender] = useState();
-    const [useDels, setUseDels] = useState(JSON.stringify(props.options) == JSON.stringify(delegations));
+    const [useDels, setUseDels] = useState(JSON.stringify(props.options) == JSON.stringify(delNames));
     const [options, setOptions] = useState(props.options);
     const [optionsRender, setOptionsRender] = useState([]);
     const [heading, setHeading] = useState(props.heading);
     const [subheading, setSubheading] = useState(props.subheading);
     const isMounted = useRef(false);
+
+    useEffect(() => {
+        setDelNames(delegations.map(del => del.name));
+    }, [delegations])
 
     useEffect(() => {
         if (props.heading) {
@@ -55,7 +60,7 @@ function EditDropdown(props) {
     }
 
     function toggleUseAll() {
-        if (!useDels) setOptions(delegations);
+        if (!useDels) setOptions(delNames);
         setUseDels(!useDels);
         document.getElementById("dropdown" + props.id).value = "";
     }

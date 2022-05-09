@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Statistics.scoped.css";
-import MockProcessed from "../history/MockProcessed.js";
 import { BsPersonFill, BsFillEnvelopeOpenFill } from "react-icons/bs";
 import { AiFillPieChart } from "react-icons/ai";
-
+import { appContext } from "../../Context";
 
 function Statistics() {
-    const [processedData, setProcessedData] = useState(JSON.parse(localStorage.getItem("processed")) || MockProcessed);
+    const {processed} = useContext(appContext);
     const [statsData, setStatsData] = useState([]);
     const [topSubCount, setTopSubCount] = useState();
     const [passedCount, setPassedCount] = useState();
@@ -15,7 +14,7 @@ function Statistics() {
 
     useEffect (() => {
         setStats();
-    }, [processedData])
+    }, [processed])
 
     useEffect(() => {
         reRenderStatBars();
@@ -107,8 +106,9 @@ function Statistics() {
         let tempPassedCounter = 0;
         let tempDelStats = [];
 
-        for (let i=0; i<processedData.length; i++) {
-            let submission = processedData[i];
+        for (let i=0; i<processed.length; i++) {
+            let submission = processed[i];
+            console.log(i)
 
             // Credit the directive authors
             let authors = [];

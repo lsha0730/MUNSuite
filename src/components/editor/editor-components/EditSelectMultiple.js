@@ -1,17 +1,23 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
+import { appContext } from "../../../Context";
 import "./EditorComponents.scoped.css";
 
 function EditSelectMultiple(props) {
-    let delegations = JSON.parse(localStorage.getItem("delegations")).map(del => del.name);
+    const {delegations} = useContext(appContext);
+    const [delNames, setDelNames] = useState(delegations.map(del => del.name));
     const [require, setRequire] = useState(props.required);
     const [toggleRender, setToggleRender] = useState();
-    const [useDels, setUseDels] = useState(JSON.stringify(props.options) == JSON.stringify(delegations));
+    const [useDels, setUseDels] = useState(JSON.stringify(props.options) == JSON.stringify(delNames));
     const [options, setOptions] = useState(props.options);
     const [optionsRender, setOptionsRender] = useState([]);
     const [heading, setHeading] = useState(props.heading);
     const [subheading, setSubheading] = useState(props.subheading);
     const [maxcount, setMaxcount] = useState(props.max);
     const isMounted = useRef(false);
+
+    useEffect(() => {
+        setDelNames(delegations.map(del => del.name));
+    }, [delegations])
 
     useEffect(() => {
         if (props.heading) {
@@ -76,7 +82,7 @@ function EditSelectMultiple(props) {
     }
 
     function toggleUseAll() {
-        if (!useDels) setOptions(delegations);
+        if (!useDels) setOptions(delNames);
         setUseDels(!useDels);
         document.getElementById("multipleSelect" + props.id).value = "";
     }

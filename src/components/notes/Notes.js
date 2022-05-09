@@ -1,14 +1,13 @@
-import React, { useEffect, useState, useMemo } from "react";
-import { getDatabase, onValue, ref, set } from "firebase/database";
+import React, { useEffect, useState, useContext } from "react";
 import "./Notes.scoped.css";
 import { BsPersonFill } from "react-icons/bs";
 import { IoClipboard } from "react-icons/io5";
 import { GoSearch } from "react-icons/go";
-import MockNotes from "./MockNotes.js";
+import { appContext } from "../../Context";
 
 function Notes() {
-    const db = getDatabase();
-    const notes = JSON.parse(localStorage.getItem("notes")) || MockNotes;
+    const {delegations} = useContext(appContext);
+    const {notes, setNotes} = useContext(appContext);
     const [notesIndv, setNotesIndv] = useState(notes.individual);
     const [notesIndvRenders, setNotesIndvRenders] = useState();
     const [notesQuick, setNotesQuick] = useState(notes.quick);
@@ -22,7 +21,7 @@ function Notes() {
 
     // Keeps notes in sync with delegations list
     useEffect(() => {
-        let newDelList = JSON.parse(localStorage.getItem("delegations")).map(item => item.name);
+        let newDelList = delegations.slice().map(item => item.name);
         let oldDelList = notesIndv.slice().map(item => item.delegate);
 
         // Determining what delegates were added/removed
@@ -61,40 +60,7 @@ function Notes() {
         newOptionsList.sort();
         setOptions(newOptionsList);
 
-    }, [localStorage.getItem("delegations")])
-
-    function updateNotes(index, newText) {
-        let tempArr = notesIndv.slice();
-        tempArr[index].text = newText;
-        setNotesIndv(tempArr);
-    }
-
-    const selectOption = (option) => {
-        let currentSelected = selected;
-        let currentOptions = options;
-        
-        currentOptions.splice(currentOptions.indexOf(option), 1);
-        currentSelected.push(option);
-        
-        setSelected(currentSelected);
-        setOptions(currentOptions)
-
-        setIsShowingOptions(false)
-        setTrigger(!trigger);
-    }
-
-    const deselectOption = (option) => {
-        let currentSelected = selected;
-        let currentOptions = options;
-
-        currentSelected.splice(currentSelected.indexOf(option), 1);
-        currentOptions.push(option);
-
-        setSelected(currentSelected);
-        setOptions(currentOptions);
-
-        setTrigger(!trigger);
-    }
+    }, [delegations])
 
     // for rendering options
     useEffect(() => {
@@ -128,8 +94,7 @@ function Notes() {
             );
         }
 
-        setRenderSelected(returnRenderSelected)
-
+        setRenderSelected(returnRenderSelected);
     }, [search, isShowingOptions, selected, trigger])
 
     useEffect(() => {
@@ -149,26 +114,10 @@ function Notes() {
     }, [selected.length, notesIndv])
 
     useEffect(() => {
-        onValue(ref(db, 'test/notes'), (snapshot) => {
-            if (snapshot.val().individual == null) {
-                setNotesIndv([]);
-            } else {
-                setNotesIndv(snapshot.val().individual);
-            }
-
-            setNotesQuick(snapshot.val().quick);
-        })
-    }, [])
-
-    useEffect(() => {
-        let notesObj = {
+        setNotes({
             individual: notesIndv,
             quick: notesQuick
-        }
-
-        set(ref(db, 'test/notes'), notesObj);
-        localStorage.setItem("notes", JSON.stringify(notesObj));
-        dispatchEvent(new Event("notes updated"));
+        });
     }, [notesIndv, notesQuick])
 
     return (
@@ -211,6 +160,39 @@ function Notes() {
             </div>
         </div>
     )
+
+    function updateNotes(index, newText) {
+        let tempArr = notesIndv.slice();
+        tempArr[index].text = newText;
+        setNotesIndv(tempArr);
+    }
+
+    function selectOption (option) {
+        let currentSelected = selected;
+        let currentOptions = options;
+        
+        currentOptions.splice(currentOptions.indexOf(option), 1);
+        currentSelected.push(option);
+        
+        setSelected(currentSelected);
+        setOptions(currentOptions)
+
+        setIsShowingOptions(false)
+        setTrigger(!trigger);
+    }
+
+    function deselectOption (option) {
+        let currentSelected = selected;
+        let currentOptions = options;
+
+        currentSelected.splice(currentSelected.indexOf(option), 1);
+        currentOptions.push(option);
+
+        setSelected(currentSelected);
+        setOptions(currentOptions);
+
+        setTrigger(!trigger);
+    }
 }
 
 

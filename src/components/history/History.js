@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { getDatabase, onValue, ref, set } from "firebase/database";
+import React, { useEffect, useState, useContext } from "react";
 import "./History.scoped.css";
-import MockProcessed from "./MockProcessed.js";
 import StandardCard from "../inbox/card/StandardCard.js";
 import CustomCard from "../inbox/card/CustomCard.js";
 import { GoTriangleDown, GoSearch } from "react-icons/go";
 import { FaFilter } from "react-icons/fa";
+import { appContext } from "../../Context";
 
 function History() {
-    const db = getDatabase();
-    const [cardArr, setCardArr] = useState(JSON.parse(localStorage.getItem("processed")) || MockProcessed);
-    const [cardTitles, setCardTitles] = useState(cardArr.map(card => {return card.title}));
+    const {processed} = useContext(appContext);
     const [cardArrRender, setCardArrRender] = useState([]);
     const [selection, setSelection] = useState(0);
     const [selectionRender, setSelectionRender] = useState();
@@ -18,29 +15,7 @@ function History() {
     const [dropdownValue, setDropdownValue] = useState("No Filter");
 
     useEffect(() => {
-        onValue(ref(db, 'test/processed'), (snapshot) => {
-            if (snapshot.val() == null) {
-                setCardArr([]);
-            } else {
-                let tempArr = snapshot.val();
-                for (let i=0; i<tempArr.length; i++) {
-                    if (tempArr[i] == null) tempArr.splice(i, 1);
-                }
-                setCardArr(tempArr);
-            }
-        })
-    }, [])
-
-    useEffect(() => {
-        set(ref(db, 'test/processed'), cardArr);
-        localStorage.setItem("processed", JSON.stringify(cardArr));
-        dispatchEvent(new Event("processed updated"));
-    }, [cardArr])
-
-    useEffect(() => {
-        let reverseArr = cardArr.slice().reverse();
-
-        setCardTitles(reverseArr.map(card => {return card.title}))
+        let reverseArr = processed.slice().reverse();
         let renderArr = [];
 
         for (let i=0; i<reverseArr.length; i++) {
@@ -68,19 +43,23 @@ function History() {
         }
 
         setCardArrRender(renderArr)
-    }, [search, cardArr, selection, dropdownValue])
-
+    }, [search, processed, selection, dropdownValue])
 
     useEffect(() => {
-        let directive = cardArr.slice().reverse()[selection];
-        if (directive.standard) {
-            setSelectionRender (
-                <StandardCard key={directive.submissionID} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors} signatories={directive.signatories} body={directive.body} hide={true}/>
-            )
+        let directive = processed.slice().reverse()[selection];
+
+        if (directive == null) {
+            setSelectionRender(<div className="no-selection-card">No Selection</div>);
         } else {
-            setSelectionRender (
-                <CustomCard key={directive.submissionID} id={directive.submissionID} author={directive.author} body={directive.body} hide={true}/>
-            )
+            if (directive.standard) {
+                setSelectionRender (
+                    <StandardCard key={directive.submissionID} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors} signatories={directive.signatories} body={directive.body} hide={true}/>
+                )
+            } else {
+                setSelectionRender (
+                    <CustomCard key={directive.submissionID} id={directive.submissionID} author={directive.author} body={directive.body} hide={true}/>
+                )
+            }
         }
     }, [selection])
 
@@ -103,12 +82,13 @@ function History() {
                     </div>
                 </div>
                 <div className="cardbar-deck-container">
-                    {cardArrRender}
+                    {cardArrRender.length != 0? cardArrRender:<div className="no-cards-box">No processed cards</div>}
                 </div>
             </div>
         </div>
     )
 }
+
 
 
 function Dropdown(props) {

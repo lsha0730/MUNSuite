@@ -1,25 +1,82 @@
-import React, { useEffect, useState } from "react";
-import { getDatabase, onValue, ref, set } from "firebase/database";
+import React, { useEffect, useState, useContext } from "react";
 import "./Delegations.scoped.css";
 import { AddUNCountries, AddCustomCountry, AddViaSpreadsheet } from "./modal-ui/modal-ui.js";
 import * as BsIcons from "react-icons/bs";
-import { delegationsContext } from "../../Context";
+import { appContext } from "../../Context.js";
 
 function Delegations() {
-    const db = getDatabase();
+    const {delegations, setDelegations} = useContext(appContext);
     const [selections, setSelections] = useState([]);
     const [modal, setModal] = useState(false);
     const [delegateBars, setDelegateBars] = useState([]);
-    const [delegations, setDelegations] = useState(JSON.parse(localStorage.getItem("delegations"))||[]);
+
+    useEffect(() => {
+        rerenderDels();
+    }, [delegations, selections]);
+
+    return (
+        <div className="delegations-container">
+            <div className={!(modal===false)? "modal-background" : "disappear"}>
+                {modalUI()}
+            </div>
+
+            <div className="UI-left">
+                <div className="UI-topleft">
+                    <div className="delcount-container">
+                        <div className="delcount-subcont">
+                            <p className="delcount-num">{delegations.length}</p>
+                            <p className="delcount-desc">Active</p>
+                            <p className="delcount-desc">Delegations</p>
+                        </div>
+                    </div>
+
+                    <div className="btt-add-country" onClick={() => {setModal("add-un-countries")}}>
+                        <p>Add UN Countries</p>
+                    </div>
+
+                    <div className="btt-add-country" onClick={() => {setModal("add-custom-country")}}>
+                        <p>Add Custom Country</p>
+                    </div>
+
+                    <div className="btt-add-country" onClick={() => {setModal("add-via-spreadsheet")}}>
+                        <p>Spreadsheet Import</p>
+                    </div>
+
+                    <div className={!(delegations.length<1) ? "btt-select-all" : "btt-select-all hide"} onClick={selectAll}>
+                        <p>Select All</p>
+                    </div>
+
+                    <div className={!(selections.length<1) ? "btt-select-all" : "btt-select-all hide"}
+                    onClick={deselectAll}>
+                        <p>Deselect All</p>
+                    </div>
+
+                    <div className={!(selections.length<1) ? "btt-remove-selected" : "btt-remove-selected hide"}
+                    onClick={removeSelected}>
+                        <p>Remove Selected</p>
+                    </div>
+                </div>
+
+                <div className="export-delegations" onClick={exportCodes}>
+                    <BsIcons.BsDownload size={22}/>
+                    <p className="export-codes">Export Codes (.csv)</p>
+                </div>
+            </div>
+
+            <div className="UI-right">
+                {delegateBars}
+            </div>
+        </div>
+    )
 
     function modalUI() {
         switch (modal) {
             case "add-un-countries":
-                return <AddUNCountries/>;
+                return <AddUNCountries setModal={setModal}/>;
             case "add-custom-country":
-                return <AddCustomCountry/>;
+                return <AddCustomCountry setModal={setModal}/>;
             case "add-via-spreadsheet":
-                return <AddViaSpreadsheet/>
+                return <AddViaSpreadsheet setModal={setModal}/>
             default:
                 break;
         }
@@ -65,31 +122,8 @@ function Delegations() {
         }
     }
 
-    useEffect(() => {
-        rerenderDels();
-    }, [delegations, selections]);
-
-    useEffect(() => {
-        onValue(ref(db, 'test/delegations'), (snapshot) => {
-            if (snapshot.val() == null) {
-                setDelegations([]);
-            } else {
-                let tempArr = snapshot.val();
-                for (let i=0; i<tempArr.length; i++) {
-                    if (tempArr[i] == null) tempArr.splice(i, 1);
-                }
-                setDelegations(tempArr);
-            }
-        })
-    }, [])
-
-    useEffect(() => {
-        set(ref(db, 'test/delegations'), delegations);
-        localStorage.setItem("delegations", JSON.stringify(delegations));
-        window.dispatchEvent(new Event("delegations updated"));
-    }, [delegations])
-
     function deselectAll() { setSelections([]); }
+    
     function selectAll() {
         let allDels = [];
         delegations.map(delegate => allDels.push(delegate.name));
@@ -130,63 +164,6 @@ function Delegations() {
         document.body.appendChild(link);
         link.click();
     }
-
-    return (
-        <delegationsContext.Provider value={{delegations, setDelegations, modal, setModal}}>
-            <div className="delegations-container">
-                <div className={!(modal===false)? "modal-background" : "disappear"}>
-                    {modalUI()}
-                </div>
-
-                <div className="UI-left">
-                    <div className="UI-topleft">
-                        <div className="delcount-container">
-                            <div className="delcount-subcont">
-                                <p className="delcount-num">{delegations.length}</p>
-                                <p className="delcount-desc">Active</p>
-                                <p className="delcount-desc">Delegations</p>
-                            </div>
-                        </div>
-
-                        <div className="btt-add-country" onClick={() => {setModal("add-un-countries")}}>
-                            <p>Add UN Countries</p>
-                        </div>
-
-                        <div className="btt-add-country" onClick={() => {setModal("add-custom-country")}}>
-                            <p>Add Custom Country</p>
-                        </div>
-
-                        <div className="btt-add-country" onClick={() => {setModal("add-via-spreadsheet")}}>
-                            <p>Spreadsheet Import</p>
-                        </div>
-
-                        <div className={!(delegations.length<1) ? "btt-select-all" : "btt-select-all hide"} onClick={selectAll}>
-                            <p>Select All</p>
-                        </div>
-
-                        <div className={!(selections.length<1) ? "btt-select-all" : "btt-select-all hide"}
-                        onClick={deselectAll}>
-                            <p>Deselect All</p>
-                        </div>
-
-                        <div className={!(selections.length<1) ? "btt-remove-selected" : "btt-remove-selected hide"}
-                        onClick={removeSelected}>
-                            <p>Remove Selected</p>
-                        </div>
-                    </div>
-
-                    <div className="export-delegations" onClick={exportCodes}>
-                        <BsIcons.BsDownload size={22}/>
-                        <p className="export-codes">Export Codes (.csv)</p>
-                    </div>
-                </div>
-
-                <div className="UI-right">
-                    {delegateBars}
-                </div>
-            </div>
-        </delegationsContext.Provider>
-    )
 }
 
 

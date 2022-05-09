@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./modal-ui.scoped.css";
 import UNCountriesData from "./UNCountriesData.js";
-import { delegationsContext } from "../../../Context.js";
+import { appContext } from "../../../Context.js";
 
 function makeUniqueCode(size, existingDels) {
     function makeCode(length) {
@@ -22,9 +22,8 @@ function makeUniqueCode(size, existingDels) {
     return code;
 }
 
-function AddUNCountries() {
-    const {setModal} = useContext(delegationsContext);
-    const {delegations, setDelegations} = useContext(delegationsContext);
+function AddUNCountries(props) {
+    const {delegations, setDelegations} = useContext(appContext);
     const [modalSelections, setModalSelections] = useState([]);
     const [delNames] = useState(delegations.map((delegateObj) => {return delegateObj.name}));
     const [countriesNotInList] = useState(UNCountriesData.filter((country) => {
@@ -54,7 +53,7 @@ function AddUNCountries() {
     }, [modalSelections])
 
     function addCountries() {
-        setModal(false);
+        props.setModal(false);
         let totalDels = delegations;
         setDelegations(
             totalDels.concat(modalSelections.map((selection) => {
@@ -84,7 +83,7 @@ function AddUNCountries() {
                 <div className="btt-add-countries" onClick={addCountries}>
                     <p>Add Countries</p>
                 </div>
-                <div className="btt-cancel" onClick={() => {setModal(false)}}>
+                <div className="btt-cancel" onClick={() => {props.setModal(false)}}>
                     <p>Cancel</p>
                 </div>
             </div>
@@ -94,12 +93,11 @@ function AddUNCountries() {
 
 
 
-function AddCustomCountry() {
-    const {setModal} = useContext(delegationsContext);
-    const {delegations, setDelegations} = useContext(delegationsContext);
+function AddCustomCountry(props) {
+    const {delegations, setDelegations} = useContext(appContext);
 
     function addCustom() {
-        setModal(false);
+        props.setModal(false);
 
         let newObject = {};
         newObject.id = delegations.length;
@@ -127,7 +125,7 @@ function AddCustomCountry() {
                 <div className="btt-custom-add-countries" onClick={addCustom}>
                     <p>Add Country</p>
                 </div>
-                <div className="btt-cancel" onClick={() => {setModal(false)}}>
+                <div className="btt-cancel" onClick={() => {props.setModal(false)}}>
                     <p>Cancel</p>
                 </div>
             </div>
@@ -136,12 +134,11 @@ function AddCustomCountry() {
 }
 
 
-function AddViaSpreadsheet() {
-    const {setModal} = useContext(delegationsContext);
-    const {delegations, setDelegations} = useContext(delegationsContext);
+function AddViaSpreadsheet(props) {
+    const {delegations, setDelegations} = useContext(appContext);
 
     function importSpreadsheet() {
-        setModal(false);
+        props.setModal(false);
         let fullString = document.getElementById("pastebin").value;
         let countryArr = fullString.split('\n');
         let objectArr = [];
@@ -173,7 +170,7 @@ function AddViaSpreadsheet() {
                 <div className="btt-import" onClick={importSpreadsheet}>
                     <p>Import</p>
                 </div>
-                <div className="btt-cancel" onClick={() => {setModal(false)}}>
+                <div className="btt-cancel" onClick={() => {props.setModal(false)}}>
                     <p>Cancel</p>
                 </div>
             </div>
