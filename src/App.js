@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { getDatabase, onValue, ref, set } from "firebase/database";
+import { getStorage } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { isEmpty } from "@firebase/util";
@@ -48,6 +49,7 @@ function App() {
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
   const database = getDatabase(app);
+  const storage = getStorage();
 
   // Firebase: Reading
   useEffect(() => {
@@ -64,7 +66,6 @@ function App() {
     })
 
     onValue(ref(database, 'test/form'), (snapshot) => {
-      console.log(snapshot.val())
       if (!snapshot.val()) {
         setForm([]);
       } else {
@@ -133,12 +134,6 @@ function App() {
     })
   }, [])
 
-  useEffect(() => {
-    console.log("Notes:")
-    console.log(notes)
-  }, [notes])
-
-
   // Firebase: Writing
   useEffect(() => {
     if (delegationsMounted.current) {
@@ -151,7 +146,6 @@ function App() {
   useEffect(() => {
     if (formMounted.current) {
       set(ref(database, 'test/form'), form);
-      console.log("Wrote to form")
     } else {
       formMounted.current = true;
     }

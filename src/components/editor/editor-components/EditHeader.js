@@ -1,10 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import "./EditorComponents.scoped.css";
 
 function EditHeader(props) {
+    const [imageData, setImageData] = useState({});
+    const [imageLink, setImageLink] = useState(props.image);
     const [heading, setHeading] = useState(props.heading);
     const [subheading, setSubheading] = useState(props.subheading);
     const isMounted = useRef(false);
+    const storage = getStorage();
 
     useEffect(() => {
         if (props.heading) {
@@ -21,30 +25,32 @@ function EditHeader(props) {
             let newObj = {}
             newObj.id = props.id;
             newObj.type = "header";
-            newObj.image = props.image;
+            newObj.image = imageLink;
             newObj.heading = heading==""? false:heading;
             newObj.subheading = subheading==""? false:subheading;
-
+    
             props.updateForm("update", props.id, newObj);
         } else {
             isMounted.current = true;
         }
-    }, [heading, subheading])
+    }, [heading, subheading, imageLink])
 
     return (
         <div className={props.editing==props.id? "block-container":"hidden"}>
             <p className="heading">Header</p>
 
             <p className="subheading">Image</p>
+
             <div className="header-imgbar-n-btt">
                 <div className="header-imgsrc-container">
                     <div className="overflow-wrapper">
-                        <p>{props.image}</p>
+                        <p>{imageData.name || "Database Name"}</p>
                     </div>
                 </div>
-                <div className="header-btt-upload">
-                    <p>Upload</p>
-                </div>
+                <label className="header-btt-upload">
+                    <input type="file" accept="image/png, image/jpeg, image/gif" style={{display: "none"}} onChange={e => {handleFileUpload(e)}}></input>
+                    Upload
+                </label>
             </div>
 
             <p className="subheading">Heading</p>
@@ -55,6 +61,18 @@ function EditHeader(props) {
 
         </div>
     )
+
+    async function handleFileUpload(e) {
+        if (e.target.files[0]) {
+            let file = e.target.files[0];
+            setImageData(file);
+
+            uploadBytes(ref(storage, "test/banners"), file);
+            getDownloadURL(ref(storage, "test/banners")).then((url) => {
+                setImageLink(url);
+            })
+        }
+    }
 }
 
 export default EditHeader;
