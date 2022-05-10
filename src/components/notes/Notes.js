@@ -8,10 +8,8 @@ import { appContext } from "../../Context";
 function Notes() {
     const {delegations} = useContext(appContext);
     const {notes, setNotes} = useContext(appContext);
-    const [notesIndv, setNotesIndv] = useState(notes.individual);
-    const [notesIndvRenders, setNotesIndvRenders] = useState();
-    const [notesQuick, setNotesQuick] = useState(notes.quick);
-    const [options, setOptions] = useState(notesIndv.map(item => item.delegate));
+    const [notesIndvRenders, setNotesIndvRenders] = useState([]);
+    const [options, setOptions] = useState(notes.individual.map(item => item.delegate));
     const [search, setSearch] = useState('');
     const [renderOptions, setRenderOptions] = useState([]);
     const [isShowingOptions, setIsShowingOptions] = useState(false);
@@ -22,7 +20,7 @@ function Notes() {
     // Keeps notes in sync with delegations list
     useEffect(() => {
         let newDelList = delegations.slice().map(item => item.name);
-        let oldDelList = notesIndv.slice().map(item => item.delegate);
+        let oldDelList = notes.individual.slice().map(item => item.delegate);
 
         // Determining what delegates were added/removed
         let toDelete = [];
@@ -37,7 +35,7 @@ function Notes() {
         }
 
         // Updating the notes list
-        let newNotesList = notesIndv;
+        let newNotesList = notes.individual;
         for (let i=0; i<newNotesList.length; i++) {
             if (toDelete.includes(newNotesList[i].delegate)) newNotesList.splice(i, 1);
         }
@@ -49,7 +47,10 @@ function Notes() {
         }
         newNotesList.sort((a, b) => a.delegate.toLowerCase().localeCompare(b.delegate.toLowerCase()));
         for (let k=0; k<newNotesList.length; k++) newNotesList[k].id = k;
-        setNotesIndv(newNotesList);
+        setNotes({
+            individual: newNotesList,
+            quick: notes.quick
+        });
 
         // Updating the options list
         let newOptionsList = options.slice();
@@ -99,8 +100,8 @@ function Notes() {
 
     useEffect(() => {
         let tempArr = [];
-        for (let i=0; i<notesIndv.length; i++) {
-            let note = notesIndv[i];
+        for (let i=0; i<notes.individual.length; i++) {
+            let note = notes.individual[i];
             if (selected.length == 0 || selected.includes(note.delegate)) {
                 tempArr.push(
                     <div className="noteblock-container">
@@ -111,14 +112,7 @@ function Notes() {
             }
         }
         setNotesIndvRenders(tempArr);
-    }, [selected.length, notesIndv])
-
-    useEffect(() => {
-        setNotes({
-            individual: notesIndv,
-            quick: notesQuick
-        });
-    }, [notesIndv, notesQuick])
+    }, [selected.length, notes.individual])
 
     return (
         <div className="page-container">
@@ -146,7 +140,7 @@ function Notes() {
                 </div>
 
                 <div className="notes-container">
-                    {notesIndvRenders}
+                    {notesIndvRenders.length != 0? notesIndvRenders:<div className="no-notes-box">No delegates in committee</div>}
                 </div>
             </div>
 
@@ -156,15 +150,18 @@ function Notes() {
                     <p className="header-text">Quick Notes</p>
                 </div>
 
-                <textarea type="text" placeholder="Input here..." defaultValue={notesQuick} onChange={e => setNotesQuick(e.target.value)} className="UI-right-input"></textarea>
+                <textarea id="quicknotes-input" type="text" placeholder="Input here..." defaultValue={notes.quick} onChange={e => setNotes({individual: notes.individual, quick: (e.target.value)})} className="UI-right-input"></textarea>
             </div>
         </div>
     )
 
     function updateNotes(index, newText) {
-        let tempArr = notesIndv.slice();
+        let tempArr = notes.individual.slice();
         tempArr[index].text = newText;
-        setNotesIndv(tempArr);
+        setNotes({
+            individual: tempArr,
+            quick: notes.quick
+        });
     }
 
     function selectOption (option) {

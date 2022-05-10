@@ -1,6 +1,6 @@
 /*----------PAGE UI----------*/
 .editor-container {
-    max-width: fit-content;
+    width: fit-content;
     height: 100%;
 
     display: flex;
@@ -10,13 +10,9 @@
 .main-UI {
     width: 1170px;
     height: 100%;
-    overflow-y: auto;
 
     display: flex;
     flex-direction: column;
-}
-.main-UI::-webkit-scrollbar {
-    display: none;
 }
 
 .fade {

@@ -35,7 +35,7 @@ function History() {
                     renderArr.push(
                         <div className={selection==i? "cardbar-container selected":"cardbar-container"} onClick={() => setSelection(i)}>
                             <div className="cardbar-indicator" style={card.status=="Passed"? {backgroundColor: "#7AFF69"}:{backgroundColor: "#FF8080"}}></div>
-                            <p>Submission {card.submissionID}</p>{/*Better alternative? !!!*/}
+                            <p>{card.author}, ID: {card.submissionID}</p>{/*Better alternative? !!!*/}
                         </div>
                     )
                 }

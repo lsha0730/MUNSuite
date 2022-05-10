@@ -24,9 +24,15 @@ function App() {
   const [form, setForm] = useState([]);
   const [pendings, setPendings] = useState([]);
   const [processed, setProcessed] = useState([]);
-  const [notes, setNotes] = useState({});
+  const [notes, setNotes] = useState({ individual: [], quick: "" });
   const [settings, setSettings] = useState({});
-  const isMounted = useRef(false);
+
+  const delegationsMounted = useRef(false);
+  const formMounted = useRef(false);
+  const pendingsMounted = useRef(false);
+  const processedMounted = useRef(false);
+  const notesMounted = useRef(false);
+  const settingsMounted = useRef(false);
 
   // Configuring Firebase
   const firebaseConfig = {
@@ -54,11 +60,11 @@ function App() {
           if (!tempArr[i]) tempArr.splice(i, 1);
         }
         setDelegations(tempArr);
-        console.log(tempArr)
       }
     })
 
     onValue(ref(database, 'test/form'), (snapshot) => {
+      console.log(snapshot.val())
       if (!snapshot.val()) {
         setForm([]);
       } else {
@@ -127,52 +133,59 @@ function App() {
     })
   }, [])
 
+  useEffect(() => {
+    console.log("Notes:")
+    console.log(notes)
+  }, [notes])
+
+
   // Firebase: Writing
   useEffect(() => {
-    if (isMounted.current) {
+    if (delegationsMounted.current) {
       set(ref(database, 'test/delegations'), delegations);
     } else {
-      isMounted.current = true;
+      delegationsMounted.current = true;
     }
   }, [delegations])
 
   useEffect(() => {
-    if (isMounted.current) {
+    if (formMounted.current) {
       set(ref(database, 'test/form'), form);
+      console.log("Wrote to form")
     } else {
-      isMounted.current = true;
+      formMounted.current = true;
     }
   }, [form])
 
   useEffect(() => {
-    if (isMounted.current) {
+    if (pendingsMounted.current) {
       set(ref(database, 'test/pendings'), pendings);
     } else {
-      isMounted.current = true;
+      pendingsMounted.current = true;
     }
   }, [pendings])
 
   useEffect(() => {
-    if (isMounted.current) {
+    if (processedMounted.current) {
       set(ref(database, 'test/processed'), processed);
     } else {
-      isMounted.current = true;
+      processedMounted.current = true;
     }
   }, [processed])
 
   useEffect(() => {
-    if (isMounted.current) {
+    if (notesMounted.current) {
       set(ref(database, 'test/notes'), notes);
     } else {
-      isMounted.current = true;
+      notesMounted.current = true;
     }
   }, [notes])
 
   useEffect(() => {
-    if (isMounted.current) {
+    if (settingsMounted.current) {
       set(ref(database, 'test/settings'), settings);
     } else {
-      isMounted.current = true;
+      settingsMounted.current = true;
     }
   }, [settings])
 

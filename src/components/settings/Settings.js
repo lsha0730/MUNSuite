@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import "./Settings.scoped.css";
 import { BsGearFill } from "react-icons/bs";
 import { FaGitAlt } from "react-icons/fa";
@@ -6,6 +6,7 @@ import { appContext } from "../../Context";
 
 function Settings() {
     const {settings, setSettings} = useContext(appContext);
+    const isMounted = useRef(false);
 
     return (
         <div className="page-container">
@@ -40,7 +41,7 @@ function Settings() {
 
                 <div className="release-notes-container">
                     <p className="version-note-heading">v 1.0.0</p>
-                    <p className="version-note-subheading">Beta release of the app. Please email any feedback to Lsha0730@gmail.com.</p>
+                    <p className="version-note-subheading">Closed beta release of the app. Please email any feedback to Lsha0730@gmail.com.</p>
                 </div>
 
                 <div className="metadata">
@@ -53,14 +54,18 @@ function Settings() {
     )
 
     function updateSettings() {
-        let confName = document.getElementById("conference-name").value == ""? "MUNSuite":document.getElementById("conference-name").value;
-        let commName = document.getElementById("committee-name").value == ""? "Commitee":document.getElementById("committee-name").value;
+        if (isMounted.current) {
+            let confName = document.getElementById("conference-name").value == ""? "MUNSuite":document.getElementById("conference-name").value;
+            let commName = document.getElementById("committee-name").value == ""? "Commitee":document.getElementById("committee-name").value;
 
-        let settingsObj = {};
-        settingsObj.conference = confName;
-        settingsObj.committee = commName;
+            let settingsObj = {};
+            settingsObj.conference = confName;
+            settingsObj.committee = commName;
 
-        setSettings(settingsObj);
+            setSettings(settingsObj);
+        } else {
+            isMounted.current = true;
+        }
     }
 }
 

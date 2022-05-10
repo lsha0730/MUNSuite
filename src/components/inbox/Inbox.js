@@ -42,7 +42,7 @@ function Inbox() {
             </div>
             <div className="UI-bottom">
                 <div className="spacer"></div>
-                {cardArrRender}
+                {cardArrRender.length != 0? cardArrRender:<div className="no-cards-box">No pending submissions</div>}
                 <div className="spacer2"></div>
             </div>
         </div>
