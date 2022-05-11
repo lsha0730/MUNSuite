@@ -161,7 +161,6 @@
 }
 
 .block-heading {
-    color: #A9A9A9;
     font-size: 14px;
     font-weight: 500;
 
@@ -169,6 +168,7 @@
 }
 
 .block-text {
+    color: #222222;
     font-size: 14px;
     margin-bottom: 20px;
 }
