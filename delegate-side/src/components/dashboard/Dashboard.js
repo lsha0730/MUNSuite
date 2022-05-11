@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { appContext } from "../../Context";
 import './Dashboard.scoped.css';
 import defaultBanner from "./defaultBanner.png";
@@ -16,15 +16,22 @@ function Dashboard(props) {
     const {form} = useContext(appContext);
     const {settings} = useContext(appContext);
     const {user} = useContext(appContext);
-    const [formRender, setFormRender] = useState();
 
+    const prevForm = useRef();
+    const [formRender, setFormRender] = useState();
     const [submission, setSubmission] = useState(form.map(item => {return { type: item.type, heading: item.heading }}));
     const [canSubmit, setCanSubmit] = useState();
     const [showingWarning, setShowingWarning] = useState(false);
 
     useEffect(() => {
         rerenderForm();
+        prevForm.current = form;
     }, [form])
+
+    useEffect(() => {
+        console.log(form)
+        console.log(prevForm.current)
+    }, [prevForm.current])
 
     useEffect(() => {
         setCanSubmit(

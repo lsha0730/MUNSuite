@@ -14,6 +14,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState();
 
+  const [delegations, setDelegations] = useState([]);
   const [form, setForm] = useState([]);
   const [pendings, setPendings] = useState([]);
   const [settings, setSettings] = useState({});
@@ -38,6 +39,18 @@ function App() {
 
   // Firebase: Reading
   useEffect(() => {
+    onValue(ref(database, 'test/delegations'), (snapshot) => {
+      if (!snapshot.val()) {
+        setDelegations([]);
+      } else {
+        let tempArr = snapshot.val();
+        for (let i=0; i<tempArr.length; i++) {
+          if (!tempArr[i]) tempArr.splice(i, 1);
+        }
+        setDelegations(tempArr);
+      }
+    })
+
     onValue(ref(database, 'test/form'), (snapshot) => {
       if (!snapshot.val()) {
         setForm([]);
@@ -92,9 +105,12 @@ function App() {
   );
 
   function attemptLogin(input) {
-    if (input) {
-      setLoggedIn(true);
-      setUser(input); //!!!
+    for (let i=0; i<delegations.length; i++) {
+      if (delegations[i].code == input) {
+        setLoggedIn(true);
+        setUser(delegations[i].name);
+        break;
+      }
     }
   }
 
