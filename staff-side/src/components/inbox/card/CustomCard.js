@@ -13,7 +13,14 @@ function CustomCard(props) {
                     return (
                         <div>
                             <p className="block-heading">{block.heading}</p>
-                            <p className="block-text">{block.value.join(", ")}</p>
+                            <p className="block-text">{block.value? block.value.join(", "):"None"}</p>
+                        </div>
+                    )
+                case "multiplechoice":
+                    return (
+                        <div>
+                            <p className="block-heading">{block.heading}</p>
+                            <p className="block-text">{block.value? block.value.join(", "):"None"}</p>
                         </div>
                     )
                 default:

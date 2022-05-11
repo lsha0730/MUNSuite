@@ -3,7 +3,6 @@ import { getDatabase, onValue, ref, set } from "firebase/database";
 import { getStorage } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { isEmpty } from "@firebase/util";
 import './App.css';
 
 import Sidebar from './components/sidebar/Sidebar.js';

@@ -110,11 +110,11 @@ function Editor() {
         if (!standardized && !checkStandardized(form)) {
             let frontArr = [];
 
-            frontArr.push(makeNewBlock("header", 0, "New Header"));
-            frontArr.push(makeNewBlock("shorttext", 1, "Directive Title"));
-            frontArr.push(makeNewBlock("radio", 2, "Directive Type"));
-            frontArr.push(makeNewBlock("select-multiple", 3, "Sponsors"));
-            frontArr.push(makeNewBlock("select-multiple", 4, "Signatories"));
+            frontArr.push(makeNewBlock("header", 0, true, "New Header"));
+            frontArr.push(makeNewBlock("shorttext", 1, true, "Directive Title"));
+            frontArr.push(makeNewBlock("radio", 2, true, "Directive Type"));
+            frontArr.push(makeNewBlock("select-multiple", 3, true, "Sponsors"));
+            frontArr.push(makeNewBlock("select-multiple", 4, false, "Signatories"));
 
             let tempArr = frontArr.concat(form);
             for (let i = 0; i<tempArr.length; i++) {
@@ -126,7 +126,7 @@ function Editor() {
         setStandardized(!standardized);
     }
 
-    function makeNewBlock(type, id, heading = null) {
+    function makeNewBlock(type, id, required, heading = null) {
         let newObj = {};
         newObj.id = id;
         newObj.type = type;
@@ -139,12 +139,12 @@ function Editor() {
                 break;
             case "radio":
                 newObj.heading = "New Radio";
-                newObj.required = false;
+                newObj.required = required;
                 newObj.options = ["Option 1", "Option 2", "Option 3"];
                 break;
             case "multiplechoice":
                 newObj.heading = "New Multiple Choice";
-                newObj.required = false;
+                newObj.required = required;
                 newObj.options = ["Option 1", "Option 2", "Option 3"];
                 break;
             case "content":
@@ -152,20 +152,20 @@ function Editor() {
                 break;
             case "shorttext":
                 newObj.heading = "New Short Text";
-                newObj.required = false;
+                newObj.required = required;
                 break;
             case "longtext":
                 newObj.heading = "New Long Text";
-                newObj.required = false;
+                newObj.required = required;
                 break;
             case "dropdown":
                 newObj.heading = "New Dropdown";
-                newObj.required = false;
+                newObj.required = required;
                 newObj.options = ["Option 1", "Option 2", "Option 3"];
                 break;
             case "select-multiple":
                 newObj.heading = "New Select Multiple";
-                newObj.required = false;
+                newObj.required = required;
                 newObj.options = ["Option 1", "Option 2", "Option 3"];
                 newObj.max = false;
                 break;
@@ -179,7 +179,7 @@ function Editor() {
 
     function addNewBlock(type) {
         let tempArr = form.slice();
-        let newObj = makeNewBlock(type, tempArr.length);
+        let newObj = makeNewBlock(type, tempArr.length, false);
 
         tempArr.push(newObj);
         for (let i = 0; i<tempArr.length; i++) {
@@ -245,15 +245,15 @@ function Editor() {
                 case "radio":
                     return (
                         <div className="preview-editor-pair">
-                            <Radio key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized && item.id == 2}/>
-                            <EditRadio key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} editing={editing} updateForm={updateForm} locked={standardized && item.id == 2}/>
+                            <Radio key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized && item.id == 2}/>
+                            <EditRadio key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} updateForm={updateForm} locked={standardized && item.id == 2}/>
                         </div>
                     )
                 case "multiplechoice":
                     return (
                         <div className="preview-editor-pair">
-                            <MultipleChoice key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized}/>
-                            <EditMultipleChoice key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} editing={editing} updateForm={updateForm} locked={standardized}/>
+                            <MultipleChoice key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized}/>
+                            <EditMultipleChoice key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} updateForm={updateForm} locked={standardized}/>
                         </div>
                     )
                 case "content":
@@ -280,15 +280,15 @@ function Editor() {
                 case "dropdown":
                     return (
                         <div className="preview-editor-pair">
-                            <Dropdown key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized}/>
-                            <EditDropdown key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options} editing={editing} updateForm={updateForm} locked={standardized}/>
+                            <Dropdown key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized}/>
+                            <EditDropdown key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} updateForm={updateForm} locked={standardized}/>
                         </div>
                     )
                 case "select-multiple":
                     return (
                         <div className="preview-editor-pair">
-                            <SelectMultiple key={item.options.length} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized && (item.id == 3 || item.id == 4)}/>
-                            <EditSelectMultiple key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options} editing={editing} updateForm={updateForm} locked={standardized && (item.id == 3 || item.id == 4)}/>
+                            <SelectMultiple key={item.options? item.options.length:0} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options || []} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized && (item.id == 3 || item.id == 4)}/>
+                            <EditSelectMultiple key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options || []} editing={editing} updateForm={updateForm} locked={standardized && (item.id == 3 || item.id == 4)}/>
                         </div>
                     )
                 default:
@@ -303,12 +303,16 @@ function Editor() {
             formArr[0].type == "header" &&
             formArr[1].type == "shorttext" &&
             formArr[1].heading == "Directive Title" &&
+            formArr[1].required &&
             formArr[2].type == "radio" &&
             formArr[2].heading == "Directive Type" &&
+            formArr[2].required &&
             formArr[3].type == "select-multiple" &&
             formArr[3].heading == "Sponsors" &&
+            formArr[3].required &&
             formArr[4].type == "select-multiple" &&
-            formArr[4].heading == "Signatories"
+            formArr[4].heading == "Signatories" &&
+            !formArr[4].required
         )
     }
 }

@@ -9,7 +9,7 @@ function SelectMultiple(props) {
     const [search, setSearch] = useState('');
     const [renderOptions, setRenderOptions] = useState([]);
     const [isShowingOptions, setIsShowingOptions] = useState(false);
-    const [selected, setSelected] = useState([]);
+    const [selected, setSelected] = useState([]); // Stores the string value of all selected items
     const [trigger, setTrigger] = useState(false);
     const [renderSelected, setRenderSelected] = useState([]);
     const [maxWarning, setMaxWarning] = useState(false);

@@ -13,7 +13,14 @@ function StandardCard(props) {
                     return (
                         <div>
                             <p className="block-heading">{block.heading}</p>
-                            <p className="block-text">{block.value.join(", ")}</p>
+                            <p className="block-text">{block.value? block.value.join(", "):"None"}</p>
+                        </div>
+                    )
+                case "multiplechoice":
+                    return (
+                        <div>
+                            <p className="block-heading">{block.heading}</p>
+                            <p className="block-text">{block.value? block.value.join(", "):"None"}</p>
                         </div>
                     )
                 default:
@@ -69,7 +76,7 @@ function StandardCard(props) {
                 {props.signatories?
                     <div className="tie-set">
                         <BsEyeglasses size={18} className="card-icon"/>
-                        <p className="signatories-list">{props.signatories.join(", ")}</p>
+                        <p className="signatories-list">{props.signatories.length > 0? props.signatories.join(", "):"None"}</p>
                     </div>
                     : <div></div>}
             </div>
