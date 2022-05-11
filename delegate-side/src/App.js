@@ -19,7 +19,6 @@ function App() {
   const [settings, setSettings] = useState({});
 
   const pendingsMounted = useRef(false);
-  const settingsMounted = useRef(false);
 
   // Configuring Firebase
   const firebaseConfig = {
