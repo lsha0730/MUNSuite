@@ -12,6 +12,8 @@ import LongText from "./form-components/LongText.js";
 import Dropdown from "./form-components/Dropdown.js";
 import SelectMultiple from "./form-components/SelectMultiple.js";
 
+import { HiPaperAirplane } from "react-icons/hi";
+
 function Dashboard(props) {
     const {form} = useContext(appContext);
     const {settings} = useContext(appContext);
@@ -22,11 +24,12 @@ function Dashboard(props) {
     const [submission, setSubmission] = useState(form.map(item => {return { type: item.type, heading: item.heading }}));
     const [canSubmit, setCanSubmit] = useState();
     const [showingWarning, setShowingWarning] = useState(false);
+    const [showingConfirmation, setShowingConfirmation] = useState(false);
 
     useEffect(() => {
         rerenderForm();
         prevForm.current = form;
-    }, [form])
+    }, [form, settings])
 
     useEffect(() => {
         console.log(form)
@@ -52,6 +55,14 @@ function Dashboard(props) {
 
     return (
         <div className="dashboard-container">
+            <div className={showingConfirmation? "submission-confirmation":"hide"}>
+                <div className="submission-confirmation-top">
+                    <HiPaperAirplane size={72} className="confirmation-icon"/>
+                    <p>Submission Sent!</p>
+                </div>
+                <div className="btt-new-directive" onClick={() => {setShowingConfirmation(false)}}>Submit New Directive</div>
+            </div>
+
             <div className="form-container">
 
                 <div className="preview-hat">
@@ -61,7 +72,7 @@ function Dashboard(props) {
 
                 {formRender}
 
-                <div className="submit-container">
+                <div className={settings.formOpen==undefined? "submit-container":`${settings.formOpen? "submit-container":"hide"}`}>
                     <p className={showingWarning? "warning":"warning fade"}>Required fields incomplete</p>
                     <div className="btt-submit" onClick={handleSubmit}>Submit</div>
                 </div>
@@ -71,28 +82,37 @@ function Dashboard(props) {
     );
 
     function rerenderForm() {
-        setFormRender(form.map(item => {
-            switch (item.type) {
-                case "header":
-                    return <Header key={`preview${item.id}`} id={item.id} image={item.image || defaultBanner} heading={item.heading} subheading={item.subheading}/>
-                case "radio":
-                    return <Radio key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} updateSubmission={updateSubmission}/>
-                case "multiplechoice":
-                    return <MultipleChoice key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} updateSubmission={updateSubmission}/>
-                case "content":
-                    return <Content key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content}/>
-                case "shorttext":
-                    return <ShortText key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} updateSubmission={updateSubmission}/>
-                case "longtext":
-                    return <LongText key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} updateSubmission={updateSubmission}/>
-                case "dropdown":
-                    return <Dropdown key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} updateSubmission={updateSubmission}/>
-                case "select-multiple":
-                    return <SelectMultiple key={item.options? item.options.length:0} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options || []} updateSubmission={updateSubmission}/>
-                default:
-                    console.log("Could not render form block.")
-            }
-        }))
+        if (settings.formOpen == undefined || settings.formOpen) {
+            setFormRender(form.map(item => {
+                switch (item.type) {
+                    case "header":
+                        return <Header key={`preview${item.id}`} id={item.id} image={item.image || defaultBanner} heading={item.heading} subheading={item.subheading}/>
+                    case "radio":
+                        return <Radio key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} updateSubmission={updateSubmission}/>
+                    case "multiplechoice":
+                        return <MultipleChoice key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} updateSubmission={updateSubmission}/>
+                    case "content":
+                        return <Content key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content}/>
+                    case "shorttext":
+                        return <ShortText key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} updateSubmission={updateSubmission}/>
+                    case "longtext":
+                        return <LongText key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} updateSubmission={updateSubmission}/>
+                    case "dropdown":
+                        return <Dropdown key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} updateSubmission={updateSubmission}/>
+                    case "select-multiple":
+                        return <SelectMultiple key={item.options? item.options.length:0} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options || []} updateSubmission={updateSubmission}/>
+                    default:
+                        console.log("Could not render form block.")
+                }
+            }))
+        } else {
+            setFormRender(
+                <div className="bricked-form-container">
+                    <p className="bricked-form-header">Form Suspended</p>
+                    <p className="bricked-form-subheader">The Dias has temporarily suspended the form.</p>
+                </div>
+            )
+        }
     }
 
     function updateSubmission(id, data) {
@@ -121,7 +141,7 @@ function Dashboard(props) {
             }
     
             props.submit(submissionObj);
-            console.log(submissionObj)
+            setShowingConfirmation(true);
         } else {
             setShowingWarning(true);
             setTimeout(() => setShowingWarning(false), 2000);

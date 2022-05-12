@@ -7,6 +7,7 @@ import { appContext } from "../../Context";
 function Inbox() {
     const {processed, setProcessed} = useContext(appContext);
     const {pendings, setPendings} = useContext(appContext);
+    const {settings, setSettings} = useContext(appContext);
     const [accepting, setAccepting] = useState(true);
     const [toggleRender, setToggleRender] = useState();
     const [cardArrRender, setCardArrRender] = useState([]);
@@ -22,6 +23,10 @@ function Inbox() {
                 <p className={accepting? "toggle-text-green":"toggle-text-red"}>{accepting? "Accepting Responses":"Form Suspended"}</p>
             </div>
         )
+        
+        let tempSettings = settings;
+        tempSettings.formOpen = accepting;
+        setSettings(JSON.parse(JSON.stringify(tempSettings)));
     }, [accepting])
 
     useEffect(() => {

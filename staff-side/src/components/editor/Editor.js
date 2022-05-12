@@ -136,6 +136,7 @@ function Editor() {
             case "header":
                 newObj.heading = "New Header";
                 newObj.image = require("./defaultBanner.png");
+                newObj.imageFileName = "Default Header";
                 break;
             case "radio":
                 newObj.heading = "New Radio";
@@ -239,7 +240,7 @@ function Editor() {
                     return (
                         <div className="preview-editor-pair">
                             <Header key={`preview${item.id}`} id={item.id} image={item.image} heading={item.heading} subheading={item.subheading} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized && item.id == 0}/>
-                            <EditHeader key={`editor${item.id}`} id={item.id} image={item.image} heading={item.heading} subheading={item.subheading} editing={editing} updateForm={updateForm} locked={standardized && item.id == 0}/>
+                            <EditHeader key={`editor${item.id}`} id={item.id} image={item.image} imageFileName={item.imageFileName} heading={item.heading} subheading={item.subheading} editing={editing} updateForm={updateForm} locked={standardized && item.id == 0}/>
                         </div>
                     )
                 case "radio":

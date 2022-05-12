@@ -28,12 +28,13 @@ function EditHeader(props) {
             newObj.image = imageLink;
             newObj.heading = heading==""? false:heading;
             newObj.subheading = subheading==""? false:subheading;
+            newObj.imageFileName = imageData.name || null;
     
             props.updateForm("update", props.id, newObj);
         } else {
             isMounted.current = true;
         }
-    }, [heading, subheading, imageLink])
+    }, [heading, subheading, imageLink, imageData])
 
     return (
         <div className={props.editing==props.id? "block-container":"hidden"}>
@@ -44,7 +45,7 @@ function EditHeader(props) {
             <div className="header-imgbar-n-btt">
                 <div className="header-imgsrc-container">
                     <div className="overflow-wrapper">
-                        <p>{imageData.name || "Database Name"}</p>
+                        <p>{props.imageFileName || imageData.name}</p>
                     </div>
                 </div>
                 <label className="header-btt-upload">
