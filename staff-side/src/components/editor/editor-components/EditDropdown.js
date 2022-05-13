@@ -98,7 +98,7 @@ function EditDropdown(props) {
         } else {
             isMounted.current = true;
         }
-    }, [require, options, heading, subheading])
+    }, [require, options, heading, subheading, useDels])
 
     return (
         <div className={props.editing==props.id? "block-container":"hidden"}>

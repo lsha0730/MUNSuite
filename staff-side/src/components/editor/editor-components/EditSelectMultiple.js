@@ -47,7 +47,7 @@ function EditSelectMultiple(props) {
         } else {
             isMounted.current = true;
         }
-    }, [require, options, heading, subheading, maxcount])
+    }, [require, options, heading, subheading, maxcount, useDels])
 
     useEffect(() => {
         let toggleOffset = require? 20:0;
