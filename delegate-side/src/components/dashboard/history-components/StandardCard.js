@@ -5,6 +5,27 @@ import { IoIosFastforward } from "react-icons/io";
 
 function StandardCard(props) {
     const [bodyRenders, setBodyRenders] = useState();
+    const [extended, setExtended] = useState(false);
+    let headerColor;
+    let indicatorColor;
+    switch (props.status) {
+        case "Passed":
+            indicatorColor = "#7AFF69";
+            headerColor = "#85a2b7";
+            break;
+        case "Failed":
+            indicatorColor = "#FF8080";
+            headerColor = "#85a2b7";
+            break;
+        case "Pending":
+            indicatorColor = "#BCBCBC";
+            headerColor = "#3C8CC9";
+            break;
+        default:
+            indicatorColor = "#BCBCBC";
+            headerColor = "#3C8CC9";
+            break;
+    }
 
     useEffect(() => {
         setBodyRenders(props.body.map(block => {
@@ -34,55 +55,37 @@ function StandardCard(props) {
         }))
     }, [])
 
-    function passDirective() {
-        props.updateCards("pass", props.id);
-    }
-
-    function tableDirective() {
-        props.updateCards("table", props.id);
-    }
-
-    function failDirective() {
-        props.updateCards("fail", props.id);
-    }
-
     return (
         <div className="card-container">
-            <div className="card-operations" style={props.hide? {display: "none"}:{}}>
-                <div className="btt-pass" onClick={passDirective}>
-                    <BsCheckLg size={20} style={{fill: "#3CDC27"}}/>
+            <div className={extended? "card-top":"card-top rounded"} style={{backgroundColor: headerColor, transition: "300ms"}} onClick={() => {setExtended(!extended)}}>
+                <div className="card-top-top">
+                    <p className="title">{props.title}</p>
+                    <div className="status-indicator" style={{backgroundColor: indicatorColor}}></div>
                 </div>
-                <div className="btt-fail" onClick={failDirective}>
-                    <BsXLg size={20} style={{fill: "#FF7070"}}/>
-                </div>
-                <div className="btt-table" onClick={tableDirective}>
-                    <IoIosFastforward size={25} style={{fill: "#FFCA39"}}/>
-                </div>
-            </div>
 
-            <div className="card-top">
-                <p className="title">{props.title}</p>
                 <div className="card-top-bottom">
                     <p className="type">{props.type}</p>
                     <p className="id-tag">ID: {props.id}</p>
                 </div>
             </div>
 
-            <div className="card-tie">
-                <div className="tie-set">
-                    <BsPeopleFill size={15} className="card-icon"/>
-                    <p>{props.sponsors.join(", ")}</p>
-                </div>
-                {props.signatories && props.signatories.length > 0?
+            <div className={extended? "collapsable":"collapsable collapsed"}>
+                <div className="card-tie">
                     <div className="tie-set">
-                        <BsEyeglasses size={18} className="card-icon"/>
-                        <p className="signatories-list">{props.signatories.join(", ")}</p>
+                        <BsPeopleFill size={15} className="card-icon"/>
+                        <p>{props.sponsors.join(", ")}</p>
                     </div>
-                    : <div></div>}
-            </div>
+                    {props.signatories && props.signatories.length > 0?
+                        <div className="tie-set">
+                            <BsEyeglasses size={18} className="card-icon"/>
+                            <p className="signatories-list">{props.signatories.join(", ")}</p>
+                        </div>
+                        : <div></div>}
+                </div>
 
-            <div className="card-body">
-                {bodyRenders}
+                <div className="card-body">
+                    {bodyRenders}
+                </div>
             </div>
         </div>
     )

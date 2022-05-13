@@ -17,6 +17,7 @@ function App() {
   const [delegations, setDelegations] = useState([]);
   const [form, setForm] = useState([]);
   const [pendings, setPendings] = useState([]);
+  const [processed, setProcessed] = useState([]);
   const [settings, setSettings] = useState({});
 
   const pendingsMounted = useRef(false);
@@ -67,6 +68,7 @@ function App() {
     })
 
     onValue(ref(database, 'test/pendings'), (snapshot) => {
+      console.log(snapshot.val())
       if (!snapshot.val()) {
         setPendings([]);
       } else {
@@ -75,6 +77,18 @@ function App() {
             if (!tempArr[i]) tempArr.splice(i, 1);
         }
         setPendings(tempArr);
+      }
+    })
+
+    onValue(ref(database, 'test/processed'), (snapshot) => {
+      if (!snapshot.val()) {
+        setProcessed([]);
+      } else {
+        let tempArr = snapshot.val();
+        for (let i=0; i<tempArr.length; i++) {
+            if (!tempArr[i]) tempArr.splice(i, 1);
+        }
+        setProcessed(tempArr);
       }
     })
 
@@ -90,6 +104,7 @@ function App() {
   // Firebase: Writing
   useEffect(() => {
     if (pendingsMounted.current) {
+      console.log("Wrote to pendings")
       set(ref(database, 'test/pendings'), pendings);
     } else {
       pendingsMounted.current = true;
@@ -97,9 +112,9 @@ function App() {
   }, [pendings])
 
   return (
-    <appContext.Provider value={{form, settings, user}}>
+    <appContext.Provider value={{form, settings, user, processed, pendings}}>
       <div className="App-container">
-        {loggedIn? <Dashboard submit={submit} submissionID={pendings.length}/>:<LoginPage attemptLogin={attemptLogin}/>}
+        {loggedIn? <Dashboard submit={submit}/>:<LoginPage attemptLogin={attemptLogin}/>}
       </div>
     </appContext.Provider>
   );

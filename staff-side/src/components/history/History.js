@@ -53,11 +53,11 @@ function History() {
         } else {
             if (directive.standard) {
                 setSelectionRender (
-                    <StandardCard key={directive.submissionID} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors} signatories={directive.signatories} body={directive.body} hide={true}/>
+                    <StandardCard key={directive.submissionID} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors} signatories={directive.signatories} body={directive.body || []} hide={true}/>
                 )
             } else {
                 setSelectionRender (
-                    <CustomCard key={directive.submissionID} id={directive.submissionID} author={directive.author} body={directive.body} hide={true}/>
+                    <CustomCard key={directive.submissionID} id={directive.submissionID} author={directive.author} body={directive.body || []} hide={true}/>
                 )
             }
         }

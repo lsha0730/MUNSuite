@@ -11,20 +11,31 @@ import ShortText from "./form-components/ShortText.js";
 import LongText from "./form-components/LongText.js";
 import Dropdown from "./form-components/Dropdown.js";
 import SelectMultiple from "./form-components/SelectMultiple.js";
+import CustomCard from "./history-components/CustomCard";
+import StandardCard from "./history-components/StandardCard";
 
 import { HiPaperAirplane } from "react-icons/hi";
+import { FaHistory } from "react-icons/fa";
+import { FOCUSABLE_SELECTOR } from "@testing-library/user-event/dist/utils";
 
 function Dashboard(props) {
     const {form} = useContext(appContext);
+    const {pendings} = useContext(appContext);
+    const {processed} = useContext(appContext);
     const {settings} = useContext(appContext);
     const {user} = useContext(appContext);
 
     const prevForm = useRef();
     const [formRender, setFormRender] = useState();
     const [submission, setSubmission] = useState(form.map(item => {return { type: item.type, heading: item.heading }}));
-    const [canSubmit, setCanSubmit] = useState();
-    const [showingWarning, setShowingWarning] = useState(false);
+    const [submissionComplete, setSubmissionComplete] = useState(false);
+    const [showingIncompleteWarning, setShowingIncompleteWarning] = useState(false);
+    const [notImpostor, setNotImpostor] = useState(false);
+    const [showingImpostorWarning, setShowingImpostorWarning] = useState(false);
     const [showingConfirmation, setShowingConfirmation] = useState(false);
+
+    const [relevantDirectives, setRelevantDirectives] = useState([]);
+    const [historyRender, setHistoryRender] = useState();
 
     useEffect(() => {
         rerenderForm();
@@ -32,12 +43,27 @@ function Dashboard(props) {
     }, [form, settings])
 
     useEffect(() => {
-        console.log(form)
-        console.log(prevForm.current)
-    }, [prevForm.current])
+        setRelevantDirectives((pendings || []).concat(getReversed(processed || [])).filter(item => {
+            if (item == undefined) return false;
+            if (item.standard) {
+                return item.sponsors.includes(user) || item.author == user;
+            } else {
+                return item.author == user;
+            }
+        }))
+    }, [pendings, processed])
 
     useEffect(() => {
-        setCanSubmit(
+        rerenderHistory();
+    }, [relevantDirectives])
+
+    // useEffect(() => { // Debugging
+    //     console.log(form)
+    //     console.log(prevForm.current)
+    // }, [prevForm.current])
+
+    useEffect(() => {
+        setSubmissionComplete(
             submission.every((item, index) => {
                 let valid = true;
                 if (form[index].required) {
@@ -51,35 +77,79 @@ function Dashboard(props) {
                 return valid;
             })
         )
+
+        setNotImpostor(() => {
+            if ((submission.length > 3) && submission[3].value && checkStandardized(form)) {
+                return submission[3].value.includes(user);
+            } else {
+                return true; // Author does not need to be sponsor to submit to a non-standard form
+            }
+        })
     }, [submission])
 
     return (
         <div className="dashboard-container">
-            <div className={showingConfirmation? "submission-confirmation":"hide"}>
-                <div className="submission-confirmation-top">
-                    <HiPaperAirplane size={72} className="confirmation-icon"/>
-                    <p>Submission Sent!</p>
-                </div>
-                <div className="btt-new-directive" onClick={() => {setShowingConfirmation(false)}}>Submit New Directive</div>
+            <div className="UI-left">
+                {showingConfirmation?
+                    <div className="submission-confirmation">
+                        <div className="submission-confirmation-top">
+                            <HiPaperAirplane size={72} className="confirmation-icon"/>
+                            <p>Submission Sent!</p>
+                        </div>
+                        <div className="btt-new-directive" onClick={() => {setShowingConfirmation(false)}}>Submit New Directive</div>
+                    </div>
+                    :
+                    <div className="form-container">
+                        <div className="preview-hat">
+                            <p className="preview-hat-heading">{user}</p>
+                            <p className="preview-hat-subheading">{settings.committee}</p>
+                        </div>
+
+                        {formRender}
+
+                        <div className={settings.formOpen==undefined? "submit-container":`${settings.formOpen? "submit-container":"hide"}`}>
+                            <p className={showingIncompleteWarning? "warning":"warning fade"}>Required fields incomplete</p>
+                            <p className={showingImpostorWarning && !showingIncompleteWarning? "warning":"warning fade"}>You must be a sponsor</p>
+                            <div className="btt-submit" onClick={handleSubmit}>Submit</div>
+                        </div>
+                    </div>
+                }
             </div>
 
-            <div className="form-container">
-
-                <div className="preview-hat">
-                    <p className="preview-hat-heading">{settings.committee}</p>
-                    <p className="preview-hat-subheading">{user}</p>
+            <div className="history-container">
+                <div className="history-top">
+                    <div className="history-top-contents">
+                        <FaHistory size={35} className="history-icon"/>
+                        <div style={{display: "flex", flexDirection: "column"}}>
+                            <p style={{fontSize: 20, fontWeight:600, color:"#B0B0B0"}}>Relevant Submissions</p>
+                            <p style={{fontSize: 14, fontWeight:600, color:"#B0B0B0"}}>Click to expand</p>
+                        </div>
+                    </div>
                 </div>
 
-                {formRender}
-
-                <div className={settings.formOpen==undefined? "submit-container":`${settings.formOpen? "submit-container":"hide"}`}>
-                    <p className={showingWarning? "warning":"warning fade"}>Required fields incomplete</p>
-                    <div className="btt-submit" onClick={handleSubmit}>Submit</div>
-                </div>
-
+                {(!historyRender || historyRender.length > 0)?
+                    <div className="history-cards-container" key={JSON.stringify(historyRender)}>{historyRender}</div>
+                    :<div className="history-no-submissions-block">No Submissions</div>}
             </div>
         </div>
     );
+
+    function getReversed(array) {
+        let tempArr = array.slice();
+        tempArr.reverse();
+        return tempArr
+    }
+
+    function rerenderHistory() {
+        console.log("Hist render set!")
+        setHistoryRender(relevantDirectives.map(directive => {
+            if (directive.standard) {
+                return <StandardCard key={JSON.stringify(relevantDirectives)} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors || []} signatories={directive.signatories || []} body={directive.body || []} status={directive.status}/>
+            } else {
+                return <CustomCard key={JSON.stringify(relevantDirectives)} id={directive.submissionID} author={directive.author} body={directive.body || []} status={directive.status}/>
+            }
+        }))
+    }
 
     function rerenderForm() {
         if (settings.formOpen == undefined || settings.formOpen) {
@@ -122,9 +192,9 @@ function Dashboard(props) {
     }
 
     function handleSubmit() {
-        if (canSubmit) {
+        if (submissionComplete && notImpostor) {
             let submissionObj = {
-                submissionID: props.submissionID,
+                submissionID: (pendings || []).concat(processed || []).length,
                 status: "Pending",
                 author: user,
                 standard: checkStandardized(form)
@@ -135,16 +205,20 @@ function Dashboard(props) {
                 submissionObj.type = submission[2].value;
                 submissionObj.sponsors = submission[3].value;
                 submissionObj.signatories = (submission[4].value.length != 0)? submission[4].value:false;
-                submissionObj.body = submission.filter(item => {return item.type != "header" && item.type != "content"}).slice(4);
+                submissionObj.body = submission.slice(4).filter(item => {
+                    return item.type != "header" && item.type != "content"});
             } else {
                 submissionObj.body = submission.filter(item => {return item.type != "header" && item.type != "content"});
             }
     
             props.submit(submissionObj);
             setShowingConfirmation(true);
-        } else {
-            setShowingWarning(true);
-            setTimeout(() => setShowingWarning(false), 2000);
+        } else if (!submissionComplete) {
+            setShowingIncompleteWarning(true);
+            setTimeout(() => setShowingIncompleteWarning(false), 2000);
+        } else if (!notImpostor) {
+            setShowingImpostorWarning(true);
+            setTimeout(() => setShowingImpostorWarning(false), 2000);
         }
     }
 

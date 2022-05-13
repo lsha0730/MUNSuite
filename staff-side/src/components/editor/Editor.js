@@ -64,7 +64,7 @@ function Editor() {
                 <div className="hat-UI">
                     <div className="preview-hat">
                         <div className="preview-hat-top">
-                            <p className="preview-hat-heading">{settings.committee}</p>
+                            <p className="preview-hat-heading">[Delegation Name]</p>
                             <div className="preview-hat-link-icon-container" onClick={copyLink}>
                                 <BiLink className="preview-hat-link-icon"/>
                             </div>
@@ -72,7 +72,7 @@ function Editor() {
                                 <p className="formlink-confirmation-text">Share Link Copied!</p>
                             </div>
                         </div>
-                        <p className="preview-hat-subheading">[Delegation Name]</p>
+                        <p className="preview-hat-subheading">{settings.committee}</p>
                     </div>
 
                     {toggleRender}
@@ -136,7 +136,7 @@ function Editor() {
             case "header":
                 newObj.heading = "New Header";
                 newObj.image = require("./defaultBanner.png");
-                newObj.imageFileName = "Default Header";
+                newObj.imageFileName = "Default Banner";
                 break;
             case "radio":
                 newObj.heading = "New Radio";
