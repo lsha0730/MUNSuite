@@ -53,10 +53,11 @@ function App() {
   // Firebase: Reading
   useEffect(() => {
     onValue(ref(database, 'test/delegations'), (snapshot) => {
-      if (!snapshot.val()) {
+      let node = snapshot.val();
+      if (!node) {
         setDelegations([]);
       } else {
-        let tempArr = snapshot.val();
+        let tempArr = node;
         for (let i=0; i<tempArr.length; i++) {
           if (!tempArr[i]) tempArr.splice(i, 1);
         }
@@ -65,10 +66,11 @@ function App() {
     })
 
     onValue(ref(database, 'test/form'), (snapshot) => {
-      if (!snapshot.val()) {
+      let node = snapshot.val();
+      if (!node) {
         setForm([]);
       } else {
-        let tempArr = snapshot.val();
+        let tempArr = node;
         for (let i=0; i<tempArr.length; i++) {
             if (!tempArr[i]) tempArr.splice(i, 1);
         }
@@ -80,10 +82,11 @@ function App() {
     })
 
     onValue(ref(database, 'test/pendings'), (snapshot) => {
-      if (!snapshot.val()) {
+      let node = snapshot.val();
+      if (!node) {
         setPendings([]);
       } else {
-        let tempArr = snapshot.val();
+        let tempArr = node;
         for (let i=0; i<tempArr.length; i++) {
             if (!tempArr[i]) tempArr.splice(i, 1);
         }
@@ -92,10 +95,11 @@ function App() {
     })
 
     onValue(ref(database, 'test/processed'), (snapshot) => {
-      if (!snapshot.val()) {
+      let node = snapshot.val();
+      if (!node) {
         setProcessed([]);
       } else {
-        let tempArr = snapshot.val();
+        let tempArr = node;
         for (let i=0; i<tempArr.length; i++) {
             if (!tempArr[i]) tempArr.splice(i, 1);
         }
@@ -104,31 +108,33 @@ function App() {
     })
 
     onValue(ref(database, 'test/notes'), (snapshot) => {
-      if (!snapshot.val()) {
+      let node = snapshot.val();
+      if (!node) {
         setNotes({
           individual: [],
           quick: ""
         });
-      } else if (!snapshot.val().individual) {
+      } else if (!node.individual) {
         setNotes({
           individual: [],
-          quick: snapshot.val().quick
+          quick: node.quick
         });
-      } else if (!snapshot.val().quick) {
+      } else if (!node.quick) {
         setNotes({
-          individual: snapshot.val().individual,
+          individual: node.individual,
           quick: ""
         });
       } else {
-        setNotes(snapshot.val());
+        setNotes(node);
       }
     })
 
     onValue(ref(database, 'test/settings'), (snapshot) => {
-      if (!snapshot.val()) {
+      let node = snapshot.val();
+      if (!node) {
         setSettings({conference: "MUNSuite", committee: "Committee"});
       } else {
-        setSettings(snapshot.val());
+        setSettings(node);
       }
     })
   }, [])

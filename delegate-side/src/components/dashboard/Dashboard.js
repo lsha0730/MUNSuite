@@ -16,16 +16,15 @@ import StandardCard from "./history-components/StandardCard";
 
 import { HiPaperAirplane } from "react-icons/hi";
 import { FaHistory } from "react-icons/fa";
-import { FOCUSABLE_SELECTOR } from "@testing-library/user-event/dist/utils";
 
 function Dashboard(props) {
+    const {delegations} = useContext(appContext);
     const {form} = useContext(appContext);
     const {pendings} = useContext(appContext);
     const {processed} = useContext(appContext);
     const {settings} = useContext(appContext);
     const {user} = useContext(appContext);
 
-    const prevForm = useRef();
     const [formRender, setFormRender] = useState();
     const [submission, setSubmission] = useState(form.map(item => {return { type: item.type, heading: item.heading }}));
     const [submissionComplete, setSubmissionComplete] = useState(false);
@@ -39,8 +38,7 @@ function Dashboard(props) {
 
     useEffect(() => {
         rerenderForm();
-        prevForm.current = form;
-    }, [form, settings])
+    }, [form, settings, delegations])
 
     useEffect(() => {
         setRelevantDirectives((pendings || []).concat(getReversed(processed || [])).filter(item => {
@@ -122,7 +120,7 @@ function Dashboard(props) {
                         <FaHistory size={35} className="history-icon"/>
                         <div style={{display: "flex", flexDirection: "column"}}>
                             <p style={{fontSize: 20, fontWeight:600, color:"#B0B0B0"}}>Relevant Submissions</p>
-                            <p style={{fontSize: 14, fontWeight:600, color:"#B0B0B0"}}>Click to expand</p>
+                            <p style={{fontSize: 14, fontWeight:600, color:"#B0B0B0"}}>Click cards to expand</p>
                         </div>
                     </div>
                 </div>
@@ -220,6 +218,10 @@ function Dashboard(props) {
             setShowingImpostorWarning(true);
             setTimeout(() => setShowingImpostorWarning(false), 2000);
         }
+
+        // Clear for new form
+        rerenderForm();
+        setSubmission(form.map(item => {return { type: item.type, heading: item.heading }}));
     }
 
     function checkStandardized(formArr) {
@@ -235,9 +237,11 @@ function Dashboard(props) {
             formArr[3].type == "select-multiple" &&
             formArr[3].heading == "Sponsors" &&
             formArr[3].required &&
+            formArr[3].options == "all-delegations" &&
             formArr[4].type == "select-multiple" &&
             formArr[4].heading == "Signatories" &&
-            !formArr[4].required
+            !formArr[4].required &&
+            formArr[4].options == "all-delegations"
         )
     }
 }

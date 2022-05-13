@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./CustomCard.scoped.css";
-import { BsPersonFill, BsCheckLg, BsXLg } from "react-icons/bs";
-import { IoIosFastforward } from "react-icons/io";
+import { BsPersonFill } from "react-icons/bs";
 
 function CustomCard(props) {
     const [bodyRenders, setBodyRenders] = useState();

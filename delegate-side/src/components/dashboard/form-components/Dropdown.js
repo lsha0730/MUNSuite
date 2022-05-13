@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./PreviewComponents.scoped.css";
 import { GoTriangleDown } from "react-icons/go";
+import { appContext } from "../../../Context";
 
 function Dropdown(props) {
+    const {delegations} = useContext(appContext);
     const [value, setValue] = useState(); // Stores the index of the item in props.options
     const [dropVisible, setDropVisible] = useState(false);
     const [dropRender, setDropRender] = useState();
+    const options = (props.options == "all-delegations")? delegations.map(item => item.name):props.options;
 
     let optionRenders = [];
-    for (let i=0; i<props.options.length; i++) {
-        let sortedOptions = props.options.sort((a, b) => a.localeCompare(b));
+    for (let i=0; i<options.length; i++) {
+        let sortedOptions = options.sort((a, b) => a.localeCompare(b));
         let option = sortedOptions[i];
         optionRenders.push(
             <div className="dropdown-option-container" onClick={() => {
@@ -24,7 +27,7 @@ function Dropdown(props) {
     }
 
     useEffect(() => {
-        props.updateSubmission(props.id, props.options[value] || "")
+        props.updateSubmission(props.id, options[value] || "")
     }, [value])
 
     useEffect(() => {
@@ -47,7 +50,7 @@ function Dropdown(props) {
             <p className={props.required? "required-star":"hidden"}>*</p>
             <div className={dropVisible? "dropdown-bar super-z":"dropdown-bar"} onClick={() => setDropVisible(!dropVisible)}>
                 <div className="dropdown-text-container">
-                    <p className="dropdown-selection-text">{props.options[value]}</p>
+                    <p className="dropdown-selection-text">{options[value]}</p>
                 </div>
                 <GoTriangleDown size={10} className="dropdown-triangle"/>
                 {dropRender}

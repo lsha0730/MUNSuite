@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./StandardCard.scoped.css"
-import { BsPeopleFill, BsEyeglasses, BsCheckLg, BsXLg } from "react-icons/bs";
-import { IoIosFastforward } from "react-icons/io";
+import { BsPeopleFill, BsEyeglasses } from "react-icons/bs";
 
 function StandardCard(props) {
     const [bodyRenders, setBodyRenders] = useState();

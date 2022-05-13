@@ -41,10 +41,11 @@ function App() {
   // Firebase: Reading
   useEffect(() => {
     onValue(ref(database, 'test/delegations'), (snapshot) => {
-      if (!snapshot.val()) {
+      let node = snapshot.val();
+      if (!node) {
         setDelegations([]);
       } else {
-        let tempArr = snapshot.val();
+        let tempArr = node;
         for (let i=0; i<tempArr.length; i++) {
           if (!tempArr[i]) tempArr.splice(i, 1);
         }
@@ -53,10 +54,11 @@ function App() {
     })
 
     onValue(ref(database, 'test/form'), (snapshot) => {
-      if (!snapshot.val()) {
+      let node = snapshot.val();
+      if (!node) {
         setForm([]);
       } else {
-        let tempArr = snapshot.val();
+        let tempArr = node;
         for (let i=0; i<tempArr.length; i++) {
             if (!tempArr[i]) tempArr.splice(i, 1);
         }
@@ -68,11 +70,12 @@ function App() {
     })
 
     onValue(ref(database, 'test/pendings'), (snapshot) => {
-      console.log(snapshot.val())
-      if (!snapshot.val()) {
+      let node = snapshot.val();
+      console.log(node)
+      if (!node) {
         setPendings([]);
       } else {
-        let tempArr = snapshot.val();
+        let tempArr = node;
         for (let i=0; i<tempArr.length; i++) {
             if (!tempArr[i]) tempArr.splice(i, 1);
         }
@@ -81,10 +84,11 @@ function App() {
     })
 
     onValue(ref(database, 'test/processed'), (snapshot) => {
-      if (!snapshot.val()) {
+      let node = snapshot.val();
+      if (!node) {
         setProcessed([]);
       } else {
-        let tempArr = snapshot.val();
+        let tempArr = node;
         for (let i=0; i<tempArr.length; i++) {
             if (!tempArr[i]) tempArr.splice(i, 1);
         }
@@ -93,10 +97,11 @@ function App() {
     })
 
     onValue(ref(database, 'test/settings'), (snapshot) => {
-      if (!snapshot.val()) {
+      let node = snapshot.val();
+      if (!node) {
         setSettings({conference: "MUNSuite", committee: "Committee"});
       } else {
-        setSettings(snapshot.val());
+        setSettings(node);
       }
     })
   }, [])
@@ -112,7 +117,7 @@ function App() {
   }, [pendings])
 
   return (
-    <appContext.Provider value={{form, settings, user, processed, pendings}}>
+    <appContext.Provider value={{delegations, form, settings, user, processed, pendings}}>
       <div className="App-container">
         {loggedIn? <Dashboard submit={submit}/>:<LoginPage attemptLogin={attemptLogin}/>}
       </div>

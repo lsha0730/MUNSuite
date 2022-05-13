@@ -7,8 +7,8 @@ function EditSelectMultiple(props) {
     const [delNames, setDelNames] = useState(delegations.map(del => del.name));
     const [require, setRequire] = useState(props.required);
     const [toggleRender, setToggleRender] = useState();
-    const [useDels, setUseDels] = useState(JSON.stringify(props.options) == JSON.stringify(delNames));
-    const [options, setOptions] = useState(props.options);
+    const [useDels, setUseDels] = useState(props.options == "all-delegations");
+    const [options, setOptions] = useState((props.options == "all-delegations"? delegations.map(item => item.name):props.options));
     const [optionsRender, setOptionsRender] = useState([]);
     const [heading, setHeading] = useState(props.heading);
     const [subheading, setSubheading] = useState(props.subheading);
@@ -41,7 +41,7 @@ function EditSelectMultiple(props) {
             newObj.heading = heading==""? false:heading;
             newObj.subheading = subheading==""? false:subheading;
             newObj.max = maxcount==""? false:parseInt(maxcount);
-            newObj.options = options;
+            newObj.options = useDels? "all-delegations":options;
 
             props.updateForm("update", props.id, newObj);
         } else {

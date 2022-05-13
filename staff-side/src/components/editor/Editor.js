@@ -25,13 +25,14 @@ import EditDropdown from "./editor-components/EditDropdown.js";
 import EditSelectMultiple from "./editor-components/EditSelectMultiple.js";
 
 function Editor() {
-    const {settings} = useContext(appContext);
+    const {delegations} = useContext(appContext);
+    const {settings, setSettings} = useContext(appContext);
     const {form, setForm} = useContext(appContext);
     const [editing, setEditing] = useState(false);
     const [formRender, setFormRender] = useState([]);
     const [formLink, setFormLink] = useState("https://forms.gle/jEErPPyXrHJ3YEpz8");
     const [isDisplayingConfirmation, setIsDisplayingConfirmation] = useState(false);
-    const [standardized, setStandardized] = useState(checkStandardized(form));
+    const [standardized, setStandardized] = useState(settings.standardForm);
     const [toggleRender, setToggleRender] = useState();
 
     useEffect(() => {
@@ -40,21 +41,39 @@ function Editor() {
 
     useEffect(() => {
         rerenderForm();
-    }, [form, editing]);
+    }, [form, editing, delegations]);
 
     useEffect(() => {
-        let toggleOffset = standardized? 25:0;
-
-        setToggleRender(
-            <div className="toggle-set" onClick={toggleStandardized}>
-                <p className={standardized? "toggle-text-green":"toggle-text-red"}>{standardized? "Standardized for MUN":"Custom Form"}</p>
-                <div className={standardized? "toggle-bar toggle-greenbg":"toggle-bar toggle-redbg"}>
-                    <div className={standardized? "toggle-circle toggle-greenbtt":"toggle-circle toggle-redbtt"} style={{left: toggleOffset}}></div>
-                </div>
-            </div>
-        )
-
+        rerenderToggle();
         rerenderForm();
+        
+        // Add standard start elements if not standardized already
+        if (standardized && !checkStandardized(form)) {
+            let frontArr = [];
+
+            frontArr.push(makeNewBlock("header", 0, true, "New Header"));
+            frontArr.push(makeNewBlock("shorttext", 1, true, "Directive Title"));
+            frontArr.push(makeNewBlock("radio", 2, true, "Directive Type"));
+
+            let sponsorsQ = makeNewBlock("select-multiple", 3, true, "Sponsors");
+            let signatoriesQ = makeNewBlock("select-multiple", 4, false, "Signatories");
+            sponsorsQ.options = "all-delegations";
+            signatoriesQ.options = "all-delegations";
+            frontArr.push(sponsorsQ);
+            frontArr.push(signatoriesQ);
+
+            let tempArr = frontArr.concat(form.slice());
+            for (let i = 0; i<tempArr.length; i++) {
+                tempArr[i].id = i;
+            }
+
+            setForm(tempArr);
+        }
+        
+        // Report standardization change to settings object in database
+        let tempSettingsObj = JSON.parse(JSON.stringify(settings));
+        tempSettingsObj.standardForm = standardized;
+        setSettings(tempSettingsObj);
     }, [standardized])
 
     return (
@@ -100,30 +119,22 @@ function Editor() {
         </div>
     )
 
+    function rerenderToggle() {
+        let toggleOffset = standardized ? 25 : 0;
+        setToggleRender(
+            <div className="toggle-set" onClick={() => {setStandardized(!standardized)}}>
+                <p className={standardized ? "toggle-text-green" : "toggle-text-red"}>{standardized ? "Standardized for MUN" : "Custom Form"}</p>
+                <div className={standardized ? "toggle-bar toggle-greenbg" : "toggle-bar toggle-redbg"}>
+                    <div className={standardized ? "toggle-circle toggle-greenbtt" : "toggle-circle toggle-redbtt"} style={{ left: toggleOffset }}></div>
+                </div>
+            </div>
+        );
+    }
+
     function copyLink() {
         navigator.clipboard.writeText(formLink);
         setIsDisplayingConfirmation(true);
         setTimeout(() => setIsDisplayingConfirmation(false), 1000);
-    }
-
-    function toggleStandardized() {
-        if (!standardized && !checkStandardized(form)) {
-            let frontArr = [];
-
-            frontArr.push(makeNewBlock("header", 0, true, "New Header"));
-            frontArr.push(makeNewBlock("shorttext", 1, true, "Directive Title"));
-            frontArr.push(makeNewBlock("radio", 2, true, "Directive Type"));
-            frontArr.push(makeNewBlock("select-multiple", 3, true, "Sponsors"));
-            frontArr.push(makeNewBlock("select-multiple", 4, false, "Signatories"));
-
-            let tempArr = frontArr.concat(form);
-            for (let i = 0; i<tempArr.length; i++) {
-                tempArr[i].id = i;
-            }
-
-            setForm(tempArr)
-        }
-        setStandardized(!standardized);
     }
 
     function makeNewBlock(type, id, required, heading = null) {
@@ -311,9 +322,11 @@ function Editor() {
             formArr[3].type == "select-multiple" &&
             formArr[3].heading == "Sponsors" &&
             formArr[3].required &&
+            formArr[3].options == "all-delegations" &&
             formArr[4].type == "select-multiple" &&
             formArr[4].heading == "Signatories" &&
-            !formArr[4].required
+            !formArr[4].required &&
+            formArr[4].options == "all-delegations"
         )
     }
 }

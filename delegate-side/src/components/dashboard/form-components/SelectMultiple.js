@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./PreviewComponents.scoped.css";
 import { GoSearch } from "react-icons/go";
+import { appContext } from "../../../Context";
 
 function SelectMultiple(props) {
-    const [options, setOptions] = useState(props.options);
+    const {delegations} = useContext(appContext);
+    const [options, setOptions] = useState((props.options == "all-delegations"? delegations.map(item => item.name):props.options));
     const [search, setSearch] = useState('');
     const [renderOptions, setRenderOptions] = useState([]);
     const [isShowingOptions, setIsShowingOptions] = useState(false);

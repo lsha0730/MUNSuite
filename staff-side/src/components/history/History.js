@@ -77,7 +77,7 @@ function History() {
                     </div>
 
                     <div className="filter-group">
-                        <Dropdown options={["No Filter", "Passed", "Failed", "Starred"]} setSelection={setDropdownValue}/>
+                        <Dropdown options={["No Filter", "Passed", "Failed"]} setSelection={setDropdownValue}/>
                         <FaFilter size={15} className="filter-icon"/>
                     </div>
                 </div>
