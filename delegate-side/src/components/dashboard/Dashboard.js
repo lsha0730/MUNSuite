@@ -203,7 +203,7 @@ function Dashboard(props) {
                 submissionObj.type = submission[2].value;
                 submissionObj.sponsors = submission[3].value;
                 submissionObj.signatories = (submission[4].value.length != 0)? submission[4].value:false;
-                submissionObj.body = submission.slice(4).filter(item => {
+                submissionObj.body = submission.slice(5).filter(item => {
                     return item.type != "header" && item.type != "content"});
             } else {
                 submissionObj.body = submission.filter(item => {return item.type != "header" && item.type != "content"});

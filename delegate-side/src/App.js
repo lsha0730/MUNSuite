@@ -71,7 +71,6 @@ function App() {
 
     onValue(ref(database, 'test/pendings'), (snapshot) => {
       let node = snapshot.val();
-      console.log(node)
       if (!node) {
         setPendings([]);
       } else {
@@ -108,9 +107,9 @@ function App() {
 
   // Firebase: Writing
   useEffect(() => {
+    console.log(pendingsMounted.current)
     if (pendingsMounted.current) {
-      console.log("Wrote to pendings")
-      set(ref(database, 'test/pendings'), pendings);
+      if (pendings.length > 0) set(ref(database, 'test/pendings'), pendings); // Find proper fix later
     } else {
       pendingsMounted.current = true;
     }
