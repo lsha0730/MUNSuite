@@ -15,7 +15,7 @@ function SelectMultiple(props) {
     const [maxWarning, setMaxWarning] = useState(false);
 
     useEffect(() => {
-        props.updateSubmission(props.id, selected);
+        props.updateSubmission(props.id, selected.length > 0? selected:["No Selection"])
     }, [selected.length])
 
     const selectOption = (option) => {

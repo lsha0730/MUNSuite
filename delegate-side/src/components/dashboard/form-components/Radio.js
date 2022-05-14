@@ -6,7 +6,7 @@ function Radio(props) {
     const [renders, setRenders] = useState([]);
     
     useEffect(() => {
-        props.updateSubmission(props.id, props.options[selected] || "")
+        props.updateSubmission(props.id, props.options[selected] || "No Selection")
     }, [selected])
 
     useEffect(() => {

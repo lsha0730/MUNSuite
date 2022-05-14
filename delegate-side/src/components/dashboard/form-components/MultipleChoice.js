@@ -6,7 +6,8 @@ function MultipleChoice(props) {
     const [renders, setRenders] = useState([]);
 
     useEffect(() => {
-        props.updateSubmission(props.id, selected.map(index => props.options[index]))
+        let resultArr = selected.map(index => props.options[index])
+        props.updateSubmission(props.id, resultArr.length > 0? resultArr:["No Selection"])
     }, [selected])
 
     useEffect(() => {

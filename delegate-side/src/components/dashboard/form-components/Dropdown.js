@@ -27,7 +27,7 @@ function Dropdown(props) {
     }
 
     useEffect(() => {
-        props.updateSubmission(props.id, options[value] || "")
+        props.updateSubmission(props.id, options[value] || "No Selection")
     }, [value])
 
     useEffect(() => {
