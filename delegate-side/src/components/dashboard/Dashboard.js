@@ -25,8 +25,10 @@ function Dashboard(props) {
     const {settings} = useContext(appContext);
     const {user} = useContext(appContext);
 
+    const [prevForm, setPrevForm] = useState(form);
+    const [currForm, setCurrForm] = useState(form);
     const [formRender, setFormRender] = useState();
-    const [submission, setSubmission] = useState(form.map(item => {return { type: item.type, heading: item.heading }}));
+    const [submission, setSubmission] = useState(currForm.map(item => {return { type: item.type, heading: item.heading }}));
     const [submissionComplete, setSubmissionComplete] = useState(false);
     const [showingIncompleteWarning, setShowingIncompleteWarning] = useState(false);
     const [notImpostor, setNotImpostor] = useState(false);
@@ -37,11 +39,18 @@ function Dashboard(props) {
     const [historyRender, setHistoryRender] = useState();
 
     useEffect(() => {
-        rerenderForm();
-    }, [form, settings, delegations])
+        // Keeps submission array in line with any form changes
+        matchSubmissionToForm(currForm, form); // Runs first so that further functions have updated arrays
+        setPrevForm(currForm);
+        setCurrForm(form);
+    }, [form])
 
     useEffect(() => {
-        setRelevantDirectives((pendings || []).concat(getReversed(processed || [])).filter(item => {
+        rerenderForm();
+    }, [currForm, settings, delegations])
+
+    useEffect(() => {
+        setRelevantDirectives(getReversed(pendings || []).concat(getReversed(processed || [])).filter(item => {
             if (item == undefined) return false;
             if (item.standard) {
                 return item.sponsors.includes(user) || item.author == user;
@@ -55,16 +64,11 @@ function Dashboard(props) {
         rerenderHistory();
     }, [relevantDirectives])
 
-    // useEffect(() => { // Debugging
-    //     console.log(form)
-    //     console.log(prevForm.current)
-    // }, [prevForm.current])
-
     useEffect(() => {
         setSubmissionComplete(
             submission.every((item, index) => {
                 let valid = true;
-                if (form[index].required) {
+                if (currForm[index].required) {
                     if (item.value == undefined || item.value == null) return false;
                     if (item.type == "select-multiple" || item.type == "multiplechoice") {
                         valid = item.value.length != 0;
@@ -77,7 +81,7 @@ function Dashboard(props) {
         )
 
         setNotImpostor(() => {
-            if ((submission.length > 3) && submission[3].value && checkStandardized(form)) {
+            if ((submission.length > 3) && submission[3].value && checkStandardized(currForm)) {
                 return submission[3].value.includes(user);
             } else {
                 return true; // Author does not need to be sponsor to submit to a non-standard form
@@ -132,6 +136,35 @@ function Dashboard(props) {
         </div>
     );
 
+    function matchSubmissionToForm(prevArr, currArr) {
+        // !!! Edge case not considered: two identical question objects back to back
+        let tempPrev = prevArr.slice();
+        let tempCurr = currArr.slice();
+
+        if (tempCurr.length > tempPrev.length) {
+            // A question was added (to the end of the form)
+            setSubmission(submission.concat({
+                type: tempCurr[tempCurr.length - 1].type,
+                heading: tempCurr[tempCurr.length - 1].heading
+            }))
+        } else if (tempCurr.length < tempPrev.length) {
+            // A question was deleted
+            let delIndex = -1;
+            for (let i=0; i<tempPrev.length; i++) {
+                console.log(JSON.stringify(tempCurr[i]))
+                console.log(JSON.stringify(tempPrev[i]))
+                if (JSON.stringify(tempCurr[i]) !== JSON.stringify(tempPrev[i])) {
+                    delIndex = i;
+                }
+            }
+            if (delIndex == -1) delIndex = tempCurr.length;
+            
+            let tempResult = submission.slice();
+            tempResult.splice(delIndex, 1);
+            setSubmission(tempResult);
+        }
+    }
+
     function getReversed(array) {
         let tempArr = array.slice();
         tempArr.reverse();
@@ -139,7 +172,6 @@ function Dashboard(props) {
     }
 
     function rerenderHistory() {
-        console.log("Hist render set!")
         setHistoryRender(relevantDirectives.map(directive => {
             if (directive.standard) {
                 return <StandardCard key={JSON.stringify(relevantDirectives)} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors || []} signatories={directive.signatories || []} body={directive.body || []} status={directive.status}/>
@@ -151,7 +183,7 @@ function Dashboard(props) {
 
     function rerenderForm() {
         if (settings.formOpen == undefined || settings.formOpen) {
-            setFormRender(form.map(item => {
+            setFormRender(currForm.map(item => {
                 switch (item.type) {
                     case "header":
                         return <Header key={`preview${item.id}`} id={item.id} image={item.image || defaultBanner} heading={item.heading} subheading={item.subheading}/>
@@ -195,7 +227,7 @@ function Dashboard(props) {
                 submissionID: (pendings || []).concat(processed || []).length,
                 status: "Pending",
                 author: user,
-                standard: checkStandardized(form)
+                standard: checkStandardized(currForm)
             };
     
             if (submissionObj.standard) {
@@ -221,7 +253,7 @@ function Dashboard(props) {
 
         // Clear for new form
         rerenderForm();
-        setSubmission(form.map(item => {return { type: item.type, heading: item.heading }}));
+        setSubmission(currForm.map(item => {return { type: item.type, heading: item.heading }}));
     }
 
     function checkStandardized(formArr) {

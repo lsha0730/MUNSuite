@@ -107,7 +107,6 @@ function App() {
 
   // Firebase: Writing
   useEffect(() => {
-    console.log(pendingsMounted.current)
     if (pendingsMounted.current) {
       if (pendings.length > 0) set(ref(database, 'test/pendings'), pendings); // Find proper fix later
     } else {
