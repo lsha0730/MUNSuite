@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from "react";
 import './App.css';
+import { appContext } from './Context.js';
+
+import Navbar from "./components/navbar/Navbar.js"
+import Home from "./components/home/Home.js";
 
 function App() {
+  const [page, setPage] = useState("home");
+  const [UI, setUI] = useState(<Home key="home"/>);
+
+  useEffect(() => {
+    setUI(() => {
+      switch (page) {
+        case "home": return <Home key="home"/>
+        default: return <Home key="home"/>
+      }
+    })
+  }, [page])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <appContext.Provider value={{page, setPage}}>
+      <div className="App-container">
+        <Navbar key="navbar"/>
+        <div className="UI-container">
+          {UI}
+        </div>
+      </div>
+    </appContext.Provider>
   );
 }
 

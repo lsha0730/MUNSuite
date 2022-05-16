@@ -1,0 +1,55 @@
+.navbar-container {
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 50px;
+}
+
+.options {
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.option-text {
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+}
+.option-text:hover {
+    color: #BCBCBC;
+    transition: 200ms;
+}
+
+.option-buy {
+    font-size: 16px;
+    font-weight: 700;
+
+    padding: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-left: -10px;
+
+    background-color: #BAE4FA;
+    color: #00A3FF;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.option-buy:hover {
+    background-color: #4bb4ff;
+    color: #FFFFFF;
+    transition: 200ms;
+}
