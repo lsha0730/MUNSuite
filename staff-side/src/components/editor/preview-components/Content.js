@@ -4,27 +4,25 @@ import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 function Content(props) {
-    let contentRenders = [];
-    for (let i=0; i<props.content.length; i++) {
-        let itemObj = props.content[i];
-        switch (itemObj.type) {
+    let contentRenders = (props.content || []).map(item => {
+        switch (item.type) {
             case "text":
-                contentRenders.push(
+                return (
                     <div className="content-item-container">
-                        <p className="content-heading">{itemObj.heading}</p>
-                        <p>{itemObj.value}</p>
+                        <p className="content-heading">{item.heading}</p>
+                        <p>{item.value}</p>
                     </div>);
                 break;
             case "image":
-                contentRenders.push(
+                return (
                     <div className="content-item-container">
-                        <p className="content-heading">{itemObj.heading}</p>
+                        <p className="content-heading">{item.heading}</p>
                         <div>
-                            <img src={itemObj.value} alt="Content Image" className="content-image"/>
+                            <img src={item.value} alt="Content Image" className="content-image"/>
                         </div>
                     </div>);
         }
-    }
+    })
 
     return (
         <div style={{display: "flex", flexDirection: "row-reverse"}}>

@@ -182,6 +182,7 @@ function App() {
 
   useEffect(() => {
     if (settingsMounted.current) {
+      console.log(settings)
       set(ref(database, 'test/settings'), settings);
     } else {
       settingsMounted.current = true;

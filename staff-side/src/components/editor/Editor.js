@@ -32,7 +32,7 @@ function Editor() {
     const [formRender, setFormRender] = useState([]);
     const [formLink, setFormLink] = useState("https://forms.gle/jEErPPyXrHJ3YEpz8");
     const [isDisplayingConfirmation, setIsDisplayingConfirmation] = useState(false);
-    const [standardized, setStandardized] = useState(settings.standardForm);
+    const [standardized, setStandardized] = useState(settings.standardForm || false);
     const [toggleRender, setToggleRender] = useState();
 
     useEffect(() => {
@@ -161,6 +161,8 @@ function Editor() {
                 break;
             case "content":
                 newObj.heading = "New Content Block";
+                newObj.content = [{type:"image", heading:"Image Heading", value:require("./defaultBanner.png")},
+                                    {type:"text", heading:"Text Heading", value:"I am a body of text. Enter directions or descriptive information here!"}];
                 break;
             case "shorttext":
                 newObj.heading = "New Short Text";
@@ -251,56 +253,56 @@ function Editor() {
                     return (
                         <div className="preview-editor-pair">
                             <Header key={`preview${item.id}`} id={item.id} image={item.image} heading={item.heading} subheading={item.subheading} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized && item.id == 0}/>
-                            <EditHeader key={`editor${item.id}`} id={item.id} image={item.image} imageFileName={item.imageFileName} heading={item.heading} subheading={item.subheading} editing={editing} updateForm={updateForm} locked={standardized && item.id == 0}/>
+                            <EditHeader key={`editor${item.id}${editing}`} id={item.id} image={item.image} imageFileName={item.imageFileName} heading={item.heading} subheading={item.subheading} editing={editing} updateForm={updateForm} locked={standardized && item.id == 0}/>
                         </div>
                     )
                 case "radio":
                     return (
                         <div className="preview-editor-pair">
                             <Radio key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized && item.id == 2}/>
-                            <EditRadio key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} updateForm={updateForm} locked={standardized && item.id == 2}/>
+                            <EditRadio key={`editor${item.id}${editing}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} updateForm={updateForm} locked={standardized && item.id == 2}/>
                         </div>
                     )
                 case "multiplechoice":
                     return (
                         <div className="preview-editor-pair">
                             <MultipleChoice key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized}/>
-                            <EditMultipleChoice key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} updateForm={updateForm} locked={standardized}/>
+                            <EditMultipleChoice key={`editor${item.id}${editing}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} updateForm={updateForm} locked={standardized}/>
                         </div>
                     )
                 case "content":
                     return (
                         <div className="preview-editor-pair">
                             <Content key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized}/>
-                            <EditContent key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content} editing={editing} updateForm={updateForm} locked={standardized}/>
+                            <EditContent key={`editor${item.id}${editing}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content} editing={editing} updateForm={updateForm} locked={standardized}/>
                         </div>
                     )
                 case "shorttext":
                     return (
                         <div className="preview-editor-pair">
                             <ShortText key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized && item.id == 1}/>
-                            <EditShortText key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} editing={editing} updateForm={updateForm} locked={standardized && item.id == 1}/>
+                            <EditShortText key={`editor${item.id}${editing}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} editing={editing} updateForm={updateForm} locked={standardized && item.id == 1}/>
                         </div>
                     )
                 case "longtext":
                     return (
                         <div className="preview-editor-pair">
                             <LongText key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized}/>
-                            <EditLongText key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} editing={editing} updateForm={updateForm} locked={standardized}/>
+                            <EditLongText key={`editor${item.id}${editing}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} editing={editing} updateForm={updateForm} locked={standardized}/>
                         </div>
                     )
                 case "dropdown":
                     return (
                         <div className="preview-editor-pair">
                             <Dropdown key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized}/>
-                            <EditDropdown key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} updateForm={updateForm} locked={standardized}/>
+                            <EditDropdown key={`editor${item.id}${editing}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} updateForm={updateForm} locked={standardized}/>
                         </div>
                     )
                 case "select-multiple":
                     return (
                         <div className="preview-editor-pair">
                             <SelectMultiple key={item.options? item.options.length:0} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options || []} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized && (item.id == 3 || item.id == 4)}/>
-                            <EditSelectMultiple key={`editor${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options || []} editing={editing} updateForm={updateForm} locked={standardized && (item.id == 3 || item.id == 4)}/>
+                            <EditSelectMultiple key={`editor${item.id}${editing}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options || []} editing={editing} updateForm={updateForm} locked={standardized && (item.id == 3 || item.id == 4)}/>
                         </div>
                     )
                 default:
