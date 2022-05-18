@@ -28,9 +28,11 @@ function Editor() {
     const {delegations} = useContext(appContext);
     const {settings, setSettings} = useContext(appContext);
     const {form, setForm} = useContext(appContext);
+    const {userID} = useContext(appContext);
+    const formLink = `munsuite-delegate.web.app/${userID}`;
+
     const [editing, setEditing] = useState(false);
     const [formRender, setFormRender] = useState([]);
-    const [formLink, setFormLink] = useState("https://forms.gle/jEErPPyXrHJ3YEpz8");
     const [isDisplayingConfirmation, setIsDisplayingConfirmation] = useState(false);
     const [standardized, setStandardized] = useState(settings.standardForm || false);
     const [toggleRender, setToggleRender] = useState();

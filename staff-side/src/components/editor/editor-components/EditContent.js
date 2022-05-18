@@ -1,9 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import "./EditorComponents.scoped.css";
 import { TiDeleteOutline } from "react-icons/ti";
+import { appContext } from "../../../Context";
 
 function EditContent(props) {
+    const {userID} = useContext(appContext);
     const [heading, setHeading] = useState(props.heading);
     const [subheading, setSubheading] = useState(props.subheading);
     const [contentArr, setContentArr] = useState(props.content);
@@ -135,9 +137,9 @@ function EditContent(props) {
             if (e.target.files[0]) {
                 let file = e.target.files[0];
                 let imgURL = "";
-    
-                uploadBytes(ref(storage, "test/content"), file);
-                getDownloadURL(ref(storage, "test/content")).then((url) => {
+                let uploadLocation = `appdata/${userID}/livedata/content`;
+                uploadBytes(ref(storage, uploadLocation), file);
+                getDownloadURL(ref(storage, uploadLocation)).then((url) => {
                     imgURL = url;
                     resolve({
                         name: file.name,

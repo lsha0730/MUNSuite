@@ -20,6 +20,7 @@ function App() {
   const [page, setPage] = useState("delegations");
   const [UI, setUI] = useState(<Delegations key="delegations"/>);
   
+  const userID = "TaN3LDKtAN";
   const [delegations, setDelegations] = useState([]);
   const [form, setForm] = useState([]);
   const [pendings, setPendings] = useState([]);
@@ -50,9 +51,11 @@ function App() {
   const database = getDatabase(app);
   const storage = getStorage();
 
+  console.log(`appdata/${userID}/livedata/delegations`)
+
   // Firebase: Reading
   useEffect(() => {
-    onValue(ref(database, 'test/delegations'), (snapshot) => {
+    onValue(ref(database, `appdata/${userID}/livedata/delegations`), (snapshot) => {
       let node = snapshot.val();
       if (!node) {
         setDelegations([]);
@@ -65,7 +68,7 @@ function App() {
       }
     })
 
-    onValue(ref(database, 'test/form'), (snapshot) => {
+    onValue(ref(database, `appdata/${userID}/livedata/form`), (snapshot) => {
       let node = snapshot.val();
       if (!node) {
         setForm([]);
@@ -81,7 +84,7 @@ function App() {
       }
     })
 
-    onValue(ref(database, 'test/pendings'), (snapshot) => {
+    onValue(ref(database, `appdata/${userID}/livedata/pendings`), (snapshot) => {
       let node = snapshot.val();
       if (!node) {
         setPendings([]);
@@ -94,7 +97,7 @@ function App() {
       }
     })
 
-    onValue(ref(database, 'test/processed'), (snapshot) => {
+    onValue(ref(database, `appdata/${userID}/livedata/processed`), (snapshot) => {
       let node = snapshot.val();
       if (!node) {
         setProcessed([]);
@@ -107,7 +110,7 @@ function App() {
       }
     })
 
-    onValue(ref(database, 'test/notes'), (snapshot) => {
+    onValue(ref(database, `appdata/${userID}/livedata/notes`), (snapshot) => {
       let node = snapshot.val();
       if (!node) {
         setNotes({
@@ -129,7 +132,7 @@ function App() {
       }
     })
 
-    onValue(ref(database, 'test/settings'), (snapshot) => {
+    onValue(ref(database, `appdata/${userID}/livedata/settings`), (snapshot) => {
       let node = snapshot.val();
       if (!node) {
         setSettings({conference: "MUNSuite", committee: "Committee"});
@@ -142,7 +145,7 @@ function App() {
   // Firebase: Writing
   useEffect(() => {
     if (delegationsMounted.current) {
-      set(ref(database, 'test/delegations'), delegations);
+      set(ref(database, `appdata/${userID}/livedata/delegations`), delegations);
     } else {
       delegationsMounted.current = true;
     }
@@ -150,7 +153,7 @@ function App() {
 
   useEffect(() => {
     if (formMounted.current) {
-      set(ref(database, 'test/form'), form);
+      set(ref(database, `appdata/${userID}/livedata/form`), form);
     } else {
       formMounted.current = true;
     }
@@ -158,7 +161,7 @@ function App() {
 
   useEffect(() => {
     if (pendingsMounted.current) {
-      set(ref(database, 'test/pendings'), pendings);
+      set(ref(database, `appdata/${userID}/livedata/pendings`), pendings);
     } else {
       pendingsMounted.current = true;
     }
@@ -166,7 +169,7 @@ function App() {
 
   useEffect(() => {
     if (processedMounted.current) {
-      set(ref(database, 'test/processed'), processed);
+      set(ref(database, `appdata/${userID}/livedata/processed`), processed);
     } else {
       processedMounted.current = true;
     }
@@ -174,7 +177,7 @@ function App() {
 
   useEffect(() => {
     if (notesMounted.current) {
-      set(ref(database, 'test/notes'), notes);
+      set(ref(database, `appdata/${userID}/livedata/notes`), notes);
     } else {
       notesMounted.current = true;
     }
@@ -183,12 +186,11 @@ function App() {
   useEffect(() => {
     if (settingsMounted.current) {
       console.log(settings)
-      set(ref(database, 'test/settings'), settings);
+      set(ref(database, `appdata/${userID}/livedata/settings`), settings);
     } else {
       settingsMounted.current = true;
     }
   }, [settings])
-
 
   // App UI
   useEffect(() => {
@@ -207,7 +209,7 @@ function App() {
   }, [page])
 
   return (
-    <appContext.Provider value={{page, setPage, delegations, setDelegations, form, setForm, pendings, setPendings, processed, setProcessed, notes, setNotes, settings, setSettings}}>
+    <appContext.Provider value={{userID, page, setPage, delegations, setDelegations, form, setForm, pendings, setPendings, processed, setProcessed, notes, setNotes, settings, setSettings}}>
       <div className="App-container">
         <Sidebar/>
         <div className="UI-container">

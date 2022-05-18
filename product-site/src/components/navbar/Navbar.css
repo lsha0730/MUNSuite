@@ -1,7 +1,8 @@
 .navbar-container {
-    width: 65%;
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 30px;
 
     position: relative;
     z-index: 2;
@@ -13,11 +14,11 @@
 }
 
 .logo {
-    width: 50px;
+    width: 40px;
 }
 
 .options {
-    width: 500px;
+    width: 450px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -25,7 +26,7 @@
 }
 
 .option-text {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     cursor: pointer;
 }
@@ -35,7 +36,7 @@
 }
 
 .option-buy {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
 
     padding: 5px;

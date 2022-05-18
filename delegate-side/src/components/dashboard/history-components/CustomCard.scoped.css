@@ -114,6 +114,7 @@
 .block-heading {
     font-size: 14px;
     font-weight: 500;
+    word-wrap: break-word;
 
     margin-bottom: 3px;
 }
@@ -121,5 +122,6 @@
 .block-text {
     color: #222222;
     font-size: 14px;
+    word-wrap: break-word;
     margin-bottom: 20px;
 }

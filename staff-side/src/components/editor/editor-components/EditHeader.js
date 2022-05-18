@@ -1,8 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import "./EditorComponents.scoped.css";
+import { appContext } from "../../../Context";
 
 function EditHeader(props) {
+    const {userID} = useContext(appContext);
     const [imageData, setImageData] = useState({});
     const [imageLink, setImageLink] = useState(props.image);
     const [heading, setHeading] = useState(props.heading);
@@ -68,8 +70,9 @@ function EditHeader(props) {
             let file = e.target.files[0];
             setImageData(file);
 
-            uploadBytes(ref(storage, "test/banners"), file);
-            getDownloadURL(ref(storage, "test/banners")).then((url) => {
+            let uploadLocation = `appdata/${userID}/livedata/banners`;
+            uploadBytes(ref(storage, uploadLocation), file);
+            getDownloadURL(ref(storage, uploadLocation)).then((url) => {
                 setImageLink(url);
             })
         }

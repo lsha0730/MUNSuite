@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "munsuite-d1d0c"
+  },
+  "targets": {
+    "munsuite-d1d0c": {
+      "hosting": {
+        "build": [
+          "munsuite-staff"
+        ]
+      }
+    }
+  }
+}

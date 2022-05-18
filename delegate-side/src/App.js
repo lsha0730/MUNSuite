@@ -13,6 +13,7 @@ import { appContext } from './Context.js';
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState();
+  const userID = window.location.pathname.slice(1);
 
   const [delegations, setDelegations] = useState([]);
   const [form, setForm] = useState([]);
@@ -40,7 +41,7 @@ function App() {
 
   // Firebase: Reading
   useEffect(() => {
-    onValue(ref(database, 'test/delegations'), (snapshot) => {
+    onValue(ref(database, `appdata/${userID}/livedata/delegations`), (snapshot) => {
       let node = snapshot.val();
       if (!node) {
         setDelegations([]);
@@ -53,7 +54,7 @@ function App() {
       }
     })
 
-    onValue(ref(database, 'test/form'), (snapshot) => {
+    onValue(ref(database, `appdata/${userID}/livedata/form`), (snapshot) => {
       let node = snapshot.val();
       if (!node) {
         setForm([]);
@@ -69,7 +70,7 @@ function App() {
       }
     })
 
-    onValue(ref(database, 'test/pendings'), (snapshot) => {
+    onValue(ref(database, `appdata/${userID}/livedata/pendings`), (snapshot) => {
       let node = snapshot.val();
       if (!node) {
         setPendings([]);
@@ -82,7 +83,7 @@ function App() {
       }
     })
 
-    onValue(ref(database, 'test/processed'), (snapshot) => {
+    onValue(ref(database, `appdata/${userID}/livedata/processed`), (snapshot) => {
       let node = snapshot.val();
       if (!node) {
         setProcessed([]);
@@ -95,7 +96,7 @@ function App() {
       }
     })
 
-    onValue(ref(database, 'test/settings'), (snapshot) => {
+    onValue(ref(database, `appdata/${userID}/livedata/settings`), (snapshot) => {
       let node = snapshot.val();
       if (!node) {
         setSettings({conference: "MUNSuite", committee: "Committee"});
@@ -108,7 +109,7 @@ function App() {
   // Firebase: Writing
   useEffect(() => {
     if (pendingsMounted.current) {
-      if (pendings.length > 0) set(ref(database, 'test/pendings'), pendings); // Find proper fix later
+      if (pendings.length > 0) set(ref(database, `appdata/${userID}/livedata/pendings`), pendings); // Find proper fix later
     } else {
       pendingsMounted.current = true;
     }
