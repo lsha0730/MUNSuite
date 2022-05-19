@@ -1,5 +1,6 @@
 import React from "react";
-import "./Home.css";
+import { Link } from "react-router-dom";
+import "./Home.scoped.css";
 
 import formTab from "./images/form-tab.png";
 import inboxTab from "./images/inbox-tab.png";
@@ -73,19 +74,7 @@ function Home() {
                 <img src={notes} alt="Notes UI Image" className="modernize-image" style={{position: "absolute", bottom: "0px", right: "-100px"}}/>
                 <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                     <p className="modernize-header">Let's Modernize Model UN.</p>
-                    <div className="btt-see-options">See Options</div>
-                </div>
-            </div>
-
-            {/*Footer*/}
-            <div className="footer">
-                <div className="footer-contents">
-                    <p className="footer-text">MUNSuite © 2022<br/>All Rights Reserved.</p>
-
-                    <div style={{display: "flex", flexDirection: "column"}}>
-                        <p className="footer-text">Created by Lincoln Lee</p>
-                        <p className="footer-text">Shoot me an <a style={{color: "#BCBCBC"}} href="mailto:digitaldirectivesystem@gmail.com">email!</a></p>
-                    </div>
+                    <Link to="/options" className="btt-see-options">See Options</Link>
                 </div>
             </div>
         </div>

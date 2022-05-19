@@ -74,6 +74,7 @@ function Dashboard(props) {
                         valid = item.value.length != 0;
                     } else if (item.type == "radio" || item.type == "shorttext" || item.type == "longtext" || item.type == "dropdown") {
                         valid = item.value != "";
+                        valid = item.value != "No Selection"
                     }
                 }
                 return valid;
@@ -151,8 +152,6 @@ function Dashboard(props) {
             // A question was deleted
             let delIndex = -1;
             for (let i=0; i<tempPrev.length; i++) {
-                console.log(JSON.stringify(tempCurr[i]))
-                console.log(JSON.stringify(tempPrev[i]))
                 if (JSON.stringify(tempCurr[i]) !== JSON.stringify(tempPrev[i])) {
                     delIndex = i;
                 }

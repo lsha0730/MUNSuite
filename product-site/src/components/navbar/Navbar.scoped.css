@@ -1,16 +1,23 @@
 .navbar-container {
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 
-    position: relative;
-    z-index: 2;
+.navbar {
+    width: 60%;
+    height: 100px;
+    margin: auto;
 
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 .logo {
@@ -28,6 +35,8 @@
 .option-text {
     font-size: 14px;
     font-weight: 400;
+    text-decoration: none;
+    color: black;
     cursor: pointer;
 }
 .option-text:hover {
@@ -35,9 +44,9 @@
     transition: 200ms;
 }
 
-.option-buy {
+.option-options {
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 600;
 
     padding: 5px;
     padding-left: 25px;
@@ -45,11 +54,12 @@
     margin-left: -10px;
 
     background-color: #BAE4FA;
+    text-decoration: none;
     color: #00A3FF;
     border-radius: 5px;
     cursor: pointer;
 }
-.option-buy:hover {
+.option-options:hover {
     background-color: #4bb4ff;
     color: #FFFFFF;
     transition: 200ms;

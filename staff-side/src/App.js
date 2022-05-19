@@ -20,7 +20,20 @@ function App() {
   const [page, setPage] = useState("delegations");
   const [UI, setUI] = useState(<Delegations key="delegations"/>);
   
-  const userID = "TaN3LDKtAN";
+  const userID = [
+    "TaN3LDKtAN",
+    "cqQskuGb8r",
+    "JmQBqj37M2",
+    "kSr7DrOkpU",
+    "mAOj6b2HR9",
+    "QBwRG8inMc",
+    "1Q0eh1jou6",
+    "tJ0k4APWRG",
+    "L1vzuVDSyD",
+    "Gy1G6tmlz9",
+    "YBDozf0xMV"
+  ].includes(window.location.pathname.slice(1))? window.location.pathname.slice(1):null;
+
   const [delegations, setDelegations] = useState([]);
   const [form, setForm] = useState([]);
   const [pendings, setPendings] = useState([]);

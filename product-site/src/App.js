@@ -1,32 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import './App.css';
-import { appContext } from './Context.js';
+import { Switch, Route } from 'react-router-dom';
 
-import Navbar from "./components/navbar/Navbar.js"
+import Navbar from "./components/navbar/Navbar.js";
+import Footer from "./components/footer/Footer.js";
 import Home from "./components/home/Home.js";
+import Register from "./components/register/Register.js";
+import Login from "./components/login/Login.js";
+import Options from "./components/options/Options.js";
 
 function App() {
-  const [page, setPage] = useState("home");
-  const [UI, setUI] = useState(<Home key="home"/>);
-
-  useEffect(() => {
-    setUI(() => {
-      switch (page) {
-        case "home": return <Home key="home"/>
-        default: return <Home key="home"/>
-      }
-    })
-  }, [page])
-
   return (
-    <appContext.Provider value={{page, setPage}}>
-      <div className="App-container">
-        <Navbar key="navbar"/>
-        <div className="UI-container">
-          {UI}
-        </div>
+    <div className="App-container">
+      <Navbar key="navbar"/>
+      <div className="UI-container">
+          <Switch>
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/register" component={Register}/>
+            <Route exact path="/login" component={Login}/>
+            <Route exact path="/options" component={Options}/>
+          </Switch>
       </div>
-    </appContext.Provider>
+      <Footer key="footer"/>
+    </div>
   );
 }
 

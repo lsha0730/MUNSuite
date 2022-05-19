@@ -8,7 +8,7 @@ function Inbox() {
     const {processed, setProcessed} = useContext(appContext);
     const {pendings, setPendings} = useContext(appContext);
     const {settings, setSettings} = useContext(appContext);
-    const [accepting, setAccepting] = useState(settings.formOpen);
+    const [accepting, setAccepting] = useState(settings.formOpen !== undefined? settings.formOpen:true);
     const [toggleRender, setToggleRender] = useState();
     const [cardArrRender, setCardArrRender] = useState([]);
 

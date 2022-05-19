@@ -1,17 +1,24 @@
 .App-container {
-  width: 100%;
-  height: 100%;
-  background-color: #EEEEEE;
+  width: 100vw;
+  height: 100vh;
+  background-color: #F3F3F3;
 
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+}
+.App-container::-webkit-scrollbar {
+  display: none;
+}
+.App-container::-webkit-scrollbar-thumb {
+  display: none;
+}
+.App-container::-webkit-scrollbar-track {
+  display: none;
 }
 
 .UI-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow-y: auto;
+  flex-grow: 1;
 }
 
 /* width */
