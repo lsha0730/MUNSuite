@@ -6,27 +6,16 @@ import { getAnalytics } from "firebase/analytics";
 
 import LoginPage from "./components/loginpage/LoginPage.js";
 import Dashboard from "./components/dashboard/Dashboard.js";
+import InvalidLink from "./components/invalid-link/InvalidLink.js";
 import './App.css';
 
 import { appContext } from './Context.js';
 
 function App() {
+  const userUID = window.location.pathname.slice(1);
+  const [validLink, setValidLink] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState();
-  
-  const userID = [
-    "TaN3LDKtAN",
-    "cqQskuGb8r",
-    "JmQBqj37M2",
-    "kSr7DrOkpU",
-    "mAOj6b2HR9",
-    "QBwRG8inMc",
-    "1Q0eh1jou6",
-    "tJ0k4APWRG",
-    "L1vzuVDSyD",
-    "Gy1G6tmlz9",
-    "YBDozf0xMV"
-  ].includes(window.location.pathname.slice(1))? window.location.pathname.slice(1):null;
 
   const [delegations, setDelegations] = useState([]);
   const [form, setForm] = useState([]);
@@ -54,7 +43,12 @@ function App() {
 
   // Firebase: Reading
   useEffect(() => {
-    onValue(ref(database, `appdata/${userID}/livedata/delegations`), (snapshot) => {
+    onValue(ref(database, `appdata/${userUID}/livedata`), (snapshot) => {
+      // Check if the link is valid
+      setValidLink(snapshot.exists());
+    })
+
+    onValue(ref(database, `appdata/${userUID}/livedata/delegations`), (snapshot) => {
       let node = snapshot.val();
       if (!node) {
         setDelegations([]);
@@ -67,7 +61,7 @@ function App() {
       }
     })
 
-    onValue(ref(database, `appdata/${userID}/livedata/form`), (snapshot) => {
+    onValue(ref(database, `appdata/${userUID}/livedata/form`), (snapshot) => {
       let node = snapshot.val();
       if (!node) {
         setForm([]);
@@ -83,7 +77,7 @@ function App() {
       }
     })
 
-    onValue(ref(database, `appdata/${userID}/livedata/pendings`), (snapshot) => {
+    onValue(ref(database, `appdata/${userUID}/livedata/pendings`), (snapshot) => {
       let node = snapshot.val();
       if (!node) {
         setPendings([]);
@@ -96,7 +90,7 @@ function App() {
       }
     })
 
-    onValue(ref(database, `appdata/${userID}/livedata/processed`), (snapshot) => {
+    onValue(ref(database, `appdata/${userUID}/livedata/processed`), (snapshot) => {
       let node = snapshot.val();
       if (!node) {
         setProcessed([]);
@@ -109,7 +103,7 @@ function App() {
       }
     })
 
-    onValue(ref(database, `appdata/${userID}/livedata/settings`), (snapshot) => {
+    onValue(ref(database, `appdata/${userUID}/livedata/settings`), (snapshot) => {
       let node = snapshot.val();
       if (!node) {
         setSettings({conference: "MUNSuite", committee: "Committee"});
@@ -121,8 +115,8 @@ function App() {
 
   // Firebase: Writing
   useEffect(() => {
-    if (pendingsMounted.current) {
-      if (pendings.length > 0) set(ref(database, `appdata/${userID}/livedata/pendings`), pendings); // Find proper fix later
+    if (pendingsMounted.current && validLink) {
+      if (pendings.length > 0) set(ref(database, `appdata/${userUID}/livedata/pendings`), pendings); // Find proper fix later
     } else {
       pendingsMounted.current = true;
     }
@@ -130,9 +124,13 @@ function App() {
 
   return (
     <appContext.Provider value={{delegations, form, settings, user, processed, pendings}}>
-      <div className="App-container">
-        {loggedIn? <Dashboard submit={submit}/>:<LoginPage attemptLogin={attemptLogin}/>}
-      </div>
+      {validLink? 
+        <div className="App-container">
+          {loggedIn? <Dashboard submit={submit}/>:<LoginPage attemptLogin={attemptLogin}/>}
+        </div>
+        :
+        <InvalidLink/>
+      }
     </appContext.Provider>
   );
 
