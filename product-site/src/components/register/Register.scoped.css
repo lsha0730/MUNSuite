@@ -1,6 +1,12 @@
+/*--------GENERAL FORMATTING-------*/
+.fade {
+    opacity: 0%;
+    transition: 200ms;
+}
+
 .centering-container {
     width: 100%;
-    min-height: 85vh;
+    min-height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -86,6 +92,24 @@
     font-weight: 600;
     text-decoration: none;
     color: #3C8CC9;
+}
+
+.btt-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.warning {
+    width: fit-content;
+    position: absolute;
+    left: 170px;
+
+    font-size: 14px;
+    font-weight: 500;
+    color: #ff7070;
+    transition: 200ms;
 }
 
 .btt-register {

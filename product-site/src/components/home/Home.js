@@ -36,7 +36,7 @@ function Home() {
                     <img src={delside} alt="Delegate Side UI Image" className="features-image"/>
                     <div className="feature-text-group">
                         <p className="feature-text-heading">Personalized Delegate Dashboards.</p>
-                        <p className="feature-text-subheading">Directive status communication, submission history tab, and password gating.</p>
+                        <p className="feature-text-subheading">Directive status communication, a submission history, and password gating.</p>
                     </div>
                 </div>
 
@@ -49,19 +49,27 @@ function Home() {
                 </div>
 
                 <div className="home-feature-group-imgText">
-                    <img src={statistics} alt="Statistics UI Image" className="features-image"/>
+                    <img src={history} alt="History UI Image" className="features-image"/>
                     <div className="feature-text-group">
-                        <p className="feature-text-heading">Auto-collected Delegate Statistics.</p>
-                        <p className="feature-text-subheading">Automatically curated, to show who is putting money where their mouth is.</p>
+                        <p className="feature-text-heading">A Directives History Page.</p>
+                        <p className="feature-text-subheading">This time when you leave your desk, the whole pile won't just disappear.</p>
                     </div>
                 </div>
 
                 <div className="home-feature-group-textImg">
                     <div className="feature-text-group">
-                        <p className="feature-text-heading">Searchable Notes for Every Delegate.</p>
-                        <p className="feature-text-subheading">Take notes on every delegate and filter to compare specific delegates.</p>
+                        <p className="feature-text-heading">Auto-collected Delegate Statistics.</p>
+                        <p className="feature-text-subheading">Automatically curated, to show who's putting money where their mouth is.</p>
                     </div>
-                    <img src={notes} alt="Notes UI Image" className="features-image"/>
+                    <img src={statistics} alt="Inbox UI Image" className="features-image"/>
+                </div>
+
+                <div className="home-feature-group-imgText">
+                    <img src={notes} alt="Statistics UI Image" className="features-image"/>
+                    <div className="feature-text-group">
+                        <p className="feature-text-heading">Searchable Notes for Every Delegate.</p>
+                        <p className="feature-text-subheading">Evaluate and compare delegates with a dedicated UI. No more scribbled papers.</p>
+                    </div>
                 </div>
             </div>
 

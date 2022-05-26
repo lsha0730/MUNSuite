@@ -25,7 +25,6 @@ function Dashboard(props) {
     const {settings} = useContext(appContext);
     const {user} = useContext(appContext);
 
-    const [prevForm, setPrevForm] = useState(form);
     const [currForm, setCurrForm] = useState(form);
     const [formRender, setFormRender] = useState();
     const [submission, setSubmission] = useState(currForm.map(item => {return { type: item.type, heading: item.heading }}));
@@ -41,7 +40,6 @@ function Dashboard(props) {
     useEffect(() => {
         // Keeps submission array in line with any form changes
         matchSubmissionToForm(currForm, form); // Runs first so that further functions have updated arrays
-        setPrevForm(currForm);
         setCurrForm(form);
     }, [form])
 
@@ -221,6 +219,7 @@ function Dashboard(props) {
     }
 
     function handleSubmit() {
+        console.log(submission)
         if (submissionComplete && notImpostor) {
             let submissionObj = {
                 submissionID: (pendings || []).concat(processed || []).length,

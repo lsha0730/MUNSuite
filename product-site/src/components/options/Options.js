@@ -6,7 +6,7 @@ function Options() {
         <div className="options-container">
             <div className="top">
                 <div className="top-container">
-                    <p className="header">Almost there!</p>
+                    <p className="header">Perfectly smooth crises, just one step away.</p>
 
                     <div className="cards-container">
                         <div className="card">
