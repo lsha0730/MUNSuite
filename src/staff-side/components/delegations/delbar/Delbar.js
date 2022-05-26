@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState } from "react";
 import "./Delbar.scoped.css";
 import { BsCheck } from "react-icons/bs";
 

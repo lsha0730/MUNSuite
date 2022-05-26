@@ -44,6 +44,7 @@ function App() {
   useEffect(() => {
     onValue(ref(database, `appdata/${userID}/livedata/delegations`), (snapshot) => {
       let node = snapshot.val();
+      // console.log(node)
       if (!node) {
         setDelegations([]);
       } else {
@@ -132,8 +133,10 @@ function App() {
   // Firebase: Writing
   useEffect(() => {
     if (delegationsMounted.current) {
+      // console.log("Wrote")
       set(ref(database, `appdata/${userID}/livedata/delegations`), delegations);
     } else {
+      // console.log("Mounted")
       delegationsMounted.current = true;
     }
   }, [delegations])
