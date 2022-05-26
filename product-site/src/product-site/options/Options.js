@@ -68,7 +68,7 @@ function Options() {
                         <li>Codes do not expire and are valid for 2 months after they are redeemed.</li>
                         <li>All sales are final.</li>
                     </ul>
-                    <p className="bottom-disclaimer">All payments are handled securely using&nbsp;<p className="red-highlight">Stripe.</p></p>
+                    <p className="bottom-disclaimer">All payments are handled securely using&nbsp;<a className="red-highlight" href="http://stripe.com">Stripe.</a></p>
                 </div>
             </div>
         </div>

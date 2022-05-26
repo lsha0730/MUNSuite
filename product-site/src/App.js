@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Routes, Route, Navigate, Router, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 
 import './App.css';
 import { siteContext } from "./Context";
