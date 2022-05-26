@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./Delegations.scoped.css";
 import { AddUNCountries, AddCustomCountry, AddViaSpreadsheet } from "./modal-ui/modal-ui.js";
+import Delbar from "./delbar/Delbar.js";
 import * as BsIcons from "react-icons/bs";
 import { appContext } from "../../staffContext.js";
+import { BsCheck } from "react-icons/bs";
 
 function Delegations() {
     const {delegations, setDelegations} = useContext(appContext);
@@ -104,14 +106,7 @@ function Delegations() {
 
         if (delegations.length !== 0) {
             setDelegateBars(delegations.map(delegate => {
-                return (
-                    <div className={selections.includes(delegate.name)? "delegate-container-selected":"delegate-container"} onClick={() => {handleClick(delegate.name)}}>
-                        <p className="del-name">{delegate.name}</p>
-                        <div className={selections.includes(delegate.name)? "code-container-selected":"code-container"}>
-                            <p>{delegate.code}</p>
-                        </div>
-                    </div>
-                )
+                return <Delbar selected={selections.includes(delegate.name)} delegate={delegate.name} code={delegate.code} handleClick={handleClick}/>
             }));
         } else {
             setDelegateBars(
