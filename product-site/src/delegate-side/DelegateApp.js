@@ -10,8 +10,8 @@ import { delContext } from './DelegateContext.js';
 import { siteContext } from "../Context.js";
 
 function App() {
-  const userUID = window.location.pathname.slice(6); // Slicing "/form/<uuid>"
-  const [validLink, setValidLink] = useState(false);
+  const userUID = window.location.pathname.slice(6); // window.location.pathname is "/form/<uuid>"
+  const [validLink, setValidLink] = useState("loading");
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState();
 
@@ -30,7 +30,7 @@ function App() {
   useEffect(() => {
     onValue(ref(database, `appdata/${userUID}/livedata`), (snapshot) => {
       // Check if the link is valid
-      setValidLink(snapshot.exists());
+      setValidLink(snapshot.exists()? "valid":"invalid");
     })
 
     onValue(ref(database, `appdata/${userUID}/livedata/delegations`), (snapshot) => {
@@ -109,15 +109,26 @@ function App() {
 
   return (
     <delContext.Provider value={{delegations, form, settings, user, processed, pendings}}>
-      {validLink? 
         <div className="App-container">
-          {loggedIn? <Dashboard submit={submit}/>:<LoginPage attemptLogin={attemptLogin}/>}
+          {getAppRender()}
         </div>
-        :
-        <InvalidLink/>
-      }
     </delContext.Provider>
   );
+
+  function getAppRender() {
+    switch(validLink) {
+      case "loading":
+        return <div></div>
+      case "valid":
+        if (loggedIn) {
+          return <Dashboard submit={submit}/>
+        } else {
+          return <LoginPage attemptLogin={attemptLogin}/>
+        }
+      case "invalid":
+        return <InvalidLink/>
+    }
+  }
 
   function attemptLogin(input) {
     for (let i=0; i<delegations.length; i++) {
