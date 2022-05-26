@@ -100,6 +100,7 @@
     transition: 200ms;
 
     font-size: 18px;
+    font-weight: 500;
     cursor: pointer;
     -webkit-user-select: none; /* Safari */        
     -moz-user-select: none; /* Firefox */

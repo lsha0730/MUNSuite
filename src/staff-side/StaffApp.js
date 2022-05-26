@@ -37,16 +37,13 @@ function App() {
   useEffect(() => {
     onValue(ref(database, `appdata/${userID}/livedata/delegations`), (snapshot) => {
       let node = snapshot.val();
-      // console.log(node)
       if (!node) {
-        console.log("Node is null")
         setDelegations([]);
       } else {
         let tempArr = node;
         for (let i=0; i<tempArr.length; i++) {
           if (!tempArr[i]) tempArr.splice(i, 1);
         }
-        console.log(tempArr)
         setDelegations(tempArr);
       }
     })
@@ -127,7 +124,6 @@ function App() {
 
   // Firebase: Writing
   function writeToFirebase(target, content) {
-    console.log(target)
     if (["delegations", "form", "pendings", "processed", "notes", "settings"].includes(target)) {
       set(ref(database, `appdata/${userID}/livedata/${target}`), content);
     }
