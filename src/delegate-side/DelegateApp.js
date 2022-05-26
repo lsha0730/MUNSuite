@@ -99,13 +99,13 @@ function App() {
   }, [])
 
   // Firebase: Writing
-  useEffect(() => {
-    if (pendingsMounted.current && validLink) {
-      if (pendings.length > 0) set(ref(database, `appdata/${userUID}/livedata/pendings`), pendings); // Find proper fix later
-    } else {
-      pendingsMounted.current = true;
+  function writeToFirebase(target, content) {
+    if (["pendings"].includes(target) && validLink) { // Delegate side only writes to pendings
+      if (content.length > 0) {
+        set(ref(database, `appdata/${userUID}/livedata/${target}`), content);
+      }
     }
-  }, [pendings])
+  }
 
   return (
     <delContext.Provider value={{delegations, form, settings, user, processed, pendings}}>
@@ -141,7 +141,7 @@ function App() {
   }
 
   function submit(submissionObj) {
-    setPendings(pendings.concat(submissionObj));
+    writeToFirebase("pendings", pendings.concat(submissionObj));
   }
 }
 

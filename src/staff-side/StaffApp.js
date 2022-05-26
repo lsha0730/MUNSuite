@@ -27,13 +27,6 @@ function App() {
   const [notes, setNotes] = useState({ individual: [], quick: "" });
   const [settings, setSettings] = useState({});
 
-  const delegationsMounted = useRef(false);
-  const formMounted = useRef(false);
-  const pendingsMounted = useRef(false);
-  const processedMounted = useRef(false);
-  const notesMounted = useRef(false);
-  const settingsMounted = useRef(false);
-
   // Firebase Setup
   const {app} = useContext(siteContext);
   const database = getDatabase(app);
@@ -46,12 +39,14 @@ function App() {
       let node = snapshot.val();
       // console.log(node)
       if (!node) {
+        console.log("Node is null")
         setDelegations([]);
       } else {
         let tempArr = node;
         for (let i=0; i<tempArr.length; i++) {
           if (!tempArr[i]) tempArr.splice(i, 1);
         }
+        console.log(tempArr)
         setDelegations(tempArr);
       }
     })
@@ -131,55 +126,12 @@ function App() {
   }, [])
 
   // Firebase: Writing
-  useEffect(() => {
-    if (delegationsMounted.current) {
-      // console.log("Wrote")
-      set(ref(database, `appdata/${userID}/livedata/delegations`), delegations);
-    } else {
-      // console.log("Mounted")
-      delegationsMounted.current = true;
+  function writeToFirebase(target, content) {
+    console.log(target)
+    if (["delegations", "form", "pendings", "processed", "notes", "settings"].includes(target)) {
+      set(ref(database, `appdata/${userID}/livedata/${target}`), content);
     }
-  }, [delegations])
-
-  useEffect(() => {
-    if (formMounted.current) {
-      set(ref(database, `appdata/${userID}/livedata/form`), form);
-    } else {
-      formMounted.current = true;
-    }
-  }, [form])
-
-  useEffect(() => {
-    if (pendingsMounted.current) {
-      set(ref(database, `appdata/${userID}/livedata/pendings`), pendings);
-    } else {
-      pendingsMounted.current = true;
-    }
-  }, [pendings])
-
-  useEffect(() => {
-    if (processedMounted.current) {
-      set(ref(database, `appdata/${userID}/livedata/processed`), processed);
-    } else {
-      processedMounted.current = true;
-    }
-  }, [processed])
-
-  useEffect(() => {
-    if (notesMounted.current) {
-      set(ref(database, `appdata/${userID}/livedata/notes`), notes);
-    } else {
-      notesMounted.current = true;
-    }
-  }, [notes])
-
-  useEffect(() => {
-    if (settingsMounted.current) {
-      set(ref(database, `appdata/${userID}/livedata/settings`), settings);
-    } else {
-      settingsMounted.current = true;
-    }
-  }, [settings])
+  }
 
   // App UI
   useEffect(() => {
@@ -198,7 +150,7 @@ function App() {
   }, [page])
 
   return (
-    <appContext.Provider value={{userID, page, setPage, delegations, setDelegations, form, setForm, pendings, setPendings, processed, setProcessed, notes, setNotes, settings, setSettings}}>
+    <appContext.Provider value={{userID, page, setPage, writeToFirebase, delegations, form, pendings, processed, notes, settings}}>
       <div className="App-container">
         <Sidebar/>
         <div className="UI-container">

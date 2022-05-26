@@ -7,7 +7,8 @@ import { appContext } from "../../staffContext";
 
 function Notes() {
     const {delegations} = useContext(appContext);
-    const {notes, setNotes} = useContext(appContext);
+    const {notes} = useContext(appContext);
+    const {writeToFirebase} = useContext(appContext);
     const [notesIndvRenders, setNotesIndvRenders] = useState([]);
     const [options, setOptions] = useState(notes.individual.map(item => item.delegate));
     const [search, setSearch] = useState('');
@@ -47,7 +48,8 @@ function Notes() {
         }
         newNotesList.sort((a, b) => a.delegate.toLowerCase().localeCompare(b.delegate.toLowerCase()));
         for (let k=0; k<newNotesList.length; k++) newNotesList[k].id = k;
-        setNotes({
+        writeToFirebase("notes",
+        {
             individual: newNotesList,
             quick: notes.quick
         });
@@ -150,7 +152,7 @@ function Notes() {
                     <p className="header-text">Quick Notes</p>
                 </div>
 
-                <textarea id="quicknotes-input" type="text" placeholder="Input here..." defaultValue={notes.quick} onChange={e => setNotes({individual: notes.individual, quick: (e.target.value)})} className="UI-right-input"></textarea>
+                <textarea id="quicknotes-input" type="text" placeholder="Input here..." defaultValue={notes.quick} onChange={e => writeToFirebase("notes", {individual: notes.individual, quick: (e.target.value)})} className="UI-right-input"></textarea>
             </div>
         </div>
     )
@@ -158,7 +160,8 @@ function Notes() {
     function updateNotes(index, newText) {
         let tempArr = notes.individual.slice();
         tempArr[index].text = newText;
-        setNotes({
+        writeToFirebase("notes",
+        {
             individual: tempArr,
             quick: notes.quick
         });

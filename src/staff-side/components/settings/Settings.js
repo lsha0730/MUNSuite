@@ -5,7 +5,8 @@ import { FaGitAlt } from "react-icons/fa";
 import { appContext } from "../../staffContext";
 
 function Settings() {
-    const {settings, setSettings} = useContext(appContext);
+    const {settings} = useContext(appContext);
+    const {writeToFirebase} = useContext(appContext);
     const isMounted = useRef(false);
 
     return (
@@ -62,7 +63,7 @@ function Settings() {
             settingsObj.conference = confName;
             settingsObj.committee = commName;
 
-            setSettings(settingsObj);
+            writeToFirebase("settings", settingsObj);
         } else {
             isMounted.current = true;
         }

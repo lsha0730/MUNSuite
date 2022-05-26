@@ -23,7 +23,8 @@ function makeUniqueCode(size, existingDels) {
 }
 
 function AddUNCountries(props) {
-    const {delegations, setDelegations} = useContext(appContext);
+    const {delegations} = useContext(appContext);
+    const {writeToFirebase} = useContext(appContext);
     const [modalSelections, setModalSelections] = useState([]);
     const [delNames] = useState(delegations.map((delegateObj) => {return delegateObj.name}));
     const [countriesNotInList] = useState(UNCountriesData.filter((country) => {
@@ -55,7 +56,8 @@ function AddUNCountries(props) {
     function addCountries() {
         props.setModal(false);
         let totalDels = delegations;
-        setDelegations(
+        writeToFirebase(
+            "delegations",
             totalDels.concat(modalSelections.map((selection) => {
                 let newObject = {};
                 newObject.id = delegations.length;
@@ -94,7 +96,8 @@ function AddUNCountries(props) {
 
 
 function AddCustomCountry(props) {
-    const {delegations, setDelegations} = useContext(appContext);
+    const {delegations} = useContext(appContext);
+    const {writeToFirebase} = useContext(appContext);
 
     function addCustom() {
         props.setModal(false);
@@ -104,7 +107,7 @@ function AddCustomCountry(props) {
         newObject.name = document.getElementById("custom-country-input").value;
         newObject.code = makeUniqueCode(5, delegations);
 
-        setDelegations(delegations.concat(newObject));
+        writeToFirebase("delegations", delegations.concat(newObject));
     }
 
     return (
@@ -135,7 +138,8 @@ function AddCustomCountry(props) {
 
 
 function AddViaSpreadsheet(props) {
-    const {delegations, setDelegations} = useContext(appContext);
+    const {delegations} = useContext(appContext);
+    const {writeToFirebase} = useContext(appContext);
 
     function importSpreadsheet() {
         props.setModal(false);
@@ -151,7 +155,7 @@ function AddViaSpreadsheet(props) {
             objectArr.push(newObject);
         }
 
-        setDelegations(delegations.concat(objectArr));
+        writeToFirebase("delegations", delegations.concat(objectArr));
     }
 
     return (

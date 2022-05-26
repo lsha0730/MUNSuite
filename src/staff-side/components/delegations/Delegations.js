@@ -4,10 +4,10 @@ import { AddUNCountries, AddCustomCountry, AddViaSpreadsheet } from "./modal-ui/
 import Delbar from "./delbar/Delbar.js";
 import * as BsIcons from "react-icons/bs";
 import { appContext } from "../../staffContext.js";
-import { BsCheck } from "react-icons/bs";
 
 function Delegations() {
-    const {delegations, setDelegations} = useContext(appContext);
+    const {delegations} = useContext(appContext);
+    const {writeToFirebase} = useContext(appContext);
     const [selections, setSelections] = useState([]);
     const [modal, setModal] = useState(false);
     const [delegateBars, setDelegateBars] = useState([]);
@@ -87,7 +87,6 @@ function Delegations() {
     function rerenderDels() {
         let delList = delegations;
         delList.sort((a, b) => a.name.localeCompare(b.name));
-        setDelegations(delList);
 
         for (let i=0; i<delegations.length; i++) {
             let delegate = delegations[i];
@@ -131,7 +130,7 @@ function Delegations() {
         let newSelections = selections.filter((country) => {
             return selections.includes(country.name);
         });
-        setDelegations(newDelegations);
+        writeToFirebase("delegations", newDelegations);
         setSelections(newSelections);
     }
 

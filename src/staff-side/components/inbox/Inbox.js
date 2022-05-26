@@ -5,9 +5,10 @@ import CustomCard from "./card/CustomCard.js";
 import { appContext } from "../../staffContext";
 
 function Inbox() {
-    const {processed, setProcessed} = useContext(appContext);
-    const {pendings, setPendings} = useContext(appContext);
-    const {settings, setSettings} = useContext(appContext);
+    const {processed} = useContext(appContext);
+    const {pendings} = useContext(appContext);
+    const {settings} = useContext(appContext);
+    const {writeToFirebase} = useContext(appContext);
     const [accepting, setAccepting] = useState(settings.formOpen !== undefined? settings.formOpen:true);
     const [toggleRender, setToggleRender] = useState();
     const [cardArrRender, setCardArrRender] = useState([]);
@@ -26,7 +27,7 @@ function Inbox() {
         
         let tempSettings = settings;
         tempSettings.formOpen = accepting;
-        setSettings(JSON.parse(JSON.stringify(tempSettings)));
+        writeToFirebase("settings", JSON.parse(JSON.stringify(tempSettings)));
     }, [accepting])
 
     useEffect(() => {
@@ -82,10 +83,10 @@ function Inbox() {
         function pushToProcessed(card) {
             let tempProcessedArr = processed.slice();
             tempProcessedArr.push(card);
-            setProcessed(tempProcessedArr);
+            writeToFirebase("processed", tempProcessedArr);
         }
 
-        setPendings(tempArr);
+        writeToFirebase("pendings", tempArr);
     }
 }
 

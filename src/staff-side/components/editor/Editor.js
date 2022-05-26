@@ -26,8 +26,9 @@ import EditSelectMultiple from "./editor-components/EditSelectMultiple.js";
 
 function Editor() {
     const {delegations} = useContext(appContext);
-    const {settings, setSettings} = useContext(appContext);
-    const {form, setForm} = useContext(appContext);
+    const {settings} = useContext(appContext);
+    const {form} = useContext(appContext);
+    const {writeToFirebase} = useContext(appContext);
     const {userID} = useContext(appContext);
     const formLink = `${window.location.host}/form/${userID}`;
 
@@ -69,13 +70,13 @@ function Editor() {
                 tempArr[i].id = i;
             }
 
-            setForm(tempArr);
+            writeToFirebase("form", tempArr);
         }
         
         // Report standardization change to settings object in database
         let tempSettingsObj = JSON.parse(JSON.stringify(settings));
         tempSettingsObj.standardForm = standardized;
-        setSettings(tempSettingsObj);
+        writeToFirebase("settings", tempSettingsObj);
     }, [standardized])
 
     return (
@@ -202,7 +203,7 @@ function Editor() {
             tempArr[i].id = i;
         }
 
-        setForm(tempArr);
+        writeToFirebase("form", tempArr);
     }
 
     function updateForm(operation, index, newObj = null) {
@@ -245,7 +246,7 @@ function Editor() {
                 break;
         }
 
-        setForm(tempArr);
+        writeToFirebase("form", tempArr);
     }
 
     function rerenderForm() {
