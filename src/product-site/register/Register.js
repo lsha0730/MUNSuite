@@ -80,6 +80,9 @@ function Register() {
         } else if (password !== confirmPassword) {
             setWarning("Passwords do not match")
             setTimeout(() => setWarning(""), 1000);
+        } else if (!productCodeValid(productCode)) {
+            setWarning("Invalid Product Code")
+            setTimeout(() => setWarning(""), 1000);
         } else {
             createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
                 // Registered successfully
@@ -96,6 +99,40 @@ function Register() {
 
     function validateEmail(email) {
         return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+    }
+
+    function productCodeValid(entry) {
+        return [
+            'Hs92aNWfB60zXLt',
+            'm2yahTF55U1PXrg',
+            'hhFijMJ8bQekzBY',
+            'JNwaPWyXwKKJ6xp',
+            'Jpwdxkj2xUB3ePw',
+            'EOup9oGnNxIGuFj',
+            'OMWUjx7dh4v6AK7',
+            '1D0ki07NwUixKsA',
+            'jbYwCdJi4xCgqrL',
+            'zjDG2d4v2aLH1Z4',
+            'LXJ37jtBe7Eoyoc',
+            'BzeW2tiewiVeLvJ',
+            'o1CJcMDhon73n1i',
+            'yXshgSKtRUQfu5i',
+            'jyWtCtpWAOeUAJD',
+            'yvTxXkCPmFwPht9',
+            'dqYgMvQHy5bBkv2',
+            'cD0LRf70xcsQNrP',
+            'uSqwEYilzk4IOon',
+            'XmAWvGCv67WApXh',
+            'pBguL8JFuleBVwJ',
+            'NQsWNoB1Jjr5vQB',
+            '3ELcXEra9Oaip9w',
+            'CGXX9mktS7MCzXh',
+            'zgSWb2h5cs08s7V',
+            'jfBdvJ3bfH9U1qO',
+            'm1yoeA6YXZdyeru',
+            'QEmm9bsNq5Xv62j',
+            'E1dpgHPNpYTa0EO',
+            'PMyuvIULAY8z0Tq' ].includes(entry)
     }
 }
 
