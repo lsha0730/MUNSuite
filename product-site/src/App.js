@@ -8,14 +8,17 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-import Navbar from "./components/navbar/Navbar.js";
-import Footer from "./components/footer/Footer.js";
-import Home from "./components/home/Home.js";
-import Register from "./components/register/Register.js";
-import Login from "./components/login/Login.js";
-import Options from "./components/options/Options.js";
-import Dashboard from "./components/dashboard/Dashboard";
-import NavbarDashboard from "./components/navbar/NavbarDashboard";
+import Navbar from "./product-site/navbar/Navbar.js";
+import Footer from "./product-site/footer/Footer.js";
+import Home from "./product-site/home/Home.js";
+import Register from "./product-site/register/Register.js";
+import Login from "./product-site/login/Login.js";
+import Options from "./product-site/options/Options.js";
+import Dashboard from "./product-site/dashboard/Dashboard";
+import NavbarDashboard from "./product-site/navbar/NavbarDashboard.js";
+
+import StaffApp from "./staff-side/StaffApp.js";
+import DelegateApp from "./delegate-side/DelegateApp.js";
 
 function App() {
   // Configuring Firebase
@@ -41,14 +44,12 @@ function App() {
       if (user) {
           // User is signed in
           setCurrentUser(user.uid);
-          console.log(user.uid);
           if (window.location.pathname == "/login" || window.location.pathname == "/register") {
             navigate("/dashboard")
           }
       } else {
           // User is signed out
           setCurrentUser(null);
-          console.log("Signed out")
       }
     })
   }, [])
@@ -60,9 +61,9 @@ function App() {
   }, [window.location.pathname])
 
   return (
-    <siteContext.Provider value={{currentUser, setCurrentUser}}>
+    <siteContext.Provider value={{currentUser, setCurrentUser, app}}>
       <div className="App-container" style={window.location.pathname == "/dashboard"? {overflowY: "hidden"}:{}}>
-        {window.location.pathname == "/dashboard"? <NavbarDashboard key="navbar-dashboard"/>:<Navbar key="navbar"/>}
+        {getNavbar()}
         <div className="UI-container">
             <Routes>
               <Route exact path="/" element={<Home/>}/>
@@ -70,13 +71,43 @@ function App() {
               <Route exact path="/login" element={<Login/>}/>
               <Route exact path="/options" element={<Options/>}/>
               <Route exact path="/dashboard" element={auth.currentUser? <Dashboard/>:<Navigate to="/login"/>}/>
+              <Route exact path="/app/*" element={auth.currentUser? <StaffApp/>:<Navigate to="/login"/>}/>
+              <Route exact path="/form/*" element={<DelegateApp/>}/>
               <Route path="*" element={<Navigate to="/" replace/>}/>
             </Routes>
         </div>
-        {window.location.pathname == "/dashboard"? <div></div>:<Footer key="footer"/>}
+        {getFooter()}
       </div>
     </siteContext.Provider>
-  );
+  )
+
+  function getNavbar() {
+    let pathname = window.location.pathname
+    switch (true) {
+      case pathname == "/dashboard":
+        return <NavbarDashboard key="navbar-dashboard"/>
+      case /\/app\/\w*/i.test(pathname):
+        return
+      case /\/form\/\w*/i.test(pathname):
+        return
+      default:
+        return <Navbar key="navbar"/>
+    }
+  }
+
+  function getFooter() {
+    let pathname = window.location.pathname
+    switch (true) {
+      case pathname == "/dashboard":
+        return
+      case /\/app\/\w*/i.test(pathname):
+        return
+      case /\/form\/\w*/i.test(pathname):
+        return
+      default:
+        return <Footer key="footer"/>
+    }
+  }
 }
 
 export default App;
