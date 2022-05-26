@@ -65,3 +65,26 @@
     color: #FFFFFF;
     transition: 200ms;
 }
+
+.btt-signout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    padding: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+
+    background-color: #4B6980;
+    color: #FFFFFF;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btt-signout:hover {
+    background-color: #6c92af;
+    color: #FFFFFF;
+    transition: 200ms;
+}
