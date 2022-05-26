@@ -41,7 +41,7 @@ function Settings() {
 
                 <div className="release-notes-container">
                     <p className="version-note-heading">v 1.0.0</p>
-                    <p className="version-note-subheading">Closed beta release of the app. Please email any feedback to Lsha0730@gmail.com.</p>
+                    <p className="version-note-subheading">Closed beta release of the app. Please email any feedback to digitaldirectivesystem@gmail.com.</p>
                 </div>
 
                 <div className="metadata">

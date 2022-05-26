@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { getDatabase, onValue, ref, set } from "firebase/database";
-import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import './StaffApp.scoped.css';
+import defaultFormData from "./components/editor/defaultFormData.js";
 
 import Sidebar from './components/sidebar/Sidebar.js';
 import Delegations from './components/delegations/Delegations.js';
@@ -58,7 +58,7 @@ function App() {
     onValue(ref(database, `appdata/${userID}/livedata/form`), (snapshot) => {
       let node = snapshot.val();
       if (!node) {
-        setForm([]);
+        setForm(defaultFormData);
       } else {
         let tempArr = node;
         for (let i=0; i<tempArr.length; i++) {

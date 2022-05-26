@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { getDatabase, onValue, ref, set } from "firebase/database";
-import { initializeApp } from "firebase/app";
 
 import LoginPage from "./components/loginpage/LoginPage.js";
 import Dashboard from "./components/dashboard/Dashboard.js";
