@@ -13,6 +13,7 @@ import Footer from "./product-site/footer/Footer.js";
 import Home from "./product-site/home/Home.js";
 import Register from "./product-site/register/Register.js";
 import Login from "./product-site/login/Login.js";
+import Forgot from "./product-site/forgot/Forgot.js";
 import Options from "./product-site/options/Options.js";
 import Dashboard from "./product-site/dashboard/Dashboard";
 import NavbarDashboard from "./product-site/navbar/NavbarDashboard.js";
@@ -70,6 +71,7 @@ function App() {
               <Route exact path="/" element={<Home/>}/>
               <Route exact path="/register" element={<Register/>}/>
               <Route exact path="/login" element={<Login/>}/>
+              <Route exact path="/forgot" element={<Forgot/>}/>
               <Route exact path="/options" element={<Options/>}/>
               <Route exact path="/dashboard" element={auth.currentUser? <Dashboard/>:<Navigate to="/login"/>}/>
               <Route exact path="/app/*" element={auth.currentUser? <StaffApp/>:<Navigate to="/login"/>}/>
