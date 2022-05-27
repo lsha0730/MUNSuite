@@ -67,7 +67,7 @@
     transition: 200ms;
 }
 .countries-list-container::-webkit-scrollbar-thumb {
-    background: rgba(188, 188, 188, 1);
+    background: rgba(220, 220, 220, 1);
     opacity: 100%;
     transition: 200ms;
 }
@@ -278,7 +278,7 @@
     transition: 200ms;
 }
 .pastebin:hover::-webkit-scrollbar-thumb {
-    background: rgba(188, 188, 188, 1);
+    background: rgba(220, 220, 220, 1);
     opacity: 100%;
     transition: 200ms;
 }

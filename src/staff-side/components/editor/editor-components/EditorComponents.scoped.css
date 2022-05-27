@@ -425,7 +425,7 @@
     transition: 200ms;
 }
 .options-container::-webkit-scrollbar-thumb {
-    background: rgba(188, 188, 188, 1);
+    background: rgba(220, 220, 220, 1);
     opacity: 100%;
     transition: 200ms;
 }
@@ -503,7 +503,7 @@
     transition: 200ms;
 }
 .content-text-input:hover::-webkit-scrollbar-thumb {
-    background: rgba(188, 188, 188, 1);
+    background: rgba(220, 220, 220, 1);
     opacity: 100%;
     transition: 200ms;
 }
