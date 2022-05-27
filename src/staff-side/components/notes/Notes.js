@@ -20,56 +20,37 @@ function Notes() {
 
     // Keeps notes in sync with delegations list
     useEffect(() => {
-        let newDelList = delegations.slice().map(item => item.name);
-        let oldDelList = notes.individual.slice().map(item => item.delegate);
+        // Updating list of notes
+        let newDels = delegations.slice().map(item => item.name);
+        let oldNotes = notes.individual.slice();
+        let oldDels = oldNotes.map(item => item.delegate);
+        let newNotes = newDels.map(delegate => {return {name: delegate}});
 
-        // Determining what delegates were added/removed
-        let toDelete = [];
-        let toAdd = [];
-        for (let i=0; i<newDelList.length; i++) {
-            let newItem = newDelList[i];
-            if (!oldDelList.includes(newItem)) toAdd.push(newItem);
-        }
-        for (let i=0; i<oldDelList.length; i++) {
-            let oldItem = oldDelList[i];
-            if (!newDelList.includes(oldItem)) toDelete.push(oldItem);
-        }
+        newNotes = newNotes.map(note => {
+            if (oldDels.includes(note.name)) {
+                return oldNotes[oldDels.indexOf(note.name)];
+            } else {
+                return {
+                    delegate: note.name,
+                    text: ""
+                }
+            }
+        })
 
-        // Updating the notes list
-        let newNotesList = notes.individual;
-        for (let i=0; i<newNotesList.length; i++) {
-            if (toDelete.includes(newNotesList[i].delegate)) newNotesList.splice(i, 1);
-        }
-        for (let j=0; j<toAdd.length; j++) {
-            newNotesList.push({
-                delegate: toAdd[j],
-                text: ""
-            })
-        }
-        newNotesList.sort((a, b) => a.delegate.toLowerCase().localeCompare(b.delegate.toLowerCase()));
-        for (let k=0; k<newNotesList.length; k++) newNotesList[k].id = k;
-        writeToFirebase("notes",
-        {
-            individual: newNotesList,
+        writeToFirebase("notes", {
+            individual: newNotes,
             quick: notes.quick
         });
 
-        // Updating the options list
-        let newOptionsList = options.slice();
-        for (let i=0; i<newOptionsList.length; i++) {
-            if (toDelete.includes(newOptionsList[i])) newOptionsList.splice(i, 1);
-        }
-        newOptionsList = newOptionsList.concat(toAdd);
-        newOptionsList.sort();
-        setOptions(newOptionsList);
-
+        // Updating queue options & selecteds
+        let finalDels = newNotes.map(note => note.delegate);
+        setOptions(finalDels.filter(item => !selected.includes(item)));
+        setSelected(selected.filter(item => finalDels.includes(item)));
     }, [delegations])
 
     // for rendering options
     useEffect(() => {
-        setOptions(options.sort((a, b) => a.localeCompare(b)));
         let renderArray = [];
-
         for(let i = 0; i < options.length; i++) {
             if(search === "" || options[i].toLowerCase().includes(search.toLowerCase())) {
                 renderArray.push(
@@ -83,12 +64,10 @@ function Notes() {
                 )
             }
         }
-
         setRenderOptions(renderArray);
 
         
         let returnRenderSelected = [];
-
         for (let j = 0; j < selected.length; j++) {
             returnRenderSelected.push(
                 <div onClick={()=>deselectOption(selected[j])} className="selection">
@@ -96,9 +75,8 @@ function Notes() {
                 </div>
             );
         }
-
         setRenderSelected(returnRenderSelected);
-    }, [search, isShowingOptions, selected, trigger])
+    }, [options, search, isShowingOptions, selected, trigger])
 
     useEffect(() => {
         let tempArr = [];
