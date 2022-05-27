@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import "./Register.scoped.css";
 import { getDatabase, set, ref } from "firebase/database";
+import defaultFormData from "./defaultFormData.js"
 
 function Register() {
     const database = getDatabase();
@@ -90,6 +91,8 @@ function Register() {
                     committee: commName,
                     conference: confName
                 });
+
+                set(ref(database, `appdata/${userCredential.user.uid}/livedata/form`), defaultFormData);
             })
                 .catch((error) => {
                     console.log(`Registration error (${error.code}): ${error.message}`)
