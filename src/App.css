@@ -19,6 +19,7 @@
 
 .UI-container {
   flex-grow: 1;
+  overflow-x: hidden;
 }
 
 /* width */

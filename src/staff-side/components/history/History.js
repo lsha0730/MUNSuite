@@ -75,7 +75,7 @@ function History() {
                     <div className="btt-clear-history" onClick={handleClear}>Clear History</div>
                     <div className="btt-download-history" onClick={exportProcesseds}>
                         <BsDownload size={18}/>
-                        <p>Export (.csv)</p>
+                        <p>Export All (.csv)</p>
                     </div>
                 </div>
             </div>
