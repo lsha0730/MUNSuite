@@ -100,6 +100,37 @@
     fill: #3C8CC9;
 }
 
+.btt-export-notes {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    padding: 8px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-top: 15px;
+
+    background-color: #EEEEEE;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.btt-export-notes:hover {
+    background-color: #D9D9D9;
+    transition: 200ms;
+}
+
+.btt-export-notes-inner {
+    width: 165px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 /*Searchbar*/
 .searchbar {
     position: relative;
@@ -251,7 +282,6 @@
 /*Noteblock*/
 .noteblock-container {
     width: 100%;
-    min-height: 200px;
     margin-bottom: 20px;
 
     display: flex;
@@ -266,6 +296,7 @@
 }
 .noteblock-textfield {
     flex-grow: 1;
+    min-height: 150px;
 
     background-color: #F7F7F7;
     border-radius: 10px;
@@ -339,7 +370,7 @@
     border-radius: 10px;
     background-color: #F7F7F7;
 
-    resize: vertical;
+    resize: none;
     overflow-y: auto;
 }
 .UI-right-input::placeholder {

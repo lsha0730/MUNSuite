@@ -175,7 +175,7 @@
     transition: 200ms;
 }
 
-.btt-download-history {
+.btt-export-history {
     width: 190px;
 
     display: flex;
@@ -193,7 +193,7 @@
     border-radius: 10px;
     cursor: pointer;
 }
-.btt-download-history:hover {
+.btt-export-history:hover {
     background-color: #D9D9D9;
     transition: 200ms;
 }

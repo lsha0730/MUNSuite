@@ -73,7 +73,7 @@ function History() {
                 <div className="card-container">{selectionRender}</div>
                 <div className="history-operations">
                     <div className="btt-clear-history" onClick={handleClear}>Clear History</div>
-                    <div className="btt-download-history" onClick={exportProcesseds}>
+                    <div className="btt-export-history" onClick={exportProcesseds}>
                         <BsDownload size={18}/>
                         <p>Export All (.csv)</p>
                     </div>
@@ -150,10 +150,7 @@ function History() {
             dataRows.push(cardRow);
         }
 
-        const rows = [["ID", "Author", "Status"]].concat(dataRows);
-
-        console.log(rows)
-        
+        const rows = [["ID", "Author", "Status"]].concat(dataRows);        
         exportToCsv("Directives History", rows)
     }
 }

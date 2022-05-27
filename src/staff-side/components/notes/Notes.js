@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./Notes.scoped.css";
-import { BsPersonFill } from "react-icons/bs";
+import { BsDownload, BsPersonFill } from "react-icons/bs";
 import { IoClipboard } from "react-icons/io5";
 import { GoSearch } from "react-icons/go";
 import { appContext } from "../../staffContext";
@@ -9,6 +9,7 @@ function Notes() {
     const {delegations} = useContext(appContext);
     const {notes} = useContext(appContext);
     const {writeToFirebase} = useContext(appContext);
+    const {exportToCsv} = useContext(appContext);
     const [notesIndvRenders, setNotesIndvRenders] = useState([]);
     const [options, setOptions] = useState(notes.individual.map(item => item.delegate));
     const [search, setSearch] = useState('');
@@ -131,9 +132,29 @@ function Notes() {
                 </div>
 
                 <textarea id="quicknotes-input" type="text" placeholder="Input here..." defaultValue={notes.quick} onChange={e => writeToFirebase("notes", {individual: notes.individual, quick: (e.target.value)})} className="UI-right-input"></textarea>
+
+                <div className="btt-export-notes" onClick={exportNotes}>
+                    <div className="btt-export-notes-inner">
+                        <BsDownload size={18}/>
+                        <p>Export Notes (.csv)</p>
+                    </div>
+                </div>
             </div>
         </div>
     )
+
+    function exportNotes() {
+        let dataRows = [];
+
+        for (let i=0; i<notes.individual.length; i++) {
+            let note = notes.individual[i];
+            let row = [note.delegate, note.text];
+            dataRows.push(row);
+        }
+
+        const rows = [["Quick Notes"], [notes.quick], [], ["Individual Notes"]].concat(dataRows);        
+        exportToCsv("Committee Notes", rows);
+    }
 
     function updateNotes(index, newText) {
         let tempArr = notes.individual.slice();
