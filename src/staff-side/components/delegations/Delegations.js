@@ -8,6 +8,7 @@ import { appContext } from "../../staffContext.js";
 function Delegations() {
     const {delegations} = useContext(appContext);
     const {writeToFirebase} = useContext(appContext);
+    const {exportToCsv} = useContext(appContext);
     const [selections, setSelections] = useState([]);
     const [modal, setModal] = useState(false);
     const [delegateBars, setDelegateBars] = useState([]);
@@ -59,9 +60,11 @@ function Delegations() {
                     </div>
                 </div>
 
-                <div className="export-delegations" onClick={exportCodes}>
-                    <BsIcons.BsDownload size={22}/>
-                    <p className="export-codes">Export Codes (.csv)</p>
+                <div className="btt-export-delegations" onClick={exportCodes}>
+                    <div className="btt-export-delegations-inner">
+                        <BsIcons.BsDownload size={18}/>
+                        <p>Export Codes (.csv)</p>
+                    </div>
                 </div>
             </div>
 
@@ -142,20 +145,7 @@ function Delegations() {
         }
 
         const rows = [["Delegate", "Code"]].concat(nameCodePairs);
-        
-        let csvContent = "data:text/csv;charset=utf-8,";
-        
-        rows.forEach(function(rowArray) {
-            let row = rowArray.join(",");
-            csvContent += row + "\r\n";
-        });
-
-        var encodedUri = encodeURI(csvContent);
-        var link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "delegate_codes.csv");
-        document.body.appendChild(link);
-        link.click();
+        exportToCsv("Delegate Codes", rows);
     }
 }
 

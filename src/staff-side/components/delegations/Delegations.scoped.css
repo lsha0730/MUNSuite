@@ -147,24 +147,34 @@
     transition: 200ms;
 }
 
-.export-delegations {
-    width: 80%;
-    color: black;
+.btt-export-delegations {
+    width: 90%;
 
     display: flex;
-    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    justify-content: flex-start;
 
+    font-size: 14px;
+    font-weight: 600;
+
+    padding: 8px;
+    padding-left: 25px;
+    padding-right: 25px;
+
+    background-color: #EEEEEE;
+    border-radius: 10px;
     cursor: pointer;
 }
-.export-delegations:hover {
-    color: #686868;
+.btt-export-delegations:hover {
+    background-color: #D9D9D9;
     transition: 200ms;
 }
-.export-codes {
-    padding-left: 15px;
-    font-weight: 500;
+
+.btt-export-delegations-inner {
+    width: 165px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 /*-----------RIGHT UI-----------*/

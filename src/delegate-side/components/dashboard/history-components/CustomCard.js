@@ -30,6 +30,7 @@ function CustomCard(props) {
         setBodyRenders(props.body.map(block => {
             switch (block.type) {
                 case "select-multiple":
+                    console.log(block.value)
                     return (
                         <div>
                             <p className="block-heading">{block.heading}</p>
