@@ -29,9 +29,8 @@ function Dashboard(props) {
     const [formRender, setFormRender] = useState();
     const [submission, setSubmission] = useState(currForm.map(item => {return { type: item.type, heading: item.heading }}));
     const [submissionComplete, setSubmissionComplete] = useState(false);
-    const [showingIncompleteWarning, setShowingIncompleteWarning] = useState(false);
     const [notImpostor, setNotImpostor] = useState(false);
-    const [showingImpostorWarning, setShowingImpostorWarning] = useState(false);
+    const [warning, setWarning] = useState("");
     const [showingConfirmation, setShowingConfirmation] = useState(false);
 
     const [relevantDirectives, setRelevantDirectives] = useState([]);
@@ -39,7 +38,7 @@ function Dashboard(props) {
 
     useEffect(() => {
         // Keeps submission array in line with any form changes
-        matchSubmissionToForm(currForm, form); // Runs first so that further functions have updated arrays
+        matchSubmissionToForm(currForm, form); // Runs first so that functions triggered by setCurrForm have updated arrays
         setCurrForm(form);
     }, [form])
 
@@ -109,8 +108,7 @@ function Dashboard(props) {
                         {formRender}
 
                         <div className={settings.formOpen==undefined? "submit-container":`${settings.formOpen? "submit-container":"hide"}`}>
-                            <p className={showingIncompleteWarning? "warning":"warning fade"}>Required fields incomplete</p>
-                            <p className={showingImpostorWarning && !showingIncompleteWarning? "warning":"warning fade"}>You must be a sponsor</p>
+                            <p className={warning==""? "warning fade":"warning"}>{warning}</p>
                             <div className="btt-submit" onClick={handleSubmit}>Submit</div>
                         </div>
                     </div>
@@ -219,7 +217,6 @@ function Dashboard(props) {
     }
 
     function handleSubmit() {
-        console.log(submission)
         if (submissionComplete && notImpostor) {
             let submissionObj = {
                 submissionID: (pendings || []).concat(processed || []).length,
@@ -242,11 +239,11 @@ function Dashboard(props) {
             props.submit(submissionObj);
             setShowingConfirmation(true);
         } else if (!submissionComplete) {
-            setShowingIncompleteWarning(true);
-            setTimeout(() => setShowingIncompleteWarning(false), 2000);
+            setWarning("Required fields incomplete");
+            setTimeout(() => setWarning(""), 2000);
         } else if (!notImpostor) {
-            setShowingImpostorWarning(true);
-            setTimeout(() => setShowingImpostorWarning(false), 2000);
+            setWarning("You must be a sponsor");
+            setTimeout(() => setWarning(""), 2000);
         }
 
         // Clear for new form
