@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 
-import './App.css';
+import './App.scoped.css';
 import { siteContext } from "./Context";
 
 import { initializeApp } from "firebase/app";

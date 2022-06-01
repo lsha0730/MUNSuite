@@ -8,6 +8,9 @@ body {
   margin: 0;
   padding: 0;
 }
+body::-webkit-scrollbar {
+  display: none;
+}
 
 * {
   margin: 0;
@@ -17,4 +20,88 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(241, 241, 241, 0);
+  border-radius: 5px;
+  transition: 200ms;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(188, 188, 188, 0);
+  border-radius: 5px;
+  transition: 200ms;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(160, 160, 160);
+  transition: 200ms;
+}
+
+* { 
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
+   box-sizing: border-box; 
+}
+
+::-moz-selection { /* Code for Firefox */
+  color: #378DCC;
+  background: #BAE4FA;
+}
+
+::selection {
+  color: #378DCC;
+  background: #BAE4FA;
+}
+
+input[type="radio"] {
+  /* remove standard background appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* create custom radiobutton appearance */
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  padding: 2px;
+  /* background-color only for content */
+  background-clip: content-box;
+  border: 0.5px solid #bbbbbb;
+  border-radius: 50%;
+}
+
+/* appearance for checked radiobutton */
+input[type="radio"]:checked {
+  background-color: #3C8CC9;
+}
+
+input[type="checkbox"] {
+  /* remove standard background appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* create custom radiobutton appearance */
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  padding: 2px;
+  /* background-color only for content */
+  background-clip: content-box;
+  border: 0.5px solid #bbbbbb;
+  border-radius: 30%;
+}
+
+/* appearance for checked radiobutton */
+input[type="checkbox"]:checked {
+  background-color: #3C8CC9;
 }

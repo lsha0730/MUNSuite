@@ -1,6 +1,6 @@
 .footer {
     width: 100%;
-    min-height: 100px;
+    min-height: 70px;
     background-color: #424242;
 
     display: flex;
@@ -16,6 +16,6 @@
 }
 
 .footer-text {
-    color: white;
-    font-weight: 300;
+    color: #f3f3f3;
+    font-weight: 200;
 }

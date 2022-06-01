@@ -4,14 +4,7 @@ import "./Footer.scoped.css";
 function Footer() {
     return (
         <div className="footer">
-            <div className="footer-contents">
-                <p className="footer-text">MUNSuite © 2022<br/>All Rights Reserved.</p>
-
-                <div style={{display: "flex", flexDirection: "column"}}>
-                    <p className="footer-text">Created by Lincoln Lee</p>
-                    <p className="footer-text">Shoot me an <a style={{color: "#BCBCBC"}} href="mailto:digitaldirectivesystem@gmail.com">email!</a></p>
-                </div>
-            </div>
+            <p className="footer-text">MUNSuite © 2022&nbsp;&nbsp;|&nbsp;&nbsp;By Lincoln Lee&nbsp;&nbsp;|&nbsp;&nbsp;<a style={{color: "#BCBCBC"}} href="mailto:digitaldirectivesystem@gmail.com">Shoot me an email!</a></p>
         </div>
     )
 }
