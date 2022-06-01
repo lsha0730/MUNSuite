@@ -6,6 +6,7 @@ import CustomCard from "../inbox/card/CustomCard.js";
 import { GoTriangleDown, GoSearch } from "react-icons/go";
 import { FaFilter } from "react-icons/fa";
 import { BsDownload } from "react-icons/bs";
+import { Confirmation } from "../modal-ui/modal-ui";
 
 function History() {
     const {processed} = useContext(appContext);
@@ -16,6 +17,7 @@ function History() {
     const [selectionRender, setSelectionRender] = useState();
     const [search, setSearch] = useState('');
     const [dropdownValue, setDropdownValue] = useState("No Filter");
+    const [modal, setModal] = useState(false);
 
     useEffect(() => {
         let reverseArr = processed.slice().reverse();
@@ -64,21 +66,24 @@ function History() {
                 )
             }
         }
-    }, [selection])
+    }, [selection, processed])
 
 
     return (
         <div className="history-container">
+            {modal? <Confirmation function={handleClear} bttLabel="Clear" description="Clearing your history will permanently remove your history and clear all delegate statistics. Consider exporting a local copy first." setModal={setModal}/>:<></>}
+
             <div className="UI-left">
                 <div className="card-container">{selectionRender}</div>
                 <div className="history-operations">
-                    <div className="btt-clear-history" onClick={handleClear}>Clear History</div>
+                    <div className="btt-clear-history" onClick={() => {setModal(true)}}>Clear History</div>
                     <div className="btt-export-history" onClick={exportProcesseds}>
                         <BsDownload size={18}/>
                         <p>Export All (.csv)</p>
                     </div>
                 </div>
             </div>
+
             <div className="UI-right">
                 <div className="UI-topright">
                     <div className="searchbar">
@@ -150,7 +155,7 @@ function History() {
             dataRows.push(cardRow);
         }
 
-        const rows = [["ID", "Author", "Status"]].concat(dataRows);        
+        const rows = [["JSON Format: ", JSON.stringify(processed)], [], ["ID", "Author", "Status"]].concat(dataRows);        
         exportToCsv("Directives History", rows)
     }
 }

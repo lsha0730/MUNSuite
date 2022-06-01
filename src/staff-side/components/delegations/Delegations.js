@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./Delegations.scoped.css";
-import { AddUNCountries, AddCustomCountry, AddViaSpreadsheet } from "./modal-ui/modal-ui.js";
+import { AddUNCountries, AddCustomCountry, AddViaSpreadsheet, Confirmation } from "../modal-ui/modal-ui.js";
 import Delbar from "./delbar/Delbar.js";
 import * as BsIcons from "react-icons/bs";
 import { appContext } from "../../staffContext.js";
@@ -20,9 +20,7 @@ function Delegations() {
 
     return (
         <div className="delegations-container">
-            <div className={!(modal===false)? "modal-background" : "disappear"}>
-                {modalUI()}
-            </div>
+            {modalUI()}
 
             <div className="UI-left">
                 <div className="UI-topleft">
@@ -56,7 +54,7 @@ function Delegations() {
                     </div>
 
                     <div className={!(selections.length<1) ? "btt-remove-selected" : "btt-remove-selected hide"}
-                    onClick={removeSelected}>
+                    onClick={() => {setModal("confirmation")}}>
                         <p>Remove Selected</p>
                     </div>
                 </div>
@@ -82,7 +80,9 @@ function Delegations() {
             case "add-custom-country":
                 return <AddCustomCountry setModal={setModal}/>;
             case "add-via-spreadsheet":
-                return <AddViaSpreadsheet setModal={setModal}/>
+                return <AddViaSpreadsheet setModal={setModal}/>;
+            case "confirmation":
+                return <Confirmation function={removeSelected} bttLabel="Remove" description="Deleting delegates will revoke their form access and delete any notes you took about them, permanently. Their statistics and directives will remain." setModal={setModal}/>;
             default:
                 break;
         }
@@ -150,7 +150,7 @@ function Delegations() {
             nameCodePairs.push(newPair);
         }
 
-        const rows = [["Delegate", "Code"]].concat(nameCodePairs);
+        const rows = [["JSON Format: ", JSON.stringify(delegations)], [], ["Delegate", "Code"]].concat(nameCodePairs);
         exportToCsv("Delegate Codes", rows);
     }
 }

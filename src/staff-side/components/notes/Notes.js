@@ -152,7 +152,7 @@ function Notes() {
             dataRows.push(row);
         }
 
-        const rows = [["Quick Notes"], [notes.quick], [], ["Individual Notes"]].concat(dataRows);        
+        const rows = [["JSON Format: ", JSON.stringify(notes)], [], ["Quick Notes"], [notes.quick], [], ["Individual Notes"]].concat(dataRows);        
         exportToCsv("Committee Notes", rows);
     }
 
