@@ -87,7 +87,7 @@ function Notes() {
                 tempArr.push(
                     <div className="noteblock-container">
                         <p className="noteblock-title">{note.delegate}</p>
-                        <textarea id={`textfield ${note.id}`} type="text" defaultValue={note.text} placeholder="Input here..." className="noteblock-textfield" onChange={() => updateNotes(note.id, document.getElementById(`textfield ${note.id}`).value)}></textarea>
+                        <textarea type="text" defaultValue={note.text} placeholder="Input here..." className="noteblock-textfield" onChange={e => updateNotes(i, e.target.value)}></textarea>
                     </div>
                 )
             }

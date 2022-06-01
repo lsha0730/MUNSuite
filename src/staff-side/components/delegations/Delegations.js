@@ -7,6 +7,7 @@ import { appContext } from "../../staffContext.js";
 
 function Delegations() {
     const {delegations} = useContext(appContext);
+    const {notes} = useContext(appContext);
     const {writeToFirebase} = useContext(appContext);
     const {exportToCsv} = useContext(appContext);
     const [selections, setSelections] = useState([]);
@@ -135,6 +136,11 @@ function Delegations() {
         });
         writeToFirebase("delegations", newDelegations);
         setSelections(newSelections);
+
+        let newNotesIndv = notes.individual.filter((note) => {
+            return !selections.includes(note.delegate);
+        });
+        writeToFirebase("notes", { quick: notes.quick, individual: newNotesIndv });
     }
 
     function exportCodes() {
