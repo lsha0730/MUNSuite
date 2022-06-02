@@ -142,7 +142,6 @@ function Dashboard(props) {
     );
 
     function matchSubmissionToForm(prevArr, currArr) {
-        // !!! Edge case not considered: two identical question objects back to back
         let tempPrev = prevArr.slice();
         let tempCurr = currArr.slice();
 
@@ -189,21 +188,21 @@ function Dashboard(props) {
             setFormRender(currForm.map(item => {
                 switch (item.type) {
                     case "header":
-                        return <Header key={`preview${item.id}`} id={item.id} image={item.image || defaultBanner} heading={item.heading} subheading={item.subheading}/>
+                        return <Header key={`${item.id}`} id={item.id} image={item.image || defaultBanner} heading={item.heading} subheading={item.subheading}/>
                     case "radio":
-                        return <Radio key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} updateSubmission={updateSubmission}/>
+                        return <Radio key={`${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} updateSubmission={updateSubmission}/>
                     case "multiplechoice":
-                        return <MultipleChoice key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} updateSubmission={updateSubmission}/>
+                        return <MultipleChoice key={`${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} updateSubmission={updateSubmission}/>
                     case "content":
-                        return <Content key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content}/>
+                        return <Content key={`${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content}/>
                     case "shorttext":
-                        return <ShortText key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} updateSubmission={updateSubmission}/>
+                        return <ShortText key={`${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} updateSubmission={updateSubmission}/>
                     case "longtext":
-                        return <LongText key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} updateSubmission={updateSubmission}/>
+                        return <LongText key={`${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} updateSubmission={updateSubmission}/>
                     case "dropdown":
-                        return <Dropdown key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} updateSubmission={updateSubmission}/>
+                        return <Dropdown key={`${item.id} ${delegations.length}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} updateSubmission={updateSubmission}/>
                     case "select-multiple":
-                        return <SelectMultiple key={item.options? item.options.length:0} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options || []} updateSubmission={updateSubmission}/>
+                        return <SelectMultiple key={`${item.id} ${item.options? item.options.length:0} ${delegations.length}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options || []} updateSubmission={updateSubmission}/>
                     default:
                         console.log("Could not render form block.")
                 }

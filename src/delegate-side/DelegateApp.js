@@ -152,11 +152,9 @@ function App() {
   function getDelFromCode(code) {
     for (let i=0; i<delegations.length; i++) {
       if (delegations[i].code == code) {
-        console.log(delegations[i].name)
         return delegations[i].name;
       }
     }
-    console.log("Not found")
     return null;
   }
 

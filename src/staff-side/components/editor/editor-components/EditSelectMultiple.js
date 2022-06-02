@@ -8,7 +8,7 @@ function EditSelectMultiple(props) {
     const [require, setRequire] = useState(props.required);
     const [toggleRender, setToggleRender] = useState();
     const [useDels, setUseDels] = useState(props.options == "all-delegations");
-    const [options, setOptions] = useState((props.options == "all-delegations"? delegations.map(item => item.name):props.options));
+    const [options, setOptions] = useState([]);
     const [optionsRender, setOptionsRender] = useState([]);
     const [heading, setHeading] = useState(props.heading);
     const [subheading, setSubheading] = useState(props.subheading);
@@ -17,6 +17,7 @@ function EditSelectMultiple(props) {
 
     useEffect(() => {
         setDelNames(delegations.map(del => del.name));
+        setOptions((props.options == "all-delegations"? delegations.map(item => item.name):props.options));
     }, [delegations])
 
     useEffect(() => {

@@ -297,15 +297,15 @@ function Editor() {
                 case "dropdown":
                     return (
                         <div className="preview-editor-pair">
-                            <Dropdown key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized}/>
-                            <EditDropdown key={`editor${item.id}${editing}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} updateForm={updateForm} locked={standardized}/>
+                            <Dropdown key={`preview${item.id}${delegations.length}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized}/>
+                            <EditDropdown key={`editor${item.id}${editing}${delegations.length}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} editing={editing} updateForm={updateForm} locked={standardized}/>
                         </div>
                     )
                 case "select-multiple":
                     return (
                         <div className="preview-editor-pair">
-                            <SelectMultiple key={item.options? item.options.length:0} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options || []} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized && (item.id == 3 || item.id == 4)}/>
-                            <EditSelectMultiple key={`editor${item.id}${editing}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options || []} editing={editing} updateForm={updateForm} locked={standardized && (item.id == 3 || item.id == 4)}/>
+                            <SelectMultiple key={`preview${item.id}${item.options? item.options.length:0}${delegations.length}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options || []} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized && (item.id == 3 || item.id == 4)}/>
+                            <EditSelectMultiple key={`editor${item.id}${editing}${delegations.length}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} max={item.max} options={item.options || []} editing={editing} updateForm={updateForm} locked={standardized && (item.id == 3 || item.id == 4)}/>
                         </div>
                     )
                 default:
