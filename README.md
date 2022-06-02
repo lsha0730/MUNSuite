@@ -21,13 +21,13 @@ _Bring MUN out of the stone age and into the 21st century. Use the internet, not
 <p>Let the cold, hard numbers show you who is leading the committee, who passes the most directives, and who isn't contributing. All done behind the scenes, with no effort; we'll crunch the numbers this time.
 
 _How do you decide on crisis awards? Check the statistics page._</p>
-<br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 
 ## A Dedicated Delegate Assessment Page.
 <img align="left" width="600px" src="https://munsuite.com/static/media/notes.cc4d838623dc9bbff075.png"></img>
 <p>Note-take on delegate performance individually and filter for specific delegates' notes when making specific comparisons. Collaborate with other dais members and export your notes anytime.</p>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 
 ## A Directives History Page.
@@ -35,7 +35,7 @@ _How do you decide on crisis awards? Check the statistics page._</p>
 <p>Paper directives: you see them, then toss them. Skip the forgetting and maintain a history of all processed directives. Filter for passed directives to see a summary of your committee's actions. Search for a specific one to refresh your memory.
 
 _If it wasn't recorded, did it really happen?_</p>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 
 <a href="https://munsuite.com">Check it out!</a>
