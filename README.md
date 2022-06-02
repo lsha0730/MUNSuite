@@ -35,7 +35,7 @@ _How do you decide on crisis awards? Check the statistics page._</p>
 <p>Paper directives: you see them, then toss them. Skip the forgetting and maintain a history of all processed directives. Filter for passed directives to see a summary of your committee's actions. Search for a specific one to refresh your memory.
 
 _If it wasn't recorded, did it really happen?_</p>
-<br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/>
 
 
-##<a href="https://munsuite.com">Check it out!</a>
+<a href="https://munsuite.com">Check it out!</a>
