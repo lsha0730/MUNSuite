@@ -9,6 +9,7 @@
 }
 
 .form-container {
+    min-width: 700px;
     display: flex;
     flex-direction: column;
     margin-top: 30px;
@@ -191,7 +192,7 @@
     justify-content: center;
 
     border-radius: 10px;
-    background-color: #EAEAEA;
+    background-color: #ECECEC;
 
     font-size: 24px;
     font-weight: 700;

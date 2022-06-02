@@ -34,7 +34,7 @@ function Statistics() {
                 </div>
 
                 <div className="statbars-container">
-                    {statBarsRenders.length != 0? statBarsRenders:<div className="no-stats-box">No statistics</div>}
+                    {statBarsRenders.length != 0? statBarsRenders:<div className="no-stats-box">No Statistics</div>}
                 </div>
             </div>
 
