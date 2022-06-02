@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# No More Directive Chaos.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Directives you can actually read.
+<img align="left" width="600px" src="https://munsuite.com/static/media/inbox.ed43803ab15fcf0b4f9c.png"></img>
+<p>Avoid missing information or poorly formatted directives using a guided form entry. Read beautiful UI font instead of deciphering terrible handwriting. Standardize directive formats to make them quickly skimmable instead of searching a crumpled sheet for randomly placed directive details.
 
-## Available Scripts
+_Why decipher terrible handwriting? Use MUNSuite and read beautiful UI font instead._</p>
+<br/><br/><br/><br/><br/><br/><br/>
 
-In the project directory, you can run:
 
-### `npm start`
+## Automatic Status Communication.
+<img align="left" width="600px" src="https://munsuite.com/static/media/delside.78b600d75c560c38f822.png"></img>
+<p>Lost, damaged or forgotten directives all leave the delegate hanging; did their directive pass or fail? Every time you update a private directive, you have to write a note back and wait for it to get passed to the directive author. Is this really the right way to handle status communication?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+_Bring MUN out of the stone age and into the 21st century. Use the internet, not messengers._</p>
+<br/><br/><br/><br/><br/><br/><br/>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Individual Statistics Collection.
+<img align="left" width="600px" src="https://munsuite.com/static/media/statistics.bd9c9db64b1839346f2d.png"></img>
+<p>Let the cold, hard numbers show you who is leading the committee, who passes the most directives, and who isn't contributing. All done behind the scenes, with no effort; we'll crunch the numbers this time.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+_How do you decide on crisis awards? Check the statistics page._</p>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## A Dedicated Delegate Assessment Page.
+<img align="left" width="600px" src="https://munsuite.com/static/media/notes.cc4d838623dc9bbff075.png"></img>
+<p>Note-take on delegate performance individually and filter for specific delegates' notes when making specific comparisons. Collaborate with other dais members and export your notes anytime.</p>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## A Directives History Page.
+<img align="left" width="600px" src="https://munsuite.com/static/media/history.8254426bc9705ea670c6.png"></img>
+<p>Paper directives: you see them, then toss them. Skip the forgetting and maintain a history of all processed directives. Filter for passed directives to see a summary of your committee's actions. Search for a specific one to refresh your memory.
 
-### `npm run eject`
+_If it wasn't recorded, did it really happen?_</p>
+<br/><br/><br/><br/><br/><br/><br/><br/>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<a href="https://munsuite.com">Check it out!</a>
