@@ -1,7 +1,7 @@
 # No More Directive Chaos.
 
-## Directives you can actually read.
 <img align="left" width="600px" src="https://munsuite.com/static/media/inbox.ed43803ab15fcf0b4f9c.png"></img>
+## Directives you can actually read.
 <p>Avoid missing information or poorly formatted directives using a guided form entry. Read beautiful UI font instead of deciphering terrible handwriting. Standardize directive formats to make them quickly skimmable instead of searching a crumpled sheet for randomly placed directive details.
 
 _Why decipher terrible handwriting? Use MUNSuite and read beautiful UI font instead._</p>
