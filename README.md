@@ -5,7 +5,7 @@
 <p>Avoid missing information or poorly formatted directives using a guided form entry. Read beautiful UI font instead of deciphering terrible handwriting. Standardize directive formats to make them quickly skimmable instead of searching a crumpled sheet for randomly placed directive details.
 
 _Why decipher terrible handwriting? Use MUNSuite and read beautiful UI font instead._</p>
-<br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/>
 
 
 ## Automatic Status Communication.
