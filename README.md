@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+# No More Directive Chaos.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Directives you can actually read.
 
-## Available Scripts
+Avoid missing information or poorly formatted directives using a guided form entry. Read beautiful UI font instead of deciphering terrible handwriting. Standardize directive formats to make them quickly skimmable instead of searching a crumpled sheet for randomly placed directive details.
 
-In the project directory, you can run:
+_Why decipher terrible handwriting? Use MUNSuite and read beautiful UI font instead._
 
-### `npm start`
+## Automatic Status Communication.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Lost, damaged or forgotten directives all leave the delegate hanging; did their directive pass or fail? Every time you update a private directive, you have to write a note back and wait for it to get passed to the directive author. Is this really the right way to handle status communication?
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+_Bring MUN out of the stone age and into the 21st century. Use the internet, not messengers._
 
-### `npm test`
+## Individual Statistics Collection.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Let the cold, hard numbers show you who is leading the committee, who passes the most directives, and who isn't contributing. All done behind the scenes, with no effort; we'll crunch the numbers this time.
 
-### `npm run build`
+_How do you decide on crisis awards? Check the statistics page._
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Collaborative Processing
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+What's a team without collaboration? Access your account on multiple computers to cooperate on directive processing. Pass and fail directives at lightning speed, and leave more time for the fun stuff. No more 5-minute waits just to hear back.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## A Directives History Page.
 
-### `npm run eject`
+Paper directives: you see them, then toss them. Skip the forgetting and maintain a history of all processed directives. Filter for passed directives to see a summary of your committee's actions. Search for a specific one to refresh your memory.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+_If it wasn't recorded, did it really happen?_
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<a href="https://munsuite.com">Check it out!</a>
