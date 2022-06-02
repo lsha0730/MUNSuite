@@ -277,8 +277,8 @@ function Editor() {
                 case "content":
                     return (
                         <div className="preview-editor-pair">
-                            <Content key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized}/>
-                            <EditContent key={`editor${item.id}${editing}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content} editing={editing} updateForm={updateForm} locked={standardized}/>
+                            <Content key={`preview${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content || []} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized}/>
+                            <EditContent key={`editor${item.id}${editing}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} content={item.content || []} editing={editing} updateForm={updateForm} locked={standardized}/>
                         </div>
                     )
                 case "shorttext":
