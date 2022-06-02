@@ -222,8 +222,6 @@ function Dashboard(props) {
     }
 
     function updateSubmission(id, data) {
-        console.log(id)
-        console.log(data)
         let tempArr = submission.slice();
         tempArr[id].value = data;
         setSubmission(tempArr);

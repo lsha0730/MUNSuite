@@ -61,7 +61,7 @@ function EditHeader(props) {
             let file = e.target.files[0];
             listAll(ref(storage, `appdata/${userID}/livedata/header`)).then(result => {
                 let fileID = getNewID(result.items.map(item => parseInt(item.name.split(".")[0])));
-                let uploadLocation = `appdata/${userID}/livedata/header/${fileID}.${file.type.slice(6)}`;
+                let uploadLocation = props.imgPath==""? `appdata/${userID}/livedata/header/${fileID}.${file.type.slice(6)}` : props.imgPath;
                 uploadBytes(ref(storage, uploadLocation), file).then(() => {
                     getDownloadURL(ref(storage, uploadLocation)).then(url => {
                         setImageData({
