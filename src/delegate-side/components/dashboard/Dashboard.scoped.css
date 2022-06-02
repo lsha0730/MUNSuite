@@ -36,6 +36,12 @@
 
 
 /*---------HAT---------*/
+.form-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .preview-hat {
     display: flex;
     flex-direction: column;
@@ -54,6 +60,32 @@
     font-size: 18px;
     font-weight: 500;
     color: #BCBCBC;
+}
+
+.btt-signout {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    margin-top: 5px;
+    padding: 8px;
+    padding-left: 25px;
+    padding-right: 25px;
+
+    background-color: #4B6980;
+    color: #FFFFFF;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.btt-signout:hover {
+    background-color: #6c92af;
+    color: #FFFFFF;
+    transition: 200ms;
 }
 
 

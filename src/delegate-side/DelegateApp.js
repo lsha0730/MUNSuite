@@ -10,17 +10,17 @@ import { delContext } from './DelegateContext.js';
 import { siteContext } from "../Context.js";
 
 function App() {
-  const userUID = window.location.pathname.slice(6); // window.location.pathname is "/form/<uuid>"
-  const [validLink, setValidLink] = useState("loading");
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState();
-  const [appRender, setAppRender] = useState();
-
   const [delegations, setDelegations] = useState([]);
   const [form, setForm] = useState([]);
   const [pendings, setPendings] = useState([]);
   const [processed, setProcessed] = useState([]);
   const [settings, setSettings] = useState({});
+
+  const userUID = window.location.pathname.slice(6); // window.location.pathname is "/form/<uuid>"
+  const [validLink, setValidLink] = useState("loading");
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState();
+  const [appRender, setAppRender] = useState();
 
   // Firebase Setup
   const {app} = useContext(siteContext);
@@ -108,6 +108,11 @@ function App() {
   }
 
   useEffect(() => {
+    setLoggedIn(delegations.map(item => item.code).includes(sessionStorage.getItem("code")))
+    setUser(getDelFromCode(sessionStorage.getItem("code")))
+  }, [delegations])
+
+  useEffect(() => {
     switch(validLink) {
       case "loading":
         setAppRender(<div></div>)
@@ -126,7 +131,7 @@ function App() {
   }, [validLink, delegations, loggedIn])
 
   return (
-    <delContext.Provider value={{delegations, form, settings, user, processed, pendings}}>
+    <delContext.Provider value={{delegations, form, settings, user, setUser, setLoggedIn, processed, pendings}}>
         <div className="App-container">
           {appRender}
         </div>
@@ -138,9 +143,21 @@ function App() {
       if (delegations[i].code == input) {
         setLoggedIn(true);
         setUser(delegations[i].name);
+        sessionStorage.setItem("code", delegations[i].code)
         break;
       }
     }
+  }
+
+  function getDelFromCode(code) {
+    for (let i=0; i<delegations.length; i++) {
+      if (delegations[i].code == code) {
+        console.log(delegations[i].name)
+        return delegations[i].name;
+      }
+    }
+    console.log("Not found")
+    return null;
   }
 
   function submit(submissionObj) {

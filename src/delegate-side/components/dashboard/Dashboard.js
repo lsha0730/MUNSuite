@@ -23,7 +23,8 @@ function Dashboard(props) {
     const {pendings} = useContext(delContext);
     const {processed} = useContext(delContext);
     const {settings} = useContext(delContext);
-    const {user} = useContext(delContext);
+    const {user, setUser} = useContext(delContext);
+    const {setLoggedIn} = useContext(delContext);
 
     const [currForm, setCurrForm] = useState(form);
     const [formRender, setFormRender] = useState();
@@ -100,9 +101,16 @@ function Dashboard(props) {
                     </div>
                     :
                     <div className="form-container">
-                        <div className="preview-hat">
-                            <p className="preview-hat-heading">{user}</p>
-                            <p className="preview-hat-subheading">{settings.committee}</p>
+                        <div className="form-top">
+                            <div className="preview-hat">
+                                <p className="preview-hat-heading">{user}</p>
+                                <p className="preview-hat-subheading">{settings.committee}</p>
+                            </div>
+                            <div className="btt-signout" onClick={() => {
+                                sessionStorage.removeItem("code");
+                                setUser(null);
+                                setLoggedIn(false);
+                            }}>Sign Out</div>
                         </div>
 
                         {formRender}
