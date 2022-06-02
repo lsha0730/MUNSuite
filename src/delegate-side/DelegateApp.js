@@ -14,6 +14,7 @@ function App() {
   const [validLink, setValidLink] = useState("loading");
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState();
+  const [appRender, setAppRender] = useState();
 
   const [delegations, setDelegations] = useState([]);
   const [form, setForm] = useState([]);
@@ -23,7 +24,6 @@ function App() {
 
   // Firebase Setup
   const {app} = useContext(siteContext);
-  const pendingsMounted = useRef(false);
   const database = getDatabase(app);
 
   // Firebase: Reading
@@ -107,28 +107,31 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    switch(validLink) {
+      case "loading":
+        setAppRender(<div></div>)
+        break;
+      case "valid":
+        if (loggedIn && delegations.map(del => del.name).includes(user)) {
+          setAppRender(<Dashboard submit={submit}/>)
+        } else {
+          setAppRender(<LoginPage attemptLogin={attemptLogin}/>)
+        }
+        break;
+      case "invalid":
+        setAppRender(<InvalidLink/>)
+        break;
+    }
+  }, [validLink, delegations, loggedIn])
+
   return (
     <delContext.Provider value={{delegations, form, settings, user, processed, pendings}}>
         <div className="App-container">
-          {getAppRender()}
+          {appRender}
         </div>
     </delContext.Provider>
   );
-
-  function getAppRender() {
-    switch(validLink) {
-      case "loading":
-        return <div></div>
-      case "valid":
-        if (loggedIn) {
-          return <Dashboard submit={submit}/>
-        } else {
-          return <LoginPage attemptLogin={attemptLogin}/>
-        }
-      case "invalid":
-        return <InvalidLink/>
-    }
-  }
 
   function attemptLogin(input) {
     for (let i=0; i<delegations.length; i++) {

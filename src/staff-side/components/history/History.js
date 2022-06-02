@@ -71,7 +71,7 @@ function History() {
 
     return (
         <div className="history-container">
-            {modal? <Confirmation function={handleClear} bttLabel="Clear" description="Clearing your history will permanently remove your history and clear all delegate statistics. Consider exporting a local copy first." setModal={setModal}/>:<></>}
+            {modal? <Confirmation function={handleClear} bttLabel="Clear History" description="Clearing your history will permanently remove your history and clear all delegate statistics. Consider exporting a local copy first." setModal={setModal}/>:<></>}
 
             <div className="UI-left">
                 <div className="card-container">{selectionRender}</div>

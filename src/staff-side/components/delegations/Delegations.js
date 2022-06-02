@@ -82,7 +82,7 @@ function Delegations() {
             case "add-via-spreadsheet":
                 return <AddViaSpreadsheet setModal={setModal}/>;
             case "confirmation":
-                return <Confirmation function={removeSelected} bttLabel="Remove" description="Deleting delegates will revoke their form access and delete any notes you took about them, permanently. Their statistics and directives will remain." setModal={setModal}/>;
+                return <Confirmation function={removeSelected} bttLabel="Remove Selected" description="Deleting delegates will revoke their form access and delete any notes you took about them, permanently. Their statistics and directives will remain." setModal={setModal}/>;
             default:
                 break;
         }

@@ -13,10 +13,6 @@
     transition: 200ms;
 }
 
-.disappear {
-    display: none !important;
-}
-
 .px18 {
     font-size: 18px;
 }
@@ -213,22 +209,4 @@
     font-weight: 600;
     font-size: 24px;
     color: #BCBCBC;
-}
-
-
-/*----------MODAL UI-----------*/
-.modal-background {
-    width: 100%;
-    height: 100%;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background-color: rgba(0, 0, 0, 0.3);
 }
