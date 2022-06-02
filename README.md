@@ -1,7 +1,7 @@
 # No More Directive Chaos.
 
-<img align="left" width="600px" src="https://munsuite.com/static/media/inbox.ed43803ab15fcf0b4f9c.png"></img>
 ## Directives you can actually read.
+<img align="left" width="600px" src="https://munsuite.com/static/media/inbox.ed43803ab15fcf0b4f9c.png"></img>
 <p>Avoid missing information or poorly formatted directives using a guided form entry. Read beautiful UI font instead of deciphering terrible handwriting. Standardize directive formats to make them quickly skimmable instead of searching a crumpled sheet for randomly placed directive details.
 
 _Why decipher terrible handwriting? Use MUNSuite and read beautiful UI font instead._</p>
@@ -21,7 +21,7 @@ _Bring MUN out of the stone age and into the 21st century. Use the internet, not
 <p>Let the cold, hard numbers show you who is leading the committee, who passes the most directives, and who isn't contributing. All done behind the scenes, with no effort; we'll crunch the numbers this time.
 
 _How do you decide on crisis awards? Check the statistics page._</p>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 
 ## A Dedicated Delegate Assessment Page.
