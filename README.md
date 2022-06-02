@@ -5,7 +5,7 @@
 <p>Avoid missing information or poorly formatted directives using a guided form entry. Read beautiful UI font instead of deciphering terrible handwriting. Standardize directive formats to make them quickly skimmable instead of searching a crumpled sheet for randomly placed directive details.
 
 _Why decipher terrible handwriting? Use MUNSuite and read beautiful UI font instead._</p>
-<br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/>
 
 
 ## Automatic Status Communication.
@@ -13,7 +13,7 @@ _Why decipher terrible handwriting? Use MUNSuite and read beautiful UI font inst
 <p>Lost, damaged or forgotten directives all leave the delegate hanging; did their directive pass or fail? Every time you update a private directive, you have to write a note back and wait for it to get passed to the directive author. Is this really the right way to handle status communication?
 
 _Bring MUN out of the stone age and into the 21st century. Use the internet, not messengers._</p>
-<br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/>
 
 
 ## Individual Statistics Collection.
@@ -35,7 +35,7 @@ _How do you decide on crisis awards? Check the statistics page._</p>
 <p>Paper directives: you see them, then toss them. Skip the forgetting and maintain a history of all processed directives. Filter for passed directives to see a summary of your committee's actions. Search for a specific one to refresh your memory.
 
 _If it wasn't recorded, did it really happen?_</p>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/>
 
 
-<a href="https://munsuite.com">Check it out!</a>
+##<a href="https://munsuite.com">Check it out!</a>
