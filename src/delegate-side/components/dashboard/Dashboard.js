@@ -188,7 +188,7 @@ function Dashboard(props) {
             setFormRender(currForm.map(item => {
                 switch (item.type) {
                     case "header":
-                        return <Header key={`${item.id}`} id={item.id} image={item.image || defaultBanner} heading={item.heading} subheading={item.subheading}/>
+                        return <Header key={`${item.id}`} id={item.id} imgLink={item.imgLink || defaultBanner} heading={item.heading} subheading={item.subheading}/>
                     case "radio":
                         return <Radio key={`${item.id}`} id={item.id} required={item.required} heading={item.heading} subheading={item.subheading} options={item.options || []} updateSubmission={updateSubmission}/>
                     case "multiplechoice":

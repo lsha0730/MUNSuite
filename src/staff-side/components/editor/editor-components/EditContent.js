@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes, listAll, deleteObject } from "firebase/storage";
 import "./EditorComponents.scoped.css";
 import { TiDeleteOutline } from "react-icons/ti";
 import { appContext } from "../../../staffContext";
@@ -93,15 +93,16 @@ function EditContent(props) {
             case "image":
                 tempArr.push({
                     type: "image",
-                    heading: "New Image",
+                    heading: "Image Heading",
                     imgName: "Default Image",
-                    value: require("../defaultBanner.png")
+                    value: require("../defaultBanner.png"),
+                    path: ""
                 })
                 break;
             case "text":
                 tempArr.push({
                     type: "text",
-                    heading: "New Image",
+                    heading: "Text Heading",
                     value: "I am a body of text. Enter directions or descriptive information here!"
                 })
                 break;
@@ -125,8 +126,12 @@ function EditContent(props) {
                 let value = await handleFileUpload(event);
                 tempArr[index].imgName = value.name;
                 tempArr[index].value = value.link;
+                tempArr[index].path = value.path;
                 break;
             case "delete":
+                if (tempArr[index].type == "image" && tempArr[index].path !== "") {
+                    deleteObject(ref(storage, tempArr[index].path));
+                }
                 tempArr.splice(index, 1);
         }
         setContentArr(tempArr);
@@ -136,18 +141,29 @@ function EditContent(props) {
         return new Promise(resolve => {
             if (e.target.files[0]) {
                 let file = e.target.files[0];
-                let imgURL = "";
-                let uploadLocation = `appdata/${userID}/livedata/content`;
-                uploadBytes(ref(storage, uploadLocation), file);
-                getDownloadURL(ref(storage, uploadLocation)).then((url) => {
-                    imgURL = url;
-                    resolve({
-                        name: file.name,
-                        link: imgURL
+                listAll(ref(storage, `appdata/${userID}/livedata/content`)).then(result => {
+                    let fileID = getNewID(result.items.map(item => parseInt(item.name.split(".")[0])));
+                    let uploadLocation = `appdata/${userID}/livedata/content/${fileID}.${file.type.slice(6)}`;
+                    uploadBytes(ref(storage, uploadLocation), file).then(() => {
+                        getDownloadURL(ref(storage, uploadLocation)).then(url => {
+                            resolve({
+                                name: file.name,
+                                link: url,
+                                path: uploadLocation
+                            })
+                        })
                     })
                 })
             }
         })
+    }
+
+    function getNewID(array) {
+        let result = 0;
+        while (array.includes(result)) {
+            result++;
+        }
+        return result;
     }
 }
 

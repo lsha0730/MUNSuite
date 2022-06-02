@@ -149,8 +149,9 @@ function Editor() {
         switch (type) {
             case "header":
                 newObj.heading = "New Header";
-                newObj.image = require("./defaultBanner.png");
-                newObj.imageFileName = "Default Banner";
+                newObj.imgLink = require("./defaultBanner.png");
+                newObj.imgName = "Default Banner";
+                newObj.imgPath = "";
                 break;
             case "radio":
                 newObj.heading = "New Radio";
@@ -164,7 +165,7 @@ function Editor() {
                 break;
             case "content":
                 newObj.heading = "New Content Block";
-                newObj.content = [{type:"image", heading:"Image Heading", value:require("./defaultBanner.png")},
+                newObj.content = [{type:"image", heading:"Image Heading", value:require("./defaultBanner.png"), imgName:"Default Image", path:""},
                                     {type:"text", heading:"Text Heading", value:"I am a body of text. Enter directions or descriptive information here!"}];
                 break;
             case "shorttext":
@@ -255,8 +256,8 @@ function Editor() {
                 case "header":
                     return (
                         <div className="preview-editor-pair">
-                            <Header key={`preview${item.id}`} id={item.id} image={item.image} heading={item.heading} subheading={item.subheading} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized && item.id == 0}/>
-                            <EditHeader key={`editor${item.id}${editing}`} id={item.id} image={item.image} imageFileName={item.imageFileName} heading={item.heading} subheading={item.subheading} editing={editing} updateForm={updateForm} locked={standardized && item.id == 0}/>
+                            <Header key={`preview${item.id}`} id={item.id} imgPath={item.imgPath} imgLink={item.imgLink} heading={item.heading} subheading={item.subheading} editing={editing} setEditing={setEditing} updateForm={updateForm} locked={standardized && item.id == 0}/>
+                            <EditHeader key={`editor${item.id}${editing}`} id={item.id} imgPath={item.imgPath} imgLink={item.imgLink} imgName={item.imgName} heading={item.heading} subheading={item.subheading} editing={editing} updateForm={updateForm} locked={standardized && item.id == 0}/>
                         </div>
                     )
                 case "radio":
