@@ -146,11 +146,15 @@ function Dashboard(props) {
         let tempCurr = currArr.slice();
 
         if (tempCurr.length > tempPrev.length) {
-            // A question was added (to the end of the form)
-            setSubmission(submission.concat({
-                type: tempCurr[tempCurr.length - 1].type,
-                heading: tempCurr[tempCurr.length - 1].heading
-            }))
+            // Question(s) were added (to the end of the form)
+            let toConcat = []
+            for (let i=0; i<tempCurr.length - tempPrev.length; i++) {
+                toConcat.push({
+                    type: tempCurr[tempCurr.length - 1 - i].type,
+                    heading: tempCurr[tempCurr.length - 1 - i].heading
+                })
+            }
+            setSubmission(submission.concat(toConcat))
         } else if (tempCurr.length < tempPrev.length) {
             // A question was deleted
             let delIndex = -1;
@@ -218,6 +222,8 @@ function Dashboard(props) {
     }
 
     function updateSubmission(id, data) {
+        console.log(id)
+        console.log(data)
         let tempArr = submission.slice();
         tempArr[id].value = data;
         setSubmission(tempArr);
