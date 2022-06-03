@@ -17,14 +17,15 @@ function Dashboard() {
 
   // Firebase: Reading Settings
   useEffect(() => {
-      onValue(ref(database, `appdata/${currentUser}/livedata/settings`), (snapshot) => {
-          let node = snapshot.val();
-          if (!node) {
-            setSettings({conference: "MUNSuite", committee: "Committee"});
-          } else {
-            setSettings(node);
-          }
-        })
+    onValue(ref(database, `appdata/${currentUser}/livedata/settings`), (snapshot) => {
+        let node = snapshot.val();
+        if (!node) {
+          console.log("Overwrote")
+          setSettings({conference: "MUNSuite", committee: "Committee"});
+        } else {
+          setSettings(node);
+        }
+      })
   }, [])
 
   return (

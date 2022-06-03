@@ -1,14 +1,44 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import "./Register.scoped.css";
-import { getDatabase, set, ref } from "firebase/database";
+import { getDatabase, set, ref, onValue } from "firebase/database";
 import defaultFormData from "./defaultFormData.js"
+import { siteContext } from "../../Context";
 
 function Register() {
     const database = getDatabase();
     const auth = getAuth();
+    const {currentUser} = useContext(siteContext);
     const [warning, setWarning] = useState('');
+
+    // Temporary product code validation
+    const [validCodes, setValidCodes] = useState([]);
+    const [usedCodes, setUsedCodes] = useState([]);
+    useEffect(() => {
+        onValue(ref(database, `adminData/productCodes/valid`), (snapshot) => {
+            // Check if the link is valid
+            if (snapshot.exists()) {
+                setValidCodes(snapshot.val());
+            }
+        })
+        onValue(ref(database, `adminData/productCodes/used`), (snapshot) => {
+            // Check if the link is valid
+            if (snapshot.exists()) {
+                setUsedCodes(snapshot.val());
+            }
+        })
+    }, [])
+    function productCodeValid(entry) {
+        return validCodes.includes(entry);
+    }
+    function killProductCode(code) {
+        let newValids = validCodes.filter(item => item !== code);
+        set(ref(database, `adminData/productCodes/valid`), newValids);
+
+        let newUseds = usedCodes.concat(code);
+        set(ref(database, `adminData/productCodes/used`), newUseds);
+    }
 
     return (
         <div className="centering-container">
@@ -86,13 +116,14 @@ function Register() {
             setTimeout(() => setWarning(""), 1000);
         } else {
             createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-                // Registered successfully
-                set(ref(database, `appdata/${userCredential.user.uid}/livedata/settings`), {
-                    committee: commName,
-                    conference: confName
-                });
+                console.log(commName)
+                console.log(confName)
 
-                set(ref(database, `appdata/${userCredential.user.uid}/livedata/form`), defaultFormData);
+                // Registered successfully
+                writeToFirebase(userCredential.user.uid, "settings", { committee: commName, conference: confName })
+                writeToFirebase(userCredential.user.uid, "form", defaultFormData);
+
+                killProductCode(productCode);
             })
                 .catch((error) => {
                     console.log(`Registration error (${error.code}): ${error.message}`)
@@ -104,38 +135,11 @@ function Register() {
         return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
     }
 
-    function productCodeValid(entry) {
-        return [
-            'Hs92aNWfB60zXLt',
-            'm2yahTF55U1PXrg',
-            'hhFijMJ8bQekzBY',
-            'JNwaPWyXwKKJ6xp',
-            'Jpwdxkj2xUB3ePw',
-            'EOup9oGnNxIGuFj',
-            'OMWUjx7dh4v6AK7',
-            '1D0ki07NwUixKsA',
-            'jbYwCdJi4xCgqrL',
-            'zjDG2d4v2aLH1Z4',
-            'LXJ37jtBe7Eoyoc',
-            'BzeW2tiewiVeLvJ',
-            'o1CJcMDhon73n1i',
-            'yXshgSKtRUQfu5i',
-            'jyWtCtpWAOeUAJD',
-            'yvTxXkCPmFwPht9',
-            'dqYgMvQHy5bBkv2',
-            'cD0LRf70xcsQNrP',
-            'uSqwEYilzk4IOon',
-            'XmAWvGCv67WApXh',
-            'pBguL8JFuleBVwJ',
-            'NQsWNoB1Jjr5vQB',
-            '3ELcXEra9Oaip9w',
-            'CGXX9mktS7MCzXh',
-            'zgSWb2h5cs08s7V',
-            'jfBdvJ3bfH9U1qO',
-            'm1yoeA6YXZdyeru',
-            'QEmm9bsNq5Xv62j',
-            'E1dpgHPNpYTa0EO',
-            'PMyuvIULAY8z0Tq' ].includes(entry)
+    // Firebase: Writing
+    function writeToFirebase(uid, target, content) {
+        if (["delegations", "form", "pendings", "processed", "notes", "settings"].includes(target)) {
+            set(ref(database, `appdata/${uid}/livedata/${target}`), content);
+        }
     }
 }
 
