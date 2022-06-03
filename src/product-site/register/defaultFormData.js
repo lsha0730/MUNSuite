@@ -2,8 +2,9 @@ const defaultFormData = [
     {
       "heading": "New Header",
       "id": 0,
-      "image": "/static/media/defaultBanner.dd0c5647a035bc1e3f3f.png",
-      "imageFileName": "Default Banner",
+      "imgLink": "/static/media/defaultBanner.dd0c5647a035bc1e3f3f.png",
+      "imgName": "Default Banner",
+      "imgPath": "",
       "subheading": false,
       "type": "header"
     },
