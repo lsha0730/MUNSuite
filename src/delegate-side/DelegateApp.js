@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { getDatabase, onValue, ref, set } from "firebase/database";
+import { get, getDatabase, onValue, ref, set } from "firebase/database";
 
 import LoginPage from "./components/loginpage/LoginPage.js";
 import Dashboard from "./components/dashboard/Dashboard.js";
@@ -64,6 +64,7 @@ function App() {
 
     onValue(ref(database, `appdata/${userUID}/livedata/pendings`), (snapshot) => {
       let node = snapshot.val();
+      console.log("Node is", node)
       if (!node) {
         setPendings([]);
       } else {
@@ -100,6 +101,7 @@ function App() {
 
   // Firebase: Writing
   function writeToFirebase(target, content) {
+    console.log(content)
     if (["pendings"].includes(target) && validLink) { // Delegate side only writes to pendings
       if (content.length > 0) {
         set(ref(database, `appdata/${userUID}/livedata/${target}`), content);
@@ -119,7 +121,7 @@ function App() {
         break;
       case "valid":
         if (loggedIn && delegations.map(del => del.name).includes(user)) {
-          setAppRender(<Dashboard submit={submit}/>)
+          setAppRender(<Dashboard key="dashboard" submit={submit}/>)
         } else {
           setAppRender(<LoginPage attemptLogin={attemptLogin}/>)
         }
@@ -159,7 +161,15 @@ function App() {
   }
 
   function submit(submissionObj) {
-    writeToFirebase("pendings", pendings.concat(submissionObj));
+    // console.log("Submitted!")
+    // console.log("Pendings is: ", pendings)
+    // console.log(submissionObj)
+    // console.log(pendings.concat(submissionObj))
+
+    get(ref(database, `appdata/${userUID}/livedata/pendings`)).then((snapshot) => {
+      let currPendings = snapshot.exists()? snapshot.val():[];
+      writeToFirebase("pendings", currPendings.concat(submissionObj));
+    })
   }
 }
 

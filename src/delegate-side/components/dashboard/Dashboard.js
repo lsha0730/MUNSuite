@@ -128,7 +128,7 @@ function Dashboard(props) {
                     <div className="history-top-contents">
                         <FaHistory size={35} className="history-icon"/>
                         <div style={{display: "flex", flexDirection: "column"}}>
-                            <p style={{fontSize: 20, fontWeight:600, color:"#B0B0B0"}}>Relevant Submissions</p>
+                            <p style={{fontSize: 20, fontWeight:600, color:"#B0B0B0"}} onClick={() => {console.log(pendings)}}>Relevant Submissions</p>
                             <p style={{fontSize: 14, fontWeight:600, color:"#B0B0B0"}}>Click cards to expand</p>
                         </div>
                     </div>
