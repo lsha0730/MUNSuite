@@ -1,6 +1,11 @@
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
 body {
   font-weight: 300;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -18,10 +23,9 @@ body::-webkit-scrollbar {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
 
 /* width */
 ::-webkit-scrollbar {
@@ -48,20 +52,21 @@ code {
   transition: 200ms;
 }
 
-* { 
-  -moz-box-sizing: border-box; 
-  -webkit-box-sizing: border-box; 
-   box-sizing: border-box; 
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-::-moz-selection { /* Code for Firefox */
-  color: #378DCC;
-  background: #BAE4FA;
+::-moz-selection {
+  /* Code for Firefox */
+  color: #378dcc;
+  background: #bae4fa;
 }
 
 ::selection {
-  color: #378DCC;
-  background: #BAE4FA;
+  color: #378dcc;
+  background: #bae4fa;
 }
 
 input[type="radio"] {
@@ -82,7 +87,7 @@ input[type="radio"] {
 
 /* appearance for checked radiobutton */
 input[type="radio"]:checked {
-  background-color: #3C8CC9;
+  background-color: #3c8cc9;
 }
 
 input[type="checkbox"] {
@@ -103,5 +108,5 @@ input[type="checkbox"] {
 
 /* appearance for checked radiobutton */
 input[type="checkbox"]:checked {
-  background-color: #3C8CC9;
+  background-color: #3c8cc9;
 }

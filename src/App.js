@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
-import './App.scoped.css';
+import "./App.scoped.css";
 import { siteContext } from "./Context";
 
 import { initializeApp } from "firebase/app";
@@ -32,87 +32,115 @@ function App() {
     storageBucket: "munsuite-d1d0c.appspot.com",
     messagingSenderId: "679459991121",
     appId: "1:679459991121:web:dc8aadabadab0e13309270",
-    measurementId: "G-41D98K4YRG"
+    measurementId: "G-41D98K4YRG",
   };
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
   const auth = getAuth();
 
-  const [currentUser, setCurrentUser] = useState(auth.currentUser? auth.currentUser.uid : null);
+  const [currentUser, setCurrentUser] = useState(
+    auth.currentUser ? auth.currentUser.uid : null
+  );
   const navigate = useNavigate();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-          // User is signed in
-          setCurrentUser(user.uid);
-          if (window.location.pathname == "/login" || window.location.pathname == "/register") {
-            navigate("/dashboard")
-          }
+        // User is signed in
+        setCurrentUser(user.uid);
+        if (
+          window.location.pathname == "/login" ||
+          window.location.pathname == "/register"
+        ) {
+          navigate("/dashboard");
+        }
       } else {
-          // User is signed out
-          setCurrentUser(null);
+        // User is signed out
+        setCurrentUser(null);
       }
-    })
-  }, [])
+    });
+  }, []);
 
   useEffect(() => {
-    if (auth.currentUser && (window.location.pathname == "/login" || window.location.pathname == "/register")) {
-      navigate("/dashboard")
+    if (
+      auth.currentUser &&
+      (window.location.pathname == "/login" ||
+        window.location.pathname == "/register")
+    ) {
+      navigate("/dashboard");
     }
-  }, [window.location.pathname])
+  }, [window.location.pathname]);
 
   return (
-    <siteContext.Provider value={{currentUser, setCurrentUser, app}}>
-      <div className="App-container" style={window.location.pathname == "/dashboard"? {overflowY: "hidden"}:{}}>
+    <siteContext.Provider value={{ currentUser, setCurrentUser, app }}>
+      <div
+        className="App-container"
+        style={
+          window.location.pathname == "/dashboard"
+            ? { overflowY: "hidden" }
+            : {}
+        }
+      >
         {getNavbar()}
         <div className="UI-container">
-            <Routes>
-              <Route exact path="/" element={<Home/>}/>
-              <Route exact path="/register" element={<Register/>}/>
-              <Route exact path="/login" element={<Login/>}/>
-              <Route exact path="/forgot" element={<Forgot/>}/>
-              <Route exact path="/options" element={<Options/>}/>
-              <Route exact path="/dashboard" element={auth.currentUser? <Dashboard/>:<Navigate to="/login"/>}/>
-              <Route exact path="/app/*" element={auth.currentUser? <StaffApp/>:<Navigate to="/login"/>}/>
-              <Route exact path="/form/*" element={<DelegateApp/>}/>
-              <Route path="*" element={<Navigate to="/" replace/>}/>
-            </Routes>
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/register" element={<Register />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/forgot" element={<Forgot />} />
+            <Route exact path="/options" element={<Options />} />
+            <Route
+              exact
+              path="/dashboard"
+              element={
+                auth.currentUser ? <Dashboard /> : <Navigate to="/login" />
+              }
+            />
+            <Route
+              exact
+              path="/app/*"
+              element={
+                auth.currentUser ? <StaffApp /> : <Navigate to="/login" />
+              }
+            />
+            <Route exact path="/form/*" element={<DelegateApp />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
         </div>
         {getFooter()}
       </div>
     </siteContext.Provider>
-  )
+  );
 
   function getNavbar() {
-    let pathname = window.location.pathname
+    let pathname = window.location.pathname;
     switch (true) {
       case pathname == "/dashboard":
-        return <NavbarDashboard key="navbar-dashboard"/>
+        return <NavbarDashboard key="navbar-dashboard" />;
       case /\/app\/\w*/i.test(pathname):
-        return
+        return;
       case /\/form\/\w*/i.test(pathname):
-        return
+        return;
       default:
         if (auth.currentUser) {
-          return <NavbarSignedin key="navbar-signedin"/>
+          return <NavbarSignedin key="navbar-signedin" />;
         } else {
-          return <Navbar key="navbar"/>
+          return <Navbar key="navbar" />;
         }
     }
   }
 
   function getFooter() {
-    let pathname = window.location.pathname
+    let pathname = window.location.pathname;
     switch (true) {
       case pathname == "/dashboard":
-        return
+        return;
       case /\/app\/\w*/i.test(pathname):
-        return
+        return;
       case /\/form\/\w*/i.test(pathname):
-        return
+        return;
       default:
-        return <Footer key="footer"/>
+        return <Footer key="footer" />;
     }
   }
 }

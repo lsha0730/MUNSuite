@@ -161,11 +161,6 @@ function App() {
   }
 
   function submit(submissionObj) {
-    // console.log("Submitted!")
-    // console.log("Pendings is: ", pendings)
-    // console.log(submissionObj)
-    // console.log(pendings.concat(submissionObj))
-
     get(ref(database, `appdata/${userUID}/livedata/pendings`)).then((snapshot) => {
       let currPendings = snapshot.exists()? snapshot.val():[];
       writeToFirebase("pendings", currPendings.concat(submissionObj));
