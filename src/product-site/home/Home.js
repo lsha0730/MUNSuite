@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.scoped.css";
 
@@ -12,8 +12,33 @@ import inbox from "./images/inbox.png";
 import history from "./images/history.png";
 import statistics from "./images/statistics.png";
 import notes from "./images/notes.png";
+import { BsFillPersonLinesFill } from "react-icons/bs";
+import { ImFontSize, ImSearch } from "react-icons/im";
+import { FaHistory } from "react-icons/fa";
+import { GoGraph } from "react-icons/go";
 
 function Home() {
+    const adwords = ["Simplified", "Modernized", "Streamlined", "Innovated", "Reimagined"]
+    const [adwordIndex, setAdwordIndex] = useState(0);
+    const bruh = useRef(false);
+
+    useEffect(() => {
+        setTimeout(() => {bruh.current = true}, 1000);
+    }, [])
+
+    useEffect(() => {
+        if (bruh.current) {
+            setTimeout(
+                () => {setAdwordIndex(null)},
+                4000
+            )
+        }
+        setTimeout(
+            () => {setAdwordIndex(adwordIndex == adwords.length - 1 ? 0 : adwordIndex + 1)},
+            4000
+        )
+    }, [adwordIndex])
+
     return (
         <div className="home-container">
             {/*Top Section*/}
@@ -25,7 +50,7 @@ function Home() {
                         <img src={formTab} alt="Form Page Preview" className="mockup-form"/>
                     </div>
                     <div className="top-right">
-                        <p className="top-heading">MUN<br/>Directives,<br/><p style={{color: "#47667D"}}>Simplified.</p></p>
+                        <p className="top-heading">MUN<br/>Directives,<br/><p className="adword">{adwords[adwordIndex]}.</p></p>
                         <p className="top-subheading">The 21st century solution to directive chaos</p>
                         <Link to="/options" className="btt-get-started">Get started</Link>
                     </div>
@@ -37,15 +62,21 @@ function Home() {
                 <div className="home-feature-group-imgText">
                     <img src={delside} alt="Delegate Side UI Image" className="features-image"/>
                     <div className="feature-text-group">
-                        <p className="feature-text-heading">Personalized Delegate Dashboards.</p>
+                        <div className="features-icon-heading-group">
+                            <BsFillPersonLinesFill size={50} className="features-icon"/>
+                            <p className="feature-text-heading">Personalized Delegate Dashboards.</p>
+                        </div>
                         <p className="feature-text-subheading">Directive status communication, a submission history, and password gating.</p>
                     </div>
                 </div>
 
                 <div className="home-feature-group-textImg">
                     <div className="feature-text-group">
-                        <p className="feature-text-heading">Directives You Can Actually Read.</p>
-                        <p className="feature-text-subheading">And a form shutoff for when things get a little crazy.</p>
+                        <div className="features-icon-heading-group">
+                            <ImFontSize size={50} className="features-icon"/>
+                            <p className="feature-text-heading">Directives You Can Actually Read.</p>
+                        </div>
+                        <p className="feature-text-subheading">And a form shutoff for when things get a little <br/> too crazy.</p>
                     </div>
                     <img src={inbox} alt="Inbox UI Image" className="features-image"/>
                 </div>
@@ -53,14 +84,20 @@ function Home() {
                 <div className="home-feature-group-imgText">
                     <img src={history} alt="History UI Image" className="features-image"/>
                     <div className="feature-text-group">
-                        <p className="feature-text-heading">A Directives History Page.</p>
+                        <div className="features-icon-heading-group">
+                            <FaHistory size={50} className="features-icon"/>
+                            <p className="feature-text-heading">A Directives History Page.</p>
+                        </div>
                         <p className="feature-text-subheading">This time when you leave your desk, the whole pile won't just disappear.</p>
                     </div>
                 </div>
 
                 <div className="home-feature-group-textImg">
                     <div className="feature-text-group">
-                        <p className="feature-text-heading">Auto-collected Delegate Statistics.</p>
+                        <div className="features-icon-heading-group">
+                            <GoGraph size={50} className="features-icon"/>
+                            <p className="feature-text-heading">Auto-collected Delegate Statistics.</p>
+                        </div>
                         <p className="feature-text-subheading">Automatically curated, to show who's putting money where their mouth is.</p>
                     </div>
                     <img src={statistics} alt="Inbox UI Image" className="features-image"/>
@@ -69,7 +106,10 @@ function Home() {
                 <div className="home-feature-group-imgText">
                     <img src={notes} alt="Statistics UI Image" className="features-image"/>
                     <div className="feature-text-group">
-                        <p className="feature-text-heading">Searchable Notes for Every Delegate.</p>
+                        <div className="features-icon-heading-group">
+                            <ImSearch size={50} className="features-icon"/>
+                            <p className="feature-text-heading">Searchable Notes for Every Delegate.</p>
+                        </div>
                         <p className="feature-text-subheading">Evaluate and compare delegates with a dedicated UI. No more scribbled papers.</p>
                     </div>
                 </div>
