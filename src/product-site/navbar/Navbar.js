@@ -23,15 +23,15 @@ function Navbar() {
         </div>
     )
 
-    const homeBar = (
+    const whiteBar = (
         <div className="navbar-container">
             <div className="navbar">
                 <Link to="/"><img src={LogoWhite} className="logo"/></Link>
                 <div className="options">
-                    <Link to="/" className="option-text-home">Home</Link>
-                    <Link to="/register" className="option-text-home">Register</Link>
-                    <Link to="/login" className="option-text-home">Login</Link>
-                    <Link to="/options" className="option-options-home">See Options</Link>
+                    <Link to="/" className="option-text-white">Home</Link>
+                    <Link to="/register" className="option-text-white">Register</Link>
+                    <Link to="/login" className="option-text-white">Login</Link>
+                    <Link to="/options" className="option-options-white">See Options</Link>
                 </div>
             </div>
         </div>
@@ -52,6 +52,21 @@ function Navbar() {
         </div>
     )
 
+    const signedinWhiteBar = (
+        <div className="navbar-container">
+            <div className="navbar">
+                <Link to="/"><img src={LogoWhite} className="logo"/></Link>
+                <div className="options">
+                    <div></div>
+                    <div></div>
+                    <Link to="/" className="option-text-white">Home</Link>
+                    <div className="option-options-white" onClick={handleSignout}>Sign Out</div>
+                    <Link to="/dashboard" className="option-options-white">Open Dashboard</Link>
+                </div>
+            </div>
+        </div>
+    )
+
     const dashboardBar = (
         <div className="navbar-container">
             <div className="navbar">
@@ -66,7 +81,11 @@ function Navbar() {
 
     switch (true) {
         case pathname == "/":
-            return homeBar;
+            if (auth.currentUser) {
+                return signedinWhiteBar
+            } else {
+                return whiteBar
+            }
         case pathname == "/dashboard":
             return dashboardBar;
         case /\/app\/\w*/i.test(pathname):

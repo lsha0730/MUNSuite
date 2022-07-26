@@ -134,7 +134,7 @@
 }
 
 .home-feature-group-imgText {
-  width: 1500px;
+  width: 1350px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -145,7 +145,7 @@
 }
 
 .home-feature-group-textImg {
-  width: 1500px;
+  width: 1350px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -156,7 +156,7 @@
 }
 
 .features-image {
-  width: 900px;
+  width: 750px;
   border-radius: 5px;
   box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -170,21 +170,21 @@
 
 .feature-text-heading {
   color: #47667D;
-  font-size: 44px;
+  font-size: 38px;
   font-weight: 800;
   margin-bottom: 20px;
 }
 
 .feature-text-subheading {
   /* color: #BCBCBC; */
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 200;
 }
 
 /*---------MODERNIZE SECTION---------*/
 .home-modernize {
   width: 100vw;
-  height: 100vh;
+  height: 120vh;
 
   position: relative;
   overflow: hidden;

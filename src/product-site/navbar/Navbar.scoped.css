@@ -69,19 +69,19 @@
 }
 
 
-.option-text-home {
+.option-text-white {
     font-size: 14px;
     font-weight: 600;
     text-decoration: none;
     color: white;
     cursor: pointer;
 }
-.option-text-home:hover {
+.option-text-white:hover {
     opacity: 0.6;
     transition: 200ms;
 }
 
-.option-options-home {
+.option-options-white {
     font-size: 14px;
     font-weight: 600;
 
@@ -96,7 +96,7 @@
     border-radius: 10px;
     cursor: pointer;
 }
-.option-options-home:hover {
+.option-options-white:hover {
     background-color: rgba(256,256,256,0.5);
     transition: 200ms;
 }
