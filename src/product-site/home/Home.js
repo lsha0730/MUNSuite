@@ -18,6 +18,7 @@ function Home() {
         <div className="home-container">
             {/*Top Section*/}
             <div className="home-top">
+                <div className="top-gradient"></div>
                 <div className="home-top-container">
                     <div className="top-left">
                         <img src={inboxTab} alt="Inbox Page Preview" className="mockup-inbox"/>
@@ -26,6 +27,7 @@ function Home() {
                     <div className="top-right">
                         <p className="top-heading">MUN<br/>Directives,<br/><p style={{color: "#47667D"}}>Simplified.</p></p>
                         <p className="top-subheading">The 21st century solution to directive chaos</p>
+                        <Link to="/options" className="btt-get-started">Get started</Link>
                     </div>
                 </div>
             </div>

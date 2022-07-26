@@ -16,8 +16,6 @@ import Login from "./product-site/login/Login.js";
 import Forgot from "./product-site/forgot/Forgot.js";
 import Options from "./product-site/options/Options.js";
 import Dashboard from "./product-site/dashboard/Dashboard";
-import NavbarDashboard from "./product-site/navbar/NavbarDashboard.js";
-import NavbarSignedin from "./product-site/navbar/NavbarSignedin.js";
 
 import StaffApp from "./staff-side/StaffApp.js";
 import DelegateApp from "./delegate-side/DelegateApp.js";
@@ -81,7 +79,7 @@ function App() {
             : {}
         }
       >
-        {getNavbar()}
+        <Navbar/>
         <div className="UI-container">
           <Routes>
             <Route exact path="/" element={<Home />} />
@@ -107,42 +105,10 @@ function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
-        {getFooter()}
+        <Footer/>
       </div>
     </siteContext.Provider>
   );
-
-  function getNavbar() {
-    let pathname = window.location.pathname;
-    switch (true) {
-      case pathname == "/dashboard":
-        return <NavbarDashboard key="navbar-dashboard" />;
-      case /\/app\/\w*/i.test(pathname):
-        return;
-      case /\/form\/\w*/i.test(pathname):
-        return;
-      default:
-        if (auth.currentUser) {
-          return <NavbarSignedin key="navbar-signedin" />;
-        } else {
-          return <Navbar key="navbar" />;
-        }
-    }
-  }
-
-  function getFooter() {
-    let pathname = window.location.pathname;
-    switch (true) {
-      case pathname == "/dashboard":
-        return;
-      case /\/app\/\w*/i.test(pathname):
-        return;
-      case /\/form\/\w*/i.test(pathname):
-        return;
-      default:
-        return <Footer key="footer" />;
-    }
-  }
 }
 
 export default App;
