@@ -57,6 +57,15 @@ function Home() {
                 </div>
             </div>
 
+            <div className="trusted-container">
+                <img src={require("./images/vmun.png")} className="trusted-logo"/>
+                <img src={require("./images/horizons.png")} className="trusted-logo"/>
+                <img src={require("./images/cahsmun.png")} className="trusted-logo"/>
+                <img src={require("./images/rimun.png")} className="trusted-logo"/>
+                <img src={require("./images/caimun.png")} className="trusted-logo"/>
+            </div>
+        
+
             {/*Features Section*/}
             <div className="home-features">
                 <div className="home-feature-group-imgText">

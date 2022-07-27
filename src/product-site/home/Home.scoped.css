@@ -10,7 +10,7 @@
 /*---------TOP SECTION---------*/
 .home-top {
   width: 100vw;
-  height: 700px;
+  height: 600px;
   margin-top: 50px;
   margin-bottom: 70px;
 }
@@ -125,6 +125,21 @@
     opacity: 0.7;
     transition: 200ms;
 }
+
+/*---------TRUSTED BY---------*/
+.trusted-container {
+  width: 70vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 150px;
+}
+
+.trusted-logo {
+  height: 70px;
+}
+
 
 /*---------FEATURES SECTION---------*/
 .home-features {
