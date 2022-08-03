@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { getDatabase, onValue, ref, set } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import './StaffApp.scoped.css';
