@@ -20,22 +20,11 @@ import { GoGraph } from "react-icons/go";
 function Home() {
     const adwords = ["Simplified", "Modernized", "Streamlined", "Innovated", "Reimagined"]
     const [adwordIndex, setAdwordIndex] = useState(0);
-    const bruh = useRef(false);
 
     useEffect(() => {
-        setTimeout(() => {bruh.current = true}, 1000);
-    }, [])
-
-    useEffect(() => {
-        if (bruh.current) {
-            setTimeout(
-                () => {setAdwordIndex(null)},
-                4000
-            )
-        }
         setTimeout(
             () => {setAdwordIndex(adwordIndex == adwords.length - 1 ? 0 : adwordIndex + 1)},
-            4000
+            3000
         )
     }, [adwordIndex])
 
