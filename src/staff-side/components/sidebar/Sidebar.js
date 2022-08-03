@@ -44,37 +44,37 @@ function Sidebar() {
             <div className="Sidebar-subcontainer">
                 <div className="Sidebar-topicons">
                     <div className="Sidebar-option" onClick={() => {setPage("delegations")}}>
-                        <IconContext.Provider value={{color: "BCBCBC"}}>
+                        <IconContext.Provider value={page==="delegations"? {color: "3C8CC9"} : {color: "BCBCBC"}}>
                             <BsIcons.BsPeopleFill size={22} className={page==="delegations"? "active":"inactive"}/>
                         </IconContext.Provider>
                     </div>
 
                     <div className="Sidebar-option" onClick={() => {setPage("editor")}}>
-                        <IconContext.Provider value={{color: "BCBCBC"}}>
+                        <IconContext.Provider value={page==="editor"? {color: "3C8CC9"} : {color: "BCBCBC"}}>
                             <BsIcons.BsPencilFill size={22} className={page==="editor"? "active":"inactive"}/>
                         </IconContext.Provider>
                     </div>
                     
                     <div className="Sidebar-option" onClick={() => {setPage("inbox")}}>
-                        <IconContext.Provider value={{color: "BCBCBC"}}>
+                        <IconContext.Provider value={page==="inbox"? {color: "3C8CC9"} : {color: "BCBCBC"}}>
                             <BsIcons.BsInboxFill size={22} className={page==="inbox"? "active":"inactive"}/>
                         </IconContext.Provider>
                     </div>
 
                     <div className="Sidebar-option" onClick={() => {setPage("history")}}>
-                        <IconContext.Provider value={{color: "BCBCBC"}}>
+                        <IconContext.Provider value={page==="history"? {color: "3C8CC9"} : {color: "BCBCBC"}}>
                             <BsIcons.BsClockFill size={20} className={page==="history"? "active":"inactive"}/>
                         </IconContext.Provider>
                     </div>
 
                     <div className="Sidebar-option" onClick={() => {setPage("statistics")}}>
-                        <IconContext.Provider value={{color: "BCBCBC"}}>
+                        <IconContext.Provider value={page==="statistics"? {color: "3C8CC9"} : {color: "BCBCBC"}}>
                             <BsIcons.BsBarChartFill size={22} className={page==="statistics"? "active":"inactive"}/>
                         </IconContext.Provider>
                     </div>
 
                     <div className="Sidebar-option" onClick={() => {setPage("notes")}}>
-                        <IconContext.Provider value={{color: "BCBCBC"}}>
+                        <IconContext.Provider value={page==="notes"? {color: "3C8CC9"} : {color: "BCBCBC"}}>
                             <IoIcons.IoIosJournal size={25} className={page==="notes"? "active":"inactive"}/>
                         </IconContext.Provider>
                     </div>
