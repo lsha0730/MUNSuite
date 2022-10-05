@@ -6,6 +6,7 @@ import * as IoIcons from "react-icons/io"
 import { IconContext } from "react-icons";
 
 function Sidebar() {
+    const {pendings} = useContext(appContext);
     const {page, setPage} = useContext(appContext);
     const [indOffset, setIndOffset] = useState(100);
 
@@ -59,6 +60,7 @@ function Sidebar() {
                         <IconContext.Provider value={page==="inbox"? {color: "3C8CC9"} : {color: "BCBCBC"}}>
                             <BsIcons.BsInboxFill size={22} className={page==="inbox"? "active":"inactive"}/>
                         </IconContext.Provider>
+                        {pendings.length > 0 && <p className="notification-indicator">{pendings.length > 99? "99+" : pendings.length}</p>}
                     </div>
 
                     <div className="Sidebar-option" onClick={() => {setPage("history")}}>
