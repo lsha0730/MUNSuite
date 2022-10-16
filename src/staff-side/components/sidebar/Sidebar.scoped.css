@@ -65,15 +65,6 @@
     transition: 150ms;
 }
 
-.active {
-    fill: #3C8CC9;
-    transition: 200ms;
-}
-.inactive {
-    fill: #CDCDCD;
-    transition: 200ms;
-}
-
 .notification-indicator {
     position: absolute;
     top: 12px;

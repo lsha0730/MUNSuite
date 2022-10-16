@@ -2,8 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import "./Sidebar.scoped.css";
 import { appContext } from "../../staffContext.js";
 import * as BsIcons from "react-icons/bs";
-import * as IoIcons from "react-icons/io"
-import { IconContext } from "react-icons";
+import * as IoIcons from "react-icons/io";
+
+const INACTIVE_COLOR = "#3C8CC9";
+const ACTIVE_COLOR = "#BCBCBC";
 
 function Sidebar() {
     const {pendings} = useContext(appContext);
@@ -45,48 +47,34 @@ function Sidebar() {
             <div className="Sidebar-subcontainer">
                 <div className="Sidebar-topicons">
                     <div className="Sidebar-option" onClick={() => {setPage("delegations")}}>
-                        <IconContext.Provider value={page==="delegations"? {color: "3C8CC9"} : {color: "BCBCBC"}}>
-                            <BsIcons.BsPeopleFill size={22} className={page==="delegations"? "active":"inactive"}/>
-                        </IconContext.Provider>
+                        <BsIcons.BsPeopleFill size={22} style={{ transition: "200ms", fill: page==="delegations"? INACTIVE_COLOR : ACTIVE_COLOR }}/>
                     </div>
 
                     <div className="Sidebar-option" onClick={() => {setPage("editor")}}>
-                        <IconContext.Provider value={page==="editor"? {color: "3C8CC9"} : {color: "BCBCBC"}}>
-                            <BsIcons.BsPencilFill size={22} className={page==="editor"? "active":"inactive"}/>
-                        </IconContext.Provider>
+                        <BsIcons.BsPencilFill size={22} style={{ transition: "200ms", fill: page==="editor"? INACTIVE_COLOR : ACTIVE_COLOR }}/>
                     </div>
                     
                     <div className="Sidebar-option" onClick={() => {setPage("inbox")}}>
-                        <IconContext.Provider value={page==="inbox"? {color: "3C8CC9"} : {color: "BCBCBC"}}>
-                            <BsIcons.BsInboxFill size={22} className={page==="inbox"? "active":"inactive"}/>
-                        </IconContext.Provider>
+                        <BsIcons.BsInboxFill size={22} style={{ transition: "200ms", fill: page==="inbox"? INACTIVE_COLOR : ACTIVE_COLOR }}/>
                         {pendings.length > 0 && <p className="notification-indicator">{pendings.length > 99? "99+" : pendings.length}</p>}
                     </div>
 
                     <div className="Sidebar-option" onClick={() => {setPage("history")}}>
-                        <IconContext.Provider value={page==="history"? {color: "3C8CC9"} : {color: "BCBCBC"}}>
-                            <BsIcons.BsClockFill size={20} className={page==="history"? "active":"inactive"}/>
-                        </IconContext.Provider>
+                        <BsIcons.BsClockFill size={20} style={{ transition: "200ms", fill: page==="history"? INACTIVE_COLOR : ACTIVE_COLOR }}/>
                     </div>
 
                     <div className="Sidebar-option" onClick={() => {setPage("statistics")}}>
-                        <IconContext.Provider value={page==="statistics"? {color: "3C8CC9"} : {color: "BCBCBC"}}>
-                            <BsIcons.BsBarChartFill size={22} className={page==="statistics"? "active":"inactive"}/>
-                        </IconContext.Provider>
+                        <BsIcons.BsBarChartFill size={22} style={{ transition: "200ms", fill: page==="statistics"? INACTIVE_COLOR : ACTIVE_COLOR }}/>
                     </div>
 
                     <div className="Sidebar-option" onClick={() => {setPage("notes")}}>
-                        <IconContext.Provider value={page==="notes"? {color: "3C8CC9"} : {color: "BCBCBC"}}>
-                            <IoIcons.IoIosJournal size={25} className={page==="notes"? "active":"inactive"}/>
-                        </IconContext.Provider>
+                        <IoIcons.IoIosJournal size={25} style={{ transition: "200ms", fill: page==="notes"? INACTIVE_COLOR : ACTIVE_COLOR }}/>
                     </div>
                 </div>
                 
                 <div className="Sidebar-boticons">
                     <div className="Sidebar-option" onClick={() => {setPage("settings")}}>
-                        <IconContext.Provider value={page==="settings"? {color: "3C8CC9"} : {color: "BCBCBC"}}>
-                            <BsIcons.BsGearFill size={22}/>
-                        </IconContext.Provider>
+                        <BsIcons.BsGearFill size={22} style={{ transition: "200ms", fill: page==="settings"? INACTIVE_COLOR : ACTIVE_COLOR }}/>
                     </div>
                 </div>
             </div>
