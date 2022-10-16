@@ -120,10 +120,7 @@ function Editor() {
         {formRender}
 
         <div className="addQ-container">
-          <div className="addQ-icon-container">
-            <div className="addQ-icon-backdrop" />
-            <IoIosArrowDroprightCircle className="addQ-icon" />
-          </div>
+          <p className="addQ-text">Add Block</p>
           <div className="addQ-options-container">
             <div className="btt-addQ" onClick={() => addNewBlock("shorttext")}>
               Short Text

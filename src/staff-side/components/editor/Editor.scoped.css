@@ -109,31 +109,24 @@
 /*----------ADD QUESTION----------*/
 .addQ-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin-top: 20px;
     transform: translate(50px);
 }
 
-.addQ-icon-container {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-.addQ-icon-backdrop {
-    width: 30px;
-    height: 30px;
-    background-color: #378DCC;
-    border-radius: 50%;
-}
-.addQ-icon {
-    position: absolute;
-    z-index: 2;
-    width: 40px;
-    height: 40px;
-    fill: #BAE4FA;
+.addQ-text {
+    width: fit-content;
+
+    font-size: 16px;
+    font-weight: 600;
+    color: #999999;
+
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 0px;
+
+    background-color: #FFFFFF;
+    border-radius: 10px 10px 0px 0px;
 }
 
 .addQ-options-container {
@@ -141,11 +134,10 @@
     height: fit-content;
 
     padding: 10px;
-    margin-left: 20px;
     margin-bottom: 100px;
 
     background-color: #FFFFFF;
-    border-radius: 10px;
+    border-radius: 0px 10px 10px 10px;
 
     display: flex;
     flex-wrap: wrap;
