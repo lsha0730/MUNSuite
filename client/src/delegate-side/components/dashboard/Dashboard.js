@@ -114,7 +114,9 @@ function Dashboard(props) {
           <div className="submission-confirmation">
             <div className="submission-confirmation-top">
               <HiPaperAirplane size={72} className="confirmation-icon" />
-              <p>Submission Sent!</p>
+              <p className="submission-confirmation-heading">
+                Submission Sent!
+              </p>
             </div>
             <div
               className="btt-new-directive"
@@ -169,12 +171,7 @@ function Dashboard(props) {
           <div className="history-top-contents">
             <FaHistory size={35} className="history-icon" />
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <p
-                style={{ fontSize: 20, fontWeight: 600, color: "#B0B0B0" }}
-                onClick={() => {
-                  console.log(pendings);
-                }}
-              >
+              <p style={{ fontSize: 20, fontWeight: 600, color: "#B0B0B0" }}>
                 Relevant Submissions
               </p>
               <p style={{ fontSize: 14, fontWeight: 600, color: "#B0B0B0" }}>
