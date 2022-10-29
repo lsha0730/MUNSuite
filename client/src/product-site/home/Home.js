@@ -20,7 +20,7 @@ import { useMediaQuery } from "react-responsive";
 import FeatureItem from "./FeatureItem";
 
 function Home() {
-  const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
+  const isPortrait = useMediaQuery({ query: "(max-width: 641px)" });
 
   const adwords = [
     "Simplified",

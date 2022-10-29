@@ -258,7 +258,7 @@
   transition: 200ms;
 }
 
-@media (orientation: portrait) {
+@media (max-width: 641px) {
   .home-top {
     margin-top: 0px;
     margin-bottom: 0px;

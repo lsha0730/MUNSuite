@@ -123,7 +123,7 @@
   transition: 200ms;
 }
 
-@media (orientation: portrait) {
+@media (max-width: 641px) {
   .navbar {
     margin: 0px;
     margin-top: 30px;

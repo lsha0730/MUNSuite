@@ -21,7 +21,7 @@
   font-size: 14px;
 }
 
-@media (orientation: portrait) {
+@media (max-width: 641px) {
   .footer-text {
     font-size: 12px;
   }
