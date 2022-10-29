@@ -7,6 +7,7 @@ import { siteContext } from "./Context";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useMediaQuery } from "react-responsive";
 
 import Navbar from "./product-site/navbar/Navbar.js";
 import Footer from "./product-site/footer/Footer.js";
@@ -69,8 +70,12 @@ function App() {
     }
   }, [window.location.pathname]);
 
+  const isPortrait = useMediaQuery({ query: "(max-width: 641px)" });
+
   return (
-    <siteContext.Provider value={{ currentUser, setCurrentUser, app }}>
+    <siteContext.Provider
+      value={{ currentUser, setCurrentUser, app, isPortrait }}
+    >
       <div
         className="App-container"
         style={
@@ -79,7 +84,7 @@ function App() {
             : {}
         }
       >
-        <Navbar/>
+        <Navbar />
         <div className="UI-container">
           <Routes>
             <Route exact path="/" element={<Home />} />
@@ -105,7 +110,7 @@ function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     </siteContext.Provider>
   );

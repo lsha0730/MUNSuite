@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.scoped.css";
 
@@ -16,11 +16,11 @@ import { BsFillPersonLinesFill } from "react-icons/bs";
 import { ImFontSize, ImSearch } from "react-icons/im";
 import { FaHistory } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
-import { useMediaQuery } from "react-responsive";
 import FeatureItem from "./FeatureItem";
+import { siteContext } from "../../Context";
 
 function Home() {
-  const isPortrait = useMediaQuery({ query: "(max-width: 641px)" });
+  const { isPortrait } = useContext(siteContext);
 
   const adwords = [
     "Simplified",
