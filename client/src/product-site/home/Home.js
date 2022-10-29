@@ -112,7 +112,7 @@ function Home() {
           heading="Auto-collected Delegate Statistics."
           subheading="Automatically curated, to show who's putting money where their
           mouth is."
-          img={history}
+          img={statistics}
           textPosition="left"
           icon={<GoGraph size={50} className="features-icon" />}
           mobile={isPortrait}
@@ -122,7 +122,7 @@ function Home() {
           heading="Searchable Notes for Every Delegate."
           subheading="Evaluate and compare delegates with a dedicated UI. No more
           scribbled papers."
-          img={history}
+          img={notes}
           textPosition="right"
           icon={<ImSearch size={50} className="features-icon" />}
           mobile={isPortrait}

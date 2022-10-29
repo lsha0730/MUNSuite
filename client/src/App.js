@@ -16,6 +16,7 @@ import Register from "./product-site/register/Register.js";
 import Login from "./product-site/login/Login.js";
 import Forgot from "./product-site/forgot/Forgot.js";
 import Options from "./product-site/options/Options.js";
+import ClosedBeta from "./product-site/options/ClosedBeta.js";
 import Dashboard from "./product-site/dashboard/Dashboard";
 
 import StaffApp from "./staff-side/StaffApp.js";
@@ -91,7 +92,7 @@ function App() {
             <Route exact path="/register" element={<Register />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/forgot" element={<Forgot />} />
-            <Route exact path="/options" element={<Options />} />
+            <Route exact path="/options" element={<ClosedBeta />} />
             <Route
               exact
               path="/dashboard"
