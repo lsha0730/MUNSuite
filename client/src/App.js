@@ -79,11 +79,7 @@ function App() {
     >
       <div
         className="App-container"
-        style={
-          window.location.pathname == "/dashboard"
-            ? { overflowY: "hidden" }
-            : {}
-        }
+        style={getAppStyle(window.location.pathname)}
       >
         <Navbar />
         <div className="UI-container">
@@ -116,5 +112,18 @@ function App() {
     </siteContext.Provider>
   );
 }
+
+const getAppStyle = (pathname) => {
+  switch (pathname) {
+    case "/dashboard":
+      return { overflowY: "hidden" };
+    case "/login":
+      return { backgroundColor: "#F7F7F7" };
+    case "/register":
+      return { backgroundColor: "#F7F7F7" };
+    default:
+      return {};
+  }
+};
 
 export default App;
