@@ -4,13 +4,13 @@ import { BsDownload, BsPersonFill } from "react-icons/bs";
 import { IoClipboard } from "react-icons/io5";
 import { GoSearch } from "react-icons/go";
 import { appContext } from "../../staffContext";
+import IndividualNote from "./IndividualNote";
 
 function Notes() {
     const {delegations} = useContext(appContext);
     const {notes} = useContext(appContext);
     const {writeToFirebase} = useContext(appContext);
     const {exportToCsv} = useContext(appContext);
-    const [notesIndvRenders, setNotesIndvRenders] = useState([]);
     const [options, setOptions] = useState(notes.individual.map(item => item.delegate));
     const [search, setSearch] = useState('');
     const [renderOptions, setRenderOptions] = useState([]);
@@ -79,21 +79,11 @@ function Notes() {
         setRenderSelected(returnRenderSelected);
     }, [options, search, isShowingOptions, selected, trigger])
 
-    useEffect(() => {
-        let tempArr = [];
-        for (let i=0; i<notes.individual.length; i++) {
-            let note = notes.individual[i];
-            if (selected.length == 0 || selected.includes(note.delegate)) {
-                tempArr.push(
-                    <div className="noteblock-container">
-                        <p className="noteblock-title">{note.delegate}</p>
-                        <textarea type="text" defaultValue={note.text} placeholder="Input here..." className="noteblock-textfield" onChange={e => updateNotes(i, e.target.value)}></textarea>
-                    </div>
-                )
-            }
-        }
-        setNotesIndvRenders(tempArr);
-    }, [selected.length, notes.individual])
+    // useEffect(() => {
+    //     let tempArr = 
+
+    //     setNotesIndvRenders(tempArr);
+    // }, [selected.length, notes.individual])
 
     return (
         <div className="page-container">
@@ -117,11 +107,17 @@ function Notes() {
                     <div className={renderSelected.length==0? "hidden":"selections-container"}>
                         {renderSelected}
                     </div>
-
                 </div>
 
                 <div className="notes-container">
-                    {notesIndvRenders.length != 0? notesIndvRenders:<div className="no-notes-box">No delegates in committee</div>}
+                    {delegations.length > 0 ? (
+                        selected.length > 0
+                        ? selected.map((del) => {
+                            const note = notes.individual.find(note => note.delegate == del);
+                            return <IndividualNote delegate={note.delegate} text={note.text} updateNotes={updateNotes} />
+                        })
+                        : notes.individual.map((note) => <IndividualNote delegate={note.delegate} text={note.text} updateNotes={updateNotes} />)
+                    ) : <div className="no-notes-box">No delegates in committee</div>}
                 </div>
             </div>
 
@@ -156,8 +152,9 @@ function Notes() {
         exportToCsv("Committee Notes", rows);
     }
 
-    function updateNotes(index, newText) {
+    function updateNotes(delegate, newText) {
         let tempArr = notes.individual.slice();
+        const index = tempArr.findIndex(elem => elem.delegate == delegate)
         tempArr[index].text = newText;
         writeToFirebase("notes",
         {
