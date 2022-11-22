@@ -92,29 +92,23 @@ function Editor() {
     <div className="editor-container">
       <div className="main-UI">
         <div className="hat-UI">
-          <div className="preview-hat">
-            <div className="preview-hat-top">
-              <p className="preview-hat-heading">[Delegation Name]</p>
-              <div
-                className="preview-hat-link-icon-container"
-                onClick={copyLink}
-              >
-                <BiLink className="preview-hat-link-icon" />
-              </div>
-              <div
-                className={
-                  isDisplayingConfirmation
-                    ? "formlink-confirmation-container"
-                    : "formlink-confirmation-container fade"
-                }
-              >
-                <p className="formlink-confirmation-text">Share Link Copied!</p>
-              </div>
-            </div>
-            <p className="preview-hat-subheading">{settings.committee}</p>
+          <div className="hat-left">
+            <p className="hat-heading">[Delegation Name]</p>
+            <p className="hat-subheading">{settings.committee}</p>
           </div>
 
-          {toggleRender}
+          <div>
+            <div className="share-container" onClick={copyLink}>
+              <BiLink className="share-icon" />
+              <p className="share-text">Share Form</p>
+              <p className={isDisplayingConfirmation
+                ? "share-confirm"
+                : "share-confirm fade"}>Share Link Copied!
+              </p>
+            </div>
+            {toggleRender}
+          </div>
+
         </div>
 
         {formRender}
@@ -167,9 +161,6 @@ function Editor() {
           setStandardized(!standardized);
         }}
       >
-        <p className={standardized ? "toggle-text-green" : "toggle-text-red"}>
-          {standardized ? "Standardized for MUN" : "Custom Form"}
-        </p>
         <div
           className={
             standardized
@@ -177,6 +168,9 @@ function Editor() {
               : "toggle-bar toggle-redbg"
           }
         >
+          <p className={standardized ? "toggle-text-green" : "toggle-text-red"}>
+            {standardized ? "Standardized for MUN" : "Custom Form"}
+          </p>
           <div
             className={
               standardized

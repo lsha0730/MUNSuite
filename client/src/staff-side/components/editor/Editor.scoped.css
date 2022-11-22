@@ -13,6 +13,8 @@
 
     display: flex;
     flex-direction: column;
+
+    margin-top: 30px;
 }
 
 .fade {
@@ -26,76 +28,27 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: flex-start;
 
     padding-right: 430px;
     padding-bottom: 30px;
 }
 
-.preview-hat {
+.hat-left {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     transform: translate(50px);
 }
-.preview-hat-top {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 30px;
-}
-.preview-hat-heading {
+.hat-heading {
     max-width: 400px;
     font-size: 32px;
     font-weight: 600;
     color: #BCBCBC;
 }
-.preview-hat-link-icon-container {
-    width: 35px;
-    height: 35px;
-
-    margin-left: 10px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 10px;
-    transition: 200ms;
-    cursor: pointer;
-}
-.preview-hat-link-icon-container:hover {
-    background-color: #BAE4FA;
-    transition: 200ms;
-}
-.preview-hat-link-icon {
-    width: 30px;
-    height: 30px;
-    fill: #378DCC;
-}
-.preview-hat-subheading {
+.hat-subheading {
     font-size: 18px;
     font-weight: 500;
     color: #BCBCBC;
-}
-
-.formlink-confirmation-container {
-    margin-left: 10px;
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 5px;
-    background-color: #FFFFFF;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    transition: 200ms;
-}
-.formlink-confirmation-text {
-    font-size: 10px;
-    font-weight: 500;
 }
 
 .preview-editor-pair {
@@ -104,6 +57,60 @@
     flex-direction: row;
     justify-content: flex-start;
     overflow: visible;
+}
+
+/*----------SHARE LINK----------*/
+.share-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+
+    padding: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    border-radius: 10px;
+    transition: 200ms;
+    cursor: pointer;
+    background-color: #378DCC;
+}
+.share-container:hover {
+    background-color: #45add2;
+    transition: 200ms;
+}
+
+.share-icon {
+    width: 30px;
+    height: 30px;
+    fill: #FFFFFF;
+    margin-right: 10px;
+}
+
+.share-text {
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+}
+
+.share-confirm {
+    position: absolute;
+    left: -120px;
+
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    background-color: #BAE4FA;
+
+    font-size: 10px;
+    font-weight: 500;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: 200ms;
 }
 
 /*----------ADD QUESTION----------*/
@@ -169,8 +176,9 @@
 
 /*Toggle*/
 .toggle-set {
+    width: fit-content;
     height: fit-content;
-    margin-top: 70px;
+    margin-top: 10px;
 
     display: flex;
     flex-direction: row;
