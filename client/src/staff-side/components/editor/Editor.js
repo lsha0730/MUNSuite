@@ -43,6 +43,10 @@ function Editor() {
   const [toggleRender, setToggleRender] = useState();
 
   useEffect(() => {
+    console.log(form)
+  }, [form])
+
+  useEffect(() => {
     setStandardized(checkStandardized(form));
   }, [form]);
 
@@ -527,6 +531,7 @@ function Editor() {
                   required={item.required}
                   heading={item.heading}
                   subheading={item.subheading}
+                  min={item.min}
                   max={item.max}
                   options={item.options || []}
                   editing={editing}
@@ -540,6 +545,7 @@ function Editor() {
                   required={item.required}
                   heading={item.heading}
                   subheading={item.subheading}
+                  min={item.min}
                   max={item.max}
                   options={item.options || []}
                   editing={editing}

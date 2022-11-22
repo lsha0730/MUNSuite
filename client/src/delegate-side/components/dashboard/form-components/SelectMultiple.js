@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./PreviewComponents.scoped.css";
 import { GoSearch } from "react-icons/go";
-import { delContext } from "../../../DelegateContext";
+import { delContext, formContext } from "../../../DelegateContext";
 
 function SelectMultiple(props) {
     const {delegations} = useContext(delContext);
+    const {formWarnings} = useContext(formContext);
     const [options, setOptions] = useState((props.options == "all-delegations"? delegations.map(item => item.name):props.options));
     const [search, setSearch] = useState('');
     const [renderOptions, setRenderOptions] = useState([]);
@@ -12,14 +13,17 @@ function SelectMultiple(props) {
     const [selected, setSelected] = useState([]); // Stores the string value of all selected items
     const [trigger, setTrigger] = useState(false);
     const [renderSelected, setRenderSelected] = useState([]);
-    const [maxWarning, setMaxWarning] = useState(false);
+    const [warning, setWarning] = useState("");
 
     useEffect(() => {
         props.updateSubmission(props.id, selected.length > 0? selected:["No Selection"])
     }, [selected.length])
 
     const selectOption = (option) => {
-        if (selected.length < props.max || !props.max) {
+        if (props.max && selected.length > props.max) {
+            setWarning(`You cannot make more than ${props.max} selections.`);
+            setTimeout(() => setWarning(""), 3000);
+        } else {
             let currentSelected = selected;
             let currentOptions = options;
             
@@ -31,9 +35,6 @@ function SelectMultiple(props) {
     
             setIsShowingOptions(false)
             setTrigger(!trigger);
-        } else {
-            setMaxWarning(true);
-            setTimeout(() => setMaxWarning(false), 3000);
         }
     }
 
@@ -86,6 +87,10 @@ function SelectMultiple(props) {
 
     }, [search, isShowingOptions, selected, trigger])
 
+    useEffect(() => {
+        console.log(formWarnings?.current?.[props.id])
+    }, [formWarnings?.current?.[props.id]])
+
     return (
         <div className="block-container" id="block-container">
             <div className={isShowingOptions? "dropdown-defocuser":"hidden"} onClick={() => setIsShowingOptions(false)}></div>
@@ -95,7 +100,7 @@ function SelectMultiple(props) {
             <div className={renderSelected.length==0? "hidden":"selmult-selections-container"}>
                 {renderSelected}
             </div>
-            <p className={maxWarning? "selmult-max-warning":"selmult-max-warning fade"}>You have selected the maximum number of selections.</p>
+            <p className={warning.length > 0 ? "selmult-max-warning":"selmult-max-warning fade"}>{warning.length > 0 ? warning : formWarnings?.current?.[props.id]}</p>
             <div className={isShowingOptions? "selmult-searchbar super-z":"selmult-searchbar"}>
                 <input    
                 type="text" 

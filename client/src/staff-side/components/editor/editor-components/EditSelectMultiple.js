@@ -12,8 +12,15 @@ function EditSelectMultiple(props) {
     const [optionsRender, setOptionsRender] = useState([]);
     const [heading, setHeading] = useState(props.heading);
     const [subheading, setSubheading] = useState(props.subheading);
-    const [maxcount, setMaxcount] = useState(props.max);
+    const [mincount, setMincount] = useState(props.min || 1);
+    const [maxcount, setMaxcount] = useState(props.max || Infinity);
     const isMounted = useRef(false);
+
+    const headingRef = useRef(props.heading);
+    const subheadingRef = useRef(props.subheading);
+    const minRef = useRef(props.min);
+    const maxRef = useRef(props.max);
+    const addOptionRef = useRef();
 
     useEffect(() => {
         setDelNames(delegations.map(del => del.name));
@@ -21,34 +28,45 @@ function EditSelectMultiple(props) {
     }, [delegations])
 
     useEffect(() => {
-        if (props.heading) {
-            document.getElementById("heading" + props.id).value = props.heading;
+        if (props.heading && headingRef.current) {
+            headingRef.current.value = props.heading;
         }
-        if (props.subheading) {
-            document.getElementById("subheading" + props.id).value = props.subheading;
+        if (props.subheading && subheading.current) {
+            subheading.current.value = props.subheading;
         }
-        if (props.max) {
-            document.getElementById("maxcount" + props.id).value = props.max;
+        if (props.min && minRef.current) {
+            minRef.current.value = props.min <= 1 ? "" : props.min;
+        }
+        if (props.max && maxRef.current) {
+            maxRef.current.value = props.max;
         }
     }, [])
 
     // Form Updater
     useEffect(() => {
         if (isMounted.current) {
-            let newObj = {}
-            newObj.id = props.id;
-            newObj.type = "select-multiple";
-            newObj.required = require;
-            newObj.heading = heading==""? false:heading;
-            newObj.subheading = subheading==""? false:subheading;
-            newObj.max = maxcount==""? false:parseInt(maxcount);
-            newObj.options = useDels? "all-delegations":options;
-
+            let newObj = {
+                id: props.id,
+                type: "select-multiple",
+                required: require,
+                heading: heading == "" ? false : heading,
+                subheading: subheading == "" ? false : subheading,
+                min: mincount == "" ? 1 : Math.min(parseInt(mincount), maxcount - 1),
+                max: ["", Infinity].includes(maxcount) ? false : parseInt(maxcount),
+                options: useDels ? "all-delegations" : options
+            }
             props.updateForm("update", props.id, newObj);
         } else {
             isMounted.current = true;
         }
-    }, [require, options, heading, subheading, maxcount, useDels])
+    }, [require, options, heading, subheading, mincount, maxcount, useDels])
+
+    useEffect(() => {
+        if (mincount >= maxcount) {
+            setMincount(maxcount - 1);
+            if (minRef.current) minRef.current.value = maxcount - 1;
+        }
+    }, [mincount])
 
     useEffect(() => {
         let toggleOffset = require? 20:0;
@@ -64,9 +82,9 @@ function EditSelectMultiple(props) {
     }, [require])
 
     function addOption() {
-        if (!useDels && document.getElementById("multipleSelect" + props.id).value !== "") {
-            setOptions(options.concat(document.getElementById("multipleSelect" + props.id).value))
-            document.getElementById("multipleSelect" + props.id).value = "";
+        if (!useDels && addOptionRef.current && addOptionRef.current.value !== "") {
+            setOptions(options.concat(addOptionRef.current.value))
+            addOptionRef.current.value = "";
         }
     }
 
@@ -85,7 +103,7 @@ function EditSelectMultiple(props) {
     function toggleUseAll() {
         if (!useDels) setOptions(delNames);
         setUseDels(!useDels);
-        document.getElementById("multipleSelect" + props.id).value = "";
+        if (addOptionRef.current) addOptionRef.current.value = "";
     }
 
     useEffect(() => {
@@ -112,18 +130,21 @@ function EditSelectMultiple(props) {
             {toggleRender}
 
             <p className="subheading">Heading</p>
-            <input type="text" id={"heading" + props.id} className={props.locked? "textfield-container-bricked":"textfield-container"} disabled={props.locked} placeholder="Input here..." onChange={() => {setHeading(document.getElementById("heading" + props.id).value)}}></input>
+            <input type="text" ref={headingRef} className={props.locked? "textfield-container-bricked":"textfield-container"} disabled={props.locked} placeholder="Input here..." onChange={e => {setHeading(e.target.value)}}></input>
 
             <p className="subheading">Subheading</p>
-            <input type="text" id={"subheading" + props.id} placeholder="Input here..." className="textfield-container" onChange={() => setSubheading(document.getElementById("subheading" + props.id).value)}></input>
+            <input type="text" ref={subheadingRef} placeholder="Input here..." className="textfield-container" onChange={e => {setSubheading(e.target.value)}}></input>
 
-            <p className="subheading">Max Selectable</p>
-            <input type="number" min="1" id={"maxcount" + props.id} placeholder="Unlimited" className="textfield-container" onChange={() => {setMaxcount(document.getElementById("maxcount" + props.id).value)}}></input>
+            <p className="subheading">Min</p>
+            <input type="number" ref={minRef} max={maxcount - 1} placeholder="1" className="textfield-container" onChange={e => {setMincount(e.target.value)}}></input>
+
+            <p className="subheading">Max</p>
+            <input type="number" ref={maxRef} min="1" placeholder="Unlimited" className="textfield-container" onChange={e => {setMaxcount(e.target.value)}}></input>
 
             <p className="subheading">Options</p>
 
             <div className="option-adder">
-                <input type="text" id={"multipleSelect" + props.id} className={useDels? "option-input-bricked":"option-input"} disabled={useDels} onKeyDown={(e) => {if (e.key === 'Enter') addOption()}}></input>
+                <input type="text" ref={addOptionRef} className={useDels? "option-input-bricked":"option-input"} disabled={useDels} onKeyDown={(e) => {if (e.key === 'Enter') addOption()}}></input>
                 <div className={useDels? "btt-add-option-bricked":"btt-add-option"} onClick={addOption}>
                     <p>Add</p>
                 </div>

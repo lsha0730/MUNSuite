@@ -14,10 +14,13 @@ function SelectMultiple(props) {
     const [selected, setSelected] = useState([]); // Stores the string value of all selected items
     const [trigger, setTrigger] = useState(false);
     const [renderSelected, setRenderSelected] = useState([]);
-    const [maxWarning, setMaxWarning] = useState(false);
+    const [warning, setWarning] = useState("");
 
     const selectOption = (option) => {
-        if (selected.length < props.max || !props.max) {
+        if (props.max && selected.length > props.max) {
+            setWarning(`You cannot make more than ${props.max} selections.`);
+            setTimeout(() => setWarning(""), 3000);
+        } else {
             let currentSelected = selected;
             let currentOptions = options;
             
@@ -29,9 +32,6 @@ function SelectMultiple(props) {
     
             setIsShowingOptions(false)
             setTrigger(!trigger);
-        } else {
-            setMaxWarning(true);
-            setTimeout(() => setMaxWarning(false), 3000);
         }
     }
 
@@ -112,7 +112,7 @@ function SelectMultiple(props) {
                 <div className={renderSelected.length==0? "hidden":"selmult-selections-container"}>
                     {renderSelected}
                 </div>
-                <p className={maxWarning? "selmult-max-warning":"selmult-max-warning fade"}>You have selected the maximum number of selections.</p>
+                <p className={warning.length > 0? "selmult-max-warning":"selmult-max-warning fade"}>{warning}</p>
                 <div className={isShowingOptions? "selmult-searchbar super-z":"selmult-searchbar"}>
                     <input    
                     type="text" 

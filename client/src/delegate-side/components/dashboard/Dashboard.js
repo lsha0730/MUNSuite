@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { delContext } from "../../DelegateContext";
+import { delContext, formContext } from "../../DelegateContext";
 import "./Dashboard.scoped.css";
 import defaultBanner from "./defaultBanner.png";
 
@@ -35,6 +35,7 @@ function Dashboard(props) {
   );
   const [submissionComplete, setSubmissionComplete] = useState(false);
   const [notImpostor, setNotImpostor] = useState(false);
+  const formWarnings = useRef(currForm.map(item => ""));
   const [warning, setWarning] = useState("");
   const [showingConfirmation, setShowingConfirmation] = useState(false);
 
@@ -80,6 +81,7 @@ function Dashboard(props) {
           if (item.value == undefined || item.value == null) return false;
           if (item.type == "select-multiple" || item.type == "multiplechoice") {
             valid = item.value.length != 0;
+            valid = item.value.length >= currForm[index].min;
           } else if (
             item.type == "radio" ||
             item.type == "shorttext" ||
@@ -145,8 +147,10 @@ function Dashboard(props) {
                 Sign Out
               </div>
             </div>
-
-            {formRender}
+            
+            <formContext.Provider value={{formWarnings}}>
+              {formRender}
+            </formContext.Provider>
 
             <div
               className={
@@ -265,7 +269,7 @@ function Dashboard(props) {
   function rerenderForm() {
     if (settings.formOpen == undefined || settings.formOpen) {
       setFormRender(
-        currForm.map((item) => {
+        currForm.map((item, index) => {
           switch (item.type) {
             case "header":
               return (
@@ -356,6 +360,7 @@ function Dashboard(props) {
                   required={item.required}
                   heading={item.heading}
                   subheading={item.subheading}
+                  min={item.min}
                   max={item.max}
                   options={item.options || []}
                   updateSubmission={updateSubmission}
@@ -385,48 +390,66 @@ function Dashboard(props) {
     console.log(tempArr);
   }
 
-  function handleSubmit() {
-    if (submissionComplete && notImpostor) {
-      let submissionObj = {
-        submissionID: (pendings || []).concat(processed || []).length,
-        status: "Pending",
-        author: user,
-        standard: checkStandardized(currForm),
-      };
-
-      if (submissionObj.standard) {
-        submissionObj.title = submission[1].value;
-        submissionObj.type = submission[2].value;
-        submissionObj.sponsors = submission[3].value;
-        submissionObj.signatories =
-          submission[4].value.length != 0 ? submission[4].value : false;
-        submissionObj.body = submission.slice(5).filter((item) => {
-          return item.type != "header" && item.type != "content";
-        });
-      } else {
-        submissionObj.body = submission.filter((item) => {
-          return item.type != "header" && item.type != "content";
-        });
+  function setFormWarnings() {
+    submission.forEach((item, index) => {
+      if (item.type == "select-multiple" && item.value.length < currForm[index].min) {
+        formWarnings.current[index] = `You must select a minimum of ${currForm[index].min} options.`
       }
+    })
+  }
 
-      props.submit(submissionObj);
-      setShowingConfirmation(true);
+  function handleSubmit() {
+    setFormWarnings();
+    const hasFormWarnings = !formWarnings.current.every(item => item == "");
 
-      // Clear for new form
-      rerenderForm();
-      // console.log("Cleared subarray!", currForm.map(item => {return { type: item.type, heading: item.heading }}))
-      setSubmission(
-        currForm.map((item) => {
-          return { type: item.type, heading: item.heading };
-        })
-      );
-    } else if (!submissionComplete) {
-      setWarning("Required fields incomplete");
-      setTimeout(() => setWarning(""), 2000);
-    } else if (!notImpostor) {
+    if (hasFormWarnings) return
+
+    if (!notImpostor) {
       setWarning("You must be a sponsor");
       setTimeout(() => setWarning(""), 2000);
+      return
     }
+
+    if (!submissionComplete) {
+      setWarning("Required fields incomplete");
+      setTimeout(() => setWarning(""), 2000);
+      return
+    }
+
+    let submissionObj = {
+      submissionID: (pendings || []).concat(processed || []).length,
+      status: "Pending",
+      author: user,
+      standard: checkStandardized(currForm),
+    };
+
+    if (submissionObj.standard) {
+      submissionObj.title = submission[1].value;
+      submissionObj.type = submission[2].value;
+      submissionObj.sponsors = submission[3].value;
+      submissionObj.signatories =
+        submission[4].value.length != 0 ? submission[4].value : false;
+      submissionObj.body = submission.slice(5).filter((item) => {
+        return item.type != "header" && item.type != "content";
+      });
+    } else {
+      submissionObj.body = submission.filter((item) => {
+        return item.type != "header" && item.type != "content";
+      });
+    }
+
+    props.submit(submissionObj);
+    setShowingConfirmation(true);
+
+    // Clear for new form
+    rerenderForm();
+    formWarnings.current = currForm.map(item => "");
+    // console.log("Cleared subarray!", currForm.map(item => {return { type: item.type, heading: item.heading }}))
+    setSubmission(
+      currForm.map((item) => {
+        return { type: item.type, heading: item.heading };
+      })
+    );
   }
 
   function checkStandardized(formArr) {
