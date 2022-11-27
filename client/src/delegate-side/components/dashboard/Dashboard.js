@@ -371,7 +371,7 @@ function Dashboard(props) {
         <div className="bricked-form-container">
           <p className="bricked-form-header">Form Suspended</p>
           <p className="bricked-form-subheader">
-            The Dias has temporarily suspended the form.
+            The Dais has temporarily suspended the form.
           </p>
         </div>
       );

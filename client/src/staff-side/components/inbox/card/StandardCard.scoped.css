@@ -173,4 +173,5 @@
     font-size: 14px;
     word-wrap: break-word;
     margin-bottom: 20px;
+    white-space: pre-line;
 }
