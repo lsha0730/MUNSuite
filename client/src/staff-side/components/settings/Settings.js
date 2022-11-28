@@ -3,6 +3,7 @@ import "./Settings.scoped.css";
 import { BsGearFill } from "react-icons/bs";
 import { FaGitAlt } from "react-icons/fa";
 import { appContext } from "../../staffContext";
+import CHANGELOG from "./CHANGELOG.json"
 
 function Settings() {
     const {settings} = useContext(appContext);
@@ -41,8 +42,12 @@ function Settings() {
                 </div>
 
                 <div className="release-notes-container">
-                    <p className="version-note-heading">v 1.0.0</p>
-                    <p className="version-note-subheading">Closed beta release of the app. Please email any feedback to info@munsuite.com.</p>
+                    {CHANGELOG.map(log => (
+                        <div>
+                            <p className="version-note-heading">v {log.version}</p>
+                            <p className="version-note-subheading">{log.description}</p>
+                        </div>
+                    ))}
                 </div>
 
                 <div className="metadata">

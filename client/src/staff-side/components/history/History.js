@@ -3,10 +3,11 @@ import "./History.scoped.css";
 import { appContext } from "../../staffContext";
 import StandardCard from "../inbox/card/StandardCard.js";
 import CustomCard from "../inbox/card/CustomCard.js";
-import { GoTriangleDown, GoSearch } from "react-icons/go";
+import { GoSearch } from "react-icons/go";
 import { FaFilter } from "react-icons/fa";
 import { BsDownload } from "react-icons/bs";
 import { Confirmation } from "../modal-ui/modal-ui";
+import Dropdown from "./Dropdown";
 
 function History() {
     const {processed} = useContext(appContext);
@@ -159,58 +160,5 @@ function History() {
         exportToCsv("Directives History", rows)
     }
 }
-
-
-
-function Dropdown(props) {
-    const [value, setValue] = useState(0); // Stores the index of the item in options
-    const [dropVisible, setDropVisible] = useState(false);
-    const [dropRender, setDropRender] = useState();
-
-    let optionRenders = [];
-    for (let i=0; i<props.options.length; i++) {
-        let option = props.options[i];
-        optionRenders.push(
-            <div className="dropdown-option-container" onClick={() => {
-                setDropVisible(!dropVisible);
-                setValue(i);
-                }}>
-                <div className="dropdown-text-container">
-                    <p className="nowrap">{option}</p>
-                </div>
-            </div>
-        )
-    }
-
-    useEffect(() => {
-        if (dropVisible) {
-            setDropRender(
-                <div className="dropdown-field">
-                    {optionRenders}
-                </div>
-            );
-        } else {
-            setDropRender();
-        }
-    }, [dropVisible])
-
-    useEffect(() => {
-        props.setSelection(props.options[value]);
-    }, [value])
-
-    return (
-        <div>
-            <div className={dropVisible? "dropdown-defocuser":"hidden"} onClick={() => setDropVisible(false)}></div>
-            <div className={dropVisible? "dropdown-bar super-z":"dropdown-bar"} onClick={() => setDropVisible(!dropVisible)}>
-                <div className="dropdown-text-container">
-                    <p className="nowrap">{props.options[value]}</p>
-                </div>
-                <GoTriangleDown size={10} className="dropdown-triangle"/>
-                {dropRender}
-            </div>
-        </div>
-    )
-}
-
 
 export default History;

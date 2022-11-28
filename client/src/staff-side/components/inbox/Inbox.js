@@ -3,6 +3,8 @@ import "./Inbox.scoped.css";
 import StandardCard from "./card/StandardCard.js";
 import CustomCard from "./card/CustomCard.js";
 import { appContext } from "../../staffContext";
+import Dropdown from "../history/Dropdown";
+import { FaFilter } from "react-icons/fa";
 
 function Inbox() {
     const {processed} = useContext(appContext);
@@ -12,16 +14,18 @@ function Inbox() {
     const [accepting, setAccepting] = useState(settings.formOpen !== undefined? settings.formOpen:true);
     const [toggleRender, setToggleRender] = useState();
     const [cardArrRender, setCardArrRender] = useState([]);
+    const {form} = useContext(appContext);
+    const [dropdownValue, setDropdownValue] = useState("No Filter");
 
     useEffect(() => {
         let toggleOffset = accepting? 0:25;
 
         setToggleRender(
             <div className="toggle-set" onClick={() => setAccepting(!accepting)}>
+                <p className={accepting? "toggle-text-green":"toggle-text-red"}>{accepting? "Accepting Responses":"Form Suspended"}</p>
                 <div className={accepting? "toggle-bar toggle-greenbg":"toggle-bar toggle-redbg"}>
                     <div className={accepting? "toggle-circle toggle-greenbtt":"toggle-circle toggle-redbtt"} style={{left: toggleOffset}}></div>
                 </div>
-                <p className={accepting? "toggle-text-green":"toggle-text-red"}>{accepting? "Accepting Responses":"Form Suspended"}</p>
             </div>
         )
         
@@ -31,20 +35,29 @@ function Inbox() {
     }, [accepting])
 
     useEffect(() => {
-        setCardArrRender(pendings.map(directive => {
+        setCardArrRender(pendings.filter(includeInFilter).map(directive => {
             if (directive.standard) {
                 return <StandardCard key={directive.submissionID} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors || []} signatories={directive.signatories || []} body={directive.body || []} updateCards={updateCards}/>
             } else {
                 return <CustomCard key={directive.submissionID} id={directive.submissionID} author={directive.author} body={directive.body || []} updateCards={updateCards}/>
             }
         }))
-    }, [pendings])
+    }, [pendings, dropdownValue])
+
+    function includeInFilter(directive) {
+        if (dropdownValue == "No Filter") return true;
+        return directive && directive?.standard && directive?.type == dropdownValue;
+    }
 
     return (
         <div className="inbox-container">
             <div className="UI-top">
-                {toggleRender}
+                <div className="filter-container">
+                    <FaFilter size={20} style={{marginRight: 10, fill: "#BCBCBC"}}/>
+                    <Dropdown options={["No Filter"].concat(settings.standardForm? form[2].options : [])} setSelection={setDropdownValue}/>
+                </div>
                 <p className="card-count">{pendings.length} in Queue</p>
+                {toggleRender}
             </div>
             <div className="UI-bottom">
                 <div className="spacer"></div>
