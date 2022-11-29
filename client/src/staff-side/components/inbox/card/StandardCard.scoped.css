@@ -30,6 +30,7 @@
     justify-content: center;
     border-radius: 20%;
     cursor: pointer;
+    color: #3CDC27;
 }
 .btt-pass:hover {
     background-color: #CFF9C3;
@@ -47,6 +48,7 @@
     justify-content: center;
     border-radius: 20%;
     cursor: pointer;
+    color: #FFCA39;
 }
 .btt-table:hover {
     background-color: #FFE49A;
@@ -64,12 +66,38 @@
     justify-content: center;
     border-radius: 20%;
     cursor: pointer;
+    color: #FF7070;
 }
 .btt-fail:hover {
     background-color: #FFC6C6;
     transition: 200ms;
 }
 
+.btt-revert {
+    margin-bottom: 10px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #DAA000;
+    background-color: #FFE49A;
+}
+.btt-revert:hover {
+    color: #FFFFFF;
+    background-color: #FFCA39;
+    transition: 200ms;
+}
+
+.btt-revert-text {
+    font-size: 12px;
+    font-weight: 500;
+    margin-right: 5px;
+}
 
 /*-------TOP-------*/
 .card-top {

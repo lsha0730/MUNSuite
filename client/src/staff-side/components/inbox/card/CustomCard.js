@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./CustomCard.scoped.css";
 import { BsPersonFill, BsCheckLg, BsXLg } from "react-icons/bs";
 import { IoIosFastforward } from "react-icons/io";
+import { BiUndo } from "react-icons/bi";
 
 function CustomCard(props) {
     const [bodyRenders, setBodyRenders] = useState();
@@ -47,18 +48,29 @@ function CustomCard(props) {
     }
 
     return (
-        <div className="card-container">
-            <div className="card-operations" style={props.hide? {display: "none"}:{}}>
-                <div className="btt-pass" onClick={passDirective}>
-                    <BsCheckLg size={20} style={{fill: "#3CDC27"}}/>
+        <div className="card-container" style={{ marginRight: props.variant == "history"? 0 : 20 }}>
+            {props.variant == "inbox" && 
+                <div className="card-operations">
+                    <div className="btt-pass" onClick={passDirective}>
+                        <BsCheckLg size={20}/>
+                    </div>
+                    <div className="btt-fail" onClick={failDirective}>
+                        <BsXLg size={20}/>
+                    </div>
+                    <div className="btt-table" onClick={tableDirective}>
+                        <IoIosFastforward size={25}/>
+                    </div>
                 </div>
-                <div className="btt-fail" onClick={failDirective}>
-                    <BsXLg size={20} style={{fill: "#FF7070"}}/>
+            }
+
+            {props.variant == "history" &&
+                <div className="card-operations">
+                    <div className="btt-revert" onClick={() => {props.revertDirective(props.index)}}>
+                        <p className="btt-revert-text">Revert to Inbox</p>
+                        <BiUndo size={20}/>
+                    </div>
                 </div>
-                <div className="btt-table" onClick={tableDirective}>
-                    <IoIosFastforward size={25} style={{fill: "#FFCA39"}}/>
-                </div>
-            </div>
+            }
 
             <div className="card-top">
                 <BsPersonFill size={30} className="card-icon"/>

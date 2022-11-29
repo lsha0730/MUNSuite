@@ -22,7 +22,7 @@
 }
 
 /*--------UI DOM--------*/
-.UI-left {
+.UI-right {
     height: 100%;
     width: fit-content;
 
@@ -31,14 +31,15 @@
     justify-content: space-between;
 }
 
-.UI-right {
+.UI-left {
     height: 100%;
 
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    justify-content: space-between;
 
-    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .UI-topright {
@@ -56,7 +57,6 @@
     max-width: 350px;
     height: 100%;
 
-    margin-right: 20px;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -90,12 +90,18 @@
 
 /*--------RIGHT-UI--------*/
 .cardbar-container {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.cardbar-body {
     width: 100%;
 
     padding: 5px;
     padding-left: 20px;
     padding-right: 20px;
-    margin-bottom: 5px;
 
     display: flex;
     flex-direction: row;
@@ -107,7 +113,7 @@
 }
 
 .cardbar-deck-container {
-    width: 100%;
+    width: calc(100% + 5px);
     overflow-y: auto;
     flex-grow: 1;
 }

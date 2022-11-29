@@ -37,9 +37,9 @@ function Inbox() {
     useEffect(() => {
         setCardArrRender(pendings.filter(includeInFilter).map(directive => {
             if (directive.standard) {
-                return <StandardCard key={directive.submissionID} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors || []} signatories={directive.signatories || []} body={directive.body || []} updateCards={updateCards}/>
+                return <StandardCard key={directive.submissionID} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors || []} signatories={directive.signatories || []} body={directive.body || []} updateCards={updateCards} variant="inbox"/>
             } else {
-                return <CustomCard key={directive.submissionID} id={directive.submissionID} author={directive.author} body={directive.body || []} updateCards={updateCards}/>
+                return <CustomCard key={directive.submissionID} id={directive.submissionID} author={directive.author} body={directive.body || []} updateCards={updateCards} variant="inbox"/>
             }
         }))
     }, [pendings, dropdownValue])

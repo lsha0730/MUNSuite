@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./StandardCard.scoped.css"
 import { BsPeopleFill, BsEyeglasses, BsCheckLg, BsXLg } from "react-icons/bs";
 import { IoIosFastforward } from "react-icons/io";
+import { BiUndo } from "react-icons/bi";
 
 function StandardCard(props) {
     const [bodyRenders, setBodyRenders] = useState();
@@ -47,21 +48,35 @@ function StandardCard(props) {
     }
 
     return (
-        <div className="card-container">
-            <div className="card-operations" style={props.hide? {display: "none"}:{}}>
-                <div className="btt-pass" onClick={passDirective}>
-                    <BsCheckLg size={20} style={{fill: "#3CDC27"}}/>
+        <div className="card-container" style={{ marginRight: props.variant == "history"? 0 : 20 }}>
+            {props.variant == "inbox" && 
+                <div className="card-operations">
+                    <div className="btt-pass" onClick={passDirective}>
+                        <BsCheckLg size={20}/>
+                    </div>
+                    <div className="btt-fail" onClick={failDirective}>
+                        <BsXLg size={20}/>
+                    </div>
+                    <div className="btt-table" onClick={tableDirective}>
+                        <IoIosFastforward size={25}/>
+                    </div>
                 </div>
-                <div className="btt-fail" onClick={failDirective}>
-                    <BsXLg size={20} style={{fill: "#FF7070"}}/>
+            }
+
+            {props.variant == "history" &&
+                <div className="card-operations">
+                    <div className="btt-revert" onClick={() => {props.revertDirective(props.index)}}>
+                        <p className="btt-revert-text">Revert to Inbox</p>
+                        <BiUndo size={20}/>
+                    </div>
                 </div>
-                <div className="btt-table" onClick={tableDirective}>
-                    <IoIosFastforward size={25} style={{fill: "#FFCA39"}}/>
-                </div>
-            </div>
+            }
 
             <div className="card-top">
-                <p className="title">{props.title}</p>
+                <div className="card-top-top">
+                    <p className="title">{props.title}</p>
+                </div>
+
                 <div className="card-top-bottom">
                     <p className="type">{props.type}</p>
                     <p className="id-tag">ID: {props.id}</p>

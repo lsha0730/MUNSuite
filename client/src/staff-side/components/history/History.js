@@ -8,8 +8,10 @@ import { FaFilter } from "react-icons/fa";
 import { BsDownload } from "react-icons/bs";
 import { Confirmation } from "../modal-ui/modal-ui";
 import Dropdown from "./Dropdown";
+import Cardbar from "./Cardbar";
 
 function History() {
+    const {pendings} = useContext(appContext);
     const {processed} = useContext(appContext);
     const {writeToFirebase} = useContext(appContext);
     const {exportToCsv} = useContext(appContext);
@@ -29,21 +31,11 @@ function History() {
             let filterBoolean = card.status == dropdownValue || dropdownValue == "No Filter";
             if (card.standard) {
                 if (filterBoolean && (search === "" || card.title.toLowerCase().includes(search.toLowerCase()))) {
-                    renderArr.push(
-                        <div className={selection==i? "cardbar-container selected":"cardbar-container"} onClick={() => setSelection(i)}>
-                            <div className="cardbar-indicator" style={card.status=="Passed"? {backgroundColor: "#7AFF69"}:{backgroundColor: "#FF8080"}}></div>
-                            <p>{card.title}</p>
-                        </div>
-                    )
+                    renderArr.push(<Cardbar type="standard" selected={selection == i} status={card.status} onClick={() => setSelection(i)} title={card.title} />)
                 }
             } else {
                 if (filterBoolean && (search === "" || `Submission ${card.submissionID}`.toLowerCase().includes(search.toLowerCase()))) {
-                    renderArr.push(
-                        <div className={selection==i? "cardbar-container selected":"cardbar-container"} onClick={() => setSelection(i)}>
-                            <div className="cardbar-indicator" style={card.status=="Passed"? {backgroundColor: "#7AFF69"}:{backgroundColor: "#FF8080"}}></div>
-                            <p>Submission {card.submissionID} by {card.author}</p>
-                        </div>
-                    )
+                    renderArr.push(<Cardbar type="custom" selected={selection == i} status={card.status} onClick={() => setSelection(i)} submissionID={card.submissionID} author={card.author} />)
                 }
             }
         }
@@ -59,11 +51,11 @@ function History() {
         } else {
             if (directive.standard) {
                 setSelectionRender (
-                    <StandardCard key={directive.submissionID} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors} signatories={directive.signatories} body={directive.body || []} hide={true}/>
+                    <StandardCard key={directive.submissionID} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors} signatories={directive.signatories} body={directive.body || []} variant={"history"} revertDirective={revertDirective} index={processed.length - 1 - selection} />
                 )
             } else {
                 setSelectionRender (
-                    <CustomCard key={directive.submissionID} id={directive.submissionID} author={directive.author} body={directive.body || []} hide={true}/>
+                    <CustomCard key={directive.submissionID} id={directive.submissionID} author={directive.author} body={directive.body || []} variant={"history"} revertDirective={revertDirective} index={processed.length - 1 - selection} />
                 )
             }
         }
@@ -75,6 +67,22 @@ function History() {
             {modal? <Confirmation function={handleClear} bttLabel="Clear History" description="Clearing your history will permanently remove your history and clear all delegate statistics. Consider exporting a local copy first." setModal={setModal}/>:<></>}
 
             <div className="UI-left">
+                <div className="UI-topright">
+                    <div className="filter-group">
+                        <Dropdown options={["No Filter", "Passed", "Failed"]} setSelection={setDropdownValue}/>
+                        <FaFilter size={15} className="filter-icon"/>
+                    </div>
+                    <div className="searchbar">
+                        <input type="text" placeholder="Search" className="subbar" value={search} onChange={(e)=>setSearch(e.target.value)}/>
+                        <GoSearch size={15} className="search-icon"/>
+                    </div>
+                </div>
+                <div className="cardbar-deck-container">
+                    {cardArrRender.length != 0? cardArrRender:<div className="no-cards-box">No processed cards</div>}
+                </div>
+            </div>
+
+            <div className="UI-right">
                 <div className="card-container">{selectionRender}</div>
                 <div className="history-operations">
                     <div className="btt-clear-history" onClick={() => {setModal(true)}}>Clear History</div>
@@ -84,25 +92,14 @@ function History() {
                     </div>
                 </div>
             </div>
-
-            <div className="UI-right">
-                <div className="UI-topright">
-                    <div className="searchbar">
-                        <input type="text" placeholder="Search" className="subbar" value={search} onChange={(e)=>setSearch(e.target.value)}/>
-                        <GoSearch size={15} className="search-icon"/>
-                    </div>
-
-                    <div className="filter-group">
-                        <Dropdown options={["No Filter", "Passed", "Failed"]} setSelection={setDropdownValue}/>
-                        <FaFilter size={15} className="filter-icon"/>
-                    </div>
-                </div>
-                <div className="cardbar-deck-container">
-                    {cardArrRender.length != 0? cardArrRender:<div className="no-cards-box">No processed cards</div>}
-                </div>
-            </div>
         </div>
     )
+
+    function revertDirective(index) {
+        const toRevert = processed[index];
+        writeToFirebase("pendings", [toRevert].concat(pendings))
+        writeToFirebase("processed", processed.filter(item => item !== toRevert))
+    }
 
     function handleClear() {
         writeToFirebase("processed", []);
