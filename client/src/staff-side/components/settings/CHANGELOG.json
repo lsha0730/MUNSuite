@@ -5,6 +5,6 @@
     },
     {
         "version": "1.1.0",
-        "description": "Inbox filtering, revert directives after processing"
+        "description": "Inbox filtering, revert directives in history to inbox"
     }
 ]
