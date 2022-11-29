@@ -75,7 +75,7 @@ function DirectiveCard(props) {
             }
 
             {page == "history" &&
-                <div className="card-operations">
+                <div className="btts-right">
                     <div className="btt-revert" onClick={() => {revertDirective(index)}}>
                         <p className="btt-revert-text">Revert to Inbox</p>
                         <BiUndo size={20}/>
