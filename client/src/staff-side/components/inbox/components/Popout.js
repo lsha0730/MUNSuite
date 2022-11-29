@@ -45,7 +45,7 @@ function Popout({ variant, body, id, signatories, title, type, sponsors, author 
             }
 
             {variant == "standard" &&
-                <div className="standard-top">
+                <div className="standard-top" style={{ backgroundColor: type == "Public" ? "#3C8CC9" : "#285e86" }}>
                     <div className="card-top-top">
                         <p className="title">{title}</p>
                     </div>
