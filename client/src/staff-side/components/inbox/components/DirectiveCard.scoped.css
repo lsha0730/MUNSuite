@@ -89,9 +89,10 @@
     justify-content: center;
     border-radius: 20%;
     cursor: pointer;
-    color: #3C8CC9;
+    color: #B1B1B1;
 }
 .btt-present:hover {
+    color: #3C8CC9;
     background-color: #BAE4FA;
     transition: 200ms;
 }
