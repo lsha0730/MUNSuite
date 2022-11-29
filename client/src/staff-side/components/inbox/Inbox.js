@@ -52,7 +52,7 @@ function Inbox() {
         <div className="inbox-container">
             <div className="UI-top">
                 <div className="filter-container">
-                    <FaFilter size={20} style={{marginRight: 10, fill: "#BCBCBC"}}/>
+                    <FaFilter size={15} style={{marginRight: 10, fill: "#BCBCBC"}}/>
                     <Dropdown options={["No Filter"].concat(settings.standardForm? form[2].options : ["Public", "Private"])} setSelection={setDropdownValue}/>
                 </div>
                 <p className="card-count">{pendings.length} in Queue</p>

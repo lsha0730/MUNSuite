@@ -68,8 +68,8 @@ function History() {
             <div className="UI-left">
                 <div className="UI-topright">
                     <div className="filter-group">
-                        <Dropdown options={["No Filter", "Passed", "Failed"]} setSelection={setDropdownValue}/>
                         <FaFilter size={15} className="filter-icon"/>
+                        <Dropdown options={["No Filter", "Passed", "Failed"]} setSelection={setDropdownValue}/>
                     </div>
                     <div className="searchbar">
                         <input type="text" placeholder="Search" className="subbar" value={search} onChange={(e)=>setSearch(e.target.value)}/>
