@@ -3,9 +3,14 @@ import "./DirectiveCard.scoped.css"
 import { BsPeopleFill, BsEyeglasses, BsCheckLg, BsXLg, BsPersonFill } from "react-icons/bs";
 import { IoIosFastforward } from "react-icons/io";
 import { BiUndo } from "react-icons/bi";
+import { MdOutlinePresentToAll } from "react-icons/md";
+import Popout from "./Popout";
 
-function DirectiveCard({ variant, body, id, updateCards, page, signatories, index, title, type, sponsors, author, revertDirective }) {
+function DirectiveCard(props) {
+    const { variant, body, id, updateCards, page, signatories, index, title, type, sponsors, author, revertDirective } = props;
+
     const [bodyRenders, setBodyRenders] = useState();
+    const [presenting, setPresenting] = useState(false);
 
     useEffect(() => {
         setBodyRenders(body.map(block => {
@@ -47,18 +52,24 @@ function DirectiveCard({ variant, body, id, updateCards, page, signatories, inde
         updateCards("fail", id);
     }
 
+    function presentDirective() {
+        setPresenting(!presenting);
+    }
+
     return (
         <div className="card-container" style={{ marginRight: page == "history"? 0 : 20 }}>
+            {presenting && <Popout variant={variant} body={body} id={id} signatories={signatories} title={title} type={type} sponsors={sponsors} author={author} />}
+
             {page == "inbox" && 
                 <div className="card-operations">
-                    <div className="btt-pass" onClick={passDirective}>
-                        <BsCheckLg size={20}/>
+                    <div className="btt-present" onClick={presentDirective}>
+                        <MdOutlinePresentToAll size={23}/>
                     </div>
-                    <div className="btt-fail" onClick={failDirective}>
-                        <BsXLg size={20}/>
-                    </div>
-                    <div className="btt-table" onClick={tableDirective}>
-                        <IoIosFastforward size={25}/>
+
+                    <div className="btts-right">
+                        <div className="btt-pass" onClick={passDirective}><BsCheckLg size={20}/></div>
+                        <div className="btt-fail" onClick={failDirective}><BsXLg size={20}/></div>
+                        <div className="btt-table" onClick={tableDirective}><IoIosFastforward size={25}/></div>
                     </div>
                 </div>
             }

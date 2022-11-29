@@ -3,7 +3,7 @@ import "./Inbox.scoped.css";
 import { appContext } from "../../staffContext";
 import Dropdown from "../history/Dropdown";
 import { FaFilter } from "react-icons/fa";
-import DirectiveCard from "./card/DirectiveCard";
+import DirectiveCard from "./components/DirectiveCard";
 
 function Inbox() {
     const {processed} = useContext(appContext);

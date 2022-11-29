@@ -1,0 +1,144 @@
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+/*-------TOP CUSTOM-------*/
+.custom-top {
+    position: relative;
+
+    padding: 15px;
+    padding-left: 30px;
+    padding-right: 45px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    background-color: #3C8CC9;
+}
+
+.custom-id-tag {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #FFFFFF;
+    font-size: 24px;
+}
+
+.author {
+    color: #FFFFFF;
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.custom-icon {
+    fill: #FFFFFF;
+    min-width: 30px;
+    margin-right: 10px;
+}
+
+/*-------TOP STANDARD-------*/
+.standard-top {
+    padding: 25px;
+    padding-left: 50px;
+    padding-right: 50px;
+
+    background-color: #3C8CC9;
+}
+
+.card-top-bottom {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.type {
+    color: #FFFFFF;
+    font-size: 24px;
+}
+
+.id-tag {
+    color: #FFFFFF;
+    font-size: 24px;
+}
+
+.title {
+    color: #FFFFFF;
+    font-size: 42px;
+    font-weight: 600;
+
+    margin-bottom: 10px;
+}
+
+
+/*-------TIE-------*/
+.card-tie {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+
+    font-size: 24px;
+    background-color: #F7F7F7;
+}
+
+.tie-set {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-bottom: 5px;
+}
+
+.tie-icon {
+    fill: #b1b1b1;
+    min-width: 30px;
+    margin-right: 20px;
+}
+
+.signatories-list {
+    color: #b1b1b1;
+}
+
+
+/*-------BODY-------*/
+.card-body {
+    flex-grow: 1;
+
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    border-radius: 0 0 10px 10px;
+    background-color: #FFFFFF;
+    overflow-y: auto;
+}
+.card-body:hover::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 1);
+    opacity: 100%;
+    transition: 200ms;
+}
+.card-body:hover::-webkit-scrollbar-thumb {
+    background: rgba(220, 220, 220, 1);
+    opacity: 100%;
+    transition: 200ms;
+}
+
+.block-heading {
+    font-size: 24px;
+    font-weight: 500;
+    word-wrap: break-word;
+
+    margin-bottom: 3px;
+}
+
+.block-text {
+    color: #222222;
+    font-size: 24px;
+    word-wrap: break-word;
+    margin-bottom: 20px;
+    white-space: pre-line;
+}

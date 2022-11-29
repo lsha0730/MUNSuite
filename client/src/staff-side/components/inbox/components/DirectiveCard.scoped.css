@@ -15,6 +15,12 @@
 
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+}
+
+.btts-right {
+    display: flex;
+    flex-direction: row;
     justify-content: flex-end;
 }
 
@@ -69,6 +75,24 @@
 }
 .btt-fail:hover {
     background-color: #FFC6C6;
+    transition: 200ms;
+}
+
+.btt-present {
+    width: 40px;
+    height: 40px;
+
+    margin: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20%;
+    cursor: pointer;
+    color: #3C8CC9;
+}
+.btt-present:hover {
+    background-color: #BAE4FA;
     transition: 200ms;
 }
 
