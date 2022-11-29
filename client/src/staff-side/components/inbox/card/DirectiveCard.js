@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import "./CustomCard.scoped.css";
-import { BsPersonFill, BsCheckLg, BsXLg } from "react-icons/bs";
+import React, { useEffect, useState } from "react";
+import "./DirectiveCard.scoped.css"
+import { BsPeopleFill, BsEyeglasses, BsCheckLg, BsXLg, BsPersonFill } from "react-icons/bs";
 import { IoIosFastforward } from "react-icons/io";
 import { BiUndo } from "react-icons/bi";
 
-function CustomCard(props) {
+function DirectiveCard({ variant, body, id, updateCards, page, signatories, index, title, type, sponsors, author, revertDirective }) {
     const [bodyRenders, setBodyRenders] = useState();
 
     useEffect(() => {
-        setBodyRenders(props.body.map(block => {
+        setBodyRenders(body.map(block => {
             switch (block.type) {
                 case "select-multiple":
                     return (
@@ -36,20 +36,20 @@ function CustomCard(props) {
     }, [])
 
     function passDirective() {
-        props.updateCards("pass", props.id);
+        updateCards("pass", id);
     }
 
     function tableDirective() {
-        props.updateCards("table", props.id);
+        updateCards("table", id);
     }
 
     function failDirective() {
-        props.updateCards("fail", props.id);
+        updateCards("fail", id);
     }
 
     return (
-        <div className="card-container" style={{ marginRight: props.variant == "history"? 0 : 20 }}>
-            {props.variant == "inbox" && 
+        <div className="card-container" style={{ marginRight: page == "history"? 0 : 20 }}>
+            {page == "inbox" && 
                 <div className="card-operations">
                     <div className="btt-pass" onClick={passDirective}>
                         <BsCheckLg size={20}/>
@@ -63,20 +63,51 @@ function CustomCard(props) {
                 </div>
             }
 
-            {props.variant == "history" &&
+            {page == "history" &&
                 <div className="card-operations">
-                    <div className="btt-revert" onClick={() => {props.revertDirective(props.index)}}>
+                    <div className="btt-revert" onClick={() => {revertDirective(index)}}>
                         <p className="btt-revert-text">Revert to Inbox</p>
                         <BiUndo size={20}/>
                     </div>
                 </div>
             }
 
-            <div className="card-top">
-                <BsPersonFill size={30} className="card-icon"/>
-                <p className="author">{props.author}</p>
-                <p className="id-tag">ID: {props.id}</p>
-            </div>
+            {variant == "custom" &&
+                <div className="custom-top">
+                    <BsPersonFill size={30} className="custom-icon"/>
+                    <p className="author">{author}</p>
+                    <p className="custom-id-tag">ID: {id}</p>
+                </div>
+            }
+
+            {variant == "standard" &&
+                <div className="standard-top">
+                    <div className="card-top-top">
+                        <p className="title">{title}</p>
+                    </div>
+    
+                    <div className="card-top-bottom">
+                        <p className="type">{type}</p>
+                        <p className="id-tag">ID: {id}</p>
+                    </div>
+                </div>
+            }
+
+            {variant == "standard" &&
+                <div className="card-tie">
+                    <div className="tie-set">
+                        <BsPeopleFill size={15} className="tie-icon"/>
+                        <p>{sponsors.join(", ")}</p>
+                    </div>
+                    {signatories && signatories.length > 0?
+                        <div className="tie-set">
+                            <BsEyeglasses size={18} className="tie-icon"/>
+                            <p className="signatories-list">{signatories.join(", ")}</p>
+                        </div>
+                        : <div></div>
+                    }
+                </div>
+            }
 
             <div className="card-body">
                 {bodyRenders}
@@ -85,4 +116,4 @@ function CustomCard(props) {
     )
 }
 
-export default CustomCard
+export default DirectiveCard

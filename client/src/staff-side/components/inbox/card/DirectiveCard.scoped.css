@@ -6,7 +6,6 @@
     display: flex;
     flex-direction: column;
 
-    margin-right: 20px;
     border-radius: 10px;
 }
 
@@ -99,8 +98,44 @@
     margin-right: 5px;
 }
 
-/*-------TOP-------*/
-.card-top {
+/*-------TOP CUSTOM-------*/
+.custom-top {
+    position: relative;
+
+    padding: 15px;
+    padding-left: 30px;
+    padding-right: 45px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    border-radius: 10px 10px 0px 0px;
+    background-color: #3C8CC9;
+}
+
+.custom-id-tag {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #FFFFFF;
+    font-size: 10px;
+}
+
+.author {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.custom-icon {
+    fill: #FFFFFF;
+    min-width: 30px;
+    margin-right: 10px;
+}
+
+/*-------TOP STANDARD-------*/
+.standard-top {
     padding: 15px;
     padding-left: 30px;
     padding-right: 30px;
@@ -153,7 +188,7 @@
     margin-bottom: 5px;
 }
 
-.card-icon {
+.tie-icon {
     fill: #b1b1b1;
     min-width: 18px;
     margin-right: 10px;

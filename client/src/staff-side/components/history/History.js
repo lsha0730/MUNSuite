@@ -1,14 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./History.scoped.css";
 import { appContext } from "../../staffContext";
-import StandardCard from "../inbox/card/StandardCard.js";
-import CustomCard from "../inbox/card/CustomCard.js";
 import { GoSearch } from "react-icons/go";
 import { FaFilter } from "react-icons/fa";
 import { BsDownload } from "react-icons/bs";
 import { Confirmation } from "../modal-ui/modal-ui";
 import Dropdown from "./Dropdown";
 import Cardbar from "./Cardbar";
+import DirectiveCard from "../inbox/card/DirectiveCard";
 
 function History() {
     const {pendings} = useContext(appContext);
@@ -51,11 +50,11 @@ function History() {
         } else {
             if (directive.standard) {
                 setSelectionRender (
-                    <StandardCard key={directive.submissionID} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors} signatories={directive.signatories} body={directive.body || []} variant={"history"} revertDirective={revertDirective} index={processed.length - 1 - selection} />
+                    <DirectiveCard variant="standard" key={directive.submissionID} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors} signatories={directive.signatories} body={directive.body || []} page={"history"} revertDirective={revertDirective} index={processed.length - 1 - selection} />
                 )
             } else {
                 setSelectionRender (
-                    <CustomCard key={directive.submissionID} id={directive.submissionID} author={directive.author} body={directive.body || []} variant={"history"} revertDirective={revertDirective} index={processed.length - 1 - selection} />
+                    <DirectiveCard variant="custom" key={directive.submissionID} id={directive.submissionID} author={directive.author} body={directive.body || []} page={"history"} revertDirective={revertDirective} index={processed.length - 1 - selection} />
                 )
             }
         }

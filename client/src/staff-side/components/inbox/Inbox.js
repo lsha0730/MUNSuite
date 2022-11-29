@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./Inbox.scoped.css";
-import StandardCard from "./card/StandardCard.js";
-import CustomCard from "./card/CustomCard.js";
 import { appContext } from "../../staffContext";
 import Dropdown from "../history/Dropdown";
 import { FaFilter } from "react-icons/fa";
+import DirectiveCard from "./card/DirectiveCard";
 
 function Inbox() {
     const {processed} = useContext(appContext);
@@ -37,9 +36,9 @@ function Inbox() {
     useEffect(() => {
         setCardArrRender(pendings.filter(includeInFilter).map(directive => {
             if (directive.standard) {
-                return <StandardCard key={directive.submissionID} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors || []} signatories={directive.signatories || []} body={directive.body || []} updateCards={updateCards} variant="inbox"/>
+                return <DirectiveCard variant="standard" key={directive.submissionID} id={directive.submissionID} title={directive.title} type={directive.type} sponsors={directive.sponsors || []} signatories={directive.signatories || []} body={directive.body || []} updateCards={updateCards} page="inbox"/>
             } else {
-                return <CustomCard key={directive.submissionID} id={directive.submissionID} author={directive.author} body={directive.body || []} updateCards={updateCards} variant="inbox"/>
+                return <DirectiveCard variant="custom" key={directive.submissionID} id={directive.submissionID} author={directive.author} body={directive.body || []} updateCards={updateCards} page="inbox"/>
             }
         }))
     }, [pendings, dropdownValue])
