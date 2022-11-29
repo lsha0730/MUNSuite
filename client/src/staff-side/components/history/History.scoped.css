@@ -173,6 +173,11 @@
     color: #FF4343;
     border-radius: 10px;
     cursor: pointer;
+
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 .btt-clear-history:hover {
     background-color: #ff7979;
@@ -197,6 +202,11 @@
     background-color: #EEEEEE;
     border-radius: 10px;
     cursor: pointer;
+
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 .btt-export-history:hover {
     background-color: #D9D9D9;
