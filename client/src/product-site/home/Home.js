@@ -18,6 +18,7 @@ import { FaHistory } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
 import FeatureItem from "./FeatureItem";
 import { siteContext } from "../../Context";
+import GradientAnimation from "./gradient/GradientAnimation";
 
 function Home() {
   const { isPortrait } = useContext(siteContext);
@@ -41,7 +42,7 @@ function Home() {
     <div className="home-container">
       {/*Top Section*/}
       <div className="home-top">
-        <div className="top-gradient" />
+        <GradientAnimation className="top-gradient" />
         <div className="home-top-container">
           <div className="top-left">
             <img

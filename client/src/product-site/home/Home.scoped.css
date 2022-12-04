@@ -21,7 +21,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  transform: translate(-150px);
+  transform: translate(-150px, 1300px);
   position: relative;
   top: -1970px;
   left: 0;
@@ -29,29 +29,13 @@
 }
 
 .top-gradient {
-  opacity: 0.7;
-  background: linear-gradient(-45deg, #47667d, #3c8cc9, #bae4fa);
-  background-size: 150% 150%;
-  animation: gradient 10s ease infinite;
   width: 120%;
-  height: 2000px;
-  transform: rotate(-5deg) translate(200px, 10px);
+  height: 100%;
+  transform: rotate(-5deg) translate(100px, 1300px);
 
   position: relative;
   top: -1700px;
   left: -300px;
-  z-index: 0;
-}
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 .top-left {
@@ -267,9 +251,10 @@
     flex-direction: column;
     transform: none;
     height: fit-content;
+    transform: translate(0px, 1300px);
   }
   .top-gradient {
-    transform: rotate(-5deg) translate(200px, 150px);
+    transform: rotate(-5deg) translate(100px, 1450px);
   }
   .top-left {
     margin-left: 50px;
