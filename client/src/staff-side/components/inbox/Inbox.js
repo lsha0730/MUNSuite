@@ -17,7 +17,7 @@ function Inbox() {
     const [dropdownValue, setDropdownValue] = useState("No Filter");
 
     useEffect(() => {
-        let toggleOffset = accepting? 0:25;
+        let toggleOffset = accepting? 25:0;
 
         setToggleRender(
             <div className="toggle-set" onClick={() => setAccepting(!accepting)}>
