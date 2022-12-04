@@ -1,224 +1,223 @@
 /*----------PAGE UI----------*/
 .editor-container {
-    width: fit-content;
-    height: 100%;
+  width: fit-content;
+  height: 100%;
 
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .main-UI {
-    width: 1170px;
-    height: 100%;
+  width: 1170px;
+  height: 100%;
 
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .fade {
-    opacity: 0%;
-    transition: 200ms;
+  opacity: 0%;
+  transition: 200ms;
 }
-
 
 /*----------FORM UI----------*/
 .hat-UI {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
 
-    padding-right: 430px;
-    padding-bottom: 30px;
+  padding-right: 430px;
+  padding-bottom: 30px;
 }
 
 .preview-hat {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    transform: translate(50px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transform: translate(50px);
 }
 .preview-hat-top {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 30px;
 }
 .preview-hat-heading {
-    max-width: 400px;
-    font-size: 32px;
-    font-weight: 600;
-    color: #BCBCBC;
+  max-width: 400px;
+  font-size: 32px;
+  font-weight: 600;
+  color: #bcbcbc;
 }
 .preview-hat-link-icon-container {
-    width: 35px;
-    height: 35px;
+  width: 35px;
+  height: 35px;
 
-    margin-left: 10px;
+  margin-left: 10px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    border-radius: 10px;
-    transition: 200ms;
-    cursor: pointer;
+  border-radius: 10px;
+  transition: 200ms;
+  cursor: pointer;
 }
 .preview-hat-link-icon-container:hover {
-    background-color: #BAE4FA;
-    transition: 200ms;
+  background-color: #bae4fa;
+  transition: 200ms;
 }
 .preview-hat-link-icon {
-    width: 30px;
-    height: 30px;
-    fill: #378DCC;
+  width: 30px;
+  height: 30px;
+  fill: #378dcc;
 }
 .preview-hat-subheading {
-    font-size: 18px;
-    font-weight: 500;
-    color: #BCBCBC;
+  font-size: 18px;
+  font-weight: 500;
+  color: #bcbcbc;
 }
 
 .formlink-confirmation-container {
-    margin-left: 10px;
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 5px;
-    background-color: #FFFFFF;
+  margin-left: 10px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  background-color: #ffffff;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    transition: 200ms;
+  transition: 200ms;
 }
 .formlink-confirmation-text {
-    font-size: 10px;
-    font-weight: 500;
+  font-size: 10px;
+  font-weight: 500;
 }
 
 .preview-editor-pair {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    overflow: visible;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  overflow: visible;
 }
 
 /*----------ADD QUESTION----------*/
 .addQ-container {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    transform: translate(50px);
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  transform: translate(50px);
 }
 
 .addQ-text {
-    width: fit-content;
+  width: fit-content;
 
-    font-size: 16px;
-    font-weight: 600;
-    color: #999999;
+  font-size: 16px;
+  font-weight: 600;
+  color: #999999;
 
-    padding: 15px;
-    padding-top: 10px;
-    padding-bottom: 0px;
+  padding: 15px;
+  padding-top: 10px;
+  padding-bottom: 0px;
 
-    background-color: #FFFFFF;
-    border-radius: 10px 10px 0px 0px;
+  background-color: #ffffff;
+  border-radius: 10px 10px 0px 0px;
 }
 
 .addQ-options-container {
-    width: 500px;
-    height: fit-content;
+  width: 500px;
+  height: fit-content;
 
-    padding: 10px;
-    margin-bottom: 100px;
+  padding: 10px;
+  margin-bottom: 100px;
 
-    background-color: #FFFFFF;
-    border-radius: 0px 10px 10px 10px;
+  background-color: #ffffff;
+  border-radius: 0px 10px 10px 10px;
 
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 .btt-addQ {
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin: 5px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 5px;
 
-    background-color: #BAE4FA;
-    border-radius: 10px;
+  background-color: #bae4fa;
+  border-radius: 10px;
 
-    color: #378DCC;
-    font-weight: 500;
-    text-align: center;
+  color: #378dcc;
+  font-weight: 500;
+  text-align: center;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    cursor: pointer;
+  cursor: pointer;
 }
 .btt-addQ:hover {
-    background-color: #7eb6df;
-    color: #FFFFFF;
-    transition: 200ms;
+  background-color: #7eb6df;
+  color: #ffffff;
+  transition: 200ms;
 }
 
 /*Toggle*/
 .toggle-set {
-    height: fit-content;
-    margin-top: 70px;
+  height: fit-content;
+  margin-top: 70px;
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-    cursor: pointer;
+  cursor: pointer;
 }
 .toggle-bar {
-    position: relative;
-    width: 45px;
-    height: 20px;
+  position: relative;
+  width: 45px;
+  height: 20px;
 
-    margin-left: 15px;
-    border-radius: 10px;
+  margin-left: 15px;
+  border-radius: 10px;
 }
 .toggle-circle {
-    position: absolute;
-    left: 0px;
+  position: absolute;
+  left: 0px;
 
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
 }
 .toggle-greenbg {
-    background-color: #CFF9C3;
-    transition: 200ms;
+  background-color: #cff9c3;
+  transition: 200ms;
 }
 .toggle-greenbtt {
-    background-color: #3CDC27;
-    transition: 200ms;
+  background-color: #3cdc27;
+  transition: 200ms;
 }
 .toggle-redbg {
-    background-color: #ffc6c6;
-    transition: 200ms;
+  background-color: #ffc6c6;
+  transition: 200ms;
 }
 .toggle-redbtt {
-    background-color: #ff7070;
-    transition: 200ms;
+  background-color: #ff7070;
+  transition: 200ms;
 }
 .toggle-text-red {
-    font-size: 16px;
-    font-weight: 500;
-    color: #ff7070;
-    transition: 200ms;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ff7070;
+  transition: 200ms;
 }
 .toggle-text-green {
-    font-size: 16px;
-    font-weight: 500;
-    color: #3CDC27;
-    transition: 200ms;
+  font-size: 16px;
+  font-weight: 500;
+  color: #3cdc27;
+  transition: 200ms;
 }

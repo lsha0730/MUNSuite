@@ -1,96 +1,96 @@
 .delbar-container {
-    width: 100%;
-    height: 45px;
-    min-width: 250px;
-    min-height: 45px;
+  width: 100%;
+  height: 45px;
+  min-width: 250px;
+  min-height: 45px;
 
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.delbar{
-    flex-grow: 1;
-    height: 100%;
+.delbar {
+  flex-grow: 1;
+  height: 100%;
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 
-    background-color: #FFFFFF;
-    border-radius: 10px;
+  background-color: #ffffff;
+  border-radius: 10px;
 
-    transition: 200ms;
-    cursor: pointer;
+  transition: 200ms;
+  cursor: pointer;
 }
 .delbar:hover {
-    background-color: #F7F7F7;
-    transition: 200ms;
+  background-color: #f7f7f7;
+  transition: 200ms;
 }
 
-.delbar-selected{
-    flex-grow: 1;
-    height: 100%;
+.delbar-selected {
+  flex-grow: 1;
+  height: 100%;
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 
-    background-color: #FFFFFF;
-    border-radius: 10px;
+  background-color: #ffffff;
+  border-radius: 10px;
 
-    background-color: #BAE4FA;
-    transition: 200ms;
-    cursor: pointer;
+  background-color: #bae4fa;
+  transition: 200ms;
+  cursor: pointer;
 }
 .delbar-selected:hover {
-    background-color: #7fb5db;
-    transition: 200ms;
+  background-color: #7fb5db;
+  transition: 200ms;
 }
 
 .del-name {
-    font-weight: 600;
-    margin-left: 30px;
+  font-weight: 600;
+  margin-left: 30px;
 }
 
 .codebox {
-    width: 80px;
-    height: 100%;
-    
-    margin-left: 10px;
-    margin-right: 5px;
+  width: 80px;
+  height: 100%;
 
-    border-radius: 10px;
-    background-color: #EEEEEE;
+  margin-left: 10px;
+  margin-right: 5px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  border-radius: 10px;
+  background-color: #eeeeee;
 
-    font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    transition: 200ms;
-    cursor: pointer;
+  font-weight: 400;
+
+  transition: 200ms;
+  cursor: pointer;
 }
 .codebox-selected {
-    background-color: #BAE4FA;
-    opacity: 80%;
+  background-color: #bae4fa;
+  opacity: 80%;
 }
 .codebox:hover {
-    background-color: #CCCCCC;
-    transition: 200ms;
+  background-color: #cccccc;
+  transition: 200ms;
 }
 
 .icon {
-    fill: #378DCC;
-    margin-right: 5px;
+  fill: #378dcc;
+  margin-right: 5px;
 }
 
 .fade {
-    opacity: 0%;
-    transition: 200ms;
+  opacity: 0%;
+  transition: 200ms;
 }

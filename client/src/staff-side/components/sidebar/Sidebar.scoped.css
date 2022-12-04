@@ -1,87 +1,87 @@
 .Sidebar-container {
-    min-width: 60px;
-    height: 100%;
+  min-width: 60px;
+  height: 100%;
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 .Sidebar-subcontainer {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 
-    background-color: #FFFFFF;
+  background-color: #ffffff;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 .Sidebar-indicator {
-    width: 3px;
-    height: 40px;
+  width: 3px;
+  height: 40px;
 
-    position: absolute;
-    left: 58px;
-    transition: 300ms;
+  position: absolute;
+  left: 58px;
+  transition: 300ms;
 
-    background-color: #3C8CC9;
+  background-color: #3c8cc9;
 }
 
 .Sidebar-topicons {
-    width: 100%;
-    height: 400px;
-    padding-top: 45px;
+  width: 100%;
+  height: 400px;
+  padding-top: 45px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .Sidebar-boticons {
-    width: 100%;
-    padding-bottom: 45px;
+  width: 100%;
+  padding-bottom: 45px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .Sidebar-option {
-    width: 100%;
-    height: 60px;
-    position: relative;
+  width: 100%;
+  height: 60px;
+  position: relative;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    transition: 150ms;
-    cursor: pointer;
+  transition: 150ms;
+  cursor: pointer;
 }
 .Sidebar-option:hover {
-    background-color: #EEEEEE;
-    transition: 150ms;
+  background-color: #eeeeee;
+  transition: 150ms;
 }
 
 .notification-indicator {
-    position: absolute;
-    top: 12px;
-    left: 34px;
-    z-index: 2;
-    min-width: 17px;
-    min-height: 17px;
-    padding: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #FF5A5A;
-    color: white;
-    font-size: 10px;
-    font-weight: 600;
-    border-radius: 8.5px;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
+  position: absolute;
+  top: 12px;
+  left: 34px;
+  z-index: 2;
+  min-width: 17px;
+  min-height: 17px;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff5a5a;
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 8.5px;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }

@@ -1,10 +1,10 @@
 [
-    {
-        "version": "1.0.0",
-        "description": "Closed beta release of the app. Please email any feedback to info@munsuite.com."
-    },
-    {
-        "version": "1.1.0",
-        "description": "Presentation mode, inbox filtering, revertable directives after processing, public/private cards color change"
-    }
+  {
+    "version": "1.0.0",
+    "description": "Closed beta release of the app. Please email any feedback to info@munsuite.com."
+  },
+  {
+    "version": "1.1.0",
+    "description": "Presentation mode, inbox filtering, revertable directives after processing, public/private cards color change"
+  }
 ]

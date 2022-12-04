@@ -1,153 +1,153 @@
 .page-container {
-    width: 75%;
-    height: 85%;
-    max-width: 1600px;
+  width: 75%;
+  height: 85%;
+  max-width: 1600px;
 
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 /*-----------LEFT UI----------*/
 .UI-left {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    min-width: 70%;
-    margin-right: 20px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
+  min-width: 70%;
+  margin-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
 
-    border-radius: 10px;
-    background-color: #FFFFFF;
+  border-radius: 10px;
+  background-color: #ffffff;
 }
 
 .UI-left-top {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
 
 /*Header*/
 .header-pair {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .header-text {
-    font-size: 18px;
-    font-weight: 600;
-    color: #3C8CC9;
-    margin-left: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #3c8cc9;
+  margin-left: 15px;
 }
 
 .header-icon {
-    fill: #3C8CC9;
+  fill: #3c8cc9;
 }
 
 /*Committee Information*/
 .setting-header {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
 }
 
 .inputs-container {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .input-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .input-subheader {
-    font-size: 16px;
-    font-weight: 500;
-    color: #BCBCBC;
+  font-size: 16px;
+  font-weight: 500;
+  color: #bcbcbc;
 }
 
 .input-field {
-    width: 300px;
-    height: 30px;
+  width: 300px;
+  height: 30px;
 
-    margin-top: 10px;
-    margin-right: 40px;
-    padding-left: 10px;
-    padding-right: 10px;
+  margin-top: 10px;
+  margin-right: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
 
-    font-size: 16px;
+  font-size: 16px;
 
-    border-color: rgba(0,0,0,0);
-    border-radius: 10px;
-    background-color: #F7F7F7;
+  border-color: rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  background-color: #f7f7f7;
 }
 .input-field:focus {
-    outline: none !important;
-    border-color: rgba(0,0,0,0);
-    background-color: #F7F7F7;
+  outline: none !important;
+  border-color: rgba(0, 0, 0, 0);
+  background-color: #f7f7f7;
 }
 .input-field:hover {
-    background-color: #EEEEEE;
+  background-color: #eeeeee;
 }
 
 /*-----------RIGHT UI----------*/
 .UI-right {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 30px;
-    padding-right: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
 
-    border-radius: 10px;
-    background-color: #FFFFFF;
+  border-radius: 10px;
+  background-color: #ffffff;
 }
 
 .release-notes-container {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 
-    background-color: #F7F7F7;
-    border-radius: 10px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
 
-    margin-top: 10px;
-    padding: 20px;
+  margin-top: 10px;
+  padding: 20px;
 
-    font-size: 16px;
-    font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
 
-    border-color: rgba(0,0,0,0);
-    border-radius: 10px;
-    background-color: #F7F7F7;
+  border-color: rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  background-color: #f7f7f7;
 
-    overflow-y: auto;
+  overflow-y: auto;
 }
 
 .version-note-heading {
-    margin-bottom: 5px;
-    font-size: 16px;
-    font-weight: 500;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 500;
 }
 .version-note-subheading {
-    font-size: 16px;
-    color: #BCBCBC;
-    margin-bottom: 25px;
+  font-size: 16px;
+  color: #bcbcbc;
+  margin-bottom: 25px;
 }
 
 .metadata {
-    color: #BCBCBC;
-    margin-top: 15px;
+  color: #bcbcbc;
+  margin-top: 15px;
 }
 
 .signature {
-    margin-top: 10px;
+  margin-top: 10px;
 }

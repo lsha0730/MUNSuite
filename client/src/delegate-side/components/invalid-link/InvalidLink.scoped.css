@@ -1,38 +1,38 @@
 .invalid-container {
-    width: 100vw;
-    height: 100vh;
+  width: 100vw;
+  height: 100vh;
 
-    background-color: #F7F7F7;
+  background-color: #f7f7f7;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .invalid-card-container {
-    width: 800px;
-    height: 300px;
+  width: 800px;
+  height: 300px;
 
-    background-color: #FFFFFF;
-    border-radius: 20px;
+  background-color: #ffffff;
+  border-radius: 20px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon {
-    fill: #FF7070;
+  fill: #ff7070;
 }
 
 .heading {
-    font-size: 42px;
-    font-weight: 600;
+  font-size: 42px;
+  font-weight: 600;
 }
 
 .subheading {
-    font-size: 24px;
-    font-weight: 600;
-    color: #BCBCBC;
+  font-size: 24px;
+  font-weight: 600;
+  color: #bcbcbc;
 }

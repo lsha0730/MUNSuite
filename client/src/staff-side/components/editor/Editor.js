@@ -34,9 +34,8 @@ function Editor() {
 
   const [editing, setEditing] = useState(false);
   const [formRender, setFormRender] = useState([]);
-  const [isDisplayingConfirmation, setIsDisplayingConfirmation] = useState(
-    false
-  );
+  const [isDisplayingConfirmation, setIsDisplayingConfirmation] =
+    useState(false);
   const [standardized, setStandardized] = useState(
     settings.standardForm || false
   );

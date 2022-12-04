@@ -1,152 +1,148 @@
 .card-container {
-    min-width: 350px;
-    max-width: 350px;
-    height: fit-content;
-    
-    display: flex;
-    flex-direction: column;
+  min-width: 350px;
+  max-width: 350px;
+  height: fit-content;
 
-    margin-bottom: 10px;
-    border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 10px;
+  border-radius: 10px;
 }
 
 .collapsable {
-    height: 500px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    transition: 300ms;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: 300ms;
 }
 
 .collapsed {
-    height: 0px;
-    transition: 300ms;
+  height: 0px;
+  transition: 300ms;
 }
 
 .rounded {
-    border-radius: 10px !important;
-    overflow: hidden;
-    transition: 300ms;
+  border-radius: 10px !important;
+  overflow: hidden;
+  transition: 300ms;
 }
-
-
 
 /*-------TOP-------*/
 .card-top {
-    padding: 15px;
-    padding-left: 30px;
-    padding-right: 30px;
+  padding: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
 
-    border-radius: 10px 10px 0px 0px;
-    cursor: pointer;
-    transition: 300ms;
+  border-radius: 10px 10px 0px 0px;
+  cursor: pointer;
+  transition: 300ms;
 }
 
 .card-top-top {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .status-indicator {
-    width: 15px;
-    height: 15px;
-    margin-top: 5px;
-    border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  margin-top: 5px;
+  border-radius: 50%;
 }
 
 .card-top-bottom {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 
 .type {
-    color: #FFFFFF;
-    font-size: 14px;
+  color: #ffffff;
+  font-size: 14px;
 }
 
 .id-tag {
-    color: #FFFFFF;
-    font-size: 10px;
+  color: #ffffff;
+  font-size: 10px;
 }
 
 .title {
-    max-width: 260px;
-    color: #FFFFFF;
-    font-size: 16px;
-    font-weight: 500;
+  max-width: 260px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
 
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
-
 
 /*-------TIE-------*/
 .card-tie {
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 10px;
-    padding-bottom: 5px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 5px;
 
-    font-size: 12px;
-    background-color: #F7F7F7;
+  font-size: 12px;
+  background-color: #f7f7f7;
 }
 
 .tie-set {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .card-icon {
-    fill: #b1b1b1;
-    min-width: 18px;
-    margin-right: 10px;
+  fill: #b1b1b1;
+  min-width: 18px;
+  margin-right: 10px;
 }
 
 .signatories-list {
-    color: #b1b1b1;
+  color: #b1b1b1;
 }
-
 
 /*-------BODY-------*/
 .card-body {
-    flex-grow: 1;
+  flex-grow: 1;
 
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 
-    border-radius: 0 0 10px 10px;
-    background-color: #FFFFFF;
-    overflow-y: auto;
+  border-radius: 0 0 10px 10px;
+  background-color: #ffffff;
+  overflow-y: auto;
 }
 .card-body:hover::-webkit-scrollbar-track {
-    background: rgba(241, 241, 241, 1);
-    opacity: 100%;
-    transition: 200ms;
+  background: rgba(241, 241, 241, 1);
+  opacity: 100%;
+  transition: 200ms;
 }
 .card-body:hover::-webkit-scrollbar-thumb {
-    background: rgba(220, 220, 220, 1);
-    opacity: 100%;
-    transition: 200ms;
+  background: rgba(220, 220, 220, 1);
+  opacity: 100%;
+  transition: 200ms;
 }
 
 .block-heading {
-    font-size: 14px;
-    font-weight: 500;
-    word-wrap: break-word;
+  font-size: 14px;
+  font-weight: 500;
+  word-wrap: break-word;
 
-    margin-bottom: 3px;
+  margin-bottom: 3px;
 }
 
 .block-text {
-    color: #222222;
-    font-size: 14px;
-    word-wrap: break-word;
-    margin-bottom: 20px;
-    white-space: pre-line;
+  color: #222222;
+  font-size: 14px;
+  word-wrap: break-word;
+  margin-bottom: 20px;
+  white-space: pre-line;
 }
