@@ -12,7 +12,7 @@
   width: 100vw;
   height: 700px;
   margin-top: 50px;
-  margin-bottom: 70px;
+  margin-bottom: -20px;
 }
 
 .home-top-container {
@@ -108,6 +108,29 @@
 .btt-get-started:hover {
   opacity: 0.7;
   transition: 200ms;
+}
+
+/*---------TRUSTED BY---------*/
+.trusted-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
+
+  width: 70%;
+  max-width: 500px;
+}
+
+.trusted-logos {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.trusted-logo {
+  height: 70px;
 }
 
 /*---------FEATURES SECTION---------*/
@@ -254,7 +277,7 @@
     transform: translate(0px, 1300px);
   }
   .top-gradient {
-    transform: rotate(-5deg) translate(100px, 1450px);
+    transform: rotate(-5deg) translate(130px, 1450px);
   }
   .top-left {
     margin-left: 50px;

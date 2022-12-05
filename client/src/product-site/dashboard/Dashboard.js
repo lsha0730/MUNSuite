@@ -3,11 +3,11 @@ import { getDatabase, onValue, ref, set } from "firebase/database";
 import "./Dashboard.scoped.css";
 import { siteContext } from "../../Context";
 
-import delegations from "../home/images/delegations.png";
-import form from "../home/images/form.png";
-import history from "../home/images/history.png";
-import statistics from "../home/images/statistics.png";
-import notes from "../home/images/notes.png";
+import delegations from "../home/images/mockups/delegations.png";
+import form from "../home/images/mockups/form.png";
+import history from "../home/images/mockups/history.png";
+import statistics from "../home/images/mockups/statistics.png";
+import notes from "../home/images/mockups/notes.png";
 import { Link } from "react-router-dom";
 
 function Dashboard() {

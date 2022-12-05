@@ -2,16 +2,16 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.scoped.css";
 
-import formTab from "./images/form-tab.png";
-import inboxTab from "./images/inbox-tab.png";
+import formTab from "./images/mockups/form-tab.png";
+import inboxTab from "./images/mockups/inbox-tab.png";
 
-import delside from "./images/delside.png";
-import delegations from "./images/delegations.png";
-import form from "./images/form.png";
-import inbox from "./images/inbox.png";
-import history from "./images/history.png";
-import statistics from "./images/statistics.png";
-import notes from "./images/notes.png";
+import delside from "./images/mockups/delside.png";
+import delegations from "./images/mockups/delegations.png";
+import form from "./images/mockups/form.png";
+import inbox from "./images/mockups/inbox.png";
+import history from "./images/mockups/history.png";
+import statistics from "./images/mockups/statistics.png";
+import notes from "./images/mockups/notes.png";
 import { BsFillPersonLinesFill } from "react-icons/bs";
 import { ImFontSize, ImSearch } from "react-icons/im";
 import { FaHistory } from "react-icons/fa";
@@ -75,6 +75,19 @@ function Home() {
               </Link>
             )}
           </div>
+        </div>
+      </div>
+
+      <div className="trusted-container">
+        <div className="trusted-logos">
+          <img
+            src={require("./images/logos/horizons.png")}
+            className="trusted-logo"
+          />
+          <img
+            src={require("./images/logos/cahsmun.png")}
+            className="trusted-logo"
+          />
         </div>
       </div>
 
