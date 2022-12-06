@@ -88,6 +88,10 @@ function Home() {
             src={require("./images/logos/cahsmun.png")}
             className="trusted-logo"
           />
+          <img
+            src={require("./images/logos/vmun.png")}
+            className="trusted-logo"
+          />
         </div>
       </div>
 
