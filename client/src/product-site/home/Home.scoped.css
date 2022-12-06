@@ -305,6 +305,10 @@
     left: 150px;
   }
 
+  .trusted-logo {
+    height: 40px;
+  }
+
   .home-features {
     padding-top: 100px;
   }
