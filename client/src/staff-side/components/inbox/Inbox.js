@@ -38,7 +38,7 @@ function Inbox() {
                 : "toggle-circle toggle-redbtt"
             }
             style={{ left: toggleOffset }}
-          ></div>
+          />
         </div>
       </div>
     );
@@ -84,8 +84,14 @@ function Inbox() {
   }, [pendings, dropdownValue]);
 
   function includeInFilter(directive) {
-    if (dropdownValue == "No Filter") return true;
-    return directive && directive?.standard && directive?.type == dropdownValue;
+    switch (dropdownValue) {
+      case "No Filter":
+        return true;
+      case "Custom Submission":
+        return !directive.standard;
+      default:
+        return directive && directive?.type == dropdownValue;
+    }
   }
 
   return (
@@ -94,9 +100,7 @@ function Inbox() {
         <div className="filter-container">
           <FaFilter size={15} style={{ marginRight: 10, fill: "#BCBCBC" }} />
           <Dropdown
-            options={["No Filter"].concat(
-              settings.standardForm ? form[2].options : ["Public", "Private"]
-            )}
+            options={getFilterOptions(pendings)}
             setSelection={setDropdownValue}
           />
         </div>
@@ -104,13 +108,13 @@ function Inbox() {
         {toggleRender}
       </div>
       <div className="UI-bottom">
-        <div className="spacer"></div>
+        <div className="spacer" />
         {cardArrRender.length != 0 ? (
           cardArrRender
         ) : (
           <div className="no-cards-box">No pending submissions</div>
         )}
-        <div className="spacer2"></div>
+        <div className="spacer2" />
       </div>
     </div>
   );
@@ -148,6 +152,20 @@ function Inbox() {
     }
 
     writeToFirebase("pendings", tempArr);
+  }
+
+  function getFilterOptions(cards) {
+    const set = new Set();
+
+    cards.forEach((card) => {
+      if (card.standard) {
+        set.add(card.type);
+      } else if (!card.standard) {
+        set.add("Custom Submission");
+      }
+    });
+
+    return ["No Filter"].concat(Array.from(set));
   }
 }
 
