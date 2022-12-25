@@ -24,7 +24,7 @@ usedRef.on("value", (snapshot: any) => {
 registerRouter.post(
   "/newuser",
   (req: express.Request, res: express.Response) => {
-    const submission: RegistrationObject = req.body.submissionObject;
+    const submission: RegistrationObject = req.body.registrationObject;
     const validation = validateRegister(submission);
     if (validation == "Success") {
       makeAccount(submission).then((result) => {
