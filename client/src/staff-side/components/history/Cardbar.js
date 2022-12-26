@@ -1,4 +1,5 @@
 import React from "react";
+import { highlight } from "../../utils";
 import "./History.scoped.css";
 
 const PASSED_COLOR = "#7AFF69";
@@ -12,7 +13,10 @@ function Cardbar({
   title,
   submissionID,
   author,
+  search,
 }) {
+  const h = (text) => (search ? highlight(text, search) : text);
+
   if (type == "custom") {
     return (
       <div className="cardbar-container">
@@ -25,10 +29,8 @@ function Cardbar({
             style={{
               backgroundColor: status == "Passed" ? PASSED_COLOR : FAILED_COLOR,
             }}
-          ></div>
-          <p>
-            Submission {submissionID} by {author}
-          </p>
+          />
+          <p>{h(`Submission ${submissionID} by ${author}`)}</p>
         </div>
       </div>
     );
@@ -44,8 +46,8 @@ function Cardbar({
             style={{
               backgroundColor: status == "Passed" ? PASSED_COLOR : FAILED_COLOR,
             }}
-          ></div>
-          <p>{title}</p>
+          />
+          <p>{h(title)}</p>
         </div>
       </div>
     );

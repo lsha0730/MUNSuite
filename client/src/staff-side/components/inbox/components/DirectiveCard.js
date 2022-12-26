@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./DirectiveCard.scoped.css";
 import {
   BsPeopleFill,
@@ -11,6 +11,7 @@ import { IoIosFastforward } from "react-icons/io";
 import { BiUndo } from "react-icons/bi";
 import { MdOutlinePresentToAll } from "react-icons/md";
 import Popout from "./Popout";
+import { highlight } from "../../../utils";
 
 function DirectiveCard(props) {
   const {
@@ -26,44 +27,11 @@ function DirectiveCard(props) {
     sponsors,
     author,
     revertDirective,
+    search,
   } = props;
 
-  const [bodyRenders, setBodyRenders] = useState();
   const [presenting, setPresenting] = useState(false);
-
-  useEffect(() => {
-    setBodyRenders(
-      body.map((block) => {
-        switch (block.type) {
-          case "select-multiple":
-            return (
-              <div>
-                <p className="block-heading">{block.heading}</p>
-                <p className="block-text">
-                  {block.value ? block.value.join(", ") : "None"}
-                </p>
-              </div>
-            );
-          case "multiplechoice":
-            return (
-              <div>
-                <p className="block-heading">{block.heading}</p>
-                <p className="block-text">
-                  {block.value ? block.value.join(", ") : "None"}
-                </p>
-              </div>
-            );
-          default:
-            return (
-              <div>
-                <p className="block-heading">{block.heading}</p>
-                <p className="block-text">{block.value}</p>
-              </div>
-            );
-        }
-      })
-    );
-  }, []);
+  const h = (text) => (search ? highlight(text, search) : text);
 
   function passDirective() {
     updateCards("pass", id);
@@ -136,8 +104,8 @@ function DirectiveCard(props) {
       {variant == "custom" && (
         <div className="custom-top">
           <BsPersonFill size={30} className="custom-icon" />
-          <p className="author">{author}</p>
-          <p className="custom-id-tag">ID: {id}</p>
+          <p className="author">{h(author)}</p>
+          <p className="custom-id-tag">ID: {h(id)}</p>
         </div>
       )}
 
@@ -147,12 +115,12 @@ function DirectiveCard(props) {
           style={{ backgroundColor: type == "Public" ? "#3C8CC9" : "#285e86" }}
         >
           <div className="card-top-top">
-            <p className="title">{title}</p>
+            <p className="title">{h(title)}</p>
           </div>
 
           <div className="card-top-bottom">
-            <p className="type">{type}</p>
-            <p className="id-tag">ID: {id}</p>
+            <p className="type">{h(type)}</p>
+            <p className="id-tag">ID: {h(id)}</p>
           </div>
         </div>
       )}
@@ -161,20 +129,50 @@ function DirectiveCard(props) {
         <div className="card-tie">
           <div className="tie-set">
             <BsPeopleFill size={15} className="tie-icon" />
-            <p>{sponsors.join(", ")}</p>
+            <p>{h(sponsors.join(", "))}</p>
           </div>
           {signatories && signatories.length > 0 ? (
             <div className="tie-set">
               <BsEyeglasses size={18} className="tie-icon" />
-              <p className="signatories-list">{signatories.join(", ")}</p>
+              <p className="signatories-list">{h(signatories.join(", "))}</p>
             </div>
           ) : (
-            <div></div>
+            <div />
           )}
         </div>
       )}
 
-      <div className="card-body">{bodyRenders}</div>
+      <div className="card-body">
+        {body.map((block) => {
+          switch (block.type) {
+            case "select-multiple":
+              return (
+                <div>
+                  <p className="block-heading">{h(block.heading)}</p>
+                  <p className="block-text">
+                    {h(block.value ? block.value.join(", ") : "None")}
+                  </p>
+                </div>
+              );
+            case "multiplechoice":
+              return (
+                <div>
+                  <p className="block-heading">{h(block.heading)}</p>
+                  <p className="block-text">
+                    {h(block.value ? block.value.join(", ") : "None")}
+                  </p>
+                </div>
+              );
+            default:
+              return (
+                <div>
+                  <p className="block-heading">{h(block.heading)}</p>
+                  <p className="block-text">{h(block.value)}</p>
+                </div>
+              );
+          }
+        })}
+      </div>
     </div>
   );
 }

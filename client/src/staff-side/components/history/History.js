@@ -8,15 +8,14 @@ import { Confirmation } from "../modal-ui/modal-ui";
 import Dropdown from "./Dropdown";
 import Cardbar from "./Cardbar";
 import DirectiveCard from "../inbox/components/DirectiveCard";
+import { exportProcesseds, flattenToString } from "../../utils";
 
 function History() {
   const { pendings } = useContext(appContext);
   const { processed } = useContext(appContext);
   const { writeToFirebase } = useContext(appContext);
-  const { exportToCsv } = useContext(appContext);
   const [cardArrRender, setCardArrRender] = useState([]);
   const [selection, setSelection] = useState(0);
-  const [selectionRender, setSelectionRender] = useState();
   const [search, setSearch] = useState("");
   const [dropdownValue, setDropdownValue] = useState("No Filter");
   const [modal, setModal] = useState(false);
@@ -24,17 +23,17 @@ function History() {
   useEffect(() => {
     let reverseArr = processed.slice().reverse();
     let renderArr = [];
+    const lowerSearch = search.toLowerCase();
 
     for (let i = 0; i < reverseArr.length; i++) {
-      let card = reverseArr[i];
-      let filterBoolean =
+      const card = reverseArr[i];
+      const cardStringLower = flattenToString(card).toLowerCase();
+      const filterBoolean =
         card.status == dropdownValue || dropdownValue == "No Filter";
+      const includesSearchKey = cardStringLower.includes(lowerSearch);
+      const shouldInclude = filterBoolean && includesSearchKey;
       if (card.standard) {
-        if (
-          filterBoolean &&
-          (search === "" ||
-            card.title.toLowerCase().includes(search.toLowerCase()))
-        ) {
+        if (shouldInclude) {
           renderArr.push(
             <Cardbar
               type="standard"
@@ -42,6 +41,7 @@ function History() {
               status={card.status}
               onClick={() => setSelection(i)}
               title={card.title}
+              search={search}
             />
           );
         }
@@ -61,6 +61,7 @@ function History() {
               onClick={() => setSelection(i)}
               submissionID={card.submissionID}
               author={card.author}
+              search={search}
             />
           );
         }
@@ -70,44 +71,7 @@ function History() {
     setCardArrRender(renderArr);
   }, [search, processed, selection, dropdownValue]);
 
-  useEffect(() => {
-    let directive = processed.slice().reverse()[selection];
-
-    if (directive == null) {
-      setSelectionRender(<div className="no-selection-card">No Selection</div>);
-    } else {
-      if (directive.standard) {
-        setSelectionRender(
-          <DirectiveCard
-            variant="standard"
-            key={directive.submissionID}
-            id={directive.submissionID}
-            title={directive.title}
-            type={directive.type}
-            sponsors={directive.sponsors}
-            signatories={directive.signatories}
-            body={directive.body || []}
-            page={"history"}
-            revertDirective={revertDirective}
-            index={processed.length - 1 - selection}
-          />
-        );
-      } else {
-        setSelectionRender(
-          <DirectiveCard
-            variant="custom"
-            key={directive.submissionID}
-            id={directive.submissionID}
-            author={directive.author}
-            body={directive.body || []}
-            page={"history"}
-            revertDirective={revertDirective}
-            index={processed.length - 1 - selection}
-          />
-        );
-      }
-    }
-  }, [selection, processed]);
+  useEffect(() => {}, [selection, processed]);
 
   return (
     <div className="history-container">
@@ -134,7 +98,7 @@ function History() {
           <div className="searchbar">
             <input
               type="text"
-              placeholder="Search"
+              placeholder="Search by keyword"
               className="subbar"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -152,7 +116,7 @@ function History() {
       </div>
 
       <div className="UI-right">
-        <div className="card-container">{selectionRender}</div>
+        <div className="card-container">{getCardRender()}</div>
         <div className="history-operations">
           <div
             className="btt-clear-history"
@@ -174,78 +138,52 @@ function History() {
   function revertDirective(index) {
     const toRevert = processed[index];
     writeToFirebase("pendings", [toRevert].concat(pendings));
-    writeToFirebase(
-      "processed",
-      processed.filter((item) => item !== toRevert)
-    );
+    writeToFirebase("processed", processed.filter((item) => item !== toRevert));
   }
 
   function handleClear() {
     writeToFirebase("processed", []);
   }
 
-  function exportProcesseds() {
-    let dataRows = [];
-    for (let i = 0; i < processed.length; i++) {
-      let card = processed[i];
-      let cardRow = [];
+  function getCardRender() {
+    let directive = processed.slice().reverse()[selection];
 
-      cardRow.push(card.submissionID);
-      cardRow.push(card.author);
-      cardRow.push(card.status);
-      if (card.standard) {
-        cardRow.push(card.title);
-        cardRow.push(card.type);
-        cardRow.push(
-          card.sponsors == "No Selection"
-            ? "No Sponsors"
-            : card.sponsors.join(", ")
+    if (directive == null) {
+      return <div className="no-selection-card">No Selection</div>;
+    } else {
+      if (directive.standard) {
+        return (
+          <DirectiveCard
+            variant="standard"
+            key={directive.submissionID}
+            id={directive.submissionID}
+            title={directive.title}
+            type={directive.type}
+            sponsors={directive.sponsors}
+            signatories={directive.signatories}
+            body={directive.body || []}
+            page={"history"}
+            revertDirective={revertDirective}
+            index={processed.length - 1 - selection}
+            search={search}
+          />
         );
-        cardRow.push(
-          card.signatories == "No Selection"
-            ? "No Signatories"
-            : card.signatories.join(", ")
+      } else {
+        return (
+          <DirectiveCard
+            variant="custom"
+            key={directive.submissionID}
+            id={directive.submissionID}
+            author={directive.author}
+            body={directive.body || []}
+            page={"history"}
+            revertDirective={revertDirective}
+            index={processed.length - 1 - selection}
+            search={search}
+          />
         );
       }
-
-      let cardBody = card.body || [];
-      for (let j = 0; j < cardBody.length; j++) {
-        let bodyItem = cardBody[j];
-        let value = bodyItem.value;
-
-        switch (bodyItem.type) {
-          case "radio":
-            cardRow.push(value == "No Selection" ? "" : value);
-            break;
-          case "dropdown":
-            cardRow.push(value == "No Selection" ? "" : value);
-            break;
-          case "multiplechoice":
-            cardRow.push(value == "No Selection" ? "" : value.join(", "));
-            break;
-          case "select-multiple":
-            cardRow.push(value == "No Selection" ? "" : value.join(", "));
-            break;
-          case "shorttext":
-            cardRow.push(value ? value : "");
-            break;
-          case "longtext":
-            cardRow.push(value ? value : "");
-            break;
-          default:
-            cardRow.push(JSON.stringify(value));
-        }
-      }
-
-      dataRows.push(cardRow);
     }
-
-    const rows = [
-      ["JSON Format: ", JSON.stringify(processed)],
-      [],
-      ["ID", "Author", "Status"],
-    ].concat(dataRows);
-    exportToCsv("Directives History", rows);
   }
 }
 
