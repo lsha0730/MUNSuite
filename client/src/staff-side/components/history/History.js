@@ -9,69 +9,16 @@ import Dropdown from "./Dropdown";
 import Cardbar from "./Cardbar";
 import DirectiveCard from "../inbox/components/DirectiveCard";
 import { exportProcesseds, flattenToString } from "../../utils";
+import CardbarList from "./CardbarList";
 
 function History() {
   const { pendings } = useContext(appContext);
   const { processed } = useContext(appContext);
   const { writeToFirebase } = useContext(appContext);
-  const [cardArrRender, setCardArrRender] = useState([]);
   const [selection, setSelection] = useState(0);
   const [search, setSearch] = useState("");
   const [dropdownValue, setDropdownValue] = useState("No Filter");
   const [modal, setModal] = useState(false);
-
-  useEffect(() => {
-    let reverseArr = processed.slice().reverse();
-    let renderArr = [];
-    const lowerSearch = search.toLowerCase();
-
-    for (let i = 0; i < reverseArr.length; i++) {
-      const card = reverseArr[i];
-      const cardStringLower = flattenToString(card).toLowerCase();
-      const filterBoolean =
-        card.status == dropdownValue || dropdownValue == "No Filter";
-      const includesSearchKey = cardStringLower.includes(lowerSearch);
-      const shouldInclude = filterBoolean && includesSearchKey;
-      if (card.standard) {
-        if (shouldInclude) {
-          renderArr.push(
-            <Cardbar
-              type="standard"
-              selected={selection == i}
-              status={card.status}
-              onClick={() => setSelection(i)}
-              title={card.title}
-              search={search}
-            />
-          );
-        }
-      } else {
-        if (
-          filterBoolean &&
-          (search === "" ||
-            `Submission ${card.submissionID}`
-              .toLowerCase()
-              .includes(search.toLowerCase()))
-        ) {
-          renderArr.push(
-            <Cardbar
-              type="custom"
-              selected={selection == i}
-              status={card.status}
-              onClick={() => setSelection(i)}
-              submissionID={card.submissionID}
-              author={card.author}
-              search={search}
-            />
-          );
-        }
-      }
-    }
-
-    setCardArrRender(renderArr);
-  }, [search, processed, selection, dropdownValue]);
-
-  useEffect(() => {}, [selection, processed]);
 
   return (
     <div className="history-container">
@@ -107,11 +54,12 @@ function History() {
           </div>
         </div>
         <div className="cardbar-deck-container">
-          {cardArrRender.length != 0 ? (
-            cardArrRender
-          ) : (
-            <div className="no-cards-box">No processed cards</div>
-          )}
+          <CardbarList
+            search={search}
+            filter={dropdownValue}
+            selection={selection}
+            setSelection={setSelection}
+          />
         </div>
       </div>
 
