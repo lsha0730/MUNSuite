@@ -42,7 +42,7 @@ function LongText({
           onChange={(e) => {
             const currLen = e.target.value.length;
             if (maxchars && currLen > maxchars) {
-              e.target.value = e.target.value.slice(0, currLen - 1);
+              e.target.value = e.target.value.slice(0, maxchars);
             }
             setTextState(e.target.value);
             if (updateSubmission) updateSubmission(id, e.target.value);

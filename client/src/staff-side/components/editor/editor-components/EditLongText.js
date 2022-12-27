@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./EditorComponents.scoped.css";
 
+const MAX_CHAR_LIMIT = 10000;
+
 function EditLongText(props) {
   const [require, setRequire] = useState(props.required);
   const [toggleRender, setToggleRender] = useState();
@@ -100,10 +102,14 @@ function EditLongText(props) {
         ref={maxcharsRef}
         type="number"
         min="1"
+        max={`${MAX_CHAR_LIMIT}`}
         placeholder="No Limit"
         className="textfield-container"
         onChange={(e) => {
-          setMaxchars(parseInt(e.target.value) || false);
+          if (e.target.value > MAX_CHAR_LIMIT) e.target.value = MAX_CHAR_LIMIT;
+          setMaxchars(
+            Math.min(parseInt(e.target.value), MAX_CHAR_LIMIT) || false
+          );
         }}
       />
     </div>
