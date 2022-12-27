@@ -34,8 +34,9 @@ function Editor() {
 
   const [editing, setEditing] = useState(false);
   const [formRender, setFormRender] = useState([]);
-  const [isDisplayingConfirmation, setIsDisplayingConfirmation] =
-    useState(false);
+  const [isDisplayingConfirmation, setIsDisplayingConfirmation] = useState(
+    false
+  );
   const [standardized, setStandardized] = useState(
     settings.standardForm || false
   );
@@ -239,10 +240,12 @@ function Editor() {
       case "shorttext":
         newObj.heading = "New Short Text";
         newObj.required = required;
+        newObj.maxchars = false;
         break;
       case "longtext":
         newObj.heading = "New Long Text";
         newObj.required = required;
+        newObj.maxchars = false;
         break;
       case "dropdown":
         newObj.heading = "New Dropdown";
@@ -462,6 +465,7 @@ function Editor() {
               </div>
             );
           case "longtext":
+            console.log(item.maxchars);
             return (
               <div className="preview-editor-pair">
                 <LongText
@@ -470,6 +474,7 @@ function Editor() {
                   required={item.required}
                   heading={item.heading}
                   subheading={item.subheading}
+                  maxchars={item.maxchars || false}
                   editing={editing}
                   setEditing={setEditing}
                   updateForm={updateForm}
@@ -481,6 +486,7 @@ function Editor() {
                   required={item.required}
                   heading={item.heading}
                   subheading={item.subheading}
+                  maxchars={item.maxchars || false}
                   editing={editing}
                   updateForm={updateForm}
                   locked={standardized}

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./PreviewComponents.scoped.css";
 
 function LongText(props) {
+  const [textState, setTextState] = useState("");
+
   return (
     <div className="block-container" id="block-container">
       <p className="heading">{props.heading}</p>
@@ -12,15 +14,20 @@ function LongText(props) {
         placeholder="Input here..."
         className="longtext-input"
         onChange={(e) => {
-          handleChange(e);
+          const currLen = e.target.value.length;
+          if (props.maxchars && currLen > props.maxchars) {
+            e.target.value = e.target.value.slice(0, currLen - 1);
+          }
+          setTextState(e.target.value);
+          props.updateSubmission(props.id, e.target.value);
         }}
-      ></textarea>
+      />
+      {props.maxchars && (
+        <p className="maxchar-count">{`${textState.length} / ${props.maxchars ||
+          "Unlimited"} Max`}</p>
+      )}
     </div>
   );
-
-  function handleChange(e) {
-    props.updateSubmission(props.id, e.target.value);
-  }
 }
 
 export default LongText;

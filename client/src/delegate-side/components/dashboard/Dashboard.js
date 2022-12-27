@@ -331,6 +331,7 @@ function Dashboard(props) {
                   required={item.required}
                   heading={item.heading}
                   subheading={item.subheading}
+                  maxchars={item.maxchars || false}
                   updateSubmission={updateSubmission}
                 />
               );

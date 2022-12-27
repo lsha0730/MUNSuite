@@ -211,6 +211,18 @@
   transition: 200ms;
 }
 
+.maxchar-count {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+  margin-bottom: -8px;
+
+  font-size: 12px;
+  font-weight: 600;
+  color: #bcbcbc;
+}
+
 /*--------DROPDOWN--------*/
 .dropdown-bar {
   width: 60%;
