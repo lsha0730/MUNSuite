@@ -329,6 +329,7 @@ function Editor() {
             return (
               <div className="preview-editor-pair">
                 <Header
+                  variant="staff"
                   key={`preview${item.id}`}
                   id={item.id}
                   imgPath={item.imgPath}
@@ -358,6 +359,7 @@ function Editor() {
             return (
               <div className="preview-editor-pair">
                 <Radio
+                  variant="staff"
                   key={`preview${item.id}`}
                   id={item.id}
                   required={item.required}
@@ -386,6 +388,7 @@ function Editor() {
             return (
               <div className="preview-editor-pair">
                 <MultipleChoice
+                  variant="staff"
                   key={`preview${item.id}`}
                   id={item.id}
                   required={item.required}
@@ -414,6 +417,7 @@ function Editor() {
             return (
               <div className="preview-editor-pair">
                 <Content
+                  variant="staff"
                   key={`preview${item.id}`}
                   id={item.id}
                   required={item.required}
@@ -442,6 +446,7 @@ function Editor() {
             return (
               <div className="preview-editor-pair">
                 <ShortText
+                  variant="staff"
                   key={`preview${item.id}`}
                   id={item.id}
                   required={item.required}
@@ -465,10 +470,10 @@ function Editor() {
               </div>
             );
           case "longtext":
-            console.log(item.maxchars);
             return (
               <div className="preview-editor-pair">
                 <LongText
+                  variant="staff"
                   key={`preview${item.id}`}
                   id={item.id}
                   required={item.required}
@@ -497,12 +502,17 @@ function Editor() {
             return (
               <div className="preview-editor-pair">
                 <Dropdown
+                  variant="staff"
                   key={`preview${item.id}${delegations.length}`}
                   id={item.id}
                   required={item.required}
                   heading={item.heading}
                   subheading={item.subheading}
-                  options={item.options || []}
+                  options={
+                    item.options === "all-delegations"
+                      ? delegations.map((del) => del.name)
+                      : item.options || []
+                  }
                   editing={editing}
                   setEditing={setEditing}
                   updateForm={updateForm}
@@ -525,6 +535,7 @@ function Editor() {
             return (
               <div className="preview-editor-pair">
                 <SelectMultiple
+                  variant="staff"
                   key={`preview${item.id}${
                     item.options ? item.options.length : 0
                   }${delegations.length}`}
@@ -533,7 +544,11 @@ function Editor() {
                   heading={item.heading}
                   subheading={item.subheading}
                   max={item.max}
-                  options={item.options || []}
+                  options={
+                    item.options === "all-delegations"
+                      ? delegations.map((del) => del.name)
+                      : item.options || []
+                  }
                   editing={editing}
                   setEditing={setEditing}
                   updateForm={updateForm}

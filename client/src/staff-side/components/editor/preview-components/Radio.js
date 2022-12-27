@@ -3,73 +3,79 @@ import "./PreviewComponents.scoped.css";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp, IoIosLock } from "react-icons/io";
 
-function Radio(props) {
-  const [selected, setSelected] = useState(); // Stores the index of selected in props.options
-  const [renders, setRenders] = useState([]);
+function Radio({
+  variant,
+  key,
+  id,
+  required,
+  heading,
+  subheading,
+  options,
+  editing,
+  setEditing,
+  updateForm,
+  updateSubmission,
+  locked,
+}) {
+  const [selected, setSelected] = useState(); // Stores the index of selected in options
 
   useEffect(() => {
-    let i = -1;
-    setRenders(
-      props.options.map((option) => {
-        i++;
-        return (
-          <div className="radio-single-container">
-            <input
-              type="radio"
-              value={i}
-              checked={selected == i}
-              onChange={(e) => {
-                setSelected(e.target.value);
-              }}
-              className="clickable"
-            />
-            <p className="radio-option-label">{option}</p>
-          </div>
-        );
-      })
-    );
-  }, [selected, props.options]);
-
-  let qmodIcons;
-  if (props.locked) {
-    qmodIcons = (
-      <div className="locked-icon-container">
-        <IoIosLock className="locked-icon" />
-      </div>
-    );
-  } else {
-    qmodIcons = [
-      <div id="Qmod-icons">
-        <div onClick={() => props.updateForm("move-up", props.id)}>
-          <IoIosArrowUp className="btt-moveQ" />
-        </div>
-        <div onClick={() => props.updateForm("move-down", props.id)}>
-          <IoIosArrowDown className="btt-moveQ" />
-        </div>
-        <div onClick={() => props.updateForm("delete", props.id)}>
-          <FaTrash className="btt-delQ" />
-        </div>
-      </div>,
-    ];
-  }
+    if (variant === "delegate" && updateSubmission) {
+      updateSubmission(id, options[selected] || "No Selection");
+    }
+  }, [selected]);
 
   return (
     <div style={{ display: "flex", flexDirection: "row-reverse" }}>
       <div
         className="block-container"
         id="block-container"
-        onClick={() => props.setEditing(props.id)}
+        onClick={() => {
+          if (setEditing) setEditing(id);
+        }}
       >
-        <div
-          className={props.editing == props.id ? "editing-indicator" : "fade"}
-        ></div>
-        <p className="heading">{props.heading}</p>
-        <p className="subheading">{props.subheading}</p>
-        <p className={props.required ? "required-star" : "hidden"}>*</p>
-        <div className="radio-options-container">{renders}</div>
+        {variant === "staff" && (
+          <div className={editing == id ? "editing-indicator" : "fade"} />
+        )}
+        <p className="heading">{heading}</p>
+        <p className="subheading">{subheading}</p>
+        <p className={required ? "required-star" : "hidden"}>*</p>
+        <div className="radio-options-container">
+          {options.map((option, index) => (
+            <div className="radio-single-container">
+              <input
+                type="radio"
+                value={index}
+                checked={selected == index}
+                onChange={(e) => {
+                  setSelected(e.target.value);
+                }}
+                className="clickable"
+              />
+              <p className="radio-option-label">{option}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {qmodIcons}
+      {variant === "staff" &&
+        (locked ? (
+          <div className="locked-icon-container">
+            <IoIosLock className="locked-icon" />
+          </div>
+        ) : (
+          <div id="Qmod-icons">
+            <div onClick={() => updateForm("move-up", id)}>
+              <IoIosArrowUp className="btt-moveQ" />
+            </div>
+            <div onClick={() => updateForm("move-down", id)}>
+              <IoIosArrowDown className="btt-moveQ" />
+            </div>
+            <div onClick={() => updateForm("delete", id)}>
+              <FaTrash className="btt-delQ" />
+            </div>
+          </div>
+        ))}
     </div>
   );
 }

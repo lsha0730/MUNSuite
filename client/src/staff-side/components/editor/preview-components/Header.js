@@ -4,63 +4,71 @@ import { getStorage, ref, deleteObject } from "firebase/storage";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp, IoIosLock } from "react-icons/io";
 
-function Header(props) {
+function Header({
+  variant,
+  key,
+  id,
+  imgPath,
+  imgLink,
+  heading,
+  subheading,
+  editing,
+  setEditing,
+  updateForm,
+  locked,
+}) {
   const storage = getStorage();
-
-  let qmodIcons;
-  if (props.locked) {
-    qmodIcons = (
-      <div className="locked-icon-container">
-        <IoIosLock className="locked-icon" />
-      </div>
-    );
-  } else {
-    qmodIcons = [
-      <div id="Qmod-icons">
-        <div onClick={() => props.updateForm("move-up", props.id)}>
-          <IoIosArrowUp className="btt-moveQ" />
-        </div>
-        <div onClick={() => props.updateForm("move-down", props.id)}>
-          <IoIosArrowDown className="btt-moveQ" />
-        </div>
-        <div
-          onClick={() => {
-            deleteImageFile();
-            props.updateForm("delete", props.id);
-          }}
-        >
-          <FaTrash className="btt-delQ" />
-        </div>
-      </div>,
-    ];
-  }
 
   return (
     <div style={{ display: "flex", flexDirection: "row-reverse" }}>
       <div
         className="header-container"
         id="block-container"
-        onClick={() => props.setEditing(props.id)}
+        onClick={() => {
+          if (setEditing) setEditing(id);
+        }}
       >
-        <div
-          className={props.editing == props.id ? "editing-indicator" : "fade"}
-        ></div>
+        {variant === "staff" && (
+          <div className={editing == id ? "editing-indicator" : "fade"} />
+        )}
         <div className="header-image-container">
-          <img src={props.imgLink} alt="form-banner" className="header-image" />
+          <img src={imgLink} alt="form-banner" className="header-image" />
         </div>
         <div className="header-text-container">
-          <p className="header-heading">{props.heading}</p>
-          <p className="header-subheading">{props.subheading}</p>
+          <p className="header-heading">{heading}</p>
+          <p className="header-subheading">{subheading}</p>
         </div>
       </div>
 
-      {qmodIcons}
+      {variant === "staff" &&
+        (locked ? (
+          <div className="locked-icon-container">
+            <IoIosLock className="locked-icon" />
+          </div>
+        ) : (
+          <div id="Qmod-icons">
+            <div onClick={() => updateForm("move-up", id)}>
+              <IoIosArrowUp className="btt-moveQ" />
+            </div>
+            <div onClick={() => updateForm("move-down", id)}>
+              <IoIosArrowDown className="btt-moveQ" />
+            </div>
+            <div
+              onClick={() => {
+                deleteImageFile();
+                updateForm("delete", id);
+              }}
+            >
+              <FaTrash className="btt-delQ" />
+            </div>
+          </div>
+        ))}
     </div>
   );
 
   function deleteImageFile() {
-    if (props.imgPath !== "") {
-      deleteObject(ref(storage, props.imgPath));
+    if (imgPath !== "") {
+      deleteObject(ref(storage, imgPath));
     }
   }
 }

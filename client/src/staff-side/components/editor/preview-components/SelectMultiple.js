@@ -1,35 +1,47 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./PreviewComponents.scoped.css";
 import { GoSearch } from "react-icons/go";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp, IoIosLock } from "react-icons/io";
-import { appContext } from "../../../staffContext";
 
-function SelectMultiple(props) {
-  const { delegations } = useContext(appContext);
-  const [options, setOptions] = useState(
-    props.options == "all-delegations"
-      ? delegations.map((item) => item.name)
-      : props.options
-  );
+function SelectMultiple({
+  variant,
+  key,
+  id,
+  required,
+  heading,
+  subheading,
+  max,
+  options,
+  editing,
+  setEditing,
+  updateForm,
+  updateSubmission,
+  locked,
+}) {
+  const [choices, setChoices] = useState(options);
   const [search, setSearch] = useState("");
-  const [renderOptions, setRenderOptions] = useState([]);
   const [isShowingOptions, setIsShowingOptions] = useState(false);
   const [selected, setSelected] = useState([]); // Stores the string value of all selected items
   const [trigger, setTrigger] = useState(false);
-  const [renderSelected, setRenderSelected] = useState([]);
   const [maxWarning, setMaxWarning] = useState(false);
 
+  useEffect(() => {
+    if (variant === "delegate" && updateSubmission) {
+      updateSubmission(id, selected.length > 0 ? selected : ["No Selection"]);
+    }
+  }, [selected.length]);
+
   const selectOption = (option) => {
-    if (selected.length < props.max || !props.max) {
+    if (selected.length < max || !max) {
       let currentSelected = selected;
-      let currentOptions = options;
+      let currentOptions = choices;
 
       currentOptions.splice(currentOptions.indexOf(option), 1);
       currentSelected.push(option);
 
       setSelected(currentSelected);
-      setOptions(currentOptions);
+      setChoices(currentOptions);
 
       setIsShowingOptions(false);
       setTrigger(!trigger);
@@ -40,108 +52,48 @@ function SelectMultiple(props) {
   };
 
   const deselectOption = (option) => {
-    let currentSelected = selected;
-    let currentOptions = options;
-
-    currentSelected.splice(currentSelected.indexOf(option), 1);
-    currentOptions.push(option);
-
-    setSelected(currentSelected);
-    setOptions(currentOptions);
-
-    setTrigger(!trigger);
+    setSelected(selected.filter((item) => item !== option));
+    setChoices(choices.concat(option));
   };
 
-  // for rendering options
   useEffect(() => {
-    setOptions(options.sort((a, b) => a.localeCompare(b)));
-    let renderArray = [];
-
-    for (let i = 0; i < options.length; i++) {
-      if (
-        search === "" ||
-        options[i].toLowerCase().includes(search.toLowerCase())
-      ) {
-        renderArray.push(
-          <div
-            className="dropdown-option-container"
-            onClick={() => {
-              selectOption(options[i]);
-              setIsShowingOptions(false);
-            }}
-          >
-            <div className="dropdown-text-container">{options[i]}</div>
-          </div>
-        );
-      }
-    }
-
-    setRenderOptions(renderArray);
-
-    let returnRenderSelected = [];
-
-    for (let j = 0; j < selected.length; j++) {
-      returnRenderSelected.push(
-        <div
-          onClick={() => deselectOption(selected[j])}
-          className="selmult-selection"
-        >
-          <p>- {selected[j]}</p>
-        </div>
-      );
-    }
-
-    setRenderSelected(returnRenderSelected);
-  }, [search, isShowingOptions, selected, trigger]);
-
-  let qmodIcons;
-  if (props.locked) {
-    qmodIcons = (
-      <div className="locked-icon-container">
-        <IoIosLock className="locked-icon" />
-      </div>
-    );
-  } else {
-    qmodIcons = [
-      <div id="Qmod-icons">
-        <div onClick={() => props.updateForm("move-up", props.id)}>
-          <IoIosArrowUp className="btt-moveQ" />
-        </div>
-        <div onClick={() => props.updateForm("move-down", props.id)}>
-          <IoIosArrowDown className="btt-moveQ" />
-        </div>
-        <div onClick={() => props.updateForm("delete", props.id)}>
-          <FaTrash className="btt-delQ" />
-        </div>
-      </div>,
-    ];
-  }
+    setChoices(choices.sort((a, b) => a.localeCompare(b)));
+  }, [selected.length]);
 
   return (
     <div style={{ display: "flex", flexDirection: "row-reverse" }}>
       <div
         className="block-container"
         id="block-container"
-        onClick={() => props.setEditing(props.id)}
+        onClick={() => {
+          if (setEditing) setEditing(id);
+        }}
       >
-        <div
-          className={props.editing == props.id ? "editing-indicator" : "fade"}
-        ></div>
+        {variant === "staff" && (
+          <div className={editing == id ? "editing-indicator" : "fade"} />
+        )}
         <div
           className={isShowingOptions ? "dropdown-defocuser" : "hidden"}
           onClick={() => setIsShowingOptions(false)}
-        ></div>
-        <p className="heading">{props.heading}</p>
-        <p className="subheading">{props.subheading}</p>
-        <p className={props.required ? "required-star" : "hidden"}>*</p>
+        />
+        <p className="heading">{heading}</p>
+        <p className="subheading">{subheading}</p>
+        <p className={required ? "required-star" : "hidden"}>*</p>
         <div
           className={
-            renderSelected.length == 0
-              ? "hidden"
-              : "selmult-selections-container"
+            selected.length == 0 ? "hidden" : "selmult-selections-container"
           }
         >
-          {renderSelected}
+          {selected.map((selection) => (
+            <div
+              onClick={() => {
+                deselectOption(selection);
+              }}
+              className="selmult-selection"
+            >
+              <p>- {selection}</p>
+            </div>
+          ))}
         </div>
         <p
           className={
@@ -166,19 +118,52 @@ function SelectMultiple(props) {
           <GoSearch size={15} className="selmult-icon" />
           <div
             className={
-              !isShowingOptions || options.length === 0
+              !isShowingOptions || choices.length === 0
                 ? "hidden"
                 : "selmult-drop-field"
             }
           >
             <div className="selmult-subdropfield">
-              {isShowingOptions && renderOptions}
+              {isShowingOptions &&
+                choices.map((e) =>
+                  search === "" ||
+                  e.toLowerCase().includes(search.toLowerCase()) ? (
+                    <div
+                      className="dropdown-option-container"
+                      onClick={() => {
+                        selectOption(e);
+                        setIsShowingOptions(false);
+                      }}
+                    >
+                      <div className="dropdown-text-container">{e}</div>
+                    </div>
+                  ) : (
+                    <></>
+                  )
+                )}
             </div>
           </div>
         </div>
       </div>
 
-      {qmodIcons}
+      {variant === "staff" &&
+        (locked ? (
+          <div className="locked-icon-container">
+            <IoIosLock className="locked-icon" />
+          </div>
+        ) : (
+          <div id="Qmod-icons">
+            <div onClick={() => updateForm("move-up", id)}>
+              <IoIosArrowUp className="btt-moveQ" />
+            </div>
+            <div onClick={() => updateForm("move-down", id)}>
+              <IoIosArrowDown className="btt-moveQ" />
+            </div>
+            <div onClick={() => updateForm("delete", id)}>
+              <FaTrash className="btt-delQ" />
+            </div>
+          </div>
+        ))}
     </div>
   );
 }

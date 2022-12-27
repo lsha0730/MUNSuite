@@ -1,64 +1,52 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./PreviewComponents.scoped.css";
 import { GoTriangleDown } from "react-icons/go";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { appContext } from "../../../staffContext";
 
-function Dropdown(props) {
-  const { delegations } = useContext(appContext);
+function Dropdown({
+  variant,
+  key,
+  id,
+  required,
+  heading,
+  subheading,
+  options,
+  editing,
+  setEditing,
+  updateForm,
+  updateSubmission,
+  locked,
+}) {
   const [value, setValue] = useState(); // Stores the index of the item in options
   const [dropVisible, setDropVisible] = useState(false);
-  const [dropRender, setDropRender] = useState();
-  const options =
-    props.options == "all-delegations"
-      ? delegations.map((item) => item.name)
-      : props.options;
-
-  let optionRenders = [];
-  for (let i = 0; i < options.length; i++) {
-    let sortedOptions = options.sort((a, b) => a.localeCompare(b));
-    let option = sortedOptions[i];
-    optionRenders.push(
-      <div
-        className="dropdown-option-container"
-        onClick={() => {
-          setDropVisible(!dropVisible);
-          setValue(i);
-        }}
-      >
-        <div className="dropdown-text-container">
-          <p className="nowrap">{option}</p>
-        </div>
-      </div>
-    );
-  }
+  const sortedOptions = options.sort((a, b) => a.localeCompare(b));
 
   useEffect(() => {
-    if (dropVisible) {
-      setDropRender(<div className="dropdown-field">{optionRenders}</div>);
-    } else {
-      setDropRender();
+    if (variant === "delegate" && updateSubmission) {
+      updateSubmission(id, options[value] || "No Selection");
     }
-  }, [dropVisible]);
+  }, [value]);
 
   return (
     <div style={{ display: "flex", flexDirection: "row-reverse" }}>
       <div
         className="block-container"
         id="block-container"
-        onClick={() => props.setEditing(props.id)}
+        onClick={() => {
+          if (setEditing) setEditing(id);
+        }}
       >
-        <div
-          className={props.editing == props.id ? "editing-indicator" : "fade"}
-        ></div>
+        {variant === "staff" && (
+          <div className={editing == id ? "editing-indicator" : "fade"} />
+        )}
         <div
           className={dropVisible ? "dropdown-defocuser" : "hidden"}
           onClick={() => setDropVisible(false)}
-        ></div>
-        <p className="heading">{props.heading}</p>
-        <p className="subheading">{props.subheading}</p>
-        <p className={props.required ? "required-star" : "hidden"}>*</p>
+        />
+        <p className="heading">{heading}</p>
+        <p className="subheading">{subheading}</p>
+        <p className={required ? "required-star" : "hidden"}>*</p>
         <div
           className={dropVisible ? "dropdown-bar super-z" : "dropdown-bar"}
           onClick={() => setDropVisible(!dropVisible)}
@@ -67,21 +55,39 @@ function Dropdown(props) {
             <p className="dropdown-selection-text">{options[value]}</p>
           </div>
           <GoTriangleDown size={10} className="dropdown-triangle" />
-          {dropRender}
+          {dropVisible && (
+            <div className="dropdown-field">
+              {sortedOptions.map((option, index) => (
+                <div
+                  className="dropdown-option-container"
+                  onClick={() => {
+                    setDropVisible(!dropVisible);
+                    setValue(index);
+                  }}
+                >
+                  <div className="dropdown-text-container">
+                    <p className="nowrap">{option}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
-      <div id="Qmod-icons">
-        <div onClick={() => props.updateForm("move-up", props.id)}>
-          <IoIosArrowUp className="btt-moveQ" />
+      {variant === "staff" && (
+        <div id="Qmod-icons">
+          <div onClick={() => updateForm("move-up", id)}>
+            <IoIosArrowUp className="btt-moveQ" />
+          </div>
+          <div onClick={() => updateForm("move-down", id)}>
+            <IoIosArrowDown className="btt-moveQ" />
+          </div>
+          <div onClick={() => updateForm("delete", id)}>
+            <FaTrash className="btt-delQ" />
+          </div>
         </div>
-        <div onClick={() => props.updateForm("move-down", props.id)}>
-          <IoIosArrowDown className="btt-moveQ" />
-        </div>
-        <div onClick={() => props.updateForm("delete", props.id)}>
-          <FaTrash className="btt-delQ" />
-        </div>
-      </div>
+      )}
     </div>
   );
 }

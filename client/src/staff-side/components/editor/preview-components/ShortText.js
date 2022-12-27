@@ -3,51 +3,62 @@ import "./PreviewComponents.scoped.css";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp, IoIosLock } from "react-icons/io";
 
-function ShortText(props) {
-  let qmodIcons;
-  if (props.locked) {
-    qmodIcons = (
-      <div className="locked-icon-container">
-        <IoIosLock className="locked-icon" />
-      </div>
-    );
-  } else {
-    qmodIcons = [
-      <div id="Qmod-icons">
-        <div onClick={() => props.updateForm("move-up", props.id)}>
-          <IoIosArrowUp className="btt-moveQ" />
-        </div>
-        <div onClick={() => props.updateForm("move-down", props.id)}>
-          <IoIosArrowDown className="btt-moveQ" />
-        </div>
-        <div onClick={() => props.updateForm("delete", props.id)}>
-          <FaTrash className="btt-delQ" />
-        </div>
-      </div>,
-    ];
-  }
-
+function ShortText({
+  variant,
+  key,
+  id,
+  required,
+  heading,
+  subheading,
+  editing,
+  setEditing,
+  updateForm,
+  updateSubmission,
+  locked,
+}) {
   return (
     <div style={{ display: "flex", flexDirection: "row-reverse" }}>
       <div
         className="block-container"
         id="block-container"
-        onClick={() => props.setEditing(props.id)}
+        onClick={() => {
+          if (setEditing) setEditing(id);
+        }}
       >
-        <div
-          className={props.editing == props.id ? "editing-indicator" : "fade"}
-        ></div>
-        <p className="heading">{props.heading}</p>
-        <p className="subheading">{props.subheading}</p>
-        <p className={props.required ? "required-star" : "hidden"}>*</p>
+        {variant === "staff" && (
+          <div className={editing == id ? "editing-indicator" : "fade"} />
+        )}
+        <p className="heading">{heading}</p>
+        <p className="subheading">{subheading}</p>
+        <p className={required ? "required-star" : "hidden"}>*</p>
         <input
           type="text"
           placeholder="Input here..."
           className="shorttext-input"
-        ></input>
+          onChange={(e) => {
+            if (updateSubmission) updateSubmission(id, e.target.value);
+          }}
+        />
       </div>
 
-      {qmodIcons}
+      {variant === "staff" &&
+        (locked ? (
+          <div className="locked-icon-container">
+            <IoIosLock className="locked-icon" />
+          </div>
+        ) : (
+          <div id="Qmod-icons">
+            <div onClick={() => updateForm("move-up", id)}>
+              <IoIosArrowUp className="btt-moveQ" />
+            </div>
+            <div onClick={() => updateForm("move-down", id)}>
+              <IoIosArrowDown className="btt-moveQ" />
+            </div>
+            <div onClick={() => updateForm("delete", id)}>
+              <FaTrash className="btt-delQ" />
+            </div>
+          </div>
+        ))}
     </div>
   );
 }

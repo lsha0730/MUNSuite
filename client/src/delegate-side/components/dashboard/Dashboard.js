@@ -3,14 +3,22 @@ import { delContext } from "../../DelegateContext";
 import "./Dashboard.scoped.css";
 import defaultBanner from "./defaultBanner.png";
 
-import Header from "./form-components/Header.js";
-import Radio from "./form-components/Radio.js";
-import MultipleChoice from "./form-components/MultipleChoice.js";
-import Content from "./form-components/Content.js";
-import ShortText from "./form-components/ShortText.js";
-import LongText from "./form-components/LongText.js";
-import Dropdown from "./form-components/Dropdown.js";
-import SelectMultiple from "./form-components/SelectMultiple.js";
+// import Header from "./form-components/Header.js";
+import Header from "../../../staff-side/components/editor/preview-components/Header";
+// import Radio from "./form-components/Radio.js";
+import Radio from "../../../staff-side/components/editor/preview-components/Radio";
+// import MultipleChoice from "./form-components/MultipleChoice.js";
+import MultipleChoice from "../../../staff-side/components/editor/preview-components/MultipleChoice";
+// import Content from "./form-components/Content.js";
+import Content from "../../../staff-side/components/editor/preview-components/Content";
+// import ShortText from "./form-components/ShortText.js";
+import ShortText from "../../../staff-side/components/editor/preview-components/ShortText";
+// import LongText from "./form-components/LongText.js";
+import LongText from "../../../staff-side/components/editor/preview-components/LongText";
+// import Dropdown from "./form-components/Dropdown.js";
+import Dropdown from "../../../staff-side/components/editor/preview-components/Dropdown";
+// import SelectMultiple from "./form-components/SelectMultiple.js";
+import SelectMultiple from "../../../staff-side/components/editor/preview-components/SelectMultiple";
 import CustomCard from "./history-components/CustomCard";
 import StandardCard from "./history-components/StandardCard";
 
@@ -71,10 +79,8 @@ function Dashboard(props) {
   }, [relevantDirectives]);
 
   useEffect(() => {
-    // console.log(submission)
     setSubmissionComplete(
       submission.every((item, index) => {
-        // console.log(item)
         let valid = true;
         if (currForm[index].required) {
           if (item.value == undefined || item.value == null) return false;
@@ -270,6 +276,7 @@ function Dashboard(props) {
             case "header":
               return (
                 <Header
+                  variant="delegate"
                   key={`${item.id}`}
                   id={item.id}
                   imgLink={item.imgLink || defaultBanner}
@@ -280,6 +287,7 @@ function Dashboard(props) {
             case "radio":
               return (
                 <Radio
+                  variant="delegate"
                   key={`${item.id}`}
                   id={item.id}
                   required={item.required}
@@ -292,6 +300,7 @@ function Dashboard(props) {
             case "multiplechoice":
               return (
                 <MultipleChoice
+                  variant="delegate"
                   key={`${item.id}`}
                   id={item.id}
                   required={item.required}
@@ -304,6 +313,7 @@ function Dashboard(props) {
             case "content":
               return (
                 <Content
+                  variant="delegate"
                   key={`${item.id}`}
                   id={item.id}
                   required={item.required}
@@ -315,6 +325,7 @@ function Dashboard(props) {
             case "shorttext":
               return (
                 <ShortText
+                  variant="delegate"
                   key={`${item.id}`}
                   id={item.id}
                   required={item.required}
@@ -326,6 +337,7 @@ function Dashboard(props) {
             case "longtext":
               return (
                 <LongText
+                  variant="delegate"
                   key={`${item.id}`}
                   id={item.id}
                   required={item.required}
@@ -338,18 +350,24 @@ function Dashboard(props) {
             case "dropdown":
               return (
                 <Dropdown
+                  variant="delegate"
                   key={`${item.id} ${delegations.length}`}
                   id={item.id}
                   required={item.required}
                   heading={item.heading}
                   subheading={item.subheading}
-                  options={item.options || []}
+                  options={
+                    item.options === "all-delegations"
+                      ? delegations.map((del) => del.name)
+                      : item.options || []
+                  }
                   updateSubmission={updateSubmission}
                 />
               );
             case "select-multiple":
               return (
                 <SelectMultiple
+                  variant="delegate"
                   key={`${item.id} ${item.options ? item.options.length : 0} ${
                     delegations.length
                   }`}
@@ -358,7 +376,11 @@ function Dashboard(props) {
                   heading={item.heading}
                   subheading={item.subheading}
                   max={item.max}
-                  options={item.options || []}
+                  options={
+                    item.options === "all-delegations"
+                      ? delegations.map((del) => del.name)
+                      : item.options || []
+                  }
                   updateSubmission={updateSubmission}
                 />
               );
@@ -383,10 +405,10 @@ function Dashboard(props) {
     let tempArr = submission.slice();
     tempArr[id].value = data;
     setSubmission(tempArr);
-    console.log(tempArr);
   }
 
   function handleSubmit() {
+    console.log(submission);
     if (submissionComplete && notImpostor) {
       let submissionObj = {
         submissionID: (pendings || []).concat(processed || []).length,
@@ -415,7 +437,6 @@ function Dashboard(props) {
 
       // Clear for new form
       rerenderForm();
-      // console.log("Cleared subarray!", currForm.map(item => {return { type: item.type, heading: item.heading }}))
       setSubmission(
         currForm.map((item) => {
           return { type: item.type, heading: item.heading };

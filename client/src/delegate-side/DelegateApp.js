@@ -69,7 +69,6 @@ function App() {
       ref(database, `appdata/${userUID}/livedata/pendings`),
       (snapshot) => {
         let node = snapshot.val();
-        console.log("Node is", node);
         if (!node) {
           setPendings([]);
         } else {
@@ -134,7 +133,7 @@ function App() {
   useEffect(() => {
     switch (validLink) {
       case "loading":
-        setAppRender(<div></div>);
+        setAppRender(<div />);
         break;
       case "valid":
         if (loggedIn && delegations.map((del) => del.name).includes(user)) {

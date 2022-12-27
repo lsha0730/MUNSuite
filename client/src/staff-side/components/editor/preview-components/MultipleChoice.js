@@ -3,9 +3,21 @@ import "./PreviewComponents.scoped.css";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
-function MultipleChoice(props) {
-  const [selected, setSelected] = useState([]); // Stores the indices of selected in props.options
-  const [renders, setRenders] = useState([]);
+function MultipleChoice({
+  variant,
+  key,
+  id,
+  required,
+  heading,
+  subheading,
+  options,
+  editing,
+  setEditing,
+  updateForm,
+  updateSubmission,
+  locked,
+}) {
+  const [selected, setSelected] = useState([]); // Stores the indices of selected in options
 
   function handleClick(e) {
     let optionVal = parseInt(e.target.value);
@@ -21,53 +33,56 @@ function MultipleChoice(props) {
   }
 
   useEffect(() => {
-    let i = -1;
-    setRenders(
-      props.options.map((option) => {
-        i++;
-        return (
-          <div className="mc-single-container">
-            <input
-              type="checkbox"
-              value={i}
-              checked={selected.includes(i)}
-              onChange={(e) => handleClick(e)}
-              className="clickable"
-            />
-            <p className="mc-option-label">{option}</p>
-          </div>
-        );
-      })
-    );
-  }, [selected, props.options]);
+    if (variant === "delegate" && updateSubmission) {
+      let resultArr = selected.map((index) => options[index]);
+      updateSubmission(id, resultArr.length > 0 ? resultArr : ["No Selection"]);
+    }
+  }, [selected]);
 
   return (
     <div style={{ display: "flex", flexDirection: "row-reverse" }}>
       <div
         className="block-container"
         id="block-container"
-        onClick={() => props.setEditing(props.id)}
+        onClick={() => {
+          if (setEditing) setEditing(id);
+        }}
       >
-        <div
-          className={props.editing == props.id ? "editing-indicator" : "fade"}
-        ></div>
-        <p className="heading">{props.heading}</p>
-        <p className="subheading">{props.subheading}</p>
-        <p className={props.required ? "required-star" : "hidden"}>*</p>
-        <div className="mc-options-container">{renders}</div>
+        {variant === "staff" && (
+          <div className={editing == id ? "editing-indicator" : "fade"} />
+        )}
+        <p className="heading">{heading}</p>
+        <p className="subheading">{subheading}</p>
+        <p className={required ? "required-star" : "hidden"}>*</p>
+        <div className="mc-options-container">
+          {options.map((option, index) => (
+            <div className="mc-single-container">
+              <input
+                type="checkbox"
+                value={index}
+                checked={selected.includes(index)}
+                onChange={(e) => handleClick(e)}
+                className="clickable"
+              />
+              <p className="mc-option-label">{option}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div id="Qmod-icons">
-        <div onClick={() => props.updateForm("move-up", props.id)}>
-          <IoIosArrowUp className="btt-moveQ" />
+      {variant === "staff" && (
+        <div id="Qmod-icons">
+          <div onClick={() => updateForm("move-up", id)}>
+            <IoIosArrowUp className="btt-moveQ" />
+          </div>
+          <div onClick={() => updateForm("move-down", id)}>
+            <IoIosArrowDown className="btt-moveQ" />
+          </div>
+          <div onClick={() => updateForm("delete", id)}>
+            <FaTrash className="btt-delQ" />
+          </div>
         </div>
-        <div onClick={() => props.updateForm("move-down", props.id)}>
-          <IoIosArrowDown className="btt-moveQ" />
-        </div>
-        <div onClick={() => props.updateForm("delete", props.id)}>
-          <FaTrash className="btt-delQ" />
-        </div>
-      </div>
+      )}
     </div>
   );
 }
