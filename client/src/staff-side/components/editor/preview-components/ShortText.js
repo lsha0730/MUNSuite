@@ -5,7 +5,6 @@ import { IoIosArrowDown, IoIosArrowUp, IoIosLock } from "react-icons/io";
 
 function ShortText({
   variant,
-  key,
   id,
   required,
   heading,

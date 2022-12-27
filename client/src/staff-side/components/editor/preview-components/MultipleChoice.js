@@ -5,7 +5,6 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 function MultipleChoice({
   variant,
-  key,
   id,
   required,
   heading,

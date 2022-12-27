@@ -5,7 +5,6 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 function LongText({
   variant,
-  key,
   id,
   required,
   heading,

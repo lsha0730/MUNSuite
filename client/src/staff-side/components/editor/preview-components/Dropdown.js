@@ -6,7 +6,6 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 function Dropdown({
   variant,
-  key,
   id,
   required,
   heading,

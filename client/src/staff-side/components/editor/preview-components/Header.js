@@ -6,7 +6,6 @@ import { IoIosArrowDown, IoIosArrowUp, IoIosLock } from "react-icons/io";
 
 function Header({
   variant,
-  key,
   id,
   imgPath,
   imgLink,

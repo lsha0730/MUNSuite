@@ -6,7 +6,6 @@ import { IoIosArrowDown, IoIosArrowUp, IoIosLock } from "react-icons/io";
 
 function SelectMultiple({
   variant,
-  key,
   id,
   required,
   heading,
