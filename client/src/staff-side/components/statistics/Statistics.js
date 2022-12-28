@@ -66,10 +66,9 @@ function Statistics() {
           </div>
 
           <div className="number-container">
-            <p className="big-counter">{`${(
-              (passedCount / (failedCount + passedCount)) *
-              100
-            ).toFixed(1)}%`}</p>
+            <p className="big-counter">
+              {getPassRate(passedCount, failedCount)}
+            </p>
             <p className="small-counter">
               {passedCount} Passed, {failedCount} Failed
             </p>
@@ -186,6 +185,13 @@ function Statistics() {
     setFailedCount(tempFailedCounter);
     setTopSubCount(tempTopPassedCount);
     setStatsData(tempDelStats);
+  }
+
+  function getPassRate(passed, failed) {
+    const totalSubmissions = failed + passed;
+    return totalSubmissions === 0
+      ? "N/A%"
+      : `${((passed / (failed + passed)) * 100).toFixed(1)}%`;
   }
 }
 
