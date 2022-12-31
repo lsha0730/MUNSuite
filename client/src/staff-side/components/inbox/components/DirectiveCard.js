@@ -1,17 +1,10 @@
 import React, { useState } from "react";
 import "./DirectiveCard.scoped.css";
-import {
-  BsPeopleFill,
-  BsEyeglasses,
-  BsCheckLg,
-  BsXLg,
-  BsPersonFill,
-} from "react-icons/bs";
-import { IoIosFastforward } from "react-icons/io";
+import { BsPeopleFill, BsEyeglasses, BsPersonFill } from "react-icons/bs";
 import { BiUndo } from "react-icons/bi";
-import { MdOutlinePresentToAll } from "react-icons/md";
 import Popout from "./Popout";
 import { highlight } from "../../../utils";
+import CardButtons from "./CardButtons";
 
 function DirectiveCard(props) {
   const {
@@ -33,21 +26,13 @@ function DirectiveCard(props) {
   const [presenting, setPresenting] = useState(false);
   const h = (text) => (search ? highlight(text, search) : text);
 
-  function passDirective() {
-    updateCards("pass", id);
-  }
+  const processDirective = (action, feedback) => {
+    updateCards(action, id, feedback);
+  };
 
-  function tableDirective() {
-    updateCards("table", id);
-  }
-
-  function failDirective() {
-    updateCards("fail", id);
-  }
-
-  function presentDirective() {
+  const presentDirective = () => {
     setPresenting(!presenting);
-  }
+  };
 
   return (
     <div
@@ -68,23 +53,12 @@ function DirectiveCard(props) {
       )}
 
       {page == "inbox" && (
-        <div className="card-operations">
-          <div className="btt-present" onClick={presentDirective}>
-            <MdOutlinePresentToAll size={23} />
-          </div>
-
-          <div className="btts-right">
-            <div className="btt-pass" onClick={passDirective}>
-              <BsCheckLg size={20} />
-            </div>
-            <div className="btt-fail" onClick={failDirective}>
-              <BsXLg size={20} />
-            </div>
-            <div className="btt-table" onClick={tableDirective}>
-              <IoIosFastforward size={25} />
-            </div>
-          </div>
-        </div>
+        <CardButtons
+          {...{
+            processDirective,
+            presentDirective,
+          }}
+        />
       )}
 
       {page == "history" && (

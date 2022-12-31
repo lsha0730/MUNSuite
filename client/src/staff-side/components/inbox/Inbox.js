@@ -119,24 +119,21 @@ function Inbox() {
     </div>
   );
 
-  function updateCards(operation, submissionID) {
-    let cardIndex;
-    for (let i = 0; i < pendings.length; i++) {
-      if (pendings[i].submissionID == submissionID) {
-        cardIndex = i;
-      }
-    }
+  function updateCards(operation, submissionID, feedback) {
+    let cardIndex = pendings.findIndex((e) => e.submissionID === submissionID);
 
     let tempArr = pendings.slice();
     switch (operation) {
       case "pass":
         let passedCard = tempArr.splice(cardIndex, 1)[0];
         passedCard.status = "Passed";
+        if (feedback) passedCard.feedback = feedback;
         pushToProcessed(passedCard);
         break;
       case "fail":
         let failedCard = tempArr.splice(cardIndex, 1)[0];
         failedCard.status = "Failed";
+        if (feedback) passedCard.feedback = feedback;
         pushToProcessed(failedCard);
         break;
       case "table":
