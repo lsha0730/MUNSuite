@@ -1,12 +1,30 @@
 .card-container {
   min-width: 350px;
   max-width: 350px;
-  height: 100%;
 
   display: flex;
   flex-direction: column;
 
   border-radius: 10px;
+}
+
+.collapsable {
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: 300ms;
+}
+
+.collapsed {
+  height: 0px;
+  transition: 300ms;
+}
+
+.rounded {
+  border-radius: 10px !important;
+  overflow: hidden;
+  transition: 300ms;
 }
 
 /*-------TOP CUSTOM-------*/
@@ -15,7 +33,7 @@
 
   padding: 15px;
   padding-left: 30px;
-  padding-right: 45px;
+  padding-right: 70px;
 
   display: flex;
   flex-direction: row;
@@ -23,11 +41,12 @@
 
   border-radius: 10px 10px 0px 0px;
   background-color: #3c8cc9;
+  transition: 200ms;
 }
 
 .custom-id-tag {
   position: absolute;
-  top: 20px;
+  top: 35px;
   right: 20px;
   color: #ffffff;
   font-size: 10px;
@@ -47,12 +66,14 @@
 
 /*-------TOP STANDARD-------*/
 .standard-top {
+  position: relative;
   padding: 15px;
   padding-left: 30px;
   padding-right: 30px;
 
   border-radius: 10px 10px 0px 0px;
   background-color: #3c8cc9;
+  transition: 200ms;
 }
 
 .card-top-bottom {
@@ -77,6 +98,7 @@
   font-size: 16px;
   font-weight: 500;
 
+  margin-right: 53px;
   margin-bottom: 10px;
 }
 
@@ -146,6 +168,43 @@
   word-wrap: break-word;
   margin-bottom: 20px;
   white-space: pre-line;
+}
+
+/*-------BODY, DELEGATE-------*/
+.delcard-body {
+  height: 500px;
+
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  border-radius: 0 0 10px 10px;
+  background-color: #ffffff;
+  overflow-y: auto;
+  transition: 300ms;
+}
+.delcard-body:hover::-webkit-scrollbar-track {
+  background: rgba(241, 241, 241, 1);
+  opacity: 100%;
+  transition: 200ms;
+}
+.delcard-body:hover::-webkit-scrollbar-thumb {
+  background: rgba(220, 220, 220, 1);
+  opacity: 100%;
+  transition: 200ms;
+}
+
+.delcard-body-collapsed {
+  padding-left: 30px;
+  padding-right: 30px;
+
+  border-radius: 0 0 10px 10px;
+  background-color: #ffffff;
+  overflow: hidden;
+
+  height: 0px;
+  transition: 300ms;
 }
 
 /*-------HISTORY REVERT-------*/

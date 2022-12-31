@@ -11,8 +11,7 @@ import ShortText from "../../../staff-side/components/editor/preview-components/
 import LongText from "../../../staff-side/components/editor/preview-components/LongText";
 import Dropdown from "../../../staff-side/components/editor/preview-components/Dropdown";
 import SelectMultiple from "../../../staff-side/components/editor/preview-components/SelectMultiple";
-import CustomCard from "./history-components/CustomCard";
-import StandardCard from "./history-components/StandardCard";
+import DirectiveCard from "../../../staff-side/components/inbox/components/DirectiveCard";
 
 import { HiPaperAirplane } from "react-icons/hi";
 import { FaHistory } from "react-icons/fa";
@@ -231,32 +230,40 @@ function Dashboard(props) {
 
   function rerenderHistory() {
     setHistoryRender(
-      relevantDirectives.map((directive) => {
-        if (directive.standard) {
-          return (
-            <StandardCard
-              key={JSON.stringify(relevantDirectives)}
-              id={directive.submissionID}
-              title={directive.title}
-              type={directive.type}
-              sponsors={directive.sponsors || []}
-              signatories={directive.signatories || []}
-              body={directive.body || []}
-              status={directive.status}
-            />
-          );
-        } else {
-          return (
-            <CustomCard
-              key={JSON.stringify(relevantDirectives)}
-              id={directive.submissionID}
-              author={directive.author}
-              body={directive.body || []}
-              status={directive.status}
-            />
-          );
-        }
-      })
+      relevantDirectives
+        .map((directive) => {
+          if (directive.standard) {
+            return (
+              <DirectiveCard
+                key={JSON.stringify(relevantDirectives)}
+                page="delegate"
+                variant="standard"
+                id={directive.submissionID}
+                title={directive.title}
+                type={directive.type}
+                sponsors={directive.sponsors || []}
+                signatories={directive.signatories || []}
+                body={directive.body || []}
+                status={directive.status}
+                feedback={directive.feedback}
+              />
+            );
+          } else {
+            return (
+              <DirectiveCard
+                key={JSON.stringify(relevantDirectives)}
+                page="delegate"
+                variant="custom"
+                id={directive.submissionID}
+                author={directive.author}
+                body={directive.body || []}
+                status={directive.status}
+                feedback={directive.feedback}
+              />
+            );
+          }
+        })
+        .concat(<div style={{ width: "100%", height: 20 }} />)
     );
   }
 

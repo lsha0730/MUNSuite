@@ -133,7 +133,7 @@ function Inbox() {
       case "fail":
         let failedCard = tempArr.splice(cardIndex, 1)[0];
         failedCard.status = "Failed";
-        if (feedback) passedCard.feedback = feedback;
+        if (feedback) failedCard.feedback = feedback;
         pushToProcessed(failedCard);
         break;
       case "table":
