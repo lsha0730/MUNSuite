@@ -87,6 +87,7 @@ function DirectiveCard({
               ? "custom-top rounded"
               : "custom-top"
           }
+          style={{ cursor: page === "delegate" ? "pointer" : undefined }}
           onClick={() => {
             setExtended(!extended);
           }}
@@ -112,7 +113,10 @@ function DirectiveCard({
               ? "standard-top rounded"
               : "standard-top"
           }
-          style={{ backgroundColor: type == "Public" ? "#3C8CC9" : "#285e86" }}
+          style={{
+            backgroundColor: type == "Public" ? "#3C8CC9" : "#285e86",
+            cursor: page === "delegate" ? "pointer" : undefined,
+          }}
           onClick={() => {
             setExtended(!extended);
           }}
