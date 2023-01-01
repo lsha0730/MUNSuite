@@ -48,7 +48,7 @@ const CardButtons = ({ processDirective, presentDirective }) => {
       <textarea
         type="text"
         className="feedback-field"
-        placeholder="Optionally add feedback"
+        placeholder="Add feedback (optional)"
         onChange={(e) => {
           setFeedback(e.target.value);
         }}
