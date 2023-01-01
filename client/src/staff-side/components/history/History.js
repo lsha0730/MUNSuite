@@ -85,6 +85,7 @@ function History() {
 
   function revertDirective(index) {
     const toRevert = processed[index];
+    toRevert.status = "Pending";
     writeToFirebase("pendings", [toRevert].concat(pendings));
     writeToFirebase("processed", processed.filter((item) => item !== toRevert));
   }
