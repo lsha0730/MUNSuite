@@ -51,17 +51,18 @@ function Dashboard(props) {
   }, [currForm, settings, delegations]);
 
   useEffect(() => {
+    const relevants = getReversed(pendings || [])
+      .concat(getReversed(processed || []))
+      .filter((item) => {
+        if (item == undefined) return false;
+        if (item.standard) {
+          return item.sponsors.includes(user) || item.author == user;
+        } else {
+          return item.author == user;
+        }
+      });
     setRelevantDirectives(
-      getReversed(pendings || [])
-        .concat(getReversed(processed || []))
-        .filter((item) => {
-          if (item == undefined) return false;
-          if (item.standard) {
-            return item.sponsors.includes(user) || item.author == user;
-          } else {
-            return item.author == user;
-          }
-        })
+      relevants.sort((a, b) => b.submissionID - a.submissionID)
     );
   }, [pendings, processed]);
 
