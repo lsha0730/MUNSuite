@@ -6,5 +6,9 @@
   {
     "version": "1.1.0",
     "description": "Presentation mode, inbox filtering, revertable directives after processing, public/private cards color change"
+  },
+  {
+    "version": "1.2.0",
+    "description": "History keyword search, Add feedback when processing directives, longtext max wordcount, smarter inbox filtering, security improvemnts, minor styling & miscellaneous bug fixes"
   }
 ]
