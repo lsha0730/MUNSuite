@@ -103,10 +103,9 @@ export const highlight = (text, highlight) => {
   // Split on highlight term and include term into parts, ignore case
   if (!text) return "";
   const inputString = typeof text == "string" ? text : JSON.stringify(text);
-  const parts = inputString.split(
-    `(${highlight.replace(/[\(\)]/g, "\\$&")})`,
-    "gi"
-  );
+  const escapedHighlight = highlight.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const parts = inputString.split(new RegExp(`(${escapedHighlight})`, "gi"));
+
   return (
     <span>
       {parts.map((part, i) => (
