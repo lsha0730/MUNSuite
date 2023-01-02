@@ -114,7 +114,7 @@ function DirectiveCard({
               : "standard-top"
           }
           style={{
-            backgroundColor: type.includes("Private") ? "#285e86" : "#3C8CC9",
+            backgroundColor: type?.includes("Private") ? "#285e86" : "#3C8CC9",
             cursor: page === "delegate" ? "pointer" : undefined,
           }}
           onClick={() => {
