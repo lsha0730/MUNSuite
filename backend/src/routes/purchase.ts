@@ -83,7 +83,7 @@ async function getOrderData(event: any): Promise<OrderDetails> {
   return {
     timestamp: timestamp,
     checkoutID: sessionWithLineItems.id,
-    customerID: sessionWithLineItems.customer,
+    customerID: sessionWithLineItems.customer || "Guest",
     paymentIntentID: sessionWithLineItems.payment_intent,
     email: sessionWithLineItems.customer_details.email,
     name: sessionWithLineItems.customer_details.name,
@@ -130,12 +130,12 @@ const createProductCode = (): string => {
 
 const logOrderFulfillment = (order: OrderDetails) => {
   console.log(
-    `[${order.timestamp}] Fulfilled order for [E: ${order.email}] [ID: ${order.customerID}], created & mailed ${order.quantity} codes`
+    `[${order.timestamp}] Fulfilled order for [E: ${order.email}] [PI: ${order.paymentIntentID}], created & mailed ${order.quantity} codes`
   );
 };
 
 const logOrderInFirebase = (order: OrderDetails, newCodes: string[]) => {
-  orderLogsRef.child(`${order.customerID}`).push({
+  orderLogsRef.child(`${order.paymentIntentID}`).push({
     ...order,
     codes: newCodes,
   });
