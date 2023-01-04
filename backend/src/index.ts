@@ -1,9 +1,9 @@
+require("dotenv").config();
 import express = require("express");
 const { registerRouter } = require("./routes/register");
 const { purchaseRouter } = require("./routes/purchase");
 
 const app = express();
-app.use(express.json());
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "https://munsuite.com");
   res.header(
@@ -13,7 +13,7 @@ app.use((req, res, next) => {
   next();
 });
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4242;
 app.listen(port);
 console.log(`App listening at port ${port}`);
 

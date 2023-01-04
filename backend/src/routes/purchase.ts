@@ -1,12 +1,17 @@
-const stripe = require("stripe")(process.env.StripeKey);
-const { db } = require("../firebase");
-const { v4: uuidv4 } = require("uuid");
-
 import express = require("express");
+import { Stripe } from "stripe";
 const purchaseRouter = express.Router();
 
 const { getUTCTimestamp } = require("../utils");
+const { v4: uuidv4 } = require("uuid");
+
+// Set up Firebase
+const { db } = require("../firebase");
 const validRef = db.ref("adminData/accessCodes/valid");
+const orderLogsRef = db.ref("adminData/orderLogs");
+
+// Set up Stripe
+const stripe = require("stripe")(process.env.StripeKey);
 
 // Set up SendInBlue
 const Sib = require("sib-api-v3-sdk");
@@ -15,72 +20,81 @@ const apiKey = SibClient.authentications["api-key"];
 apiKey.apiKey = process.env.SibKey;
 const tranEmailApi = new Sib.TransactionalEmailsApi();
 import { SendCodeTemplate } from "../data/sendCodeEmailHTML";
-import { EmailAndQuantity } from "../types";
+import { OrderDetails } from "../types";
 
 // Request handlers
 purchaseRouter.post(
   "/webhook",
-  (req: express.Request, res: express.Response) => {
-    const event = req.body;
-    handlePaymentIntent(event);
-    res.send();
+  express.raw({ type: "application/json" }),
+  (request: express.Request, response: express.Response) => {
+    const payload = request.body;
+    const sig = request.headers["stripe-signature"];
+
+    let event;
+    try {
+      event = stripe.webhooks.constructEvent(
+        payload,
+        sig,
+        process.env.StripeEndpointSecret
+      );
+    } catch (err: any) {
+      const message = `Webhook Error: ${err.message}`;
+      console.log(message);
+      return response.status(400).send(message);
+    }
+
+    handleStripeEvent(event);
+    response.send();
   }
 );
 
-const handlePaymentIntent = (event: any) => {
-  const paymentIntent: any = event.data.object;
+function handleStripeEvent(event: any) {
   switch (event.type) {
-    case "payment_intent.amount_capturable_updated":
-      break;
-    case "payment_intent.canceled":
-      break;
-    case "payment_intent.created":
-      break;
-    case "payment_intent.partially_funded":
-      break;
-    case "payment_intent.payment_failed":
-      break;
-    case "payment_intent.processing":
-      break;
-    case "payment_intent.requires_action":
-      break;
-    case "payment_intent.succeeded":
-      getEmailAndQuantity(paymentIntent).then((result: EmailAndQuantity) => {
-        console.log(result);
+    case "checkout.session.completed":
+      getOrderData(event).then((result: OrderDetails) => {
+        const newCodes = [];
+        for (let i = 0; i < result.quantity; i++) {
+          newCodes.push(createProductCode());
+        }
+
+        sendCodes(newCodes, result.email);
+        logOrderInFirebase(result, newCodes);
+        logOrderFulfillment(result);
       });
+      break;
     default:
-      console.log(`Unhandled event type ${event.type}`);
+      break;
   }
-};
+}
 
 // Stripe helpers
-async function getEmailAndQuantity(paymentIntent: any) {
-  const email = await getCustomerEmail(paymentIntent);
-  const quantity = await getQuantityFromPaymentIntent(paymentIntent);
+async function getOrderData(event: any): Promise<OrderDetails> {
+  const sessionID = event.data.object.id;
 
+  // Retrieve the session. If you require line items in the response, you may include them by expanding line_items.
+  const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
+    sessionID,
+    {
+      expand: ["line_items"],
+    }
+  );
+
+  const timestamp = getUTCTimestamp();
   return {
-    email: email,
-    quantity: quantity,
+    timestamp: timestamp,
+    checkoutID: sessionWithLineItems.id,
+    customerID: sessionWithLineItems.customer,
+    paymentIntentID: sessionWithLineItems.payment_intent,
+    email: sessionWithLineItems.customer_details.email,
+    name: sessionWithLineItems.customer_details.name,
+    country: sessionWithLineItems.customer_details.address.country,
+    paid: sessionWithLineItems.amount_total / 100,
+    currency: sessionWithLineItems.currency,
+    quantity: sessionWithLineItems.line_items.data.reduce(
+      (acc: number, curr: Stripe.LineItem) => acc + (curr?.quantity || 0),
+      0
+    ),
   };
-}
-
-async function getCustomerEmail(paymentIntent: any) {
-  const customer = await stripe.customers.retrieve(paymentIntent.customer);
-  const email = customer.email;
-
-  return email;
-}
-
-async function getQuantityFromPaymentIntent(paymentIntent: any) {
-  const charge = await stripe.charges.retrieve(paymentIntent.charge);
-  const lineItems = charge.items;
-
-  let quantity = 0;
-  for (const lineItem of lineItems.data) {
-    quantity += lineItem.quantity;
-  }
-
-  return quantity;
 }
 
 // Order fulfillment
@@ -99,9 +113,7 @@ const sendCodes = (codes: string[], recipient: string) => {
       subject: "Your MUNSuite Access Codes",
       htmlContent: SendCodeTemplate({ codes: codes }),
     })
-    .then(() => {
-      console.log("Email sent!");
-    })
+    .then(() => {})
     .catch(() => {
       console.log("Email couldn't send");
     });
@@ -114,6 +126,19 @@ const createProductCode = (): string => {
   // Add new code to Firebase with corresponding timestamp
   validRef.child(newCode).set(UTCTimestamp);
   return newCode;
+};
+
+const logOrderFulfillment = (order: OrderDetails) => {
+  console.log(
+    `[${order.timestamp}] Fulfilled order for [E: ${order.email}] [ID: ${order.customerID}], created & mailed ${order.quantity} codes`
+  );
+};
+
+const logOrderInFirebase = (order: OrderDetails, newCodes: string[]) => {
+  orderLogsRef.child(`${order.customerID}`).push({
+    ...order,
+    codes: newCodes,
+  });
 };
 
 module.exports = { purchaseRouter };

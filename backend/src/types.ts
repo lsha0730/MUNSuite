@@ -22,7 +22,15 @@ export type CodesLog = {
   [code: string]: UTCString;
 };
 
-export type EmailAndQuantity = {
+export type OrderDetails = {
+  timestamp: UTCString;
+  checkoutID: string;
+  customerID: string;
+  paymentIntentID: string;
   email: string;
+  name: string;
+  country: string;
+  paid: number; // 10.00 for $10.00
+  currency: string;
   quantity: number;
 };

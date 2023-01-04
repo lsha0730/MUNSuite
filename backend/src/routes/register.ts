@@ -2,6 +2,7 @@ const { db, auth } = require("../firebase");
 
 import express = require("express");
 const registerRouter = express.Router();
+registerRouter.use(express.json());
 
 import { CodesLog, RegistrationObject, UserDataTarget } from "../types";
 const { getUTCTimestamp } = require("../utils");
