@@ -5,7 +5,7 @@ const registerRouter = express.Router();
 
 import { CodesLog, RegistrationObject, UserDataTarget } from "../types";
 const { getUTCTimestamp } = require("../utils");
-const { defaultFormData } = require("./defaultFormData");
+const { defaultFormData } = require("../data/defaultFormData");
 
 // Read product codes from database
 let validCodes: CodesLog = {};

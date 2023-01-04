@@ -1,5 +1,6 @@
 import express = require("express");
 const { registerRouter } = require("./routes/register");
+const { purchaseRouter } = require("./routes/purchase");
 
 const app = express();
 app.use(express.json());
@@ -18,3 +19,4 @@ console.log(`App listening at port ${port}`);
 
 // Routers
 app.use("/register", registerRouter);
+app.use("/purchase", purchaseRouter);

@@ -21,3 +21,8 @@ export type UTCString =
 export type CodesLog = {
   [code: string]: UTCString;
 };
+
+export type EmailAndQuantity = {
+  email: string;
+  quantity: number;
+};
