@@ -1,4 +1,5 @@
-import { UTCString } from "./types";
+const { db } = require("./firebase");
+import { AccountType, UserDataTarget, UTCString } from "./types";
 
 /* Returns the current UTC time as a string in the format
     YYYY-MM-DD HH:MM:SS UTC
@@ -16,4 +17,25 @@ const getUTCTimestamp = (): UTCString => {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds} UTC`;
 };
 
-module.exports = { getUTCTimestamp };
+const writeToUser = (uid: string, target: UserDataTarget, content: any) => {
+  if (
+    [
+      "delegations",
+      "form",
+      "pendings",
+      "processed",
+      "notes",
+      "settings",
+    ].includes(target)
+  ) {
+    const ref = db.ref(`appdata/${uid}/livedata/${target}`);
+    ref.set(content);
+  }
+};
+
+const setAccountType = (uid: string, type: AccountType) => {
+  const ref = db.ref(`adminData/accounts/${uid}/type`);
+  ref.set(type);
+};
+
+module.exports = { getUTCTimestamp, writeToUser, setAccountType };

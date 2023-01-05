@@ -4,7 +4,6 @@ export type RegistrationObject = {
   confirmPassword: string;
   confName: string;
   commName: string;
-  productCode: string;
 };
 
 export type UserDataTarget =
@@ -30,7 +29,15 @@ export type OrderDetails = {
   email: string;
   name: string;
   country: string;
-  paid: number; // 10.00 for $10.00
+  paid: number; // Ex. 10.00 for $10.00
   currency: string;
   quantity: number;
+};
+
+export type AccountType = "Starter" | "Premium";
+
+export type AccountsLog = {
+  [x: string]: {
+    type: AccountType;
+  };
 };

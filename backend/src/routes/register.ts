@@ -1,25 +1,12 @@
-const { db, auth } = require("../firebase");
+const { auth } = require("../firebase");
 
 import express = require("express");
 const registerRouter = express.Router();
 registerRouter.use(express.json());
 
-import { CodesLog, RegistrationObject, UserDataTarget } from "../types";
-const { getUTCTimestamp } = require("../utils");
+import { RegistrationObject } from "../types";
+const { getUTCTimestamp, writeToUser, setAccountType } = require("../utils");
 const { defaultFormData } = require("../data/defaultFormData");
-
-// Read product codes from database
-let validCodes: CodesLog = {};
-let usedCodes: CodesLog = {};
-
-const validRef = db.ref("adminData/accessCodes/valid");
-const usedRef = db.ref("adminData/accessCodes/used");
-validRef.on("value", (snapshot: any) => {
-  validCodes = snapshot.val() || {};
-});
-usedRef.on("value", (snapshot: any) => {
-  usedCodes = snapshot.val() || {};
-});
 
 // Request handlers
 registerRouter.post(
@@ -45,30 +32,22 @@ const validateRegister = ({
   confirmPassword,
   confName,
   commName,
-  productCode,
 }: RegistrationObject) => {
-  const complete = [
-    email,
-    password,
-    confirmPassword,
-    confName,
-    commName,
-    productCode,
-  ].every((e) => (e || "") != "");
+  const complete = [email, password, confirmPassword, confName, commName].every(
+    (e) => (e || "") != ""
+  );
 
   const checks = [
     complete,
     validateEmail(email),
     password.length >= 8,
     password == confirmPassword,
-    productCode in validCodes,
   ];
   const errors = [
     "Fields Incomplete",
     "Invalid Email",
     "Password must be 8 or more characters",
     "Passwords do not match",
-    "Invalid product code",
   ];
 
   for (let i = 0; i < checks.length; i++) {
@@ -87,7 +66,7 @@ const validateEmail = (email: string) => {
 };
 
 const makeAccount = (submission: RegistrationObject) => {
-  const { email, password, confName, commName, productCode } = submission;
+  const { email, password, confName, commName } = submission;
 
   return new Promise((resolve) => {
     auth
@@ -102,7 +81,8 @@ const makeAccount = (submission: RegistrationObject) => {
           conference: confName,
         });
         writeToUser(uid, "form", defaultFormData);
-        killProductCode(productCode);
+        setAccountType(uid, "Starter");
+
         logRegAttempt("success", submission, "Passing", uid);
         resolve("Success");
       })
@@ -118,31 +98,6 @@ const makeAccount = (submission: RegistrationObject) => {
   });
 };
 
-const killProductCode = (usedCode: string) => {
-  const UTCTimestamp = getUTCTimestamp();
-
-  // Remove used code from list of valids
-  validRef.child(usedCode).set(null);
-  // Log the code as claimed with timestamp
-  usedRef.child(usedCode).set(UTCTimestamp);
-};
-
-const writeToUser = (uid: string, target: UserDataTarget, content: any) => {
-  if (
-    [
-      "delegations",
-      "form",
-      "pendings",
-      "processed",
-      "notes",
-      "settings",
-    ].includes(target)
-  ) {
-    const ref = db.ref(`appdata/${uid}/livedata/${target}`);
-    ref.set(content);
-  }
-};
-
 const logRegAttempt = (
   outcome: "success" | "fail",
   submission: RegistrationObject,
@@ -152,13 +107,12 @@ const logRegAttempt = (
   const timestamp = getUTCTimestamp();
   if (outcome === "success") {
     console.log(
-      `[${timestamp}] Created user [E: ${submission.email}] [UID: ${uid}] using code "${submission.productCode}"`
+      `[${timestamp}] Created user [E: ${submission.email}] [UID: ${uid}]`
     );
   } else if (outcome === "fail") {
     console.log(
-      `[${timestamp}] Failed to register [E: ${submission.email}] [Conf: ${submission.confName}] [Comm: ${submission.commName}], attempted code "${submission.productCode}"`
+      `[${timestamp}] Failed to register [E: ${submission.email}] [Conf: ${submission.confName}] [Comm: ${submission.commName}], ${reason}`
     );
-    console.log(`--> Reason: ${reason}`);
   }
 };
 

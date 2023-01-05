@@ -2,6 +2,7 @@ require("dotenv").config();
 import express = require("express");
 const { registerRouter } = require("./routes/register");
 const { purchaseRouter } = require("./routes/purchase");
+const { accountRouter } = require("./routes/account");
 
 const app = express();
 app.use((req, res, next) => {
@@ -20,3 +21,4 @@ console.log(`App listening at port ${port}`);
 // Routers
 app.use("/register", registerRouter);
 app.use("/purchase", purchaseRouter);
+app.use("/account", accountRouter);
