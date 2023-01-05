@@ -28,10 +28,13 @@ function App() {
 
   // Firebase: Reading
   useEffect(() => {
-    onValue(ref(database, `appdata/${userUID}/livedata`), (snapshot) => {
-      // Check if the link is valid
-      setValidLink(snapshot.exists() ? "valid" : "invalid");
-    });
+    onValue(
+      ref(database, `appdata/${userUID}/livedata/delegations`),
+      (snapshot) => {
+        // Check if the link is valid
+        setValidLink(snapshot.exists() ? "valid" : "invalid");
+      }
+    );
 
     onValue(
       ref(database, `appdata/${userUID}/livedata/delegations`),
