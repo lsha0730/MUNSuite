@@ -16,11 +16,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(-45deg, #78aed7, #7aa5c6);
+  background-color: #f5f8fb;
 }
 
 .top-container {
-  width: 900px;
+  width: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,30 +29,27 @@
 .header {
   font-size: 36px;
   font-weight: 700;
-  color: #ffffff;
+  color: #4a687f;
   margin-bottom: 50px;
 }
 
 .cards-container {
-  width: 600px;
+  width: 650px;
   margin: auto;
 
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
-  filter: blur(10px);
 }
 
 /*CARD*/
 .card {
-  width: 270px;
+  width: 300px;
   height: 400px;
 
   display: flex;
   flex-direction: column;
 
-  background-color: #ffffff;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.1);
@@ -61,39 +58,43 @@
 /*Tie*/
 .card-tie {
   width: 100%;
-  padding: 10px;
+  padding: 15px;
   padding-left: 25px;
   padding-right: 25px;
 
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  background-color: #deeefe;
 }
 
-.card-tie-left {
-  display: flex;
-  flex-direction: column;
+.icon {
+  width: fit-content;
+  margin-bottom: 10px;
+  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.2));
 }
 
 .card-heading {
   font-size: 24px;
   font-weight: 700;
+  color: #707070;
 }
 
 .card-subheading {
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 500;
+  color: #707070;
 }
 
 .price-tag {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
 }
 
 .price-subtag {
-  font-size: 12px;
-  font-weight: 300;
+  font-weight: 500;
+  color: #707070;
 }
 
 /*Body*/
@@ -106,11 +107,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-.items-list {
-  padding-left: 20px;
-  color: #707070;
+  background-color: white;
 }
 
 .btt-demo {
@@ -132,6 +129,7 @@
   border-color: #eaeaea;
   border-radius: 5px;
   cursor: pointer;
+  text-decoration: none;
 }
 .btt-demo:hover {
   background-color: #eaeaea;
@@ -152,13 +150,14 @@
   padding-left: 15px;
   padding-right: 15px;
 
-  background-color: #4a687f;
-  color: #ffffff;
+  background-color: #dfefff;
+  color: #00a3ff;
   border-radius: 5px;
   cursor: pointer;
+  text-decoration: none;
 }
 .btt-full:hover {
-  background-color: rgb(43, 69, 90);
+  background-color: #59c2ff;
   color: #ffffff;
   transition: 200ms;
 }
@@ -241,4 +240,16 @@
 .link {
   color: #00a4ff;
   text-decoration: none;
+}
+
+/*----- Feature List -----*/
+.list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.list-text {
+  margin-left: 5px;
+  font-weight: 300;
 }
