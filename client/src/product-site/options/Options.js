@@ -28,7 +28,7 @@ function Options() {
                 <h1 className="price-tag">Free</h1>
 
                 <FeatureList
-                  items={["Up to 75 submissions", "Email technical support"]}
+                  items={["Up to 75 submissions", "Email support"]}
                 />
 
                 <Link to="/register" className="btt-demo">
