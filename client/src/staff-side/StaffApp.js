@@ -41,7 +41,7 @@ function App() {
   useEffect(() => {
     // Get user account info
     axios
-      .get("https://munsuite-backend.onrender.com/accont/info", {
+      .get("https://munsuite-backend.onrender.com/account/info", {
         uid: userID,
       })
       .then((response) => {
@@ -205,6 +205,7 @@ function App() {
         notes,
         settings,
         accountInfo,
+        setAccountInfo,
       }}
     >
       <div className="App-container">

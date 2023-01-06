@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import PlanCards from "../../../product-site/options/PlanCards";
 import { appContext } from "../../staffContext";
 import "./Plan.scoped.css";
+import axios from "axios";
 import { HiBadgeCheck } from "react-icons/hi";
 
 import delegations from "../../../product-site/home/images/mockups/delegations.png";
@@ -9,12 +10,47 @@ import form from "../../../product-site/home/images/mockups/form.png";
 import history from "../../../product-site/home/images/mockups/history.png";
 import statistics from "../../../product-site/home/images/mockups/statistics.png";
 import notes from "../../../product-site/home/images/mockups/notes.png";
+import ConfirmRedeemModal from "./ConfirmRedeemModal";
 
 const MAX_SUBMISSIONS = 75;
 
 const Plan = () => {
-  const { pendings, processed, accountInfo } = useContext(appContext);
+  const {
+    pendings,
+    processed,
+    accountInfo,
+    setAccountInfo,
+    userID,
+  } = useContext(appContext);
   const totalSubmissions = pendings?.length + processed?.length;
+  const codeRef = useRef();
+  const [warning, setWarning] = useState("");
+  const [showingConfirmation, setShowingConfirmation] = useState(false);
+
+  const handleRedeem = () => {
+    axios
+      .post("https://munsuite-backend.onrender.com/account/redeem", {
+        code: codeRef?.current?.value,
+        uid: userID,
+      })
+      .then((response) => {
+        if (response === "Success") {
+          // Check account status again
+          axios
+            .get("https://munsuite-backend.onrender.com/account/info", {
+              uid: userID,
+            })
+            .then((response) => {
+              if (response.type === "Premium") {
+                setAccountInfo(response);
+                setShowingConfirmation(true);
+              }
+            });
+        } else {
+          setWarning(response);
+        }
+      });
+  };
 
   return (
     <div className="page-container">
@@ -109,14 +145,24 @@ const Plan = () => {
                 </p>
                 <div className="inputs">
                   <input
+                    ref={codeRef}
                     className="input"
                     type="text"
                     placeholder="Enter a product code"
                   />
-                  <div className="btt-redeem">Redeem</div>
+                  <div className="btt-redeem" onClick={handleRedeem}>
+                    Redeem
+                  </div>
                 </div>
+                {warning && (
+                  <p style={{ fontWeight: 500, color: "#FF5A5A" }}>{warning}</p>
+                )}
               </div>
             </div>
+
+            {showingConfirmation && (
+              <ConfirmRedeemModal {...{ setShowingConfirmation }} />
+            )}
           </>
         )}
       </div>
