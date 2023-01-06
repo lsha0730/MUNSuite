@@ -3,6 +3,7 @@ import "./Sidebar.scoped.css";
 import { appContext } from "../../staffContext.js";
 import * as BsIcons from "react-icons/bs";
 import * as IoIcons from "react-icons/io";
+import { HiBadgeCheck } from "react-icons/hi";
 
 const INACTIVE_COLOR = "#3C8CC9";
 const ACTIVE_COLOR = "#BCBCBC";
@@ -18,43 +19,12 @@ function Sidebar() {
       clearTimeout(resizeTimeout);
     }
     resizeTimeout = setTimeout(() => {
-      if (page === "settings") {
-        setIndOffset(window.innerHeight - 95);
-      } else {
-        setIndOffset(indOffset);
-      }
+      setIndOffset(getIndicatorOffset(page));
     }, 100);
   };
 
   useEffect(() => {
-    const base = 55;
-    const diff = 59; //68;
-
-    switch (page) {
-      case "delegations":
-        setIndOffset(base);
-        break;
-      case "editor":
-        setIndOffset(base + diff);
-        break;
-      case "inbox":
-        setIndOffset(base + diff * 2);
-        break;
-      case "history":
-        setIndOffset(base + diff * 3);
-        break;
-      case "statistics":
-        setIndOffset(base + diff * 4);
-        break;
-      case "notes":
-        setIndOffset(base + diff * 5);
-        break;
-      case "settings":
-        setIndOffset(window.innerHeight - 95);
-        break;
-      default:
-        setIndOffset(base);
-    }
+    setIndOffset(getIndicatorOffset(page));
   }, [page]);
 
   return (
@@ -161,6 +131,20 @@ function Sidebar() {
           <div
             className="Sidebar-option"
             onClick={() => {
+              setPage("plan");
+            }}
+          >
+            <HiBadgeCheck
+              size={25}
+              style={{
+                transition: "200ms",
+                fill: page === "plan" ? INACTIVE_COLOR : ACTIVE_COLOR,
+              }}
+            />
+          </div>
+          <div
+            className="Sidebar-option"
+            onClick={() => {
               setPage("settings");
             }}
           >
@@ -175,9 +159,35 @@ function Sidebar() {
         </div>
       </div>
 
-      <div className="Sidebar-indicator" style={{ top: indOffset }}></div>
+      <div className="Sidebar-indicator" style={{ top: indOffset }} />
     </div>
   );
 }
+
+const getIndicatorOffset = (page) => {
+  const base = 55;
+  const diff = 59;
+
+  switch (page) {
+    case "delegations":
+      return base;
+    case "editor":
+      return base + diff;
+    case "inbox":
+      return base + diff * 2;
+    case "history":
+      return base + diff * 3;
+    case "statistics":
+      return base + diff * 4;
+    case "notes":
+      return base + diff * 5;
+    case "plan":
+      return window.innerHeight - 95 - diff;
+    case "settings":
+      return window.innerHeight - 95;
+    default:
+      return base;
+  }
+};
 
 export default Sidebar;

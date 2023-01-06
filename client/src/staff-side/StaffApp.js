@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { getDatabase, onValue, ref, set } from "firebase/database";
+import axios from "axios";
 import { getAuth } from "firebase/auth";
 import "./StaffApp.scoped.css";
 
@@ -10,6 +11,7 @@ import Inbox from "./components/inbox/Inbox.js";
 import History from "./components/history/History.js";
 import Statistics from "./components/statistics/Statistics.js";
 import Notes from "./components/notes/Notes.js";
+import Plan from "./components/plan/Plan";
 import Settings from "./components/settings/Settings.js";
 
 import { appContext } from "./staffContext.js";
@@ -25,6 +27,10 @@ function App() {
   const [processed, setProcessed] = useState([]);
   const [notes, setNotes] = useState({ individual: [], quick: "" });
   const [settings, setSettings] = useState({});
+  const [accountInfo, setAccountInfo] = useState({
+    type: "Starter",
+    expiration: "Error",
+  });
 
   // Firebase Setup
   const { app } = useContext(siteContext);
@@ -32,8 +38,17 @@ function App() {
   const auth = getAuth();
   const userID = auth.currentUser.uid;
 
-  // Firebase: Reading
   useEffect(() => {
+    // Get user account info
+    axios
+      .get("https://munsuite-backend.onrender.com/accont/info", {
+        uid: userID,
+      })
+      .then((response) => {
+        setAccountInfo(response);
+      });
+
+    // Firebase: Reading
     onValue(
       ref(database, `appdata/${userID}/livedata/delegations`),
       (snapshot) => {
@@ -165,6 +180,8 @@ function App() {
           return <Statistics key="statistics" />;
         case "notes":
           return <Notes key="notes" />;
+        case "plan":
+          return <Plan key="plan" />;
         case "settings":
           return <Settings key="settings" />;
         default:
@@ -187,6 +204,7 @@ function App() {
         processed,
         notes,
         settings,
+        accountInfo,
       }}
     >
       <div className="App-container">
@@ -197,7 +215,7 @@ function App() {
   );
 
   function exportToCsv(filename, rows) {
-    var processRow = function (row) {
+    var processRow = function(row) {
       var finalVal = "";
       for (var j = 0; j < row.length; j++) {
         var innerValue = row[j] === null ? "" : row[j].toString();

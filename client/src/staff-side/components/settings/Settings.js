@@ -31,7 +31,7 @@ function Settings() {
                 className="input-field"
                 defaultValue={settings.conference}
                 onChange={updateSettings}
-              ></input>
+              />
             </div>
             <div className="input-container">
               <p className="input-subheader">Committee (Abbreviated)</p>
@@ -41,7 +41,7 @@ function Settings() {
                 className="input-field"
                 defaultValue={settings.committee}
                 onChange={updateSettings}
-              ></input>
+              />
             </div>
           </div>
         </div>

@@ -1,0 +1,165 @@
+.cards-container {
+  width: 650px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/*CARD*/
+.card {
+  width: 300px;
+  height: 400px;
+
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/*Tie*/
+.card-tie {
+  width: 100%;
+  padding: 15px;
+  padding-left: 25px;
+  padding-right: 25px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  background-color: #deeefe;
+}
+
+.icon {
+  width: fit-content;
+  margin-bottom: 10px;
+  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.2));
+}
+
+.card-heading {
+  font-size: 24px;
+  font-weight: 700;
+  color: #707070;
+}
+
+.card-subheading {
+  font-size: 14px;
+  font-weight: 500;
+  color: #707070;
+}
+
+.price-tag {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.price-subtag {
+  font-weight: 500;
+  color: #707070;
+}
+
+/*Body*/
+.card-body {
+  flex-grow: 1;
+  padding: 20px;
+  padding-left: 25px;
+  padding-right: 25px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.btt-demo {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  padding: 7px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  color: #707070;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #eaeaea;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btt-demo:hover {
+  background-color: #eaeaea;
+  color: #707070;
+  transition: 200ms;
+}
+
+.btt-full {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  padding: 7px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  background-color: #dfefff;
+  color: #00a3ff;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btt-full:hover {
+  background-color: #59c2ff;
+  color: #ffffff;
+  transition: 200ms;
+}
+
+.btt-bricked {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  padding: 7px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  background-color: #f3f3f3;
+  color: #bcbcbc;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/*----- App Page -----*/
+.app-container {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+/*----- Feature List -----*/
+.list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.list-text {
+  margin-left: 5px;
+  font-weight: 300;
+}

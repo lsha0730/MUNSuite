@@ -64,16 +64,16 @@ function Navbar() {
           <img src={Logo} className="logo" />
         </Link>
         <div className="options">
-          <div></div>
-          <div></div>
+          <div />
+          <div />
           <Link to="/" className="option-text">
             Home
           </Link>
           <div className="btt-signout" onClick={handleSignout}>
             Sign Out
           </div>
-          <Link to="/dashboard" className="option-options">
-            Open Dashboard
+          <Link to={`/app/${auth.currentUser}`} className="option-options">
+            Launch App
           </Link>
         </div>
       </div>
@@ -87,33 +87,20 @@ function Navbar() {
           <img src={LogoWhite} className="logo" />
         </Link>
         <div className="options">
-          <div></div>
-          <div></div>
+          <div />
+          <div />
           <Link to="/" className="option-text-white">
             Home
           </Link>
           <div className="option-options-white" onClick={handleSignout}>
             Sign Out
           </div>
-          <Link to="/dashboard" className="option-options-white">
-            Open Dashboard
+          <Link
+            to={`/app/${auth.currentUser}`}
+            className="option-options-white"
+          >
+            Launch App
           </Link>
-        </div>
-      </div>
-    </div>
-  );
-
-  const dashboardBar = (
-    <div className="navbar-container">
-      <div className="navbar">
-        <Link to="/">
-          <img src={Logo} className="logo" />
-        </Link>
-        <div className="options">
-          <div></div>
-          <div className="btt-signout" onClick={handleSignout}>
-            Sign Out
-          </div>
         </div>
       </div>
     </div>
@@ -126,8 +113,6 @@ function Navbar() {
       } else {
         return whiteBar;
       }
-    case pathname == "/dashboard":
-      return dashboardBar;
     case /\/app\/\w*/i.test(pathname):
       return;
     case /\/form\/\w*/i.test(pathname):

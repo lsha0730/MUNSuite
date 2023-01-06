@@ -16,7 +16,6 @@ import Register from "./product-site/register/Register.js";
 import Login from "./product-site/login/Login.js";
 import Forgot from "./product-site/forgot/Forgot.js";
 import Options from "./product-site/options/Options.js";
-import Dashboard from "./product-site/dashboard/Dashboard";
 
 import StaffApp from "./staff-side/StaffApp.js";
 import DelegateApp from "./delegate-side/DelegateApp.js";
@@ -51,7 +50,7 @@ function App() {
           window.location.pathname == "/login" ||
           window.location.pathname == "/register"
         ) {
-          navigate("/dashboard");
+          navigate(`/app/${auth.currentUser}`);
         }
       } else {
         // User is signed out
@@ -66,7 +65,7 @@ function App() {
       (window.location.pathname == "/login" ||
         window.location.pathname == "/register")
     ) {
-      navigate("/dashboard");
+      navigate(`/app/${auth.currentUser}`);
     }
   }, [window.location.pathname]);
 
@@ -90,13 +89,6 @@ function App() {
             <Route exact path="/options" element={<Options />} />
             <Route
               exact
-              path="/dashboard"
-              element={
-                auth.currentUser ? <Dashboard /> : <Navigate to="/login" />
-              }
-            />
-            <Route
-              exact
               path="/app/*"
               element={
                 auth.currentUser ? <StaffApp /> : <Navigate to="/login" />
@@ -114,8 +106,6 @@ function App() {
 
 const getAppStyle = (pathname) => {
   switch (pathname) {
-    case "/dashboard":
-      return { overflowY: "hidden" };
     case "/login":
       return { backgroundColor: "#F7F7F7" };
     case "/register":

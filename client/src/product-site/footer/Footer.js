@@ -17,8 +17,6 @@ function Footer() {
   );
 
   switch (true) {
-    case pathname == "/dashboard":
-      return;
     case /\/app\/\w*/i.test(pathname):
       return;
     case /\/form\/\w*/i.test(pathname):
