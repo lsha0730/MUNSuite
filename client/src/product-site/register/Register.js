@@ -12,7 +12,6 @@ function Register() {
   const confirmPassRef = useRef();
   const confNameRef = useRef();
   const commNameRef = useRef();
-  const codeRef = useRef();
   const navigate = useNavigate();
 
   return (
@@ -97,23 +96,6 @@ function Register() {
                 }}
               />
             </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <p className="input-label">Product Code</p>
-              <input
-                ref={codeRef}
-                type="text"
-                className="input-field"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") handleRegister();
-                }}
-              />
-            </div>
-            <p className="additional-text" style={{ marginTop: "10px" }}>
-              Don't have one?&nbsp;
-              <Link to="/options" className="additional-link">
-                Get one!
-              </Link>
-            </p>
           </div>
         </div>
       </div>
@@ -127,11 +109,10 @@ function Register() {
       confirmPassword: confirmPassRef.current?.value || "",
       confName: confNameRef.current?.value || "",
       commName: commNameRef.current?.value || "",
-      productCode: codeRef.current?.value || "",
     };
 
     axios
-      .post("https://munsuite-backend.onrender.com/register/newuser", {
+      .post("https://localhost:4242/register/newuser", {
         registrationObject: submission,
       })
       .then((response) => {
