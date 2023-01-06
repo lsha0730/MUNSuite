@@ -112,7 +112,7 @@ function Register() {
     };
 
     axios
-      .post("https://localhost:4242/register/newuser", {
+      .post("https://munsuite-backend.onrender.com/register/newuser", {
         registrationObject: submission,
       })
       .then((response) => {

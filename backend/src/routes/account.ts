@@ -47,7 +47,7 @@ accountRouter.post("/redeem", (req: express.Request, res: express.Response) => {
   }
 });
 
-accountRouter.get("/info", (req: express.Request, res: express.Response) => {
+accountRouter.post("/info", (req: express.Request, res: express.Response) => {
   const uid: string = req.body.uid;
   res.send(accounts?.[uid] || null);
 });

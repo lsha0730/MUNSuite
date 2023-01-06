@@ -11,7 +11,7 @@ const ConfirmRedeemModal = ({ setShowingConfirmation }) => {
   return (
     <div className="modal-fade">
       <div className="modal-container">
-        <h1 style={{ color: "#378DCC" }}>Success!</h1>
+        <h1 style={{ color: "#378DCC", fontSize: 28 }}>Success!</h1>
         <p>You are now on the Premium Plan.</p>
 
         <div className="modal-bottom">

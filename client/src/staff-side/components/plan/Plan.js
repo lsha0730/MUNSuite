@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import PlanCards from "../../../product-site/options/PlanCards";
 import { appContext } from "../../staffContext";
 import "./Plan.scoped.css";
@@ -34,23 +34,36 @@ const Plan = () => {
         uid: userID,
       })
       .then((response) => {
-        if (response === "Success") {
+        const data = response.data;
+        if (data === "Success") {
           // Check account status again
           axios
-            .get("https://munsuite-backend.onrender.com/account/info", {
+            .post("https://munsuite-backend.onrender.com/account/info", {
               uid: userID,
             })
             .then((response) => {
-              if (response.type === "Premium") {
-                setAccountInfo(response);
+              const data = response.data;
+              if (data.type === "Premium") {
+                setAccountInfo(data);
                 setShowingConfirmation(true);
               }
             });
         } else {
-          setWarning(response);
+          setWarning(data);
         }
       });
   };
+
+  useEffect(() => {
+    axios
+      .post("https://munsuite-backend.onrender.com/account/info", {
+        uid: userID,
+      })
+      .then((response) => {
+        const data = response.data;
+        setAccountInfo(data);
+      });
+  }, []);
 
   return (
     <div className="page-container">
@@ -159,11 +172,11 @@ const Plan = () => {
                 )}
               </div>
             </div>
-
-            {showingConfirmation && (
-              <ConfirmRedeemModal {...{ setShowingConfirmation }} />
-            )}
           </>
+        )}
+
+        {showingConfirmation && (
+          <ConfirmRedeemModal {...{ setShowingConfirmation }} />
         )}
       </div>
     </div>

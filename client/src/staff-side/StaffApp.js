@@ -28,7 +28,7 @@ function App() {
   const [notes, setNotes] = useState({ individual: [], quick: "" });
   const [settings, setSettings] = useState({});
   const [accountInfo, setAccountInfo] = useState({
-    type: "Starter",
+    type: "Error",
     expiration: "Error",
   });
 
@@ -41,11 +41,12 @@ function App() {
   useEffect(() => {
     // Get user account info
     axios
-      .get("https://munsuite-backend.onrender.com/account/info", {
+      .post("https://munsuite-backend.onrender.com/account/info", {
         uid: userID,
       })
       .then((response) => {
-        setAccountInfo(response);
+        const result = response.data;
+        setAccountInfo(result);
       });
 
     // Firebase: Reading

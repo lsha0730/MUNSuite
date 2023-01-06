@@ -11,10 +11,12 @@
 }
 
 .innerpage-container {
+  position: relative;
   width: 65%;
   max-width: 1600px;
   min-width: 750px;
 
+  min-height: 65%;
   height: fit-content;
 
   display: flex;
@@ -158,8 +160,10 @@
 /*----- Mockups -----*/
 .mockup-container {
   width: calc(100% + 30px);
-  height: calc(100% + 30px);
-  position: relative;
+  height: 500px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
   overflow: hidden;
 }
 
@@ -175,6 +179,7 @@
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 10;
 
   width: 100vw;
   height: 100vh;
