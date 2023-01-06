@@ -43,7 +43,7 @@ export type AccountsLog = {
 };
 
 export type DateOffset = {
-  oyear?: number;
-  omonth?: number;
-  oday?: number;
+  year?: number;
+  month?: number;
+  day?: number;
 };
