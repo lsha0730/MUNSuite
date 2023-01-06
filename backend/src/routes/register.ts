@@ -5,7 +5,7 @@ const registerRouter = express.Router();
 registerRouter.use(express.json());
 
 import { RegistrationObject } from "../types";
-const { getUTCTimestamp, writeToUser, setAccountType } = require("../utils");
+const { getUTCTimestamp, writeToUser, updateAccountType } = require("../utils");
 const { defaultFormData } = require("../data/defaultFormData");
 
 // Request handlers
@@ -81,7 +81,7 @@ const makeAccount = (submission: RegistrationObject) => {
           conference: confName,
         });
         writeToUser(uid, "form", defaultFormData);
-        setAccountType(uid, "Starter");
+        updateAccountType(uid, "Starter");
 
         logRegAttempt("success", submission, "Passing", uid);
         resolve("Success");

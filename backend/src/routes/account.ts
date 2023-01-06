@@ -4,7 +4,7 @@ import express = require("express");
 const accountRouter = express.Router();
 accountRouter.use(express.json());
 
-const { getUTCTimestamp, setAccountType } = require("../utils");
+const { getUTCTimestamp, updateAccountType } = require("../utils");
 import { AccountsLog, CodesLog } from "../types";
 
 // Read product codes & account types from database
@@ -40,7 +40,7 @@ accountRouter.post("/redeem", (req: express.Request, res: express.Response) => {
     logUpgrade("fail", uid, productCode);
     res.send("Already Premium");
   } else {
-    setAccountType(uid, "Premium");
+    updateAccountType(uid, "Premium");
     killProductCode(productCode);
     logUpgrade("success", uid, productCode);
     res.send("Success");

@@ -1,15 +1,17 @@
 const { db } = require("./firebase");
-import { AccountType, UserDataTarget, UTCString } from "./types";
+import { AccountType, UserDataTarget, UTCString, DateOffset } from "./types";
 
 /* Returns the current UTC time as a string in the format
     YYYY-MM-DD HH:MM:SS UTC
     2022-12-25 08:01:10 UTC
 */
-const getUTCTimestamp = (): UTCString => {
+const getUTCTimestamp = ({ oyear, omonth, oday }: DateOffset): UTCString => {
   const date = new Date();
-  const year = date.getUTCFullYear();
-  const month = (date.getUTCMonth() + 1).toString().padStart(2, "0"); // January is 0
-  const day = date.getUTCDate().toString().padStart(2, "0");
+  const year = date.getUTCFullYear() + (oyear || 0);
+  const month = (date.getUTCMonth() + 1 + (omonth || 0))
+    .toString()
+    .padStart(2, "0"); // January is 0
+  const day = (date.getUTCDate() + (oday || 0)).toString().padStart(2, "0");
   const hours = date.getUTCHours().toString().padStart(2, "0");
   const minutes = date.getUTCMinutes().toString().padStart(2, "0");
   const seconds = date.getUTCSeconds().toString().padStart(2, "0");
@@ -33,9 +35,16 @@ const writeToUser = (uid: string, target: UserDataTarget, content: any) => {
   }
 };
 
-const setAccountType = (uid: string, type: AccountType) => {
-  const ref = db.ref(`adminData/accounts/${uid}/type`);
-  ref.set(type);
+const updateAccountType = (uid: string, type: AccountType) => {
+  const ref = db.ref(`adminData/accounts/${uid}`);
+  ref.child("/type").set(type);
+
+  if (type === "Premium") {
+    const threeMonthsFuture = getUTCTimestamp({ omonth: 3 });
+    ref.child("/expiration").set(threeMonthsFuture);
+  } else {
+    ref.child("/expiration").set(null);
+  }
 };
 
-module.exports = { getUTCTimestamp, writeToUser, setAccountType };
+module.exports = { getUTCTimestamp, writeToUser, updateAccountType };
