@@ -2,6 +2,10 @@ import React from "react";
 import "./Options.scoped.css";
 import PlanCards from "./PlanCards";
 
+import Horizons from "../home/images/logos/horizons.png";
+import CAHSMUN from "../home/images/logos/cahsmun.png";
+import VMUN from "../home/images/logos/vmun.png";
+
 function Options() {
   return (
     <div className="options-container">
@@ -10,6 +14,20 @@ function Options() {
           <p className="header">
             The all-in-one package for perfectly smooth crises.
           </p>
+
+          <div
+            style={{ width: "100%", display: "flex", alignItems: "flex-start" }}
+          >
+            <div className="trusted-by">
+              <p className="trusted-text">Trusted by partners at</p>
+              <div className="logos">
+                <img className="logo" src={CAHSMUN} />
+                <img className="logo" src={Horizons} />
+                <img className="logo" src={VMUN} />
+              </div>
+            </div>
+          </div>
+
           <PlanCards page={"plan"} />
         </div>
       </div>
