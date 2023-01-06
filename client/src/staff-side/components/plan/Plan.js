@@ -186,7 +186,10 @@ const Plan = () => {
         )}
 
         {showingConfirmation && (
-          <ConfirmRedeemModal {...{ setShowingConfirmation }} />
+          <ConfirmRedeemModal
+            setShowingConfirmation={setShowingConfirmation}
+            expiration={accountInfo.expiration?.slice(0, 10)}
+          />
         )}
       </div>
     </div>

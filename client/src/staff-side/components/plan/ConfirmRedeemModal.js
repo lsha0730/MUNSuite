@@ -4,9 +4,7 @@ import "./Plan.scoped.css";
 import FlyingDark from "../../../product-site/options/icons/FlyingDark.svg";
 import { getExpiration } from "../../utils";
 
-const ConfirmRedeemModal = ({ setShowingConfirmation }) => {
-  const expiration = getExpiration();
-
+const ConfirmRedeemModal = ({ setShowingConfirmation, expiration }) => {
   return (
     <div className="modal-fade">
       <div className="modal-container">
