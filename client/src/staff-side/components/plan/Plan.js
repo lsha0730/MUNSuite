@@ -126,6 +126,16 @@ const Plan = () => {
               className="subtext"
               style={{ fontWeight: 600, color: "#BCBCBC" }}
             >
+              Expiration:&nbsp;
+              <p style={{ color: "#707070" }}>{`${accountInfo.expiration?.slice(
+                0,
+                10
+              )}`}</p>
+            </p>
+            <p
+              className="subtext"
+              style={{ fontWeight: 600, color: "#BCBCBC" }}
+            >
               Happy directive processing!
             </p>
 

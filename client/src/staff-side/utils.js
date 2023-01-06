@@ -123,3 +123,13 @@ export const highlight = (text, highlight) => {
     </span>
   );
 };
+
+export const getExpiration = () => {
+  const date = new Date();
+  const year = date.getFullYear().toString();
+  const month = (date.getMonth() + 4).toString().padStart(2, "0");
+  const day = (date.getDay() + 1).toString().padStart(2, "0");
+  const expiration = `${year}-${month}-${day}`;
+
+  return expiration;
+};
