@@ -50,7 +50,7 @@ function App() {
           window.location.pathname == "/login" ||
           window.location.pathname == "/register"
         ) {
-          navigate(`/app/${auth.currentUser}`);
+          navigate(`/app/${auth.currentUser.uid}`);
         }
       } else {
         // User is signed out
@@ -65,7 +65,7 @@ function App() {
       (window.location.pathname == "/login" ||
         window.location.pathname == "/register")
     ) {
-      navigate(`/app/${auth.currentUser}`);
+      navigate(`/app/${auth.currentUser.uid}`);
     }
   }, [window.location.pathname]);
 

@@ -72,7 +72,7 @@ function Navbar() {
           <div className="btt-signout" onClick={handleSignout}>
             Sign Out
           </div>
-          <Link to={`/app/${auth.currentUser}`} className="option-options">
+          <Link to={`/app/${auth.currentUser?.uid}`} className="option-options">
             Launch App
           </Link>
         </div>
@@ -96,7 +96,7 @@ function Navbar() {
             Sign Out
           </div>
           <Link
-            to={`/app/${auth.currentUser}`}
+            to={`/app/${auth.currentUser?.uid}`}
             className="option-options-white"
           >
             Launch App

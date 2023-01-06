@@ -143,7 +143,7 @@ function Register() {
             submission.password
           )
             .then(() => {
-              navigate(`/app/${auth.currentUser}`);
+              navigate(`/app/${auth.currentUser.uid}`);
             })
             .catch((error) => {
               if (error.code == "auth/wrong-password") {

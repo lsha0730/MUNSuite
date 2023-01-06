@@ -80,7 +80,7 @@ function Login() {
     } else {
       signInWithEmailAndPassword(auth, email, password)
         .then(() => {
-          navigate(`/app/${auth.currentUser}`);
+          navigate(`/app/${auth.currentUser.uid}`);
         })
         .catch((error) => {
           console.log(`Login error (${error.code}): ${error.message}`);
