@@ -91,7 +91,7 @@ function Settings() {
             <Confirmation
               fn={clearAccount}
               bttLabel="Reset Account"
-              description="Clearing your account data will permanently remove your history and clear all delegate statistics. Consider exporting a local copy first."
+              description="Clearing your account data will permanently reset your account and delete all your data. This action is irreversible."
               setModal={setConfirmingReset}
             />
           )}

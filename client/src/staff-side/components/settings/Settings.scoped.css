@@ -200,7 +200,7 @@
   flex-direction: row;
   justify-content: space-between;
 
-  border-width: 1;
+  border-width: 2px;
   border-color: #f3f3f3;
   border-style: solid;
   border-radius: 10px;
