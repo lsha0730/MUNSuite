@@ -28,7 +28,7 @@
   width: 100%;
   height: 100%;
 
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 10;
@@ -119,7 +119,7 @@
   margin-right: 25px;
   font-size: 16px;
   font-weight: 300;
-  color: #bcbcbc;
+  color: #707070;
 }
 
 /*-----------MODAL CONFIRMATION----------*/
@@ -374,21 +374,7 @@
 }
 
 /*----- Confirm Code Redeem -----*/
-.modal-fade {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-container {
+.modal-container-redeem {
   width: 350px;
   height: 400px;
 
@@ -404,7 +390,7 @@
   border-radius: 15px;
 }
 
-.modal-bottom {
+.modal-bottom-redeem {
   width: 100%;
 
   display: flex;

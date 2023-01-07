@@ -6,12 +6,12 @@ import FlyingDark from "../../../product-site/options/icons/FlyingDark.svg";
 
 const ConfirmRedeemModal = ({ setShowingConfirmation, expiration }) => {
   return (
-    <div className="modal-fade">
-      <div className="modal-container">
+    <div className="modal-background">
+      <div className="modal-container-redeem">
         <h1 style={{ color: "#378DCC", fontSize: 28 }}>Success!</h1>
         <p>You are now on the Premium Plan.</p>
 
-        <div className="modal-bottom">
+        <div className="modal-bottom-redeem">
           <img src={FlyingDark} className="modal-icon" />
           <p className="expiration">
             Premium until:&nbsp;
