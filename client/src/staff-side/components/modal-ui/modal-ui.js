@@ -64,31 +64,8 @@ function Confirmation({ description, bttLabel, fn, setModal }) {
   );
 }
 
-function makeUniqueCode(size, existingDels) {
-  function makeCode(length) {
-    var result = "";
-    var characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  }
-
-  let codes = existingDels.map((delegate) => {
-    return delegate.name;
-  });
-  let code = makeCode(size);
-  while (codes.includes(code)) {
-    code = makeCode(size);
-  }
-  return code;
-}
-
 function AddUNCountries(props) {
   const { delegations } = useContext(appContext);
-  const { writeToFirebase } = useContext(appContext);
   const [modalSelections, setModalSelections] = useState([]);
   const [delNames] = useState(
     delegations.map((delegateObj) => {
@@ -137,24 +114,6 @@ function AddUNCountries(props) {
     setCountriesNotInListRenders(renders);
   }, [modalSelections]);
 
-  function addCountries() {
-    props.setModal(false);
-    let totalDels = delegations;
-    writeToFirebase(
-      "delegations",
-      totalDels.concat(
-        modalSelections.map((selection) => {
-          let newObject = {};
-          newObject.id = delegations.length;
-          newObject.name = selection;
-          newObject.code = makeUniqueCode(5, delegations);
-          return newObject;
-        })
-      )
-    );
-    setModalSelections([]);
-  }
-
   return (
     <div className="modal-background">
       <div className="modal-container-un">
@@ -172,7 +131,14 @@ function AddUNCountries(props) {
         </div>
 
         <div className="modal-bottom">
-          <div className="btt-add-countries" onClick={addCountries}>
+          <div
+            className="btt-add-countries"
+            onClick={() => {
+              props.setModal(false);
+              props.addDelegates(modalSelections);
+              setModalSelections([]);
+            }}
+          >
             <p>Add Countries</p>
           </div>
           <div
@@ -190,19 +156,10 @@ function AddUNCountries(props) {
 }
 
 function AddCustomCountry(props) {
-  const { delegations } = useContext(appContext);
-  const { writeToFirebase } = useContext(appContext);
-
-  function addCustom() {
+  const addCustom = () => {
     props.setModal(false);
-
-    let newObject = {};
-    newObject.id = delegations.length;
-    newObject.name = document.getElementById("custom-country-input").value;
-    newObject.code = makeUniqueCode(5, delegations);
-
-    writeToFirebase("delegations", delegations.concat(newObject));
-  }
+    props.addDelegates([document.getElementById("custom-country-input").value]);
+  };
 
   return (
     <div className="modal-background">
@@ -244,26 +201,12 @@ function AddCustomCountry(props) {
 }
 
 function AddViaSpreadsheet(props) {
-  const { delegations } = useContext(appContext);
-  const { writeToFirebase } = useContext(appContext);
-
   function importSpreadsheet() {
     props.setModal(false);
     let fullString = document.getElementById("pastebin").value;
 
     if (fullString !== "") {
-      let countryArr = fullString.split("\n");
-      let objectArr = [];
-
-      for (let i = 0; i < countryArr.length; i++) {
-        let newObject = {};
-        newObject.id = delegations.length + objectArr.length;
-        newObject.name = countryArr[i];
-        newObject.code = makeUniqueCode(5, delegations.concat(objectArr));
-        objectArr.push(newObject);
-      }
-
-      writeToFirebase("delegations", delegations.concat(objectArr));
+      props?.addDelegates(fullString.split("\n"));
     }
   }
 

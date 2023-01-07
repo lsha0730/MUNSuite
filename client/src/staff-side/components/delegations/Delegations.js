@@ -9,6 +9,7 @@ import {
 import Delbar from "./delbar/Delbar.js";
 import * as BsIcons from "react-icons/bs";
 import { appContext } from "../../staffContext.js";
+import axios from "axios";
 
 function Delegations() {
   const {
@@ -36,6 +37,46 @@ function Delegations() {
     resizeTimeout = setTimeout(() => {
       setShowingWelcome(window.innerHeight > 900);
     }, 100);
+  };
+
+  function makeUniqueCode(size, existingDels) {
+    function makeCode(length) {
+      var result = "";
+      var characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      var charactersLength = characters.length;
+      for (var i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+      return result;
+    }
+
+    let codes = existingDels.map((delegate) => {
+      return delegate.name;
+    });
+    let code = makeCode(size);
+    while (codes.includes(code)) {
+      code = makeCode(size);
+    }
+    return code;
+  }
+
+  const addDelegates = (newDels) => {
+    const objectArr = [];
+    newDels.forEach((name) => {
+      objectArr.push({
+        id: delegations.length + objectArr.length,
+        name: name,
+        code: makeUniqueCode(5, delegations.concat(objectArr)),
+      });
+    });
+
+    writeToFirebase("delegations", delegations.concat(objectArr));
+    axios.post("https://munsuite-backend.onrender.com/analytics/delcount", {
+      count: newDels.length,
+    });
   };
 
   return (
@@ -150,11 +191,17 @@ function Delegations() {
   function modalUI() {
     switch (modal) {
       case "add-un-countries":
-        return <AddUNCountries setModal={setModal} />;
+        return (
+          <AddUNCountries setModal={setModal} addDelegates={addDelegates} />
+        );
       case "add-custom-country":
-        return <AddCustomCountry setModal={setModal} />;
+        return (
+          <AddCustomCountry setModal={setModal} addDelegates={addDelegates} />
+        );
       case "add-via-spreadsheet":
-        return <AddViaSpreadsheet setModal={setModal} />;
+        return (
+          <AddViaSpreadsheet setModal={setModal} addDelegates={addDelegates} />
+        );
       case "confirmation":
         return (
           <Confirmation
