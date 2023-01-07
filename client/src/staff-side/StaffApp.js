@@ -213,7 +213,12 @@ function App() {
       <div className="App-container">
         <Sidebar />
         <div className="UI-container">
-          {accountInfo.type !== "Premium" && <Banner />}
+          {accountInfo.type !== "Premium" && (
+            <Banner
+              totalSubmissions={pendings.length + processed.length}
+              page={"staff"}
+            />
+          )}
           <div className="page-container">{UI}</div>
         </div>
       </div>

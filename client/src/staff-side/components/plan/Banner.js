@@ -3,11 +3,26 @@ import { appContext } from "../../staffContext";
 import "./Banner.scoped.css";
 import { MAX_SUBMISSIONS } from "./Plan";
 
-const Banner = ({ totalSubmissions }) => {
+const Banner = ({ totalSubmissions, page }) => {
   const { setPage } = useContext(appContext);
 
   const messages = [
-    <p>You are using the Starter tier of MUNSuite.</p>,
+    <p>
+      You are using the Starter tier of MUNSuite.
+      {page === "staff" && (
+        <>
+          &nbsp;
+          <span
+            className="action-text"
+            onClick={() => {
+              setPage("plan");
+            }}
+          >
+            Upgrade to Premium
+          </span>
+        </>
+      )}
+    </p>,
     <p>
       {`Your account is nearing the ${MAX_SUBMISSIONS} submission limit. At the limit, you will have to clear your data in settings or`}
       &nbsp;

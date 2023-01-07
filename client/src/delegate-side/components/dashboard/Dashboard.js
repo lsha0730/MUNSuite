@@ -116,7 +116,9 @@ function Dashboard(props) {
 
   return (
     <div className="dashboard-container">
-      {accountInfo.type === "Starter" && <Banner totalSubmissions={0} />}
+      {accountInfo.type === "Starter" && (
+        <Banner totalSubmissions={0} page={"delegate"} />
+      )}
 
       <div className="content-container">
         <div className="UI-left">
