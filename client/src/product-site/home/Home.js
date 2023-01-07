@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.scoped.css";
 
@@ -21,7 +21,7 @@ import { siteContext } from "../../Context";
 import GradientAnimation from "./gradient/GradientAnimation";
 
 function Home() {
-  const { isPortrait } = useContext(siteContext);
+  const { isPortrait, currentUser } = useContext(siteContext);
 
   const adwords = [
     "Simplified",
@@ -69,6 +69,10 @@ function Home() {
             </p>
             {isPortrait ? (
               <div className="btt-try-free">Available on Desktop</div>
+            ) : currentUser ? (
+              <Link to={`/app/${currentUser}`} className="btt-try-free">
+                Launch App
+              </Link>
             ) : (
               <Link to="/register" className="btt-try-free">
                 Try MUNSuite Free
@@ -187,9 +191,15 @@ function Home() {
           }}
         >
           <p className="modernize-header">Let's Modernize Model UN.</p>
-          <Link to="/register" className="btt-see-options">
-            Try for Free
-          </Link>
+          {currentUser ? (
+            <Link to={`/app/${currentUser}`} className="btt-see-options">
+              Launch App
+            </Link>
+          ) : (
+            <Link to="/register" className="btt-see-options">
+              Try MUNSuite Free
+            </Link>
+          )}
         </div>
       </div>
     </div>

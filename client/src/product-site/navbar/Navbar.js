@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.scoped.css";
 import Logo from "./munsuitelogo.png";
 import LogoWhite from "./munsuitelogowhite.png";
 import { getAuth, signOut } from "firebase/auth";
+import { siteContext } from "../../Context";
 
 function Navbar() {
   const auth = getAuth();
+  const { currentUser } = useContext(siteContext);
   let pathname = window.location.pathname;
 
   const standardBar = (
@@ -25,9 +27,15 @@ function Navbar() {
           <Link to="/login" className="option-text">
             Login
           </Link>
-          <Link to="/register" className="btt-primary">
-            Try MUNSuite Free
-          </Link>
+          {currentUser ? (
+            <Link to={`/app/${currentUser}`} className="btt-primary">
+              Launch App
+            </Link>
+          ) : (
+            <Link to="/register" className="btt-primary">
+              Try MUNSuite Free
+            </Link>
+          )}
         </div>
       </div>
     </div>
@@ -49,9 +57,15 @@ function Navbar() {
           <Link to="/login" className="option-text-white">
             Login
           </Link>
-          <Link to="/register" className="btt-primary-white">
-            Try MUNSuite Free
-          </Link>
+          {currentUser ? (
+            <Link to={`/app/${currentUser}`} className="btt-primary-white">
+              Launch App
+            </Link>
+          ) : (
+            <Link to="/register" className="btt-primary-white">
+              Try MUNSuite Free
+            </Link>
+          )}
         </div>
       </div>
     </div>
