@@ -67,7 +67,7 @@ const Banner = ({ totalSubmissions, page }) => {
   const i = (x) => {
     if (x >= MAX_SUBMISSIONS) {
       return 2;
-    } else if (x > 50) {
+    } else if (x > MAX_SUBMISSIONS * 0.8) {
       return 1;
     } else {
       return 0;
