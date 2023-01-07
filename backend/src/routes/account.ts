@@ -1,4 +1,4 @@
-const { db } = require("../firebase");
+const { db, auth } = require("../firebase");
 
 import express = require("express");
 const accountRouter = express.Router();
@@ -49,10 +49,33 @@ accountRouter.post("/redeem", (req: express.Request, res: express.Response) => {
 
 accountRouter.post("/info", (req: express.Request, res: express.Response) => {
   const uid: string = req.body.uid;
-  res.send(accounts?.[uid] || null);
+
+  getEmailFromUid(uid).then((email: string | null) => {
+    const accountInfo = accounts?.[uid];
+
+    if (!accountInfo && !email) {
+      res.send(null);
+    } else if (!accountInfo) {
+      res.send({
+        email: email,
+      });
+    } else if (!email) {
+      res.send(accountInfo);
+    } else {
+      res.send({
+        ...accountInfo,
+        email: email,
+      });
+    }
+  });
 });
 
 // Helper functions
+const getEmailFromUid = async (uid: string) => {
+  const userRecord = await auth.getUser(uid);
+  return userRecord?.toJSON()?.email || null;
+};
+
 const killProductCode = (usedCode: string) => {
   const UTCTimestamp = getUTCTimestamp();
 

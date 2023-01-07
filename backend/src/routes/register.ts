@@ -90,8 +90,7 @@ const makeAccount = (submission: RegistrationObject) => {
         });
         writeToUser(uid, "form", defaultFormData);
 
-        // Create account entry with email
-        updateAccountType(uid, "Starter", email);
+        updateAccountType(uid, "Starter");
 
         logRegAttempt("success", submission, "Passing", uid);
         resolve("Success");

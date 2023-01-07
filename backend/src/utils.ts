@@ -41,7 +41,7 @@ const writeToUser = (uid: string, target: UserDataTarget, content: any) => {
   }
 };
 
-const updateAccountType = (uid: string, type: AccountType, email?: string) => {
+const updateAccountType = (uid: string, type: AccountType) => {
   const accountsRef = db.ref(`adminData/accounts/${uid}`);
   const deadlinesRef = db.ref(`adminData/deadlines`);
   accountsRef.child("type").set(type);
@@ -57,7 +57,6 @@ const updateAccountType = (uid: string, type: AccountType, email?: string) => {
     incrementAnalytics("historicPremiums", 1);
   } else {
     accountsRef.child("expiration").set(null);
-    if (email) accountsRef.child("email").set(email);
   }
 };
 
