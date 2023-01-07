@@ -51,6 +51,7 @@ const Plan = () => {
             });
         } else {
           setWarning(data);
+          setTimeout(() => setWarning(""), 2000);
         }
       });
   };
@@ -182,7 +183,16 @@ const Plan = () => {
                   </div>
                 </div>
                 {warning && (
-                  <p style={{ fontWeight: 500, color: "#FF5A5A" }}>{warning}</p>
+                  <p
+                    style={{
+                      fontWeight: 500,
+                      color: "#FF5A5A",
+                      marginTop: 10,
+                      marginLeft: 5,
+                    }}
+                  >
+                    {warning}
+                  </p>
                 )}
               </div>
             </div>
