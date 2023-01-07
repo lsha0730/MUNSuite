@@ -98,8 +98,8 @@ const Plan = () => {
                 &nbsp; included submissions.
               </p>
               <p className="subtext">
-                To continue after 75 submissions, please clear your account data
-                or upgrade to a premium plan.
+                {`To continue after ${MAX_SUBMISSIONS} submissions, please clear your account data
+                or upgrade to a premium plan.`}
               </p>
             </>
           ) : (
