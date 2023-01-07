@@ -13,7 +13,7 @@ import statistics from "../../../product-site/home/images/mockups/statistics.png
 import notes from "../../../product-site/home/images/mockups/notes.png";
 import { HiBadgeCheck } from "react-icons/hi";
 
-export const MAX_SUBMISSIONS = 75;
+export const MAX_SUBMISSIONS = 100;
 
 const Plan = () => {
   const {

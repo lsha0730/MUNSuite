@@ -4,13 +4,18 @@ import { Link } from "react-router-dom";
 import { BsCheck } from "react-icons/bs";
 import SingleFill from "./icons/SingleFill.svg";
 import FlyingDark from "./icons/FlyingDark.svg";
+import { MAX_SUBMISSIONS } from "../../staff-side/components/plan/Plan";
 
 const PlanCards = ({ page }) => {
   return (
     <div className={`cards-container ${page === "app" ? "app-container" : ""}`}>
       <div className="card">
         <div className="card-tie" style={{ backgroundColor: "#F3F3F3" }}>
-          <img className="icon" src={SingleFill} style={{ height: 40 }} />
+          <img
+            className="icon noselect"
+            src={SingleFill}
+            style={{ height: 40 }}
+          />
           <p className="card-heading">Starter</p>
           <p className="card-subheading">
             For small conferences, school clubs, or student groups
@@ -20,7 +25,9 @@ const PlanCards = ({ page }) => {
         <div className="card-body">
           <h1 className="price-tag">Free</h1>
 
-          <FeatureList items={["Up to 75 submissions", "Email support"]} />
+          <FeatureList
+            items={[`Up to ${MAX_SUBMISSIONS} submissions`, "Email support"]}
+          />
 
           {page === "app" ? (
             <div className="btt-bricked">Current Plan</div>
@@ -34,7 +41,11 @@ const PlanCards = ({ page }) => {
 
       <div className="card">
         <div className="card-tie">
-          <img className="icon" src={FlyingDark} style={{ height: 50 }} />
+          <img
+            className="icon noselect"
+            src={FlyingDark}
+            style={{ height: 50 }}
+          />
           <p className="card-heading" style={{ color: "#378DCC" }}>
             Premium
           </p>
@@ -60,6 +71,7 @@ const PlanCards = ({ page }) => {
 
           <a
             href="https://buy.stripe.com/bIY8z09RUfnPg0MeUU"
+            target="_blank"
             className="btt-full"
           >
             Get Started
