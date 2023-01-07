@@ -5,7 +5,12 @@ const registerRouter = express.Router();
 registerRouter.use(express.json());
 
 import { RegistrationObject } from "../types";
-const { getUTCTimestamp, writeToUser, updateAccountType } = require("../utils");
+const {
+  getUTCTimestamp,
+  writeToUser,
+  updateAccountType,
+  incrementAnalytics,
+} = require("../utils");
 const { defaultFormData } = require("../data/defaultFormData");
 
 // Request handlers
@@ -16,6 +21,7 @@ registerRouter.post(
     const validation = validateRegister(submission);
     if (validation == "Success") {
       makeAccount(submission).then((result) => {
+        incrementAnalytics("historicAccounts", 1);
         res.send(result);
       });
     } else {

@@ -1,5 +1,11 @@
 const { db } = require("./firebase");
-import { AccountType, UserDataTarget, UTCString, Deadlines } from "./types";
+import {
+  AccountType,
+  UserDataTarget,
+  UTCString,
+  Deadlines,
+  AnalyticsType,
+} from "./types";
 
 /* Returns the current UTC time as a string in the format
     YYYY-MM-DD HH:MM:SS UTC
@@ -47,6 +53,8 @@ const updateAccountType = (uid: string, type: AccountType, email?: string) => {
 
     // Add deadline entry
     deadlinesRef.child(threeMonthsFuture.slice(0, 10)).push(uid);
+
+    incrementAnalytics("historicPremiums", 1);
   } else {
     accountsRef.child("expiration").set(null);
     if (email) accountsRef.child("email").set(email);
@@ -69,9 +77,25 @@ const expireAccounts = () => {
   });
 };
 
+const incrementAnalytics = (
+  type: AnalyticsType,
+  count: number,
+  config?: { min: number; max: number }
+) => {
+  if (count <= 0) return;
+  if (config && (count < config.min || count > config.max)) return;
+
+  const countRef = db.ref(`adminData/analytics/counts/${type}`);
+  countRef.once("value", (snapshot: any) => {
+    const currCount = snapshot.val();
+    countRef.set(currCount + count);
+  });
+};
+
 module.exports = {
   getUTCTimestamp,
   writeToUser,
   updateAccountType,
   expireAccounts,
+  incrementAnalytics,
 };

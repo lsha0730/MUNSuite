@@ -45,3 +45,8 @@ export type AccountsLog = {
 export type Deadlines = {
   [x: string]: string;
 };
+
+export type AnalyticsType =
+  | "historicDelcount"
+  | "historicPremiums"
+  | "historicAccounts";

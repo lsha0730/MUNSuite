@@ -3,6 +3,7 @@ import express = require("express");
 const { registerRouter } = require("./routes/register");
 const { purchaseRouter } = require("./routes/purchase");
 const { accountRouter } = require("./routes/account");
+const { analyticsRouter } = require("./routes/analytics");
 
 const schedule = require("node-schedule");
 const { expireAccounts } = require("./utils");
@@ -30,3 +31,4 @@ const sweeper = schedule.scheduleJob("* * 0 * * *", () => {
 app.use("/register", registerRouter);
 app.use("/purchase", purchaseRouter);
 app.use("/account", accountRouter);
+app.use("/analytics", analyticsRouter);
