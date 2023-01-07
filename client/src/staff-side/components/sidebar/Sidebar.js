@@ -4,13 +4,15 @@ import { appContext } from "../../staffContext.js";
 import * as BsIcons from "react-icons/bs";
 import * as IoIcons from "react-icons/io";
 import { HiBadgeCheck } from "react-icons/hi";
+import { RxExit } from "react-icons/rx";
+import { siteContext } from "../../../Context";
 
 const INACTIVE_COLOR = "#3C8CC9";
 const ACTIVE_COLOR = "#BCBCBC";
 
 function Sidebar() {
-  const { pendings } = useContext(appContext);
-  const { page, setPage } = useContext(appContext);
+  const { pendings, page, setPage } = useContext(appContext);
+  const { handleSignout } = useContext(siteContext);
   const [indOffset, setIndOffset] = useState(100);
 
   var resizeTimeout;
@@ -156,6 +158,15 @@ function Sidebar() {
               }}
             />
           </div>
+          <div className="Sidebar-option" onClick={handleSignout}>
+            <RxExit
+              size={22}
+              style={{
+                transition: "200ms",
+                fill: page === "plan" ? INACTIVE_COLOR : ACTIVE_COLOR,
+              }}
+            />
+          </div>
         </div>
       </div>
 
@@ -182,9 +193,9 @@ const getIndicatorOffset = (page) => {
     case "notes":
       return base + diff * 5;
     case "plan":
-      return window.innerHeight - 95 - diff;
+      return window.innerHeight - 95 - diff * 2;
     case "settings":
-      return window.innerHeight - 95;
+      return window.innerHeight - 95 - diff;
     default:
       return base;
   }

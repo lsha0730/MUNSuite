@@ -3,12 +3,10 @@ import { Link } from "react-router-dom";
 import "./Navbar.scoped.css";
 import Logo from "./munsuitelogo.png";
 import LogoWhite from "./munsuitelogowhite.png";
-import { getAuth, signOut } from "firebase/auth";
 import { siteContext } from "../../Context";
 
 function Navbar() {
-  const auth = getAuth();
-  const { currentUser } = useContext(siteContext);
+  const { currentUser, handleSignout } = useContext(siteContext);
   let pathname = window.location.pathname;
 
   const standardBar = (
@@ -87,7 +85,7 @@ function Navbar() {
           <div className="btt-signout" onClick={handleSignout}>
             Sign Out
           </div>
-          <Link to={`/app/${auth.currentUser?.uid}`} className="btt-primary">
+          <Link to={`/app/${currentUser}`} className="btt-primary">
             Launch App
           </Link>
         </div>
@@ -111,10 +109,7 @@ function Navbar() {
           <div className="btt-primary-white" onClick={handleSignout}>
             Sign Out
           </div>
-          <Link
-            to={`/app/${auth.currentUser?.uid}`}
-            className="btt-primary-white"
-          >
+          <Link to={`/app/${currentUser}`} className="btt-primary-white">
             Launch App
           </Link>
         </div>
@@ -124,7 +119,7 @@ function Navbar() {
 
   switch (true) {
     case pathname == "/":
-      if (auth.currentUser) {
+      if (currentUser) {
         return signedinWhiteBar;
       } else {
         return whiteBar;
@@ -134,21 +129,11 @@ function Navbar() {
     case /\/form\/\w*/i.test(pathname):
       return;
     default:
-      if (auth.currentUser) {
+      if (currentUser) {
         return signedinBar;
       } else {
         return standardBar;
       }
-  }
-
-  function handleSignout() {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        console.log(`Signout error (${error.code}): ${error.message}`);
-      });
   }
 }
 

@@ -6,7 +6,7 @@ import { siteContext } from "./Context";
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { useMediaQuery } from "react-responsive";
 
 import Navbar from "./product-site/navbar/Navbar.js";
@@ -35,6 +35,17 @@ function App() {
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
   const auth = getAuth();
+
+  const handleSignout = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(`Signout error (${error.code}): ${error.message}`);
+      });
+  };
 
   const [currentUser, setCurrentUser] = useState(
     auth.currentUser ? auth.currentUser.uid : null
@@ -73,7 +84,7 @@ function App() {
 
   return (
     <siteContext.Provider
-      value={{ currentUser, setCurrentUser, app, isPortrait }}
+      value={{ currentUser, setCurrentUser, app, handleSignout, isPortrait }}
     >
       <div
         className="App-container"
