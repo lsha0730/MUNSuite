@@ -25,4 +25,6 @@
   align-items: center;
   justify-content: center;
   overflow-y: auto;
+
+  position: relative;
 }

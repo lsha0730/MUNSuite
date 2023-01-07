@@ -11,104 +11,139 @@ import * as BsIcons from "react-icons/bs";
 import { appContext } from "../../staffContext.js";
 
 function Delegations() {
-  const { delegations } = useContext(appContext);
-  const { notes } = useContext(appContext);
-  const { writeToFirebase } = useContext(appContext);
-  const { exportToCsv } = useContext(appContext);
+  const {
+    delegations,
+    notes,
+    settings,
+    writeToFirebase,
+    exportToCsv,
+    accountInfo,
+  } = useContext(appContext);
   const [selections, setSelections] = useState([]);
   const [modal, setModal] = useState(false);
   const [delegateBars, setDelegateBars] = useState([]);
+  const [showingWelcome, setShowingWelcome] = useState(true);
 
   useEffect(() => {
     rerenderDels();
   }, [delegations, selections]);
 
+  let resizeTimeout;
+  window.onresize = () => {
+    if (resizeTimeout) {
+      clearTimeout(resizeTimeout);
+    }
+    resizeTimeout = setTimeout(() => {
+      setShowingWelcome(window.innerHeight > 900);
+    }, 100);
+  };
+
   return (
     <div className="delegations-container">
       {modalUI()}
+      {showingWelcome ? (
+        <div className="welcome">
+          <p className="welcome-subheading">Signed in as</p>
+          <h1 className="welcome-heading">
+            {accountInfo.email ||
+              `${settings.conference} ${settings.committee}`}
+          </h1>
+        </div>
+      ) : (
+        <div className="welcome">
+          <h1 className="welcome-subheading">
+            {accountInfo.email ||
+              `${settings.conference} ${settings.committee}`}
+          </h1>
+        </div>
+      )}
 
-      <div className="UI-left">
-        <div className="UI-topleft">
-          <div className="delcount-container">
-            <div className="delcount-subcont">
-              <p className="delcount-num">{delegations.length}</p>
-              <p className="delcount-desc">Active</p>
-              <p className="delcount-desc">Delegations</p>
+      <div className="flex-row full-size">
+        <div className="UI-left">
+          <div className="UI-topleft">
+            <div className="delcount-container">
+              <div className="delcount-subcont">
+                <p className="delcount-num">{delegations.length}</p>
+                <p className="delcount-desc">Active</p>
+                <p className="delcount-desc">Delegations</p>
+              </div>
+            </div>
+
+            <div
+              className="btt-add-country"
+              onClick={() => {
+                setModal("add-un-countries");
+              }}
+            >
+              <p>Add UN Countries</p>
+            </div>
+
+            <div
+              className="btt-add-country"
+              onClick={() => {
+                setModal("add-custom-country");
+              }}
+            >
+              <p>Add Custom Country</p>
+            </div>
+
+            {accountInfo.type === "Premium" && (
+              <div
+                className="btt-add-country"
+                onClick={() => {
+                  setModal("add-via-spreadsheet");
+                }}
+              >
+                <p>Spreadsheet Import</p>
+              </div>
+            )}
+
+            <div
+              className={
+                !(delegations.length < 1)
+                  ? "btt-select-all"
+                  : "btt-select-all hide"
+              }
+              onClick={selectAll}
+            >
+              <p>Select All</p>
+            </div>
+
+            <div
+              className={
+                !(selections.length < 1)
+                  ? "btt-select-all"
+                  : "btt-select-all hide"
+              }
+              onClick={deselectAll}
+            >
+              <p>Deselect All</p>
+            </div>
+
+            <div
+              className={
+                !(selections.length < 1)
+                  ? "btt-remove-selected"
+                  : "btt-remove-selected hide"
+              }
+              onClick={() => {
+                setModal("confirmation");
+              }}
+            >
+              <p>Remove Selected</p>
             </div>
           </div>
 
-          <div
-            className="btt-add-country"
-            onClick={() => {
-              setModal("add-un-countries");
-            }}
-          >
-            <p>Add UN Countries</p>
-          </div>
-
-          <div
-            className="btt-add-country"
-            onClick={() => {
-              setModal("add-custom-country");
-            }}
-          >
-            <p>Add Custom Country</p>
-          </div>
-
-          <div
-            className="btt-add-country"
-            onClick={() => {
-              setModal("add-via-spreadsheet");
-            }}
-          >
-            <p>Spreadsheet Import</p>
-          </div>
-
-          <div
-            className={
-              !(delegations.length < 1)
-                ? "btt-select-all"
-                : "btt-select-all hide"
-            }
-            onClick={selectAll}
-          >
-            <p>Select All</p>
-          </div>
-
-          <div
-            className={
-              !(selections.length < 1)
-                ? "btt-select-all"
-                : "btt-select-all hide"
-            }
-            onClick={deselectAll}
-          >
-            <p>Deselect All</p>
-          </div>
-
-          <div
-            className={
-              !(selections.length < 1)
-                ? "btt-remove-selected"
-                : "btt-remove-selected hide"
-            }
-            onClick={() => {
-              setModal("confirmation");
-            }}
-          >
-            <p>Remove Selected</p>
+          <div className="btt-export-delegations" onClick={exportCodes}>
+            <div className="btt-export-delegations-inner">
+              <BsIcons.BsDownload size={18} />
+              <p>Export Codes (.csv)</p>
+            </div>
           </div>
         </div>
 
-        <div className="btt-export-delegations" onClick={exportCodes}>
-          <div className="btt-export-delegations-inner">
-            <BsIcons.BsDownload size={18} />
-            <p>Export Codes (.csv)</p>
-          </div>
-        </div>
+        <div className="UI-right">{delegateBars}</div>
       </div>
-
-      <div className="UI-right">{delegateBars}</div>
     </div>
   );
 
