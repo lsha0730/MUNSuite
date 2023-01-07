@@ -68,10 +68,10 @@ function Home() {
               The 21st century solution to directive chaos
             </p>
             {isPortrait ? (
-              <div className="btt-get-started">Available on Desktop</div>
+              <div className="btt-try-free">Available on Desktop</div>
             ) : (
-              <Link to="/options" className="btt-get-started">
-                Get started
+              <Link to="/register" className="btt-try-free">
+                Try MUNSuite Free
               </Link>
             )}
           </div>
@@ -187,8 +187,8 @@ function Home() {
           }}
         >
           <p className="modernize-header">Let's Modernize Model UN.</p>
-          <Link to="/options" className="btt-see-options">
-            See Options
+          <Link to="/register" className="btt-see-options">
+            Try for Free
           </Link>
         </div>
       </div>

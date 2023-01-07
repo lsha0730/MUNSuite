@@ -19,14 +19,14 @@ function Navbar() {
           <Link to="/" className="option-text">
             Home
           </Link>
-          <Link to="/register" className="option-text">
-            Register
+          <Link to="/options" className="option-text">
+            Plans
           </Link>
           <Link to="/login" className="option-text">
             Login
           </Link>
-          <Link to="/options" className="option-options">
-            See Options
+          <Link to="/register" className="btt-primary">
+            Try MUNSuite Free
           </Link>
         </div>
       </div>
@@ -43,14 +43,14 @@ function Navbar() {
           <Link to="/" className="option-text-white">
             Home
           </Link>
-          <Link to="/register" className="option-text-white">
-            Register
+          <Link to="/options" className="option-text-white">
+            Plans
           </Link>
           <Link to="/login" className="option-text-white">
             Login
           </Link>
-          <Link to="/options" className="option-options-white">
-            See Options
+          <Link to="/register" className="btt-primary-white">
+            Try MUNSuite Free
           </Link>
         </div>
       </div>
@@ -64,15 +64,16 @@ function Navbar() {
           <img src={Logo} className="logo" />
         </Link>
         <div className="options">
-          <div />
-          <div />
           <Link to="/" className="option-text">
             Home
+          </Link>
+          <Link to="/options" className="option-text">
+            Plans
           </Link>
           <div className="btt-signout" onClick={handleSignout}>
             Sign Out
           </div>
-          <Link to={`/app/${auth.currentUser?.uid}`} className="option-options">
+          <Link to={`/app/${auth.currentUser?.uid}`} className="btt-primary">
             Launch App
           </Link>
         </div>
@@ -87,17 +88,18 @@ function Navbar() {
           <img src={LogoWhite} className="logo" />
         </Link>
         <div className="options">
-          <div />
-          <div />
           <Link to="/" className="option-text-white">
             Home
           </Link>
-          <div className="option-options-white" onClick={handleSignout}>
+          <Link to="/options" className="option-text-white">
+            Plans
+          </Link>
+          <div className="btt-primary-white" onClick={handleSignout}>
             Sign Out
           </div>
           <Link
             to={`/app/${auth.currentUser?.uid}`}
-            className="option-options-white"
+            className="btt-primary-white"
           >
             Launch App
           </Link>

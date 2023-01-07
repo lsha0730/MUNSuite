@@ -47,7 +47,7 @@
   transition: 200ms;
 }
 
-.option-options {
+.btt-primary {
   font-size: 14px;
   font-weight: 600;
 
@@ -62,7 +62,7 @@
   border-radius: 10px;
   cursor: pointer;
 }
-.option-options:hover {
+.btt-primary:hover {
   background-color: #4bb4ff;
   color: #ffffff;
   transition: 200ms;
@@ -80,7 +80,7 @@
   transition: 200ms;
 }
 
-.option-options-white {
+.btt-primary-white {
   font-size: 14px;
   font-weight: 600;
 
@@ -95,7 +95,7 @@
   border-radius: 10px;
   cursor: pointer;
 }
-.option-options-white:hover {
+.btt-primary-white:hover {
   background-color: rgba(256, 256, 256, 0.5);
   transition: 200ms;
 }
