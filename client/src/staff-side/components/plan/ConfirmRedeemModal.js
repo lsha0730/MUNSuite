@@ -2,7 +2,6 @@ import React from "react";
 import "./Plan.scoped.css";
 
 import FlyingDark from "../../../product-site/options/icons/FlyingDark.svg";
-import { getExpiration } from "../../utils";
 
 const ConfirmRedeemModal = ({ setShowingConfirmation, expiration }) => {
   return (

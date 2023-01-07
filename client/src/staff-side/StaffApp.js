@@ -16,6 +16,7 @@ import Settings from "./components/settings/Settings.js";
 
 import { appContext } from "./staffContext.js";
 import { siteContext } from "../Context.js";
+import Banner from "./components/plan/Banner";
 
 function App() {
   const [page, setPage] = useState("delegations");
@@ -211,7 +212,10 @@ function App() {
     >
       <div className="App-container">
         <Sidebar />
-        <div className="UI-container">{UI}</div>
+        <div className="UI-container">
+          {accountInfo.type !== "Premium" && <Banner />}
+          <div className="page-container">{UI}</div>
+        </div>
       </div>
     </appContext.Provider>
   );

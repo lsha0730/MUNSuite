@@ -12,7 +12,7 @@ import statistics from "../../../product-site/home/images/mockups/statistics.png
 import notes from "../../../product-site/home/images/mockups/notes.png";
 import ConfirmRedeemModal from "./ConfirmRedeemModal";
 
-const MAX_SUBMISSIONS = 75;
+export const MAX_SUBMISSIONS = 75;
 
 const Plan = () => {
   const {
