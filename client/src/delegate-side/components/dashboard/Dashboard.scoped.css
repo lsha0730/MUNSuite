@@ -3,6 +3,7 @@
   height: 100%;
 
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 
   background-color: #f7f7f7;
@@ -14,6 +15,11 @@
   display: flex;
   flex-direction: column;
   margin-top: 30px;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: row;
 }
 
 .hide {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { delContext } from "../../DelegateContext";
 import "./Dashboard.scoped.css";
 import defaultBanner from "./defaultBanner.png";
@@ -13,17 +13,24 @@ import Dropdown from "../../../staff-side/components/editor/preview-components/D
 import SelectMultiple from "../../../staff-side/components/editor/preview-components/SelectMultiple";
 import DirectiveCard from "../../../staff-side/components/inbox/components/DirectiveCard";
 
+import { MAX_SUBMISSIONS } from "../../../staff-side/components/plan/Plan";
+import Banner from "../../../staff-side/components/plan/Banner";
+
 import { HiPaperAirplane } from "react-icons/hi";
 import { FaHistory } from "react-icons/fa";
 
 function Dashboard(props) {
-  const { delegations } = useContext(delContext);
-  const { form } = useContext(delContext);
-  const { pendings } = useContext(delContext);
-  const { processed } = useContext(delContext);
-  const { settings } = useContext(delContext);
-  const { user, setUser } = useContext(delContext);
-  const { setLoggedIn } = useContext(delContext);
+  const {
+    delegations,
+    form,
+    pendings,
+    processed,
+    settings,
+    user,
+    setUser,
+    setLoggedIn,
+    accountInfo,
+  } = useContext(delContext);
 
   const [currForm, setCurrForm] = useState(form);
   const [formRender, setFormRender] = useState();
@@ -39,6 +46,8 @@ function Dashboard(props) {
 
   const [relevantDirectives, setRelevantDirectives] = useState([]);
   const [historyRender, setHistoryRender] = useState();
+
+  const totalSubmissions = pendings.length + processed.length;
 
   useEffect(() => {
     // Keeps submission array in line with any form changes
@@ -107,88 +116,92 @@ function Dashboard(props) {
 
   return (
     <div className="dashboard-container">
-      <div className="UI-left">
-        {showingConfirmation ? (
-          <div className="submission-confirmation">
-            <div className="submission-confirmation-top">
-              <HiPaperAirplane size={72} className="confirmation-icon" />
-              <p className="submission-confirmation-heading">
-                Submission Sent!
-              </p>
-            </div>
-            <div
-              className="btt-new-directive"
-              onClick={() => {
-                setShowingConfirmation(false);
-              }}
-            >
-              Submit New Directive
-            </div>
-          </div>
-        ) : (
-          <div className="form-container">
-            <div className="form-top">
-              <div className="preview-hat">
-                <p className="preview-hat-heading">{user}</p>
-                <p className="preview-hat-subheading">{settings.committee}</p>
+      {accountInfo.type === "Starter" && <Banner totalSubmissions={0} />}
+
+      <div className="content-container">
+        <div className="UI-left">
+          {showingConfirmation ? (
+            <div className="submission-confirmation">
+              <div className="submission-confirmation-top">
+                <HiPaperAirplane size={72} className="confirmation-icon" />
+                <p className="submission-confirmation-heading">
+                  Submission Sent!
+                </p>
               </div>
               <div
-                className="btt-signout"
+                className="btt-new-directive"
                 onClick={() => {
-                  sessionStorage.removeItem("code");
-                  setUser(null);
-                  setLoggedIn(false);
+                  setShowingConfirmation(false);
                 }}
               >
-                Sign Out
+                Submit New Directive
               </div>
             </div>
+          ) : (
+            <div className="form-container">
+              <div className="form-top">
+                <div className="preview-hat">
+                  <p className="preview-hat-heading">{user}</p>
+                  <p className="preview-hat-subheading">{settings.committee}</p>
+                </div>
+                <div
+                  className="btt-signout"
+                  onClick={() => {
+                    sessionStorage.removeItem("code");
+                    setUser(null);
+                    setLoggedIn(false);
+                  }}
+                >
+                  Sign Out
+                </div>
+              </div>
 
-            {formRender}
+              {formRender}
 
-            <div
-              className={
-                settings.formOpen == undefined
-                  ? "submit-container"
-                  : `${settings.formOpen ? "submit-container" : "hide"}`
-              }
-            >
-              <p className={warning == "" ? "warning fade" : "warning"}>
-                {warning}
-              </p>
-              <div className="btt-submit" onClick={handleSubmit}>
-                Submit
+              <div
+                className={
+                  settings.formOpen == undefined
+                    ? "submit-container"
+                    : `${settings.formOpen ? "submit-container" : "hide"}`
+                }
+              >
+                <p className={warning == "" ? "warning fade" : "warning"}>
+                  {warning}
+                </p>
+                <div className="btt-submit" onClick={handleSubmit}>
+                  Submit
+                </div>
               </div>
             </div>
-          </div>
-        )}
-      </div>
-
-      <div className="history-container">
-        <div className="history-top">
-          <div className="history-top-contents">
-            <FaHistory size={35} className="history-icon" />
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <p style={{ fontSize: 20, fontWeight: 600, color: "#B0B0B0" }}>
-                Relevant Submissions
-              </p>
-              <p style={{ fontSize: 14, fontWeight: 600, color: "#B0B0B0" }}>
-                Click cards to expand
-              </p>
-            </div>
-          </div>
+          )}
         </div>
 
-        {!historyRender || historyRender.length > 0 ? (
-          <div
-            className="history-cards-container"
-            key={JSON.stringify(historyRender)}
-          >
-            {historyRender}
+        <div className="history-container">
+          <div className="history-top">
+            <div className="history-top-contents">
+              <FaHistory size={35} className="history-icon" />
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <p style={{ fontSize: 20, fontWeight: 600, color: "#B0B0B0" }}>
+                  Relevant Submissions
+                </p>
+                <p style={{ fontSize: 14, fontWeight: 600, color: "#B0B0B0" }}>
+                  Click cards to expand
+                </p>
+              </div>
+            </div>
           </div>
-        ) : (
-          <div className="history-no-submissions-block">No Submissions</div>
-        )}
+
+          {!historyRender || historyRender.length > 0 ? (
+            <div
+              className="history-cards-container"
+              key={JSON.stringify(historyRender)}
+            >
+              {historyRender}
+            </div>
+          ) : (
+            <div className="history-no-submissions-block">No Submissions</div>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -408,7 +421,12 @@ function Dashboard(props) {
   }
 
   function handleSubmit() {
-    console.log(submission);
+    if (accountInfo.type === "Starter" && totalSubmissions >= MAX_SUBMISSIONS) {
+      setWarning("Submission limit reached");
+      setTimeout(() => setWarning(""), 2000);
+      return;
+    }
+
     if (submissionComplete && notImpostor) {
       let submissionObj = {
         submissionID: (pendings || []).concat(processed || []).length,

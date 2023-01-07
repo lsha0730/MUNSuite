@@ -16,20 +16,34 @@ function App() {
   const [processed, setProcessed] = useState([]);
   const [settings, setSettings] = useState({});
 
-  const userUID = window.location.pathname.slice(6); // window.location.pathname is "/form/<uuid>"
+  const userID = window.location.pathname.slice(6); // window.location.pathname is "/form/<uuid>"
   const [validLink, setValidLink] = useState("loading");
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState();
   const [appRender, setAppRender] = useState();
+  const [accountInfo, setAccountInfo] = useState({
+    type: "Error",
+    expiration: "Error",
+  });
 
   // Firebase Setup
   const { app } = useContext(siteContext);
   const database = getDatabase(app);
 
-  // Firebase: Reading
   useEffect(() => {
+    // Get user account info
+    axios
+      .post("https://munsuite-backend.onrender.com/account/info", {
+        uid: userID,
+      })
+      .then((response) => {
+        const result = response.data;
+        setAccountInfo(result);
+      });
+
+    // Firebase: Reading
     onValue(
-      ref(database, `appdata/${userUID}/livedata/delegations`),
+      ref(database, `appdata/${userID}/livedata/delegations`),
       (snapshot) => {
         // Check if the link is valid
         setValidLink(snapshot.exists() ? "valid" : "invalid");
@@ -37,7 +51,7 @@ function App() {
     );
 
     onValue(
-      ref(database, `appdata/${userUID}/livedata/delegations`),
+      ref(database, `appdata/${userID}/livedata/delegations`),
       (snapshot) => {
         let node = snapshot.val();
         if (!node) {
@@ -52,7 +66,7 @@ function App() {
       }
     );
 
-    onValue(ref(database, `appdata/${userUID}/livedata/form`), (snapshot) => {
+    onValue(ref(database, `appdata/${userID}/livedata/form`), (snapshot) => {
       let node = snapshot.val();
       if (!node) {
         setForm([]);
@@ -69,7 +83,7 @@ function App() {
     });
 
     onValue(
-      ref(database, `appdata/${userUID}/livedata/pendings`),
+      ref(database, `appdata/${userID}/livedata/pendings`),
       (snapshot) => {
         let node = snapshot.val();
         if (!node) {
@@ -85,7 +99,7 @@ function App() {
     );
 
     onValue(
-      ref(database, `appdata/${userUID}/livedata/processed`),
+      ref(database, `appdata/${userID}/livedata/processed`),
       (snapshot) => {
         let node = snapshot.val();
         if (!node) {
@@ -101,7 +115,7 @@ function App() {
     );
 
     onValue(
-      ref(database, `appdata/${userUID}/livedata/settings`),
+      ref(database, `appdata/${userID}/livedata/settings`),
       (snapshot) => {
         let node = snapshot.val();
         if (!node) {
@@ -119,7 +133,7 @@ function App() {
     if (["pendings"].includes(target) && validLink) {
       // Delegate side only writes to pendings
       if (content.length > 0) {
-        set(ref(database, `appdata/${userUID}/livedata/${target}`), content);
+        set(ref(database, `appdata/${userID}/livedata/${target}`), content);
       }
     }
   }
@@ -162,6 +176,7 @@ function App() {
         setLoggedIn,
         processed,
         pendings,
+        accountInfo,
       }}
     >
       <div className="App-container">{appRender}</div>
@@ -189,7 +204,7 @@ function App() {
   }
 
   function submit(submissionObj) {
-    get(ref(database, `appdata/${userUID}/livedata/pendings`)).then(
+    get(ref(database, `appdata/${userID}/livedata/pendings`)).then(
       (snapshot) => {
         let currPendings = snapshot.exists() ? snapshot.val() : [];
         writeToFirebase("pendings", currPendings.concat(submissionObj));

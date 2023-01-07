@@ -3,9 +3,8 @@ import { appContext } from "../../staffContext";
 import "./Banner.scoped.css";
 import { MAX_SUBMISSIONS } from "./Plan";
 
-const Banner = () => {
-  const { pendings, processed, setPage } = useContext(appContext);
-  const totalSubmissions = pendings.length + processed.length;
+const Banner = ({ totalSubmissions }) => {
+  const { setPage } = useContext(appContext);
 
   const messages = [
     <p>You are using the Starter tier of MUNSuite.</p>,
