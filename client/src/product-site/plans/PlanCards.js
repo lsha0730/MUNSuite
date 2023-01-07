@@ -26,7 +26,10 @@ const PlanCards = ({ page }) => {
           <h1 className="price-tag">Free</h1>
 
           <FeatureList
-            items={[`Up to ${MAX_SUBMISSIONS} submissions`, "Email support"]}
+            items={[
+              `${MAX_SUBMISSIONS} submissions at a time`,
+              "Email support",
+            ]}
           />
 
           {page === "app" ? (
