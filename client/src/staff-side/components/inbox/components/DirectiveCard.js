@@ -146,12 +146,14 @@ function DirectiveCard({
               : "collapsable collapsed"
             : ""
         }
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          flexGrow: 1,
-          height: 1,
-        }}
+        style={Object.assign(
+          {
+            display: "flex",
+            flexDirection: "column",
+            flexGrow: 1,
+          },
+          page !== "delegate" ? { height: 1 } : {}
+        )}
       >
         {variant == "standard" && (
           <div className="card-tie">

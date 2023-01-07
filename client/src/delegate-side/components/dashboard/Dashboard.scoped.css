@@ -9,17 +9,19 @@
   background-color: #f7f7f7;
 }
 
+.content-container {
+  display: flex;
+  flex-direction: row;
+
+  overflow: auto;
+}
+
 .form-container {
   width: 90%;
   max-width: 700px;
   display: flex;
   flex-direction: column;
   margin-top: 30px;
-}
-
-.content-container {
-  display: flex;
-  flex-direction: row;
 }
 
 .hide {
