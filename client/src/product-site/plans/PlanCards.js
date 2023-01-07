@@ -63,9 +63,8 @@ const PlanCards = ({ page }) => {
           <FeatureList
             items={[
               "Unlimited submissions",
-              "Auto-collected statistics",
-              "Searchable notepad",
               "Spreadsheet import delegates",
+              "Remove starter banner",
             ]}
           />
 
