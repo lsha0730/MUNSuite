@@ -130,7 +130,6 @@ function App() {
 
   // Firebase: Writing
   function writeToFirebase(target, content) {
-    console.log(content);
     if (["pendings"].includes(target) && validLink) {
       // Delegate side only writes to pendings
       if (content.length > 0) {
