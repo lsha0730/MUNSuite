@@ -46,7 +46,7 @@ function Delegations() {
           <p className="welcome-subheading">Signed in as</p>
           <h1 className="welcome-heading">
             {accountInfo.email ||
-              `${settings.conference} ${settings.committee}`}
+              `${settings.conference || ""} ${settings.committee || ""}`}
           </h1>
         </div>
       ) : (
