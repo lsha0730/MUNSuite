@@ -76,12 +76,16 @@ const makeAccount = (submission: RegistrationObject) => {
       })
       .then((userCredential: any) => {
         const uid: string = userCredential.uid;
+
+        // Set up account data
         writeToUser(uid, "settings", {
           committee: commName,
           conference: confName,
         });
         writeToUser(uid, "form", defaultFormData);
-        updateAccountType(uid, "Starter");
+
+        // Create account entry with email
+        updateAccountType(uid, "Starter", email);
 
         logRegAttempt("success", submission, "Passing", uid);
         resolve("Success");

@@ -42,8 +42,6 @@ export type AccountsLog = {
   };
 };
 
-export type DateOffset = {
-  year?: number;
-  month?: number;
-  day?: number;
+export type Deadlines = {
+  [x: string]: string;
 };

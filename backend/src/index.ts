@@ -4,6 +4,9 @@ const { registerRouter } = require("./routes/register");
 const { purchaseRouter } = require("./routes/purchase");
 const { accountRouter } = require("./routes/account");
 
+const schedule = require("node-schedule");
+const { expireAccounts } = require("./utils");
+
 const app = express();
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "https://munsuite.com");
@@ -17,6 +20,11 @@ app.use((req, res, next) => {
 const port = process.env.PORT || 4242;
 app.listen(port);
 console.log(`App listening at port ${port}`);
+
+// Initialize Account Sweeper
+const sweeper = schedule.scheduleJob("* * 0 * * *", () => {
+  expireAccounts();
+});
 
 // Routers
 app.use("/register", registerRouter);
