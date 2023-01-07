@@ -173,6 +173,9 @@ const Plan = () => {
                     className="input"
                     type="text"
                     placeholder="Enter a product code"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") handleRedeem();
+                    }}
                   />
                   <div className="btt-redeem" onClick={handleRedeem}>
                     Redeem
