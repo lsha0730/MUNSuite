@@ -2,6 +2,34 @@ import React, { useContext, useEffect, useState } from "react";
 import "./modal-ui.scoped.css";
 import UNCountriesData from "./UNCountriesData.js";
 import { appContext } from "../../staffContext.js";
+import FlyingDark from "../../../product-site/options/icons/FlyingDark.svg";
+
+const ConfirmRedeemModal = ({ setShowingConfirmation, expiration }) => {
+  return (
+    <div className="modal-fade">
+      <div className="modal-container">
+        <h1 style={{ color: "#378DCC", fontSize: 28 }}>Success!</h1>
+        <p>You are now on the Premium Plan.</p>
+
+        <div className="modal-bottom">
+          <img src={FlyingDark} className="modal-icon" />
+          <p className="expiration">
+            Premium until:&nbsp;
+            <p style={{ fontWeight: 600 }}>{expiration}</p>
+          </p>
+          <div
+            className="btt-ok"
+            onClick={() => {
+              setShowingConfirmation(false);
+            }}
+          >
+            Got it
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 function Confirmation({ description, bttLabel, fn, setModal }) {
   return (
@@ -272,4 +300,10 @@ function AddViaSpreadsheet(props) {
   );
 }
 
-export { AddUNCountries, AddCustomCountry, AddViaSpreadsheet, Confirmation };
+export {
+  AddUNCountries,
+  AddCustomCountry,
+  AddViaSpreadsheet,
+  Confirmation,
+  ConfirmRedeemModal,
+};

@@ -1,16 +1,17 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
-import PlanCards from "../../../product-site/options/PlanCards";
 import { appContext } from "../../staffContext";
 import "./Plan.scoped.css";
 import axios from "axios";
-import { HiBadgeCheck } from "react-icons/hi";
+
+import PlanCards from "../../../product-site/options/PlanCards";
+import { ConfirmRedeemModal } from "../modal-ui/modal-ui";
 
 import delegations from "../../../product-site/home/images/mockups/delegations.png";
 import form from "../../../product-site/home/images/mockups/form.png";
 import history from "../../../product-site/home/images/mockups/history.png";
 import statistics from "../../../product-site/home/images/mockups/statistics.png";
 import notes from "../../../product-site/home/images/mockups/notes.png";
-import ConfirmRedeemModal from "./ConfirmRedeemModal";
+import { HiBadgeCheck } from "react-icons/hi";
 
 export const MAX_SUBMISSIONS = 75;
 
