@@ -1,14 +1,30 @@
-import React, { useContext, useRef } from "react";
+import React, { useState, useContext, useRef } from "react";
 import "./Settings.scoped.css";
 import { BsGearFill } from "react-icons/bs";
 import { FaGitAlt } from "react-icons/fa";
 import { appContext } from "../../staffContext";
 import CHANGELOG from "./CHANGELOG.json";
+import blankAccount from "./blankAccount.json";
+import { Confirmation } from "../modal-ui/modal-ui";
 
 function Settings() {
   const { settings } = useContext(appContext);
   const { writeToFirebase } = useContext(appContext);
   const isMounted = useRef(false);
+  const [confirmingReset, setConfirmingReset] = useState(false);
+
+  const clearAccount = () => {
+    writeToFirebase("delegations", []);
+    writeToFirebase("form", blankAccount.form);
+    writeToFirebase("pendings", []);
+    writeToFirebase("processed", []);
+    writeToFirebase("notes", {});
+    writeToFirebase("settings", {
+      ...blankAccount.settings,
+      conference: settings.conference,
+      committee: settings.committee,
+    });
+  };
 
   return (
     <div className="page-container">
@@ -44,6 +60,41 @@ function Settings() {
               />
             </div>
           </div>
+        </div>
+
+        <div
+          style={{
+            marginTop: 30,
+          }}
+        >
+          <p className="setting-header">Danger Zone</p>
+          <div className="danger-container">
+            <div className="flex-col">
+              <p className="input-subheader" style={{ marginBottom: 5 }}>
+                Reset account data
+              </p>
+              <p>
+                Delete all delegations, form, directives, statistics and notes
+              </p>
+            </div>
+            <div
+              className="btt-clear"
+              onClick={() => {
+                setConfirmingReset(true);
+              }}
+            >
+              Clear all
+            </div>
+          </div>
+
+          {confirmingReset && (
+            <Confirmation
+              fn={clearAccount}
+              bttLabel="Reset Account"
+              description="Clearing your account data will permanently remove your history and clear all delegate statistics. Consider exporting a local copy first."
+              setModal={setConfirmingReset}
+            />
+          )}
         </div>
       </div>
 

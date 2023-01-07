@@ -3,29 +3,29 @@ import "./modal-ui.scoped.css";
 import UNCountriesData from "./UNCountriesData.js";
 import { appContext } from "../../staffContext.js";
 
-function Confirmation(props) {
+function Confirmation({ description, bttLabel, fn, setModal }) {
   return (
     <div className="modal-background">
       <div className="modal-container-confirmation">
         <div className="modal-top">
           <p className="modal-header">Are you sure?</p>
-          <p className="modal-subheader">{props.description}</p>
+          <p className="modal-subheader">{description}</p>
         </div>
 
         <div className="modal-bottom">
           <div
             className="btt-confirm"
             onClick={() => {
-              props.function();
-              props.setModal(false);
+              fn();
+              setModal(false);
             }}
           >
-            <p>{props.bttLabel}</p>
+            <p>{bttLabel}</p>
           </div>
           <div
             className="btt-cancel"
             onClick={() => {
-              props.setModal(false);
+              setModal(false);
             }}
           >
             <p>Cancel</p>
@@ -193,7 +193,7 @@ function AddCustomCountry(props) {
               onKeyDown={(e) => {
                 if (e.key === "Enter") addCustom();
               }}
-            ></input>
+            />
           </div>
         </div>
 
@@ -251,7 +251,7 @@ function AddViaSpreadsheet(props) {
         </div>
 
         <div className="modal-body">
-          <textarea id="pastebin" className="pastebin"></textarea>
+          <textarea id="pastebin" className="pastebin" />
         </div>
 
         <div className="modal-bottom">

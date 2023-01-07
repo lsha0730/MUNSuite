@@ -123,7 +123,7 @@ function Delegations() {
       case "confirmation":
         return (
           <Confirmation
-            function={removeSelected}
+            fn={removeSelected}
             bttLabel="Remove Selected"
             description="Deleting delegates will revoke their form access and delete any notes you took about them, permanently. Their statistics and directives will remain."
             setModal={setModal}

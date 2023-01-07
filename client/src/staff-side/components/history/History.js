@@ -6,9 +6,8 @@ import { FaFilter } from "react-icons/fa";
 import { BsDownload } from "react-icons/bs";
 import { Confirmation } from "../modal-ui/modal-ui";
 import Dropdown from "./Dropdown";
-import Cardbar from "./Cardbar";
 import DirectiveCard from "../inbox/components/DirectiveCard";
-import { exportProcesseds, flattenToString } from "../../utils";
+import { exportProcesseds } from "../../utils";
 import CardbarList from "./CardbarList";
 
 function History() {
@@ -24,7 +23,7 @@ function History() {
     <div className="history-container">
       {modal ? (
         <Confirmation
-          function={handleClear}
+          fn={handleClear}
           bttLabel="Clear History"
           description="Clearing your history will permanently remove your history and clear all delegate statistics. Consider exporting a local copy first."
           setModal={setModal}
