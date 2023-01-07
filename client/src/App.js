@@ -15,7 +15,7 @@ import Home from "./product-site/home/Home.js";
 import Register from "./product-site/register/Register.js";
 import Login from "./product-site/login/Login.js";
 import Forgot from "./product-site/forgot/Forgot.js";
-import Options from "./product-site/options/Options.js";
+import Plans from "./product-site/plans/Plans.js";
 
 import StaffApp from "./staff-side/StaffApp.js";
 import DelegateApp from "./delegate-side/DelegateApp.js";
@@ -86,7 +86,7 @@ function App() {
             <Route exact path="/register" element={<Register />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/forgot" element={<Forgot />} />
-            <Route exact path="/options" element={<Options />} />
+            <Route exact path="/plans" element={<Plans />} />
             <Route
               exact
               path="/app/*"

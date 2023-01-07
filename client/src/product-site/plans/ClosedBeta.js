@@ -1,7 +1,7 @@
 import React from "react";
-import "./Options.scoped.css";
+import "./Plans.scoped.css";
 
-function Options() {
+function Plans() {
   return (
     <div className="options-container">
       <div className="top">
@@ -127,4 +127,4 @@ function Options() {
   );
 }
 
-export default Options;
+export default Plans;

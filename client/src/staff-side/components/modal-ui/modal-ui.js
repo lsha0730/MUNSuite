@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./modal-ui.scoped.css";
 import UNCountriesData from "./UNCountriesData.js";
 import { appContext } from "../../staffContext.js";
-import FlyingDark from "../../../product-site/options/icons/FlyingDark.svg";
+import FlyingDark from "../../../product-site/plans/icons/FlyingDark.svg";
 
 const ConfirmRedeemModal = ({ setShowingConfirmation, expiration }) => {
   return (

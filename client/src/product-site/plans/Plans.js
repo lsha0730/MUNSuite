@@ -1,12 +1,12 @@
 import React from "react";
-import "./Options.scoped.css";
+import "./Plans.scoped.css";
 import PlanCards from "./PlanCards";
 
 import Horizons from "../home/images/logos/horizons.png";
 import CAHSMUN from "../home/images/logos/cahsmun.png";
 import VMUN from "../home/images/logos/vmun.png";
 
-function Options() {
+function Plans() {
   return (
     <div className="options-container">
       <div className="top">
@@ -65,4 +65,4 @@ function Options() {
   );
 }
 
-export default Options;
+export default Plans;

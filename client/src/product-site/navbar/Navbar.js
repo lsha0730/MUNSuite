@@ -19,7 +19,7 @@ function Navbar() {
           <Link to="/" className="option-text">
             Home
           </Link>
-          <Link to="/options" className="option-text">
+          <Link to="/plans" className="option-text">
             Plans
           </Link>
           <Link to="/login" className="option-text">
@@ -43,7 +43,7 @@ function Navbar() {
           <Link to="/" className="option-text-white">
             Home
           </Link>
-          <Link to="/options" className="option-text-white">
+          <Link to="/plans" className="option-text-white">
             Plans
           </Link>
           <Link to="/login" className="option-text-white">
@@ -67,7 +67,7 @@ function Navbar() {
           <Link to="/" className="option-text">
             Home
           </Link>
-          <Link to="/options" className="option-text">
+          <Link to="/plans" className="option-text">
             Plans
           </Link>
           <div className="btt-signout" onClick={handleSignout}>
@@ -91,7 +91,7 @@ function Navbar() {
           <Link to="/" className="option-text-white">
             Home
           </Link>
-          <Link to="/options" className="option-text-white">
+          <Link to="/plans" className="option-text-white">
             Plans
           </Link>
           <div className="btt-primary-white" onClick={handleSignout}>
