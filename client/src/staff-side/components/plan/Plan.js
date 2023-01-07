@@ -189,6 +189,7 @@ const Plan = () => {
                       color: "#FF5A5A",
                       marginTop: 10,
                       marginLeft: 5,
+                      fontSize: 14,
                     }}
                   >
                     {warning}
