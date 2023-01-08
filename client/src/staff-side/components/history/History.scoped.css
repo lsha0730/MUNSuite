@@ -32,6 +32,7 @@
 }
 
 .UI-left {
+  width: 1px;
   height: 100%;
 
   display: flex;
@@ -48,6 +49,7 @@
   align-items: center;
 
   margin-bottom: 20px;
+  margin-right: 7px;
 }
 
 /*--------NO CARDS--------*/
@@ -88,30 +90,34 @@
 
 /*--------RIGHT-UI--------*/
 .cardbar-container {
+  width: 100%;
+
   display: flex;
   flex-direction: row;
-  margin-bottom: 5px;
-  margin-right: 5px;
+  margin-bottom: 3px;
+
+  border-radius: 3px;
+  background-color: #ffffff;
+  cursor: pointer;
+  overflow: hidden;
 }
 
 .cardbar-body {
-  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+  width: 1px;
 
   padding: 5px;
   padding-left: 20px;
   padding-right: 20px;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  border-radius: 10px;
-  background-color: #ffffff;
-  cursor: pointer;
 }
 
 .cardbar-deck-container {
   width: calc(100% + 5px);
+  padding-right: 7px;
   overflow-y: auto;
   flex-grow: 1;
 }
@@ -127,11 +133,8 @@
 }
 
 .cardbar-indicator {
-  width: 15px;
-  height: 15px;
-
-  margin-right: 20px;
-  border-radius: 50%;
+  min-width: 15px;
+  min-height: 15px;
 }
 
 .selected {
@@ -141,6 +144,43 @@
 
 .card-container {
   height: calc(100% - 50px);
+}
+
+.cardbar-left {
+  width: 70%;
+  flex-direction: row;
+  align-items: center;
+}
+
+.cardbar-right {
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardbar-title {
+  margin-right: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.cardbar-desc {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #aaaaaa;
+  font-size: 12px;
+}
+
+.cardbar-id {
+  margin-left: 15px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #aaaaaa;
 }
 
 /*History Operations*/

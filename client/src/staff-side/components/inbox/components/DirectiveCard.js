@@ -96,7 +96,7 @@ function DirectiveCard({
           <p className="author">{h(author)}</p>
           <p className="custom-id-tag">ID: {h(id)}</p>
 
-          {page === "delegate" && (
+          {["delegate", "history"].includes(page) && (
             <StatusIndicator
               status={status}
               feedback={feedback}
@@ -121,14 +121,19 @@ function DirectiveCard({
             setExtended(!extended);
           }}
         >
-          <p className="title">{h(title)}</p>
+          <p
+            className="title"
+            style={page === "inbox" ? { marginRight: 0 } : {}}
+          >
+            {h(title)}
+          </p>
 
           <div className="card-top-bottom">
             <p className="type">{h(type)}</p>
             <p className="id-tag">ID: {h(id)}</p>
           </div>
 
-          {page === "delegate" && (
+          {["delegate", "history"].includes(page) && (
             <StatusIndicator
               status={status}
               feedback={feedback}

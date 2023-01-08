@@ -123,6 +123,8 @@ function History() {
             revertDirective={revertDirective}
             index={processed.length - 1 - selection}
             search={search}
+            status={directive.status}
+            feedback={directive.feedback}
           />
         );
       } else {
@@ -137,6 +139,8 @@ function History() {
             revertDirective={revertDirective}
             index={processed.length - 1 - selection}
             search={search}
+            status={directive.status}
+            feedback={directive.feedback}
           />
         );
       }

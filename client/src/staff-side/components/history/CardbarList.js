@@ -22,7 +22,9 @@ const CardbarList = ({ search, selection, filter, setSelection }) => {
             status={card.status}
             onClick={() => setSelection(i)}
             title={card.title}
+            description={getDescription(card)}
             search={search}
+            submissionID={card.submissionID}
           />
         );
       } else {
@@ -32,9 +34,10 @@ const CardbarList = ({ search, selection, filter, setSelection }) => {
             selected={selection == i}
             status={card.status}
             onClick={() => setSelection(i)}
-            submissionID={card.submissionID}
             author={card.author}
+            description={getDescription(card)}
             search={search}
+            submissionID={card.submissionID}
           />
         );
       }
@@ -48,6 +51,14 @@ const shouldRender = (card, filter, lowerSearch) => {
   const includesSearchKey = cardStringLower.includes(lowerSearch);
 
   return filterBoolean && includesSearchKey;
+};
+
+const getDescription = (card) => {
+  if (card.standard) {
+    return card.sponsors?.join(", ");
+  } else {
+    return card.body?.[0]?.value;
+  }
 };
 
 export default CardbarList;

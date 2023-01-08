@@ -11,6 +11,7 @@ function Cardbar({
   selected,
   onClick,
   title,
+  description,
   submissionID,
   author,
   search,
@@ -21,16 +22,23 @@ function Cardbar({
     return (
       <div className="cardbar-container">
         <div
+          className="cardbar-indicator"
+          style={{
+            backgroundColor: status == "Passed" ? PASSED_COLOR : FAILED_COLOR,
+          }}
+        />
+        <div
           className={selected ? "cardbar-body selected" : "cardbar-body"}
           onClick={onClick}
         >
-          <div
-            className="cardbar-indicator"
-            style={{
-              backgroundColor: status == "Passed" ? PASSED_COLOR : FAILED_COLOR,
-            }}
-          />
-          <p>{h(`Submission ${submissionID} by ${author}`)}</p>
+          <div className="cardbar-left">
+            <p className="cardbar-title">{h(author)}</p>
+          </div>
+
+          <div className="cardbar-right">
+            <p className="cardbar-desc">{h(description)}</p>
+            <p className="cardbar-id">{h(submissionID)}</p>
+          </div>
         </div>
       </div>
     );
@@ -38,16 +46,23 @@ function Cardbar({
     return (
       <div className="cardbar-container">
         <div
+          className="cardbar-indicator"
+          style={{
+            backgroundColor: status == "Passed" ? PASSED_COLOR : FAILED_COLOR,
+          }}
+        />
+        <div
           className={selected ? "cardbar-body selected" : "cardbar-body"}
           onClick={onClick}
         >
-          <div
-            className="cardbar-indicator"
-            style={{
-              backgroundColor: status == "Passed" ? PASSED_COLOR : FAILED_COLOR,
-            }}
-          />
-          <p>{h(title)}</p>
+          <div className="cardbar-left">
+            <p className="cardbar-title">{h(title)}</p>
+          </div>
+
+          <div className="cardbar-right">
+            <p className="cardbar-desc">{h(description)}</p>
+            <p className="cardbar-id">{h(submissionID)}</p>
+          </div>
         </div>
       </div>
     );
