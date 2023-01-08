@@ -16,7 +16,7 @@
 /*CARD*/
 .card {
   width: 300px;
-  height: 400px;
+  height: fit-content;
 
   display: flex;
   flex-direction: column;
@@ -160,10 +160,25 @@
 }
 
 /*----- Feature List -----*/
+.list-container {
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .list-item {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
+}
+
+.list-check {
+  min-width: 20px;
+  min-height: 20px;
+  display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .list-text {

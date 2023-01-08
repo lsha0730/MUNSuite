@@ -67,6 +67,7 @@ const PlanCards = ({ page }) => {
             items={[
               "Unlimited submissions",
               "Spreadsheet import delegates",
+              "Export directives history & notes to csv",
               "Remove starter banner",
             ]}
           />
@@ -86,10 +87,10 @@ const PlanCards = ({ page }) => {
 
 const FeatureList = ({ items }) => {
   return (
-    <div>
+    <div className="list-container">
       {items.map((e) => (
         <div className="list-item">
-          <BsCheck size={16} />
+          <BsCheck size={16} className="list-check" />
           <p className="list-text">{e}</p>
         </div>
       ))}

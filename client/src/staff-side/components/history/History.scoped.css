@@ -355,3 +355,29 @@
   top: 8px;
   fill: #bcbcbc;
 }
+
+/*----- Bricked Button -----*/
+.btt-bricked {
+  width: 190px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  padding: 8px;
+  padding-left: 25px;
+  padding-right: 25px;
+
+  background-color: #f3f3f3;
+  color: #bcbcbc;
+  border-radius: 10px;
+  cursor: pointer;
+
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}

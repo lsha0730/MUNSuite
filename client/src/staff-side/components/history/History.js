@@ -9,11 +9,12 @@ import Dropdown from "./Dropdown";
 import DirectiveCard from "../inbox/components/DirectiveCard";
 import { exportProcesseds } from "../../utils";
 import CardbarList from "./CardbarList";
+import { IoIosLock } from "react-icons/io";
 
 function History() {
-  const { pendings } = useContext(appContext);
-  const { processed } = useContext(appContext);
-  const { writeToFirebase } = useContext(appContext);
+  const { pendings, processed, writeToFirebase, accountInfo } = useContext(
+    appContext
+  );
   const [selection, setSelection] = useState(0);
   const [search, setSearch] = useState("");
   const [dropdownValue, setDropdownValue] = useState("No Filter");
@@ -73,10 +74,18 @@ function History() {
           >
             Clear History
           </div>
-          <div className="btt-export-history" onClick={exportProcesseds}>
-            <BsDownload size={18} />
-            <p>Export All (.csv)</p>
-          </div>
+
+          {accountInfo.type === "Premium" ? (
+            <div className="btt-export-history" onClick={exportProcesseds}>
+              <BsDownload size={18} />
+              <p>Export All (.csv)</p>
+            </div>
+          ) : (
+            <div className="btt-bricked">
+              <IoIosLock size={18} />
+              <p>Export All (.csv)</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -5,12 +5,16 @@ import { IoClipboard } from "react-icons/io5";
 import { GoSearch } from "react-icons/go";
 import { appContext } from "../../staffContext";
 import IndividualNote from "./IndividualNote";
+import { IoIosLock } from "react-icons/io";
 
 function Notes() {
-  const { delegations } = useContext(appContext);
-  const { notes } = useContext(appContext);
-  const { writeToFirebase } = useContext(appContext);
-  const { exportToCsv } = useContext(appContext);
+  const {
+    delegations,
+    notes,
+    writeToFirebase,
+    exportToCsv,
+    accountInfo,
+  } = useContext(appContext);
   const [options, setOptions] = useState(
     notes.individual.map((item) => item.delegate)
   );
@@ -87,12 +91,6 @@ function Notes() {
     setRenderSelected(returnRenderSelected);
   }, [options, search, isShowingOptions, selected, trigger]);
 
-  // useEffect(() => {
-  //     let tempArr =
-
-  //     setNotesIndvRenders(tempArr);
-  // }, [selected.length, notes.individual])
-
   return (
     <div className="page-container">
       <div className="UI-left">
@@ -105,7 +103,7 @@ function Notes() {
           <div
             className={isShowingOptions ? "dropdown-defocuser" : "hidden"}
             onClick={() => setIsShowingOptions(false)}
-          ></div>
+          />
           <div className={isShowingOptions ? "searchbar super-z" : "searchbar"}>
             <input
               type="text"
@@ -185,14 +183,23 @@ function Notes() {
             })
           }
           className="UI-right-input"
-        ></textarea>
+        />
 
-        <div className="btt-export-notes" onClick={exportNotes}>
-          <div className="btt-export-notes-inner">
-            <BsDownload size={18} />
-            <p>Export Notes (.csv)</p>
+        {accountInfo.type === "Premium" ? (
+          <div className="btt-export-notes" onClick={exportNotes}>
+            <div className="btt-export-notes-inner">
+              <BsDownload size={18} />
+              <p>Export Notes (.csv)</p>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="btt-bricked">
+            <div className="btt-export-notes-inner">
+              <IoIosLock size={18} />
+              <p>Export Notes (.csv)</p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
