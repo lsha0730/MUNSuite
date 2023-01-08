@@ -24,7 +24,7 @@ const Banner = ({ totalSubmissions, page }) => {
       )}
     </p>,
     <p>
-      {`Your account is nearing the ${MAX_SUBMISSIONS} submission limit. At the limit, you will have to clear your data in settings or`}
+      {`Your account is nearing the ${MAX_SUBMISSIONS} submission limit. At the limit, you will have to clear your directives history or`}
       &nbsp;
       <span
         className="action-text"
@@ -36,7 +36,7 @@ const Banner = ({ totalSubmissions, page }) => {
       </span>
     </p>,
     <p>
-      {`Your account has reached the ${MAX_SUBMISSIONS} submission limit. Clear account data in settings or`}
+      {`Your account has reached the ${MAX_SUBMISSIONS} submission limit. Make room by clearing your directives history or`}
       &nbsp;
       <span
         className="action-text"

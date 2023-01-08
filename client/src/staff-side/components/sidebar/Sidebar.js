@@ -164,6 +164,7 @@ function Sidebar() {
               style={{
                 transition: "200ms",
                 fill: page === "plan" ? INACTIVE_COLOR : ACTIVE_COLOR,
+                transform: "rotate(180deg)",
               }}
             />
           </div>
