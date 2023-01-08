@@ -10,6 +10,7 @@ import Delbar from "./delbar/Delbar.js";
 import * as BsIcons from "react-icons/bs";
 import { appContext } from "../../staffContext.js";
 import axios from "axios";
+import { IoIosLock } from "react-icons/io";
 
 function Delegations() {
   const {
@@ -111,7 +112,7 @@ function Delegations() {
             </div>
 
             <div
-              className="btt-add-country"
+              className="btt-add-country noselect"
               onClick={() => {
                 setModal("add-un-countries");
               }}
@@ -120,7 +121,7 @@ function Delegations() {
             </div>
 
             <div
-              className="btt-add-country"
+              className="btt-add-country noselect"
               onClick={() => {
                 setModal("add-custom-country");
               }}
@@ -128,22 +129,28 @@ function Delegations() {
               <p>Add Custom Country</p>
             </div>
 
-            {accountInfo.type === "Premium" && (
-              <div
-                className="btt-add-country"
-                onClick={() => {
+            <div
+              className={
+                accountInfo.type === "Premium"
+                  ? "btt-add-country noselect"
+                  : "btt-bricked noselect"
+              }
+              onClick={() => {
+                if (accountInfo.type === "Premium")
                   setModal("add-via-spreadsheet");
-                }}
-              >
-                <p>Spreadsheet Import</p>
-              </div>
-            )}
+              }}
+            >
+              {accountInfo.type !== "Premium" && (
+                <IoIosLock size={20} style={{ marginRight: 10 }} />
+              )}
+              <p>Spreadsheet Import</p>
+            </div>
 
             <div
               className={
                 !(delegations.length < 1)
-                  ? "btt-select-all"
-                  : "btt-select-all hide"
+                  ? "btt-select-all noselect"
+                  : "btt-select-all noselect hide"
               }
               onClick={selectAll}
             >
@@ -153,8 +160,8 @@ function Delegations() {
             <div
               className={
                 !(selections.length < 1)
-                  ? "btt-select-all"
-                  : "btt-select-all hide"
+                  ? "btt-select-all noselect"
+                  : "btt-select-all noselect hide"
               }
               onClick={deselectAll}
             >
@@ -164,8 +171,8 @@ function Delegations() {
             <div
               className={
                 !(selections.length < 1)
-                  ? "btt-remove-selected"
-                  : "btt-remove-selected hide"
+                  ? "btt-remove-selected noselect"
+                  : "btt-remove-selected noselect hide"
               }
               onClick={() => {
                 setModal("confirmation");
@@ -175,7 +182,10 @@ function Delegations() {
             </div>
           </div>
 
-          <div className="btt-export-delegations" onClick={exportCodes}>
+          <div
+            className="btt-export-delegations noselect"
+            onClick={exportCodes}
+          >
             <div className="btt-export-delegations-inner">
               <BsIcons.BsDownload size={18} />
               <p>Export Codes (.csv)</p>
