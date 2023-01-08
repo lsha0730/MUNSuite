@@ -48,23 +48,40 @@ purchaseRouter.post(
   }
 );
 
-function handleStripeEvent(event: any) {
+function handleStripeEvent(event: any): number {
   switch (event.type) {
     case "checkout.session.completed":
-      getOrderData(event).then((result: OrderDetails) => {
-        const newCodes = [];
-        for (let i = 0; i < result.quantity; i++) {
-          newCodes.push(createProductCode());
-        }
-
-        sendCodes(newCodes, result.email);
-        logOrderInFirebase(result, newCodes);
-        logOrderFulfillment(result);
+      getOrderData(event).then((orderDetails: OrderDetails) => {
+        fulfilledBefore(orderDetails.paymentIntentID).then(
+          (alreadyFulfilled: boolean) => {
+            if (!alreadyFulfilled) {
+              const newCodes = [];
+              for (let i = 0; i < orderDetails.quantity; i++) {
+                newCodes.push(createProductCode());
+              }
+              sendCodes(newCodes, orderDetails.email);
+              logOrderInFirebase(orderDetails, newCodes);
+              logOrderFulfillment("Success", orderDetails);
+            } else {
+              logOrderFulfillment("Fail", orderDetails);
+              return 400;
+            }
+          }
+        );
       });
-      break;
+      return 200;
     default:
-      break;
+      return 200;
   }
+}
+
+// Check if order has been fulfilled before
+async function fulfilledBefore(paymentIntentID: string): Promise<boolean> {
+  let alreadyFulfilled = true;
+  orderLogsRef.child(paymentIntentID).once("value", (snapshot: any) => {
+    alreadyFulfilled = snapshot.exists();
+  });
+  return alreadyFulfilled;
 }
 
 // Stripe helpers
@@ -128,10 +145,19 @@ const createProductCode = (): string => {
   return newCode;
 };
 
-const logOrderFulfillment = (order: OrderDetails) => {
-  console.log(
-    `[${order.timestamp}] Fulfilled order for [E: ${order.email}] [PI: ${order.paymentIntentID}], created & mailed ${order.quantity} codes`
-  );
+const logOrderFulfillment = (
+  outcome: "Success" | "Fail",
+  order: OrderDetails
+) => {
+  if (outcome === "Success") {
+    console.log(
+      `[${order.timestamp}] Fulfilled order for [E: ${order.email}] [PI: ${order.paymentIntentID}], created & mailed ${order.quantity} codes`
+    );
+  } else {
+    console.log(
+      `[${order.timestamp}] Rejected order for [E: ${order.email}] [PI: ${order.paymentIntentID}], already fulfilled before`
+    );
+  }
 };
 
 const logOrderInFirebase = (order: OrderDetails, newCodes: string[]) => {
