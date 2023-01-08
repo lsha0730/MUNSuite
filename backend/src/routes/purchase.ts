@@ -78,7 +78,7 @@ function handleStripeEvent(event: any): number {
 // Check if order has been fulfilled before
 async function fulfilledBefore(paymentIntentID: string): Promise<boolean> {
   let alreadyFulfilled = true;
-  orderLogsRef.child(paymentIntentID).once("value", (snapshot: any) => {
+  await orderLogsRef.child(paymentIntentID).once("value", (snapshot: any) => {
     alreadyFulfilled = snapshot.exists();
   });
   return alreadyFulfilled;
