@@ -102,7 +102,7 @@
   background-color: #bae4fa;
   color: #378dcc;
   font-weight: 600;
-  border-radius: 25px;
+  border-radius: 10px;
 
   display: flex;
   justify-content: center;
@@ -124,7 +124,7 @@
   background-color: #ffe49a;
   color: #daa000;
   font-weight: 600;
-  border-radius: 25px;
+  border-radius: 10px;
 
   display: flex;
   justify-content: center;
@@ -148,7 +148,7 @@
   background-color: #f3b9c9;
   color: #ff4343;
   font-weight: 600;
-  border-radius: 25px;
+  border-radius: 10px;
 
   display: flex;
   justify-content: center;
@@ -172,7 +172,7 @@
   background-color: #f3f3f3;
   color: #bcbcbc;
   font-weight: 600;
-  border-radius: 25px;
+  border-radius: 10px;
 
   display: flex;
   justify-content: center;
