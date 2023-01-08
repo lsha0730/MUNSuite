@@ -218,7 +218,7 @@ const MockupSplash = () => {
         src={delegations}
         alt="Delegations UI Image"
         className="mockup"
-        style={{ position: "absolute", top: "100px", left: "1000px" }}
+        style={{ position: "absolute", top: "100px", left: "800px" }}
       />
       <img
         src={form}
@@ -227,7 +227,7 @@ const MockupSplash = () => {
         style={{
           position: "absolute",
           top: "50px",
-          left: "500px",
+          left: "400px",
           zIndex: "1",
         }}
       />
@@ -235,19 +235,19 @@ const MockupSplash = () => {
         src={history}
         alt="History UI Image"
         className="mockup"
-        style={{ position: "absolute", top: "300px", left: "350px" }}
+        style={{ position: "absolute", top: "250px", left: "350px" }}
       />
       <img
         src={statistics}
         alt="Statistics UI Image"
         className="mockup"
-        style={{ position: "absolute", top: "150px", left: "200px" }}
+        style={{ position: "absolute", top: "120px", left: "200px" }}
       />
       <img
         src={notes}
         alt="Notes UI Image"
         className="mockup"
-        style={{ position: "absolute", top: "300px", left: "700px" }}
+        style={{ position: "absolute", top: "250px", left: "700px" }}
       />
     </div>
   );
