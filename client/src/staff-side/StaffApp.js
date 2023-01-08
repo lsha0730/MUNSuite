@@ -29,7 +29,7 @@ function App() {
   const [notes, setNotes] = useState({ individual: [], quick: "" });
   const [settings, setSettings] = useState({});
   const [accountInfo, setAccountInfo] = useState({
-    type: "Error",
+    type: "Starter",
     expiration: "Error",
   });
 
