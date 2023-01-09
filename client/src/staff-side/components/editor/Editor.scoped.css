@@ -85,7 +85,9 @@
   align-items: center;
   justify-content: center;
 
-  padding: 10px;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
   margin-left: 10px;
 
   border-radius: 10px;
@@ -93,7 +95,7 @@
 
   transition: 200ms;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #378dcc;
 }
@@ -109,8 +111,8 @@
 }
 
 .link-icon {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   fill: #378dcc;
   transition: 200ms;
 }
