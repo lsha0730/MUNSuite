@@ -36,7 +36,7 @@ function Delegations() {
       clearTimeout(resizeTimeout);
     }
     resizeTimeout = setTimeout(() => {
-      setShowingWelcome(window.innerHeight > 900);
+      setShowingWelcome(window.innerHeight > 1000);
     }, 100);
   };
 
@@ -94,8 +94,11 @@ function Delegations() {
       ) : (
         <div className="welcome">
           <h1 className="welcome-subheading">
-            {accountInfo.email ||
-              `${settings.conference} ${settings.committee}`}
+            Signed in as&nbsp;
+            <span>
+              {accountInfo.email ||
+                `${settings.conference} ${settings.committee}`}
+            </span>
           </h1>
         </div>
       )}

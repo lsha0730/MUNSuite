@@ -1,7 +1,7 @@
 [
   {
     "version": "1.0.0",
-    "description": "Closed beta release of the app. Please email any feedback to info@munsuite.com."
+    "description": "Closed beta release of the app. Please email any feedback to info@munsuite.com"
   },
   {
     "version": "1.1.0",
@@ -9,7 +9,7 @@
   },
   {
     "version": "1.2.0",
-    "description": "History keyword search, Add feedback when processing directives, longtext max wordcount, smarter inbox filtering, security improvements, minor styling & miscellaneous bug fixes"
+    "description": "History keyword search, add feedback when processing directives, longtext max wordcount, smarter inbox filtering, security improvements, minor styling & miscellaneous bug fixes"
   },
   {
     "version": "2.0.0",

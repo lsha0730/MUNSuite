@@ -34,9 +34,7 @@ function Editor() {
 
   const [editing, setEditing] = useState(false);
   const [formRender, setFormRender] = useState([]);
-  const [isDisplayingConfirmation, setIsDisplayingConfirmation] = useState(
-    false
-  );
+  const [confirmation, setConfirmation] = useState(false);
   const [standardized, setStandardized] = useState(
     settings.standardForm || false
   );
@@ -91,26 +89,19 @@ function Editor() {
   return (
     <div className="editor-container">
       <div className="main-UI">
+        <div className="link-container noselect">
+          <p className={confirmation ? "confirmation" : "confirmation fade"}>
+            Copied!
+          </p>
+          <div className="btt-link" onClick={copyLink}>
+            <BiLink className="link-icon" />
+            <p style={{ marginLeft: 5 }}>Share</p>
+          </div>
+        </div>
+
         <div className="hat-UI">
           <div className="preview-hat">
-            <div className="preview-hat-top">
-              <p className="preview-hat-heading">[Delegation Name]</p>
-              <div
-                className="preview-hat-link-icon-container"
-                onClick={copyLink}
-              >
-                <BiLink className="preview-hat-link-icon" />
-              </div>
-              <div
-                className={
-                  isDisplayingConfirmation
-                    ? "formlink-confirmation-container"
-                    : "formlink-confirmation-container fade"
-                }
-              >
-                <p className="formlink-confirmation-text">Share Link Copied!</p>
-              </div>
-            </div>
+            <p className="preview-hat-heading">[Delegation Name]</p>
             <p className="preview-hat-subheading">{settings.committee}</p>
           </div>
 
@@ -192,8 +183,8 @@ function Editor() {
 
   function copyLink() {
     navigator.clipboard.writeText(formLink);
-    setIsDisplayingConfirmation(true);
-    setTimeout(() => setIsDisplayingConfirmation(false), 1000);
+    setConfirmation(true);
+    setTimeout(() => setConfirmation(false), 1000);
   }
 
   function makeNewBlock(type, id, required, heading = null) {
