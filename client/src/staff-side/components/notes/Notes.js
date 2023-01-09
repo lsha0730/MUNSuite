@@ -6,15 +6,12 @@ import { GoSearch } from "react-icons/go";
 import { appContext } from "../../staffContext";
 import IndividualNote from "./IndividualNote";
 import { IoIosLock } from "react-icons/io";
+import { exportToCsv } from "../../utils";
 
 function Notes() {
-  const {
-    delegations,
-    notes,
-    writeToFirebase,
-    exportToCsv,
-    accountInfo,
-  } = useContext(appContext);
+  const { delegations, notes, writeToFirebase, accountInfo } = useContext(
+    appContext
+  );
   const [options, setOptions] = useState(
     notes.individual.map((item) => item.delegate)
   );

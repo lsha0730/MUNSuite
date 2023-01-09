@@ -11,6 +11,7 @@ import * as BsIcons from "react-icons/bs";
 import { appContext } from "../../staffContext.js";
 import axios from "axios";
 import { IoIosLock } from "react-icons/io";
+import { exportToCsv } from "../../utils";
 
 function Delegations() {
   const {
@@ -18,7 +19,6 @@ function Delegations() {
     notes,
     settings,
     writeToFirebase,
-    exportToCsv,
     accountInfo,
   } = useContext(appContext);
   const [selections, setSelections] = useState([]);
