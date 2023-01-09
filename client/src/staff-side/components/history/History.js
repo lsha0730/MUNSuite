@@ -76,7 +76,12 @@ function History() {
           </div>
 
           {accountInfo.type === "Premium" ? (
-            <div className="btt-export-history" onClick={exportProcesseds}>
+            <div
+              className="btt-export-history"
+              onClick={() => {
+                exportProcesseds(processed);
+              }}
+            >
               <BsDownload size={18} />
               <p>Export All (.csv)</p>
             </div>
