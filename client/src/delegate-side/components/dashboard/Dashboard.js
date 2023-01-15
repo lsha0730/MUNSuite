@@ -11,13 +11,12 @@ import ShortText from "../../../staff-side/components/editor/preview-components/
 import LongText from "../../../staff-side/components/editor/preview-components/LongText";
 import Dropdown from "../../../staff-side/components/editor/preview-components/Dropdown";
 import SelectMultiple from "../../../staff-side/components/editor/preview-components/SelectMultiple";
-import DirectiveCard from "../../../staff-side/components/inbox/components/DirectiveCard";
 
 import { MAX_SUBMISSIONS } from "../../../staff-side/components/plan/Plan";
 import Banner from "../../../staff-side/components/plan/Banner";
 
 import { HiPaperAirplane } from "react-icons/hi";
-import { FaHistory } from "react-icons/fa";
+import HistorySidebar from "./HistorySidebar";
 
 function Dashboard(props) {
   const {
@@ -44,9 +43,6 @@ function Dashboard(props) {
   const [warning, setWarning] = useState("");
   const [showingConfirmation, setShowingConfirmation] = useState(false);
 
-  const [relevantDirectives, setRelevantDirectives] = useState([]);
-  const [historyRender, setHistoryRender] = useState();
-
   const totalSubmissions = pendings.length + processed.length;
 
   useEffect(() => {
@@ -58,26 +54,6 @@ function Dashboard(props) {
   useEffect(() => {
     rerenderForm();
   }, [currForm, settings, delegations]);
-
-  useEffect(() => {
-    const relevants = getReversed(pendings || [])
-      .concat(getReversed(processed || []))
-      .filter((item) => {
-        if (item == undefined) return false;
-        if (item.standard) {
-          return item.sponsors.includes(user) || item.author == user;
-        } else {
-          return item.author == user;
-        }
-      });
-    setRelevantDirectives(
-      relevants.sort((a, b) => b.submissionID - a.submissionID)
-    );
-  }, [pendings, processed]);
-
-  useEffect(() => {
-    rerenderHistory();
-  }, [relevantDirectives]);
 
   useEffect(() => {
     setSubmissionComplete(
@@ -178,32 +154,7 @@ function Dashboard(props) {
           )}
         </div>
 
-        <div className="history-container">
-          <div className="history-top">
-            <div className="history-top-contents">
-              <FaHistory size={35} className="history-icon" />
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <p style={{ fontSize: 20, fontWeight: 600, color: "#B0B0B0" }}>
-                  Relevant Submissions
-                </p>
-                <p style={{ fontSize: 14, fontWeight: 600, color: "#B0B0B0" }}>
-                  Click cards to expand
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {!historyRender || historyRender.length > 0 ? (
-            <div
-              className="history-cards-container"
-              key={JSON.stringify(historyRender)}
-            >
-              {historyRender}
-            </div>
-          ) : (
-            <div className="history-no-submissions-block">No Submissions</div>
-          )}
-        </div>
+        <HistorySidebar />
       </div>
     </div>
   );
@@ -236,51 +187,6 @@ function Dashboard(props) {
       tempResult.splice(delIndex, 1);
       setSubmission(tempResult);
     }
-  }
-
-  function getReversed(array) {
-    let tempArr = array.slice();
-    tempArr.reverse();
-    return tempArr;
-  }
-
-  function rerenderHistory() {
-    setHistoryRender(
-      relevantDirectives
-        .map((directive) => {
-          if (directive.standard) {
-            return (
-              <DirectiveCard
-                key={JSON.stringify(relevantDirectives)}
-                page="delegate"
-                variant="standard"
-                id={directive.submissionID}
-                title={directive.title}
-                type={directive.type}
-                sponsors={directive.sponsors || []}
-                signatories={directive.signatories || []}
-                body={directive.body || []}
-                status={directive.status}
-                feedback={directive.feedback}
-              />
-            );
-          } else {
-            return (
-              <DirectiveCard
-                key={JSON.stringify(relevantDirectives)}
-                page="delegate"
-                variant="custom"
-                id={directive.submissionID}
-                author={directive.author}
-                body={directive.body || []}
-                status={directive.status}
-                feedback={directive.feedback}
-              />
-            );
-          }
-        })
-        .concat(<div style={{ width: "100%", height: 20 }} />)
-    );
   }
 
   function rerenderForm() {
