@@ -40,7 +40,7 @@ function DirectiveCard({
     <div
       className="card-container"
       style={{
-        marginRight: page === "history" ? 0 : 20,
+        marginRight: ["history", "delegate"].includes(page) ? 0 : 20,
         height: page === "delegate" ? "fit-content" : "100%",
       }}
     >
