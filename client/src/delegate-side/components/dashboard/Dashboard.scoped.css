@@ -14,6 +14,7 @@
 .content-container {
   display: flex;
   flex-direction: row;
+  flex-grow: 1;
 }
 
 .form-container {
@@ -232,14 +233,14 @@
 .bricked-form-header {
   font-size: 28px;
   font-weight: 700;
-  color: #ff7070;
+  color: #707070;
   margin-bottom: 10px;
 }
 
 .bricked-form-subheader {
   font-size: 18px;
   font-weight: 500;
-  color: #bcbcbc;
+  color: #707070;
 }
 
 @media (max-width: 641px) {

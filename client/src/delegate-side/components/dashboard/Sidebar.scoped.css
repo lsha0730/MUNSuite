@@ -114,7 +114,7 @@
   color: #aaaaaa;
 
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 /*----- History -----*/
@@ -145,6 +145,12 @@
 }
 
 /*----- Draft -----*/
+.subheading {
+  font-size: 14px;
+  font-weight: 600;
+  color: #707070;
+  margin-top: 5px;
+}
 
 /*----- Media Query -----*/
 @media (max-width: 641px) {

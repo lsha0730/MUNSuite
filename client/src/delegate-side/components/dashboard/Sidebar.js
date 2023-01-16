@@ -11,7 +11,7 @@ const Sidebar = ({ draft }) => {
   const { pendings, processed, user, settings } = useContext(delContext);
   const isNarrow = useMediaQuery({ query: "(max-width: 850px)" });
   const [relevantDirectives, setRelevantDirectives] = useState([]);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(!isNarrow);
   const [page, setPage] = useState("Submissions");
   const code = sessionStorage.getItem("code") || user;
   const [autosaves, setAutosaves] = useState(
@@ -158,8 +158,35 @@ const Sidebar = ({ draft }) => {
           {page === "Draft" && (
             <>
               <div className="history-cards-container" key="draft-cards">
-                {[draft]
-                  .concat(getReversed(autosaves))
+                <p className="subheading">Current Draft</p>
+                {draft.standard ? (
+                  <DirectiveCard
+                    key={`current-draft`}
+                    page="delegate"
+                    variant="standard"
+                    id={draft.submissionID}
+                    title={draft.title || "Untitled Directive"}
+                    type={draft.type || "No Selection"}
+                    sponsors={draft.sponsors || []}
+                    signatories={draft.signatories || []}
+                    body={draft.body || []}
+                    status={"Current"}
+                    feedback={draft.feedback}
+                  />
+                ) : (
+                  <DirectiveCard
+                    key={`current-draft`}
+                    page="delegate"
+                    variant="custom"
+                    id={draft.submissionID}
+                    author={draft.author}
+                    body={draft.body || []}
+                    status={"Current"}
+                    feedback={draft.feedback}
+                  />
+                )}
+                <p className="subheading">Autosaved Drafts</p>
+                {getReversed([...autosaves, draft])
                   .map((directive, index) =>
                     directive.standard ? (
                       <DirectiveCard
@@ -172,9 +199,8 @@ const Sidebar = ({ draft }) => {
                         sponsors={directive.sponsors || []}
                         signatories={directive.signatories || []}
                         body={directive.body || []}
-                        status={index === 0 ? "Current" : `Draft`}
+                        status={"Draft"}
                         feedback={directive.feedback}
-                        isOpen={index === 0}
                       />
                     ) : (
                       <DirectiveCard
@@ -184,9 +210,8 @@ const Sidebar = ({ draft }) => {
                         id={directive.submissionID}
                         author={directive.author}
                         body={directive.body || []}
-                        status={index === 0 ? "Current" : `Draft`}
+                        status={"Draft"}
                         feedback={directive.feedback}
-                        isOpen={index === 0}
                       />
                     )
                   )
