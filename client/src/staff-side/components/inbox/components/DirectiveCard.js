@@ -43,6 +43,8 @@ function DirectiveCard({
       style={{
         marginRight: ["history", "delegate"].includes(page) ? 0 : 20,
         height: page === "delegate" ? "fit-content" : "100%",
+        minWidth: page === "delegate" ? "100%" : 350,
+        maxWidth: page === "delegate" ? "100%" : 350,
       }}
     >
       {presenting && (

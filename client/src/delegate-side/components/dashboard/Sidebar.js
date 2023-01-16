@@ -17,6 +17,7 @@ const Sidebar = ({ draft }) => {
   const [autosaves, setAutosaves] = useState(
     JSON.parse(localStorage.getItem(`drafts-${code}`)) || []
   );
+  const sidebarWidth = Math.min(window.innerWidth, 400);
 
   // TODO: Prevents run on mount only sometimes
   const isMounted = useRef(false);
@@ -47,11 +48,11 @@ const Sidebar = ({ draft }) => {
   return (
     <div
       className="margin-block"
-      style={{ marginRight: !open || isNarrow ? 0 : 400 }}
+      style={{ marginRight: !open || isNarrow ? 0 : sidebarWidth }}
     >
       <div
         className="history-container"
-        style={isNarrow ? { right: open ? 0 : -400 } : {}}
+        style={isNarrow ? { right: open ? 0 : -sidebarWidth } : {}}
       >
         <div
           className={`toggle ${open ? "open" : "closed"}`}
@@ -66,7 +67,7 @@ const Sidebar = ({ draft }) => {
           )}
         </div>
 
-        <div className="content">
+        <div className="content" style={{ width: sidebarWidth }}>
           <div className="sidebar-top">
             <div
               className={`btt-page noselect ${
