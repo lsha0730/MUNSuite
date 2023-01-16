@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { delContext } from "../../DelegateContext";
 import DirectiveCard from "../../../staff-side/components/inbox/components/DirectiveCard";
-import "./HistorySidebar.scoped.css";
+import "./Sidebar.scoped.css";
 import { FaHistory } from "react-icons/fa";
 import { BsPencilSquare } from "react-icons/bs";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 import { useMediaQuery } from "react-responsive";
 
-const HistorySidebar = ({ draft }) => {
+const Sidebar = ({ draft }) => {
   const { pendings, processed, user, settings } = useContext(delContext);
   const isNarrow = useMediaQuery({ query: "(max-width: 850px)" });
   const [relevantDirectives, setRelevantDirectives] = useState([]);
@@ -21,7 +21,6 @@ const HistorySidebar = ({ draft }) => {
   // TODO: Prevents run on mount only sometimes
   const isMounted = useRef(false);
   useEffect(() => {
-    console.log("Mounted?", isMounted.current);
     if (isMounted.current) {
       if (settings.formOpen) autosave();
     } else {
@@ -201,7 +200,6 @@ const HistorySidebar = ({ draft }) => {
   );
 
   function getReversed(array) {
-    console.log(array);
     let tempArr = array.slice();
     tempArr.reverse();
     return tempArr;
@@ -216,4 +214,4 @@ const HistorySidebar = ({ draft }) => {
   }
 };
 
-export default HistorySidebar;
+export default Sidebar;

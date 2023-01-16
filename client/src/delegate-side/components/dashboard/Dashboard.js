@@ -16,7 +16,7 @@ import { MAX_SUBMISSIONS } from "../../../staff-side/components/plan/Plan";
 import Banner from "../../../staff-side/components/plan/Banner";
 
 import { HiPaperAirplane } from "react-icons/hi";
-import HistorySidebar from "./HistorySidebar";
+import Sidebar from "./Sidebar";
 
 function Dashboard(props) {
   const {
@@ -152,7 +152,7 @@ function Dashboard(props) {
           )}
         </div>
 
-        <HistorySidebar draft={getDraftCard()} />
+        <Sidebar draft={getDraftCard()} />
       </div>
     </div>
   );
