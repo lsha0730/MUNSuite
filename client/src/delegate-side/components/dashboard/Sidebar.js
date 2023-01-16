@@ -187,7 +187,7 @@ const Sidebar = ({ draft }) => {
                   />
                 )}
                 <p className="subheading">Autosaved Drafts</p>
-                {getReversed([...autosaves, draft])
+                {getReversed(autosaves)
                   .map((directive, index) =>
                     directive.standard ? (
                       <DirectiveCard
