@@ -23,10 +23,11 @@ function DirectiveCard({
   search,
   status,
   feedback,
+  isOpen,
 }) {
   const h = (text) => (search ? highlight(text, search) : text);
   const [presenting, setPresenting] = useState(false);
-  const [extended, setExtended] = useState(false);
+  const [extended, setExtended] = isOpen ? [true, () => {}] : useState(false);
 
   const processDirective = (action, feedback) => {
     updateCards(action, id, feedback);
@@ -87,7 +88,9 @@ function DirectiveCard({
               ? "custom-top rounded"
               : "custom-top"
           }
-          style={{ cursor: page === "delegate" ? "pointer" : undefined }}
+          style={{
+            cursor: page === "delegate" && !isOpen ? "pointer" : undefined,
+          }}
           onClick={() => {
             setExtended(!extended);
           }}
@@ -115,7 +118,7 @@ function DirectiveCard({
           }
           style={{
             backgroundColor: type?.includes("Private") ? "#285e86" : "#3C8CC9",
-            cursor: page === "delegate" ? "pointer" : undefined,
+            cursor: page === "delegate" && !isOpen ? "pointer" : undefined,
           }}
           onClick={() => {
             setExtended(!extended);

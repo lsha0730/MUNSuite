@@ -45,6 +45,9 @@
 .pending {
   background-color: #bcbcbc;
 }
+.draft {
+  background-color: #bcbcbc;
+}
 
 .hover-passed:hover {
   background-color: #0ac34c;

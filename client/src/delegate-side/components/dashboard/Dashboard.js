@@ -34,9 +34,7 @@ function Dashboard(props) {
   const [currForm, setCurrForm] = useState(form);
   const [formRender, setFormRender] = useState();
   const [submission, setSubmission] = useState(
-    currForm.map((item) => {
-      return { type: item.type, heading: item.heading };
-    })
+    currForm.map((item) => ({ type: item.type, heading: item.heading }))
   );
   const [submissionComplete, setSubmissionComplete] = useState(false);
   const [notImpostor, setNotImpostor] = useState(false);
@@ -154,7 +152,7 @@ function Dashboard(props) {
           )}
         </div>
 
-        <HistorySidebar />
+        <HistorySidebar draft={getDraftCard()} />
       </div>
     </div>
   );
@@ -336,28 +334,7 @@ function Dashboard(props) {
     }
 
     if (submissionComplete && notImpostor) {
-      let submissionObj = {
-        submissionID: (pendings || []).concat(processed || []).length,
-        status: "Pending",
-        author: user,
-        standard: checkStandardized(currForm),
-      };
-
-      if (submissionObj.standard) {
-        submissionObj.title = submission[1].value;
-        submissionObj.type = submission[2].value;
-        submissionObj.sponsors = submission[3].value;
-        submissionObj.signatories =
-          submission[4].value.length != 0 ? submission[4].value : false;
-        submissionObj.body = submission.slice(5).filter((item) => {
-          return item.type != "header" && item.type != "content";
-        });
-      } else {
-        submissionObj.body = submission.filter((item) => {
-          return item.type != "header" && item.type != "content";
-        });
-      }
-
+      const submissionObj = getDraftCard();
       props.submit(submissionObj);
       setShowingConfirmation(true);
 
@@ -396,6 +373,32 @@ function Dashboard(props) {
       !formArr[4].required &&
       formArr[4].options == "all-delegations"
     );
+  }
+
+  function getDraftCard() {
+    const draftCard = {
+      submissionID: (pendings || []).concat(processed || []).length,
+      status: "Pending",
+      author: user,
+      standard: checkStandardized(currForm),
+    };
+
+    if (draftCard.standard) {
+      draftCard.title = submission[1].value;
+      draftCard.type = submission[2].value;
+      draftCard.sponsors = submission[3].value;
+      draftCard.signatories =
+        submission[4]?.value?.length != 0 ? submission[4].value : false;
+      draftCard.body = submission.slice(5).filter((item) => {
+        return item.type != "header" && item.type != "content";
+      });
+    } else {
+      draftCard.body = submission.filter((item) => {
+        return item.type != "header" && item.type != "content";
+      });
+    }
+
+    return draftCard;
   }
 }
 
