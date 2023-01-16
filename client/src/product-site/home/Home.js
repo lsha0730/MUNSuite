@@ -62,7 +62,7 @@ function Home() {
               <br />
               Directives,
               <br />
-              <p className="adword">{adwords[adwordIndex]}.</p>
+              <span className="adword">{adwords[adwordIndex]}.</span>
             </p>
             <p className="top-subheading">
               The 21st century solution to directive chaos

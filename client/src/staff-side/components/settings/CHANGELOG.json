@@ -13,6 +13,6 @@
   },
   {
     "version": "2.0.0",
-    "description": "Public release! Miscellaneous bug fixes, styling changes, security improvements"
+    "description": "Public release! Delegate sidebar autosave/collapse, history page UI improvements, orders & account type handling, miscellaneous bug fixes, security improvements"
   }
 ]

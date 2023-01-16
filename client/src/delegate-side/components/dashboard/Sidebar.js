@@ -11,7 +11,7 @@ const Sidebar = ({ draft }) => {
   const { pendings, processed, user, settings } = useContext(delContext);
   const isNarrow = useMediaQuery({ query: "(max-width: 850px)" });
   const [relevantDirectives, setRelevantDirectives] = useState([]);
-  const [historyOpen, setHistoryOpen] = useState(true);
+  const [open, setOpen] = useState(true);
   const [page, setPage] = useState("Submissions");
   const code = sessionStorage.getItem("code") || user;
   const [autosaves, setAutosaves] = useState(
@@ -47,22 +47,22 @@ const Sidebar = ({ draft }) => {
   return (
     <div
       className="margin-block"
-      style={{ marginRight: historyOpen || isNarrow ? 0 : 400 }}
+      style={{ marginRight: !open || isNarrow ? 0 : 400 }}
     >
       <div
         className="history-container"
-        style={isNarrow ? { right: historyOpen ? -400 : 0 } : {}}
+        style={isNarrow ? { right: open ? 0 : -400 } : {}}
       >
         <div
-          className={`toggle ${historyOpen ? "open" : "closed"}`}
+          className={`toggle ${open ? "open" : "closed"}`}
           onClick={() => {
-            setHistoryOpen(!historyOpen);
+            setOpen(!open);
           }}
         >
-          {historyOpen ? (
-            <BiChevronLeft size={30} style={{ fill: "#707070" }} />
-          ) : (
+          {open ? (
             <BiChevronRight size={30} style={{ fill: "#707070" }} />
+          ) : (
+            <BiChevronLeft size={30} style={{ fill: "#707070" }} />
           )}
         </div>
 
@@ -104,7 +104,7 @@ const Sidebar = ({ draft }) => {
           <p className="page-description">
             {page === "Submissions"
               ? `All directives sponsored by you. Click card headers to expand.
-            Click the status indicator to see dais feedback if message icon appears.`
+            If message icon appears, click the status indicator to see dais feedback.`
               : `Current working draft, autosaves your work anytime the form is suspended. Stores up to 10 drafts.`}
           </p>
 

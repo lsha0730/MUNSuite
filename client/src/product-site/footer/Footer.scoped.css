@@ -16,9 +16,24 @@
 }
 
 .footer-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
   color: #f3f3f3;
   font-weight: 200;
   font-size: 14px;
+}
+
+.name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  margin-right: 10px;
+
+  cursor: pointer;
+  color: #f3f3f3;
 }
 
 @media (max-width: 641px) {
