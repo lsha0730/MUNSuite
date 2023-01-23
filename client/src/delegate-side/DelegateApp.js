@@ -43,13 +43,10 @@ function App() {
       });
 
     // Firebase: Reading
-    onValue(
-      ref(database, `appdata/${userID}/livedata/delegations`),
-      (snapshot) => {
-        // Check if the link is valid
-        setValidLink(snapshot.exists() ? "valid" : "invalid");
-      }
-    );
+    onValue(ref(database, `appdata/${userID}/livedata/form`), (snapshot) => {
+      // Check if the link is valid
+      setValidLink(snapshot.exists() ? "valid" : "invalid");
+    });
 
     onValue(
       ref(database, `appdata/${userID}/livedata/delegations`),
