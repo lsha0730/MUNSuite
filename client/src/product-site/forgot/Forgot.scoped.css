@@ -23,7 +23,6 @@
 .form-header {
   font-size: 32px;
   font-weight: 700;
-  color: #4b6980;
 }
 
 .form-subheader {
@@ -110,6 +109,6 @@
 }
 
 .icon {
-  fill: #668dac;
+  fill: #4b6980;
   margin-bottom: 10px;
 }

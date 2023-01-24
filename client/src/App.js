@@ -88,7 +88,11 @@ function App() {
     >
       <div
         className="App-container"
-        style={getAppStyle(window.location.pathname)}
+        style={
+          ["/register", "/login", "/forgot"].includes(window.location.pathname)
+            ? { backgroundColor: "#F7F7F7" }
+            : {}
+        }
       >
         <Navbar />
         <div className="UI-container">
@@ -114,16 +118,5 @@ function App() {
     </siteContext.Provider>
   );
 }
-
-const getAppStyle = (pathname) => {
-  switch (pathname) {
-    case "/login":
-      return { backgroundColor: "#F7F7F7" };
-    case "/register":
-      return { backgroundColor: "#F7F7F7" };
-    default:
-      return {};
-  }
-};
 
 export default App;

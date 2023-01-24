@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import "./Forgot.scoped.css";
-import { MdMarkEmailRead } from "react-icons/md";
+import { BiPaperPlane } from "react-icons/bi";
 
 function Forgot() {
   const auth = getAuth();
   const [warning, setWarning] = useState("");
-  const [emailSent, setEmailSent] = useState(false);
+  const [emailSent, setEmailSent] = useState(true);
 
   return (
     <div className="centering-container">
       {emailSent ? (
         <div className="forgot-container">
-          <MdMarkEmailRead size={100} className="icon" />
+          <BiPaperPlane size={100} className="icon" />
           <p className="form-header">Email Sent!</p>
           <p className="form-subheader">Check your inbox</p>
         </div>
@@ -28,7 +28,7 @@ function Forgot() {
             onKeyDown={(e) => {
               if (e.key === "Enter") handleForgot();
             }}
-          ></input>
+          />
 
           <div className="btt-container">
             <div className="btt-send" onClick={handleForgot}>
