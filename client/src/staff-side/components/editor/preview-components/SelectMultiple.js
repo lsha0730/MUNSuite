@@ -132,9 +132,10 @@ function SelectMultiple({
                       onClick={() => {
                         selectOption(e);
                         setIsShowingOptions(false);
+                        setSearch("");
                       }}
                     >
-                      <div className="dropdown-text-container">{e}</div>
+                      {e}
                     </div>
                   ) : (
                     <></>

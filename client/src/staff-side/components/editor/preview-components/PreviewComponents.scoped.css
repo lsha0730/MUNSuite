@@ -375,7 +375,7 @@
 
 .dropdown-option-container {
   width: 100%;
-  height: 28px;
+  min-height: 28px;
   padding: 5px;
   padding-left: 25px;
   padding-right: 25px;
@@ -394,10 +394,6 @@
 .dropdown-selection-text {
   white-space: nowrap;
   font-size: 16px;
-}
-
-.dropdown-text-container {
-  overflow: hidden;
 }
 
 /*--------SELECT MULTIPLE--------*/
