@@ -30,9 +30,7 @@ function Header({
         {variant === "staff" && (
           <div className={editing == id ? "editing-indicator" : "fade"} />
         )}
-        <div className="header-image-container">
-          <img src={imgLink} alt="form-banner" className="header-image" />
-        </div>
+        <img src={imgLink} alt="form-banner" className="header-image" />
         <div className="header-text-container">
           <p className="header-heading">{heading}</p>
           <p className="header-subheading">{subheading}</p>
