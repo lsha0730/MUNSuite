@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
 import { delContext } from "../../DelegateContext";
 import "./Dashboard.scoped.css";
 
@@ -200,6 +201,11 @@ function Dashboard(props) {
     setSubmission(
       currForm.map((item) => ({ type: item.type, heading: item.heading }))
     );
+
+    gtag("event", "submit_directive");
+    axios.post("https://munsuite-backend.onrender.com/analytics", {
+      type: "submit_directive",
+    });
   }
 
   function checkStandardized(formArr) {

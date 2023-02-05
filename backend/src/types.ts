@@ -49,4 +49,5 @@ export type Deadlines = {
 export type AnalyticsType =
   | "historicDelcount"
   | "historicPremiums"
-  | "historicAccounts";
+  | "historicAccounts"
+  | "directiveSubmissions";
