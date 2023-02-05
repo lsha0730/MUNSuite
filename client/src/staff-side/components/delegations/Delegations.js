@@ -75,7 +75,7 @@ function Delegations() {
     });
 
     writeToFirebase("delegations", delegations.concat(objectArr));
-    axios.post("https://munsuite-backend.onrender.com/analytics/", {
+    axios.post("https://munsuite-backend.onrender.com/analytics", {
       type: "add_dels",
       count: newDels.length,
     });
