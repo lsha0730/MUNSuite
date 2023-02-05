@@ -202,10 +202,11 @@ function Dashboard(props) {
       currForm.map((item) => ({ type: item.type, heading: item.heading }))
     );
 
-    gtag("event", "submit_directive");
+    // Add analytics
     axios.post("https://munsuite-backend.onrender.com/analytics", {
       type: "submit_directive",
     });
+    gtag("event", "submit_directive");
   }
 
   function checkStandardized(formArr) {
