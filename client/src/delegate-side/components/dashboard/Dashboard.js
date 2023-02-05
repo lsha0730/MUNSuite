@@ -6,7 +6,7 @@ import "./Dashboard.scoped.css";
 import { MAX_SUBMISSIONS } from "../../../staff-side/components/plan/Plan";
 import Banner from "../../../staff-side/components/plan/Banner";
 
-import { HiPaperAirplane } from "react-icons/hi";
+import { FaPaperPlane } from "react-icons/fa";
 import Sidebar from "./Sidebar";
 import Form from "./Form";
 
@@ -86,7 +86,7 @@ function Dashboard(props) {
           {showingConfirmation ? (
             <div className="submission-confirmation">
               <div className="submission-confirmation-top">
-                <HiPaperAirplane size={72} className="confirmation-icon" />
+                <FaPaperPlane size={48} className="confirmation-icon" />
                 <p className="submission-confirmation-heading">
                   Submission Sent!
                 </p>
