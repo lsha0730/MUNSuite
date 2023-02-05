@@ -48,7 +48,7 @@ function Plans() {
               redeemable code(s).
             </li>
             <li>
-              Codes do not expire and are valid for 3 months after they are
+              Codes do not expire and are valid for 2 months after they are
               redeemed.
             </li>
             <li>All sales are final.</li>
