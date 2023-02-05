@@ -59,8 +59,8 @@ const PlanCards = ({ page }) => {
 
         <div className="card-body">
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <h1 className="price-tag">$5</h1>
-            <p className="price-subtag">2 months access</p>
+            <h1 className="price-tag">$10</h1>
+            <p className="price-subtag">3 months access</p>
           </div>
 
           <FeatureList
