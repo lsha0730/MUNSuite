@@ -740,15 +740,10 @@ export const SendCodeTemplate = (params: any) =>
                                                                         using
                                                                         email
                                                                         and
-                                                                        password
+                                                                        password, or log into an existing account
                                                                       </li>
                                                                       <li>
-                                                                        Activate
-                                                                        the
-                                                                        account
-                                                                        using a
-                                                                        product
-                                                                        code
+                                                                        Redeem your code in the account page in your dashboard (page above the gear icon on the sidebar) to activate your premium subscription
                                                                       </li>
                                                                     </ol>
                                                                   </div>
