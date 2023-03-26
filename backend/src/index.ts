@@ -23,7 +23,7 @@ app.listen(port);
 console.log(`App listening at port ${port}`);
 
 // Initialize Account Sweeper
-const sweeper = schedule.scheduleJob("* * 0 * * *", () => {
+const sweeper = schedule.scheduleJob("0 0 * * * *", () => {
   expireAccounts();
 });
 
