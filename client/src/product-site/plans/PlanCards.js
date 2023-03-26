@@ -72,13 +72,9 @@ const PlanCards = ({ page }) => {
             ]}
           />
 
-          <a
-            href="https://buy.stripe.com/bIY8z09RUfnPg0MeUU"
-            target="_blank"
-            className="btt-full"
-          >
+          <Link to="/prepayment" className="btt-full">
             Get Started
-          </a>
+          </Link>
         </div>
       </div>
     </div>

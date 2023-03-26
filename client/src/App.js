@@ -16,6 +16,7 @@ import Register from "./product-site/register/Register.js";
 import Login from "./product-site/login/Login.js";
 import Forgot from "./product-site/forgot/Forgot.js";
 import Plans from "./product-site/plans/Plans.js";
+import Prepayment from "./product-site/plans/Prepayment";
 
 import StaffApp from "./staff-side/StaffApp.js";
 import DelegateApp from "./delegate-side/DelegateApp.js";
@@ -89,7 +90,9 @@ function App() {
       <div
         className="App-container"
         style={
-          ["/register", "/login", "/forgot"].includes(window.location.pathname)
+          ["/register", "/login", "/forgot", "/prepayment"].includes(
+            window.location.pathname
+          )
             ? { backgroundColor: "#F7F7F7" }
             : {}
         }
@@ -102,6 +105,7 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/forgot" element={<Forgot />} />
             <Route exact path="/plans" element={<Plans />} />
+            <Route exact path="/prepayment" element={<Prepayment />} />
             <Route
               exact
               path="/app/*"
