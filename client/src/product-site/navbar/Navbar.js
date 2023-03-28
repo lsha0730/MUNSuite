@@ -118,14 +118,12 @@ function Navbar() {
   );
 
   switch (true) {
-    case pathname == "/":
+    case ["/", "/prepayment"].includes(pathname):
       if (currentUser) {
         return signedinWhiteBar;
       } else {
         return whiteBar;
       }
-    case pathname == "/prepayment":
-      return whiteBar;
     case /\/app\/\w*/i.test(pathname):
       return;
     case /\/form\/\w*/i.test(pathname):
