@@ -20,6 +20,13 @@ function History() {
   const [dropdownValue, setDropdownValue] = useState("No Filter");
   const [modal, setModal] = useState(false);
 
+  useEffect(() => {
+    document.addEventListener("keydown", handleArrowKey);
+    return () => {
+      document.removeEventListener("keydown", handleArrowKey);
+    };
+  }, []);
+
   return (
     <div className="history-container">
       {modal ? (
@@ -95,6 +102,18 @@ function History() {
       </div>
     </div>
   );
+
+  function handleArrowKey(e) {
+    console.log("rbuh");
+    switch (e.key) {
+      case "ArrowDown":
+        setSelection((prev) => Math.min(prev + 1, processed.length - 1));
+        break;
+      case "ArrowUp":
+        setSelection((prev) => Math.max(prev - 1, 0));
+        break;
+    }
+  }
 
   function revertDirective(index) {
     const toRevert = processed[index];
