@@ -1,0 +1,22 @@
+.hover {
+  position: absolute;
+  z-index: 10;
+
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  transition: 500ms;
+
+  color: #707070;
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #ffffff;
+  border-radius: 15px;
+
+  white-space: nowrap;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}

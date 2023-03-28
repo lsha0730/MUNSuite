@@ -104,7 +104,6 @@ function History() {
   );
 
   function handleArrowKey(e) {
-    console.log("rbuh");
     switch (e.key) {
       case "ArrowDown":
         setSelection((prev) => Math.min(prev + 1, processed.length - 1));

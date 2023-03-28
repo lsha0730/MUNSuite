@@ -1,18 +1,81 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./Sidebar.scoped.css";
 import { appContext } from "../../staffContext.js";
-import * as BsIcons from "react-icons/bs";
-import * as IoIcons from "react-icons/io";
+import SidebarOption from "./SidebarOption";
+import {
+  BsPeopleFill,
+  BsPencilFill,
+  BsInboxFill,
+  BsClockFill,
+  BsBarChartFill,
+  BsGearFill,
+} from "react-icons/bs";
+import { IoIosJournal } from "react-icons/io";
 import { HiBadgeCheck } from "react-icons/hi";
 import { RxExit } from "react-icons/rx";
-import { siteContext } from "../../../Context";
 
-const INACTIVE_COLOR = "#3C8CC9";
-const ACTIVE_COLOR = "#BCBCBC";
+const TOP_OPTIONS = [
+  {
+    destination: "delegations",
+    label: "Delegations",
+    icon: BsPeopleFill,
+    iconSize: 22,
+  },
+  {
+    destination: "editor",
+    label: "Form Editor",
+    icon: BsPencilFill,
+    iconSize: 22,
+  },
+  {
+    destination: "inbox",
+    label: "Inbox",
+    icon: BsInboxFill,
+    iconSize: 22,
+  },
+  {
+    destination: "history",
+    label: "History",
+    icon: BsClockFill,
+    iconSize: 20,
+  },
+  {
+    destination: "statistics",
+    label: "Statistics",
+    icon: BsBarChartFill,
+    iconSize: 22,
+  },
+  {
+    destination: "notes",
+    label: "Notes",
+    icon: IoIosJournal,
+    iconSize: 25,
+  },
+];
+
+const BOTTOM_OPTIONS = [
+  {
+    destination: "plan",
+    label: "Plan",
+    icon: HiBadgeCheck,
+    iconSize: 25,
+  },
+  {
+    destination: "settings",
+    label: "Settings",
+    icon: BsGearFill,
+    iconSize: 22,
+  },
+  {
+    destination: "signout",
+    label: "Sign Out",
+    icon: RxExit,
+    iconSize: 22,
+  },
+];
 
 function Sidebar() {
-  const { pendings, page, setPage } = useContext(appContext);
-  const { handleSignout } = useContext(siteContext);
+  const { page } = useContext(appContext);
   const [indOffset, setIndOffset] = useState(100);
 
   var resizeTimeout;
@@ -33,141 +96,15 @@ function Sidebar() {
     <div className="Sidebar-container">
       <div className="Sidebar-subcontainer">
         <div className="Sidebar-topicons">
-          <div
-            className="Sidebar-option"
-            onClick={() => {
-              setPage("delegations");
-            }}
-          >
-            <BsIcons.BsPeopleFill
-              size={22}
-              style={{
-                transition: "200ms",
-                fill: page === "delegations" ? INACTIVE_COLOR : ACTIVE_COLOR,
-              }}
-            />
-          </div>
-
-          <div
-            className="Sidebar-option"
-            onClick={() => {
-              setPage("editor");
-            }}
-          >
-            <BsIcons.BsPencilFill
-              size={22}
-              style={{
-                transition: "200ms",
-                fill: page === "editor" ? INACTIVE_COLOR : ACTIVE_COLOR,
-              }}
-            />
-          </div>
-
-          <div
-            className="Sidebar-option"
-            onClick={() => {
-              setPage("inbox");
-            }}
-          >
-            <BsIcons.BsInboxFill
-              size={22}
-              style={{
-                transition: "200ms",
-                fill: page === "inbox" ? INACTIVE_COLOR : ACTIVE_COLOR,
-              }}
-            />
-            {pendings.length > 0 && (
-              <p className="notification-indicator">
-                {pendings.length > 99 ? "99+" : pendings.length}
-              </p>
-            )}
-          </div>
-
-          <div
-            className="Sidebar-option"
-            onClick={() => {
-              setPage("history");
-            }}
-          >
-            <BsIcons.BsClockFill
-              size={20}
-              style={{
-                transition: "200ms",
-                fill: page === "history" ? INACTIVE_COLOR : ACTIVE_COLOR,
-              }}
-            />
-          </div>
-
-          <div
-            className="Sidebar-option"
-            onClick={() => {
-              setPage("statistics");
-            }}
-          >
-            <BsIcons.BsBarChartFill
-              size={22}
-              style={{
-                transition: "200ms",
-                fill: page === "statistics" ? INACTIVE_COLOR : ACTIVE_COLOR,
-              }}
-            />
-          </div>
-
-          <div
-            className="Sidebar-option"
-            onClick={() => {
-              setPage("notes");
-            }}
-          >
-            <IoIcons.IoIosJournal
-              size={25}
-              style={{
-                transition: "200ms",
-                fill: page === "notes" ? INACTIVE_COLOR : ACTIVE_COLOR,
-              }}
-            />
-          </div>
+          {TOP_OPTIONS.map((obj) => (
+            <SidebarOption {...obj} />
+          ))}
         </div>
 
         <div className="Sidebar-boticons">
-          <div
-            className="Sidebar-option"
-            onClick={() => {
-              setPage("plan");
-            }}
-          >
-            <HiBadgeCheck
-              size={25}
-              style={{
-                transition: "200ms",
-                fill: page === "plan" ? INACTIVE_COLOR : ACTIVE_COLOR,
-              }}
-            />
-          </div>
-          <div
-            className="Sidebar-option"
-            onClick={() => {
-              setPage("settings");
-            }}
-          >
-            <BsIcons.BsGearFill
-              size={22}
-              style={{
-                transition: "200ms",
-                fill: page === "settings" ? INACTIVE_COLOR : ACTIVE_COLOR,
-              }}
-            />
-          </div>
-          <div className="Sidebar-option" onClick={handleSignout}>
-            <RxExit
-              size={22}
-              style={{
-                transition: "200ms",
-                fill: page === "plan" ? INACTIVE_COLOR : ACTIVE_COLOR,
-                transform: "rotate(180deg)",
-              }}
-            />
-          </div>
+          {BOTTOM_OPTIONS.map((obj) => (
+            <SidebarOption {...obj} />
+          ))}
         </div>
       </div>
 
