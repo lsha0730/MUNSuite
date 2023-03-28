@@ -119,7 +119,7 @@ function Register() {
       confirmPassword: confirmPassRef.current?.value || "",
       confName: confNameRef.current?.value || "",
       commName: commNameRef.current?.value || "",
-      eula: eulaRef.current?.value || false,
+      eula: Boolean(eulaRef.current?.checked),
     };
 
     axios
