@@ -40,14 +40,9 @@ const validateRegister = ({
   commName,
   eula,
 }: RegistrationObject) => {
-  const complete = [
-    email,
-    password,
-    confirmPassword,
-    confName,
-    commName,
-    eula,
-  ].every((e) => (e || "") != "");
+  const complete = [email, password, confirmPassword, confName, commName].every(
+    (e) => (e || "") !== ""
+  );
 
   const checks = [
     complete,
