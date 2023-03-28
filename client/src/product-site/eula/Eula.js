@@ -9,9 +9,9 @@ const Eula = () => {
         className="page sans eula-content"
       >
         <header>
-          <h1 className="page-title">
+          <h2 className="page-title">
             MUNSuite End-user Software License Agreement
-          </h1>
+          </h2>
         </header>
         <div className="page-body">
           <p id="d449b6ac-f1e3-4647-9d22-8514d8556f2a" className="">
@@ -20,8 +20,17 @@ const Eula = () => {
             (&quot;[INVENTOR]&quot;) to the terms and conditions set forth
             below. PLEASE CAREFULLY READ THE TERMS OF THIS SOFTWARE LICENSE
             AGREEMENT. IF YOU AGREE TO BE BOUND BY THE TERMS OF THIS AGREEMENT,
-            YOU SHOULD CLICK ON THE &quot;I Accept&quot; BOX ON THE REGISTRATION
-            PAGE.
+            YOU SHOULD CHECK THE &quot;I have read and agree to the EULA&quot;
+            BOX ON THE REGISTRATION PAGE. By clicking the 'I have read and agree
+            to the EULA' button on the registration page, you are agreeing to be
+            bound by the terms of this End User License Agreement ('EULA') as a
+            legally binding agreement between you and the licensor. Your click
+            on the 'I have read and agree to the EULA' button is the legal
+            equivalent of your signature on a written agreement. By clicking the
+            'I have read and agree to the EULA' button, you represent and
+            warrant that you have the legal authority to enter into this
+            agreement and that you have read and understand all of the terms and
+            conditions of this EULA.
           </p>
           <h3 id="53a7993d-633b-482a-8682-c3c9f05b3349" className="">
             1. SOFTWARE
