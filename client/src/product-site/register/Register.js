@@ -12,6 +12,7 @@ function Register() {
   const confirmPassRef = useRef();
   const confNameRef = useRef();
   const commNameRef = useRef();
+  const eulaRef = useRef();
   const navigate = useNavigate();
 
   return (
@@ -96,6 +97,15 @@ function Register() {
                 }}
               />
             </div>
+            <div className="eula-container">
+              <p className="input-label">
+                I have read and agree to the{" "}
+                <Link className="eula-link" to="/eula" target="_blank">
+                  EULA
+                </Link>
+              </p>
+              <input ref={eulaRef} className="eula-check" type="checkbox" />
+            </div>
           </div>
         </div>
       </div>
@@ -109,6 +119,7 @@ function Register() {
       confirmPassword: confirmPassRef.current?.value || "",
       confName: confNameRef.current?.value || "",
       commName: commNameRef.current?.value || "",
+      eula: eulaRef.current?.value || false,
     };
 
     axios

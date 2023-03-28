@@ -4,6 +4,7 @@ export type RegistrationObject = {
   confirmPassword: string;
   confName: string;
   commName: string;
+  eula: boolean;
 };
 
 export type UserDataTarget =

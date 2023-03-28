@@ -38,22 +38,30 @@ const validateRegister = ({
   confirmPassword,
   confName,
   commName,
+  eula,
 }: RegistrationObject) => {
-  const complete = [email, password, confirmPassword, confName, commName].every(
-    (e) => (e || "") != ""
-  );
+  const complete = [
+    email,
+    password,
+    confirmPassword,
+    confName,
+    commName,
+    eula,
+  ].every((e) => (e || "") != "");
 
   const checks = [
     complete,
     validateEmail(email),
     password.length >= 8,
     password == confirmPassword,
+    eula,
   ];
   const errors = [
     "Fields Incomplete",
     "Invalid Email",
     "Password must be 8 or more characters",
     "Passwords do not match",
+    "Please agree to the EULA",
   ];
 
   for (let i = 0; i < checks.length; i++) {
