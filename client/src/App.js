@@ -17,6 +17,7 @@ import Login from "./product-site/login/Login.js";
 import Forgot from "./product-site/forgot/Forgot.js";
 import Plans from "./product-site/plans/Plans.js";
 import Prepayment from "./product-site/plans/Prepayment";
+import Eula from "./product-site/eula/Eula";
 
 import StaffApp from "./staff-side/StaffApp.js";
 import DelegateApp from "./delegate-side/DelegateApp.js";
@@ -106,6 +107,7 @@ function App() {
             <Route exact path="/forgot" element={<Forgot />} />
             <Route exact path="/plans" element={<Plans />} />
             <Route exact path="/prepayment" element={<Prepayment />} />
+            <Route exact path="/eula" element={<Eula />} />
             <Route
               exact
               path="/app/*"
