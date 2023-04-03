@@ -5,6 +5,7 @@ import PlanCards from "./PlanCards";
 import Horizons from "../home/images/logos/horizons.png";
 import CAHSMUN from "../home/images/logos/cahsmun.png";
 import VMUN from "../home/images/logos/vmun.png";
+import TMUN from "../home/images/logos/tmun.png";
 
 function Plans() {
   return (
@@ -24,6 +25,7 @@ function Plans() {
                 <img className="logo" src={CAHSMUN} />
                 <img className="logo" src={Horizons} />
                 <img className="logo" src={VMUN} />
+                <img className="logo" src={TMUN} />
               </div>
             </div>
           </div>
