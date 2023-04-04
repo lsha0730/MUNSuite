@@ -1,3 +1,7 @@
+.container {
+  position: relative;
+}
+
 .hover {
   position: absolute;
   z-index: 10;

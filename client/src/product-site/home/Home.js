@@ -19,6 +19,7 @@ import { GoGraph } from "react-icons/go";
 import FeatureItem from "./FeatureItem";
 import { siteContext } from "../../Context";
 import GradientAnimation from "./gradient/GradientAnimation";
+import Hoverable from "../../composable/hover/Hover";
 
 function Home() {
   const { isPortrait, currentUser } = useContext(siteContext);
@@ -84,22 +85,30 @@ function Home() {
 
       <div className="trusted-container">
         <div className="trusted-logos">
-          <img
-            src={require("./images/logos/horizons.png")}
-            className="trusted-logo"
-          />
-          <img
-            src={require("./images/logos/cahsmun.png")}
-            className="trusted-logo"
-          />
-          <img
-            src={require("./images/logos/vmun.png")}
-            className="trusted-logo"
-          />
-          <img
-            src={require("./images/logos/tmun.png")}
-            className="trusted-logo"
-          />
+          <Hoverable message="Horizons" pos={{ bottom: -25, left: 3 }}>
+            <img
+              src={require("./images/logos/horizons.png")}
+              className="trusted-logo"
+            />
+          </Hoverable>
+          <Hoverable message="CAHSMUN" pos={{ bottom: -25, left: -5 }}>
+            <img
+              src={require("./images/logos/cahsmun.png")}
+              className="trusted-logo"
+            />
+          </Hoverable>
+          <Hoverable message="VMUN" pos={{ bottom: -25, left: 8 }}>
+            <img
+              src={require("./images/logos/vmun.png")}
+              className="trusted-logo"
+            />
+          </Hoverable>
+          <Hoverable message="TMUN" pos={{ bottom: -25, left: 8 }}>
+            <img
+              src={require("./images/logos/tmun.png")}
+              className="trusted-logo"
+            />
+          </Hoverable>
         </div>
       </div>
 

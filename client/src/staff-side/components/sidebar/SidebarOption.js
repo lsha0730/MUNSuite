@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { appContext } from "../../staffContext.js";
 import { siteContext } from "../../../Context";
 import "./Sidebar.scoped.css";
-import Hover from "../misc/Hover.js";
+import Hoverable from "../../../composable/hover/Hover.js";
 
 const INACTIVE_COLOR = "#3C8CC9";
 const ACTIVE_COLOR = "#BCBCBC";
@@ -10,10 +10,13 @@ const ACTIVE_COLOR = "#BCBCBC";
 function SidebarOption({ destination, label, icon: Tag, iconSize }) {
   const { pendings, page, setPage } = useContext(appContext);
   const { handleSignout } = useContext(siteContext);
-  const [hovering, setHovering] = useState(false);
 
   return (
-    <div className="container">
+    <Hoverable
+      message={label}
+      pos={{ top: 17.5, left: 70 }}
+      className="container"
+    >
       <div
         className="button"
         onClick={
@@ -23,12 +26,6 @@ function SidebarOption({ destination, label, icon: Tag, iconSize }) {
                 setPage(destination);
               }
         }
-        onMouseEnter={() => {
-          setHovering(true);
-        }}
-        onMouseLeave={() => {
-          setHovering(false);
-        }}
       >
         <Tag
           size={iconSize || 22}
@@ -43,11 +40,8 @@ function SidebarOption({ destination, label, icon: Tag, iconSize }) {
             {pendings.length > 99 ? "99+" : pendings.length}
           </p>
         )}
-        {/* <Hover message={label} show={hovering} pos={{ left: 70 }} /> */}
       </div>
-
-      <Hover message={label} show={hovering} pos={{ top: 17.5, left: 70 }} />
-    </div>
+    </Hoverable>
   );
 }
 
