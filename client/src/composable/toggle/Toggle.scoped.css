@@ -1,0 +1,65 @@
+.container {
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.bar {
+  position: relative;
+  width: 45px;
+  height: 20px;
+
+  border-radius: 10px;
+}
+
+.circle {
+  position: absolute;
+  top: -1px;
+  left: 0px;
+
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+}
+
+.bgon {
+  background-color: #cff9c3;
+  transition: 200ms;
+}
+
+.btton {
+  background-color: #3cdc27;
+  transition: 200ms;
+}
+
+.bgoff {
+  background-color: #eeeeee;
+  transition: 200ms;
+}
+
+.bttoff {
+  background-color: #aaaaaa;
+  transition: 200ms;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 500;
+  transition: 200ms;
+}
+
+.labeloff {
+  color: #707070;
+}
+
+.labelon {
+  color: #3cdc27;
+}
+
+.noselect {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}

@@ -23,13 +23,12 @@ import EditShortText from "./editor-components/EditShortText.js";
 import EditLongText from "./editor-components/EditLongText.js";
 import EditDropdown from "./editor-components/EditDropdown.js";
 import EditSelectMultiple from "./editor-components/EditSelectMultiple.js";
+import Toggle from "../../../composable/toggle/Toggle";
 
 function Editor() {
-  const { delegations } = useContext(appContext);
-  const { settings } = useContext(appContext);
-  const { form } = useContext(appContext);
-  const { writeToFirebase } = useContext(appContext);
-  const { userID } = useContext(appContext);
+  const { delegations, settings, form, writeToFirebase, userID } = useContext(
+    appContext
+  );
   const formLink = `${window.location.host}/form/${userID}`;
 
   const [editing, setEditing] = useState(false);
@@ -38,7 +37,6 @@ function Editor() {
   const [standardized, setStandardized] = useState(
     settings.standardForm || false
   );
-  const [toggleRender, setToggleRender] = useState();
 
   useEffect(() => {
     setStandardized(checkStandardized(form));
@@ -49,7 +47,6 @@ function Editor() {
   }, [form, editing, delegations]);
 
   useEffect(() => {
-    rerenderToggle();
     rerenderForm();
 
     // Add standard start elements if not standardized already
@@ -105,7 +102,11 @@ function Editor() {
             <p className="preview-hat-subheading">{settings.committee}</p>
           </div>
 
-          {toggleRender}
+          <Toggle
+            value={standardized}
+            onValue={setStandardized}
+            label={{ on: "Standardized for MUN", off: "Custom Form" }}
+          />
         </div>
 
         {formRender}
@@ -148,38 +149,6 @@ function Editor() {
       </div>
     </div>
   );
-
-  function rerenderToggle() {
-    let toggleOffset = standardized ? 25 : 0;
-    setToggleRender(
-      <div
-        className="toggle-set"
-        onClick={() => {
-          setStandardized(!standardized);
-        }}
-      >
-        <p className={standardized ? "toggle-text-green" : "toggle-text-red"}>
-          {standardized ? "Standardized for MUN" : "Custom Form"}
-        </p>
-        <div
-          className={
-            standardized
-              ? "toggle-bar toggle-greenbg"
-              : "toggle-bar toggle-redbg"
-          }
-        >
-          <div
-            className={
-              standardized
-                ? "toggle-circle toggle-greenbtt"
-                : "toggle-circle toggle-redbtt"
-            }
-            style={{ left: toggleOffset }}
-          />
-        </div>
-      </div>
-    );
-  }
 
   function copyLink() {
     navigator.clipboard.writeText(formLink);

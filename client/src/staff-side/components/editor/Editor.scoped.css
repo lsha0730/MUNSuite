@@ -36,6 +36,7 @@
 
   padding-right: 430px;
   padding-bottom: 30px;
+  margin-top: 30px;
 }
 
 .preview-hat {
@@ -190,61 +191,5 @@
 .btt-addQ:hover {
   background-color: #7eb6df;
   color: #ffffff;
-  transition: 200ms;
-}
-
-/*Toggle*/
-.toggle-set {
-  height: fit-content;
-  margin-top: 70px;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  cursor: pointer;
-}
-.toggle-bar {
-  position: relative;
-  width: 45px;
-  height: 20px;
-
-  margin-left: 15px;
-  border-radius: 10px;
-}
-.toggle-circle {
-  position: absolute;
-  left: 0px;
-
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-}
-.toggle-greenbg {
-  background-color: #cff9c3;
-  transition: 200ms;
-}
-.toggle-greenbtt {
-  background-color: #3cdc27;
-  transition: 200ms;
-}
-.toggle-redbg {
-  background-color: #ffc6c6;
-  transition: 200ms;
-}
-.toggle-redbtt {
-  background-color: #ff7070;
-  transition: 200ms;
-}
-.toggle-text-red {
-  font-size: 16px;
-  font-weight: 500;
-  color: #ff7070;
-  transition: 200ms;
-}
-.toggle-text-green {
-  font-size: 16px;
-  font-weight: 500;
-  color: #3cdc27;
   transition: 200ms;
 }

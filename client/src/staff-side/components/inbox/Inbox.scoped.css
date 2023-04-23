@@ -7,66 +7,6 @@
   justify-content: space-between;
 }
 
-/*Toggle*/
-.toggle-set {
-  height: fit-content;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  cursor: pointer;
-}
-.toggle-bar {
-  position: relative;
-  width: 45px;
-  height: 20px;
-
-  border-radius: 10px;
-}
-.toggle-circle {
-  position: absolute;
-  left: 0px;
-
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-}
-.toggle-greenbg {
-  background-color: #cff9c3;
-  transition: 200ms;
-}
-.toggle-greenbtt {
-  background-color: #3cdc27;
-  transition: 200ms;
-}
-.toggle-redbg {
-  background-color: #ffc6c6;
-  transition: 200ms;
-}
-.toggle-redbtt {
-  background-color: #ff7070;
-  transition: 200ms;
-}
-.toggle-text-red {
-  width: 170px;
-  text-align: right;
-  margin-right: 15px;
-  font-size: 16px;
-  font-weight: 500;
-  color: #ff7070;
-  transition: 200ms;
-}
-.toggle-text-green {
-  width: 170px;
-  text-align: right;
-  margin-right: 15px;
-  font-size: 16px;
-  font-weight: 500;
-  color: #3cdc27;
-  transition: 200ms;
-}
-
 /*--------------TOP UI--------------*/
 .UI-top {
   width: 75%;
@@ -93,6 +33,13 @@
   font-size: 16px;
   font-weight: 500;
   color: #bcbcbc;
+}
+
+.left-spacer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 225px;
 }
 
 /*---------BOTTOM UI--------*/
