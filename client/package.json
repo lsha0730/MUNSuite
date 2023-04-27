@@ -1,5 +1,5 @@
 {
-  "name": "product-site",
+  "name": "munsuite",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -36,5 +36,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/lsha0730/MUNSuite",
+  "author": "Lincoln Lee",
+  "license": "MIT"
 }
