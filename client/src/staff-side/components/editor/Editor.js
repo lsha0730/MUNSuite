@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./Editor.scoped.css";
 import { appContext } from "../../staffContext";
-import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { BiLink } from "react-icons/bi";
 
 // Preview Imports
@@ -24,6 +23,7 @@ import EditLongText from "./editor-components/EditLongText.js";
 import EditDropdown from "./editor-components/EditDropdown.js";
 import EditSelectMultiple from "./editor-components/EditSelectMultiple.js";
 import Toggle from "../../../composable/toggle/Toggle";
+import AddQuestion from "./addQ/AddQuestion";
 
 function Editor() {
   const { delegations, settings, form, writeToFirebase, userID } = useContext(
@@ -51,14 +51,14 @@ function Editor() {
 
     // Add standard start elements if not standardized already
     if (standardized && !checkStandardized(form)) {
-      let frontArr = [];
+      const frontArr = [];
 
       frontArr.push(makeNewBlock("header", 0, true, "New Header"));
       frontArr.push(makeNewBlock("shorttext", 1, true, "Directive Title"));
       frontArr.push(makeNewBlock("radio", 2, true, "Directive Type"));
 
-      let sponsorsQ = makeNewBlock("select-multiple", 3, true, "Sponsors");
-      let signatoriesQ = makeNewBlock(
+      const sponsorsQ = makeNewBlock("select-multiple", 3, true, "Sponsors");
+      const signatoriesQ = makeNewBlock(
         "select-multiple",
         4,
         false,
@@ -69,7 +69,7 @@ function Editor() {
       frontArr.push(sponsorsQ);
       frontArr.push(signatoriesQ);
 
-      let tempArr = frontArr.concat(form.slice());
+      const tempArr = frontArr.concat(form.slice());
       for (let i = 0; i < tempArr.length; i++) {
         tempArr[i].id = i;
       }
@@ -77,10 +77,10 @@ function Editor() {
       writeToFirebase("form", tempArr);
     }
 
-    // Report standardization change to settings object in database
-    let tempSettingsObj = JSON.parse(JSON.stringify(settings));
-    tempSettingsObj.standardForm = standardized;
-    writeToFirebase("settings", tempSettingsObj);
+    writeToFirebase("settings", {
+      ...settings,
+      standardForm: standardized,
+    });
   }, [standardized]);
 
   return (
@@ -111,41 +111,7 @@ function Editor() {
 
         {formRender}
 
-        <div className="addQ-container">
-          <p className="addQ-text">Add Block</p>
-          <div className="addQ-options-container">
-            <div className="btt-addQ" onClick={() => addNewBlock("shorttext")}>
-              Short Text
-            </div>
-            <div className="btt-addQ" onClick={() => addNewBlock("longtext")}>
-              Long Text
-            </div>
-            <div className="btt-addQ" onClick={() => addNewBlock("radio")}>
-              Radio
-            </div>
-            <div
-              className="btt-addQ"
-              onClick={() => addNewBlock("multiplechoice")}
-            >
-              Multiple Choice
-            </div>
-            <div
-              className="btt-addQ"
-              onClick={() => addNewBlock("select-multiple")}
-            >
-              Select Multiple
-            </div>
-            <div className="btt-addQ" onClick={() => addNewBlock("dropdown")}>
-              Dropdown
-            </div>
-            <div className="btt-addQ" onClick={() => addNewBlock("content")}>
-              Content Block
-            </div>
-            <div className="btt-addQ" onClick={() => addNewBlock("header")}>
-              Header
-            </div>
-          </div>
-        </div>
+        <AddQuestion addNewBlock={addNewBlock} />
       </div>
     </div>
   );
