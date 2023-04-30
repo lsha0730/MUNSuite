@@ -21,7 +21,7 @@ function Header({
   return (
     <div style={{ display: "flex", flexDirection: "row-reverse" }}>
       <div
-        className={styles.block_container}
+        className={styles.header_container}
         id={styles.block_container}
         onClick={() => {
           if (setEditing) setEditing(id);
