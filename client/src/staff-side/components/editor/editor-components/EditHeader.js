@@ -6,7 +6,7 @@ import {
   uploadBytes,
   listAll,
 } from "firebase/storage";
-import "./EditorComponents.scoped.css";
+import styles from "./EditorComponents.module.css";
 import { appContext } from "../../../staffContext";
 
 function EditHeader(props) {
@@ -40,18 +40,22 @@ function EditHeader(props) {
   }, [heading, subheading, imageData]);
 
   return (
-    <div className={props.editing == props.id ? "block-container" : "hidden"}>
-      <p className="heading">Header</p>
+    <div
+      className={
+        props.editing == props.id ? styles.block_container : styles.hidden
+      }
+    >
+      <p className={styles.heading}>Header</p>
 
-      <p className="subheading">Image</p>
+      <p className={styles.subheading}>Image</p>
 
-      <div className="header-imgbar-n-btt">
-        <div className="header-imgsrc-container">
-          <div className="overflow-wrapper">
+      <div className={styles.header_imgbar_n_btt}>
+        <div className={styles.header_imgsrc_container}>
+          <div className={styles.overflow_wrapper}>
             <p>{props.imgName || imageData.imgName}</p>
           </div>
         </div>
-        <label className="header-btt-upload">
+        <label className={styles.header_btt_upload}>
           <input
             type="file"
             accept="image/png, image/jpeg, image/gif"
@@ -59,32 +63,32 @@ function EditHeader(props) {
             onChange={(e) => {
               handleFileUpload(e);
             }}
-          ></input>
+          />
           Upload
         </label>
       </div>
 
-      <p className="subheading">Heading</p>
+      <p className={styles.subheading}>Heading</p>
       <input
         type="text"
         placeholder="Input here..."
-        className="textfield-container"
+        className={styles.textfield_container}
         defaultValue={props.heading ? props.heading : ""}
         onChange={(e) => {
           setHeading(e.target.value);
         }}
-      ></input>
+      />
 
-      <p className="subheading">Subheading</p>
+      <p className={styles.subheading}>Subheading</p>
       <input
         type="text"
         placeholder="Input here..."
-        className="textfield-container"
+        className={styles.textfield_container}
         defaultValue={props.subheading ? props.subheading : ""}
         onChange={(e) => {
           setSubheading(e.target.value);
         }}
-      ></input>
+      />
     </div>
   );
 

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { appContext } from "../../staffContext";
-import "./Plan.scoped.css";
+import styles from "./Plan.module.css";
 import axios from "axios";
 
 import PlanCards from "../../../product-site/plans/PlanCards";
@@ -68,16 +68,16 @@ const Plan = () => {
   }, []);
 
   return (
-    <div className="page-container">
-      <div className="innerpage-container">
-        <div className="page-header">
-          <div className="header-pair">
-            <HiBadgeCheck size={30} className="header-icon" />
-            <p className="header-text">Your MUNSuite Plan</p>
+    <div className={styles.page_container}>
+      <div className={styles.innerpage_container}>
+        <div className={styles.page_header}>
+          <div className={styles.header_pair}>
+            <HiBadgeCheck size={30} className={styles.header_icon} />
+            <p className={styles.header_text}>Your MUNSuite Plan</p>
           </div>
         </div>
 
-        <h1 className="plantype-heading">
+        <h1 className={styles.plantype_heading}>
           You are currently on the&nbsp;
           <p
             style={{
@@ -91,14 +91,14 @@ const Plan = () => {
         {accountInfo.type === "Starter" &&
           (totalSubmissions < MAX_SUBMISSIONS ? (
             <>
-              <p className="subtext">
+              <p className={styles.subtext}>
                 You have used &nbsp;
                 <p
                   style={{ color: "#000000", fontWeight: 600 }}
                 >{`${totalSubmissions} of ${MAX_SUBMISSIONS}`}</p>
                 &nbsp; included submissions.
               </p>
-              <p className="subtext">
+              <p className={styles.subtext}>
                 {`To continue after ${MAX_SUBMISSIONS} submissions, please clear your account data
                 or upgrade to a premium plan.`}
               </p>
@@ -106,13 +106,13 @@ const Plan = () => {
           ) : (
             <>
               <p
-                className="subtext"
+                className={styles.subtext}
                 style={{ color: "#FF5A5A", fontWeight: 600 }}
               >
                 {`You have used all ${MAX_SUBMISSIONS} included submissions.`}
               </p>
               <p
-                className="subtext"
+                className={styles.subtext}
                 style={{ color: "#FF5A5A", fontWeight: 600 }}
               >
                 No more submissions can be made until either your account data
@@ -125,7 +125,7 @@ const Plan = () => {
         {accountInfo.type === "Premium" && (
           <>
             <p
-              className="subtext"
+              className={styles.subtext}
               style={{ fontWeight: 600, color: "#BCBCBC" }}
             >
               Expiration:&nbsp;
@@ -135,7 +135,7 @@ const Plan = () => {
               )}`}</p>
             </p>
             <p
-              className="subtext"
+              className={styles.subtext}
               style={{ fontWeight: 600, color: "#BCBCBC" }}
             >
               Happy directive processing!
@@ -157,28 +157,28 @@ const Plan = () => {
               <PlanCards page="app" />
             </div>
 
-            <div className="redeem">
-              <h1 className="heading">Redeem a Code</h1>
-              <div className="redeem-content">
-                <p className="subtext">
+            <div className={styles.redeem}>
+              <h1 className={styles.heading}>Redeem a Code</h1>
+              <div className={styles.redeem_content}>
+                <p className={styles.subtext}>
                   Once you redeem your code, your account will hold premium
                   status for 3 months.
                 </p>
-                <p className="subtext">
+                <p className={styles.subtext}>
                   After the expiration date, your account will revert back to
                   Starter account status.
                 </p>
-                <div className="inputs">
+                <div className={styles.inputs}>
                   <input
                     ref={codeRef}
-                    className="input"
+                    className={styles.input}
                     type="text"
                     placeholder="Enter a product code"
                     onKeyDown={(e) => {
                       if (e.key === "Enter") handleRedeem();
                     }}
                   />
-                  <div className="btt-redeem" onClick={handleRedeem}>
+                  <div className={styles.btt_redeem} onClick={handleRedeem}>
                     Redeem
                   </div>
                 </div>
@@ -213,17 +213,17 @@ const Plan = () => {
 
 const MockupSplash = () => {
   return (
-    <div className="mockup-container">
+    <div className={styles.mockup_container}>
       <img
         src={delegations}
         alt="Delegations UI Image"
-        className="mockup"
+        className={styles.mockup}
         style={{ position: "absolute", top: "100px", left: "800px" }}
       />
       <img
         src={form}
         alt="Form UI Image"
-        className="mockup"
+        className={styles.mockup}
         style={{
           position: "absolute",
           top: "50px",
@@ -234,19 +234,19 @@ const MockupSplash = () => {
       <img
         src={history}
         alt="History UI Image"
-        className="mockup"
+        className={styles.mockup}
         style={{ position: "absolute", top: "250px", left: "350px" }}
       />
       <img
         src={statistics}
         alt="Statistics UI Image"
-        className="mockup"
+        className={styles.mockup}
         style={{ position: "absolute", top: "120px", left: "200px" }}
       />
       <img
         src={notes}
         alt="Notes UI Image"
-        className="mockup"
+        className={styles.mockup}
         style={{ position: "absolute", top: "250px", left: "700px" }}
       />
     </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { delContext } from "../../DelegateContext";
-import "./Dashboard.scoped.css";
+import styles from "./Dashboard.module.css";
 
 import { MAX_SUBMISSIONS } from "../../../staff-side/components/plan/Plan";
 import Banner from "../../../staff-side/components/plan/Banner";
@@ -76,23 +76,23 @@ function Dashboard(props) {
   }, [submission]);
 
   return (
-    <div className="dashboard-container">
+    <div className={styles.dashboard_container}>
       {accountInfo.type === "Starter" && (
         <Banner totalSubmissions={0} page={"delegate"} />
       )}
 
-      <div className="content-container">
-        <div className="UI-left">
+      <div className={styles.content_container}>
+        <div className={styles.UI_left}>
           {showingConfirmation ? (
-            <div className="submission-confirmation">
-              <div className="submission-confirmation-top">
-                <FaPaperPlane size={48} className="confirmation-icon" />
-                <p className="submission-confirmation-heading">
+            <div className={styles.submission_confirmation}>
+              <div className={styles.submission_confirmation_top}>
+                <FaPaperPlane size={48} className={styles.confirmation_icon} />
+                <p className={styles.submission_confirmation_heading}>
                   Submission Sent!
                 </p>
               </div>
               <div
-                className="btt-new-directive"
+                className={styles.btt_new_directive}
                 onClick={() => {
                   setShowingConfirmation(false);
                 }}
@@ -101,14 +101,16 @@ function Dashboard(props) {
               </div>
             </div>
           ) : (
-            <div className="form-container">
-              <div className="form-top">
-                <div className="preview-hat">
-                  <p className="preview-hat-heading">{user}</p>
-                  <p className="preview-hat-subheading">{settings.committee}</p>
+            <div className={styles.form_container}>
+              <div className={styles.form_top}>
+                <div className={styles.preview_hat}>
+                  <p className={styles.preview_hat_heading}>{user}</p>
+                  <p className={styles.preview_hat_subheading}>
+                    {settings.committee}
+                  </p>
                 </div>
                 <div
-                  className="btt-signout"
+                  className={styles.btt_signout}
                   onClick={() => {
                     sessionStorage.removeItem("code");
                     setUser(null);

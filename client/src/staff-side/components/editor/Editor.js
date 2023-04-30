@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import "./Editor.scoped.css";
+import styles from "./Editor.module.css";
 import { appContext } from "../../staffContext";
 import { BiLink } from "react-icons/bi";
 
@@ -84,22 +84,28 @@ function Editor() {
   }, [standardized]);
 
   return (
-    <div className="editor-container">
-      <div className="main-UI">
-        <div className="link-container noselect">
-          <p className={confirmation ? "confirmation" : "confirmation fade"}>
+    <div className={styles.editor_container}>
+      <div className={styles.main_UI}>
+        <div className={`${styles.link_container} ${styles.noselect}`}>
+          <p
+            className={`${styles.confirmation} ${
+              confirmation ? "" : styles.fade
+            }`}
+          >
             Copied!
           </p>
-          <div className="btt-link" onClick={copyLink}>
-            <BiLink className="link-icon" />
+          <div className={styles.btt_link} onClick={copyLink}>
+            <BiLink className={styles.link_icon} />
             <p style={{ marginLeft: 5 }}>Share</p>
           </div>
         </div>
 
-        <div className="hat-UI">
-          <div className="preview-hat">
-            <p className="preview-hat-heading">[Delegation Name]</p>
-            <p className="preview-hat-subheading">{settings.committee}</p>
+        <div className={styles.hat_UI}>
+          <div className={styles.preview_hat}>
+            <p className={styles.preview_hat_heading}>[Delegation Name]</p>
+            <p className={styles.preview_hat_subheading}>
+              {settings.committee}
+            </p>
           </div>
 
           <Toggle
@@ -253,7 +259,7 @@ function Editor() {
         switch (item.type) {
           case "header":
             return (
-              <div className="preview-editor-pair">
+              <div className={styles.preview_editor_pair}>
                 <Header
                   variant="staff"
                   key={`preview${item.id}`}
@@ -283,7 +289,7 @@ function Editor() {
             );
           case "radio":
             return (
-              <div className="preview-editor-pair">
+              <div className={styles.preview_editor_pair}>
                 <Radio
                   variant="staff"
                   key={`preview${item.id}`}
@@ -312,7 +318,7 @@ function Editor() {
             );
           case "multiplechoice":
             return (
-              <div className="preview-editor-pair">
+              <div className={styles.preview_editor_pair}>
                 <MultipleChoice
                   variant="staff"
                   key={`preview${item.id}`}
@@ -341,7 +347,7 @@ function Editor() {
             );
           case "content":
             return (
-              <div className="preview-editor-pair">
+              <div className={styles.preview_editor_pair}>
                 <Content
                   variant="staff"
                   key={`preview${item.id}`}
@@ -370,7 +376,7 @@ function Editor() {
             );
           case "shorttext":
             return (
-              <div className="preview-editor-pair">
+              <div className={styles.preview_editor_pair}>
                 <ShortText
                   variant="staff"
                   key={`preview${item.id}`}
@@ -397,7 +403,7 @@ function Editor() {
             );
           case "longtext":
             return (
-              <div className="preview-editor-pair">
+              <div className={styles.preview_editor_pair}>
                 <LongText
                   variant="staff"
                   key={`preview${item.id}`}
@@ -426,7 +432,7 @@ function Editor() {
             );
           case "dropdown":
             return (
-              <div className="preview-editor-pair">
+              <div className={styles.preview_editor_pair}>
                 <Dropdown
                   variant="staff"
                   key={`preview${item.id}${delegations.length}`}
@@ -459,7 +465,7 @@ function Editor() {
             );
           case "select-multiple":
             return (
-              <div className="preview-editor-pair">
+              <div className={styles.preview_editor_pair}>
                 <SelectMultiple
                   variant="staff"
                   key={`preview${item.id}${

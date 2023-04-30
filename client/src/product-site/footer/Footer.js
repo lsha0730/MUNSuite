@@ -1,16 +1,16 @@
 import React from "react";
-import "./Footer.scoped.css";
+import styles from "./Footer.module.css";
 import { FaLinkedin } from "react-icons/fa";
 
 function Footer() {
   let pathname = window.location.pathname;
 
   const footer = (
-    <div className="footer">
-      <div className="footer-text">
+    <div className={styles.footer}>
+      <div className={styles.footer_text}>
         MUNSuite © 2022&nbsp;&nbsp;|&nbsp;&nbsp;By
         <a
-          className="name"
+          className={styles.name}
           href="https://www.linkedin.com/in/lincoln-seungha-lee/"
         >
           Lincoln Lee&nbsp;

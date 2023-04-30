@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import "./Delegations.scoped.css";
+import styles from "./Delegations.module.css";
 import {
   AddUNCountries,
   AddCustomCountry,
@@ -82,19 +82,19 @@ function Delegations() {
   };
 
   return (
-    <div className="delegations-container">
+    <div className={styles.delegations_container}>
       {modalUI()}
       {showingWelcome ? (
-        <div className="welcome">
-          <p className="welcome-subheading">Signed in as</p>
-          <h1 className="welcome-heading">
+        <div className={styles.welcome}>
+          <p className={styles.welcome_subheading}>Signed in as</p>
+          <h1 className={styles.welcome_heading}>
             {accountInfo.email ||
               `${settings.conference || ""} ${settings.committee || ""}`}
           </h1>
         </div>
       ) : (
-        <div className="welcome">
-          <h1 className="welcome-subheading">
+        <div className={styles.welcome}>
+          <h1 className={styles.welcome_subheading}>
             Signed in as&nbsp;
             <span>
               {accountInfo.email ||
@@ -104,19 +104,19 @@ function Delegations() {
         </div>
       )}
 
-      <div className="flex-row full-size">
-        <div className="UI-left">
-          <div className="UI-topleft">
-            <div className="delcount-container">
-              <div className="delcount-subcont">
-                <p className="delcount-num">{delegations.length}</p>
-                <p className="delcount-desc">Active</p>
-                <p className="delcount-desc">Delegations</p>
+      <div className={`${styles.flex_row} ${styles.full_size}`}>
+        <div className={styles.UI_left}>
+          <div className={styles.UI_topleft}>
+            <div className={styles.delcount_container}>
+              <div className={styles.delcount_subcont}>
+                <p className={styles.delcount_num}>{delegations.length}</p>
+                <p className={styles.delcount_desc}>Active</p>
+                <p className={styles.delcount_desc}>Delegations</p>
               </div>
             </div>
 
             <div
-              className="btt-add-country noselect"
+              className={`${styles.btt_add_country} ${styles.noselect}`}
               onClick={() => {
                 setModal("add-un-countries");
               }}
@@ -125,7 +125,7 @@ function Delegations() {
             </div>
 
             <div
-              className="btt-add-country noselect"
+              className={`${styles.btt_add_country} ${styles.noselect}`}
               onClick={() => {
                 setModal("add-custom-country");
               }}
@@ -136,8 +136,8 @@ function Delegations() {
             <div
               className={
                 accountInfo.type === "Premium"
-                  ? "btt-add-country noselect"
-                  : "btt-bricked noselect"
+                  ? `${styles.btt_add_country} ${styles.noselect}`
+                  : `${styles.btt_bricked} ${styles.noselect}`
               }
               onClick={() => {
                 if (accountInfo.type === "Premium")
@@ -153,8 +153,8 @@ function Delegations() {
             <div
               className={
                 !(delegations.length < 1)
-                  ? "btt-select-all noselect"
-                  : "btt-select-all noselect hide"
+                  ? `${styles.btt_select_all} ${styles.noselect}`
+                  : `${styles.btt_select_all} ${styles.noselect} ${styles.hide}`
               }
               onClick={selectAll}
             >
@@ -164,8 +164,8 @@ function Delegations() {
             <div
               className={
                 !(selections.length < 1)
-                  ? "btt-select-all noselect"
-                  : "btt-select-all noselect hide"
+                  ? `${styles.btt_select_all} ${styles.noselect}`
+                  : `${styles.btt_select_all} ${styles.noselect} ${styles.hide}`
               }
               onClick={deselectAll}
             >
@@ -175,8 +175,10 @@ function Delegations() {
             <div
               className={
                 !(selections.length < 1)
-                  ? "btt-remove-selected noselect"
-                  : "btt-remove-selected noselect hide"
+                  ? `${styles.btt_remove_selected} ${styles.noselect}`
+                  : `${styles.btt_remove_selected} ${styles.noselect} ${
+                      styles.hide
+                    }`
               }
               onClick={() => {
                 setModal("confirmation");
@@ -187,17 +189,17 @@ function Delegations() {
           </div>
 
           <div
-            className="btt-export-delegations noselect"
+            className={`${styles.btt_export_delegations} ${styles.noselect}`}
             onClick={exportCodes}
           >
-            <div className="btt-export-delegations-inner">
+            <div className={styles.btt_export_delegations_inner}>
               <BsIcons.BsDownload size={18} />
               <p>Export Codes (.csv)</p>
             </div>
           </div>
         </div>
 
-        <div className="UI-right">{delegateBars}</div>
+        <div className={styles.UI_right}>{delegateBars}</div>
       </div>
     </div>
   );
@@ -266,8 +268,8 @@ function Delegations() {
       );
     } else {
       setDelegateBars(
-        <div className="no-del-container">
-          <p className="no-del-message">No delegations yet!</p>
+        <div className={styles.no_del_container}>
+          <p className={styles.no_del_message}>No delegations yet!</p>
         </div>
       );
     }

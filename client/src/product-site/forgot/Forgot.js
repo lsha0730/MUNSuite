@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import "./Forgot.scoped.css";
+import styles from "./Forgot.module.css";
 import { BiPaperPlane } from "react-icons/bi";
 
 function Forgot() {
@@ -9,29 +9,29 @@ function Forgot() {
   const [emailSent, setEmailSent] = useState(true);
 
   return (
-    <div className="centering-container">
+    <div className={styles.centering_container}>
       {emailSent ? (
-        <div className="forgot-container">
-          <BiPaperPlane size={100} className="icon" />
-          <p className="form-header">Email Sent!</p>
-          <p className="form-subheader">Check your inbox</p>
+        <div className={styles.forgot_container}>
+          <BiPaperPlane size={100} className={styles.icon} />
+          <p className={styles.form_header}>Email Sent!</p>
+          <p className={styles.form_subheader}>Check your inbox</p>
         </div>
       ) : (
-        <div className="forgot-container">
-          <p className="form-header">Reset Password</p>
+        <div className={styles.forgot_container}>
+          <p className={styles.form_header}>Reset Password</p>
 
-          <p className="input-label">Account Email</p>
+          <p className={styles.input_label}>Account Email</p>
           <input
             type="text"
             id="email"
-            className="input-field"
+            className={styles.input_field}
             onKeyDown={(e) => {
               if (e.key === "Enter") handleForgot();
             }}
           />
 
-          <div className="btt-container">
-            <div className="btt-send" onClick={handleForgot}>
+          <div className={styles.btt_container}>
+            <div className={styles.btt_send} onClick={handleForgot}>
               Send Email
             </div>
             <p className={warning !== "" ? "warning" : "warning fade"}>

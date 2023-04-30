@@ -1,82 +1,104 @@
 import React from "react";
-import "./Plans.scoped.css";
+import styles from "./Plans.module.css";
 
 function Plans() {
   return (
-    <div className="options-container">
-      <div className="top">
-        <div className="top-container">
-          <p className="header">Perfectly smooth crises, just one step away.</p>
+    <div className={styles.options_container}>
+      <div className={styles.top}>
+        <div className={styles.top_container}>
+          <p className={styles.header}>
+            Perfectly smooth crises, just one step away.
+          </p>
 
           <div style={{ position: "relative" }}>
-            <div className="join-container">
-              <div className="join-header">
+            <div className={styles.join_container}>
+              <div className={styles.join_header}>
                 MUNSuite is currently in private beta.
               </div>
-              <div className="join-subheader">Public release in late 2022</div>
-              <div className="join-action">
-                <a href="mailto:info@munsuite.com" className="link">
+              <div className={styles.join_subheader}>
+                Public release in late 2022
+              </div>
+              <div className={styles.join_action}>
+                <a href="mailto:info@munsuite.com" className={styles.link}>
                   Shoot me an email
                 </a>{" "}
                 to request access!
               </div>
             </div>
 
-            <div className="cards-container">
-              <div className="card">
+            <div className={styles.cards_container}>
+              <div className={styles.card}>
                 <div
-                  className="card-tie"
+                  className={styles.card_tie}
                   style={{ backgroundColor: "#EAEAEA" }}
                 >
-                  <div className="card-tie-left">
-                    <p className="card-heading" style={{ color: "#707070" }}>
+                  <div className={styles.card_tie_left}>
+                    <p
+                      className={styles.card_heading}
+                      style={{ color: "#707070" }}
+                    >
                       Demo
                     </p>
-                    <p className="card-subheading" style={{ color: "#707070" }}>
+                    <p
+                      className={styles.card_subheading}
+                      style={{ color: "#707070" }}
+                    >
                       Try it out
                     </p>
                   </div>
-                  <p className="price-tag" style={{ color: "#707070" }}>
+                  <p className={styles.price_tag} style={{ color: "#707070" }}>
                     $0
                   </p>
                 </div>
 
-                <div className="card-body">
-                  <ul className="items-list">
+                <div className={styles.card_body}>
+                  <ul className={styles.items_list}>
                     <li>50 submissions</li>
                     <li>Email support</li>
                   </ul>
 
-                  <div className="btt-demo">Try the Demo</div>
+                  <div className={styles.btt_demo}>Try the Demo</div>
                 </div>
               </div>
 
-              <div className="card">
+              <div className={styles.card}>
                 <div
-                  className="card-tie"
+                  className={styles.card_tie}
                   style={{ backgroundColor: "#4A687F" }}
                 >
-                  <div className="card-tie-left">
-                    <p className="card-heading" style={{ color: "#FFFFFF" }}>
+                  <div className={styles.card_tie_left}>
+                    <p
+                      className={styles.card_heading}
+                      style={{ color: "#FFFFFF" }}
+                    >
                       Full Access
                     </p>
-                    <p className="card-subheading" style={{ color: "#FFFFFF" }}>
+                    <p
+                      className={styles.card_subheading}
+                      style={{ color: "#FFFFFF" }}
+                    >
                       Goodbye headaches
                     </p>
                   </div>
 
                   <div>
-                    <p className="price-tag" style={{ color: "#FFFFFF" }}>
+                    <p
+                      className={styles.price_tag}
+                      style={{ color: "#FFFFFF" }}
+                    >
                       $5
                     </p>
-                    <p className="price-subtag" style={{ color: "#FFFFFF" }}>
+                    <p
+                      className={styles.price_subtag}
+                      style={{ color: "#FFFFFF" }}
+                    >
                       /2 mo
                     </p>
                   </div>
                 </div>
 
-                <div className="card-body">
-                  <ul className="items-list">
+                <div className={styles.card_body}>
+                  <ul className={styles.items_list}>
                     <li>Infinite submissions</li>
                     <li>See previous directives</li>
                     <li>Auto-collected statistics</li>
@@ -86,7 +108,7 @@ function Plans() {
                     <li>Messaging support</li>
                   </ul>
 
-                  <div className="btt-full">Get Started</div>
+                  <div className={styles.btt_full}>Get Started</div>
                 </div>
               </div>
             </div>
@@ -94,11 +116,11 @@ function Plans() {
         </div>
       </div>
 
-      <div className="bottom">
-        <div className="bottom-container">
-          <p className="bottom-header">Payment Details</p>
-          <ul className="items-list">
-            <div className="nowrap">
+      <div className={styles.bottom}>
+        <div className={styles.bottom_container}>
+          <p className={styles.bottom_header}>Payment Details</p>
+          <ul className={styles.items_list}>
+            <div className={styles.nowrap}>
               <li>This is</li>
               <p style={{ fontWeight: "600" }}>
                 &nbsp;not a subscription&nbsp;
@@ -115,9 +137,9 @@ function Plans() {
             </li>
             <li>All sales are final.</li>
           </ul>
-          <p className="bottom-disclaimer">
+          <p className={styles.bottom_disclaimer}>
             All payments are handled securely using&nbsp;
-            <a className="red-highlight" href="http://stripe.com">
+            <a className={styles.red_highlight} href="http://stripe.com">
               Stripe.
             </a>
           </p>

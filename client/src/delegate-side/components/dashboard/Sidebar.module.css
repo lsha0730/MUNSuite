@@ -1,0 +1,162 @@
+.margin_block {
+  transition: 500ms;
+}
+
+.history_container {
+  width: fit-content;
+  height: 100%;
+
+  position: fixed;
+  z-index: 99;
+
+  display: flex;
+  transition: 500ms;
+}
+
+.content {
+  height: 100%;
+  flex-direction: column;
+  background-color: #eeeeee;
+  display: flex;
+
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.toggle {
+  position: absolute;
+
+  min-width: 35px;
+  min-height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: 500ms;
+}
+
+.open {
+  left: 0px;
+
+  background-color: #f7f7f7;
+  border-radius: 0 12rem 12rem 0;
+  padding-right: 5px;
+}
+
+.closed {
+  left: -35px;
+
+  background-color: #eeeeee;
+  border-radius: 12rem 0 0 12rem;
+  padding-left: 5px;
+}
+
+.noselect {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+/*----- Heading -----*/
+.sidebar_top {
+  margin-top: 20px;
+  margin-bottom: 10px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.btt_page {
+  width: 140px;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px;
+
+  background-color: #eeeeee;
+  border-radius: 15px;
+  color: #707070;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: #f7f7f7;
+  color: #000000;
+  font-weight: 600;
+}
+
+.btt_text {
+  width: fit-content;
+  margin-left: 8px;
+  font-size: 14px;
+}
+
+.btt_icon {
+  fill: #707070;
+}
+.bold {
+  fill: #000000;
+}
+
+.page_description {
+  font-size: 14px;
+  font-weight: 500;
+  color: #aaaaaa;
+
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+/*----- History -----*/
+.history_cards_container {
+  display: grid;
+  row-gap: 10px;
+  overflow-y: auto;
+}
+.history_cards_container::-webkit-scrollbar {
+  display: none;
+}
+
+.history_no_submissions_block {
+  width: 350px;
+  flex-grow: 1;
+  margin-bottom: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  background-color: #ececec;
+
+  font-size: 24px;
+  font-weight: 700;
+  color: #bcbcbc;
+}
+
+/*----- Draft -----*/
+.subheading {
+  font-size: 14px;
+  font-weight: 600;
+  color: #707070;
+  margin-top: 5px;
+}
+
+/*----- Media Query -----*/
+@media (max-width: 641px) {
+  .form_top {
+    padding-left: 10px;
+    padding-right: 10px;
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+}

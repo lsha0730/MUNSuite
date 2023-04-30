@@ -1,5 +1,5 @@
 import React from "react";
-import "./Form.scoped.css";
+import styles from "./Form.module.css";
 
 import defaultBanner from "./defaultBanner.png";
 import Header from "../../../staff-side/components/editor/preview-components/Header";
@@ -20,14 +20,14 @@ const Form = ({
   handleSubmit,
 }) => {
   return disabled ? (
-    <div className="bricked-container">
-      <p className="bricked-header">Form Suspended</p>
-      <p className="bricked-subheader">
+    <div className={styles.bricked_container}>
+      <p className={styles.bricked_header}>Form Suspended</p>
+      <p className={styles.bricked_subheader}>
         The Dais has temporarily suspended the form.
       </p>
     </div>
   ) : (
-    <div className="form-container">
+    <div className={styles.form_container}>
       {form.map((item) => {
         switch (item.type) {
           case "header":
@@ -146,9 +146,11 @@ const Form = ({
         }
       })}
 
-      <div className="submit-container">
-        <p className={warning == "" ? "warning fade" : "warning"}>{warning}</p>
-        <div className="btt-submit" onClick={handleSubmit}>
+      <div className={styles.submit_container}>
+        <p className={`${styles.warning} ${warning == "" ? styles.fade : ""}`}>
+          {warning}
+        </p>
+        <div className={styles.btt_submit} onClick={handleSubmit}>
           Submit
         </div>
       </div>

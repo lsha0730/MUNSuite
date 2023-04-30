@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import "./Inbox.scoped.css";
+import styles from "./Inbox.module.css";
 import { appContext } from "../../staffContext";
 import Dropdown from "../history/Dropdown";
 import { FaFilter } from "react-icons/fa";
@@ -32,17 +32,17 @@ function Inbox() {
   const directivesToDisplay = pendings.filter(includeInFilter);
 
   return (
-    <div className="inbox-container">
-      <div className="UI-top">
-        <div className="filter-container">
+    <div className={styles.inbox_container}>
+      <div className={styles.UI_top}>
+        <div className={styles.filter_container}>
           <FaFilter size={15} style={{ marginRight: 10, fill: "#BCBCBC" }} />
           <Dropdown
             options={getFilterOptions(pendings)}
             setSelection={setDropdownValue}
           />
         </div>
-        <p className="card-count">{pendings.length} in Queue</p>
-        <div className="left-spacer">
+        <p className={styles.card_count}>{pendings.length} in Queue</p>
+        <div className={styles.left_spacer}>
           <Toggle
             value={accepting}
             onValue={setAccepting}
@@ -54,8 +54,8 @@ function Inbox() {
           />
         </div>
       </div>
-      <div className="UI-bottom">
-        <div className="spacer" />
+      <div className={styles.UI_bottom}>
+        <div className={styles.spacer} />
         {directivesToDisplay.length > 0 ? (
           directivesToDisplay.map((directive) =>
             directive.standard ? (
@@ -84,9 +84,9 @@ function Inbox() {
             )
           )
         ) : (
-          <div className="no-cards-box">No pending submissions</div>
+          <div className={styles.no_cards_box}>No pending submissions</div>
         )}
-        <div className="spacer2" />
+        <div className={styles.spacer2} />
       </div>
     </div>
   );

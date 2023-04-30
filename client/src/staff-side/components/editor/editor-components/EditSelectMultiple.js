@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { appContext } from "../../../staffContext";
-import "./EditorComponents.scoped.css";
+import styles from "./EditorComponents.module.css";
 
 function EditSelectMultiple(props) {
   const { delegations } = useContext(appContext);
@@ -58,23 +58,23 @@ function EditSelectMultiple(props) {
     let toggleOffset = require ? 20 : 0;
 
     setToggleRender(
-      <div className="toggle-set" onClick={() => setRequire(!require)}>
-        <p className={require ? "toggle-text-red" : "toggle-text-grey"}>
+      <div className={styles.toggle_set} onClick={() => setRequire(!require)}>
+        <p
+          className={require ? styles.toggle_text_red : styles.toggle_text_grey}
+        >
           {require ? "Required" : "Optional"}
         </p>
         <div
-          className={
-            require ? "toggle-bar toggle-redbg" : "toggle-bar toggle-greybg"
-          }
+          className={`${styles.toggle_bar} ${
+            require ? styles.toggle_redbg : styles.toggle_greybg
+          }`}
         >
           <div
-            className={
-              require
-                ? "toggle-circle toggle-redbtt"
-                : "toggle-circle toggle-greybtt"
-            }
+            className={`${styles.toggle_circle} ${
+              require ? styles.toggle_redbtt : styles.toggle_greybtt
+            }`}
             style={{ left: toggleOffset }}
-          ></div>
+          />
         </div>
       </div>
     );
@@ -114,19 +114,23 @@ function EditSelectMultiple(props) {
 
   useEffect(() => {
     if (options.length == 0) {
-      setOptionsRender(<p className="option-none-ind">No options yet!</p>);
+      setOptionsRender(
+        <p className={styles.option_none_ind}>No options yet!</p>
+      );
     } else {
       let renderArr = [];
       for (let i = 0; i < options.length; i++) {
         renderArr.push(
           <div
             className={
-              useDels ? "option-container-bricked" : "option-container"
+              useDels
+                ? styles.option_container_bricked
+                : styles.option_container
             }
             onClick={() => removeOption(i)}
           >
-            <div className="overflow-wrapper">
-              <p className="option-text">{options[i]}</p>
+            <div className={styles.overflow_wrapper}>
+              <p className={styles.option_text}>{options[i]}</p>
             </div>
           </div>
         );
@@ -136,71 +140,79 @@ function EditSelectMultiple(props) {
   }, [options, useDels]);
 
   return (
-    <div className={props.editing == props.id ? "block-container" : "hidden"}>
-      <p className="heading">Select Multiple</p>
+    <div
+      className={
+        props.editing == props.id ? styles.block_container : styles.hidden
+      }
+    >
+      <p className={styles.heading}>Select Multiple</p>
       {toggleRender}
 
-      <p className="subheading">Heading</p>
+      <p className={styles.subheading}>Heading</p>
       <input
         type="text"
         id={"heading" + props.id}
         className={
-          props.locked ? "textfield-container-bricked" : "textfield-container"
+          props.locked
+            ? styles.textfield_container_bricked
+            : styles.textfield_container
         }
         disabled={props.locked}
         placeholder="Input here..."
         onChange={() => {
           setHeading(document.getElementById("heading" + props.id).value);
         }}
-      ></input>
+      />
 
-      <p className="subheading">Subheading</p>
+      <p className={styles.subheading}>Subheading</p>
       <input
         type="text"
         id={"subheading" + props.id}
         placeholder="Input here..."
-        className="textfield-container"
+        className={styles.textfield_container}
         onChange={() =>
           setSubheading(document.getElementById("subheading" + props.id).value)
         }
-      ></input>
+      />
 
-      <p className="subheading">Max Selectable</p>
+      <p className={styles.subheading}>Max Selectable</p>
       <input
         type="number"
         min="1"
         id={"maxcount" + props.id}
         placeholder="Unlimited"
-        className="textfield-container"
+        className={styles.textfield_container}
         onChange={() => {
           setMaxcount(document.getElementById("maxcount" + props.id).value);
         }}
-      ></input>
+      />
 
-      <p className="subheading">Options</p>
+      <p className={styles.subheading}>Options</p>
 
-      <div className="option-adder">
+      <div className={styles.option_adder}>
         <input
           type="text"
           id={"multipleSelect" + props.id}
-          className={useDels ? "option-input-bricked" : "option-input"}
+          className={
+            useDels ? styles.option_input_bricked : styles.option_input
+          }
           disabled={useDels}
           onKeyDown={(e) => {
             if (e.key === "Enter") addOption();
           }}
-        ></input>
+        />
         <div
-          className={useDels ? "btt-add-option-bricked" : "btt-add-option"}
+          className={
+            useDels ? styles.btt_add_option_bricked : styles.btt_add_option
+          }
           onClick={addOption}
         >
           <p>Add</p>
         </div>
         <div
-          className={
-            useDels
-              ? "btt-add-all btt-add-all-on"
-              : "btt-add-all btt-add-all-off"
-          }
+          className={`${styles.btt_add_all} ${
+            useDels ? styles.btt_add_all_on : styles.btt_add_all_off
+          }`}
           onClick={toggleUseAll}
         >
           <p>Use Dels</p>
@@ -208,11 +220,9 @@ function EditSelectMultiple(props) {
       </div>
 
       <div
-        className={
-          useDels
-            ? "options-container options-container-bricked"
-            : "options-container"
-        }
+        className={`${styles.options_container} ${
+          useDels ? styles.options_container_bricked : ""
+        }`}
       >
         {optionsRender}
       </div>

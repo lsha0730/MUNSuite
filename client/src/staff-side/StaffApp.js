@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { getDatabase, onValue, ref, set } from "firebase/database";
 import axios from "axios";
 import { getAuth } from "firebase/auth";
-import "./StaffApp.scoped.css";
+import styles from "./StaffApp.module.css";
 
 import Sidebar from "./components/sidebar/Sidebar.js";
 import Delegations from "./components/delegations/Delegations.js";
@@ -209,16 +209,16 @@ function App() {
         setAccountInfo,
       }}
     >
-      <div className="App-container">
+      <div className={styles.App_container}>
         <Sidebar />
-        <div className="UI-container">
+        <div className={styles.UI_container}>
           {accountInfo.type !== "Premium" && (
             <Banner
               totalSubmissions={pendings.length + processed.length}
               page={"staff"}
             />
           )}
-          <div className="page-container">{UI}</div>
+          <div className={styles.page_container}>{UI}</div>
         </div>
       </div>
     </appContext.Provider>

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import "./Register.scoped.css";
+import styles from "./Register.module.css";
 import axios from "axios";
 
 function Register() {
@@ -16,39 +16,39 @@ function Register() {
   const navigate = useNavigate();
 
   return (
-    <div className="centering-container">
-      <div className="register-container">
-        <p className="form-header">Register an Account</p>
-        <div className="form">
-          <div className="form-left">
+    <div className={styles.centering_container}>
+      <div className={styles.register_container}>
+        <p className={styles.form_header}>Register an Account</p>
+        <div className={styles.form}>
+          <div className={styles.form_left}>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <p className="input-label">Email</p>
+              <p className={styles.input_label}>Email</p>
               <input
                 ref={emailRef}
                 type="text"
-                className="input-field"
+                className={styles.input_field}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleRegister();
                 }}
               />
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <p className="input-label">Password</p>
+              <p className={styles.input_label}>Password</p>
               <input
                 ref={passwordRef}
                 type="password"
-                className="input-field"
+                className={styles.input_field}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleRegister();
                 }}
               />
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <p className="input-label">Confirm Password</p>
+              <p className={styles.input_label}>Confirm Password</p>
               <input
                 ref={confirmPassRef}
                 type="password"
-                className="input-field"
+                className={styles.input_field}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleRegister();
                 }}
@@ -56,16 +56,16 @@ function Register() {
             </div>
 
             <p
-              className="additional-text"
+              className={styles.additional_text}
               style={{ marginTop: "50px", marginBottom: "10px" }}
             >
               Have an account?&nbsp;
-              <Link to="/login" className="additional-link">
+              <Link to="/login" className={styles.additional_link}>
                 Log In.
               </Link>
             </p>
-            <div className="btt-container">
-              <div className="btt-register" onClick={handleRegister}>
+            <div className={styles.btt_container}>
+              <div className={styles.btt_register} onClick={handleRegister}>
                 Register
               </div>
               <p className={warning !== "" ? "warning" : "warning fade"}>
@@ -74,37 +74,41 @@ function Register() {
             </div>
           </div>
 
-          <div className="form-right">
+          <div className={styles.form_right}>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <p className="input-label">Abbreviated Conference Name</p>
+              <p className={styles.input_label}>Abbreviated Conference Name</p>
               <input
                 ref={confNameRef}
                 type="text"
-                className="input-field"
+                className={styles.input_field}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleRegister();
                 }}
               />
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <p className="input-label">Abbreviated Committee Name</p>
+              <p className={styles.input_label}>Abbreviated Committee Name</p>
               <input
                 ref={commNameRef}
                 type="text"
-                className="input-field"
+                className={styles.input_field}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleRegister();
                 }}
               />
             </div>
-            <div className="eula-container">
-              <p className="input-label">
+            <div className={styles.eula_container}>
+              <p className={styles.input_label}>
                 I have read and agree to the{" "}
-                <Link className="eula-link" to="/eula" target="_blank">
+                <Link className={styles.eula_link} to="/eula" target="_blank">
                   EULA
                 </Link>
               </p>
-              <input ref={eulaRef} className="eula-check" type="checkbox" />
+              <input
+                ref={eulaRef}
+                className={styles.eula_check}
+                type="checkbox"
+              />
             </div>
           </div>
         </div>

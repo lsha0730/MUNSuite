@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import "./Hover.scoped.css";
+import styles from "./Hover.module.css";
 
-const Hoverable = ({ message, pos, children, ...other }) => {
+const Hoverable = ({ message, pos, children, className, ...other }) => {
   const [hover, setHover] = useState(false);
 
   return (
     <div
       {...other}
-      className="container"
+      className={`${styles.container} ${className}`}
       onMouseEnter={() => {
         setHover(true);
       }}
@@ -16,7 +16,7 @@ const Hoverable = ({ message, pos, children, ...other }) => {
       }}
     >
       <div
-        className="hover"
+        className={styles.hover}
         style={Object.assign({ opacity: hover ? "100%" : "0%" }, pos)}
       >
         {message}

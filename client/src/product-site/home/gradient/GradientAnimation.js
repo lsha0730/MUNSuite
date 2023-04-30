@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./GradientAnimation.scoped.css";
+import "./GradientAnimation.css";
 
 function GradientAnimation({ ...other }) {
   useEffect(() => {

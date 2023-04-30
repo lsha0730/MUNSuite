@@ -1,0 +1,134 @@
+.loginpage_container {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #f7f7f7;
+}
+
+.UI_container {
+  width: fit-content;
+  min-width: 450px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+/*----------UI TOP----------*/
+.UI_top {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.UI_top_right {
+  display: flex;
+  flex-direction: column;
+}
+
+.icon {
+  fill: #378dcc;
+  margin-right: 20px;
+}
+
+.heading {
+  font-size: 42px;
+  font-weight: 700;
+  color: #bcbcbc;
+}
+
+.subheading {
+  font-size: 20px;
+  font-weight: 700;
+  color: #bcbcbc;
+}
+
+/*--------UI BOTTOM--------*/
+.UI_bottom {
+  width: 100%;
+  height: 35px;
+
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+}
+
+.input_field {
+  width: 100%;
+  height: 100%;
+
+  padding-left: 10px;
+  padding-right: 10px;
+
+  font-size: 16px;
+
+  border-color: rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+.input_field::placeholder {
+  font-size: 16px;
+  color: #c0c0c0;
+}
+.input_field:focus {
+  outline: none !important;
+  border-color: rgba(0, 0, 0, 0);
+  background-color: #ffffff;
+}
+.input_field:hover {
+  background-color: #eeeeee;
+}
+
+.btt_enter {
+  padding: 3px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+  background-color: #bae4fa;
+  color: #00a3ff;
+  transition: 200ms;
+
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+.btt_enter:hover {
+  background-color: #7eb6df;
+  color: #ffffff;
+  transition: 200ms;
+}
+
+@media (max-width: 641px) {
+  .UI_container {
+    justify-content: center;
+  }
+  .UI_top {
+    justify-content: center;
+  }
+  .UI_bottom {
+    justify-content: center;
+  }
+  .heading {
+    font-size: 28px;
+  }
+  .subheading {
+    font-size: 18px;
+  }
+  .input_field {
+    width: 200px;
+  }
+}

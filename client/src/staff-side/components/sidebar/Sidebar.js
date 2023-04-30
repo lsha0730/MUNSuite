@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import "./Sidebar.scoped.css";
+import styles from "./Sidebar.module.css";
 import { appContext } from "../../staffContext.js";
 import SidebarOption from "./SidebarOption";
 import {
@@ -93,22 +93,22 @@ function Sidebar() {
   }, [page]);
 
   return (
-    <div className="Sidebar-container">
-      <div className="Sidebar-subcontainer">
-        <div className="Sidebar-topicons">
+    <div className={styles.Sidebar_container}>
+      <div className={styles.Sidebar_subcontainer}>
+        <div className={styles.Sidebar_topicons}>
           {TOP_OPTIONS.map((obj) => (
             <SidebarOption {...obj} />
           ))}
         </div>
 
-        <div className="Sidebar-boticons">
+        <div className={styles.Sidebar_boticons}>
           {BOTTOM_OPTIONS.map((obj) => (
             <SidebarOption {...obj} />
           ))}
         </div>
       </div>
 
-      <div className="Sidebar-indicator" style={{ top: indOffset }} />
+      <div className={styles.Sidebar_indicator} style={{ top: indOffset }} />
     </div>
   );
 }

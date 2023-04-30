@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { appContext } from "../../staffContext";
-import "./Banner.scoped.css";
+import styles from "./Banner.module.css";
 import { MAX_SUBMISSIONS } from "./Plan";
 
 const Banner = ({ totalSubmissions, page }) => {
@@ -13,7 +13,7 @@ const Banner = ({ totalSubmissions, page }) => {
         <>
           &nbsp;
           <span
-            className="action-text"
+            className={styles.action_text}
             onClick={() => {
               setPage("plan");
             }}
@@ -27,7 +27,7 @@ const Banner = ({ totalSubmissions, page }) => {
       {`Your account is nearing the ${MAX_SUBMISSIONS} submission limit. At the limit, you will have to clear your directives history or`}
       &nbsp;
       <span
-        className="action-text"
+        className={styles.action_text}
         onClick={() => {
           setPage("plan");
         }}
@@ -39,7 +39,7 @@ const Banner = ({ totalSubmissions, page }) => {
       {`Your account has reached the ${MAX_SUBMISSIONS} submission limit. Make room by clearing your directives history or`}
       &nbsp;
       <span
-        className="action-text"
+        className={styles.action_text}
         onClick={() => {
           setPage("plan");
         }}
@@ -76,13 +76,13 @@ const Banner = ({ totalSubmissions, page }) => {
 
   return (
     <div
-      className="container"
+      className={styles.container}
       style={{
         backgroundColor: colors[i(totalSubmissions)].bg,
         color: colors[i(totalSubmissions)].text,
       }}
     >
-      <p className="message">{messages[i(totalSubmissions)]}</p>
+      <p className={styles.message}>{messages[i(totalSubmissions)]}</p>
     </div>
   );
 };

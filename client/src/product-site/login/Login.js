@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import "../register/Register.scoped.css";
+import styles from "../register/Register.module.css";
 
 function Login() {
   const auth = getAuth();
@@ -9,51 +9,51 @@ function Login() {
   const navigate = useNavigate();
 
   return (
-    <div className="centering-container">
-      <div className="register-container">
-        <p className="form-header">Log In</p>
-        <div className="form">
-          <div className="form-left">
+    <div className={styles.centering_container}>
+      <div className={styles.register_container}>
+        <p className={styles.form_header}>Log In</p>
+        <div className={styles.form}>
+          <div className={styles.form_left}>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <p className="input-label">Email</p>
+              <p className={styles.input_label}>Email</p>
               <input
                 type="text"
                 id="email"
-                className="input-field"
+                className={styles.input_field}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleLogin();
                 }}
               />
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <p className="input-label">Password</p>
+              <p className={styles.input_label}>Password</p>
               <input
                 type="password"
                 id="password"
-                className="input-field"
+                className={styles.input_field}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleLogin();
                 }}
               />
             </div>
-            <p className="additional-text" style={{ marginTop: "10px" }}>
-              <Link to="/forgot" className="additional-link">
+            <p className={styles.additional_text} style={{ marginTop: "10px" }}>
+              <Link to="/forgot" className={styles.additional_link}>
                 Forgot Password?
               </Link>
             </p>
 
             <p
-              className="additional-text"
+              className={styles.additional_text}
               style={{ marginTop: "100px", marginBottom: "10px" }}
             >
               Don't have an account?&nbsp;
-              <Link to="/register" className="additional-link">
+              <Link to="/register" className={styles.additional_link}>
                 Register!
               </Link>
             </p>
 
-            <div className="btt-container">
-              <div className="btt-register" onClick={handleLogin}>
+            <div className={styles.btt_container}>
+              <div className={styles.btt_register} onClick={handleLogin}>
                 Log In
               </div>
               <p className={warning !== "" ? "warning" : "warning fade"}>

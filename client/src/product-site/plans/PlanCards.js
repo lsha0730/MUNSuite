@@ -1,5 +1,5 @@
 import React from "react";
-import "./PlanCards.scoped.css";
+import styles from "./PlanCards.module.css";
 import { Link } from "react-router-dom";
 import { BsCheck } from "react-icons/bs";
 import SingleFill from "./icons/SingleFill.svg";
@@ -8,22 +8,26 @@ import { MAX_SUBMISSIONS } from "../../staff-side/components/plan/Plan";
 
 const PlanCards = ({ page }) => {
   return (
-    <div className={`cards-container ${page === "app" ? "app-container" : ""}`}>
-      <div className="card">
-        <div className="card-tie" style={{ backgroundColor: "#F3F3F3" }}>
+    <div
+      className={`${styles.cards_container} ${
+        page === "app" ? styles.app_container : ""
+      }`}
+    >
+      <div className={styles.card}>
+        <div className={styles.card_tie} style={{ backgroundColor: "#F3F3F3" }}>
           <img
-            className="icon noselect"
+            className={`${styles.icon} ${styles.noselect}`}
             src={SingleFill}
             style={{ height: 40 }}
           />
-          <p className="card-heading">Starter</p>
-          <p className="card-subheading">
+          <p className={styles.card_heading}>Starter</p>
+          <p className={styles.card_subheading}>
             For small conferences, school clubs, or student groups
           </p>
         </div>
 
-        <div className="card-body">
-          <h1 className="price-tag">Free</h1>
+        <div className={styles.card_body}>
+          <h1 className={styles.price_tag}>Free</h1>
 
           <FeatureList
             items={[
@@ -33,34 +37,34 @@ const PlanCards = ({ page }) => {
           />
 
           {page === "app" ? (
-            <div className="btt-bricked">Current Plan</div>
+            <div className={styles.btt_bricked}>Current Plan</div>
           ) : (
-            <Link to="/register" className="btt-demo">
+            <Link to="/register" className={styles.btt_demo}>
               Make an account
             </Link>
           )}
         </div>
       </div>
 
-      <div className="card">
-        <div className="card-tie">
+      <div className={styles.card}>
+        <div className={styles.card_tie}>
           <img
-            className="icon noselect"
+            className={`${styles.icon} ${styles.noselect}`}
             src={FlyingDark}
             style={{ height: 50 }}
           />
-          <p className="card-heading" style={{ color: "#378DCC" }}>
+          <p className={styles.card_heading} style={{ color: "#378DCC" }}>
             Premium
           </p>
-          <p className="card-subheading" style={{ color: "#378DCC" }}>
+          <p className={styles.card_subheading} style={{ color: "#378DCC" }}>
             For bigger, more serious applications
           </p>
         </div>
 
-        <div className="card-body">
+        <div className={styles.card_body}>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <h1 className="price-tag">$10</h1>
-            <p className="price-subtag">3 months access</p>
+            <h1 className={styles.price_tag}>$10</h1>
+            <p className={styles.price_subtag}>3 months access</p>
           </div>
 
           <FeatureList
@@ -72,7 +76,7 @@ const PlanCards = ({ page }) => {
             ]}
           />
 
-          <Link to="/prepayment" className="btt-full">
+          <Link to="/prepayment" className={styles.btt_full}>
             Get Started
           </Link>
         </div>
@@ -83,11 +87,11 @@ const PlanCards = ({ page }) => {
 
 const FeatureList = ({ items }) => {
   return (
-    <div className="list-container">
+    <div className={styles.list_container}>
       {items.map((e) => (
-        <div className="list-item">
-          <BsCheck size={16} className="list-check" />
-          <p className="list-text">{e}</p>
+        <div className={styles.list_item}>
+          <BsCheck size={16} className={styles.list_check} />
+          <p className={styles.list_text}>{e}</p>
         </div>
       ))}
     </div>

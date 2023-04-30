@@ -1,5 +1,5 @@
 import React from "react";
-import "./PreviewComponents.scoped.css";
+import styles from "./PreviewComponents.module.css";
 import { getStorage, ref, deleteObject } from "firebase/storage";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp, IoIosLock } from "react-icons/io";
@@ -21,34 +21,36 @@ function Header({
   return (
     <div style={{ display: "flex", flexDirection: "row-reverse" }}>
       <div
-        className="header-container"
-        id="block-container"
+        className={styles.block_container}
+        id={styles.block_container}
         onClick={() => {
           if (setEditing) setEditing(id);
         }}
       >
         {variant === "staff" && (
-          <div className={editing == id ? "editing-indicator" : "fade"} />
+          <div
+            className={editing == id ? styles.editing_indicator : styles.fade}
+          />
         )}
-        <img src={imgLink} alt="form-banner" className="header-image" />
-        <div className="header-text-container">
-          <p className="header-heading">{heading}</p>
-          <p className="header-subheading">{subheading}</p>
+        <img src={imgLink} alt="form-banner" className={styles.header_image} />
+        <div className={styles.header_text_container}>
+          <p className={styles.header_heading}>{heading}</p>
+          <p className={styles.header_subheading}>{subheading}</p>
         </div>
       </div>
 
       {variant === "staff" &&
         (locked ? (
-          <div className="locked-icon-container">
-            <IoIosLock className="locked-icon" />
+          <div className={styles.locked_icon_container}>
+            <IoIosLock className={styles.locked_icon} />
           </div>
         ) : (
-          <div id="Qmod-icons">
+          <div id={styles.Qmod_icons}>
             <div onClick={() => updateForm("move-up", id)}>
-              <IoIosArrowUp className="btt-moveQ" />
+              <IoIosArrowUp className={styles.btt_moveQ} />
             </div>
             <div onClick={() => updateForm("move-down", id)}>
-              <IoIosArrowDown className="btt-moveQ" />
+              <IoIosArrowDown className={styles.btt_moveQ} />
             </div>
             <div
               onClick={() => {
@@ -56,7 +58,7 @@ function Header({
                 updateForm("delete", id);
               }}
             >
-              <FaTrash className="btt-delQ" />
+              <FaTrash className={styles.btt_delQ} />
             </div>
           </div>
         ))}

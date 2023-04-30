@@ -1,24 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./modal-ui.scoped.css";
+import styles from "./modal-ui.module.css";
 import UNCountriesData from "./UNCountriesData.js";
 import { appContext } from "../../staffContext.js";
 import FlyingDark from "../../../product-site/plans/icons/FlyingDark.svg";
 
 const ConfirmRedeemModal = ({ setShowingConfirmation, expiration }) => {
   return (
-    <div className="modal-background">
-      <div className="modal-container-redeem">
+    <div className={styles.modal_background}>
+      <div className={styles.modal_container_redeem}>
         <h1 style={{ color: "#378DCC", fontSize: 28 }}>Success!</h1>
         <p>You are now on the Premium Plan.</p>
 
-        <div className="modal-bottom-redeem">
-          <img src={FlyingDark} className="modal-icon" />
-          <p className="expiration">
+        <div className={styles.modal_bottom_redeem}>
+          <img src={FlyingDark} className={styles.modal_icon} />
+          <p className={styles.expiration}>
             Premium until:&nbsp;
             <p style={{ fontWeight: 600 }}>{expiration}</p>
           </p>
           <div
-            className="btt-ok"
+            className={styles.btt_ok}
             onClick={() => {
               setShowingConfirmation(false);
             }}
@@ -33,16 +33,16 @@ const ConfirmRedeemModal = ({ setShowingConfirmation, expiration }) => {
 
 function Confirmation({ description, bttLabel, fn, setModal }) {
   return (
-    <div className="modal-background">
-      <div className="modal-container-confirmation">
-        <div className="modal-top">
-          <p className="modal-header">Are you sure?</p>
-          <p className="modal-subheader">{description}</p>
+    <div className={styles.modal_background}>
+      <div className={styles.modal_container_confirmation}>
+        <div className={styles.modal_top}>
+          <p className={styles.modal_header}>Are you sure?</p>
+          <p className={styles.modal_subheader}>{description}</p>
         </div>
 
-        <div className="modal-bottom">
+        <div className={styles.modal_bottom}>
           <div
-            className="btt-confirm"
+            className={styles.btt_confirm}
             onClick={() => {
               fn();
               setModal(false);
@@ -51,7 +51,7 @@ function Confirmation({ description, bttLabel, fn, setModal }) {
             <p>{bttLabel}</p>
           </div>
           <div
-            className="btt-cancel"
+            className={styles.btt_cancel}
             onClick={() => {
               setModal(false);
             }}
@@ -98,16 +98,14 @@ function AddUNCountries(props) {
     let renders = countriesNotInList.map((country) => {
       return (
         <div
-          className={
-            modalSelections.includes(country)
-              ? "modal-delbar-container selected"
-              : "modal-delbar-container"
-          }
+          className={`${styles.modal_delbar_container} ${
+            modalSelections.includes(country) ? styles.selected : ""
+          }`}
           onClick={() => {
             handleClick(country);
           }}
         >
-          <p className="modal-country-name">{country}</p>
+          <p className={styles.modal_country_name}>{country}</p>
         </div>
       );
     });
@@ -115,24 +113,24 @@ function AddUNCountries(props) {
   }, [modalSelections]);
 
   return (
-    <div className="modal-background">
-      <div className="modal-container-un">
-        <div className="modal-top">
-          <p className="modal-header">Add UN Countries</p>
-          <p className="modal-subheader">
+    <div className={styles.modal_background}>
+      <div className={styles.modal_container_un}>
+        <div className={styles.modal_top}>
+          <p className={styles.modal_header}>Add UN Countries</p>
+          <p className={styles.modal_subheader}>
             Select countries, then click "Add Countries" to add them.
           </p>
         </div>
 
-        <div className="modal-body">
-          <div className="countries-list-container">
+        <div className={styles.modal_body}>
+          <div className={styles.countries_list_container}>
             {countriesNotInListRenders}
           </div>
         </div>
 
-        <div className="modal-bottom">
+        <div className={styles.modal_bottom}>
           <div
-            className="btt-add-countries"
+            className={styles.btt_add_countries}
             onClick={() => {
               props.setModal(false);
               props.addDelegates(modalSelections);
@@ -142,7 +140,7 @@ function AddUNCountries(props) {
             <p>Add Countries</p>
           </div>
           <div
-            className="btt-cancel"
+            className={styles.btt_cancel}
             onClick={() => {
               props.setModal(false);
             }}
@@ -162,18 +160,18 @@ function AddCustomCountry(props) {
   };
 
   return (
-    <div className="modal-background">
-      <div className="modal-container-custom">
-        <div className="modal-top">
-          <p className="modal-header">Add Custom Country</p>
-          <p className="modal-subheader">Add your own country.</p>
+    <div className={styles.modal_background}>
+      <div className={styles.modal_container_custom}>
+        <div className={styles.modal_top}>
+          <p className={styles.modal_header}>Add Custom Country</p>
+          <p className={styles.modal_subheader}>Add your own country.</p>
         </div>
 
-        <div className="modal-body">
-          <div className="modal-input-container">
+        <div className={styles.modal_body}>
+          <div className={styles.modal_input_container}>
             <p style={{ fontWeight: 500, marginBottom: 10 }}>Country Name</p>
             <input
-              className="modal-custom-input"
+              className={styles.modal_custom_input}
               id="custom-country-input"
               onKeyDown={(e) => {
                 if (e.key === "Enter") addCustom();
@@ -182,12 +180,12 @@ function AddCustomCountry(props) {
           </div>
         </div>
 
-        <div className="modal-bottom">
-          <div className="btt-custom-add-countries" onClick={addCustom}>
+        <div className={styles.modal_bottom}>
+          <div className={styles.btt_custom_add_countries} onClick={addCustom}>
             <p>Add Country</p>
           </div>
           <div
-            className="btt-cancel"
+            className={styles.btt_cancel}
             onClick={() => {
               props.setModal(false);
             }}
@@ -211,26 +209,26 @@ function AddViaSpreadsheet(props) {
   }
 
   return (
-    <div className="modal-background">
-      <div className="modal-container-spreadsheet">
-        <div className="modal-top">
-          <p className="modal-header">Import from Spreadsheet</p>
-          <p className="modal-subheader">
+    <div className={styles.modal_background}>
+      <div className={styles.modal_container_spreadsheet}>
+        <div className={styles.modal_top}>
+          <p className={styles.modal_header}>Import from Spreadsheet</p>
+          <p className={styles.modal_subheader}>
             Copy and paste in a single column from a spreadsheet below such that
             each country is on its own line.
           </p>
         </div>
 
-        <div className="modal-body">
-          <textarea id="pastebin" className="pastebin" />
+        <div className={styles.modal_body}>
+          <textarea id="pastebin" className={styles.pastebin} />
         </div>
 
-        <div className="modal-bottom">
-          <div className="btt-import" onClick={importSpreadsheet}>
+        <div className={styles.modal_bottom}>
+          <div className={styles.btt_import} onClick={importSpreadsheet}>
             <p>Import</p>
           </div>
           <div
-            className="btt-cancel"
+            className={styles.btt_cancel}
             onClick={() => {
               props.setModal(false);
             }}

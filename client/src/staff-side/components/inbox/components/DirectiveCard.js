@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./DirectiveCard.scoped.css";
+import styles from "./DirectiveCard.module.css";
 import { BsPeopleFill, BsEyeglasses, BsPersonFill } from "react-icons/bs";
 import { BiUndo } from "react-icons/bi";
 import Popout from "./Popout";
@@ -39,7 +39,7 @@ function DirectiveCard({
 
   return (
     <div
-      className="card-container"
+      className={styles.card_container}
       style={{
         marginRight: ["history", "delegate"].includes(page) ? 0 : 20,
         height: page === "delegate" ? "fit-content" : "100%",
@@ -70,14 +70,14 @@ function DirectiveCard({
       )}
 
       {page == "history" && (
-        <div className="btts-right">
+        <div className={styles.btts_right}>
           <div
-            className="btt-revert"
+            className={styles.btt_revert}
             onClick={() => {
               revertDirective(index);
             }}
           >
-            <p className="btt-revert-text">Revert to Inbox</p>
+            <p className={styles.btt_revert_text}>Revert to Inbox</p>
             <BiUndo size={20} />
           </div>
         </div>
@@ -85,11 +85,9 @@ function DirectiveCard({
 
       {variant == "custom" && (
         <div
-          className={
-            page === "delegate" && !extended
-              ? "custom-top rounded"
-              : "custom-top"
-          }
+          className={`${styles.custom_top} ${
+            page === "delegate" && !extended ? styles.rounded : ""
+          }`}
           style={{
             cursor: page === "delegate" && !isOpen ? "pointer" : undefined,
           }}
@@ -97,9 +95,9 @@ function DirectiveCard({
             setExtended(!extended);
           }}
         >
-          <BsPersonFill size={30} className="custom-icon" />
-          <p className="author">{h(author)}</p>
-          <p className="custom-id-tag">ID: {h(id)}</p>
+          <BsPersonFill size={30} className={styles.custom_icon} />
+          <p className={styles.author}>{h(author)}</p>
+          <p className={styles.custom_id_tag}>ID: {h(id)}</p>
 
           {["delegate", "history"].includes(page) && (
             <StatusIndicator
@@ -113,11 +111,9 @@ function DirectiveCard({
 
       {variant == "standard" && (
         <div
-          className={
-            page === "delegate" && !extended
-              ? "standard-top rounded"
-              : "standard-top"
-          }
+          className={`${styles.standard_top} ${
+            page === "delegate" && !extended ? styles.rounded : ""
+          }`}
           style={{
             backgroundColor: type?.includes("Private") ? "#285e86" : "#3C8CC9",
             cursor: page === "delegate" && !isOpen ? "pointer" : undefined,
@@ -127,15 +123,15 @@ function DirectiveCard({
           }}
         >
           <p
-            className="title"
+            className={styles.title}
             style={page === "inbox" ? { marginRight: 0 } : {}}
           >
             {h(title)}
           </p>
 
-          <div className="card-top-bottom">
-            <p className="type">{h(type)}</p>
-            <p className="id-tag">ID: {h(id)}</p>
+          <div className={styles.card_top_bottom}>
+            <p className={styles.type}>{h(type)}</p>
+            <p className={styles.id_tag}>ID: {h(id)}</p>
           </div>
 
           {["delegate", "history"].includes(page) && (
@@ -149,13 +145,11 @@ function DirectiveCard({
       )}
 
       <div
-        className={
-          page === "delegate" && variant === "standard"
-            ? extended
-              ? "collapsable"
-              : "collapsable collapsed"
+        className={`${styles.collapsable} ${
+          page === "delegate" && variant === "standard" && !extended
+            ? styles.collapsed
             : ""
-        }
+        }`}
         style={Object.assign(
           {
             display: "flex",
@@ -166,15 +160,17 @@ function DirectiveCard({
         )}
       >
         {variant == "standard" && (
-          <div className="card-tie">
-            <div className="tie-set">
-              <BsPeopleFill size={15} className="tie-icon" />
+          <div className={styles.card_tie}>
+            <div className={styles.tie_set}>
+              <BsPeopleFill size={15} className={styles.tie_icon} />
               <p>{h(sponsors.join(", "))}</p>
             </div>
             {signatories && signatories.length > 0 ? (
-              <div className="tie-set">
-                <BsEyeglasses size={18} className="tie-icon" />
-                <p className="signatories-list">{h(signatories.join(", "))}</p>
+              <div className={styles.tie_set}>
+                <BsEyeglasses size={18} className={styles.tie_icon} />
+                <p className={styles.signatories_list}>
+                  {h(signatories.join(", "))}
+                </p>
               </div>
             ) : (
               <div />
@@ -186,9 +182,9 @@ function DirectiveCard({
           className={
             page === "delegate" && variant === "custom"
               ? extended
-                ? "delcard-body"
-                : "delcard-body-collapsed"
-              : "card-body"
+                ? styles.delcard_body
+                : stykes.delcard_body_collapsed
+              : styles.card_body
           }
         >
           {body.map((block) => {
@@ -196,8 +192,8 @@ function DirectiveCard({
               case "select-multiple":
                 return (
                   <div>
-                    <p className="block-heading">{h(block.heading)}</p>
-                    <p className="block-text">
+                    <p className={styles.block_heading}>{h(block.heading)}</p>
+                    <p className={styles.block_text}>
                       {h(block.value ? block.value.join(", ") : "None")}
                     </p>
                   </div>
@@ -205,8 +201,8 @@ function DirectiveCard({
               case "multiplechoice":
                 return (
                   <div>
-                    <p className="block-heading">{h(block.heading)}</p>
-                    <p className="block-text">
+                    <p className={styles.block_heading}>{h(block.heading)}</p>
+                    <p className={styles.block_text}>
                       {h(block.value ? block.value.join(", ") : "None")}
                     </p>
                   </div>
@@ -214,8 +210,8 @@ function DirectiveCard({
               default:
                 return (
                   <div>
-                    <p className="block-heading">{h(block.heading)}</p>
-                    <p className="block-text">{h(block.value)}</p>
+                    <p className={styles.block_heading}>{h(block.heading)}</p>
+                    <p className={styles.block_text}>{h(block.value)}</p>
                   </div>
                 );
             }

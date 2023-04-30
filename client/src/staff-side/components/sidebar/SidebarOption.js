@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { appContext } from "../../staffContext.js";
 import { siteContext } from "../../../Context";
-import "./Sidebar.scoped.css";
+import styles from "./Sidebar.module.css";
 import Hoverable from "../../../composable/hover/Hover.js";
 
 const INACTIVE_COLOR = "#3C8CC9";
@@ -15,10 +15,10 @@ function SidebarOption({ destination, label, icon: Tag, iconSize }) {
     <Hoverable
       message={label}
       pos={{ top: 17.5, left: 70 }}
-      className="container"
+      className={styles.container}
     >
       <div
-        className="button"
+        className={styles.button}
         onClick={
           destination === "signout"
             ? handleSignout
@@ -36,7 +36,7 @@ function SidebarOption({ destination, label, icon: Tag, iconSize }) {
           }}
         />
         {destination === "inbox" && pendings.length > 0 && (
-          <p className="notification-indicator">
+          <p className={styles.notification_indicator}>
             {pendings.length > 99 ? "99+" : pendings.length}
           </p>
         )}

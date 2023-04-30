@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import "./History.scoped.css";
+import styles from "./History.module.css";
 import { appContext } from "../../staffContext";
 import { GoSearch } from "react-icons/go";
 import { FaFilter } from "react-icons/fa";
@@ -28,7 +28,7 @@ function History() {
   }, []);
 
   return (
-    <div className="history-container">
+    <div className={styles.history_container}>
       {modal ? (
         <Confirmation
           fn={handleClear}
@@ -40,27 +40,27 @@ function History() {
         <></>
       )}
 
-      <div className="UI-left">
-        <div className="UI-topright">
-          <div className="filter-group">
-            <FaFilter size={15} className="filter-icon" />
+      <div className={styles.UI_left}>
+        <div className={styles.UI_topright}>
+          <div className={styles.filter_group}>
+            <FaFilter size={15} className={styles.filter_icon} />
             <Dropdown
               options={["No Filter", "Passed", "Failed"]}
               setSelection={setDropdownValue}
             />
           </div>
-          <div className="searchbar">
+          <div className={styles.searchbar}>
             <input
               type="text"
               placeholder="Search by keyword"
-              className="subbar"
+              className={styles.subbar}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
-            <GoSearch size={15} className="search-icon" />
+            <GoSearch size={15} className={styles.search_icon} />
           </div>
         </div>
-        <div className="cardbar-deck-container">
+        <div className={styles.cardbar_deck_container}>
           <CardbarList
             search={search}
             filter={dropdownValue}
@@ -70,11 +70,11 @@ function History() {
         </div>
       </div>
 
-      <div className="UI-right">
-        <div className="card-container">{getCardRender()}</div>
-        <div className="history-operations">
+      <div className={styles.UI_right}>
+        <div className={styles.card_container}>{getCardRender()}</div>
+        <div className={styles.history_operations}>
           <div
-            className="btt-clear-history"
+            className={styles.btt_clear_history}
             onClick={() => {
               setModal(true);
             }}
@@ -84,7 +84,7 @@ function History() {
 
           {accountInfo.type === "Premium" ? (
             <div
-              className="btt-export-history"
+              className={styles.btt_export_history}
               onClick={() => {
                 exportProcesseds(processed);
               }}
@@ -93,7 +93,7 @@ function History() {
               <p>Export All (.csv)</p>
             </div>
           ) : (
-            <div className="btt-bricked">
+            <div className={styles.btt_bricked}>
               <IoIosLock size={18} />
               <p>Export All (.csv)</p>
             </div>
@@ -129,7 +129,7 @@ function History() {
     let directive = processed.slice().reverse()[selection];
 
     if (directive == null) {
-      return <div className="no-selection-card">No Selection</div>;
+      return <div className={styles.no_selection_card}>No Selection</div>;
     } else {
       if (directive.standard) {
         return (

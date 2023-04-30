@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { delContext } from "../../DelegateContext";
 import DirectiveCard from "../../../staff-side/components/inbox/components/DirectiveCard";
-import "./Sidebar.scoped.css";
+import styles from "./Sidebar.module.css";
 import { FaHistory } from "react-icons/fa";
 import { BsPencilSquare } from "react-icons/bs";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
@@ -47,15 +47,15 @@ const Sidebar = ({ draft }) => {
 
   return (
     <div
-      className="margin-block"
+      className={styles.margin_block}
       style={{ marginRight: !open || isNarrow ? 0 : sidebarWidth }}
     >
       <div
-        className="history-container"
+        className={styles.history_container}
         style={isNarrow ? { right: open ? 0 : -sidebarWidth } : {}}
       >
         <div
-          className={`toggle ${open ? "open" : "closed"}`}
+          className={`${styles.toggle} ${open ? styles.open : styles.closed}`}
           onClick={() => {
             setOpen(!open);
           }}
@@ -67,11 +67,11 @@ const Sidebar = ({ draft }) => {
           )}
         </div>
 
-        <div className="content" style={{ width: sidebarWidth }}>
-          <div className="sidebar-top">
+        <div className={styles.content} style={{ width: sidebarWidth }}>
+          <div className={styles.sidebar_top}>
             <div
-              className={`btt-page noselect ${
-                page === "Submissions" ? "selected" : ""
+              className={`${styles.btt_page} ${styles.noselect} ${
+                page === "Submissions" ? styles.selected : ""
               }`}
               onClick={() => {
                 setPage("Submissions");
@@ -80,15 +80,15 @@ const Sidebar = ({ draft }) => {
             >
               <FaHistory
                 size={15}
-                className={
-                  page === "Submissions" ? "btt-icon bold" : "btt-icon"
-                }
+                className={`${styles.btt_icon} ${
+                  page === "Submissions" ? styles.bold : ""
+                }`}
               />
-              <p className="btt-text">Submissions</p>
+              <p className={styles.btt_text}>Submissions</p>
             </div>
             <div
-              className={`btt-page noselect ${
-                page === "Draft" ? "selected" : ""
+              className={`${styles.btt_page} ${styles.noselect} ${
+                page === "Draft" ? styles.selected : ""
               }`}
               onClick={() => {
                 setPage("Draft");
@@ -96,13 +96,15 @@ const Sidebar = ({ draft }) => {
             >
               <BsPencilSquare
                 size={15}
-                className={page === "Draft" ? "btt-icon bold" : "btt-icon"}
+                className={`${styles.btt_icon} ${
+                  page === "Draft" ? styles.bold : ""
+                }`}
               />
-              <p className="btt-text">Draft Autosave</p>
+              <p className={styles.btt_text}>Draft Autosave</p>
             </div>
           </div>
 
-          <p className="page-description">
+          <p className={styles.page_description}>
             {page === "Submissions"
               ? `All directives sponsored by you. Click card headers to expand.
             If message icon appears, click the status indicator to see dais feedback.`
@@ -112,7 +114,10 @@ const Sidebar = ({ draft }) => {
           {page === "Submissions" && (
             <>
               {relevantDirectives && relevantDirectives.length > 0 ? (
-                <div className="history-cards-container" key="history-cards">
+                <div
+                  className={styles.history_cards_container}
+                  key="history-cards"
+                >
                   {relevantDirectives
                     .map((directive) => {
                       if (directive.standard) {
@@ -149,7 +154,7 @@ const Sidebar = ({ draft }) => {
                     .concat(<div style={{ width: "100%", height: 20 }} />)}
                 </div>
               ) : (
-                <div className="history-no-submissions-block">
+                <div className={styles.history_no_submissions_block}>
                   No Submissions
                 </div>
               )}
@@ -158,8 +163,8 @@ const Sidebar = ({ draft }) => {
 
           {page === "Draft" && (
             <>
-              <div className="history-cards-container" key="draft-cards">
-                <p className="subheading">Current Draft</p>
+              <div className={styles.history_cards_container} key="draft-cards">
+                <p className={styles.subheading}>Current Draft</p>
                 {draft.standard ? (
                   <DirectiveCard
                     key={`current-draft`}
@@ -186,7 +191,7 @@ const Sidebar = ({ draft }) => {
                     feedback={draft.feedback}
                   />
                 )}
-                <p className="subheading">Autosaved Drafts</p>
+                <p className={styles.subheading}>Autosaved Drafts</p>
                 {getReversed(autosaves)
                   .map((directive, index) =>
                     directive.standard ? (

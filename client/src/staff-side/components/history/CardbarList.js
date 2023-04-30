@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { appContext } from "../../staffContext";
 import { flattenToString } from "../../utils";
 import Cardbar from "./Cardbar";
-import "./History.scoped.css";
+import styles from "./History.module.css";
 
 const CardbarList = ({ search, selection, filter, setSelection }) => {
   const { processed } = useContext(appContext);
@@ -10,7 +10,7 @@ const CardbarList = ({ search, selection, filter, setSelection }) => {
   const reverseProcessed = processed.slice().reverse();
 
   if (reverseProcessed.length < 1)
-    return <div className="no-cards-box">No processed cards</div>;
+    return <div className={styles.no_cards_box}>No processed cards</div>;
 
   return reverseProcessed.map((card, i) => {
     if (shouldRender(card, filter, lowerSearch)) {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Toggle.scoped.css";
+import styles from "./Toggle.module.css";
 import { getTextWidth } from "../../utils/utils";
 
 const TOGGLE_OFFSET = 25;
@@ -14,7 +14,7 @@ const Toggle = ({ value, onValue, label, style, ...other }) => {
 
   return (
     <div
-      className="container"
+      className={styles.container}
       onClick={() => setOn(!on)}
       style={Object.assign(
         {
@@ -26,7 +26,9 @@ const Toggle = ({ value, onValue, label, style, ...other }) => {
     >
       {label && (
         <p
-          className={`label noselect ${on ? "labelon" : "labeloff"}`}
+          className={`${styles.label} ${styles.noselect} ${
+            on ? styles.labelon : styles.labeloff
+          }`}
           style={Object.assign(
             {
               width: Math.max(getTextWidth(label.on), getTextWidth(label.off)),
@@ -40,9 +42,9 @@ const Toggle = ({ value, onValue, label, style, ...other }) => {
         </p>
       )}
 
-      <div className={`bar ${on ? "bgon" : "bgoff"}`}>
+      <div className={`${styles.bar} ${on ? styles.bgon : styles.bgoff}`}>
         <div
-          className={`circle ${on ? "btton" : "bttoff"}`}
+          className={`${styles.circle} ${on ? styles.btton : styles.bttoff}`}
           style={{ left: on ? TOGGLE_OFFSET : 0 }}
         />
       </div>

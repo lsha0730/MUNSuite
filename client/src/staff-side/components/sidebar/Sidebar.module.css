@@ -1,0 +1,93 @@
+.Sidebar_container {
+  min-width: 60px;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.Sidebar_subcontainer {
+  width: 100%;
+  height: 100%;
+
+  background-color: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.Sidebar_indicator {
+  width: 3px;
+  height: 40px;
+
+  position: absolute;
+  left: 58px;
+  transition: 300ms;
+
+  background-color: #3c8cc9;
+}
+
+.Sidebar_topicons {
+  width: 100%;
+  height: 400px;
+  padding-top: 45px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.Sidebar_boticons {
+  width: 100%;
+  padding-bottom: 45px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.notification_indicator {
+  position: absolute;
+  top: 12px;
+  left: 34px;
+  z-index: 2;
+  min-width: 17px;
+  min-height: 17px;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff5a5a;
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 8.5px;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+/*----- Sidebar Option -----*/
+.container {
+  width: 100%;
+  height: 60px;
+  position: relative;
+}
+
+.button {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: 150ms;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #eeeeee;
+  transition: 150ms;
+}

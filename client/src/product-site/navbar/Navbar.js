@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import "./Navbar.scoped.css";
+import styles from "./Navbar.module.css";
 import Logo from "./munsuitelogo.png";
 import LogoWhite from "./munsuitelogowhite.png";
 import { siteContext } from "../../Context";
@@ -10,27 +10,27 @@ function Navbar() {
   let pathname = window.location.pathname;
 
   const standardBar = (
-    <div className="navbar-container">
-      <div className="navbar">
+    <div className={styles.navbar_container}>
+      <div className={styles.navbar}>
         <Link to="/">
-          <img src={Logo} className="logo" />
+          <img src={Logo} className={styles.logo} />
         </Link>
-        <div className="options">
-          <Link to="/" className="option-text">
+        <div className={styles.options}>
+          <Link to="/" className={styles.option_text}>
             Home
           </Link>
-          <Link to="/plans" className="option-text">
+          <Link to="/plans" className={styles.option_text}>
             Plans
           </Link>
-          <Link to="/login" className="option-text">
+          <Link to="/login" className={styles.option_text}>
             Login
           </Link>
           {currentUser ? (
-            <Link to={`/app/${currentUser}`} className="btt-primary">
+            <Link to={`/app/${currentUser}`} className={styles.btt_primary}>
               Launch App
             </Link>
           ) : (
-            <Link to="/register" className="btt-primary">
+            <Link to="/register" className={styles.btt_primary}>
               Try MUNSuite Free
             </Link>
           )}
@@ -40,27 +40,30 @@ function Navbar() {
   );
 
   const whiteBar = (
-    <div className="navbar-container">
-      <div className="navbar">
+    <div className={styles.navbar_container}>
+      <div className={styles.navbar}>
         <Link to="/">
-          <img src={LogoWhite} className="logo" />
+          <img src={LogoWhite} className={styles.logo} />
         </Link>
-        <div className="options">
-          <Link to="/" className="option-text-white">
+        <div className={styles.options}>
+          <Link to="/" className={styles.option_text_white}>
             Home
           </Link>
-          <Link to="/plans" className="option-text-white">
+          <Link to="/plans" className={styles.option_text_white}>
             Plans
           </Link>
-          <Link to="/login" className="option-text-white">
+          <Link to="/login" className={styles.option_text_white}>
             Login
           </Link>
           {currentUser ? (
-            <Link to={`/app/${currentUser}`} className="btt-primary-white">
+            <Link
+              to={`/app/${currentUser}`}
+              className={styles.btt_primary_white}
+            >
               Launch App
             </Link>
           ) : (
-            <Link to="/register" className="btt-primary-white">
+            <Link to="/register" className={styles.btt_primary_white}>
               Try MUNSuite Free
             </Link>
           )}
@@ -70,22 +73,22 @@ function Navbar() {
   );
 
   const signedinBar = (
-    <div className="navbar-container">
-      <div className="navbar">
+    <div className={styles.navbar_container}>
+      <div className={styles.navbar}>
         <Link to="/">
-          <img src={Logo} className="logo" />
+          <img src={Logo} className={styles.logo} />
         </Link>
-        <div className="options">
-          <Link to="/" className="option-text">
+        <div className={styles.options}>
+          <Link to="/" className={styles.option_text}>
             Home
           </Link>
-          <Link to="/plans" className="option-text">
+          <Link to="/plans" className={styles.option_text}>
             Plans
           </Link>
-          <div className="btt-signout" onClick={handleSignout}>
+          <div className={styles.btt_signout} onClick={handleSignout}>
             Sign Out
           </div>
-          <Link to={`/app/${currentUser}`} className="btt-primary">
+          <Link to={`/app/${currentUser}`} className={styles.btt_primary}>
             Launch App
           </Link>
         </div>
@@ -94,22 +97,22 @@ function Navbar() {
   );
 
   const signedinWhiteBar = (
-    <div className="navbar-container">
-      <div className="navbar">
+    <div className={styles.navbar_container}>
+      <div className={styles.navbar}>
         <Link to="/">
-          <img src={LogoWhite} className="logo" />
+          <img src={LogoWhite} className={styles.logo} />
         </Link>
-        <div className="options">
-          <Link to="/" className="option-text-white">
+        <div className={styles.options}>
+          <Link to="/" className={styles.option_text_white}>
             Home
           </Link>
-          <Link to="/plans" className="option-text-white">
+          <Link to="/plans" className={styles.option_text_white}>
             Plans
           </Link>
-          <div className="btt-primary-white" onClick={handleSignout}>
+          <div className={styles.btt_primary_white} onClick={handleSignout}>
             Sign Out
           </div>
-          <Link to={`/app/${currentUser}`} className="btt-primary-white">
+          <Link to={`/app/${currentUser}`} className={styles.btt_primary_white}>
             Launch App
           </Link>
         </div>

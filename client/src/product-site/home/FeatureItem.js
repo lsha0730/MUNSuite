@@ -1,5 +1,5 @@
 import React from "react";
-import "./Home.scoped.css";
+import styles from "./Home.module.css";
 
 function FeatureItem({
   textPosition,
@@ -13,17 +13,17 @@ function FeatureItem({
     <div
       className={
         textPosition == "right"
-          ? "home-feature-group-imgText"
-          : "home-feature-group-textImg"
+          ? styles.home_feature_group_imgText
+          : styles.home_feature_group_textImg
       }
     >
-      <img src={img} className="features-image" />
-      <div className="feature-text-group">
-        <div className="features-icon-heading-group">
+      <img src={img} className={styles.features_image} />
+      <div className={styles.feature_text_group}>
+        <div className={styles.features_icon_heading_group}>
           {icon}
-          <p className="feature-text-heading">{heading}</p>
+          <p className={styles.feature_text_heading}>{heading}</p>
         </div>
-        <p className="feature-text-subheading">{subheading}</p>
+        <p className={styles.feature_text_subheading}>{subheading}</p>
       </div>
     </div>
   );

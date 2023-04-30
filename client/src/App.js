@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
-import "./App.scoped.css";
+import styles from "./App.module.css";
 import { siteContext } from "./Context";
 
 import { initializeApp } from "firebase/app";
@@ -89,7 +89,7 @@ function App() {
       value={{ currentUser, setCurrentUser, app, handleSignout, isPortrait }}
     >
       <div
-        className="App-container"
+        className={styles.app_container}
         style={
           ["/register", "/login", "/forgot", "/prepayment"].includes(
             window.location.pathname
@@ -99,7 +99,7 @@ function App() {
         }
       >
         <Navbar />
-        <div className="UI-container">
+        <div className={styles.UI_container}>
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/register" element={<Register />} />

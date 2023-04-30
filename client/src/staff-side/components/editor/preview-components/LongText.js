@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import "./PreviewComponents.scoped.css";
+import styles from "./PreviewComponents.module.css";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
@@ -22,23 +22,25 @@ function LongText({
   return (
     <div style={{ display: "flex", flexDirection: "row-reverse" }}>
       <div
-        className="block-container"
-        id="block-container"
+        className={styles.block_container}
+        id={styles.block_container}
         onClick={() => {
           if (setEditing) setEditing(id);
         }}
       >
         {variant === "staff" && (
-          <div className={editing == id ? "editing-indicator" : "fade"} />
+          <div
+            className={editing == id ? styles.editing_indicator : styles.fade}
+          />
         )}
-        <p className="heading">{heading}</p>
-        <p className="subheading">{subheading}</p>
-        <p className={required ? "required-star" : "hidden"}>*</p>
+        <p className={styles.heading}>{heading}</p>
+        <p className={styles.subheading}>{subheading}</p>
+        <p className={required ? styles.required_star : styles.hidden}>*</p>
         <textarea
           ref={textareaRef}
           type="text"
           placeholder="Input here..."
-          className="longtext-input"
+          className={styles.longtext_input}
           onChange={(e) => {
             const currLen = e.target.value.length;
             if (maxchars && currLen > maxchars) {
@@ -49,21 +51,22 @@ function LongText({
           }}
         />
         {maxchars && (
-          <p className="maxchar-count">{`${textState.length} / ${maxchars ||
-            "Unlimited"} Max`}</p>
+          <p className={styles.maxchar_count}>{`${
+            textState.length
+          } / ${maxchars || "Unlimited"} Max`}</p>
         )}
       </div>
 
       {variant === "staff" && (
-        <div id="Qmod-icons">
+        <div id={styles.Qmod_icons}>
           <div onClick={() => updateForm("move-up", id)}>
-            <IoIosArrowUp className="btt-moveQ" />
+            <IoIosArrowUp className={styles.btt_moveQ} />
           </div>
           <div onClick={() => updateForm("move-down", id)}>
-            <IoIosArrowDown className="btt-moveQ" />
+            <IoIosArrowDown className={styles.btt_moveQ} />
           </div>
           <div onClick={() => updateForm("delete", id)}>
-            <FaTrash className="btt-delQ" />
+            <FaTrash className={styles.btt_delQ} />
           </div>
         </div>
       )}

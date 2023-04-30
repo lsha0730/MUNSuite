@@ -1,5 +1,5 @@
 import React, { useState, useContext, useRef } from "react";
-import "./Settings.scoped.css";
+import styles from "./Settings.module.css";
 import { BsGearFill } from "react-icons/bs";
 import { FaGitAlt } from "react-icons/fa";
 import { appContext } from "../../staffContext";
@@ -27,34 +27,36 @@ function Settings() {
   };
 
   return (
-    <div className="page-container">
-      <div className="UI-left">
-        <div className="UI-left-top">
-          <div className="header-pair">
-            <BsGearFill size={30} className="header-icon" />
-            <p className="header-text">Program Settings</p>
+    <div className={styles.page_container}>
+      <div className={styles.UI_left}>
+        <div className={styles.UI_left_top}>
+          <div className={styles.header_pair}>
+            <BsGearFill size={30} className={styles.header_icon} />
+            <p className={styles.header_text}>Program Settings</p>
           </div>
         </div>
 
         <div>
-          <p className="setting-header">Committee Information</p>
-          <div className="inputs-container">
-            <div className="input-container">
-              <p className="input-subheader">Conference Name (Abbreviated)</p>
+          <p className={styles.setting_header}>Committee Information</p>
+          <div className={styles.inputs_container}>
+            <div className={styles.input_container}>
+              <p className={styles.input_subheader}>
+                Conference Name (Abbreviated)
+              </p>
               <input
                 id="conference-name"
                 type="text"
-                className="input-field"
+                className={styles.input_field}
                 defaultValue={settings.conference}
                 onChange={updateSettings}
               />
             </div>
-            <div className="input-container">
-              <p className="input-subheader">Committee (Abbreviated)</p>
+            <div className={styles.input_container}>
+              <p className={styles.input_subheader}>Committee (Abbreviated)</p>
               <input
                 id="committee-name"
                 type="text"
-                className="input-field"
+                className={styles.input_field}
                 defaultValue={settings.committee}
                 onChange={updateSettings}
               />
@@ -67,10 +69,10 @@ function Settings() {
             marginTop: 30,
           }}
         >
-          <p className="setting-header">Danger Zone</p>
-          <div className="danger-container">
-            <div className="flex-col">
-              <p className="input-subheader" style={{ marginBottom: 5 }}>
+          <p className={styles.setting_header}>Danger Zone</p>
+          <div className={styles.danger_container}>
+            <div className={styles.flex_col}>
+              <p className={styles.input_subheader} style={{ marginBottom: 5 }}>
                 Reset account data
               </p>
               <p>
@@ -78,7 +80,7 @@ function Settings() {
               </p>
             </div>
             <div
-              className="btt-clear"
+              className={styles.btt_clear}
               onClick={() => {
                 setConfirmingReset(true);
               }}
@@ -98,25 +100,27 @@ function Settings() {
         </div>
       </div>
 
-      <div className="UI-right">
-        <div className="header-pair">
-          <FaGitAlt size={30} className="header-icon" />
-          <p className="header-text">Release Notes</p>
+      <div className={styles.UI_right}>
+        <div className={styles.header_pair}>
+          <FaGitAlt size={30} className={styles.header_icon} />
+          <p className={styles.header_text}>Release Notes</p>
         </div>
 
-        <div className="release-notes-container">
+        <div className={styles.release_notes_container}>
           {CHANGELOG.map((log) => (
             <div>
-              <p className="version-note-heading">v {log.version}</p>
-              <p className="version-note-subheading">{log.description}</p>
+              <p className={styles.version_note_heading}>v {log.version}</p>
+              <p className={styles.version_note_subheading}>
+                {log.description}
+              </p>
             </div>
           ))}
         </div>
 
-        <div className="metadata">
+        <div className={styles.metadata}>
           <p>Copyright © MUNSuite.com</p>
           <p>All rights reserved.</p>
-          <p className="signature">Created by Lincoln Lee</p>
+          <p className={styles.signature}>Created by Lincoln Lee</p>
         </div>
       </div>
     </div>

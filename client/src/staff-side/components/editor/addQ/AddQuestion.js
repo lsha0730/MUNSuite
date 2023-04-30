@@ -1,5 +1,5 @@
 import React from "react";
-import "./AddQuestion.scoped.css";
+import styles from "./AddQuestion.module.css";
 
 const OPTIONS = [
   { key: "shorttext", label: "Short Text" },
@@ -14,12 +14,12 @@ const OPTIONS = [
 
 function AddQuestion({ addNewBlock }) {
   return (
-    <div className="container">
-      <p className="text">Add Block</p>
-      <div className="options-container">
+    <div className={styles.container}>
+      <p className={styles.text}>Add Block</p>
+      <div className={styles.options_container}>
         {OPTIONS.map((e) => (
           <div
-            className="btt"
+            className={styles.btt}
             onClick={() => {
               addNewBlock(e.key);
             }}

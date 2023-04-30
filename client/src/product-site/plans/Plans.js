@@ -1,5 +1,5 @@
 import React from "react";
-import "./Plans.scoped.css";
+import styles from "./Plans.module.css";
 import PlanCards from "./PlanCards";
 
 import Horizons from "../home/images/logos/horizons.png";
@@ -9,23 +9,23 @@ import TMUN from "../home/images/logos/tmun.png";
 
 function Plans() {
   return (
-    <div className="options-container">
-      <div className="top">
-        <div className="top-container">
-          <p className="header">
+    <div className={styles.options_container}>
+      <div className={styles.top}>
+        <div className={styles.top_container}>
+          <p className={styles.header}>
             The all-in-one package for perfectly smooth crises.
           </p>
 
           <div
             style={{ width: "100%", display: "flex", alignItems: "flex-start" }}
           >
-            <div className="trusted-by">
-              <p className="trusted-text">Trusted by partners at</p>
-              <div className="logos">
-                <img className="logo" src={CAHSMUN} />
-                <img className="logo" src={Horizons} />
-                <img className="logo" src={VMUN} />
-                <img className="logo" src={TMUN} />
+            <div className={styles.trusted_by}>
+              <p className={styles.trusted_text}>Trusted by partners at</p>
+              <div className={styles.logos}>
+                <img className={styles.logo} src={CAHSMUN} />
+                <img className={styles.logo} src={Horizons} />
+                <img className={styles.logo} src={VMUN} />
+                <img className={styles.logo} src={TMUN} />
               </div>
             </div>
           </div>
@@ -34,11 +34,11 @@ function Plans() {
         </div>
       </div>
 
-      <div className="bottom">
-        <div className="bottom-container">
-          <p className="bottom-header">Payment Details</p>
+      <div className={styles.bottom}>
+        <div className={styles.bottom_container}>
+          <p className={styles.bottom_header}>Payment Details</p>
           <ul style={{ marginLeft: 30 }}>
-            <div className="nowrap">
+            <div className={styles.nowrap}>
               <li>This is</li>
               <p style={{ fontWeight: "600" }}>
                 &nbsp;not a subscription&nbsp;
@@ -55,9 +55,9 @@ function Plans() {
             </li>
             <li>All sales are final.</li>
           </ul>
-          <p className="bottom-disclaimer">
+          <p className={styles.bottom_disclaimer}>
             All payments are handled securely using&nbsp;
-            <a className="red-highlight" href="http://stripe.com">
+            <a className={styles.red_highlight} href="http://stripe.com">
               Stripe.
             </a>
           </p>

@@ -1,29 +1,38 @@
 import React, { useState } from "react";
-import "./Delbar.scoped.css";
+import styles from "./Delbar.module.css";
 import { BsCheck } from "react-icons/bs";
 
 function Delbar(props) {
   const [showingCopied, setShowingCopied] = useState(false);
 
   return (
-    <div className="delbar-container">
+    <div className={styles.delbar_container}>
       <div
-        className={props.selected ? "delbar-selected" : "delbar"}
+        className={`${styles.delbar} ${props.selected ? styles.selected : ""}`}
         onClick={() => {
           props.handleClick(props.delegate);
         }}
       >
-        <p className="del-name">{props.delegate}</p>
+        <p className={styles.del_name}>{props.delegate}</p>
       </div>
 
       <div
-        className={props.selected ? "codebox codebox-selected" : "codebox"}
+        className={
+          props.selected
+            ? `${styles.codebox} ${styles.codebox_selected}`
+            : styles.codebox
+        }
         onClick={copyCode}
       >
         <p>{props.code}</p>
       </div>
 
-      <BsCheck size={25} className={showingCopied ? "icon" : "icon fade"} />
+      <BsCheck
+        size={25}
+        className={
+          showingCopied ? styles.icon : `${styles.icon} + ${styles.fade}`
+        }
+      />
     </div>
   );
 

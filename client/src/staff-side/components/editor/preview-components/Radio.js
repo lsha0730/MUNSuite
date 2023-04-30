@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./PreviewComponents.scoped.css";
+import styles from "./PreviewComponents.module.css";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp, IoIosLock } from "react-icons/io";
 
@@ -27,21 +27,23 @@ function Radio({
   return (
     <div style={{ display: "flex", flexDirection: "row-reverse" }}>
       <div
-        className="block-container"
-        id="block-container"
+        className={styles.block_container}
+        id={styles.block_container}
         onClick={() => {
           if (setEditing) setEditing(id);
         }}
       >
         {variant === "staff" && (
-          <div className={editing == id ? "editing-indicator" : "fade"} />
+          <div
+            className={editing == id ? styles.editing_indicator : styles.fade}
+          />
         )}
-        <p className="heading">{heading}</p>
-        <p className="subheading">{subheading}</p>
-        <p className={required ? "required-star" : "hidden"}>*</p>
-        <div className="radio-options-container">
+        <p className={styles.heading}>{heading}</p>
+        <p className={styles.subheading}>{subheading}</p>
+        <p className={required ? styles.required_star : styles.hidden}>*</p>
+        <div className={styles.radio_options_container}>
           {options.map((option, index) => (
-            <div className="radio-single-container">
+            <div className={styles.radio_single_container}>
               <input
                 type="radio"
                 value={index}
@@ -49,9 +51,9 @@ function Radio({
                 onChange={(e) => {
                   setSelected(e.target.value);
                 }}
-                className="clickable"
+                className={styles.clickable}
               />
-              <p className="radio-option-label">{option}</p>
+              <p className={styles.radio_option_label}>{option}</p>
             </div>
           ))}
         </div>
@@ -59,19 +61,19 @@ function Radio({
 
       {variant === "staff" &&
         (locked ? (
-          <div className="locked-icon-container">
-            <IoIosLock className="locked-icon" />
+          <div className={styles.locked_icon_container}>
+            <IoIosLock className={styles.locked_icon} />
           </div>
         ) : (
-          <div id="Qmod-icons">
+          <div id={styles.Qmod_icons}>
             <div onClick={() => updateForm("move-up", id)}>
-              <IoIosArrowUp className="btt-moveQ" />
+              <IoIosArrowUp className={styles.btt_moveQ} />
             </div>
             <div onClick={() => updateForm("move-down", id)}>
-              <IoIosArrowDown className="btt-moveQ" />
+              <IoIosArrowDown className={styles.btt_moveQ} />
             </div>
             <div onClick={() => updateForm("delete", id)}>
-              <FaTrash className="btt-delQ" />
+              <FaTrash className={styles.btt_delQ} />
             </div>
           </div>
         ))}

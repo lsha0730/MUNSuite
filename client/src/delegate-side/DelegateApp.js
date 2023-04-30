@@ -5,7 +5,7 @@ import axios from "axios";
 import LoginPage from "./components/loginpage/LoginPage.js";
 import Dashboard from "./components/dashboard/Dashboard.js";
 import InvalidLink from "./components/invalid-link/InvalidLink.js";
-import "./DelegateApp.scoped.css";
+import styles from "./DelegateApp.module.css";
 
 import { delContext } from "./DelegateContext.js";
 import { siteContext } from "../Context.js";
@@ -176,7 +176,7 @@ function App() {
         accountInfo,
       }}
     >
-      <div className="App-container">{appRender}</div>
+      <div className={styles.App_container}>{appRender}</div>
     </delContext.Provider>
   );
 

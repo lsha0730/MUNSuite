@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./Home.scoped.css";
+import styles from "./Home.module.css";
 
 import formTab from "./images/mockups/form-tab.png";
 import inboxTab from "./images/mockups/inbox-tab.png";
@@ -40,42 +40,42 @@ function Home() {
   }, [adwordIndex]);
 
   return (
-    <div className="home-container">
+    <div className={styles.home_container}>
       {/*Top Section*/}
-      <div className="home-top">
-        <GradientAnimation className="top-gradient" />
-        <div className="home-top-container">
-          <div className="top-left">
+      <div className={styles.home_top}>
+        <GradientAnimation className={styles.top_gradient} />
+        <div className={styles.home_top_container}>
+          <div className={styles.top_left}>
             <img
               src={inboxTab}
               alt="Inbox Page Preview"
-              className="mockup-inbox"
+              className={styles.mockup_inbox}
             />
             <img
               src={formTab}
               alt="Form Page Preview"
-              className="mockup-form"
+              className={styles.mockup_form}
             />
           </div>
-          <div className="top-right">
-            <p className="top-heading">
+          <div className={styles.top_right}>
+            <p className={styles.top_heading}>
               MUN
               <br />
               Directives,
               <br />
-              <span className="adword">{adwords[adwordIndex]}.</span>
+              <span className={styles.adword}>{adwords[adwordIndex]}.</span>
             </p>
-            <p className="top-subheading">
+            <p className={styles.top_subheading}>
               The 21st century solution to directive chaos
             </p>
             {isPortrait ? (
-              <div className="btt-try-free">Available on Desktop</div>
+              <div className={styles.btt_try_free}>Available on Desktop</div>
             ) : currentUser ? (
-              <Link to={`/app/${currentUser}`} className="btt-try-free">
+              <Link to={`/app/${currentUser}`} className={styles.btt_try_free}>
                 Launch App
               </Link>
             ) : (
-              <Link to="/register" className="btt-try-free">
+              <Link to="/register" className={styles.btt_try_free}>
                 Try MUNSuite Free
               </Link>
             )}
@@ -83,117 +83,114 @@ function Home() {
         </div>
       </div>
 
-      <div className="trusted-container">
-        <div className="trusted-logos">
+      <div className={styles.trusted_container}>
+        <div className={styles.trusted_logos}>
           <Hoverable message="Horizons" pos={{ bottom: -25, left: 3 }}>
             <img
               src={require("./images/logos/horizons.png")}
-              className="trusted-logo"
+              className={styles.trusted_logo}
             />
           </Hoverable>
           <Hoverable message="CAHSMUN" pos={{ bottom: -25, left: -5 }}>
             <img
               src={require("./images/logos/cahsmun.png")}
-              className="trusted-logo"
+              className={styles.trusted_logo}
             />
           </Hoverable>
           <Hoverable message="VMUN" pos={{ bottom: -25, left: 8 }}>
             <img
               src={require("./images/logos/vmun.png")}
-              className="trusted-logo"
+              className={styles.trusted_logo}
             />
           </Hoverable>
           <Hoverable message="TMUN" pos={{ bottom: -25, left: 8 }}>
             <img
               src={require("./images/logos/tmun.png")}
-              className="trusted-logo"
+              className={styles.trusted_logo}
             />
           </Hoverable>
         </div>
       </div>
 
       {/*Features Section*/}
-      <div className="home-features">
+      <div className={styles.home_features}>
         <FeatureItem
           heading="Personalized Delegate Dashboards."
-          subheading="Directive status communication, a submission history, and password
-              gating."
+          subheading="Directive status communication, a submission history, and password gating."
           img={delside}
           textPosition="right"
-          icon={<BsFillPersonLinesFill size={50} className="features-icon" />}
+          icon={
+            <BsFillPersonLinesFill size={50} className={styles.features_icon} />
+          }
           mobile={isPortrait}
         />
-
         <FeatureItem
           heading="Directives you can actually read."
           subheading="And a form shutoff for when things get a little too crazy."
           img={inbox}
           textPosition="left"
-          icon={<ImFontSize size={50} className="features-icon" />}
+          icon={<ImFontSize size={50} className={styles.features_icon} />}
           mobile={isPortrait}
         />
 
         <FeatureItem
           heading="A Directives History Page."
-          subheading="This time when you leave your desk, the whole pile won't just
-          disappear."
+          subheading="This time when you leave your desk, the whole pile won't just disappear."
           img={history}
           textPosition="right"
-          icon={<FaHistory size={50} className="features-icon" />}
+          icon={<FaHistory size={50} className={styles.features_icon} />}
           mobile={isPortrait}
         />
 
         <FeatureItem
           heading="Auto-collected Delegate Statistics."
-          subheading="Automatically curated, to show who's putting money where their
-          mouth is."
+          subheading="Automatically curated, to show who's putting money where their mouth is."
           img={statistics}
           textPosition="left"
-          icon={<GoGraph size={50} className="features-icon" />}
+          icon={<GoGraph size={50} className={styles.features_icon} />}
           mobile={isPortrait}
         />
 
         <FeatureItem
           heading="Searchable Notes for Every Delegate."
-          subheading="Evaluate and compare delegates with a dedicated UI. No more
-          scribbled papers."
+          subheading="Evaluate and compare delegates with a dedicated UI. No more scribbled papers."
           img={notes}
           textPosition="right"
-          icon={<ImSearch size={50} className="features-icon" />}
+          icon={<ImSearch size={50} className={styles.features_icon} />}
           mobile={isPortrait}
         />
       </div>
 
       {/*Let's Modernize Model UN.*/}
-      <div className="home-modernize">
+      <div className={styles.home_modernize}>
         <img
           src={delegations}
           alt="Delegations UI Image"
-          className="modernize-image"
+          className={styles.modernize_image}
           style={{ position: "absolute", top: "-70px", left: "200px" }}
         />
         <img
           src={form}
           alt="Form UI Image"
-          className="modernize-image"
+          className={styles.modernize_image}
           style={{ position: "absolute", bottom: "-50px", left: "0px" }}
         />
         <img
           src={history}
           alt="History UI Image"
-          className="modernize-image"
+          className={styles.modernize_image}
           style={{ position: "absolute", bottom: "-100px", right: "200px" }}
         />
         <img
           src={statistics}
           alt="Statistics UI Image"
-          className="modernize-image"
+          className={styles.modernize_image}
           style={{ position: "absolute", top: "-120px", left: "-20px" }}
         />
         <img
           src={notes}
           alt="Notes UI Image"
-          className="modernize-image"
+          className={styles.modernize_image}
           style={{ position: "absolute", bottom: "0px", right: "-100px" }}
         />
         <div
@@ -203,13 +200,13 @@ function Home() {
             alignItems: "center",
           }}
         >
-          <p className="modernize-header">Let's Modernize Model UN.</p>
+          <p className={styles.modernize_header}>Let's Modernize Model UN.</p>
           {currentUser ? (
-            <Link to={`/app/${currentUser}`} className="btt-see-options">
+            <Link to={`/app/${currentUser}`} className={styles.btt_see_options}>
               Launch App
             </Link>
           ) : (
-            <Link to="/register" className="btt-see-options">
+            <Link to="/register" className={styles.btt_see_options}>
               Try MUNSuite Free
             </Link>
           )}

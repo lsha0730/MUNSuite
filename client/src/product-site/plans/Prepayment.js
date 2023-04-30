@@ -3,16 +3,16 @@ import { BsFillInboxFill, BsSendExclamationFill } from "react-icons/bs";
 import { FaHandPointer } from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
 import GradientAnimation from "../home/gradient/GradientAnimation";
-import "./Prepayment.scoped.css";
+import styles from "./Prepayment.module.css";
 
 const Prepayment = () => {
   return (
-    <div className="container">
-      <GradientAnimation className="gradient" />
+    <div className={styles.container}>
+      <GradientAnimation className={styles.gradient} />
 
-      <div className="messagebox">
-        <h2 className="heading">Payment Instructions</h2>
-        <div className="pairs">
+      <div className={styles.messagebox}>
+        <h2 className={styles.heading}>Payment Instructions</h2>
+        <div className={styles.pairs}>
           <IconTextPair
             icon={<FaHandPointer fill="#00a3ff" size={25} />}
             text="In the payment page below, select the appropriate quantity of codes
@@ -32,7 +32,7 @@ const Prepayment = () => {
             text={
               <p>
                 If you encounter any problems, shoot us an email at{" "}
-                <a href="mailto:info@munsuite.com" className="email">
+                <a href="mailto:info@munsuite.com" className={styles.email}>
                   info@munsuite.com
                 </a>
               </p>
@@ -42,7 +42,7 @@ const Prepayment = () => {
         <a
           href="https://buy.stripe.com/bIY8z09RUfnPg0MeUU"
           target="_blank"
-          className="btt-full"
+          className={styles.btt_full}
         >
           Get Started
         </a>
@@ -53,9 +53,9 @@ const Prepayment = () => {
 
 const IconTextPair = ({ icon, text }) => {
   return (
-    <div className="pair">
-      <div className="icon">{icon}</div>
-      <div className="text">{text}</div>
+    <div className={styles.pair}>
+      <div className={styles.icon}>{icon}</div>
+      <div className={styles.text}>{text}</div>
     </div>
   );
 };

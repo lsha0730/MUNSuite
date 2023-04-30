@@ -1,5 +1,5 @@
 import React from "react";
-import "./PreviewComponents.scoped.css";
+import styles from "./PreviewComponents.module.css";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp, IoIosLock } from "react-icons/io";
 
@@ -18,22 +18,24 @@ function ShortText({
   return (
     <div style={{ display: "flex", flexDirection: "row-reverse" }}>
       <div
-        className="block-container"
-        id="block-container"
+        className={styles.block_container}
+        id={styles.block_container}
         onClick={() => {
           if (setEditing) setEditing(id);
         }}
       >
         {variant === "staff" && (
-          <div className={editing == id ? "editing-indicator" : "fade"} />
+          <div
+            className={editing == id ? styles.editing_indicator : styles.fade}
+          />
         )}
-        <p className="heading">{heading}</p>
-        <p className="subheading">{subheading}</p>
-        <p className={required ? "required-star" : "hidden"}>*</p>
+        <p className={styles.heading}>{heading}</p>
+        <p className={styles.subheading}>{subheading}</p>
+        <p className={required ? styles.required_star : styles.hidden}>*</p>
         <input
           type="text"
           placeholder="Input here..."
-          className="shorttext-input"
+          className={styles.shorttext_input}
           onChange={(e) => {
             if (updateSubmission) updateSubmission(id, e.target.value);
           }}
@@ -42,19 +44,19 @@ function ShortText({
 
       {variant === "staff" &&
         (locked ? (
-          <div className="locked-icon-container">
-            <IoIosLock className="locked-icon" />
+          <div className={styles.locked_icon_container}>
+            <IoIosLock className={styles.locked_icon} />
           </div>
         ) : (
-          <div id="Qmod-icons">
+          <div id={styles.Qmod_icons}>
             <div onClick={() => updateForm("move-up", id)}>
-              <IoIosArrowUp className="btt-moveQ" />
+              <IoIosArrowUp className={styles.btt_moveQ} />
             </div>
             <div onClick={() => updateForm("move-down", id)}>
-              <IoIosArrowDown className="btt-moveQ" />
+              <IoIosArrowDown className={styles.btt_moveQ} />
             </div>
             <div onClick={() => updateForm("delete", id)}>
-              <FaTrash className="btt-delQ" />
+              <FaTrash className={styles.btt_delQ} />
             </div>
           </div>
         ))}

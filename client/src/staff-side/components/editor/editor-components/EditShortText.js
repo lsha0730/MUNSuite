@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./EditorComponents.scoped.css";
+import styles from "./EditorComponents.module.css";
 
 function EditShortText(props) {
   const [require, setRequire] = useState(props.required);
@@ -21,23 +21,23 @@ function EditShortText(props) {
     let toggleOffset = require ? 20 : 0;
 
     setToggleRender(
-      <div className="toggle-set" onClick={() => setRequire(!require)}>
-        <p className={require ? "toggle-text-red" : "toggle-text-grey"}>
+      <div className={styles.toggle_set} onClick={() => setRequire(!require)}>
+        <p
+          className={require ? styles.toggle_text_red : styles.toggle_text_grey}
+        >
           {require ? "Required" : "Optional"}
         </p>
         <div
-          className={
-            require ? "toggle-bar toggle-redbg" : "toggle-bar toggle-greybg"
-          }
+          className={`${styles.toggle_bar} ${
+            require ? styles.toggle_redbg : styles.toggle_greybg
+          }`}
         >
           <div
-            className={
-              require
-                ? "toggle-circle toggle-redbtt"
-                : "toggle-circle toggle-greybtt"
-            }
+            className={`${styles.toggle_circle} ${
+              require ? styles.toggle_redbtt : styles.toggle_greybtt
+            }`}
             style={{ left: toggleOffset }}
-          ></div>
+          />
         </div>
       </div>
     );
@@ -60,34 +60,40 @@ function EditShortText(props) {
   }, [require, heading, subheading]);
 
   return (
-    <div className={props.editing == props.id ? "block-container" : "hidden"}>
-      <p className="heading">Short Text</p>
+    <div
+      className={
+        props.editing == props.id ? styles.block_container : styles.hidden
+      }
+    >
+      <p className={styles.heading}>Short Text</p>
       {toggleRender}
 
-      <p className="subheading">Heading</p>
+      <p className={styles.subheading}>Heading</p>
       <input
         type="text"
         id={"heading" + props.id}
         className={
-          props.locked ? "textfield-container-bricked" : "textfield-container"
+          props.locked
+            ? styles.textfield_container_bricked
+            : styles.textfield_container
         }
         disabled={props.locked}
         placeholder="Input here..."
         onChange={() => {
           setHeading(document.getElementById("heading" + props.id).value);
         }}
-      ></input>
+      />
 
-      <p className="subheading">Subheading</p>
+      <p className={styles.subheading}>Subheading</p>
       <input
         type="text"
         id={"subheading" + props.id}
-        className="textfield-container"
+        className={styles.textfield_container}
         placeholder="Input here..."
         onChange={() => {
           setSubheading(document.getElementById("subheading" + props.id).value);
         }}
-      ></input>
+      />
     </div>
   );
 }

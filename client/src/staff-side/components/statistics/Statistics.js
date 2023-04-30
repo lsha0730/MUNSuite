@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import "./Statistics.scoped.css";
+import styles from "./Statistics.module.css";
 import { BsPersonFill, BsFillEnvelopeOpenFill } from "react-icons/bs";
 import { AiFillPieChart } from "react-icons/ai";
 import { appContext } from "../../staffContext";
@@ -21,55 +21,55 @@ function Statistics() {
   }, [statsData, topSubCount, passedCount, failedCount]);
 
   return (
-    <div className="page-container">
-      <div className="UI-left">
-        <div className="UI-left-top">
-          <div className="header-pair">
-            <BsPersonFill size={30} className="header-icon" />
-            <div className="header-right">
-              <p className="header-right-heading">
+    <div className={styles.page_container}>
+      <div className={styles.UI_left}>
+        <div className={styles.UI_left_top}>
+          <div className={styles.header_pair}>
+            <BsPersonFill size={30} className={styles.header_icon} />
+            <div className={styles.header_right}>
+              <p className={styles.header_right_heading}>
                 Individual Delegate Statistics
               </p>
-              <p className="header-right-subheading">
+              <p className={styles.header_right_subheading}>
                 Ordered by number of passed directives, then total submissions
               </p>
             </div>
           </div>
         </div>
 
-        <div className="statbars-container">
+        <div className={styles.statbars_container}>
           {statBarsRenders.length != 0 ? (
             statBarsRenders
           ) : (
-            <div className="no-stats-box">No Statistics</div>
+            <div className={styles.no_stats_box}>No Statistics</div>
           )}
         </div>
       </div>
 
-      <div className="UI-right">
-        <div className="UI-right-block">
-          <div className="header-pair">
-            <BsFillEnvelopeOpenFill size={30} className="header-icon" />
-            <p className="header-right-heading">Directives Processed</p>
+      <div className={styles.UI_right}>
+        <div className={styles.UI_right_block}>
+          <div className={styles.header_pair}>
+            <BsFillEnvelopeOpenFill size={30} className={styles.header_icon} />
+            <p className={styles.header_right_heading}>Directives Processed</p>
           </div>
 
-          <div className="number-container">
-            <p className="big-counter">{passedCount + failedCount}</p>
-            <p className="small-counter">Total Directives</p>
+          <div className={styles.number_container}>
+            <p className={styles.big_counter}>{passedCount + failedCount}</p>
+            <p className={styles.small_counter}>Total Directives</p>
           </div>
         </div>
 
-        <div className="UI-right-block">
-          <div className="header-pair">
-            <AiFillPieChart size={35} className="header-icon" />
-            <p className="header-right-heading">Committee Pass Rate</p>
+        <div className={styles.UI_right_block}>
+          <div className={styles.header_pair}>
+            <AiFillPieChart size={35} className={styles.header_icon} />
+            <p className={styles.header_right_heading}>Committee Pass Rate</p>
           </div>
 
-          <div className="number-container">
-            <p className="big-counter">
+          <div className={styles.number_container}>
+            <p className={styles.big_counter}>
               {getPassRate(passedCount, failedCount)}
             </p>
-            <p className="small-counter">
+            <p className={styles.small_counter}>
               {passedCount} Passed, {failedCount} Failed
             </p>
           </div>
@@ -97,11 +97,11 @@ function Statistics() {
       let stat = sortedData[i];
       let widthMultiplier = (100 / topSubCount).toFixed(1); // How many percent of total width each submission is worth relative to
       renderArr.push(
-        <div className="statbar-container">
-          <p className="delname">{stat.delegate}</p>
-          <div className="bar">
+        <div className={styles.statbar_container}>
+          <p className={styles.delname}>{stat.delegate}</p>
+          <div className={styles.bar}>
             <div
-              className="passbar"
+              className={styles.passbar}
               style={{
                 width:
                   stat.passed * widthMultiplier < 3
@@ -109,10 +109,10 @@ function Statistics() {
                     : `${stat.passed * widthMultiplier}%`,
               }}
             >
-              <p className="passbar-label">{stat.passed}</p>
+              <p className={styles.passbar_label}>{stat.passed}</p>
             </div>
             <div
-              className="failbar"
+              className={styles.failbar}
               style={{
                 width:
                   stat.failed * widthMultiplier < 3
@@ -120,7 +120,7 @@ function Statistics() {
                     : `${stat.failed * widthMultiplier}%`,
               }}
             >
-              <p className="failbar-label">{stat.failed}</p>
+              <p className={styles.failbar_label}>{stat.failed}</p>
             </div>
           </div>
         </div>

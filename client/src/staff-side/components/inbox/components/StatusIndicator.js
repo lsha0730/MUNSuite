@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./StatusIndicator.scoped.css";
+import styles from "./StatusIndicator.module.css";
 import { RiMessage2Fill } from "react-icons/ri";
 
 const StatusIndicator = ({ status, feedback, cardExtended }) => {
@@ -9,11 +9,11 @@ const StatusIndicator = ({ status, feedback, cardExtended }) => {
   const [showingFeedback, setShowingFeedback] = useState(false);
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <div
-        className={`indicator ${statusL} ${
+        className={`${styles.indicator} ${styles[statusL]} ${
           feedback && status !== "Pending"
-            ? `cursor-pointer hover-${statusL}`
+            ? `${styles.cursor_pointer} ${styles[`hover_${statusL}`]}`
             : ""
         }`}
         onClick={(e) => {
@@ -28,9 +28,9 @@ const StatusIndicator = ({ status, feedback, cardExtended }) => {
       </div>
 
       {showingFeedback && (
-        <div className="feedback">
-          <div className="feedback-heading">Feedback from the dais</div>
-          <p className="feedback-text">{feedback}</p>
+        <div className={styles.feedback}>
+          <div className={styles.feedback_heading}>Feedback from the dais</div>
+          <p className={styles.feedback_text}>{feedback}</p>
         </div>
       )}
     </div>

@@ -1,13 +1,13 @@
 import React from "react";
-import "./InvalidLink.scoped.css";
+import styles from "./InvalidLink.module.css";
 import { BiCompass } from "react-icons/bi";
 
 function InvalidLink() {
   return (
-    <div className="invalid-container">
-      <BiCompass size={90} className="icon" />
-      <p className="heading">Invalid Form Link</p>
-      <p className="subheading">Contact your staff member</p>
+    <div className={styles.invalid_container}>
+      <BiCompass size={90} className={styles.icon} />
+      <p className={styles.heading}>Invalid Form Link</p>
+      <p className={styles.subheading}>Contact your staff member</p>
     </div>
   );
 }

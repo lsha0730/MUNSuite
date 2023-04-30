@@ -1,0 +1,22 @@
+.App_container {
+  width: 100%;
+  height: 100%;
+  background-color: #f7f7f7;
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+  padding: 0;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.UI_container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+}

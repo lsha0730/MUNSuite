@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./PreviewComponents.scoped.css";
+import styles from "./PreviewComponents.module.css";
 import { GoSearch } from "react-icons/go";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp, IoIosLock } from "react-icons/io";
@@ -62,25 +62,31 @@ function SelectMultiple({
   return (
     <div style={{ display: "flex", flexDirection: "row-reverse" }}>
       <div
-        className="block-container"
-        id="block-container"
+        className={styles.block_container}
+        id={styles.block_container}
         onClick={() => {
           if (setEditing) setEditing(id);
         }}
       >
         {variant === "staff" && (
-          <div className={editing == id ? "editing-indicator" : "fade"} />
+          <div
+            className={editing == id ? styles.editing_indicator : styles.fade}
+          />
         )}
         <div
-          className={isShowingOptions ? "dropdown-defocuser" : "hidden"}
+          className={
+            isShowingOptions ? styles.dropdown_defocuser : styles.hidden
+          }
           onClick={() => setIsShowingOptions(false)}
         />
-        <p className="heading">{heading}</p>
-        <p className="subheading">{subheading}</p>
-        <p className={required ? "required-star" : "hidden"}>*</p>
+        <p className={styles.heading}>{heading}</p>
+        <p className={styles.subheading}>{subheading}</p>
+        <p className={required ? styles.required_star : styles.hidden}>*</p>
         <div
           className={
-            selected.length == 0 ? "hidden" : "selmult-selections-container"
+            selected.length == 0
+              ? styles.hidden
+              : styles.selmult_selections_container
           }
         >
           {selected.map((selection) => (
@@ -88,47 +94,47 @@ function SelectMultiple({
               onClick={() => {
                 deselectOption(selection);
               }}
-              className="selmult-selection"
+              className={styles.selmult_selection}
             >
               <p>- {selection}</p>
             </div>
           ))}
         </div>
         <p
-          className={
-            maxWarning ? "selmult-max-warning" : "selmult-max-warning fade"
-          }
+          className={`${styles.selmult_max_warning} ${
+            maxWarning ? "" : styles.fade
+          }`}
         >
           You have selected the maximum number of selections.
         </p>
         <div
-          className={
-            isShowingOptions ? "selmult-searchbar super-z" : "selmult-searchbar"
-          }
+          className={`${styles.selmult_searchbar} ${
+            isShowingOptions ? styles.super_z : ""
+          }`}
         >
           <input
             type="text"
             placeholder="Search"
-            className="selmult-subbar"
+            className={styles.selmult_subbar}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onFocus={() => setIsShowingOptions(true)}
           />
-          <GoSearch size={15} className="selmult-icon" />
+          <GoSearch size={15} className={styles.selmult_icon} />
           <div
             className={
               !isShowingOptions || choices.length === 0
-                ? "hidden"
-                : "selmult-drop-field"
+                ? styles.hidden
+                : styles.selmult_drop_field
             }
           >
-            <div className="selmult-subdropfield">
+            <div className={styles.selmult_subdropfield}>
               {isShowingOptions &&
                 choices.map((e) =>
                   search === "" ||
                   e.toLowerCase().includes(search.toLowerCase()) ? (
                     <div
-                      className="dropdown-option-container"
+                      className={styles.dropdown_option_container}
                       onClick={() => {
                         selectOption(e);
                         setIsShowingOptions(false);
@@ -148,19 +154,19 @@ function SelectMultiple({
 
       {variant === "staff" &&
         (locked ? (
-          <div className="locked-icon-container">
-            <IoIosLock className="locked-icon" />
+          <div className={styles.locked_icon_container}>
+            <IoIosLock className={styles.locked_icon} />
           </div>
         ) : (
-          <div id="Qmod-icons">
+          <div id={styles.Qmod_icons}>
             <div onClick={() => updateForm("move-up", id)}>
-              <IoIosArrowUp className="btt-moveQ" />
+              <IoIosArrowUp className={styles.btt_moveQ} />
             </div>
             <div onClick={() => updateForm("move-down", id)}>
-              <IoIosArrowDown className="btt-moveQ" />
+              <IoIosArrowDown className={styles.btt_moveQ} />
             </div>
             <div onClick={() => updateForm("delete", id)}>
-              <FaTrash className="btt-delQ" />
+              <FaTrash className={styles.btt_delQ} />
             </div>
           </div>
         ))}

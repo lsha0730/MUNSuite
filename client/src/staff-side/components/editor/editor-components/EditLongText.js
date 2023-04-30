@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./EditorComponents.scoped.css";
+import styles from "./EditorComponents.module.css";
 
 const MAX_CHAR_LIMIT = 10000;
 
@@ -31,21 +31,21 @@ function EditLongText(props) {
     let toggleOffset = require ? 20 : 0;
 
     setToggleRender(
-      <div className="toggle-set" onClick={() => setRequire(!require)}>
-        <p className={require ? "toggle-text-red" : "toggle-text-grey"}>
+      <div className={styles.toggle_set} onClick={() => setRequire(!require)}>
+        <p
+          className={require ? styles.toggle_text_red : styles.toggle_text_grey}
+        >
           {require ? "Required" : "Optional"}
         </p>
         <div
-          className={
-            require ? "toggle-bar toggle-redbg" : "toggle-bar toggle-greybg"
-          }
+          className={`${styles.toggle_bar} ${
+            require ? styles.toggle_redbg : styles.toggle_greybg
+          }`}
         >
           <div
-            className={
-              require
-                ? "toggle-circle toggle-redbtt"
-                : "toggle-circle toggle-greybtt"
-            }
+            className={`${styles.toggle_circle} ${
+              require ? styles.toggle_redbtt : styles.toggle_greybtt
+            }`}
             style={{ left: toggleOffset }}
           />
         </div>
@@ -71,40 +71,44 @@ function EditLongText(props) {
   }, [require, heading, subheading, maxchars]);
 
   return (
-    <div className={props.editing == props.id ? "block-container" : "hidden"}>
-      <p className="heading">Long Text</p>
+    <div
+      className={
+        props.editing == props.id ? styles.block_container : styles.hidden
+      }
+    >
+      <p className={styles.heading}>Long Text</p>
       {toggleRender}
 
-      <p className="subheading">Heading</p>
+      <p className={styles.subheading}>Heading</p>
       <input
         ref={headingRef}
         type="text"
         placeholder="Input here..."
-        className="textfield-container"
+        className={styles.textfield_container}
         onChange={(e) => {
           setHeading(e.target.value);
         }}
       />
 
-      <p className="subheading">Subheading</p>
+      <p className={styles.subheading}>Subheading</p>
       <input
         ref={subheadingRef}
         type="text"
         placeholder="Input here..."
-        className="textfield-container"
+        className={styles.textfield_container}
         onChange={(e) => {
           setSubheading(e.target.value);
         }}
       />
 
-      <p className="subheading">Max Characters</p>
+      <p className={styles.subheading}>Max Characters</p>
       <input
         ref={maxcharsRef}
         type="number"
         min="1"
         max={`${MAX_CHAR_LIMIT}`}
         placeholder="No Limit"
-        className="textfield-container"
+        className={styles.textfield_container}
         onChange={(e) => {
           if (e.target.value > MAX_CHAR_LIMIT) e.target.value = MAX_CHAR_LIMIT;
           setMaxchars(

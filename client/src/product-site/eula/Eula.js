@@ -1,20 +1,20 @@
 import React from "react";
-import "./Eula.scoped.css";
+import "./Eula.module.css";
 
 const Eula = () => {
   return (
-    <div className="eula-container">
+    <div className={styles.eula_container}>
       <article
         id="8baa45f9-89e5-4dc5-81f5-1e9dcd3b9706"
-        className="page sans eula-content"
+        className={`${styles.page} ${styles.sans} ${styles.eula_content}`}
       >
         <header>
-          <h2 className="page-title">
+          <h2 className={styles.page_title}>
             MUNSuite End-user Software License Agreement
           </h2>
         </header>
-        <div className="page-body">
-          <p id="d449b6ac-f1e3-4647-9d22-8514d8556f2a" className="">
+        <div className={styles.page_body}>
+          <p id="d449b6ac-f1e3-4647-9d22-8514d8556f2a">
             The Software you seek to use is licensed only on the condition that
             you (&quot;YOU&quot;) agree with Seungha Lee
             (&quot;[INVENTOR]&quot;) to the terms and conditions set forth
@@ -32,26 +32,20 @@ const Eula = () => {
             agreement and that you have read and understand all of the terms and
             conditions of this EULA.
           </p>
-          <h3 id="53a7993d-633b-482a-8682-c3c9f05b3349" className="">
-            1. SOFTWARE
-          </h3>
-          <p id="7f1e824c-d209-4949-aca4-557dc7a6e0aa" className="">
+          <h3 id="53a7993d-633b-482a-8682-c3c9f05b3349">1. SOFTWARE</h3>
+          <p id="7f1e824c-d209-4949-aca4-557dc7a6e0aa">
             As used in this Agreement &quot;Software&quot; shall mean the
             MUNSuite computer program and all related documentation which was
             developed by Seungha Lee.
           </p>
-          <h3 id="75ecaa7d-9c3f-45d3-9bcf-4e0e005e6bb1" className="">
-            2. LICENSE TO USE
-          </h3>
-          <p id="b202f7f9-179b-4b1f-8b56-9de1fc9bdb9c" className="">
+          <h3 id="75ecaa7d-9c3f-45d3-9bcf-4e0e005e6bb1">2. LICENSE TO USE</h3>
+          <p id="b202f7f9-179b-4b1f-8b56-9de1fc9bdb9c">
             Seungha Lee hereby grants to YOU a non-exclusive, non-transferable,
             limited license to use the Software solely on the terms, conditions
             and restrictions contained in this Agreement.
           </p>
-          <h3 id="1ec4a637-abbb-4fb1-a138-a60673ff1006" className="">
-            3. RESTRICTIONS
-          </h3>
-          <p id="5ba66ae0-521a-4022-800a-54def638a4a7" className="">
+          <h3 id="1ec4a637-abbb-4fb1-a138-a60673ff1006">3. RESTRICTIONS</h3>
+          <p id="5ba66ae0-521a-4022-800a-54def638a4a7">
             The Software and any and all knowledge, know-how and/or techniques
             relating to the Software, as may be modified or enhanced, in whole
             or in part, is and will remain the sole and absolute property of
@@ -69,7 +63,7 @@ const Eula = () => {
           </p>
           <ul
             id="632d3c9a-8c6a-4789-a646-df83abb4d72a"
-            className="bulleted-list"
+            className={styles.bulleted_list}
           >
             <li
               style={{
@@ -81,7 +75,7 @@ const Eula = () => {
           </ul>
           <ul
             id="ccbd4c89-3371-40ad-b354-f1a39faa96b1"
-            className="bulleted-list"
+            className={styles.bulleted_list}
           >
             <li
               style={{
@@ -95,7 +89,7 @@ const Eula = () => {
           </ul>
           <ul
             id="3ae20c25-e9d6-45d6-a2ab-631325ef0401"
-            className="bulleted-list"
+            className={styles.bulleted_list}
           >
             <li
               style={{
@@ -109,7 +103,7 @@ const Eula = () => {
           </ul>
           <ul
             id="b10f6f7b-9f4b-49be-8c1b-2bc89c1e22d3"
-            className="bulleted-list"
+            className={styles.bulleted_list}
           >
             <li
               style={{
@@ -121,7 +115,7 @@ const Eula = () => {
           </ul>
           <ul
             id="addf6928-46ec-472a-8610-c5fea763513b"
-            className="bulleted-list"
+            className={styles.bulleted_list}
           >
             <li
               style={{
@@ -134,7 +128,7 @@ const Eula = () => {
           </ul>
           <ul
             id="07a56069-ccde-4843-a9b4-584010bf74c9"
-            className="bulleted-list"
+            className={styles.bulleted_list}
           >
             <li
               style={{
@@ -145,10 +139,10 @@ const Eula = () => {
               YOUR advertising, publicity, or otherwise.
             </li>
           </ul>
-          <h3 id="b3b7842b-2db6-4133-8621-b71dd295063d" className="">
+          <h3 id="b3b7842b-2db6-4133-8621-b71dd295063d">
             4. DISCLAIMER OF WARRANTY
           </h3>
-          <p id="03631049-3a23-4c22-bc95-4b265b6598a5" className="">
+          <p id="03631049-3a23-4c22-bc95-4b265b6598a5">
             THE SOFTWARE IS PROVIDED TO YOU BY SEUNGHA LEE &quot;AS IS&quot;,
             AND YOU ACKNOWLEDGE AND AGREE THAT SEUNGHA LEE MAKES NO
             REPRESENTATIONS AND EXTEND NO WARRANTIES OF ANY KIND, EITHER EXPRESS
@@ -161,7 +155,7 @@ const Eula = () => {
           </p>
           <ul
             id="468abee3-7129-4e81-aecb-b30cc533a40c"
-            className="bulleted-list"
+            className={styles.bulleted_list}
           >
             <li
               style={{
@@ -175,7 +169,7 @@ const Eula = () => {
           </ul>
           <ul
             id="9922ee6d-8dd7-4e07-84e8-b730a964b708"
-            className="bulleted-list"
+            className={styles.bulleted_list}
           >
             <li
               style={{
@@ -188,7 +182,7 @@ const Eula = () => {
           </ul>
           <ul
             id="fc3b8a85-337a-4b7d-a129-95082443669b"
-            className="bulleted-list"
+            className={styles.bulleted_list}
           >
             <li
               style={{
@@ -206,10 +200,10 @@ const Eula = () => {
               YOU UNDER THIS AGREEMENT.
             </li>
           </ul>
-          <h3 id="5414015c-2a99-41bc-a1a2-0a061da3c26e" className="">
+          <h3 id="5414015c-2a99-41bc-a1a2-0a061da3c26e">
             5. LIMITATION OF LIABILITY
           </h3>
-          <p id="a9424098-a764-48f6-a789-e98ebc7640df" className="">
+          <p id="a9424098-a764-48f6-a789-e98ebc7640df">
             SEUNGHA LEE WILL NOT BE LIABLE TO YOU OR ANY OTHER PERSON OR ENTITY
             FOR ANY LIABILITY, LOSS, OR DAMAGES CAUSED OR ALLEGED TO HAVE BEEN
             CAUSED, EITHER DIRECTLY OR INDIRECTLY, BY THE SOFTWARE. WITHOUT
@@ -221,10 +215,8 @@ const Eula = () => {
             EVEN IF SEUNGHA LEE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
             DAMAGES.
           </p>
-          <h3 id="34183224-020d-4ba1-878a-1facf895377e" className="">
-            6. INDEMNITY
-          </h3>
-          <p id="b1ee5736-7386-477a-ac1e-ff55128d1609" className="">
+          <h3 id="34183224-020d-4ba1-878a-1facf895377e">6. INDEMNITY</h3>
+          <p id="b1ee5736-7386-477a-ac1e-ff55128d1609">
             YOU WILL INDEMNIFY, DEFEND AND HOLD HARMLESS SEUNGHA LEE, OR ANY
             OTHER ACTOR INVOLVED IN THE PRODUCTION, MAINTENANCE, AND
             DISTRIBUTION OF THE PRODUCT, FROM AND AGAINST ANY AND ALL LIABILITY,
@@ -234,10 +226,8 @@ const Eula = () => {
             WITH, RESULTING FROM, OR SUSTAINED AS A RESULT OF YOUR USE OF THE
             SOFTWARE OR IN EXECUTING AND PERFORMING THIS AGREEMENT.
           </p>
-          <h3 id="250fbd96-b283-4335-b3d9-013813f36ceb" className="">
-            7. TERM
-          </h3>
-          <p id="9756b28f-7f12-4b56-9ac7-ca2faef1d698" className="">
+          <h3 id="250fbd96-b283-4335-b3d9-013813f36ceb">7. TERM</h3>
+          <p id="9756b28f-7f12-4b56-9ac7-ca2faef1d698">
             This Agreement is effective until terminated. YOU may terminate this
             Agreement at any time by ceasing use of the Software and destroying
             or deleting any copies of the Software. This Agreement will
@@ -247,12 +237,12 @@ const Eula = () => {
             and Indemnity provisions of this Agreement shall survive such
             termination.
           </p>
-          <h3 id="85708435-4bb7-47e5-823d-e5ac132a036e" className="">
+          <h3 id="85708435-4bb7-47e5-823d-e5ac132a036e">
             8. GENERAL PROVISIONS
           </h3>
           <ul
             id="8b1b69ab-9076-495f-9a56-24553bf6d1d3"
-            className="bulleted-list"
+            className={styles.bulleted_list}
           >
             <li
               style={{
@@ -267,7 +257,7 @@ const Eula = () => {
           </ul>
           <ul
             id="ca79b3d3-212e-40a4-adac-af6c52a90570"
-            className="bulleted-list"
+            className={styles.bulleted_list}
           >
             <li
               style={{
@@ -280,7 +270,7 @@ const Eula = () => {
           </ul>
           <ul
             id="c4a65328-6b71-4de5-a820-1de45b10e41f"
-            className="bulleted-list"
+            className={styles.bulleted_list}
           >
             <li
               style={{
@@ -291,15 +281,15 @@ const Eula = () => {
               writing and signed by an authorized representative of each party.
             </li>
           </ul>
-          <p id="958578e3-1904-4225-81f5-3f4a21d74864" className="" />
-          <p id="89abfe7e-af0c-4150-8f55-ea6d2f7a2b7c" className="">
+          <p id="958578e3-1904-4225-81f5-3f4a21d74864" />
+          <p id="89abfe7e-af0c-4150-8f55-ea6d2f7a2b7c">
             The provisions of this Agreement are severable in that if any
             provision in the Agreement is determined to be invalid or
             unenforceable under any controlling body of law, that will not
             affect the validity or enforceability of the remaining provisions of
             the Agreement
           </p>
-          <p id="3d6e6360-fbf6-4621-8569-b692ef651734" className="" />
+          <p id="3d6e6360-fbf6-4621-8569-b692ef651734" />
         </div>
       </article>
     </div>

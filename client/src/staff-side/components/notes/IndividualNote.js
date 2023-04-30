@@ -1,17 +1,17 @@
 import React from "react";
-import "./Notes.scoped.css";
+import styles from "./Notes.module.css";
 
 const IndividualNote = ({ delegate, text, updateNotes }) => {
   return (
-    <div className="noteblock-container">
-      <p className="noteblock-title">{delegate}</p>
+    <div className={styles.noteblock_container}>
+      <p className={styles.noteblock_title}>{delegate}</p>
       <textarea
         type="text"
         value={text}
         placeholder="Input here..."
-        className="noteblock-textfield"
+        className={styles.noteblock_textfield}
         onChange={(e) => updateNotes(delegate, e.target.value)}
-      ></textarea>
+      />
     </div>
   );
 };

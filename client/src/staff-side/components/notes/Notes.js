@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import "./Notes.scoped.css";
+import styles from "./Notes.module.css";
 import { BsDownload, BsPersonFill } from "react-icons/bs";
 import { IoClipboard } from "react-icons/io5";
 import { GoSearch } from "react-icons/go";
@@ -64,13 +64,13 @@ function Notes() {
       ) {
         renderArray.push(
           <div
-            className="dropdown-option-container"
+            className={styles.dropdown_option_container}
             onClick={() => {
               selectOption(options[i]);
               setIsShowingOptions(false);
             }}
           >
-            <div className="dropdown-text-container">{options[i]}</div>
+            <div className={styles.dropdown_text_container}>{options[i]}</div>
           </div>
         );
       }
@@ -80,7 +80,10 @@ function Notes() {
     let returnRenderSelected = [];
     for (let j = 0; j < selected.length; j++) {
       returnRenderSelected.push(
-        <div onClick={() => deselectOption(selected[j])} className="selection">
+        <div
+          onClick={() => deselectOption(selected[j])}
+          className={styles.selection}
+        >
           <p>- {selected[j]}</p>
         </div>
       );
@@ -89,28 +92,36 @@ function Notes() {
   }, [options, search, isShowingOptions, selected, trigger]);
 
   return (
-    <div className="page-container">
-      <div className="UI-left">
-        <div className="UI-left-top">
-          <div className="header-pair">
-            <BsPersonFill className="header-icon" />
-            <p className="header-text">Individual Notes</p>
+    <div className={styles.page_container}>
+      <div className={styles.UI_left}>
+        <div className={styles.UI_left_top}>
+          <div className={styles.header_pair}>
+            <BsPersonFill className={styles.header_icon} />
+            <p className={styles.header_text}>Individual Notes</p>
           </div>
 
           <div
-            className={isShowingOptions ? "dropdown-defocuser" : "hidden"}
+            className={
+              isShowingOptions ? styles.dropdown_defocuser : styles.hidden
+            }
             onClick={() => setIsShowingOptions(false)}
           />
-          <div className={isShowingOptions ? "searchbar super-z" : "searchbar"}>
+          <div
+            className={
+              isShowingOptions
+                ? `${styles.searchbar} ${styles.super_z}`
+                : styles.searchbar
+            }
+          >
             <input
               type="text"
               placeholder="Search"
-              className="subbar"
+              className={styles.subbar}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               onFocus={() => setIsShowingOptions(true)}
             />
-            <GoSearch size={15} className="icon" />
+            <GoSearch size={15} className={styles.icon} />
             <div
               className={
                 !isShowingOptions || options.length === 0
@@ -118,21 +129,23 @@ function Notes() {
                   : "drop-field"
               }
             >
-              <div className="subdropfield">
+              <div className={styles.subdropfield}>
                 {isShowingOptions && renderOptions}
               </div>
             </div>
           </div>
           <div
             className={
-              renderSelected.length == 0 ? "hidden" : "selections-container"
+              renderSelected.length == 0
+                ? styles.hidden
+                : styles.selections_container
             }
           >
             {renderSelected}
           </div>
         </div>
 
-        <div className="notes-container">
+        <div className={styles.notes_container}>
           {delegations.length > 0 ? (
             selected.length > 0 ? (
               selected.map((del) => {
@@ -157,15 +170,15 @@ function Notes() {
               ))
             )
           ) : (
-            <div className="no-notes-box">No delegates in committee</div>
+            <div className={styles.no_notes_box}>No delegates in committee</div>
           )}
         </div>
       </div>
 
-      <div className="UI-right">
-        <div className="header-pair">
-          <IoClipboard className="header-icon" />
-          <p className="header-text">Quick Notes</p>
+      <div className={styles.UI_right}>
+        <div className={styles.header_pair}>
+          <IoClipboard className={styles.header_icon} />
+          <p className={styles.header_text}>Quick Notes</p>
         </div>
 
         <textarea
@@ -179,19 +192,19 @@ function Notes() {
               quick: e.target.value,
             })
           }
-          className="UI-right-input"
+          className={styles.UI_right_input}
         />
 
         {accountInfo.type === "Premium" ? (
-          <div className="btt-export-notes" onClick={exportNotes}>
-            <div className="btt-export-notes-inner">
+          <div className={styles.btt_export_notes} onClick={exportNotes}>
+            <div className={styles.btt_export_notes_inner}>
               <BsDownload size={18} />
               <p>Export Notes (.csv)</p>
             </div>
           </div>
         ) : (
-          <div className="btt-bricked">
-            <div className="btt-export-notes-inner">
+          <div className={styles.btt_bricked}>
+            <div className={styles.btt_export_notes_inner}>
               <IoIosLock size={18} />
               <p>Export Notes (.csv)</p>
             </div>

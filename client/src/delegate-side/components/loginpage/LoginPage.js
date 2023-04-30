@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "./LoginPage.scoped.css";
+import styles from "./LoginPage.module.css";
 import { delContext } from "../../DelegateContext";
 import { IoIosLock } from "react-icons/io";
 
@@ -7,30 +7,30 @@ function LoginPage(props) {
   const { settings } = useContext(delContext);
 
   return (
-    <div className="loginpage-container">
-      <div className="UI-container">
-        <div className="UI-top">
-          <IoIosLock size={64} className="icon" />
-          <div className="UI-top-right">
-            <p className="heading">
+    <div className={styles.loginpage_container}>
+      <div className={styles.UI_container}>
+        <div className={styles.UI_top}>
+          <IoIosLock size={64} className={styles.icon} />
+          <div className={styles.UI_top_right}>
+            <p className={styles.heading}>
               {settings.conference} {settings.committee}
             </p>
-            <p className="subheading">Digital Directive System</p>
+            <p className={styles.subheading}>Digital Directive System</p>
           </div>
         </div>
 
-        <div className="UI-bottom">
+        <div className={styles.UI_bottom}>
           <input
             type="text"
             id="keycode-input"
             placeholder="Enter Keycode"
-            className="input-field"
+            className={styles.input_field}
             onKeyDown={(e) => {
               if (e.key === "Enter") props.attemptLogin(e.target.value);
             }}
-          ></input>
+          />
           <div
-            className="btt-enter"
+            className={styles.btt_enter}
             onClick={() =>
               props.attemptLogin(document.getElementById("keycode-input").value)
             }

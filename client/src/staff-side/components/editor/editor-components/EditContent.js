@@ -7,7 +7,7 @@ import {
   listAll,
   deleteObject,
 } from "firebase/storage";
-import "./EditorComponents.scoped.css";
+import styles from "./EditorComponents.module.css";
 import { TiDeleteOutline } from "react-icons/ti";
 import { appContext } from "../../../staffContext";
 
@@ -28,16 +28,16 @@ function EditContent(props) {
             return (
               <div>
                 <div
-                  className="subheading-icon-container"
+                  className={styles.subheading_icon_container}
                   onClick={() => {
                     updateContentArr(index, "delete");
                   }}
                 >
-                  <p className="subheading">Image</p>
-                  <div className="content-item-delete-background">
+                  <p className={styles.subheading}>Image</p>
+                  <div className={styles.content_item_delete_background}>
                     <TiDeleteOutline
                       size={15}
-                      className="content-item-delete-icon"
+                      className={styles.content_item_delete_icon}
                     />
                   </div>
                 </div>
@@ -45,18 +45,18 @@ function EditContent(props) {
                   type="text"
                   placeholder="Image Heading"
                   defaultValue={item.heading}
-                  className="content-item-header-field"
+                  className={styles.content_item_header_field}
                   onChange={(e) => {
                     updateContentArr(index, "heading", e);
                   }}
-                ></input>
-                <div className="header-imgbar-n-btt">
-                  <div className="header-imgsrc-container">
-                    <div className="overflow-wrapper">
+                />
+                <div className={styles.header_imgbar_n_btt}>
+                  <div className={styles.header_imgsrc_container}>
+                    <div className={styles.overflow_wrapper}>
                       <p>{item.imgName || "No Image"}</p>
                     </div>
                   </div>
-                  <label className="header-btt-upload">
+                  <label className={styles.header_btt_upload}>
                     <input
                       type="file"
                       accept="image/png, image/jpeg, image/gif"
@@ -64,7 +64,7 @@ function EditContent(props) {
                       onChange={(e) => {
                         updateContentArr(index, "image", e);
                       }}
-                    ></input>
+                    />
                     Upload
                   </label>
                 </div>
@@ -74,16 +74,16 @@ function EditContent(props) {
             return (
               <div>
                 <div
-                  className="subheading-icon-container"
+                  className={styles.subheading_icon_container}
                   onClick={() => {
                     updateContentArr(index, "delete");
                   }}
                 >
-                  <p className="subheading">Text</p>
-                  <div className="content-item-delete-background">
+                  <p className={styles.subheading}>Text</p>
+                  <div className={styles.content_item_delete_background}>
                     <TiDeleteOutline
                       size={15}
-                      className="content-item-delete-icon"
+                      className={styles.content_item_delete_icon}
                     />
                   </div>
                 </div>
@@ -91,20 +91,20 @@ function EditContent(props) {
                   type="text"
                   placeholder="Text Heading"
                   defaultValue={item.heading}
-                  className="content-item-header-field"
+                  className={styles.content_item_header_field}
                   onChange={(e) => {
                     updateContentArr(index, "heading", e);
                   }}
-                ></input>
+                />
                 <textarea
                   type="text"
                   placeholder="Input here..."
                   defaultValue={item.value}
-                  className="content-text-input"
+                  className={styles.content_text_input}
                   onChange={(e) => {
                     updateContentArr(index, "text", e);
                   }}
-                ></textarea>
+                />
               </div>
             );
         }
@@ -129,30 +129,34 @@ function EditContent(props) {
   }, [heading, subheading, contentArr]);
 
   return (
-    <div className={props.editing == props.id ? "block-container" : "hidden"}>
-      <p className="heading">Content Block</p>
+    <div
+      className={
+        props.editing == props.id ? styles.block_container : styles.hidden
+      }
+    >
+      <p className={styles.heading}>Content Block</p>
 
-      <p className="subheading">Heading</p>
+      <p className={styles.subheading}>Heading</p>
       <input
         type="text"
         placeholder="Input here..."
         defaultValue={heading}
-        className="textfield-container"
+        className={styles.textfield_container}
         onChange={(e) => {
           setHeading(e.target.value);
         }}
-      ></input>
+      />
 
-      <p className="subheading">Subheading</p>
+      <p className={styles.subheading}>Subheading</p>
       <input
         type="text"
         placeholder="Input here..."
         defaultValue={subheading || ""}
-        className="textfield-container"
+        className={styles.textfield_container}
         onChange={(e) => {
           setSubheading(e.target.value);
         }}
-      ></input>
+      />
 
       {contentRender}
 
@@ -160,7 +164,7 @@ function EditContent(props) {
         style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
       >
         <div
-          className="btt-add-content"
+          className={styles.btt_add_content}
           onClick={() => {
             handleAddItem("image");
           }}
@@ -168,7 +172,7 @@ function EditContent(props) {
           + Add Image
         </div>
         <div
-          className="btt-add-content"
+          className={styles.btt_add_content}
           onClick={() => {
             handleAddItem("text");
           }}

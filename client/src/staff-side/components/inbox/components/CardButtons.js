@@ -3,7 +3,7 @@ import { BiUndo } from "react-icons/bi";
 import { BsCheckLg, BsXLg } from "react-icons/bs";
 import { IoIosFastforward } from "react-icons/io";
 import { MdOutlinePresentToAll } from "react-icons/md";
-import "./CardButtons.scoped.css";
+import styles from "./CardButtons.module.css";
 
 const CardButtons = ({ processDirective, presentDirective }) => {
   const [confirming, setConfirming] = useState(false);
@@ -15,13 +15,15 @@ const CardButtons = ({ processDirective, presentDirective }) => {
 
   return confirming ? (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <div className="confirm-container">
+      <div className={styles.confirm_container}>
         {confirming && (
           <div
-            className={`btt-2 confirm-${confirming.toLowerCase()}`}
+            className={`${styles.btt_2} ${
+              styles[`confirm_${confirming.toLowerCase()}`]
+            }`}
             onClick={handleConfirm}
           >
-            <h3 className="btt-2-text">
+            <h3 className={styles.btt_2_text}>
               {`Confirm ${confirming}${
                 feedback.length > 0 ? " with feedback" : ""
               }`}
@@ -35,19 +37,19 @@ const CardButtons = ({ processDirective, presentDirective }) => {
         )}
 
         <div
-          className="btt-2 confirm-cancel"
+          className={`${styles.btt_2} ${styles.confirm_cancel}`}
           onClick={() => {
             setConfirming(false);
           }}
         >
-          <h3 className="btt-2-text">Cancel</h3>
+          <h3 className={styles.btt_2_text}>Cancel</h3>
           <BiUndo size={20} />
         </div>
       </div>
 
       <textarea
         type="text"
-        className="feedback-field"
+        className={styles.feedback_field}
         placeholder="Add feedback (optional)"
         onChange={(e) => {
           setFeedback(e.target.value);
@@ -55,9 +57,9 @@ const CardButtons = ({ processDirective, presentDirective }) => {
       />
     </div>
   ) : (
-    <div className="card-operations">
+    <div className={styles.card_operations}>
       <div
-        className="btt-1 btt-present"
+        className={`${styles.btt_1} ${styles.btt_present}`}
         onClick={() => {
           if (!confirming) presentDirective();
         }}
@@ -65,9 +67,9 @@ const CardButtons = ({ processDirective, presentDirective }) => {
         <MdOutlinePresentToAll size={23} />
       </div>
 
-      <div className="btts-right">
+      <div className={styles.btts_right}>
         <div
-          className="btt-1 btt-pass"
+          className={`${styles.btt_1} ${styles.btt_pass}`}
           onClick={() => {
             setConfirming("Pass");
           }}
@@ -75,7 +77,7 @@ const CardButtons = ({ processDirective, presentDirective }) => {
           <BsCheckLg size={20} />
         </div>
         <div
-          className="btt-1 btt-fail"
+          className={`${styles.btt_1} ${styles.btt_fail}`}
           onClick={() => {
             setConfirming("Fail");
           }}
@@ -83,7 +85,7 @@ const CardButtons = ({ processDirective, presentDirective }) => {
           <BsXLg size={20} />
         </div>
         <div
-          className="btt-1 btt-table"
+          className={`${styles.btt_1} ${styles.btt_table}`}
           onClick={() => {
             processDirective("table");
           }}
