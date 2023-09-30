@@ -2,26 +2,27 @@ import React, { useState, useEffect, useContext } from "react";
 import "./Editor.scoped.css";
 import { appContext } from "../../staffContext";
 import { BiLink } from "react-icons/bi";
+import {
+  Header,
+  Radio,
+  MultipleChoice,
+  Content,
+  ShortText,
+  LongText,
+  Dropdown,
+  SelectMultiple,
+} from "../../../composable/form";
+import {
+  EditContent,
+  EditDropdown,
+  EditHeader,
+  EditLongText,
+  EditMultipleChoice,
+  EditRadio,
+  EditSelectMultiple,
+  EditShortText,
+} from "./editor-components";
 
-// Preview Imports
-import Header from "./preview-components/Header.js";
-import Radio from "./preview-components/Radio.js";
-import MultipleChoice from "./preview-components/MultipleChoice.js";
-import Content from "./preview-components/Content.js";
-import ShortText from "./preview-components/ShortText.js";
-import LongText from "./preview-components/LongText.js";
-import Dropdown from "./preview-components/Dropdown.js";
-import SelectMultiple from "./preview-components/SelectMultiple.js";
-
-// Editor Imports
-import EditHeader from "./editor-components/EditHeader.js";
-import EditRadio from "./editor-components/EditRadio.js";
-import EditMultipleChoice from "./editor-components/EditMultipleChoice.js";
-import EditContent from "./editor-components/EditContent.js";
-import EditShortText from "./editor-components/EditShortText.js";
-import EditLongText from "./editor-components/EditLongText.js";
-import EditDropdown from "./editor-components/EditDropdown.js";
-import EditSelectMultiple from "./editor-components/EditSelectMultiple.js";
 import Toggle from "../../../composable/toggle/Toggle";
 import AddQuestion from "./addQ/AddQuestion";
 

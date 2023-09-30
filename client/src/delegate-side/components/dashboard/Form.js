@@ -1,15 +1,16 @@
 import React from "react";
 import "./Form.scoped.css";
-
 import defaultBanner from "./defaultBanner.png";
-import Header from "../../../staff-side/components/editor/preview-components/Header";
-import Radio from "../../../staff-side/components/editor/preview-components/Radio";
-import MultipleChoice from "../../../staff-side/components/editor/preview-components/MultipleChoice";
-import Content from "../../../staff-side/components/editor/preview-components/Content";
-import ShortText from "../../../staff-side/components/editor/preview-components/ShortText";
-import LongText from "../../../staff-side/components/editor/preview-components/LongText";
-import Dropdown from "../../../staff-side/components/editor/preview-components/Dropdown";
-import SelectMultiple from "../../../staff-side/components/editor/preview-components/SelectMultiple";
+import {
+  Header,
+  Radio,
+  MultipleChoice,
+  Content,
+  ShortText,
+  LongText,
+  Dropdown,
+  SelectMultiple,
+} from "../../../composable/form";
 
 const Form = ({
   form,
