@@ -21,6 +21,29 @@ import { siteContext } from "../../Context";
 import GradientAnimation from "./gradient/GradientAnimation";
 import Hoverable from "../../composable/hover/Hover";
 
+const TRUSTING_CONFS = [
+  {
+    name: "Horizons",
+    img: require("./images/logos/horizons.png"),
+    url: "https://horizons.cahsmun.org",
+  },
+  {
+    name: "CAHSMUN",
+    img: require("./images/logos/cahsmun.png"),
+    url: "https://cahsmun.org",
+  },
+  {
+    name: "VMUN",
+    img: require("./images/logos/vmun.png"),
+    url: "https://vmun.com",
+  },
+  {
+    name: "TMUN",
+    img: require("./images/logos/tmun.png"),
+    url: "https://tmun.ca",
+  },
+];
+
 function Home() {
   const { isPortrait, currentUser } = useContext(siteContext);
 
@@ -85,30 +108,16 @@ function Home() {
 
       <div className="trusted-container">
         <div className="trusted-logos">
-          <Hoverable message="Horizons" pos={{ bottom: -25, left: 3 }}>
-            <img
-              src={require("./images/logos/horizons.png")}
-              className="trusted-logo"
-            />
-          </Hoverable>
-          <Hoverable message="CAHSMUN" pos={{ bottom: -25, left: -5 }}>
-            <img
-              src={require("./images/logos/cahsmun.png")}
-              className="trusted-logo"
-            />
-          </Hoverable>
-          <Hoverable message="VMUN" pos={{ bottom: -25, left: 8 }}>
-            <img
-              src={require("./images/logos/vmun.png")}
-              className="trusted-logo"
-            />
-          </Hoverable>
-          <Hoverable message="TMUN" pos={{ bottom: -25, left: 8 }}>
-            <img
-              src={require("./images/logos/tmun.png")}
-              className="trusted-logo"
-            />
-          </Hoverable>
+          {TRUSTING_CONFS.map((conf) => (
+            <Hoverable
+              message={conf.name}
+              href={conf.url}
+              messageStyle={{ width: 75, textAlign: "center", padding: 0 }}
+              pos={{ bottom: -20 }}
+            >
+              <img src={conf.img} className="trusted-logo" />
+            </Hoverable>
+          ))}
         </div>
       </div>
 

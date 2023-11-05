@@ -27,7 +27,7 @@ const PlanCards = ({ page }) => {
 
           <FeatureList
             items={[
-              `${MAX_SUBMISSIONS} submissions at a time`,
+              `Store up to ${MAX_SUBMISSIONS} submissions`,
               "Email support",
             ]}
           />
@@ -65,7 +65,7 @@ const PlanCards = ({ page }) => {
 
           <FeatureList
             items={[
-              "Unlimited submissions",
+              "Unlimited submissions storage",
               "Spreadsheet import delegates",
               "Export directives history & notes to csv",
               "Remove starter banner",
