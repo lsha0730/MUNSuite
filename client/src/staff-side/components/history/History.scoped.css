@@ -115,18 +115,18 @@
   padding-right: 20px;
 }
 
-.cardbar-deck-container {
+.deck-container {
   width: calc(100% + 5px);
   padding-right: 7px;
   overflow-y: auto;
   flex-grow: 1;
 }
-.cardbar-deck-container:hover::-webkit-scrollbar-track {
+.deck-container:hover::-webkit-scrollbar-track {
   background: rgba(241, 241, 241, 1);
   opacity: 100%;
   transition: 200ms;
 }
-.cardbar-deck-container:hover::-webkit-scrollbar-thumb {
+.deck-container:hover::-webkit-scrollbar-thumb {
   background: rgba(220, 220, 220, 1);
   opacity: 100%;
   transition: 200ms;

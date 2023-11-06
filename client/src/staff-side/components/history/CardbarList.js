@@ -1,21 +1,14 @@
-import React, { useContext } from "react";
-import { appContext } from "../../staffContext";
-import { flattenToString } from "../../utils";
+import React from "react";
 import Cardbar from "./Cardbar";
 import "./History.scoped.css";
 
-const CardbarList = ({ search, selection, filter, setSelection }) => {
-  const { processed } = useContext(appContext);
-  const lowerSearch = search.toLowerCase();
-  const reverseProcessed = processed.slice().reverse();
-
-  if (reverseProcessed.length < 1)
-    return <div className="no-cards-box">No processed cards</div>;
-
-  return reverseProcessed.map((card, i) => {
-    if (shouldRender(card, filter, lowerSearch)) {
-      if (card.standard) {
-        return (
+const CardbarList = ({ cards, search, selection, setSelection }) => {
+  return cards.length < 1 ? (
+    <div className="no-cards-box">No processed cards</div>
+  ) : (
+    <div className="deck-container">
+      {cards.map((card, i) =>
+        card.standard ? (
           <Cardbar
             type="standard"
             selected={selection == i}
@@ -26,9 +19,7 @@ const CardbarList = ({ search, selection, filter, setSelection }) => {
             search={search}
             submissionID={card.submissionID}
           />
-        );
-      } else {
-        return (
+        ) : (
           <Cardbar
             type="custom"
             selected={selection == i}
@@ -39,18 +30,10 @@ const CardbarList = ({ search, selection, filter, setSelection }) => {
             search={search}
             submissionID={card.submissionID}
           />
-        );
-      }
-    }
-  });
-};
-
-const shouldRender = (card, filter, lowerSearch) => {
-  const cardStringLower = flattenToString(card).toLowerCase();
-  const filterBoolean = card.status == filter || filter == "No Filter";
-  const includesSearchKey = cardStringLower.includes(lowerSearch);
-
-  return filterBoolean && includesSearchKey;
+        )
+      )}
+    </div>
+  );
 };
 
 const getDescription = (card) => {

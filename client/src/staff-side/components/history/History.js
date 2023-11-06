@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import "./History.scoped.css";
 import { appContext } from "../../staffContext";
 import { GoSearch } from "react-icons/go";
@@ -10,6 +10,7 @@ import DirectiveCard from "../inbox/components/DirectiveCard";
 import { exportProcesseds } from "../../utils";
 import CardbarList from "./CardbarList";
 import { IoIosLock } from "react-icons/io";
+import { flattenToString } from "../../utils";
 
 function History() {
   const { pendings, processed, writeToFirebase, accountInfo } = useContext(
@@ -20,6 +21,15 @@ function History() {
   const [dropdownValue, setDropdownValue] = useState("No Filter");
   const [modal, setModal] = useState(false);
 
+  const reverseProcessed = processed.slice().reverse();
+  const filteredProcessed = reverseProcessed.filter((c) =>
+    filterBySearchAndFilter(c, dropdownValue, search.toLowerCase())
+  );
+  const filteredProcessedLengthRef = useRef(filteredProcessed.length);
+  useEffect(() => {
+    filteredProcessedLengthRef.current = filteredProcessed.length;
+  }, [filteredProcessed.length]);
+
   useEffect(() => {
     document.addEventListener("keydown", handleArrowKey);
     return () => {
@@ -29,15 +39,13 @@ function History() {
 
   return (
     <div className="history-container">
-      {modal ? (
+      {modal && (
         <Confirmation
           fn={handleClear}
           bttLabel="Clear History"
           description="Clearing your history will permanently remove your history and clear all delegate statistics. Consider exporting a local copy first."
           setModal={setModal}
         />
-      ) : (
-        <></>
       )}
 
       <div className="UI-left">
@@ -60,14 +68,12 @@ function History() {
             <GoSearch size={15} className="search-icon" />
           </div>
         </div>
-        <div className="cardbar-deck-container">
-          <CardbarList
-            search={search}
-            filter={dropdownValue}
-            selection={selection}
-            setSelection={setSelection}
-          />
-        </div>
+        <CardbarList
+          cards={filteredProcessed}
+          search={search}
+          selection={selection}
+          setSelection={setSelection}
+        />
       </div>
 
       <div className="UI-right">
@@ -106,7 +112,9 @@ function History() {
   function handleArrowKey(e) {
     switch (e.key) {
       case "ArrowDown":
-        setSelection((prev) => Math.min(prev + 1, processed.length - 1));
+        setSelection((prev) =>
+          Math.min(prev + 1, filteredProcessedLengthRef.current - 1)
+        );
         break;
       case "ArrowUp":
         setSelection((prev) => Math.max(prev - 1, 0));
@@ -126,7 +134,7 @@ function History() {
   }
 
   function getCardRender() {
-    let directive = processed.slice().reverse()[selection];
+    const directive = filteredProcessed[selection];
 
     if (directive == null) {
       return <div className="no-selection-card">No Selection</div>;
@@ -170,5 +178,13 @@ function History() {
     }
   }
 }
+
+const filterBySearchAndFilter = (card, filter, lowerSearch) => {
+  const cardStringLower = flattenToString(card).toLowerCase();
+  const filterBoolean = card.status == filter || filter == "No Filter";
+  const includesSearchKey = cardStringLower.includes(lowerSearch);
+
+  return filterBoolean && includesSearchKey;
+};
 
 export default History;
