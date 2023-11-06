@@ -3,6 +3,7 @@ import "./Statistics.scoped.css";
 import { BsPersonFill, BsFillEnvelopeOpenFill } from "react-icons/bs";
 import { AiFillPieChart } from "react-icons/ai";
 import { appContext } from "../../staffContext";
+import Legend from "./components/Legend";
 
 function Statistics() {
   const { processed } = useContext(appContext);
@@ -35,6 +36,8 @@ function Statistics() {
               </p>
             </div>
           </div>
+
+          <Legend />
         </div>
 
         <div className="statbars-container">

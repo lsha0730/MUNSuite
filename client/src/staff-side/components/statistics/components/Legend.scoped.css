@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  padding: 7px;
+}
+
+.set {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.circle {
+  min-width: 10px;
+  min-height: 10px;
+  border-radius: 100%;
+}
+
+.passed {
+  background-color: #3c8cc9;
+}
+
+.failed {
+  background-color: #bae4fa;
+}
