@@ -187,7 +187,7 @@ function EditContent(props) {
           type: "image",
           heading: "Image Heading",
           imgName: "Default Image",
-          value: require("../defaultBanner.png"),
+          value: require("../../../../common/assets/images/default_banner.png"),
           path: "",
         });
         break;

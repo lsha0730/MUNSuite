@@ -2,8 +2,8 @@ import React from "react";
 import "./PlanCards.scoped.css";
 import { Link } from "react-router-dom";
 import { BsCheck } from "react-icons/bs";
-import SingleFill from "./icons/SingleFill.svg";
-import FlyingDark from "./icons/FlyingDark.svg";
+import SingleFill from "../../common/assets/icons/single_fill.svg";
+import FlyingDark from "../../common/assets/icons/flying_dark.svg";
 import { MAX_SUBMISSIONS } from "../../staff-side/components/plan/Plan";
 
 const PlanCards = ({ page }) => {

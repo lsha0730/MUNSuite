@@ -132,7 +132,7 @@ function Editor() {
     switch (type) {
       case "header":
         newObj.heading = "New Header";
-        newObj.imgLink = require("./defaultBanner.png");
+        newObj.imgLink = require("../../../common/assets/images/default_banner.png");
         newObj.imgName = "Default Banner";
         newObj.imgPath = "";
         break;
@@ -152,7 +152,7 @@ function Editor() {
           {
             type: "image",
             heading: "Image Heading",
-            value: require("./defaultBanner.png"),
+            value: require("../../../common/assets/images/default_banner.png"),
             imgName: "Default Image",
             path: "",
           },

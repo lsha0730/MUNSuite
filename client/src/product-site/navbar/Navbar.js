@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.scoped.css";
-import Logo from "./munsuitelogo.png";
-import LogoWhite from "./munsuitelogowhite.png";
+import Logo from "../../common/assets/images/logos/logo.png";
+import LogoWhite from "../../common/assets/images/logos/logo_white.png";
 import { siteContext } from "../../Context";
 
 function Navbar() {

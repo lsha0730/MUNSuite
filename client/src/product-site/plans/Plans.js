@@ -2,10 +2,10 @@ import React from "react";
 import "./Plans.scoped.css";
 import PlanCards from "./PlanCards";
 
-import Horizons from "../home/images/logos/horizons.png";
-import CAHSMUN from "../home/images/logos/cahsmun.png";
-import VMUN from "../home/images/logos/vmun.png";
-import TMUN from "../home/images/logos/tmun.png";
+import Horizons from "../../common/assets/images/customer_logos/horizons.png";
+import CAHSMUN from "../../common/assets/images/customer_logos/cahsmun.png";
+import VMUN from "../../common/assets/images/customer_logos/vmun.png";
+import TMUN from "../../common/assets/images/customer_logos/tmun.png";
 
 function Plans() {
   return (

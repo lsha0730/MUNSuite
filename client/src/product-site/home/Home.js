@@ -2,16 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.scoped.css";
 
-import formTab from "./images/mockups/form-tab.png";
-import inboxTab from "./images/mockups/inbox-tab.png";
-
-import delside from "./images/mockups/delside.png";
-import delegations from "./images/mockups/delegations.png";
-import form from "./images/mockups/form.png";
-import inbox from "./images/mockups/inbox.png";
-import history from "./images/mockups/history.png";
-import statistics from "./images/mockups/statistics.png";
-import notes from "./images/mockups/notes.png";
+import formTab from "../../common/assets/images/mockups/form_tab.png";
+import inboxTab from "../../common/assets/images/mockups/inbox_tab.png";
+import delside from "../../common/assets/images/mockups/delside.png";
+import delegations from "../../common/assets/images/mockups/delegations.png";
+import form from "../../common/assets/images/mockups/form.png";
+import inbox from "../../common/assets/images/mockups/inbox.png";
+import history from "../../common/assets/images/mockups/history.png";
+import statistics from "../../common/assets/images/mockups/statistics.png";
+import notes from "../../common/assets/images/mockups/notes.png";
 import { BsFillPersonLinesFill } from "react-icons/bs";
 import { ImFontSize, ImSearch } from "react-icons/im";
 import { FaHistory } from "react-icons/fa";
@@ -24,22 +23,22 @@ import Hoverable from "../../common/components/hover/Hover";
 const TRUSTING_CONFS = [
   {
     name: "Horizons",
-    img: require("./images/logos/horizons.png"),
+    img: require("../../common/assets/images/customer_logos/horizons.png"),
     url: "https://horizons.cahsmun.org",
   },
   {
     name: "CAHSMUN",
-    img: require("./images/logos/cahsmun.png"),
+    img: require("../../common/assets/images/customer_logos/cahsmun.png"),
     url: "https://cahsmun.org",
   },
   {
     name: "VMUN",
-    img: require("./images/logos/vmun.png"),
+    img: require("../../common/assets/images/customer_logos/vmun.png"),
     url: "https://vmun.com",
   },
   {
     name: "TMUN",
-    img: require("./images/logos/tmun.png"),
+    img: require("../../common/assets/images/customer_logos/tmun.png"),
     url: "https://tmun.ca",
   },
 ];

@@ -6,11 +6,11 @@ import axios from "axios";
 import PlanCards from "../../../product-site/plans/PlanCards";
 import { ConfirmRedeemModal } from "../modal-ui/modal-ui";
 
-import delegations from "../../../product-site/home/images/mockups/delegations.png";
-import form from "../../../product-site/home/images/mockups/form.png";
-import history from "../../../product-site/home/images/mockups/history.png";
-import statistics from "../../../product-site/home/images/mockups/statistics.png";
-import notes from "../../../product-site/home/images/mockups/notes.png";
+import delegations from "../../../common/assets/images/mockups/delegations.png";
+import form from "../../../common/assets/images/mockups/form.png";
+import history from "../../../common/assets/images/mockups/history.png";
+import statistics from "../../../common/assets/images/mockups/statistics.png";
+import notes from "../../../common/assets/images/mockups/notes.png";
 import { HiBadgeCheck } from "react-icons/hi";
 
 export const MAX_SUBMISSIONS = 100;
