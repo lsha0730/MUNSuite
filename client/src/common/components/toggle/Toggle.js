@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Toggle.scoped.css";
-import { getTextWidth } from "../../../utils/utils";
+import { getTextWidth } from "../../utils/utils";
 
 const TOGGLE_OFFSET = 25;
 
