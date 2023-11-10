@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { appContext } from "../../staffContext.js";
 import { siteContext } from "../../../Context";
 import "./Sidebar.scoped.css";
-import Hoverable from "../../../composable/hover/Hover.js";
+import Hoverable from "../../../common/components/hover/Hover.js";
 
 const INACTIVE_COLOR = "#3C8CC9";
 const ACTIVE_COLOR = "#BCBCBC";

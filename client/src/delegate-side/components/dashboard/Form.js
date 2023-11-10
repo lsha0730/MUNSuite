@@ -10,7 +10,7 @@ import {
   LongText,
   Dropdown,
   SelectMultiple,
-} from "../../../composable/form";
+} from "../../../common/components/form";
 
 const Form = ({
   form,

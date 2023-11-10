@@ -4,7 +4,7 @@ import { appContext } from "../../staffContext";
 import Dropdown from "../history/Dropdown";
 import { FaFilter } from "react-icons/fa";
 import DirectiveCard from "./components/DirectiveCard";
-import Toggle from "../../../composable/toggle/Toggle";
+import Toggle from "../../../common/components/toggle/Toggle";
 
 function Inbox() {
   const { processed, pendings, settings, writeToFirebase } = useContext(

@@ -19,7 +19,7 @@ import { GoGraph } from "react-icons/go";
 import FeatureItem from "./FeatureItem";
 import { siteContext } from "../../Context";
 import GradientAnimation from "./gradient/GradientAnimation";
-import Hoverable from "../../composable/hover/Hover";
+import Hoverable from "../../common/components/hover/Hover";
 
 const TRUSTING_CONFS = [
   {

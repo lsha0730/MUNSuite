@@ -11,7 +11,7 @@ import {
   LongText,
   Dropdown,
   SelectMultiple,
-} from "../../../composable/form";
+} from "../../../common/components/form";
 import {
   EditContent,
   EditDropdown,
@@ -23,7 +23,7 @@ import {
   EditShortText,
 } from "./editor-components";
 
-import Toggle from "../../../composable/toggle/Toggle";
+import Toggle from "../../../common/components/toggle/Toggle";
 import AddQuestion from "./addQ/AddQuestion";
 
 function Editor() {
