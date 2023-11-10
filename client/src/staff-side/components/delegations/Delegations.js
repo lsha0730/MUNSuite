@@ -11,7 +11,7 @@ import * as BsIcons from "react-icons/bs";
 import { appContext } from "../../staffContext.js";
 import axios from "axios";
 import { IoIosLock } from "react-icons/io";
-import { exportToCsv } from "../../utils";
+import { exportToCsv } from "../../../common/utils/utils";
 
 function Delegations() {
   const {

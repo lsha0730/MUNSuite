@@ -1,5 +1,5 @@
 import React from "react";
-import { highlight } from "../../utils";
+import { highlight } from "../../../common/utils/utils";
 import "./History.scoped.css";
 
 const PASSED_COLOR = "#7AFF69";

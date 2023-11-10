@@ -3,7 +3,7 @@ import "./DirectiveCard.scoped.css";
 import { BsPeopleFill, BsEyeglasses, BsPersonFill } from "react-icons/bs";
 import { BiUndo } from "react-icons/bi";
 import Popout from "./Popout";
-import { highlight } from "../../../utils";
+import { highlight } from "../../../../common/utils/utils";
 import CardButtons from "./CardButtons";
 import StatusIndicator from "./StatusIndicator";
 

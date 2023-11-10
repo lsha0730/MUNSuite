@@ -6,7 +6,7 @@ import { GoSearch } from "react-icons/go";
 import { appContext } from "../../staffContext";
 import IndividualNote from "./IndividualNote";
 import { IoIosLock } from "react-icons/io";
-import { exportToCsv } from "../../utils";
+import { exportToCsv } from "../../../common/utils/utils";
 
 function Notes() {
   const { delegations, notes, writeToFirebase, accountInfo } = useContext(
