@@ -1,4 +1,4 @@
-const UNCountriesData = [
+[
   "Afghanistan",
   "Albania",
   "Algeria",
@@ -191,7 +191,5 @@ const UNCountriesData = [
   "Vietnam",
   "Yemen",
   "Zambia",
-  "Zimbabwe",
-];
-
-export default UNCountriesData;
+  "Zimbabwe"
+]

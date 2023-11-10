@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./modal-ui.scoped.css";
-import UNCountriesData from "./UNCountriesData.js";
+import UNCountriesData from "../../../common/assets/json/un_country_list.json";
 import { appContext } from "../../staffContext.js";
 import FlyingDark from "../../../common/assets/icons/flying_dark.svg";
 

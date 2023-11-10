@@ -3,8 +3,8 @@ import "./Settings.scoped.css";
 import { BsGearFill } from "react-icons/bs";
 import { FaGitAlt } from "react-icons/fa";
 import { appContext } from "../../staffContext";
-import CHANGELOG from "./CHANGELOG.json";
-import blankAccount from "./blankAccount.json";
+import CHANGELOG from "../../../common/assets/json/CHANGELOG.json";
+import blankAccount from "../../../common/assets/json/blank_account.json";
 import { Confirmation } from "../modal-ui/modal-ui";
 
 function Settings() {
