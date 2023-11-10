@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { BsCheck } from "react-icons/bs";
 import SingleFill from "../../common/assets/icons/single_fill.svg";
 import FlyingDark from "../../common/assets/icons/flying_dark.svg";
-import { MAX_SUBMISSIONS } from "../../staff_side/components/plan/Plan";
+import { MAX_SUBMISSIONS } from "../../staff_side/plan/Plan";
 
 const PlanCards = ({ page }) => {
   return (

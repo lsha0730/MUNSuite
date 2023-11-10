@@ -15,7 +15,7 @@ import { BsFillPersonLinesFill } from "react-icons/bs";
 import { ImFontSize, ImSearch } from "react-icons/im";
 import { FaHistory } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
-import FeatureItem from "./FeatureItem";
+import FeatureItem from "./feature_item/FeatureItem";
 import { siteContext } from "../../Context";
 import GradientAnimation from "./gradient/GradientAnimation";
 import Hoverable from "../../common/components/hover/Hover";

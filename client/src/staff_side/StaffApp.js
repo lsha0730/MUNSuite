@@ -4,19 +4,19 @@ import axios from "axios";
 import { getAuth } from "firebase/auth";
 import "./StaffApp.scoped.css";
 
-import Sidebar from "./components/sidebar/Sidebar.js";
-import Delegations from "./components/delegations/Delegations.js";
-import Editor from "./components/editor/Editor.js";
-import Inbox from "./components/inbox/Inbox.js";
-import History from "./components/history/History.js";
-import Statistics from "./components/statistics/Statistics.js";
-import Notes from "./components/notes/Notes.js";
-import Plan from "./components/plan/Plan";
-import Settings from "./components/settings/Settings.js";
+import Sidebar from "./sidebar/Sidebar.js";
+import Delegations from "./delegations/Delegations.js";
+import Editor from "./editor/Editor.js";
+import Inbox from "./inbox/Inbox.js";
+import History from "./history/History.js";
+import Statistics from "./statistics/Statistics.js";
+import Notes from "./notes/Notes.js";
+import Plan from "./plan/Plan";
+import Settings from "./settings/Settings.js";
 
 import { appContext } from "./staffContext.js";
 import { siteContext } from "../Context.js";
-import Banner from "./components/plan/Banner";
+import Banner from "./plan/banner/Banner";
 
 function App() {
   const [page, setPage] = useState("delegations");
