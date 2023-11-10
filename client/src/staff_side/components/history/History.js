@@ -4,15 +4,12 @@ import { appContext } from "../../staffContext";
 import { GoSearch } from "react-icons/go";
 import { FaFilter } from "react-icons/fa";
 import { BsDownload } from "react-icons/bs";
-import { Confirmation } from "../modal-ui/modal-ui";
+import { Confirmation } from "../modal_ui/ModalUI";
 import Dropdown from "./Dropdown";
 import DirectiveCard from "../inbox/components/DirectiveCard";
 import CardbarList from "./CardbarList";
 import { IoIosLock } from "react-icons/io";
-import {
-  exportProcesseds,
-  flattenToString,
-} from "../../../common//utils/utils";
+import { exportProcesseds, flattenToString } from "../../../common/utils/utils";
 
 function History() {
   const { pendings, processed, writeToFirebase, accountInfo } = useContext(

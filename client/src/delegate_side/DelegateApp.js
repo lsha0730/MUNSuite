@@ -2,9 +2,9 @@ import React, { useEffect, useState, useContext } from "react";
 import { get, getDatabase, onValue, ref, set } from "firebase/database";
 import axios from "axios";
 
-import LoginPage from "./components/loginpage/LoginPage.js";
+import LoginPage from "./components/login_page/LoginPage.js";
 import Dashboard from "./components/dashboard/Dashboard.js";
-import InvalidLink from "./components/invalid-link/InvalidLink.js";
+import InvalidLink from "./components/invalid_link/InvalidLink.js";
 import "./DelegateApp.scoped.css";
 
 import { delContext } from "./DelegateContext.js";

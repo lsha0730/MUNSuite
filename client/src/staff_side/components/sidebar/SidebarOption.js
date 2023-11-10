@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { appContext } from "../../staffContext.js";
-import { siteContext } from "../../../Context";
+import { siteContext } from "../../../Context.js";
 import "./Sidebar.scoped.css";
 import Hoverable from "../../../common/components/hover/Hover.js";
 

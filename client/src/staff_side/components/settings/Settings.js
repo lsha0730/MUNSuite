@@ -5,7 +5,7 @@ import { FaGitAlt } from "react-icons/fa";
 import { appContext } from "../../staffContext";
 import CHANGELOG from "../../../common/assets/json/CHANGELOG.json";
 import blankAccount from "../../../common/assets/json/blank_account.json";
-import { Confirmation } from "../modal-ui/modal-ui";
+import { Confirmation } from "../modal_ui/ModalUI";
 
 function Settings() {
   const { settings } = useContext(appContext);

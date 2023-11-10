@@ -9,18 +9,18 @@ import { getAnalytics } from "firebase/analytics";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { useMediaQuery } from "react-responsive";
 
-import Navbar from "./product-site/navbar/Navbar.js";
-import Footer from "./product-site/footer/Footer.js";
-import Home from "./product-site/home/Home.js";
-import Register from "./product-site/register/Register.js";
-import Login from "./product-site/login/Login.js";
-import Forgot from "./product-site/forgot/Forgot.js";
-import Plans from "./product-site/plans/Plans.js";
-import Prepayment from "./product-site/plans/Prepayment";
-import Eula from "./product-site/eula/Eula";
+import Navbar from "./product_site/navbar/Navbar.js";
+import Footer from "./product_site/footer/Footer.js";
+import Home from "./product_site/home/Home.js";
+import Register from "./product_site/register/Register.js";
+import Login from "./product_site/login/Login.js";
+import Forgot from "./product_site/forgot/Forgot.js";
+import Plans from "./product_site/plans/Plans.js";
+import Prepayment from "./product_site/plans/Prepayment";
+import Eula from "./product_site/eula/Eula";
 
-import StaffApp from "./staff-side/StaffApp.js";
-import DelegateApp from "./delegate-side/DelegateApp.js";
+import StaffApp from "./staff_side/StaffApp.js";
+import DelegateApp from "./delegate_side/DelegateApp.js";
 
 function App() {
   // Configuring Firebase

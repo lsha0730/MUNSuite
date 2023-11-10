@@ -5,7 +5,7 @@ import {
   AddCustomCountry,
   AddViaSpreadsheet,
   Confirmation,
-} from "../modal-ui/modal-ui.js";
+} from "../modal_ui/ModalUI.js";
 import Delbar from "./delbar/Delbar.js";
 import * as BsIcons from "react-icons/bs";
 import { appContext } from "../../staffContext.js";

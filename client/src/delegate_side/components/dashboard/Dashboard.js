@@ -3,8 +3,8 @@ import axios from "axios";
 import { delContext } from "../../DelegateContext";
 import "./Dashboard.scoped.css";
 
-import { MAX_SUBMISSIONS } from "../../../staff-side/components/plan/Plan";
-import Banner from "../../../staff-side/components/plan/Banner";
+import { MAX_SUBMISSIONS } from "../../../staff_side/components/plan/Plan";
+import Banner from "../../../staff_side/components/plan/Banner";
 
 import { FaPaperPlane } from "react-icons/fa";
 import Sidebar from "./Sidebar";
