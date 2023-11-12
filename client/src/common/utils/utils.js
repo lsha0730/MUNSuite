@@ -192,3 +192,8 @@ export const getExpiration = () => {
 
   return expiration;
 };
+
+export function classNames(...args) {
+  if (!args || !Array.isArray(args)) return "";
+  return args.join(" ");
+}
