@@ -18,7 +18,7 @@ function App() {
   const [settings, setSettings] = useState({});
 
   const userID = window.location.pathname.slice(6); // window.location.pathname is "/form/<uuid>"
-  const [validLink, setValidLink] = useState("loading");
+  const [linkValidity, setValidLink] = useState("loading");
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState();
   const [appRender, setAppRender] = useState();
@@ -127,7 +127,7 @@ function App() {
 
   // Firebase: Writing
   function writeToFirebase(target, content) {
-    if (["pendings"].includes(target) && validLink) {
+    if (["pendings"].includes(target) && linkValidity) {
       // Delegate side only writes to pendings
       if (content.length > 0) {
         set(ref(database, `appdata/${userID}/livedata/${target}`), content);
@@ -144,23 +144,16 @@ function App() {
     setUser(getDelFromCode(sessionStorage.getItem("code")));
   }, [delegations]);
 
-  useEffect(() => {
-    switch (validLink) {
-      case "loading":
-        setAppRender(<div />);
-        break;
-      case "valid":
-        if (loggedIn && delegations.map((del) => del.name).includes(user)) {
-          setAppRender(<Dashboard key="dashboard" submit={submit} />);
-        } else {
-          setAppRender(<LoginPage attemptLogin={attemptLogin} />);
-        }
-        break;
-      case "invalid":
-        setAppRender(<InvalidLink />);
-        break;
-    }
-  }, [validLink, delegations, loggedIn]);
+  const screens = {
+    loading: <div />,
+    valid:
+      loggedIn && delegateIsInDelegateList(user) ? (
+        <Dashboard key="dashboard" submit={submit} />
+      ) : (
+        <LoginPage attemptLogin={attemptLogin} />
+      ),
+    invalid: <InvalidLink />,
+  };
 
   return (
     <delContext.Provider
@@ -176,9 +169,13 @@ function App() {
         accountInfo,
       }}
     >
-      <div className="App-container">{appRender}</div>
+      <div className="App-container">{screens[linkValidity]}</div>
     </delContext.Provider>
   );
+
+  function delegateIsInDelegateList(user) {
+    return delegations.map((del) => del.name).includes(user);
+  }
 
   function attemptLogin(input) {
     for (let i = 0; i < delegations.length; i++) {
