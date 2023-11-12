@@ -2,10 +2,10 @@ import React from "react";
 import { BsFillInboxFill, BsSendExclamationFill } from "react-icons/bs";
 import { FaHandPointer } from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
-import GradientAnimation from "../home/gradient/GradientAnimation";
-import "./Prepayment.scoped.css";
+import GradientAnimation from "../../home/gradient/GradientAnimation";
+import "./OrderInstructions.scoped.css";
 
-const Prepayment = () => {
+const OrderInstructions = () => {
   return (
     <div className="container">
       <GradientAnimation className="gradient" />
@@ -60,4 +60,4 @@ const IconTextPair = ({ icon, text }) => {
   );
 };
 
-export default Prepayment;
+export default OrderInstructions;

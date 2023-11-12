@@ -1,7 +1,7 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import "./Register.scoped.css";
+import "./Auth.scoped.css";
 import axios from "axios";
 
 function Register() {
@@ -17,7 +17,7 @@ function Register() {
 
   return (
     <div className="centering-container">
-      <div className="register-container">
+      <div className="content">
         <p className="form-header">Register an Account</p>
         <div className="form">
           <div className="form-left">

@@ -1,29 +1,21 @@
-import React from "react";
-import "../Home.scoped.css";
+import "./FeatureItem.scoped.css";
+import { classNames } from "../../../common/utils/utils";
 
-function FeatureItem({
-  textPosition,
-  img,
-  heading,
-  subheading,
-  icon,
-  mobile = false,
-}) {
+function FeatureItem({ textPosition, img, heading, subheading, icon }) {
   return (
     <div
-      className={
-        textPosition == "right"
-          ? "home-feature-group-imgText"
-          : "home-feature-group-textImg"
-      }
+      className={classNames(
+        "container",
+        textPosition == "right" ? "img-text" : "text-img"
+      )}
     >
-      <img src={img} className="features-image" />
-      <div className="feature-text-group">
-        <div className="features-icon-heading-group">
+      <img src={img} className="image" />
+      <div className="text">
+        <div className="icon-heading-group">
           {icon}
-          <p className="feature-text-heading">{heading}</p>
+          <p className="heading">{heading}</p>
         </div>
-        <p className="feature-text-subheading">{subheading}</p>
+        <p className="subheading">{subheading}</p>
       </div>
     </div>
   );

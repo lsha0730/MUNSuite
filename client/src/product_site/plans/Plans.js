@@ -1,6 +1,6 @@
 import React from "react";
 import "./Plans.scoped.css";
-import PlanCards from "./PlanCards";
+import PlanCards from "./cards/PlanCards";
 
 import Horizons from "../../common/assets/images/customer_logos/horizons.png";
 import CAHSMUN from "../../common/assets/images/customer_logos/cahsmun.png";

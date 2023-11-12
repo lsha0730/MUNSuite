@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import "../register/Register.scoped.css";
+import "./Auth.scoped.css";
 
 function Login() {
   const auth = getAuth();
@@ -10,7 +10,7 @@ function Login() {
 
   return (
     <div className="centering-container">
-      <div className="register-container">
+      <div className="content">
         <p className="form-header">Log In</p>
         <div className="form">
           <div className="form-left">
