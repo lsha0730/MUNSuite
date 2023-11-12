@@ -1,6 +1,7 @@
 import React from "react";
-import Cardbar from "./Cardbar";
+import Cardbar from "./cardbar/Cardbar";
 import "../History.scoped.css";
+import "./CardbarList.scoped.css";
 
 const CardbarList = ({ cards, search, selection, setSelection }) => {
   return cards.length < 1 ? (

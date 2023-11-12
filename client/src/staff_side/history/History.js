@@ -7,7 +7,7 @@ import { BsDownload } from "react-icons/bs";
 import { Confirmation } from "../modals/Modals";
 import Dropdown from "./dropdown/Dropdown";
 import DirectiveCard from "../inbox/card/DirectiveCard";
-import CardbarList from "./cardbar/CardbarList";
+import CardbarList from "./cardbar_list/CardbarList";
 import { IoIosLock } from "react-icons/io";
 import { exportProcesseds, flattenToString } from "../../common/utils/utils";
 

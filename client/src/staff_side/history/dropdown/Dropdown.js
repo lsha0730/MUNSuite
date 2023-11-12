@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { GoTriangleDown } from "react-icons/go";
 import "../History.scoped.css";
+import "./Dropdown.scoped.css";
 
 function Dropdown({ options, setSelection, ...other }) {
   const [value, setValue] = useState(0); // Stores the index of the item in options
@@ -42,7 +43,7 @@ function Dropdown({ options, setSelection, ...other }) {
       <div
         className={dropVisible ? "dropdown-defocuser" : "hidden"}
         onClick={() => setDropVisible(false)}
-      ></div>
+      />
       <div
         className={dropVisible ? "dropdown-bar super-z" : "dropdown-bar"}
         onClick={() => setDropVisible(!dropVisible)}

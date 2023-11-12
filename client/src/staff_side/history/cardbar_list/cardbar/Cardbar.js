@@ -1,6 +1,6 @@
 import React from "react";
-import { highlight } from "../../../common/utils/utils";
-import "../History.scoped.css";
+import { highlight } from "../../../../common/utils/utils";
+import "./Cardbar.scoped.css";
 
 const PASSED_COLOR = "#7AFF69";
 const FAILED_COLOR = "#FF8080";

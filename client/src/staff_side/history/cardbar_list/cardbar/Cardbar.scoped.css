@@ -1,0 +1,67 @@
+.cardbar-container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 3px;
+
+  border-radius: 3px;
+  background-color: #ffffff;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.cardbar-body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+  width: 1px;
+
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.cardbar-indicator {
+  min-width: 15px;
+  min-height: 15px;
+}
+
+.cardbar-left {
+  width: 70%;
+  flex-direction: row;
+  align-items: center;
+}
+
+.cardbar-right {
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardbar-title {
+  margin-right: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.cardbar-desc {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #aaaaaa;
+  font-size: 12px;
+}
+
+.cardbar-id {
+  margin-left: 15px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #aaaaaa;
+}
