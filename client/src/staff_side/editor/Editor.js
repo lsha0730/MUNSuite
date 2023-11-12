@@ -25,6 +25,7 @@ import {
 
 import Toggle from "../../common/components/toggle/Toggle";
 import AddQuestion from "./add_question/AddQuestion";
+import defaultBanner from "../../common/assets/images/default_banner.png"
 
 function Editor() {
   const { delegations, settings, form, writeToFirebase, userID } = useContext(
@@ -132,7 +133,7 @@ function Editor() {
     switch (type) {
       case "header":
         newObj.heading = "New Header";
-        newObj.imgLink = require("../../common/assets/images/default_banner.png");
+        newObj.imgLink = defaultBanner
         newObj.imgName = "Default Banner";
         newObj.imgPath = "";
         break;
