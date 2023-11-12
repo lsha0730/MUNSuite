@@ -7,8 +7,8 @@ import { MAX_SUBMISSIONS } from "../../staff_side/plan/Plan";
 import Banner from "../../staff_side/plan/banner/Banner";
 
 import { FaPaperPlane } from "react-icons/fa";
-import Sidebar from "./Sidebar";
-import Form from "./Form";
+import Sidebar from "./sidebar/Sidebar";
+import Form from "./form/Form";
 
 function Dashboard(props) {
   const {

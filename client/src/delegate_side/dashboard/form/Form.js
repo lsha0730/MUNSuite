@@ -1,6 +1,6 @@
 import React from "react";
 import "./Form.scoped.css";
-import defaultBanner from "../../common/assets/images/default_banner.png";
+import defaultBanner from "../../../common/assets/images/default_banner.png";
 import {
   Header,
   Radio,
@@ -10,7 +10,7 @@ import {
   LongText,
   Dropdown,
   SelectMultiple,
-} from "../../common/components/form";
+} from "../../../common/components/form";
 
 const Form = ({
   form,

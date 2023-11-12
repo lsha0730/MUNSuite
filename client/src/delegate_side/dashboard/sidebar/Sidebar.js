@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { delContext } from "../DelegateContext";
-import DirectiveCard from "../../staff_side/inbox/card/DirectiveCard";
+import { delContext } from "../../DelegateContext";
+import DirectiveCard from "../../../staff_side/inbox/card/DirectiveCard";
 import "./Sidebar.scoped.css";
 import { FaHistory } from "react-icons/fa";
 import { BsPencilSquare } from "react-icons/bs";
