@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
-import "./EditorComponents.scoped.css";
+import { useEffect, useState, useRef } from "react";
+import "./Generic.scoped.css";
 
 const MAX_CHAR_LIMIT = 10000;
 
-function EditLongText(props) {
+function LongtextEditor(props) {
   const [require, setRequire] = useState(props.required);
   const [toggleRender, setToggleRender] = useState();
   const [heading, setHeading] = useState(props.heading);
@@ -116,4 +116,4 @@ function EditLongText(props) {
   );
 }
 
-export default EditLongText;
+export default LongtextEditor;

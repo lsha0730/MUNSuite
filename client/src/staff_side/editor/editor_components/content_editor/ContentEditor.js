@@ -7,11 +7,12 @@ import {
   listAll,
   deleteObject,
 } from "firebase/storage";
-import "./EditorComponents.scoped.css";
+import "../Generic.scoped.css";
+import "./ContentEditor.scoped.css";
 import { TiDeleteOutline } from "react-icons/ti";
-import { appContext } from "../../staffContext";
+import { appContext } from "../../../staffContext";
 
-function EditContent(props) {
+function ContentEditor(props) {
   const { userID } = useContext(appContext);
   const [heading, setHeading] = useState(props.heading);
   const [subheading, setSubheading] = useState(props.subheading);
@@ -187,7 +188,7 @@ function EditContent(props) {
           type: "image",
           heading: "Image Heading",
           imgName: "Default Image",
-          value: require("../../../common/assets/images/default_banner.png"),
+          value: require("../../../../common/assets/images/default_banner.png"),
           path: "",
         });
         break;
@@ -266,4 +267,4 @@ function EditContent(props) {
   }
 }
 
-export default EditContent;
+export default ContentEditor;

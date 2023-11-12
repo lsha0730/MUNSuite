@@ -1,19 +1,19 @@
-import EditContent from "./EditContent";
-import EditDropdown from "./EditDropdown";
-import EditHeader from "./EditHeader";
-import EditLongText from "./EditLongText";
-import EditMultipleChoice from "./EditMultipleChoice";
-import EditRadio from "./EditRadio";
-import EditSelectMultiple from "./EditSelectMultiple";
-import EditShortText from "./EditShortText";
+import ContentEditor from "./content_editor/ContentEditor";
+import DropdownEditor from "./DropdownEditor";
+import HeaderEditor from "./header_editor/HeaderEditor";
+import LongtextEditor from "./LongtextEditor";
+import MultiplechoiceEditor from "./MultiplechoiceEditor";
+import RadioEditor from "./RadioEditor";
+import SelectmultipleEditor from "./SelectmultipleEditor";
+import ShorttextEditor from "./ShorttextEditor";
 
 export {
-  EditContent,
-  EditDropdown,
-  EditHeader,
-  EditLongText,
-  EditMultipleChoice,
-  EditRadio,
-  EditSelectMultiple,
-  EditShortText,
+  ContentEditor,
+  DropdownEditor,
+  HeaderEditor,
+  LongtextEditor,
+  MultiplechoiceEditor,
+  RadioEditor,
+  SelectmultipleEditor,
+  ShorttextEditor,
 };

@@ -13,14 +13,14 @@ import {
   SelectMultiple,
 } from "../../common/components/form";
 import {
-  EditContent,
-  EditDropdown,
-  EditHeader,
-  EditLongText,
-  EditMultipleChoice,
-  EditRadio,
-  EditSelectMultiple,
-  EditShortText,
+  ContentEditor,
+  DropdownEditor,
+  HeaderEditor,
+  LongtextEditor,
+  MultiplechoiceEditor,
+  RadioEditor,
+  SelectmultipleEditor,
+  ShorttextEditor,
 } from "./editor_components";
 
 import Toggle from "../../common/components/toggle/Toggle";
@@ -268,7 +268,7 @@ function Editor() {
                   updateForm={updateForm}
                   locked={standardized && item.id == 0}
                 />
-                <EditHeader
+                <HeaderEditor
                   key={`editor${item.id}${editing}`}
                   id={item.id}
                   imgPath={item.imgPath}
@@ -298,7 +298,7 @@ function Editor() {
                   updateForm={updateForm}
                   locked={standardized && item.id == 2}
                 />
-                <EditRadio
+                <RadioEditor
                   key={`editor${item.id}${editing}`}
                   id={item.id}
                   required={item.required}
@@ -327,7 +327,7 @@ function Editor() {
                   updateForm={updateForm}
                   locked={standardized}
                 />
-                <EditMultipleChoice
+                <MultiplechoiceEditor
                   key={`editor${item.id}${editing}`}
                   id={item.id}
                   required={item.required}
@@ -356,7 +356,7 @@ function Editor() {
                   updateForm={updateForm}
                   locked={standardized}
                 />
-                <EditContent
+                <ContentEditor
                   key={`editor${item.id}${editing}`}
                   id={item.id}
                   required={item.required}
@@ -384,7 +384,7 @@ function Editor() {
                   updateForm={updateForm}
                   locked={standardized && item.id == 1}
                 />
-                <EditShortText
+                <ShorttextEditor
                   key={`editor${item.id}${editing}`}
                   id={item.id}
                   required={item.required}
@@ -412,7 +412,7 @@ function Editor() {
                   updateForm={updateForm}
                   locked={standardized}
                 />
-                <EditLongText
+                <LongtextEditor
                   key={`editor${item.id}${editing}`}
                   id={item.id}
                   required={item.required}
@@ -445,7 +445,7 @@ function Editor() {
                   updateForm={updateForm}
                   locked={standardized}
                 />
-                <EditDropdown
+                <DropdownEditor
                   key={`editor${item.id}${editing}${delegations.length}`}
                   id={item.id}
                   required={item.required}
@@ -481,7 +481,7 @@ function Editor() {
                   updateForm={updateForm}
                   locked={standardized && (item.id == 3 || item.id == 4)}
                 />
-                <EditSelectMultiple
+                <SelectmultipleEditor
                   key={`editor${item.id}${editing}${delegations.length}`}
                   id={item.id}
                   required={item.required}

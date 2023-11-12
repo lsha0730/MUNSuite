@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./EditorComponents.scoped.css";
+import "./Generic.scoped.css";
 
-function EditShortText(props) {
+function ShorttextEditor(props) {
   const [require, setRequire] = useState(props.required);
   const [toggleRender, setToggleRender] = useState();
   const [heading, setHeading] = useState(props.heading);
@@ -37,7 +37,7 @@ function EditShortText(props) {
                 : "toggle-circle toggle-greybtt"
             }
             style={{ left: toggleOffset }}
-          ></div>
+          />
         </div>
       </div>
     );
@@ -76,7 +76,7 @@ function EditShortText(props) {
         onChange={() => {
           setHeading(document.getElementById("heading" + props.id).value);
         }}
-      ></input>
+      />
 
       <p className="subheading">Subheading</p>
       <input
@@ -87,9 +87,9 @@ function EditShortText(props) {
         onChange={() => {
           setSubheading(document.getElementById("subheading" + props.id).value);
         }}
-      ></input>
+      />
     </div>
   );
 }
 
-export default EditShortText;
+export default ShorttextEditor;

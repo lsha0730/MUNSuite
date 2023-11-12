@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { appContext } from "../../staffContext";
-import "./EditorComponents.scoped.css";
+import "./Generic.scoped.css";
 
-function EditSelectMultiple(props) {
+function SelectmultipleEditor(props) {
   const { delegations } = useContext(appContext);
   const [delNames, setDelNames] = useState(delegations.map((del) => del.name));
   const [require, setRequire] = useState(props.required);
@@ -220,4 +220,4 @@ function EditSelectMultiple(props) {
   );
 }
 
-export default EditSelectMultiple;
+export default SelectmultipleEditor;

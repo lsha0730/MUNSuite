@@ -6,10 +6,11 @@ import {
   uploadBytes,
   listAll,
 } from "firebase/storage";
-import "./EditorComponents.scoped.css";
-import { appContext } from "../../staffContext";
+import "../Generic.scoped.css";
+import "./HeaderEditor.scoped.css";
+import { appContext } from "../../../staffContext";
 
-function EditHeader(props) {
+function HeaderEditor(props) {
   const { userID } = useContext(appContext);
   const [imageData, setImageData] = useState({
     imgLink: props.imgLink,
@@ -125,4 +126,4 @@ function EditHeader(props) {
   }
 }
 
-export default EditHeader;
+export default HeaderEditor;

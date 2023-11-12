@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./EditorComponents.scoped.css";
+import "./Generic.scoped.css";
 
-function EditRadio(props) {
+function RadioEditor(props) {
   const [require, setRequire] = useState(props.required);
   const [toggleRender, setToggleRender] = useState();
   const [options, setOptions] = useState(props.options);
@@ -56,7 +56,7 @@ function EditRadio(props) {
                 : "toggle-circle toggle-greybtt"
             }
             style={{ left: toggleOffset }}
-          ></div>
+          />
         </div>
       </div>
     );
@@ -116,7 +116,7 @@ function EditRadio(props) {
         onChange={() => {
           setHeading(document.getElementById("heading" + props.id).value);
         }}
-      ></input>
+      />
 
       <p className="subheading">Subheading</p>
       <input
@@ -127,7 +127,7 @@ function EditRadio(props) {
         onChange={() =>
           setSubheading(document.getElementById("subheading" + props.id).value)
         }
-      ></input>
+      />
 
       <p className="subheading">Options</p>
 
@@ -139,7 +139,7 @@ function EditRadio(props) {
           onKeyDown={(e) => {
             if (e.key === "Enter") addOption();
           }}
-        ></input>
+        />
         <div className="btt-add-option" onClick={addOption}>
           <p>Add</p>
         </div>
@@ -150,4 +150,4 @@ function EditRadio(props) {
   );
 }
 
-export default EditRadio;
+export default RadioEditor;

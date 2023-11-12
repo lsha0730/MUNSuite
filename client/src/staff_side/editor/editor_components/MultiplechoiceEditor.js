@@ -1,27 +1,14 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
-import { appContext } from "../../staffContext";
-import "./EditorComponents.scoped.css";
+import React, { useEffect, useState, useRef } from "react";
+import "./Generic.scoped.css";
 
-function EditDropdown(props) {
-  const { delegations } = useContext(appContext);
-  const [delNames, setDelNames] = useState(delegations.map((del) => del.name));
+function MultiplechoiceEditor(props) {
   const [require, setRequire] = useState(props.required);
   const [toggleRender, setToggleRender] = useState();
-  const [useDels, setUseDels] = useState(props.options == "all-delegations");
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState(props.options);
   const [optionsRender, setOptionsRender] = useState([]);
   const [heading, setHeading] = useState(props.heading);
   const [subheading, setSubheading] = useState(props.subheading);
   const isMounted = useRef(false);
-
-  useEffect(() => {
-    setDelNames(delegations.map((del) => del.name));
-    setOptions(
-      props.options == "all-delegations"
-        ? delegations.map((item) => item.name)
-        : props.options
-    );
-  }, [delegations]);
 
   useEffect(() => {
     if (props.heading) {
@@ -59,30 +46,22 @@ function EditDropdown(props) {
   }, [require]);
 
   function addOption() {
-    if (document.getElementById("dropdown" + props.id).value !== "") {
+    if (document.getElementById("mc" + props.id).value !== "") {
       setOptions(
-        options.concat(document.getElementById("dropdown" + props.id).value)
+        options.concat(document.getElementById("mc" + props.id).value)
       );
-      document.getElementById("dropdown" + props.id).value = "";
+      document.getElementById("mc" + props.id).value = "";
     }
   }
 
   function removeOption(target) {
-    if (!useDels) {
-      let newArr = [];
-      for (let i = 0; i < options.length; i++) {
-        if (i !== target) {
-          newArr.push(options[i]);
-        }
+    let newArr = [];
+    for (let i = 0; i < options.length; i++) {
+      if (i !== target) {
+        newArr.push(options[i]);
       }
-      setOptions(newArr);
     }
-  }
-
-  function toggleUseAll() {
-    if (!useDels) setOptions(delNames);
-    setUseDels(!useDels);
-    document.getElementById("dropdown" + props.id).value = "";
+    setOptions(newArr);
   }
 
   useEffect(() => {
@@ -92,12 +71,7 @@ function EditDropdown(props) {
       let renderArr = [];
       for (let i = 0; i < options.length; i++) {
         renderArr.push(
-          <div
-            className={
-              useDels ? "option-container-bricked" : "option-container"
-            }
-            onClick={() => removeOption(i)}
-          >
+          <div className="option-container" onClick={() => removeOption(i)}>
             <div className="overflow-wrapper">
               <p className="option-text">{options[i]}</p>
             </div>
@@ -106,28 +80,28 @@ function EditDropdown(props) {
       }
       setOptionsRender(renderArr);
     }
-  }, [options, useDels]);
+  }, [options]);
 
   // Form Updater
   useEffect(() => {
     if (isMounted.current) {
       let newObj = {};
       newObj.id = props.id;
-      newObj.type = "dropdown";
+      newObj.type = "multiplechoice";
       newObj.required = require;
       newObj.heading = heading == "" ? false : heading;
       newObj.subheading = subheading == "" ? false : subheading;
-      newObj.options = useDels ? "all-delegations" : options;
+      newObj.options = options;
 
       props.updateForm("update", props.id, newObj);
     } else {
       isMounted.current = true;
     }
-  }, [require, options, heading, subheading, useDels]);
+  }, [require, options, heading, subheading]);
 
   return (
     <div className={props.editing == props.id ? "block-container" : "hidden"}>
-      <p className="heading">Dropdown</p>
+      <p className="heading">Multiple Choice</p>
       {toggleRender}
 
       <p className="subheading">Heading</p>
@@ -136,9 +110,9 @@ function EditDropdown(props) {
         id={"heading" + props.id}
         placeholder="Input here..."
         className="textfield-container"
-        onChange={() =>
-          setHeading(document.getElementById("heading" + props.id).value)
-        }
+        onChange={() => {
+          setHeading(document.getElementById("heading" + props.id).value);
+        }}
       />
 
       <p className="subheading">Subheading</p>
@@ -147,9 +121,9 @@ function EditDropdown(props) {
         id={"subheading" + props.id}
         placeholder="Input here..."
         className="textfield-container"
-        onChange={() =>
-          setSubheading(document.getElementById("subheading" + props.id).value)
-        }
+        onChange={() => {
+          setSubheading(document.getElementById("subheading" + props.id).value);
+        }}
       />
 
       <p className="subheading">Options</p>
@@ -157,42 +131,19 @@ function EditDropdown(props) {
       <div className="option-adder">
         <input
           type="text"
-          id={"dropdown" + props.id}
-          className={useDels ? "option-input-bricked" : "option-input"}
-          disabled={useDels}
+          id={"mc" + props.id}
+          className="option-input"
           onKeyDown={(e) => {
             if (e.key === "Enter") addOption();
           }}
         />
-        <div
-          className={useDels ? "btt-add-option-bricked" : "btt-add-option"}
-          onClick={addOption}
-        >
+        <div className="btt-add-option" onClick={addOption}>
           <p>Add</p>
         </div>
-        <div
-          className={
-            useDels
-              ? "btt-add-all btt-add-all-on"
-              : "btt-add-all btt-add-all-off"
-          }
-          onClick={toggleUseAll}
-        >
-          <p>Use Dels</p>
-        </div>
       </div>
-
-      <div
-        className={
-          useDels
-            ? "options-container options-container-bricked"
-            : "options-container"
-        }
-      >
-        {optionsRender}
-      </div>
+      <div className="options-container">{optionsRender}</div>
     </div>
   );
 }
 
-export default EditDropdown;
+export default MultiplechoiceEditor;
