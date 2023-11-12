@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./Sidebar.scoped.css";
 import { appContext } from "../staffContext.js";
-import SidebarOption from "./sidebar_option/SidebarOption";
+import PageButton from "./PageButton";
 import {
   BsPeopleFill,
   BsPencilFill,
@@ -97,13 +97,13 @@ function Sidebar() {
       <div className="Sidebar-subcontainer">
         <div className="Sidebar-topicons">
           {TOP_OPTIONS.map((obj) => (
-            <SidebarOption {...obj} />
+            <PageButton {...obj} />
           ))}
         </div>
 
         <div className="Sidebar-boticons">
           {BOTTOM_OPTIONS.map((obj) => (
-            <SidebarOption {...obj} />
+            <PageButton {...obj} />
           ))}
         </div>
       </div>

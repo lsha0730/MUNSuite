@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import "./Notes.scoped.css";
 import { BsDownload, BsPersonFill } from "react-icons/bs";
 import { IoClipboard } from "react-icons/io5";

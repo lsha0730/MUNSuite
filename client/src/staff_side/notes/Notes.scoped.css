@@ -281,64 +281,6 @@
   z-index: 2;
 }
 
-/*Noteblock*/
-.noteblock-container {
-  width: 100%;
-  margin-bottom: 20px;
-
-  display: flex;
-  flex-direction: column;
-}
-.noteblock-title {
-  font-size: 18px;
-  font-weight: 500;
-
-  margin-left: 5px;
-  margin-bottom: 10px;
-}
-.noteblock-textfield {
-  flex-grow: 1;
-  min-height: 150px;
-
-  background-color: #f7f7f7;
-  border-radius: 10px;
-
-  padding: 10px;
-  padding-top: 5px;
-
-  font-size: 16px;
-  font-family: "Inter", sans-serif;
-
-  border-color: rgba(0, 0, 0, 0);
-  border-radius: 10px;
-  background-color: #f7f7f7;
-
-  resize: vertical;
-  overflow-y: auto;
-}
-.noteblock-textfield::placeholder {
-  font-size: 16px;
-  color: #c0c0c0;
-}
-.noteblock-textfield:focus {
-  outline: none !important;
-  border-color: rgba(0, 0, 0, 0);
-  background-color: #f7f7f7;
-}
-.noteblock-textfield:hover {
-  background-color: #eeeeee;
-}
-.noteblock-textfield::-webkit-scrollbar-track {
-  background: rgba(241, 241, 241, 1);
-  opacity: 100%;
-  transition: 200ms;
-}
-.noteblock-textfield::-webkit-scrollbar-thumb {
-  background: rgba(220, 220, 220, 1);
-  opacity: 100%;
-  transition: 200ms;
-}
-
 /*-----------RIGHT UI----------*/
 .UI-right {
   display: flex;

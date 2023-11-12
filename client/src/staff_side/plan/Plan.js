@@ -3,7 +3,7 @@ import { appContext } from "../staffContext";
 import "./Plan.scoped.css";
 import axios from "axios";
 
-import PlanCards from "../../product_site/plans/PlanCards";
+import PlanCards from "../../product_site/plans/cards/PlanCards";
 import { ConfirmRedeemModal } from "../modals/Modals";
 
 import delegations from "../../common/assets/images/mockups/delegations.png";

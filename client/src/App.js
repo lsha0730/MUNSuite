@@ -12,11 +12,11 @@ import { useMediaQuery } from "react-responsive";
 import Navbar from "./product_site/navbar/Navbar.js";
 import Footer from "./product_site/footer/Footer.js";
 import Home from "./product_site/home/Home.js";
-import Register from "./product_site/register/Register.js";
-import Login from "./product_site/login/Login.js";
+import Register from "./product_site/auth/Register.js";
+import Login from "./product_site/auth/Login.js";
 import Forgot from "./product_site/forgot/Forgot.js";
 import Plans from "./product_site/plans/Plans.js";
-import Prepayment from "./product_site/plans/Prepayment";
+import OrderInstructions from "./product_site/plans/order_instructions/OrderInstructions";
 import Eula from "./product_site/eula/Eula";
 
 import StaffApp from "./staff_side/StaffApp.js";
@@ -106,7 +106,7 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/forgot" element={<Forgot />} />
             <Route exact path="/plans" element={<Plans />} />
-            <Route exact path="/prepayment" element={<Prepayment />} />
+            <Route exact path="/prepayment" element={<OrderInstructions />} />
             <Route exact path="/eula" element={<Eula />} />
             <Route
               exact

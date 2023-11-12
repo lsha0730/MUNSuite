@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import { appContext } from "../../staffContext.js";
-import { siteContext } from "../../../Context.js";
-import "../Sidebar.scoped.css";
-import Hoverable from "../../../common/components/hover/Hover.js";
+import { appContext } from "../staffContext.js";
+import { siteContext } from "../../Context.js";
+import "./Sidebar.scoped.css";
+import Hoverable from "../../common/components/hover/Hover.js";
 
 const INACTIVE_COLOR = "#3C8CC9";
 const ACTIVE_COLOR = "#BCBCBC";
 
-function SidebarOption({ destination, label, icon: Tag, iconSize }) {
+function PageButton({ destination, label, icon: Tag, iconSize }) {
   const { pendings, page, setPage } = useContext(appContext);
   const { handleSignout } = useContext(siteContext);
 
@@ -45,4 +45,4 @@ function SidebarOption({ destination, label, icon: Tag, iconSize }) {
   );
 }
 
-export default SidebarOption;
+export default PageButton;
