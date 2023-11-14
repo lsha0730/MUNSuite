@@ -4,7 +4,7 @@ import { appContext } from "../staffContext";
 import { GoSearch } from "react-icons/go";
 import { FaFilter } from "react-icons/fa";
 import { BsDownload } from "react-icons/bs";
-import { Confirmation } from "../modals/Modals";
+import { Confirmation } from "../modals";
 import Dropdown from "./dropdown/Dropdown";
 import DirectiveCard from "../inbox/card/DirectiveCard";
 import CardbarList from "./cardbar_list/CardbarList";

@@ -3,9 +3,9 @@ import "./Delegations.scoped.css";
 import {
   AddUNCountries,
   AddCustomCountry,
-  AddViaSpreadsheet,
+  SpreadsheetAdd,
   Confirmation,
-} from "../modals/Modals.js";
+} from "../modals/index.js";
 import Delbar from "./delbar/Delbar.js";
 import * as BsIcons from "react-icons/bs";
 import { appContext } from "../staffContext.js";
@@ -118,7 +118,7 @@ function Delegations() {
             <div
               className="btt-add-country noselect"
               onClick={() => {
-                setModal("add-un-countries");
+                setModal("add_un_countries");
               }}
             >
               <p>Add UN Countries</p>
@@ -127,7 +127,7 @@ function Delegations() {
             <div
               className="btt-add-country noselect"
               onClick={() => {
-                setModal("add-custom-country");
+                setModal("add_custom_country");
               }}
             >
               <p>Add Custom Country</p>
@@ -141,7 +141,7 @@ function Delegations() {
               }
               onClick={() => {
                 if (accountInfo.type === "Premium")
-                  setModal("add-via-spreadsheet");
+                  setModal("spreadsheet_add");
               }}
             >
               {accountInfo.type !== "Premium" && (
@@ -204,17 +204,17 @@ function Delegations() {
 
   function modalUI() {
     switch (modal) {
-      case "add-un-countries":
+      case "add_un_countries":
         return (
           <AddUNCountries setModal={setModal} addDelegates={addDelegates} />
         );
-      case "add-custom-country":
+      case "add_custom_country":
         return (
           <AddCustomCountry setModal={setModal} addDelegates={addDelegates} />
         );
-      case "add-via-spreadsheet":
+      case "spreadsheet_add":
         return (
-          <AddViaSpreadsheet setModal={setModal} addDelegates={addDelegates} />
+          <SpreadsheetAdd setModal={setModal} addDelegates={addDelegates} />
         );
       case "confirmation":
         return (

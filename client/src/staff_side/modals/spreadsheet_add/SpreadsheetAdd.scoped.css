@@ -1,0 +1,83 @@
+/*-----------MODAL SPREADSHEET IMPORT----------*/
+.container {
+  height: 80%;
+  max-height: 800px;
+  width: 500px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+.pastebin {
+  width: 100%;
+  min-height: 100%;
+
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding: 10px;
+  padding-top: 5px;
+
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+
+  border-color: rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  background-color: #f7f7f7;
+
+  resize: vertical;
+  overflow-y: auto;
+}
+.pastebin::placeholder {
+  font-size: 16px;
+  color: #c0c0c0;
+}
+.pastebin:focus {
+  outline: none !important;
+  border-color: rgba(0, 0, 0, 0);
+  background-color: #f7f7f7;
+}
+.pastebin:hover {
+  background-color: #eeeeee;
+}
+.pastebin:hover::-webkit-scrollbar-track {
+  background: rgba(241, 241, 241, 1);
+  opacity: 100%;
+  transition: 200ms;
+}
+.pastebin:hover::-webkit-scrollbar-thumb {
+  background: rgba(220, 220, 220, 1);
+  opacity: 100%;
+  transition: 200ms;
+}
+
+.btt-import {
+  width: 80px;
+  height: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 10px;
+  background-color: #bae4fa;
+  color: #378dcc;
+  font-weight: 500;
+  border-radius: 5px;
+
+  transition: 200ms;
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+.btt-import:hover {
+  background-color: #7eb6df;
+  color: #ffffff;
+  transition: 200ms;
+}

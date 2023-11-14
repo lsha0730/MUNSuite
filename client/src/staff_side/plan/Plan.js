@@ -4,7 +4,7 @@ import "./Plan.scoped.css";
 import axios from "axios";
 
 import PlanCards from "../../product_site/plans/cards/PlanCards";
-import { ConfirmRedeemModal } from "../modals/Modals";
+import { RedeemConfirmation } from "../modals";
 
 import delegations from "../../common/assets/images/mockups/delegations.png";
 import form from "../../common/assets/images/mockups/form.png";
@@ -201,7 +201,7 @@ const Plan = () => {
         )}
 
         {showingConfirmation && (
-          <ConfirmRedeemModal
+          <RedeemConfirmation
             setShowingConfirmation={setShowingConfirmation}
             expiration={accountInfo.expiration?.slice(0, 10)}
           />
