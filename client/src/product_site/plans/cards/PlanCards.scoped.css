@@ -158,30 +158,3 @@
   margin-top: 40px;
   margin-bottom: 20px;
 }
-
-/*----- Feature List -----*/
-.list-container {
-  height: 170px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.list-item {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-}
-
-.list-check {
-  min-width: 20px;
-  min-height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.list-text {
-  margin-left: 5px;
-  font-weight: 300;
-}

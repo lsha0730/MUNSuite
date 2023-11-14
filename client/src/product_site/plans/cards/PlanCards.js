@@ -1,10 +1,10 @@
 import React from "react";
 import "./PlanCards.scoped.css";
 import { Link } from "react-router-dom";
-import { BsCheck } from "react-icons/bs";
 import SingleFill from "../../../common/assets/icons/single_fill.svg";
 import FlyingDark from "../../../common/assets/icons/flying_dark.svg";
 import { MAX_SUBMISSIONS } from "../../../staff_side/plan/Plan";
+import FeatureList from "./feature_list/FeatureList";
 
 const PlanCards = ({ page }) => {
   return (
@@ -77,19 +77,6 @@ const PlanCards = ({ page }) => {
           </Link>
         </div>
       </div>
-    </div>
-  );
-};
-
-const FeatureList = ({ items }) => {
-  return (
-    <div className="list-container">
-      {items.map((e) => (
-        <div className="list-item">
-          <BsCheck size={16} className="list-check" />
-          <p className="list-text">{e}</p>
-        </div>
-      ))}
     </div>
   );
 };
