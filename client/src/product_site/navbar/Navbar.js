@@ -7,134 +7,72 @@ import { siteContext } from "../../Context";
 
 function Navbar() {
   const { currentUser, handleSignout } = useContext(siteContext);
-  let pathname = window.location.pathname;
+  const pathname = window.location.pathname;
 
-  const standardBar = (
-    <div className="navbar-container">
-      <div className="navbar">
-        <Link to="/">
-          <img src={Logo} className="logo" />
-        </Link>
-        <div className="options">
-          <Link to="/" className="option-text">
-            Home
-          </Link>
-          <Link to="/plans" className="option-text">
-            Plans
-          </Link>
-          <Link to="/login" className="option-text">
-            Login
-          </Link>
-          {currentUser ? (
-            <Link to={`/app/${currentUser}`} className="btt-primary">
-              Launch App
-            </Link>
-          ) : (
-            <Link to="/register" className="btt-primary">
-              Try MUNSuite Free
-            </Link>
-          )}
-        </div>
-      </div>
-    </div>
-  );
+  const onHomePage = pathname === "/";
+  const onPrepaymentPage = pathname === "/prepayment";
+  const onAppPage = /\/app\/\w*/i.test(pathname);
+  const onSubmissionPage = /\/form\/\w*/i.test(pathname);
 
-  const whiteBar = (
-    <div className="navbar-container">
-      <div className="navbar">
-        <Link to="/">
-          <img src={LogoWhite} className="logo" />
-        </Link>
-        <div className="options">
-          <Link to="/" className="option-text-white">
-            Home
-          </Link>
-          <Link to="/plans" className="option-text-white">
-            Plans
-          </Link>
-          <Link to="/login" className="option-text-white">
-            Login
-          </Link>
-          {currentUser ? (
-            <Link to={`/app/${currentUser}`} className="btt-primary-white">
-              Launch App
-            </Link>
-          ) : (
-            <Link to="/register" className="btt-primary-white">
-              Try MUNSuite Free
-            </Link>
-          )}
-        </div>
-      </div>
-    </div>
-  );
+  const showBar = !(onAppPage || onSubmissionPage);
+  const whiteBar = onHomePage || onPrepaymentPage;
+  const signedInBar = Boolean(currentUser);
 
-  const signedinBar = (
-    <div className="navbar-container">
-      <div className="navbar">
-        <Link to="/">
-          <img src={Logo} className="logo" />
-        </Link>
-        <div className="options">
-          <Link to="/" className="option-text">
-            Home
+  return (
+    showBar && (
+      <div className="navbar-container">
+        <div className="navbar">
+          <Link to="/">
+            <img src={whiteBar ? LogoWhite : Logo} className="logo" />
           </Link>
-          <Link to="/plans" className="option-text">
-            Plans
-          </Link>
-          <div className="btt-signout" onClick={handleSignout}>
-            Sign Out
+          <div className="options">
+            <Link
+              to="/"
+              className={whiteBar ? "option-text-white" : "option-text"}
+            >
+              Home
+            </Link>
+            <Link
+              to="/plans"
+              className={whiteBar ? "option-text-white" : "option-text"}
+            >
+              Plans
+            </Link>
+            {signedInBar ? (
+              <div
+                className={whiteBar ? "btt-primary-white" : "btt-signout"}
+                onClick={handleSignout}
+              >
+                Sign Out
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className={whiteBar ? "option-text-white" : "option-text"}
+              >
+                Login
+              </Link>
+            )}
+            {signedInBar ? (
+              <Link
+                to={`/app/${currentUser}`}
+                className={whiteBar ? "btt-primary-white" : "btt-primary"}
+              >
+                Launch App
+              </Link>
+            ) : (
+              <Link
+                to="/register"
+                className={whiteBar ? "btt-primary-white" : "btt-primary"}
+              >
+                Try MUNSuite Free
+              </Link>
+            )}
           </div>
-          <Link to={`/app/${currentUser}`} className="btt-primary">
-            Launch App
-          </Link>
         </div>
       </div>
-    </div>
+    )
   );
-
-  const signedinWhiteBar = (
-    <div className="navbar-container">
-      <div className="navbar">
-        <Link to="/">
-          <img src={LogoWhite} className="logo" />
-        </Link>
-        <div className="options">
-          <Link to="/" className="option-text-white">
-            Home
-          </Link>
-          <Link to="/plans" className="option-text-white">
-            Plans
-          </Link>
-          <div className="btt-primary-white" onClick={handleSignout}>
-            Sign Out
-          </div>
-          <Link to={`/app/${currentUser}`} className="btt-primary-white">
-            Launch App
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-
-  switch (true) {
-    case ["/", "/prepayment"].includes(pathname):
-      if (currentUser) {
-        return signedinWhiteBar;
-      } else {
-        return whiteBar;
-      }
-    case /\/app\/\w*/i.test(pathname):
-      return;
-    case /\/form\/\w*/i.test(pathname):
-      return;
-    default:
-      if (currentUser) {
-        return signedinBar;
-      } else {
-        return standardBar;
-      }
-  }
 }
 
 export default Navbar;
