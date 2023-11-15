@@ -25,7 +25,7 @@ import {
 
 import Toggle from "../../common/components/toggle/Toggle";
 import AddQuestion from "./add_question/AddQuestion";
-import defaultBanner from "../../common/assets/images/default_banner.png"
+import defaultBanner from "../../common/assets/images/default_banner.png";
 
 function Editor() {
   const { delegations, settings, form, writeToFirebase, userID } = useContext(
@@ -105,6 +105,8 @@ function Editor() {
           </div>
 
           <Toggle
+            size="large"
+            color="green"
             value={standardized}
             onValue={setStandardized}
             label={{ on: "Standardized for MUN", off: "Custom Form" }}
@@ -133,7 +135,7 @@ function Editor() {
     switch (type) {
       case "header":
         newObj.heading = "New Header";
-        newObj.imgLink = defaultBanner
+        newObj.imgLink = defaultBanner;
         newObj.imgName = "Default Banner";
         newObj.imgPath = "";
         break;

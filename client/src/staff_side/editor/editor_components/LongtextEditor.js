@@ -1,11 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import "./Generic.scoped.css";
+import Toggle from "../../../common/components/toggle/Toggle";
 
 const MAX_CHAR_LIMIT = 10000;
 
 function LongtextEditor(props) {
   const [require, setRequire] = useState(props.required);
-  const [toggleRender, setToggleRender] = useState();
   const [heading, setHeading] = useState(props.heading);
   const [subheading, setSubheading] = useState(props.subheading);
   const [maxchars, setMaxchars] = useState(props.maxchars);
@@ -27,32 +27,6 @@ function LongtextEditor(props) {
     }
   }, []);
 
-  useEffect(() => {
-    let toggleOffset = require ? 20 : 0;
-
-    setToggleRender(
-      <div className="toggle-set" onClick={() => setRequire(!require)}>
-        <p className={require ? "toggle-text-red" : "toggle-text-grey"}>
-          {require ? "Required" : "Optional"}
-        </p>
-        <div
-          className={
-            require ? "toggle-bar toggle-redbg" : "toggle-bar toggle-greybg"
-          }
-        >
-          <div
-            className={
-              require
-                ? "toggle-circle toggle-redbtt"
-                : "toggle-circle toggle-greybtt"
-            }
-            style={{ left: toggleOffset }}
-          />
-        </div>
-      </div>
-    );
-  }, [require]);
-
   // Form Updater
   useEffect(() => {
     if (isMounted.current) {
@@ -73,7 +47,18 @@ function LongtextEditor(props) {
   return (
     <div className={props.editing == props.id ? "block-container" : "hidden"}>
       <p className="heading">Long Text</p>
-      {toggleRender}
+      <Toggle
+        size="small"
+        color="red"
+        value={require}
+        onValue={setRequire}
+        label={{
+          on: "Required",
+          off: "Optional",
+          direction: "left",
+        }}
+        style={{ position: "absolute", top: 20, right: 35, cursor: "pointer" }}
+      />
 
       <p className="subheading">Heading</p>
       <input

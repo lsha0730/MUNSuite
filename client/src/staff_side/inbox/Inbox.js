@@ -44,6 +44,8 @@ function Inbox() {
         <p className="card-count">{pendings.length} in Queue</p>
         <div className="left-spacer">
           <Toggle
+            color="green"
+            size="large"
             value={accepting}
             onValue={setAccepting}
             label={{

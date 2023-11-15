@@ -98,63 +98,6 @@
   background-color: #eeeeee;
 }
 
-/*Toggle*/
-.toggle-set {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  position: absolute;
-  top: 20px;
-  right: 35px;
-  cursor: pointer;
-}
-.toggle-bar {
-  position: relative;
-  width: 35px;
-  height: 15px;
-
-  border-radius: 10px;
-}
-.toggle-circle {
-  position: absolute;
-  left: 0px;
-
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-}
-.toggle-greybg {
-  background-color: #f7f7f7;
-  transition: 200ms;
-}
-.toggle-greybtt {
-  background-color: #c4c4c4;
-  transition: 200ms;
-}
-.toggle-redbg {
-  background-color: #ffc6c6;
-  transition: 200ms;
-}
-.toggle-redbtt {
-  background-color: #ff7070;
-  transition: 200ms;
-}
-.toggle-text-red {
-  margin-right: 10px;
-  font-size: 12px;
-  font-weight: 500;
-  color: #ff7070;
-  transition: 200ms;
-}
-.toggle-text-grey {
-  margin-right: 10px;
-  font-size: 12px;
-  font-weight: 500;
-  color: #c4c4c4;
-  transition: 200ms;
-}
-
 /*Add Option Button*/
 .btt-add-option {
   width: 15%;

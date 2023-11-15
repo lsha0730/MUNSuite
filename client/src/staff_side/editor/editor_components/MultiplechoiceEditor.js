@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./Generic.scoped.css";
+import Toggle from "../../../common/components/toggle/Toggle";
 
 function MultiplechoiceEditor(props) {
   const [require, setRequire] = useState(props.required);
-  const [toggleRender, setToggleRender] = useState();
   const [options, setOptions] = useState(props.options);
   const [optionsRender, setOptionsRender] = useState([]);
   const [heading, setHeading] = useState(props.heading);
@@ -18,32 +18,6 @@ function MultiplechoiceEditor(props) {
       document.getElementById("subheading" + props.id).value = props.subheading;
     }
   }, []);
-
-  useEffect(() => {
-    let toggleOffset = require ? 20 : 0;
-
-    setToggleRender(
-      <div className="toggle-set" onClick={() => setRequire(!require)}>
-        <p className={require ? "toggle-text-red" : "toggle-text-grey"}>
-          {require ? "Required" : "Optional"}
-        </p>
-        <div
-          className={
-            require ? "toggle-bar toggle-redbg" : "toggle-bar toggle-greybg"
-          }
-        >
-          <div
-            className={
-              require
-                ? "toggle-circle toggle-redbtt"
-                : "toggle-circle toggle-greybtt"
-            }
-            style={{ left: toggleOffset }}
-          />
-        </div>
-      </div>
-    );
-  }, [require]);
 
   function addOption() {
     if (document.getElementById("mc" + props.id).value !== "") {
@@ -102,7 +76,18 @@ function MultiplechoiceEditor(props) {
   return (
     <div className={props.editing == props.id ? "block-container" : "hidden"}>
       <p className="heading">Multiple Choice</p>
-      {toggleRender}
+      <Toggle
+        size="small"
+        color="red"
+        value={require}
+        onValue={setRequire}
+        label={{
+          on: "Required",
+          off: "Optional",
+          direction: "left",
+        }}
+        style={{ position: "absolute", top: 20, right: 35, cursor: "pointer" }}
+      />
 
       <p className="subheading">Heading</p>
       <input
