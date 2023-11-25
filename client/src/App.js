@@ -9,16 +9,16 @@ import { getAnalytics } from "firebase/analytics";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { useMediaQuery } from "react-responsive";
 
-import Navbar from "./product_site/navbar/Navbar.js";
-import Footer from "./product_site/footer/Footer.js";
-import Home from "./product_site/home/Home.js";
-import Register from "./product_site/auth/Register.js";
-import Login from "./product_site/auth/Login.js";
-import Forgot from "./product_site/forgot/Forgot.js";
-import Plans from "./product_site/plans/Plans.js";
-import OrderInstructions from "./product_site/plans/order_instructions/OrderInstructions";
-import Eula from "./product_site/eula/Eula";
-
+import {
+  Login,
+  Register,
+  Eula,
+  Footer,
+  Forgot,
+  Home,
+  Navbar,
+  Plans,
+} from "./product_site";
 import StaffApp from "./staff_side/StaffApp.js";
 import DelegateApp from "./delegate_side/DelegateApp.js";
 
