@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 import "./App.scoped.css";
 import { siteContext } from "./Context";
-
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { useMediaQuery } from "react-responsive";
 
 import {
@@ -21,73 +18,35 @@ import {
 } from "./product_site";
 import StaffApp from "./staff_side/StaffApp.js";
 import DelegateApp from "./delegate_side/DelegateApp.js";
+import OrderInstructions from "./product_site/plans/order_instructions/OrderInstructions";
+import { configureFirebase, logOut } from "./common/utils/firebase";
 
 function App() {
-  // Configuring Firebase
-  const firebaseConfig = {
-    apiKey: "AIzaSyDlwJk3ZyuuQEz9xH71E16luTakuOBCfzg",
-    authDomain: "munsuite-d1d0c.firebaseapp.com",
-    databaseURL: "https://munsuite-d1d0c-default-rtdb.firebaseio.com",
-    projectId: "munsuite-d1d0c",
-    storageBucket: "munsuite-d1d0c.appspot.com",
-    messagingSenderId: "679459991121",
-    appId: "1:679459991121:web:dc8aadabadab0e13309270",
-    measurementId: "G-41D98K4YRG",
-  };
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const auth = getAuth();
-
-  const handleSignout = () => {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(`Signout error (${error.code}): ${error.message}`);
-      });
-  };
-
-  const [currentUser, setCurrentUser] = useState(
-    auth.currentUser ? auth.currentUser.uid : null
-  );
+  const { app, auth } = configureFirebase();
   const navigate = useNavigate();
+  const signOut = () => {
+    logOut(auth, navigate);
+  };
+  const isPortrait = useMediaQuery({ query: "(max-width: 641px)" });
+  const [user, setUser] = useState(auth.currentUser);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in
-        setCurrentUser(user.uid);
-        if (
-          window.location.pathname == "/login" ||
-          window.location.pathname == "/register"
-        ) {
-          navigate(`/app/${auth.currentUser.uid}`);
-        }
-      } else {
-        // User is signed out
-        setCurrentUser(null);
+      setUser(user);
+      if (user && ["/login", "/register"].includes(window.location.pathname)) {
+        navigate(`/app/${user.uid}`);
       }
     });
   }, []);
 
   useEffect(() => {
-    if (
-      auth.currentUser &&
-      (window.location.pathname == "/login" ||
-        window.location.pathname == "/register")
-    ) {
-      navigate(`/app/${auth.currentUser.uid}`);
+    if (user && ["/login", "/register"].includes(window.location.pathname)) {
+      navigate(`/app/${user.uid}`);
     }
   }, [window.location.pathname]);
 
-  const isPortrait = useMediaQuery({ query: "(max-width: 641px)" });
-
   return (
-    <siteContext.Provider
-      value={{ currentUser, setCurrentUser, app, handleSignout, isPortrait }}
-    >
+    <siteContext.Provider value={{ app, auth, user, signOut, isPortrait }}>
       <div
         className="App-container"
         style={
@@ -111,9 +70,7 @@ function App() {
             <Route
               exact
               path="/app/*"
-              element={
-                auth.currentUser ? <StaffApp /> : <Navigate to="/login" />
-              }
+              element={user ? <StaffApp /> : <Navigate to="/login" />}
             />
             <Route exact path="/form/*" element={<DelegateApp />} />
             <Route path="*" element={<Navigate to="/" replace />} />

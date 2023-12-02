@@ -44,7 +44,7 @@ const TRUSTING_CONFS = [
 ];
 
 function Home() {
-  const { isPortrait, currentUser } = useContext(siteContext);
+  const { isPortrait, user } = useContext(siteContext);
 
   const adwords = [
     "Simplified",
@@ -92,8 +92,8 @@ function Home() {
             </p>
             {isPortrait ? (
               <div className="btt-try-free">Available on Desktop</div>
-            ) : currentUser ? (
-              <Link to={`/app/${currentUser}`} className="btt-try-free">
+            ) : user ? (
+              <Link to={`/app/${user.uid}`} className="btt-try-free">
                 Launch App
               </Link>
             ) : (
@@ -212,8 +212,8 @@ function Home() {
           }}
         >
           <p className="modernize-header">Let's Modernize Model UN.</p>
-          {currentUser ? (
-            <Link to={`/app/${currentUser}`} className="btt-see-options">
+          {user ? (
+            <Link to={`/app/${user.uid}`} className="btt-see-options">
               Launch App
             </Link>
           ) : (

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.scoped.css";
 import Logo from "../../common/assets/images/logos/logo.png";
@@ -6,7 +6,7 @@ import LogoWhite from "../../common/assets/images/logos/logo_white.png";
 import { siteContext } from "../../Context";
 
 function Navbar() {
-  const { currentUser, handleSignout } = useContext(siteContext);
+  const { user, signOut } = useContext(siteContext);
   const pathname = window.location.pathname;
 
   const onHomePage = pathname === "/";
@@ -16,7 +16,6 @@ function Navbar() {
 
   const showBar = !(onAppPage || onSubmissionPage);
   const whiteBar = onHomePage || onPrepaymentPage;
-  const signedInBar = Boolean(currentUser);
 
   return (
     showBar && (
@@ -38,10 +37,10 @@ function Navbar() {
             >
               Plans
             </Link>
-            {signedInBar ? (
+            {user ? (
               <div
                 className={whiteBar ? "btt-primary-white" : "btt-signout"}
-                onClick={handleSignout}
+                onClick={signOut}
               >
                 Sign Out
               </div>
@@ -53,9 +52,9 @@ function Navbar() {
                 Login
               </Link>
             )}
-            {signedInBar ? (
+            {user ? (
               <Link
-                to={`/app/${currentUser}`}
+                to={`/app/${user.uid}`}
                 className={whiteBar ? "btt-primary-white" : "btt-primary"}
               >
                 Launch App
