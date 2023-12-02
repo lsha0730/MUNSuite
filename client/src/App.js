@@ -15,10 +15,10 @@ import {
   Home,
   Navbar,
   Plans,
+  OrderInstructions,
 } from "./product_site";
 import StaffApp from "./staff_side/StaffApp.js";
 import DelegateApp from "./delegate_side/DelegateApp.js";
-import OrderInstructions from "./product_site/plans/order_instructions/OrderInstructions";
 import { configureFirebase, logOut } from "./common/utils/firebase";
 
 function App() {
