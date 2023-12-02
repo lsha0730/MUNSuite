@@ -5,7 +5,7 @@ import { createContext } from "react";
 interface AppContext {
   app: FirebaseApp;
   auth: Auth;
-  user: User;
+  user: User | null;
   signOut: () => void;
   isPortrait: boolean;
 }
