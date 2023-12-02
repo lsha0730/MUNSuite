@@ -7,8 +7,7 @@ import Dashboard from "./dashboard/Dashboard.js";
 import InvalidLink from "./invalid_link/InvalidLink.js";
 import "./DelegateApp.scoped.css";
 
-import { delContext } from "./DelegateContext.js";
-import { siteContext } from "../Context.js";
+import { appContext, delegateContext } from "../common/Context.js";
 
 function App() {
   const [delegations, setDelegations] = useState([]);
@@ -28,7 +27,7 @@ function App() {
   });
 
   // Firebase Setup
-  const { app } = useContext(siteContext);
+  const { app } = useContext(appContext);
   const database = getDatabase(app);
 
   useEffect(() => {
@@ -156,7 +155,7 @@ function App() {
   };
 
   return (
-    <delContext.Provider
+    <delegateContext.Provider
       value={{
         delegations,
         form,
@@ -170,7 +169,7 @@ function App() {
       }}
     >
       <div className="App-container">{screens[linkValidity]}</div>
-    </delContext.Provider>
+    </delegateContext.Provider>
   );
 
   function delegateIsInDelegateList(user) {

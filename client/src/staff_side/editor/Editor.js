@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./Editor.scoped.css";
-import { appContext } from "../staffContext";
+import { staffContext } from "../../common/Context";
 import { BiLink } from "react-icons/bi";
 import {
   Header,
@@ -29,7 +29,7 @@ import defaultBanner from "../../common/assets/images/default_banner.png";
 
 function Editor() {
   const { delegations, settings, form, writeToFirebase, userID } = useContext(
-    appContext
+    staffContext
   );
   const formLink = `${window.location.host}/form/${userID}`;
 

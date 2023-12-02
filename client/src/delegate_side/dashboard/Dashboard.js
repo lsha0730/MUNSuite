@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { delContext } from "../DelegateContext";
+import { delegateContext } from "../../common/Context";
 import "./Dashboard.scoped.css";
 
 import { MAX_SUBMISSIONS } from "../../staff_side/plan/Plan";
@@ -21,7 +21,7 @@ function Dashboard(props) {
     setUser,
     setLoggedIn,
     accountInfo,
-  } = useContext(delContext);
+  } = useContext(delegateContext);
 
   const [currForm, setCurrForm] = useState(form);
   const [submission, setSubmission] = useState(

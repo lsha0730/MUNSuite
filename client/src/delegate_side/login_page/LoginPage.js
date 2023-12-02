@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import "./LoginPage.scoped.css";
-import { delContext } from "../DelegateContext";
+import { delegateContext } from "../../common/Context";
 import { IoIosLock } from "react-icons/io";
 
 function LoginPage(props) {
-  const { settings } = useContext(delContext);
+  const { settings } = useContext(delegateContext);
 
   return (
     <div className="loginpage-container">

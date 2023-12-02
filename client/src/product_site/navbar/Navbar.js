@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import "./Navbar.scoped.css";
 import Logo from "../../common/assets/images/logos/logo.png";
 import LogoWhite from "../../common/assets/images/logos/logo_white.png";
-import { siteContext } from "../../Context";
+import { appContext } from "../../common/Context";
 
 function Navbar() {
-  const { user, signOut } = useContext(siteContext);
+  const { user, signOut } = useContext(appContext);
   const pathname = window.location.pathname;
 
   const onHomePage = pathname === "/";

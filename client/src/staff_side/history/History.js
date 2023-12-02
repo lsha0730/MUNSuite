@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import "./History.scoped.css";
-import { appContext } from "../staffContext";
+import { staffContext } from "../../common/Context";
 import { GoSearch } from "react-icons/go";
 import { FaFilter } from "react-icons/fa";
 import { BsDownload } from "react-icons/bs";
@@ -13,7 +13,7 @@ import { exportProcesseds, flattenToString } from "../../common/utils/utils";
 
 function History() {
   const { pendings, processed, writeToFirebase, accountInfo } = useContext(
-    appContext
+    staffContext
   );
   const [selection, setSelection] = useState(0);
   const [search, setSearch] = useState("");

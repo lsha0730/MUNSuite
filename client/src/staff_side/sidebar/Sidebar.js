@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./Sidebar.scoped.css";
-import { appContext } from "../staffContext.js";
+import { staffContext } from "../../common/Context";
 import PageButton from "./PageButton";
 import {
   BsPeopleFill,
@@ -75,7 +75,7 @@ const BOTTOM_OPTIONS = [
 ];
 
 function Sidebar() {
-  const { page } = useContext(appContext);
+  const { page } = useContext(staffContext);
   const [indOffset, setIndOffset] = useState(100);
 
   var resizeTimeout;

@@ -14,8 +14,7 @@ import Notes from "./notes/Notes.js";
 import Plan from "./plan/Plan";
 import Settings from "./settings/Settings.js";
 
-import { appContext } from "./staffContext.js";
-import { siteContext } from "../Context.js";
+import { appContext, staffContext } from "../common/Context.js";
 import Banner from "./plan/banner/Banner";
 
 function App() {
@@ -34,7 +33,7 @@ function App() {
   });
 
   // Firebase Setup
-  const { app } = useContext(siteContext);
+  const { app } = useContext(appContext);
   const database = getDatabase(app);
   const auth = getAuth();
   const userID = auth.currentUser.uid;
@@ -193,7 +192,7 @@ function App() {
   }, [page]);
 
   return (
-    <appContext.Provider
+    <staffContext.Provider
       value={{
         userID,
         page,
@@ -221,7 +220,7 @@ function App() {
           <div className="page-container">{UI}</div>
         </div>
       </div>
-    </appContext.Provider>
+    </staffContext.Provider>
   );
 }
 

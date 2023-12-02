@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
-import { appContext } from "../../staffContext";
+import { staffContext } from "../../../common/Context";
 import "./Generic.scoped.css";
 import Toggle from "../../../common/components/toggle/Toggle";
 
 function SelectmultipleEditor(props) {
-  const { delegations } = useContext(appContext);
+  const { delegations } = useContext(staffContext);
   const [delNames, setDelNames] = useState(delegations.map((del) => del.name));
   const [require, setRequire] = useState(props.required);
   const [useDels, setUseDels] = useState(props.options == "all-delegations");

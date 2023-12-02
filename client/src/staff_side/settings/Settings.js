@@ -2,14 +2,13 @@ import React, { useState, useContext, useRef } from "react";
 import "./Settings.scoped.css";
 import { BsGearFill } from "react-icons/bs";
 import { FaGitAlt } from "react-icons/fa";
-import { appContext } from "../staffContext";
+import { staffContext } from "../../common/Context";
 import CHANGELOG from "../../common/assets/json/CHANGELOG.json";
 import blankAccount from "../../common/assets/json/blank_account.json";
 import { Confirmation } from "../modals";
 
 function Settings() {
-  const { settings } = useContext(appContext);
-  const { writeToFirebase } = useContext(appContext);
+  const { settings, writeToFirebase } = useContext(staffContext);
   const isMounted = useRef(false);
   const [confirmingReset, setConfirmingReset] = useState(false);
 

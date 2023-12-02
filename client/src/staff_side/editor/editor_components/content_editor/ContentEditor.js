@@ -10,10 +10,10 @@ import {
 import "../Generic.scoped.css";
 import "./ContentEditor.scoped.css";
 import { TiDeleteOutline } from "react-icons/ti";
-import { appContext } from "../../../staffContext";
+import { staffContext } from "../../../../common/Context";
 
 function ContentEditor(props) {
-  const { userID } = useContext(appContext);
+  const { userID } = useContext(staffContext);
   const [heading, setHeading] = useState(props.heading);
   const [subheading, setSubheading] = useState(props.subheading);
   const [contentArr, setContentArr] = useState(props.content);

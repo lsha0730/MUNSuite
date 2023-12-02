@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 import "./App.scoped.css";
-import { siteContext } from "./Context";
+import { appContext } from "./common/Context";
 import { onAuthStateChanged } from "firebase/auth";
 import { useMediaQuery } from "react-responsive";
 
@@ -46,7 +46,7 @@ function App() {
   }, [window.location.pathname]);
 
   return (
-    <siteContext.Provider value={{ app, auth, user, signOut, isPortrait }}>
+    <appContext.Provider value={{ app, auth, user, signOut, isPortrait }}>
       <div
         className="App-container"
         style={
@@ -78,7 +78,7 @@ function App() {
         </div>
         <Footer />
       </div>
-    </siteContext.Provider>
+    </appContext.Provider>
   );
 }
 

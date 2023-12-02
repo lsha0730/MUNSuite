@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { delContext } from "../../DelegateContext";
+import { delegateContext } from "../../../common/Context";
 import DirectiveCard from "../../../staff_side/inbox/card/DirectiveCard";
 import "./Sidebar.scoped.css";
 import { FaHistory } from "react-icons/fa";
@@ -8,7 +8,7 @@ import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 import { useMediaQuery } from "react-responsive";
 
 const Sidebar = ({ draft }) => {
-  const { pendings, processed, user, settings } = useContext(delContext);
+  const { pendings, processed, user, settings } = useContext(delegateContext);
   const isNarrow = useMediaQuery({ query: "(max-width: 850px)" });
   const [relevantDirectives, setRelevantDirectives] = useState([]);
   const [open, setOpen] = useState(!isNarrow);

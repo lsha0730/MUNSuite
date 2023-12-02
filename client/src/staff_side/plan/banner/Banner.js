@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { appContext } from "../../staffContext";
+import { staffContext } from "../../../common/Context";
 import "./Banner.scoped.css";
 import { MAX_SUBMISSIONS } from "../Plan";
 
 const Banner = ({ totalSubmissions, page }) => {
-  const { setPage } = useContext(appContext);
+  const { setPage } = useContext(staffContext);
 
   const messages = [
     <p>

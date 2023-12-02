@@ -1,5 +1,5 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
-import { appContext } from "../staffContext";
+import { staffContext } from "../../common/Context";
 import "./Plan.scoped.css";
 import axios from "axios";
 
@@ -17,7 +17,7 @@ const Plan = () => {
     accountInfo,
     setAccountInfo,
     userID,
-  } = useContext(appContext);
+  } = useContext(staffContext);
   const totalSubmissions = pendings?.length + processed?.length;
   const codeRef = useRef();
   const [warning, setWarning] = useState("");

@@ -16,7 +16,7 @@ import { ImFontSize, ImSearch } from "react-icons/im";
 import { FaHistory } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
 import FeatureItem from "./feature_item/FeatureItem";
-import { siteContext } from "../../Context";
+import { appContext } from "../../common/Context";
 import GradientAnimation from "./gradient/GradientAnimation";
 import Hoverable from "../../common/components/hover/Hover";
 
@@ -44,7 +44,7 @@ const TRUSTING_CONFS = [
 ];
 
 function Home() {
-  const { isPortrait, user } = useContext(siteContext);
+  const { isPortrait, user } = useContext(appContext);
 
   const adwords = [
     "Simplified",

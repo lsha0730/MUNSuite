@@ -3,10 +3,10 @@ import "../Modals.scoped.css";
 import "./AddUNCountries.scoped.css";
 import UNCountriesData from "../../../common/assets/json/un_country_list.json";
 import { classNames } from "../../../common/utils/utils";
-import { appContext } from "../../staffContext";
+import { staffContext } from "../../../common/Context";
 
 function AddUNCountries(props) {
-  const { delegations } = useContext(appContext);
+  const { delegations } = useContext(staffContext);
   const [modalSelections, setModalSelections] = useState([]);
   const [delNames] = useState(
     delegations.map((delegateObj) => {

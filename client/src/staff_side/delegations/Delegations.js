@@ -8,7 +8,7 @@ import {
 } from "../modals/index.js";
 import Delbar from "./delbar/Delbar.js";
 import * as BsIcons from "react-icons/bs";
-import { appContext } from "../staffContext.js";
+import { staffContext } from "../../common/Context";
 import axios from "axios";
 import { IoIosLock } from "react-icons/io";
 import { exportToCsv } from "../../common/utils/utils";
@@ -20,7 +20,7 @@ function Delegations() {
     settings,
     writeToFirebase,
     accountInfo,
-  } = useContext(appContext);
+  } = useContext(staffContext);
   const [selections, setSelections] = useState([]);
   const [modal, setModal] = useState(false);
   const [delegateBars, setDelegateBars] = useState([]);
@@ -140,8 +140,7 @@ function Delegations() {
                   : "btt-bricked noselect"
               }
               onClick={() => {
-                if (accountInfo.type === "Premium")
-                  setModal("spreadsheet_add");
+                if (accountInfo.type === "Premium") setModal("spreadsheet_add");
               }}
             >
               {accountInfo.type !== "Premium" && (

@@ -3,14 +3,14 @@ import "./Notes.scoped.css";
 import { BsDownload, BsPersonFill } from "react-icons/bs";
 import { IoClipboard } from "react-icons/io5";
 import { GoSearch } from "react-icons/go";
-import { appContext } from "../staffContext";
+import { staffContext } from "../../common/Context";
 import IndividualNote from "./individual_note/IndividualNote";
 import { IoIosLock } from "react-icons/io";
 import { exportToCsv } from "../../common/utils/utils";
 
 function Notes() {
   const { delegations, notes, writeToFirebase, accountInfo } = useContext(
-    appContext
+    staffContext
   );
   const [options, setOptions] = useState(
     notes.individual.map((item) => item.delegate)

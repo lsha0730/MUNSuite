@@ -8,10 +8,10 @@ import {
 } from "firebase/storage";
 import "../Generic.scoped.css";
 import "./HeaderEditor.scoped.css";
-import { appContext } from "../../../staffContext";
+import { staffContext } from "../../../../common/Context";
 
 function HeaderEditor(props) {
-  const { userID } = useContext(appContext);
+  const { userID } = useContext(staffContext);
   const [imageData, setImageData] = useState({
     imgLink: props.imgLink,
     imgName: props.imgName,

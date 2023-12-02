@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-import { appContext } from "../staffContext.js";
-import { siteContext } from "../../Context.js";
+import { appContext, staffContext } from "../../common/Context.js";
 import "./Sidebar.scoped.css";
 import Hoverable from "../../common/components/hover/Hover.js";
 
@@ -8,8 +7,8 @@ const INACTIVE_COLOR = "#3C8CC9";
 const ACTIVE_COLOR = "#BCBCBC";
 
 function PageButton({ destination, label, icon: Tag, iconSize }) {
-  const { pendings, page, setPage } = useContext(appContext);
-  const { signOut } = useContext(siteContext);
+  const { pendings, page, setPage } = useContext(staffContext);
+  const { signOut } = useContext(appContext);
 
   return (
     <Hoverable
