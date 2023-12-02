@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { appContext, staffContext } from "../../common/Context.js";
+import { appContext, staffContext } from "../../common/Context";
 import "./Sidebar.scoped.css";
 import Hoverable from "../../common/components/hover/Hover.js";
 

@@ -14,7 +14,7 @@ import Notes from "./notes/Notes.js";
 import Plan from "./plan/Plan";
 import Settings from "./settings/Settings.js";
 
-import { appContext, staffContext } from "../common/Context.js";
+import { appContext, staffContext } from "../common/Context";
 import Banner from "./plan/banner/Banner";
 
 function App() {

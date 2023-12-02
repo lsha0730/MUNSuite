@@ -7,7 +7,7 @@ import Dashboard from "./dashboard/Dashboard.js";
 import InvalidLink from "./invalid_link/InvalidLink.js";
 import "./DelegateApp.scoped.css";
 
-import { appContext, delegateContext } from "../common/Context.js";
+import { appContext, delegateContext } from "../common/Context";
 
 function App() {
   const [delegations, setDelegations] = useState([]);
