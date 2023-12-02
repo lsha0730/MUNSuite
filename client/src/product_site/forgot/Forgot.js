@@ -6,7 +6,7 @@ import { BiPaperPlane } from "react-icons/bi";
 function Forgot() {
   const auth = getAuth();
   const [warning, setWarning] = useState("");
-  const [emailSent, setEmailSent] = useState(true);
+  const [emailSent, setEmailSent] = useState(false);
 
   return (
     <div className="centering-container">
