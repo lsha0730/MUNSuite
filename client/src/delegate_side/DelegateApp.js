@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { get, getDatabase, onValue, ref, set } from "firebase/database";
+import "./DelegateApp.scoped.css";
 import axios from "axios";
 
-import LoginPage from "./login_page/LoginPage.js";
-import Dashboard from "./dashboard/Dashboard.js";
-import InvalidLink from "./invalid_link/InvalidLink.js";
-import "./DelegateApp.scoped.css";
+import LoginPage from "./login_page/LoginPage";
+import Dashboard from "./dashboard/Dashboard";
+import InvalidLink from "./invalid_link/InvalidLink";
 
 import { appContext, delegateContext } from "../common/Context";
 
@@ -20,7 +20,6 @@ function App() {
   const [linkValidity, setValidLink] = useState("loading");
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState();
-  const [appRender, setAppRender] = useState();
   const [accountInfo, setAccountInfo] = useState({
     type: "Error",
     expiration: "Error",
