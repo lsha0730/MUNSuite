@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.scoped.css";
 import Logo from "../../common/assets/images/logos/logo.png";
@@ -6,7 +6,7 @@ import LogoWhite from "../../common/assets/images/logos/logo_white.png";
 import { appContext } from "../../common/Context";
 
 function Navbar() {
-  const { user, signOut } = useContext(appContext);
+  const { user, auth } = useContext(appContext);
   const pathname = window.location.pathname;
 
   const onHomePage = pathname === "/";
@@ -40,7 +40,9 @@ function Navbar() {
             {user ? (
               <div
                 className={whiteBar ? "btt-primary-white" : "btt-signout"}
-                onClick={signOut}
+                onClick={() => {
+                  auth.signOut();
+                }}
               >
                 Sign Out
               </div>

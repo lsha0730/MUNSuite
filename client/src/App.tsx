@@ -19,7 +19,7 @@ import {
 } from "./product_site";
 import StaffApp from "./staff_side/StaffApp";
 import DelegateApp from "./delegate_side/DelegateApp";
-import { configureFirebase, logOut } from "./common/utils/firebase";
+import { configureFirebase } from "./common/utils/firebase";
 import { classNames } from "./common/utils/utils";
 
 const DESKTOP_BREAKPOINT_PX = 641;
@@ -31,9 +31,6 @@ function App() {
   });
   const navigate = useNavigate();
   const { app, auth } = configureFirebase();
-  const signOut = () => {
-    logOut(auth, navigate);
-  };
   const [user, setUser] = useState(auth.currentUser);
 
   useEffect(() => {
@@ -43,7 +40,7 @@ function App() {
   }, []);
 
   return (
-    <appContext.Provider value={{ app, auth, user, signOut, isPortrait }}>
+    <appContext.Provider value={{ app, auth, user, isPortrait }}>
       <div
         className={classNames(
           "app_container",

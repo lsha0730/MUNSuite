@@ -8,7 +8,7 @@ const ACTIVE_COLOR = "#BCBCBC";
 
 function PageButton({ destination, label, icon: Tag, iconSize }) {
   const { pendings, page, setPage } = useContext(staffContext);
-  const { signOut } = useContext(appContext);
+  const { auth } = useContext(appContext);
 
   return (
     <Hoverable
@@ -20,7 +20,9 @@ function PageButton({ destination, label, icon: Tag, iconSize }) {
         className="button"
         onClick={
           destination === "signout"
-            ? signOut
+            ? () => {
+                auth.signOut();
+              }
             : () => {
                 setPage(destination);
               }

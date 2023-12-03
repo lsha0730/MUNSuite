@@ -25,12 +25,3 @@ export function configureFirebase() {
 
   return { app, analytics, auth };
 }
-
-export async function logOut(auth: Auth, navigate: NavigateFunction) {
-  try {
-    await signOut(auth);
-    navigate("/");
-  } catch (e: any) {
-    console.error(`Signout error (${e.code}): ${e.message}`);
-  }
-}

@@ -6,7 +6,6 @@ interface AppContext {
   app: FirebaseApp;
   auth: Auth;
   user: User | null;
-  signOut: () => void;
   isPortrait: boolean;
 }
 
