@@ -1,0 +1,1 @@
+export const CUSTOM_BACKEND_URL = "https://munsuite-backend.onrender.com"

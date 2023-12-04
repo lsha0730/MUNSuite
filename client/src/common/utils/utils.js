@@ -197,3 +197,5 @@ export function classNames(...args) {
   if (!args || !Array.isArray(args)) return "";
   return args.join(" ");
 }
+
+export const filterFalsies = (arr) => arr.filter((e) => Boolean(e));
