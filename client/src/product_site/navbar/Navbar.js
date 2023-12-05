@@ -41,7 +41,7 @@ function Navbar() {
               <div
                 className={whiteBar ? "btt-primary-white" : "btt-signout"}
                 onClick={() => {
-                  auth.signOut();
+                  if (auth) auth.signOut();
                 }}
               >
                 Sign Out

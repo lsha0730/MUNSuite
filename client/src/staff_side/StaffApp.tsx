@@ -42,14 +42,16 @@ function App() {
 
   // Firebase Setup
   const { app } = useContext(appContext);
-  const database = getDatabase(app);
+  const database = app ? getDatabase(app) : null;
   const auth = getAuth();
   const userID = auth.currentUser?.uid;
 
   useEffect(() => {
     if (userID) getHostAccountInfo(userID, setAccountInfo)
+  }, [userID]);
 
-    setUpFirebaseListeners(database, `appdata/${userID}/livedata`, [
+  useEffect(() => {
+    if (database) setUpFirebaseListeners(database, `appdata/${userID}/livedata`, [
       { target: AppDataTarget.Delegations, onValue: setDelegations as oneArgFn },
       { target: AppDataTarget.Form, onValue: setForm as oneArgFn },
       { target: AppDataTarget.Pendings, onValue: setPendings as oneArgFn },
@@ -57,11 +59,11 @@ function App() {
       { target: AppDataTarget.Notes, onValue: setNotes as oneArgFn },
       { target: AppDataTarget.Settings, onValue: setSettings as oneArgFn },
     ]);
-  }, []);
+  }, [database])
 
   // Firebase: Writing
   function writeToFirebase(target: any, content: any) {
-    if (
+    if (database &&
       [
         "delegations",
         "form",

@@ -29,7 +29,6 @@ function App() {
   const isPortrait = useMediaQuery({
     query: `(max-width: ${DESKTOP_BREAKPOINT_PX}px)`,
   });
-  const navigate = useNavigate();
   const { app, auth } = configureFirebase();
   const [user, setUser] = useState(auth.currentUser);
 

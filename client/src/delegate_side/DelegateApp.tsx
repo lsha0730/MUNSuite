@@ -30,10 +30,15 @@ function App() {
 
   // Firebase Setup
   const { app } = useContext(appContext);
-  const database = getDatabase(app);
+  const database = app ? getDatabase(app) : null;
 
   useEffect(() => {
-    if (userID) getHostAccountInfo(userID, setAccountInfo);
+    if (!userID) return;
+    getHostAccountInfo(userID, setAccountInfo);
+  }, [userID]);
+
+  useEffect(() => {
+    if (!database) return;
 
     onValue(ref(database, `appdata/${userID}/livedata/form`), (snapshot) => {
       setValidLink(snapshot.exists() ? "valid" : "invalid");
@@ -49,11 +54,11 @@ function App() {
       { target: AppDataTarget.Processed, onValue: setProcessed as oneArgFn },
       { target: AppDataTarget.Settings, onValue: setSettings as oneArgFn },
     ]);
-  }, []);
+  }, [database]);
 
   // Firebase: Writing
   function writeToFirebase(target: any, content: any) {
-    if (["pendings"].includes(target) && linkValidity) {
+    if (database && ["pendings"].includes(target) && linkValidity) {
       // Delegate side only writes to pendings
       if (content.length > 0) {
         set(ref(database, `appdata/${userID}/livedata/${target}`), content);
@@ -124,6 +129,7 @@ function App() {
   }
 
   function submit(submissionObj: any) {
+    if (!database) return;
     get(ref(database, `appdata/${userID}/livedata/pendings`)).then(
       (snapshot) => {
         let currPendings = snapshot.exists() ? snapshot.val() : [];

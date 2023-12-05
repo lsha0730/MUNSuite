@@ -21,7 +21,7 @@ function PageButton({ destination, label, icon: Tag, iconSize }) {
         onClick={
           destination === "signout"
             ? () => {
-                auth.signOut();
+                if (auth) auth.signOut();
               }
             : () => {
                 setPage(destination);
