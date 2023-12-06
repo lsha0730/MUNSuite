@@ -1,8 +1,11 @@
 import { useEffect, useState, useContext } from "react";
 import { get, getDatabase, onValue, ref, set } from "firebase/database";
 import "./DelegateApp.scoped.css";
-import axios from "axios";
-import { AccountType, AppDataTarget, oneArgFn } from "../common/types/types";
+import {
+  AccountType,
+  FirebaseDataTarget,
+  oneArgFn,
+} from "../common/types/types";
 
 import LoginPage from "./login_page/LoginPage";
 import Dashboard from "./dashboard/Dashboard";
@@ -25,7 +28,6 @@ function App() {
   const [user, setUser] = useState();
   const [accountInfo, setAccountInfo] = useState({
     type: AccountType.Premium,
-    expiration: "Error",
   });
 
   // Firebase Setup
@@ -46,13 +48,16 @@ function App() {
 
     setUpFirebaseListeners(database, `appdata/${userID}/livedata`, [
       {
-        target: AppDataTarget.Delegations,
+        target: FirebaseDataTarget.Delegations,
         onValue: setDelegations as oneArgFn,
       },
-      { target: AppDataTarget.Form, onValue: setForm as oneArgFn },
-      { target: AppDataTarget.Pendings, onValue: setPendings as oneArgFn },
-      { target: AppDataTarget.Processed, onValue: setProcessed as oneArgFn },
-      { target: AppDataTarget.Settings, onValue: setSettings as oneArgFn },
+      { target: FirebaseDataTarget.Form, onValue: setForm as oneArgFn },
+      { target: FirebaseDataTarget.Pendings, onValue: setPendings as oneArgFn },
+      {
+        target: FirebaseDataTarget.Processed,
+        onValue: setProcessed as oneArgFn,
+      },
+      { target: FirebaseDataTarget.Settings, onValue: setSettings as oneArgFn },
     ]);
   }, [database]);
 

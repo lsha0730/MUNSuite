@@ -11,16 +11,16 @@ export enum AccountType {
 }
 
 // Firebase Realtime Database
-export type AppData = {
-  delegations: Delegations;
-  form: Form;
-  pendings: Pendings;
-  processed: Processed;
+export type FirebaseData = {
+  delegations: Delegate[];
+  form: Question[];
+  pendings: Directive[];
+  processed: Directive[];
   notes: Notes;
   settings: Settings;
 };
 
-export enum AppDataTarget {
+export enum FirebaseDataTarget {
   Delegations = "delegations",
   Form = "form",
   Pendings = "pendings",
@@ -29,10 +29,6 @@ export enum AppDataTarget {
   Settings = "settings",
 }
 
-export type Delegations = Delegate[];
-export type Form = Question[];
-export type Pendings = Directive[];
-export type Processed = Directive[];
 export type Notes = {
   individual: IndividualNote[];
   quick: string;
