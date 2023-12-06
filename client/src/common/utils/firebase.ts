@@ -1,32 +1,18 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
-import { Database, onValue, ref } from "firebase/database";
-import { AppDataTarget } from "../types/types";
+import { Database, onValue, ref, set } from "firebase/database";
+import { FirebaseDataTarget } from "../types/types";
 import { filterFalsies } from "./utils";
+import { BLANK_APPDATA } from "../constants";
 
 const DB_ARRAY_NODES = [
-  AppDataTarget.Delegations,
-  AppDataTarget.Form,
-  AppDataTarget.Pendings,
-  AppDataTarget.Processed,
+  FirebaseDataTarget.Delegations,
+  FirebaseDataTarget.Form,
+  FirebaseDataTarget.Pendings,
+  FirebaseDataTarget.Processed,
 ];
-const DB_OBJECT_NODES = [AppDataTarget.Notes, AppDataTarget.Settings];
-
-const DB_DEFAULT_VALUES = {
-  delegations: [],
-  form: [],
-  pendings: [],
-  processed: [],
-  notes: {
-    individual: [],
-    quick: "",
-  },
-  settings: {
-    conference: "MUNSuite",
-    committee: "Committee",
-  },
-};
+const DB_OBJECT_NODES = [FirebaseDataTarget.Notes, FirebaseDataTarget.Settings];
 
 /**
  * Sets up firebase functionality for the whole app.
@@ -52,7 +38,7 @@ export function configureFirebase() {
 }
 
 type Target = {
-  target: AppDataTarget;
+  target: FirebaseDataTarget;
   onValue: (data: any[] | Record<string, any>) => void;
 };
 
@@ -71,9 +57,22 @@ export function setUpFirebaseListeners(
     onValue(dbRef, (snapshot) => {
       const node = snapshot.val();
       const cleaned = isArrayNode
-        ? filterFalsies(node || DB_DEFAULT_VALUES[target])
-        : Object.assign(DB_DEFAULT_VALUES[target], node);
+        ? filterFalsies(node || BLANK_APPDATA[target])
+        : Object.assign(BLANK_APPDATA[target], node);
       callback(cleaned);
     });
   }
+}
+
+/**
+ * Overwrites target node with the provided value
+ */
+export function firebaseWrite(
+  db: Database,
+  userID: string,
+  target: FirebaseDataTarget,
+  content: any
+) {
+  const dbRef = ref(db, `appdata/${userID}/livedata/${target}`);
+  set(dbRef, content);
 }
