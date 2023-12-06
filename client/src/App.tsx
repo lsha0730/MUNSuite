@@ -26,11 +26,11 @@ const DESKTOP_BREAKPOINT_PX = 641;
 const GRAY_BG_PAGES = ["/register", "/login", "/forgot", "/prepayment"];
 
 function App() {
+  const { app, auth, database, analytics } = configureFirebase();
+  const [user, setUser] = useState(auth.currentUser);
   const isPortrait = useMediaQuery({
     query: `(max-width: ${DESKTOP_BREAKPOINT_PX}px)`,
   });
-  const { app, auth } = configureFirebase();
-  const [user, setUser] = useState(auth.currentUser);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -39,7 +39,9 @@ function App() {
   }, []);
 
   return (
-    <appContext.Provider value={{ app, auth, user, isPortrait }}>
+    <appContext.Provider
+      value={{ app, auth, database, analytics, user, isPortrait }}
+    >
       <div
         className={classNames(
           "app_container",

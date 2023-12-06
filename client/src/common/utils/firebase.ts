@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
-import { Database, onValue, ref, set } from "firebase/database";
+import { Database, getDatabase, onValue, ref, set } from "firebase/database";
 import { FirebaseDataTarget } from "../types/types";
 import { filterFalsies } from "./utils";
 import { BLANK_APPDATA } from "../constants";
@@ -31,10 +31,11 @@ export function configureFirebase() {
     measurementId: "G-41D98K4YRG",
   };
   const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
   const auth = getAuth();
+  const database = getDatabase(app);
+  const analytics = getAnalytics(app);
 
-  return { app, analytics, auth };
+  return { app, auth, database, analytics };
 }
 
 type Target = {

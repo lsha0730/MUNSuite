@@ -44,7 +44,7 @@ const TRUSTING_CONFS = [
 ];
 
 function Home() {
-  const { isPortrait, user } = useContext(appContext);
+  const { user, isPortrait } = useContext(appContext);
 
   const adwords = [
     "Simplified",
