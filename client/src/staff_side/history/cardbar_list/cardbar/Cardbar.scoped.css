@@ -1,3 +1,8 @@
+.selected {
+  background-color: #bae4fa;
+  transition: 200ms;
+}
+
 .cardbar-container {
   width: 100%;
 
