@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import "./History.scoped.css";
-import { staffContext } from "../../common/Context";
+import { appContext, staffContext } from "../../common/Context";
 import { GoSearch } from "react-icons/go";
 import { FaFilter } from "react-icons/fa";
 import { BsDownload } from "react-icons/bs";
@@ -10,11 +10,15 @@ import DirectiveCard from "../inbox/card/DirectiveCard";
 import CardbarList from "./cardbar_list/CardbarList";
 import { IoIosLock } from "react-icons/io";
 import { exportProcesseds, flattenToString } from "../../common/utils/utils";
+import { firebaseWrite } from "../../common/utils/firebase";
+import { FirebaseDataTarget } from "../../common/types/types";
 
 function History() {
-  const { pendings, processed, writeToFirebase, accountInfo } = useContext(
-    staffContext
-  );
+  const { database, user } = useContext(appContext);
+  const {
+    firebaseData: { pendings, processed },
+    staffAPI: { accountInfo },
+  } = useContext(staffContext);
   const [selection, setSelection] = useState(0);
   const [search, setSearch] = useState("");
   const [dropdownValue, setDropdownValue] = useState("No Filter");
@@ -124,12 +128,22 @@ function History() {
   function revertDirective(index) {
     const toRevert = processed[index];
     toRevert.status = "Pending";
-    writeToFirebase("pendings", [toRevert].concat(pendings));
-    writeToFirebase("processed", processed.filter((item) => item !== toRevert));
+    firebaseWrite(
+      database,
+      user.uid,
+      FirebaseDataTarget.Pendings,
+      [toRevert].concat(pendings)
+    );
+    firebaseWrite(
+      database,
+      user.uid,
+      FirebaseDataTarget.Processed,
+      processed.filter((item) => item !== toRevert)
+    );
   }
 
   function handleClear() {
-    writeToFirebase("processed", []);
+    firebaseWrite(database, user.uid, FirebaseDataTarget.Processed, []);
   }
 
   function getCardRender() {

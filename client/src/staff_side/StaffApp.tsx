@@ -1,7 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
-import { getDatabase, onValue, ref, set } from "firebase/database";
-import axios from "axios";
-import { getAuth } from "firebase/auth";
+import React, { useEffect, useState, useContext, Dispatch, SetStateAction } from "react";
 import "./StaffApp.scoped.css";
 
 import Sidebar from "./sidebar/Sidebar.js";
@@ -17,34 +14,53 @@ import Settings from "./settings/Settings.js";
 import { appContext, staffContext } from "../common/Context";
 import Banner from "./plan/banner/Banner";
 import { setUpFirebaseListeners } from "../common/utils/firebase";
-import { AccountType, AppDataTarget, oneArgFn } from "../common/types/types";
+import { AccountType, FirebaseData, FirebaseDataTarget, Delegate, Notes as NotesT, Settings as SettingsT, oneArgFn } from "../common/types/types";
 import { getHostAccountInfo } from "../common/utils/http";
+import { Question } from "../common/types/questionTypes";
+import { Directive } from "../common/types/directiveTypes";
+import { BLANK_DELEGATIONS, BLANK_FORM, BLANK_NOTES, BLANK_PENDINGS, BLANK_PROCESSED, BLANK_SETTINGS, BLANK_STAFF_ACCOUNT_INFO } from "../common/constants";
 
 export type StaffAccountInfo = {
   type: AccountType;
-  expiration: "Error" | string;
+  expiration: string | null;
+  email: string | null;
 };
 
+export type PageKey = "delegations" | "editor" | "inbox" | "history" | "statistics" | "notes" | "plan" | "settings"
+const PAGES = {
+  delegations: <Delegations/>,
+  editor: <Editor/>,
+  inbox: <Inbox/>,
+  history: <History/>,
+  statistics: <Statistics />,
+  notes: <Notes/>,
+  plan: <Plan/>,
+  settings:<Settings/>
+} as Record<PageKey, JSX.Element>
+
+export type StaffAPI = {
+  userID: string | null;
+  page: PageKey,
+  setPage: Dispatch<SetStateAction<PageKey>>;
+  accountInfo: StaffAccountInfo;
+  setAccountInfo: Dispatch<SetStateAction<StaffAccountInfo>>
+}
+
 function App() {
-  const [page, setPage] = useState("delegations");
-  const [UI, setUI] = useState(<Delegations key="delegations" />);
+  const { database, user } = useContext(appContext);
+  const userID = user?.uid || null;
 
-  const [delegations, setDelegations] = useState([]);
-  const [form, setForm] = useState([]);
-  const [pendings, setPendings] = useState([]);
-  const [processed, setProcessed] = useState([]);
-  const [notes, setNotes] = useState({ individual: [], quick: "" });
-  const [settings, setSettings] = useState({});
-  const [accountInfo, setAccountInfo] = useState<StaffAccountInfo>({
-    type: AccountType.Starter,
-    expiration: "Error",
-  });
+  const [page, setPage] = useState<PageKey>("delegations");
+  const [accountInfo, setAccountInfo] = useState<StaffAccountInfo>(BLANK_STAFF_ACCOUNT_INFO);
+  const staffAPI: StaffAPI = {userID, page, setPage, accountInfo, setAccountInfo}
 
-  // Firebase Setup
-  const { app } = useContext(appContext);
-  const database = app ? getDatabase(app) : null;
-  const auth = getAuth();
-  const userID = auth.currentUser?.uid;
+  const [delegations, setDelegations] = useState<Delegate[]>(BLANK_DELEGATIONS);
+  const [form, setForm] = useState<Question[]>(BLANK_FORM);
+  const [pendings, setPendings] = useState<Directive[]>(BLANK_PENDINGS);
+  const [processed, setProcessed] = useState<Directive[]>(BLANK_PROCESSED);
+  const [notes, setNotes] = useState<NotesT>(BLANK_NOTES);
+  const [settings, setSettings] = useState<SettingsT>(BLANK_SETTINGS);
+  const firebaseData: FirebaseData = {delegations, form, pendings, processed, notes, settings}
 
   useEffect(() => {
     if (userID) getHostAccountInfo(userID, setAccountInfo)
@@ -52,73 +68,18 @@ function App() {
 
   useEffect(() => {
     if (database) setUpFirebaseListeners(database, `appdata/${userID}/livedata`, [
-      { target: AppDataTarget.Delegations, onValue: setDelegations as oneArgFn },
-      { target: AppDataTarget.Form, onValue: setForm as oneArgFn },
-      { target: AppDataTarget.Pendings, onValue: setPendings as oneArgFn },
-      { target: AppDataTarget.Processed, onValue: setProcessed as oneArgFn },
-      { target: AppDataTarget.Notes, onValue: setNotes as oneArgFn },
-      { target: AppDataTarget.Settings, onValue: setSettings as oneArgFn },
+      { target: FirebaseDataTarget.Delegations, onValue: setDelegations as oneArgFn },
+      { target: FirebaseDataTarget.Form, onValue: setForm as oneArgFn },
+      { target: FirebaseDataTarget.Pendings, onValue: setPendings as oneArgFn },
+      { target: FirebaseDataTarget.Processed, onValue: setProcessed as oneArgFn },
+      { target: FirebaseDataTarget.Notes, onValue: setNotes as oneArgFn },
+      { target: FirebaseDataTarget.Settings, onValue: setSettings as oneArgFn },
     ]);
   }, [database])
 
-  // Firebase: Writing
-  function writeToFirebase(target: any, content: any) {
-    if (database &&
-      [
-        "delegations",
-        "form",
-        "pendings",
-        "processed",
-        "notes",
-        "settings",
-      ].includes(target)
-    ) {
-      set(ref(database, `appdata/${userID}/livedata/${target}`), content);
-    }
-  }
-
-  // App UI
-  useEffect(() => {
-    setUI(() => {
-      switch (page) {
-        case "delegations":
-          return <Delegations key="delegations" />;
-        case "editor":
-          return <Editor key="editor" />;
-        case "inbox":
-          return <Inbox key="inbox" />;
-        case "history":
-          return <History key="history" />;
-        case "statistics":
-          return <Statistics key="statistics" />;
-        case "notes":
-          return <Notes key="notes" />;
-        case "plan":
-          return <Plan key="plan" />;
-        case "settings":
-          return <Settings key="settings" />;
-        default:
-          return <Delegations key="delegations" />;
-      }
-    });
-  }, [page]);
-
   return (
     <staffContext.Provider
-      value={{
-        userID,
-        page,
-        setPage,
-        writeToFirebase,
-        delegations,
-        form,
-        pendings,
-        processed,
-        notes,
-        settings,
-        accountInfo,
-        setAccountInfo,
-      }}
+      value={{ staffAPI, firebaseData }}
     >
       <div className="App-container">
         <Sidebar />
@@ -126,10 +87,10 @@ function App() {
           {accountInfo.type !== "Premium" && (
             <Banner
               totalSubmissions={pendings.length + processed.length}
-              page={"staff"}
+              page="staff"
             />
           )}
-          <div className="page-container">{UI}</div>
+          <div className="page-container">{PAGES[page]}</div>
         </div>
       </div>
     </staffContext.Provider>

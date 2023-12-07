@@ -1,4 +1,4 @@
-import { StaffAppAPI } from "../staff_side/StaffApp";
+import { StaffAPI, StaffAccountInfo } from "../staff_side/StaffApp";
 import { Directive } from "./types/directiveTypes";
 import { Question } from "./types/questionTypes";
 import {
@@ -35,13 +35,16 @@ export const BLANK_APPDATA: FirebaseData = {
   settings: BLANK_SETTINGS,
 };
 
-export const BLANK_STAFFAPPAPI: StaffAppAPI = {
+export const BLANK_STAFF_ACCOUNT_INFO: StaffAccountInfo = {
+  type: AccountType.Starter,
+  expiration: "Error",
+  email: null,
+};
+
+export const BLANK_STAFFAPI: StaffAPI = {
   userID: null,
   page: "delegations",
   setPage: (p) => {},
-  accountInfo: {
-    type: AccountType.Starter,
-    expiration: null,
-  },
+  accountInfo: BLANK_STAFF_ACCOUNT_INFO,
   setAccountInfo: (i) => {},
 };

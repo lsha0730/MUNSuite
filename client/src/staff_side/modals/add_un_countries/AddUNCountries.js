@@ -6,7 +6,9 @@ import { classNames } from "../../../common/utils/utils";
 import { staffContext } from "../../../common/Context";
 
 function AddUNCountries(props) {
-  const { delegations } = useContext(staffContext);
+  const {
+    firebaseData: { delegations },
+  } = useContext(staffContext);
   const [modalSelections, setModalSelections] = useState([]);
   const [delNames] = useState(
     delegations.map((delegateObj) => {

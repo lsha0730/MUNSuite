@@ -4,7 +4,9 @@ import "./Banner.scoped.css";
 import { MAX_SUBMISSIONS } from "../Plan";
 
 const Banner = ({ totalSubmissions, page }) => {
-  const { setPage } = useContext(staffContext);
+  const {
+    staffAPI: { setPage },
+  } = useContext(staffContext);
 
   const messages = [
     <p>

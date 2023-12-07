@@ -2,23 +2,28 @@ import React, { useState, useContext, useRef } from "react";
 import "./Settings.scoped.css";
 import { BsGearFill } from "react-icons/bs";
 import { FaGitAlt } from "react-icons/fa";
-import { staffContext } from "../../common/Context";
+import { appContext, staffContext } from "../../common/Context";
 import CHANGELOG from "../../common/assets/json/CHANGELOG.json";
 import blankAccount from "../../common/assets/json/blank_account.json";
 import { Confirmation } from "../modals";
+import { firebaseWrite } from "../../common/utils/firebase";
+import { FirebaseDataTarget } from "../../common/types/types";
 
 function Settings() {
-  const { settings, writeToFirebase } = useContext(staffContext);
+  const { database, user } = useContext(appContext);
+  const {
+    firebaseData: { settings },
+  } = useContext(staffContext);
   const isMounted = useRef(false);
   const [confirmingReset, setConfirmingReset] = useState(false);
 
   const clearAccount = () => {
-    writeToFirebase("delegations", []);
-    writeToFirebase("form", blankAccount.form);
-    writeToFirebase("pendings", []);
-    writeToFirebase("processed", []);
-    writeToFirebase("notes", {});
-    writeToFirebase("settings", {
+    firebaseWrite(database, user, FirebaseDataTarget.Delegations, []);
+    firebaseWrite(database, user, FirebaseDataTarget.Form, blankAccount.form);
+    firebaseWrite(database, user, FirebaseDataTarget.Pendings, []);
+    firebaseWrite(database, user, FirebaseDataTarget.Processed, []);
+    firebaseWrite(database, user, FirebaseDataTarget.Notes, {});
+    firebaseWrite(database, user, FirebaseDataTarget.Settings, {
       ...blankAccount.settings,
       conference: settings.conference,
       committee: settings.committee,
@@ -136,7 +141,7 @@ function Settings() {
       settingsObj.conference = confName;
       settingsObj.committee = commName;
 
-      writeToFirebase("settings", settingsObj);
+      firebaseWrite("settings", settingsObj);
     } else {
       isMounted.current = true;
     }

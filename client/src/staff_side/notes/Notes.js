@@ -3,15 +3,19 @@ import "./Notes.scoped.css";
 import { BsDownload, BsPersonFill } from "react-icons/bs";
 import { IoClipboard } from "react-icons/io5";
 import { GoSearch } from "react-icons/go";
-import { staffContext } from "../../common/Context";
+import { appContext, staffContext } from "../../common/Context";
 import IndividualNote from "./individual_note/IndividualNote";
 import { IoIosLock } from "react-icons/io";
 import { exportToCsv } from "../../common/utils/utils";
+import { FirebaseDataTarget } from "../../common/types/types";
+import { firebaseWrite } from "../../common/utils/firebase";
 
 function Notes() {
-  const { delegations, notes, writeToFirebase, accountInfo } = useContext(
-    staffContext
-  );
+  const { database, user } = useContext(appContext);
+  const {
+    firebaseData: { delegations, notes },
+    staffAPI: { accountInfo },
+  } = useContext(staffContext);
   const [options, setOptions] = useState(
     notes.individual.map((item) => item.delegate)
   );
@@ -43,7 +47,7 @@ function Notes() {
       }
     });
 
-    writeToFirebase("notes", {
+    firebaseWrite(database, user.uid, FirebaseDataTarget.Notes, {
       individual: newNotes,
       quick: notes.quick,
     });
@@ -174,7 +178,7 @@ function Notes() {
           placeholder="Input here..."
           defaultValue={notes.quick}
           onChange={(e) =>
-            writeToFirebase("notes", {
+            firebaseWrite(database, user.uid, FirebaseDataTarget.Notes, {
               individual: notes.individual,
               quick: e.target.value,
             })
@@ -222,10 +226,12 @@ function Notes() {
   }
 
   function updateNotes(delegate, newText) {
+    // TODO: Add debouncing
+    console.log(delegate, newText);
     let tempArr = notes.individual.slice();
     const index = tempArr.findIndex((elem) => elem.delegate == delegate);
     tempArr[index].text = newText;
-    writeToFirebase("notes", {
+    firebaseWrite(database, user.uid, FirebaseDataTarget.Notes, {
       individual: tempArr,
       quick: notes.quick,
     });

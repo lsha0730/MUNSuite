@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./Editor.scoped.css";
-import { staffContext } from "../../common/Context";
+import { appContext, staffContext } from "../../common/Context";
 import { BiLink } from "react-icons/bi";
 import {
   Header,
@@ -26,12 +26,15 @@ import {
 import Toggle from "../../common/components/toggle/Toggle";
 import AddQuestion from "./add_question/AddQuestion";
 import defaultBanner from "../../common/assets/images/default_banner.png";
+import { firebaseWrite } from "../../common/utils/firebase";
+import { FirebaseDataTarget } from "../../common/types/types";
 
 function Editor() {
-  const { delegations, settings, form, writeToFirebase, userID } = useContext(
-    staffContext
-  );
-  const formLink = `${window.location.host}/form/${userID}`;
+  const { database, user } = useContext(appContext);
+  const {
+    firebaseData: { delegations, form, settings },
+  } = useContext(staffContext);
+  const formLink = `${window.location.host}/form/${user.uid}`;
 
   const [editing, setEditing] = useState(false);
   const [formRender, setFormRender] = useState([]);
@@ -76,10 +79,10 @@ function Editor() {
         tempArr[i].id = i;
       }
 
-      writeToFirebase("form", tempArr);
+      firebaseWrite(database, user.uid, FirebaseDataTarget.Form, tempArr);
     }
 
-    writeToFirebase("settings", {
+    firebaseWrite(database, user.uid, FirebaseDataTarget.Settings, {
       ...settings,
       standardForm: standardized,
     });
@@ -205,7 +208,7 @@ function Editor() {
       tempArr[i].id = i;
     }
 
-    writeToFirebase("form", tempArr);
+    firebaseWrite(database, user.uid, FirebaseDataTarget.Form, tempArr);
   }
 
   function updateForm(operation, index, newObj = null) {
@@ -248,7 +251,7 @@ function Editor() {
         break;
     }
 
-    writeToFirebase("form", tempArr);
+    firebaseWrite(database, user.uid, FirebaseDataTarget.Form, tempArr);
   }
 
   function rerenderForm() {

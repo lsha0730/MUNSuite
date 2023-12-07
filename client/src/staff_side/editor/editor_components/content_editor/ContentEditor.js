@@ -10,10 +10,10 @@ import {
 import "../Generic.scoped.css";
 import "./ContentEditor.scoped.css";
 import { TiDeleteOutline } from "react-icons/ti";
-import { staffContext } from "../../../../common/Context";
+import { appContext } from "../../../../common/Context";
 
 function ContentEditor(props) {
-  const { userID } = useContext(staffContext);
+  const { user } = useContext(appContext);
   const [heading, setHeading] = useState(props.heading);
   const [subheading, setSubheading] = useState(props.subheading);
   const [contentArr, setContentArr] = useState(props.content);
@@ -235,12 +235,12 @@ function ContentEditor(props) {
     return new Promise((resolve) => {
       if (e.target.files[0]) {
         let file = e.target.files[0];
-        listAll(ref(storage, `appdata/${userID}/livedata/content`)).then(
+        listAll(ref(storage, `appdata/${user}/livedata/content`)).then(
           (result) => {
             let fileID = getNewID(
               result.items.map((item) => parseInt(item.name.split(".")[0]))
             );
-            let uploadLocation = `appdata/${userID}/livedata/content/${fileID}.${file.type.slice(
+            let uploadLocation = `appdata/${user}/livedata/content/${fileID}.${file.type.slice(
               6
             )}`;
             uploadBytes(ref(storage, uploadLocation), file).then(() => {

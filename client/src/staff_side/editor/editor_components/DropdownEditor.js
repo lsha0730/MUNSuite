@@ -4,7 +4,9 @@ import "./Generic.scoped.css";
 import Toggle from "../../../common/components/toggle/Toggle";
 
 function DropdownEditor(props) {
-  const { delegations } = useContext(staffContext);
+  const {
+    firebaseData: { delegations },
+  } = useContext(staffContext);
   const [delNames, setDelNames] = useState(delegations.map((del) => del.name));
   const [require, setRequire] = useState(props.required);
   const [useDels, setUseDels] = useState(props.options == "all-delegations");

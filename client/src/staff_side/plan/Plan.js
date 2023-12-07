@@ -1,5 +1,5 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
-import { staffContext } from "../../common/Context";
+import { appContext, staffContext } from "../../common/Context";
 import "./Plan.scoped.css";
 import axios from "axios";
 
@@ -11,12 +11,10 @@ import MockupSplash from "./mockup_splash/MockupSplash";
 export const MAX_SUBMISSIONS = 100;
 
 const Plan = () => {
+  const { user } = useContext(appContext);
   const {
-    pendings,
-    processed,
-    accountInfo,
-    setAccountInfo,
-    userID,
+    staffAPI: { accountInfo, setAccountInfo },
+    firebaseData: { pendings, processed },
   } = useContext(staffContext);
   const totalSubmissions = pendings?.length + processed?.length;
   const codeRef = useRef();
@@ -27,7 +25,7 @@ const Plan = () => {
     axios
       .post("https://munsuite-backend.onrender.com/account/redeem", {
         code: codeRef?.current?.value,
-        uid: userID,
+        uid: user,
       })
       .then((response) => {
         const data = response.data;
@@ -35,7 +33,7 @@ const Plan = () => {
           // Check account status again
           axios
             .post("https://munsuite-backend.onrender.com/account/info", {
-              uid: userID,
+              uid: user,
             })
             .then((response) => {
               const data = response.data;
@@ -54,7 +52,7 @@ const Plan = () => {
   useEffect(() => {
     axios
       .post("https://munsuite-backend.onrender.com/account/info", {
-        uid: userID,
+        uid: user,
       })
       .then((response) => {
         const data = response.data;

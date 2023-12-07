@@ -7,8 +7,11 @@ const INACTIVE_COLOR = "#3C8CC9";
 const ACTIVE_COLOR = "#BCBCBC";
 
 function PageButton({ destination, label, icon: Tag, iconSize }) {
-  const { pendings, page, setPage } = useContext(staffContext);
   const { auth } = useContext(appContext);
+  const {
+    firebaseData: { pendings },
+    staffAPI: { page, setPage },
+  } = useContext(staffContext);
 
   return (
     <Hoverable

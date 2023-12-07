@@ -1,15 +1,18 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./Inbox.scoped.css";
-import { staffContext } from "../../common/Context";
+import { appContext, staffContext } from "../../common/Context";
 import Dropdown from "../history/dropdown/Dropdown";
 import { FaFilter } from "react-icons/fa";
 import DirectiveCard from "./card/DirectiveCard";
 import Toggle from "../../common/components/toggle/Toggle";
+import { firebaseWrite } from "../../common/utils/firebase";
+import { FirebaseDataTarget } from "../../common/types/types";
 
 function Inbox() {
-  const { processed, pendings, settings, writeToFirebase } = useContext(
-    staffContext
-  );
+  const { database, user } = useContext(appContext);
+  const {
+    firebaseData: { processed, pendings, settings },
+  } = useContext(staffContext);
   const [accepting, setAccepting] = useState(
     settings.formOpen !== undefined ? settings.formOpen : true
   );
@@ -26,7 +29,7 @@ function Inbox() {
         formOpen: accepting,
       })
     );
-    writeToFirebase("settings", copy);
+    firebaseWrite(database, user.uid, FirebaseDataTarget.Settings, copy);
   }, [accepting]);
 
   const directivesToDisplay = pendings.filter(includeInFilter);
@@ -130,10 +133,15 @@ function Inbox() {
     function pushToProcessed(card) {
       let tempProcessedArr = processed.slice();
       tempProcessedArr.push(card);
-      writeToFirebase("processed", tempProcessedArr);
+      firebaseWrite(
+        database,
+        user.uid,
+        FirebaseDataTarget.Processed,
+        tempProcessedArr
+      );
     }
 
-    writeToFirebase("pendings", tempArr);
+    firebaseWrite(database, user.uid, FirebaseDataTarget.Pendings, tempArr);
   }
 
   function getFilterOptions(cards) {

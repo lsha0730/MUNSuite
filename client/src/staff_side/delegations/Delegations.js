@@ -8,18 +8,18 @@ import {
 } from "../modals/index.js";
 import Delbar from "./delbar/Delbar.js";
 import * as BsIcons from "react-icons/bs";
-import { staffContext } from "../../common/Context";
+import { appContext, staffContext } from "../../common/Context";
 import axios from "axios";
 import { IoIosLock } from "react-icons/io";
 import { exportToCsv } from "../../common/utils/utils";
+import { firebaseWrite } from "../../common/utils/firebase";
+import { AccountType, FirebaseDataTarget } from "../../common/types/types";
 
 function Delegations() {
+  const { database, user } = useContext(appContext);
   const {
-    delegations,
-    notes,
-    settings,
-    writeToFirebase,
-    accountInfo,
+    staffAPI: { accountInfo },
+    firebaseData: { delegations, notes, settings },
   } = useContext(staffContext);
   const [selections, setSelections] = useState([]);
   const [modal, setModal] = useState(false);
@@ -74,7 +74,12 @@ function Delegations() {
       });
     });
 
-    writeToFirebase("delegations", delegations.concat(objectArr));
+    firebaseWrite(
+      database,
+      user,
+      FirebaseDataTarget.Delegations,
+      delegations.concat(objectArr)
+    );
     axios.post("https://munsuite-backend.onrender.com/analytics", {
       type: "add_dels",
       count: newDels.length,
@@ -88,7 +93,7 @@ function Delegations() {
         <div className="welcome">
           <p className="welcome-subheading">Signed in as</p>
           <h1 className="welcome-heading">
-            {accountInfo.email ||
+            {accountInfo?.email ||
               `${settings.conference || ""} ${settings.committee || ""}`}
           </h1>
         </div>
@@ -97,7 +102,7 @@ function Delegations() {
           <h1 className="welcome-subheading">
             Signed in as&nbsp;
             <span>
-              {accountInfo.email ||
+              {accountInfo?.email ||
                 `${settings.conference} ${settings.committee}`}
             </span>
           </h1>
@@ -135,15 +140,16 @@ function Delegations() {
 
             <div
               className={
-                accountInfo.type === "Premium"
+                accountInfo?.type === AccountType.Premium
                   ? "btt-add-country noselect"
                   : "btt-bricked noselect"
               }
               onClick={() => {
-                if (accountInfo.type === "Premium") setModal("spreadsheet_add");
+                if (accountInfo?.type === AccountType.Premium)
+                  setModal("spreadsheet_add");
               }}
             >
-              {accountInfo.type !== "Premium" && (
+              {accountInfo?.type === AccountType.Starter && (
                 <IoIosLock size={20} style={{ marginRight: 10 }} />
               )}
               <p>Spreadsheet Import</p>
@@ -288,13 +294,21 @@ function Delegations() {
     let newSelections = selections.filter((country) => {
       return selections.includes(country.name);
     });
-    writeToFirebase("delegations", newDelegations);
+    firebaseWrite(
+      database,
+      user,
+      FirebaseDataTarget.Delegations,
+      newDelegations
+    );
     setSelections(newSelections);
 
     let newNotesIndv = notes.individual.filter((note) => {
       return !selections.includes(note.delegate);
     });
-    writeToFirebase("notes", { quick: notes.quick, individual: newNotesIndv });
+    firebaseWrite(database, user, FirebaseDataTarget.Notes, {
+      quick: notes.quick,
+      individual: newNotesIndv,
+    });
   }
 
   function exportCodes() {

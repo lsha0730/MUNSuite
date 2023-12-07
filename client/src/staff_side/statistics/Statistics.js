@@ -6,7 +6,9 @@ import { staffContext } from "../../common/Context";
 import Legend from "./legend/Legend";
 
 function Statistics() {
-  const { processed } = useContext(staffContext);
+  const {
+    firebaseData: { processed },
+  } = useContext(staffContext);
   const [statsData, setStatsData] = useState([]);
   const [topSubCount, setTopSubCount] = useState();
   const [passedCount, setPassedCount] = useState();

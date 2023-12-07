@@ -75,7 +75,9 @@ const BOTTOM_OPTIONS = [
 ];
 
 function Sidebar() {
-  const { page } = useContext(staffContext);
+  const {
+    staffAPI: { page },
+  } = useContext(staffContext);
   const [indOffset, setIndOffset] = useState(100);
 
   var resizeTimeout;
