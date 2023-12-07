@@ -2,7 +2,7 @@ import { StaffAPI, StaffAccountInfo } from "../staff_side/StaffApp";
 import { Directive } from "./types/directiveTypes";
 import { Question } from "./types/questionTypes";
 import {
-  FirebaseData,
+  FirebaseDataStaff,
   Delegate,
   Notes,
   Settings,
@@ -26,7 +26,7 @@ export const BLANK_SETTINGS: Settings = {
   standardForm: true,
 };
 
-export const BLANK_APPDATA: FirebaseData = {
+export const BLANK_APPDATA: FirebaseDataStaff = {
   delegations: BLANK_DELEGATIONS,
   form: BLANK_FORM,
   pendings: BLANK_PENDINGS,

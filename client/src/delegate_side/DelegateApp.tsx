@@ -24,7 +24,7 @@ function App() {
   const [settings, setSettings] = useState({});
 
   const { pathname } = useLocation();
-  const userID = pathname.slice(6); // pathname is "/form/<uuid>"
+  const hostID = pathname.slice(6); // pathname is "/form/<uuid>"
   const [linkValidity, setValidLink] = useState("loading");
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState();
@@ -33,22 +33,21 @@ function App() {
   });
 
   // Firebase Setup
-  const { app } = useContext(appContext);
-  const database = app ? getDatabase(app) : null;
+  const { database } = useContext(appContext);
 
   useEffect(() => {
-    if (!userID) return;
-    getHostAccountInfo(userID, setAccountInfo);
-  }, [userID]);
+    if (!hostID) return;
+    getHostAccountInfo(hostID, setAccountInfo);
+  }, [hostID]);
 
   useEffect(() => {
     if (!database) return;
 
-    onValue(ref(database, `appdata/${userID}/livedata/form`), (snapshot) => {
+    onValue(ref(database, `appdata/${hostID}/livedata/form`), (snapshot) => {
       setValidLink(snapshot.exists() ? "valid" : "invalid");
     });
 
-    setUpFirebaseListeners(database, `appdata/${userID}/livedata`, [
+    setUpFirebaseListeners(database, `appdata/${hostID}/livedata`, [
       {
         target: FirebaseDataTarget.Delegations,
         onValue: setDelegations as oneArgFn,
@@ -68,7 +67,7 @@ function App() {
     if (database && ["pendings"].includes(target) && linkValidity) {
       // Delegate side only writes to pendings
       if (content.length > 0) {
-        set(ref(database, `appdata/${userID}/livedata/${target}`), content);
+        set(ref(database, `appdata/${hostID}/livedata/${target}`), content);
       }
     }
   }
@@ -137,7 +136,7 @@ function App() {
 
   function submit(submissionObj: any) {
     if (!database) return;
-    get(ref(database, `appdata/${userID}/livedata/pendings`)).then(
+    get(ref(database, `appdata/${hostID}/livedata/pendings`)).then(
       (snapshot) => {
         let currPendings = snapshot.exists() ? snapshot.val() : [];
         writeToFirebase("pendings", currPendings.concat(submissionObj));

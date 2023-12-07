@@ -14,7 +14,7 @@ import Settings from "./settings/Settings.js";
 import { appContext, staffContext } from "../common/Context";
 import Banner from "./plan/banner/Banner";
 import { setUpFirebaseListeners } from "../common/utils/firebase";
-import { AccountType, FirebaseData, FirebaseDataTarget, Delegate, Notes as NotesT, Settings as SettingsT, oneArgFn } from "../common/types/types";
+import { AccountType, FirebaseDataStaff, FirebaseDataTarget, Delegate, Notes as NotesT, Settings as SettingsT, oneArgFn } from "../common/types/types";
 import { getHostAccountInfo } from "../common/utils/http";
 import { Question } from "../common/types/questionTypes";
 import { Directive } from "../common/types/directiveTypes";
@@ -60,7 +60,7 @@ function App() {
   const [processed, setProcessed] = useState<Directive[]>(BLANK_PROCESSED);
   const [notes, setNotes] = useState<NotesT>(BLANK_NOTES);
   const [settings, setSettings] = useState<SettingsT>(BLANK_SETTINGS);
-  const firebaseData: FirebaseData = {delegations, form, pendings, processed, notes, settings}
+  const firebaseData: FirebaseDataStaff = {delegations, form, pendings, processed, notes, settings}
 
   useEffect(() => {
     if (userID) getHostAccountInfo(userID, setAccountInfo)

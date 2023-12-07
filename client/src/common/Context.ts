@@ -1,7 +1,7 @@
 import { FirebaseApp } from "firebase/app";
 import { Auth, User } from "firebase/auth";
 import React, { createContext } from "react";
-import { FirebaseData } from "./types/types";
+import { FirebaseDataStaff } from "./types/types";
 import { StaffAPI } from "../staff_side/StaffApp";
 import { BLANK_APPDATA, BLANK_STAFFAPI } from "./constants";
 import { Database } from "firebase/database";
@@ -26,7 +26,7 @@ const DEFAULT_APPCONTEXT = {
 
 interface StaffContext {
   staffAPI: StaffAPI;
-  firebaseData: FirebaseData;
+  firebaseData: FirebaseDataStaff;
 }
 const DEFAULT_STAFFCONTEXT: StaffContext = {
   staffAPI: BLANK_STAFFAPI,
