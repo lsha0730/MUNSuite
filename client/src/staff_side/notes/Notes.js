@@ -227,12 +227,12 @@ function Notes() {
 
   function updateNotes(delegate, newText) {
     // TODO: Add debouncing
-    console.log(delegate, newText);
-    let tempArr = notes.individual.slice();
-    const index = tempArr.findIndex((elem) => elem.delegate == delegate);
-    tempArr[index].text = newText;
+    // TODO BUG: Individual notes not updating properly. The function only changes the last char
+    const newNotes = notes.individual
+      .slice()
+      .map((n) => (n.delegate == delegate ? { delegate, text: newText } : n));
     firebaseWrite(database, user.uid, FirebaseDataTarget.Notes, {
-      individual: tempArr,
+      individual: newNotes,
       quick: notes.quick,
     });
   }
