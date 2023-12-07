@@ -141,7 +141,12 @@ function Settings() {
       settingsObj.conference = confName;
       settingsObj.committee = commName;
 
-      firebaseWrite("settings", settingsObj);
+      firebaseWrite(
+        database,
+        user.uid,
+        FirebaseDataTarget.Settings,
+        settingsObj
+      );
     } else {
       isMounted.current = true;
     }
