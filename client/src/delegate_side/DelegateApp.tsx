@@ -14,6 +14,7 @@ import InvalidLink from "./invalid_link/InvalidLink";
 import { appContext, delegateContext } from "../common/Context";
 import { getHostAccountInfo } from "../common/utils/http";
 import { setUpFirebaseListeners } from "../common/utils/firebase";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const [delegations, setDelegations] = useState<any>([]);
@@ -22,7 +23,8 @@ function App() {
   const [processed, setProcessed] = useState([]);
   const [settings, setSettings] = useState({});
 
-  const userID = window.location.pathname.slice(6); // window.location.pathname is "/form/<uuid>"
+  const { pathname } = useLocation();
+  const userID = pathname.slice(6); // pathname is "/form/<uuid>"
   const [linkValidity, setValidLink] = useState("loading");
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState();

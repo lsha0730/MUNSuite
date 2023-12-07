@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "./Navbar.scoped.css";
 import Logo from "../../common/assets/images/logos/logo.png";
 import LogoWhite from "../../common/assets/images/logos/logo_white.png";
@@ -7,15 +7,19 @@ import { appContext } from "../../common/Context";
 
 function Navbar() {
   const { user, auth } = useContext(appContext);
-  const pathname = window.location.pathname;
+  const { pathname } = useLocation();
+  const [showBar, setShowBar] = useState(false);
+  const [whiteBar, setWhiteBar] = useState(false);
 
-  const onHomePage = pathname === "/";
-  const onPrepaymentPage = pathname === "/prepayment";
-  const onAppPage = /\/app\/\w*/i.test(pathname);
-  const onSubmissionPage = /\/form\/\w*/i.test(pathname);
+  useEffect(() => {
+    const onHomePage = pathname === "/";
+    const onPrepaymentPage = pathname === "/prepayment";
+    const onAppPage = /\/app\/\w*/i.test(pathname);
+    const onSubmissionPage = /\/form\/\w*/i.test(pathname);
 
-  const showBar = !(onAppPage || onSubmissionPage);
-  const whiteBar = onHomePage || onPrepaymentPage;
+    setShowBar(!(onAppPage || onSubmissionPage));
+    setWhiteBar(onHomePage || onPrepaymentPage);
+  }, [pathname]);
 
   return (
     showBar && (

@@ -1,9 +1,9 @@
-import React from "react";
 import "./Footer.scoped.css";
 import { FaLinkedin } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 function Footer() {
-  let pathname = window.location.pathname;
+  const { pathname } = useLocation();
 
   const footer = (
     <div className="footer">

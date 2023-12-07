@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import "./App.scoped.css";
 import { appContext } from "./common/Context";
@@ -31,6 +31,7 @@ function App() {
   const isPortrait = useMediaQuery({
     query: `(max-width: ${DESKTOP_BREAKPOINT_PX}px)`,
   });
+  const { pathname } = useLocation();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -45,7 +46,7 @@ function App() {
       <div
         className={classNames(
           "app_container",
-          GRAY_BG_PAGES.includes(window.location.pathname) ? "gray_bg" : ""
+          GRAY_BG_PAGES.includes(pathname) ? "gray_bg" : ""
         )}
       >
         <Navbar />
