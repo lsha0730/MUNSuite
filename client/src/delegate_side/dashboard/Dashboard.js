@@ -9,18 +9,12 @@ import Banner from "../../staff_side/plan/banner/Banner";
 import { FaPaperPlane } from "react-icons/fa";
 import Sidebar from "./sidebar/Sidebar";
 import Form from "./form/Form";
+import { AccountType } from "../../common/types/types";
 
 function Dashboard(props) {
   const {
-    delegations,
-    form,
-    pendings,
-    processed,
-    settings,
-    user,
-    setUser,
-    setLoggedIn,
-    accountInfo,
+    firebaseData: { delegations, form, pendings, processed, settings },
+    delegateAPI: { user, setUser, hostAccountInfo },
   } = useContext(delegateContext);
 
   const [currForm, setCurrForm] = useState(form);
@@ -77,7 +71,7 @@ function Dashboard(props) {
 
   return (
     <div className="dashboard-container">
-      {accountInfo.type === "Starter" && (
+      {hostAccountInfo.type === AccountType.Starter && (
         <Banner totalSubmissions={0} page={"delegate"} />
       )}
 
@@ -104,7 +98,7 @@ function Dashboard(props) {
             <div className="form-container">
               <div className="form-top">
                 <div className="preview-hat">
-                  <p className="preview-hat-heading">{user}</p>
+                  <p className="preview-hat-heading">{user.name}</p>
                   <p className="preview-hat-subheading">{settings.committee}</p>
                 </div>
                 <div
@@ -112,7 +106,6 @@ function Dashboard(props) {
                   onClick={() => {
                     sessionStorage.removeItem("code");
                     setUser(null);
-                    setLoggedIn(false);
                   }}
                 >
                   Sign Out
@@ -175,7 +168,10 @@ function Dashboard(props) {
   }
 
   function handleSubmit() {
-    if (accountInfo.type === "Starter" && totalSubmissions >= MAX_SUBMISSIONS) {
+    if (
+      hostAccountInfo.type === AccountType.Starter &&
+      totalSubmissions >= MAX_SUBMISSIONS
+    ) {
       setWarning("Submission limit reached");
       setTimeout(() => setWarning(""), 2000);
       return;

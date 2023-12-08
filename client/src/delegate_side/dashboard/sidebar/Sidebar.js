@@ -8,12 +8,15 @@ import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 import { useMediaQuery } from "react-responsive";
 
 const Sidebar = ({ draft }) => {
-  const { pendings, processed, user, settings } = useContext(delegateContext);
+  const {
+    firebaseData: { pendings, processed, settings },
+    delegateAPI: { user },
+  } = useContext(delegateContext);
   const isNarrow = useMediaQuery({ query: "(max-width: 850px)" });
   const [relevantDirectives, setRelevantDirectives] = useState([]);
   const [open, setOpen] = useState(!isNarrow);
   const [page, setPage] = useState("Submissions");
-  const code = sessionStorage.getItem("code") || user;
+  const code = sessionStorage.getItem("code") || user.code;
   const [autosaves, setAutosaves] = useState(
     JSON.parse(localStorage.getItem(`drafts-${code}`)) || []
   );
@@ -35,9 +38,9 @@ const Sidebar = ({ draft }) => {
       .filter((item) => {
         if (item == undefined) return false;
         if (item.standard) {
-          return item.sponsors.includes(user) || item.author == user;
+          return item.sponsors.includes(user.name) || item.author == user.name;
         } else {
-          return item.author == user;
+          return item.author == user.name;
         }
       });
     setRelevantDirectives(

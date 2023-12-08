@@ -4,7 +4,9 @@ import { delegateContext } from "../../common/Context";
 import { IoIosLock } from "react-icons/io";
 
 function LoginPage(props) {
-  const { settings } = useContext(delegateContext);
+  const {
+    firebaseData: { settings },
+  } = useContext(delegateContext);
 
   return (
     <div className="loginpage-container">

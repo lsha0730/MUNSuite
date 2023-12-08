@@ -1,3 +1,4 @@
+import { DelegateAPI } from "../delegate_side/DelegateApp";
 import { StaffAPI, StaffAccountInfo } from "../staff_side/StaffApp";
 import { Directive } from "./types/directiveTypes";
 import { Question } from "./types/questionTypes";
@@ -41,10 +42,22 @@ export const BLANK_STAFF_ACCOUNT_INFO: StaffAccountInfo = {
   email: null,
 };
 
+export const BLANK_HOST_ACCOUNT_INFO: StaffAccountInfo = {
+  type: AccountType.Premium,
+  expiration: "Error",
+  email: null,
+};
+
 export const BLANK_STAFFAPI: StaffAPI = {
   userID: null,
   page: "delegations",
   setPage: (p) => {},
   accountInfo: BLANK_STAFF_ACCOUNT_INFO,
   setAccountInfo: (i) => {},
+};
+
+export const BLANK_DELEGATEAPI: DelegateAPI = {
+  user: null,
+  setUser: (u) => {},
+  hostAccountInfo: BLANK_HOST_ACCOUNT_INFO,
 };
