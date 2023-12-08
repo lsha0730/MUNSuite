@@ -51,7 +51,7 @@ export type DelegateAPI = {
   hostAccountInfo: StaffAccountInfo;
 };
 
-function App() {
+function DelegateApp() {
   const { database } = useContext(appContext);
   const { pathname } = useLocation();
   const hostID = pathname.slice(6); // pathname is "/form/<uuid>"
@@ -169,4 +169,4 @@ function App() {
   }
 }
 
-export default App;
+export default DelegateApp;

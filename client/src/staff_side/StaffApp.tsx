@@ -46,7 +46,7 @@ export type StaffAPI = {
   setAccountInfo: Dispatch<SetStateAction<StaffAccountInfo>>
 }
 
-function App() {
+function StaffApp() {
   const { database, user } = useContext(appContext);
   const userID = user?.uid || null;
 
@@ -97,4 +97,4 @@ function App() {
   );
 }
 
-export default App;
+export default StaffApp;
