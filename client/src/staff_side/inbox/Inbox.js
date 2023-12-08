@@ -19,10 +19,6 @@ function Inbox() {
   const [dropdownValue, setDropdownValue] = useState("No Filter");
 
   useEffect(() => {
-    console.log(accepting);
-  }, [accepting]);
-
-  useEffect(() => {
     const copy = JSON.parse(
       JSON.stringify({
         ...settings,

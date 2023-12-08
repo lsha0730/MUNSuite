@@ -1,5 +1,8 @@
 import { DelegateAPI } from "../delegate_side/DelegateApp";
-import { StaffAPI, StaffAccountInfo } from "../staff_side/StaffApp";
+import {
+  StaffAPI,
+  StaffAccountInfo,
+} from "../staff_side/StaffApp";
 import { Directive } from "./types/directiveTypes";
 import { Question } from "./types/questionTypes";
 import {
@@ -8,6 +11,7 @@ import {
   Notes,
   Settings,
   AccountType,
+  StaffPageKey
 } from "./types/types";
 
 export const CUSTOM_BACKEND_URL = "https://munsuite-backend.onrender.com";
@@ -50,7 +54,7 @@ export const BLANK_HOST_ACCOUNT_INFO: StaffAccountInfo = {
 
 export const BLANK_STAFFAPI: StaffAPI = {
   userID: null,
-  page: "delegations",
+  page: StaffPageKey.Delegations,
   setPage: (p) => {},
   accountInfo: BLANK_STAFF_ACCOUNT_INFO,
   setAccountInfo: (i) => {},

@@ -1,4 +1,4 @@
-.App-container {
+.app_container {
   width: 100%;
   height: 100%;
   background-color: #f7f7f7;
@@ -11,14 +11,14 @@
   flex-direction: row;
 }
 
-.UI-container {
+.UI_container {
   width: calc(100% - 60px);
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.page-container {
+.page_container {
   width: 100%;
   display: flex;
   flex-grow: 1;

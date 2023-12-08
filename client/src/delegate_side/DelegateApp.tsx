@@ -131,7 +131,7 @@ function DelegateApp() {
 
   return (
     <delegateContext.Provider value={{ delegateAPI, firebaseData }}>
-      <div className="App-container">{(screens as any)[linkValidity]}</div>
+      <div className="app_container">{(screens as any)[linkValidity]}</div>
     </delegateContext.Provider>
   );
 

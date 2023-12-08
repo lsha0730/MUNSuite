@@ -14,7 +14,7 @@ import Settings from "./settings/Settings.js";
 import { appContext, staffContext } from "../common/Context";
 import Banner from "./plan/banner/Banner";
 import { setUpFirebaseListeners } from "../common/utils/firebase";
-import { AccountType, FirebaseDataStaff, FirebaseDataTarget, Delegate, Notes as NotesT, Settings as SettingsT, oneArgFn } from "../common/types/types";
+import { AccountType, FirebaseDataStaff, FirebaseDataTarget, Delegate, Notes as NotesT, Settings as SettingsT, oneArgFn, StaffPageKey } from "../common/types/types";
 import { getHostAccountInfo } from "../common/utils/http";
 import { Question } from "../common/types/questionTypes";
 import { Directive } from "../common/types/directiveTypes";
@@ -26,7 +26,6 @@ export type StaffAccountInfo = {
   email: string | null;
 };
 
-export type PageKey = "delegations" | "editor" | "inbox" | "history" | "statistics" | "notes" | "plan" | "settings"
 const PAGES = {
   delegations: <Delegations/>,
   editor: <Editor/>,
@@ -36,12 +35,12 @@ const PAGES = {
   notes: <Notes/>,
   plan: <Plan/>,
   settings:<Settings/>
-} as Record<PageKey, JSX.Element>
+} as Record<StaffPageKey, JSX.Element>
 
 export type StaffAPI = {
   userID: string | null;
-  page: PageKey,
-  setPage: Dispatch<SetStateAction<PageKey>>;
+  page: StaffPageKey,
+  setPage: Dispatch<SetStateAction<StaffPageKey>>;
   accountInfo: StaffAccountInfo;
   setAccountInfo: Dispatch<SetStateAction<StaffAccountInfo>>
 }
@@ -50,7 +49,7 @@ function StaffApp() {
   const { database, user } = useContext(appContext);
   const userID = user?.uid || null;
 
-  const [page, setPage] = useState<PageKey>("delegations");
+  const [page, setPage] = useState<StaffPageKey>(StaffPageKey.Delegations);
   const [accountInfo, setAccountInfo] = useState<StaffAccountInfo>(BLANK_STAFF_ACCOUNT_INFO);
   const staffAPI: StaffAPI = {userID, page, setPage, accountInfo, setAccountInfo}
 
@@ -81,16 +80,16 @@ function StaffApp() {
     <staffContext.Provider
       value={{ staffAPI, firebaseData }}
     >
-      <div className="App-container">
+      <div className="app_container">
         <Sidebar />
-        <div className="UI-container">
-          {accountInfo.type !== "Premium" && (
+        <div className="UI_container">
+          {accountInfo.type !== AccountType.Premium && (
             <Banner
               totalSubmissions={pendings.length + processed.length}
               page="staff"
             />
           )}
-          <div className="page-container">{PAGES[page]}</div>
+          <div className="page_container">{PAGES[page]}</div>
         </div>
       </div>
     </staffContext.Provider>

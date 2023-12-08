@@ -10,6 +10,18 @@ export enum AccountType {
   Premium = "Premium",
 }
 
+export enum StaffPageKey {
+  Delegations = "delegations",
+  Editor = "editor",
+  Inbox = "inbox",
+  History = "history",
+  Statistics = "statistics",
+  Notes = "notes",
+  Plan = "plan",
+  Settings = "settings",
+  Signout = "signout",
+}
+
 // Firebase Realtime Database
 export type FirebaseDataDelegate = {
   delegations: Delegate[];

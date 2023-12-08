@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { staffContext } from "../../../common/Context";
 import "./Banner.scoped.css";
 import { MAX_SUBMISSIONS } from "../Plan";
+import { StaffPageKey } from "../../../common/types/types";
 
 const Banner = ({ totalSubmissions, page }) => {
   const {
@@ -17,7 +18,7 @@ const Banner = ({ totalSubmissions, page }) => {
           <span
             className="action-text"
             onClick={() => {
-              setPage("plan");
+              setPage(StaffPageKey.Plan);
             }}
           >
             Upgrade to Premium
@@ -31,7 +32,7 @@ const Banner = ({ totalSubmissions, page }) => {
       <span
         className="action-text"
         onClick={() => {
-          setPage("plan");
+          setPage(StaffPageKey.Plan);
         }}
       >
         upgrade to Premium.
@@ -43,7 +44,7 @@ const Banner = ({ totalSubmissions, page }) => {
       <span
         className="action-text"
         onClick={() => {
-          setPage("plan");
+          setPage(StaffPageKey.Plan);
         }}
       >
         upgrade to Premium.

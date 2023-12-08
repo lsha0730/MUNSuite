@@ -13,40 +13,41 @@ import {
 import { IoIosJournal } from "react-icons/io";
 import { HiBadgeCheck } from "react-icons/hi";
 import { RxExit } from "react-icons/rx";
+import { StaffPageKey } from "../../common/types/types";
 
 const TOP_OPTIONS = [
   {
-    destination: "delegations",
+    destination: StaffPageKey.Delegations,
     label: "Delegations",
     icon: BsPeopleFill,
     iconSize: 22,
   },
   {
-    destination: "editor",
+    destination: StaffPageKey.Editor,
     label: "Form Editor",
     icon: BsPencilFill,
     iconSize: 22,
   },
   {
-    destination: "inbox",
+    destination: StaffPageKey.Inbox,
     label: "Inbox",
     icon: BsInboxFill,
     iconSize: 22,
   },
   {
-    destination: "history",
+    destination: StaffPageKey.History,
     label: "History",
     icon: BsClockFill,
     iconSize: 20,
   },
   {
-    destination: "statistics",
+    destination: StaffPageKey.Statistics,
     label: "Statistics",
     icon: BsBarChartFill,
     iconSize: 22,
   },
   {
-    destination: "notes",
+    destination: StaffPageKey.Notes,
     label: "Notes",
     icon: IoIosJournal,
     iconSize: 25,
@@ -55,19 +56,19 @@ const TOP_OPTIONS = [
 
 const BOTTOM_OPTIONS = [
   {
-    destination: "plan",
+    destination: StaffPageKey.Plan,
     label: "Plan",
     icon: HiBadgeCheck,
     iconSize: 25,
   },
   {
-    destination: "settings",
+    destination: StaffPageKey.Settings,
     label: "Settings",
     icon: BsGearFill,
     iconSize: 22,
   },
   {
-    destination: "signout",
+    destination: StaffPageKey.Signout,
     label: "Sign Out",
     icon: RxExit,
     iconSize: 22,
@@ -118,27 +119,18 @@ function Sidebar() {
 const getIndicatorOffset = (page) => {
   const base = 55;
   const diff = 59;
+  const offsets = {
+    delegations: base,
+    editor: base + diff,
+    inbox: base + diff * 2,
+    history: base + diff * 3,
+    statistics: base + diff * 4,
+    notes: base + diff * 5,
+    plan: window.innerHeight - 95 - diff * 2,
+    settings: window.innerHeight - 95 - diff,
+  };
 
-  switch (page) {
-    case "delegations":
-      return base;
-    case "editor":
-      return base + diff;
-    case "inbox":
-      return base + diff * 2;
-    case "history":
-      return base + diff * 3;
-    case "statistics":
-      return base + diff * 4;
-    case "notes":
-      return base + diff * 5;
-    case "plan":
-      return window.innerHeight - 95 - diff * 2;
-    case "settings":
-      return window.innerHeight - 95 - diff;
-    default:
-      return base;
-  }
+  return offsets[page];
 };
 
 export default Sidebar;
