@@ -34,9 +34,7 @@ function App() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setUser(user);
-    });
+    onAuthStateChanged(auth, setUser);
   }, []);
 
   return (

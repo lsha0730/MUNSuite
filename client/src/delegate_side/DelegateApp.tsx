@@ -36,15 +36,6 @@ import {
   BLANK_SETTINGS,
 } from "../common/constants";
 
-// delegations,
-// form,
-// settings,
-// user,
-// setUser,
-// processed,
-// pendings,
-// accountInfo,
-
 export type DelegateAPI = {
   user: Delegate | null;
   setUser: Dispatch<SetStateAction<Delegate | null>>;
