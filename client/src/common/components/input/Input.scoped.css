@@ -1,0 +1,79 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #707070;
+  margin-top: 15px;
+}
+
+/* Short Text */
+.shorttext {
+  width: 300px;
+  height: 30px;
+
+  margin-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  font-size: 14px;
+
+  border-color: rgba(0, 0, 0, 0);
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+.shorttext::placeholder {
+  font-size: 16px;
+  color: #c0c0c0;
+}
+.shorttext:focus {
+  outline: none !important;
+  border-color: rgba(0, 0, 0, 0);
+  background-color: #ffffff;
+}
+.shorttext:hover {
+  background-color: #f7f7f7;
+}
+
+/* Checkbox */
+.checkbox_container {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 8px;
+}
+
+.checkbox {
+  width: 1.3rem;
+  height: 1.3rem;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+/* Button */
+.button {
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  padding: 7px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  background-color: #4b6980;
+  color: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}
+.button:hover {
+  background-color: #6c92af;
+  color: #ffffff;
+  transition: 200ms;
+}
