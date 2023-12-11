@@ -5,15 +5,16 @@ type Props = {
   onEnter?: () => void;
   label?: string;
   type?: "text" | "password";
+  style?: Record<string, string | number>;
 };
 
 const ShortText = forwardRef(
   (
-    { onEnter, label, type = "text" }: Props,
+    { onEnter, label, type = "text", style }: Props,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
-      <div className="container">
+      <div className="container" style={style}>
         {label && <p className="label">{label}</p>}
         <input
           ref={ref}
