@@ -20,7 +20,7 @@ function Login() {
 
   return (
     <div className="container">
-      <p className="form-header">Log In</p>
+      <p className="header">Log In</p>
 
       <div className="form_col">
         <ShortText label="Email" ref={emailRef} onEnter={handleLogin} />

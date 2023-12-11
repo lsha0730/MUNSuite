@@ -23,7 +23,7 @@ function Register() {
 
   return (
     <div className="container">
-      <p className="form-header">Register an Account</p>
+      <p className="header">Register an Account</p>
 
       <div className="form">
         <div className="form_col">
