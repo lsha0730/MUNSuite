@@ -52,6 +52,7 @@ function Register() {
                 </Link>
               </p>
             }
+            innerText="Register"
             onClick={handleRegister}
           />
         </div>

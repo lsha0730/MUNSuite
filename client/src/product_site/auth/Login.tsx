@@ -43,6 +43,7 @@ function Login() {
               </Link>
             </p>
           }
+          innerText="Log In"
           onClick={handleLogin}
         />
       </div>
