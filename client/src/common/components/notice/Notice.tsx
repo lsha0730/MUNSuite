@@ -1,12 +1,11 @@
-import { ReactNode, RefObject, useEffect, useRef, useState } from "react";
 import { BsExclamation, BsInfoCircle, BsX } from "react-icons/bs";
 import "./Notice.scoped.css";
-import { classNames } from "../../utils/utils";
+import { classNames, getTextWidth } from "../../utils/utils";
 
 type Props = {
-  message: string | ReactNode;
+  message: string;
+  visible: boolean;
   type?: "error" | "warning" | "info";
-  timeout?: number;
 };
 
 const ICONS = {
@@ -15,31 +14,15 @@ const ICONS = {
   info: BsInfoCircle,
 };
 
-const DEFAULT_TIMEOUT_MS = 4000;
-
-const Notice = ({
-  message,
-  type = "info",
-  timeout = DEFAULT_TIMEOUT_MS,
-}: Props) => {
+const Notice = ({ message, visible, type = "info" }: Props) => {
   const Icon = ICONS[type];
   const displayType = type.charAt(0).toUpperCase() + type.slice(1);
-  const [visible, setVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const dynamicOffset = (ref.current?.offsetWidth || 0) + 30
-
-  useEffect(() => {
-    setVisible(true);
-    setTimeout(() => {
-      setVisible(false);
-    }, timeout);
-  }, []);
+  const boxWidth = getTextWidth(message, 16) + 120;
 
   return (
     <div
       className={classNames("container", type)}
-      style={{ right: visible ? "3rem" : `${-dynamicOffset}px` }}
-      ref={ref}
+      style={{ right: visible ? "3rem" : `${-boxWidth}px` }}
     >
       <Icon className={`${type}_icon`} />
       <p>
