@@ -1,8 +1,5 @@
 import { DelegateAPI } from "../delegate_side/DelegateApp";
-import {
-  StaffAPI,
-  StaffAccountInfo,
-} from "../staff_side/StaffApp";
+import { StaffAPI, StaffAccountInfo } from "../staff_side/StaffApp";
 import { Directive } from "./types/directiveTypes";
 import { Question } from "./types/questionTypes";
 import {
@@ -11,11 +8,16 @@ import {
   Notes,
   Settings,
   AccountType,
-  StaffPageKey
+  StaffPageKey,
 } from "./types/types";
 
+// Links
 export const CUSTOM_BACKEND_URL = "https://munsuite-backend.onrender.com";
+export const LINCOLN_LINKEDIN =
+  "https://www.linkedin.com/in/lincoln-seungha-lee/";
+export const INQUIRY_EMAIL = "info@munsuite.com";
 
+// Blank Types
 export const BLANK_DELEGATIONS: Delegate[] = [];
 export const BLANK_FORM: Question[] = [];
 export const BLANK_PENDINGS: Directive[] = [];

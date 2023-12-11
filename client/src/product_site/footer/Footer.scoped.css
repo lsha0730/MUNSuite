@@ -8,14 +8,7 @@
   justify-content: center;
 }
 
-.footer-contents {
-  width: 60%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.footer-text {
+.text {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -38,7 +31,7 @@
 }
 
 @media (max-width: 641px) {
-  .footer-text {
+  .text {
     font-size: 12px;
   }
 }
