@@ -199,3 +199,6 @@ export function classNames(...args) {
 }
 
 export const filterFalsies = (arr) => arr.filter((e) => Boolean(e));
+
+export const syntaxCheckEmail = (email) =>
+  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);

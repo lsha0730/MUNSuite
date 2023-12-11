@@ -8,4 +8,14 @@ import Navbar from "./navbar/Navbar";
 import Plans from "./plans/Plans";
 import OrderInstructions from "./plans/order_instructions/OrderInstructions";
 
-export { Login, Register, Eula, Footer, Forgot, Home, Navbar, Plans, OrderInstructions };
+export {
+  Login,
+  Register,
+  Eula,
+  Footer,
+  Forgot,
+  Home,
+  Navbar,
+  Plans,
+  OrderInstructions,
+};

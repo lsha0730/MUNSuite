@@ -1,23 +1,13 @@
 /*--------GENERAL FORMATTING-------*/
-.fade {
-  opacity: 0%;
-  transition: 200ms;
-}
-
-.centering-container {
-  width: 100%;
-  min-height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.content {
+.container {
+  height: 100%;
   width: 60%;
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
-  margin-bottom: 70px;
+  padding-top: 50px;
+  padding-bottom: 70px;
+  margin: auto;
+  justify-content: center;
 }
 
 .form-header {
@@ -28,54 +18,16 @@
 }
 
 .form {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
+  width: fit-content;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.1rem;
 }
 
-.form-left {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-right {
+.form_col {
+  width: fit-content;
   display: flex;
   flex-direction: column;
-  margin-left: 50px;
-}
-
-.input-label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #707070;
-  margin-top: 15px;
-}
-
-.input-field {
-  width: 300px;
-  height: 30px;
-
-  margin-top: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-
-  font-size: 14px;
-
-  border-color: rgba(0, 0, 0, 0);
-  border-radius: 5px;
-  background-color: #ffffff;
-}
-.input-field::placeholder {
-  font-size: 16px;
-  color: #c0c0c0;
-}
-.input-field:focus {
-  outline: none !important;
-  border-color: rgba(0, 0, 0, 0);
-  background-color: #ffffff;
-}
-.input-field:hover {
-  background-color: #f7f7f7;
 }
 
 .additional-text {
@@ -94,13 +46,6 @@
   color: #3c8cc9;
 }
 
-.btt-container {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-}
-
 .warning {
   width: fit-content;
   position: absolute;
@@ -112,45 +57,7 @@
   transition: 200ms;
 }
 
-.btt-register {
-  width: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 14px;
-  font-weight: 700;
-
-  padding: 7px;
-  padding-left: 15px;
-  padding-right: 15px;
-
-  background-color: #4b6980;
-  color: #ffffff;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.btt-register:hover {
-  background-color: #6c92af;
-  color: #ffffff;
-  transition: 200ms;
-}
-
-/*----- EULA Stuff -----*/
-.eula-container {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  gap: 8px;
-}
-
-.eula-link {
+.eula_link {
   font-weight: 500;
   color: #378dcc;
-}
-
-.eula-check {
-  width: 25px;
-  height: 25px;
-  cursor: pointer;
-  background-color: #ffffff;
 }
