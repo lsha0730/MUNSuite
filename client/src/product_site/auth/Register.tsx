@@ -54,6 +54,7 @@ function Register() {
             }
             innerText="Register"
             onClick={handleRegister}
+            wide
           />
         </div>
 

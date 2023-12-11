@@ -34,7 +34,7 @@ function Forgot() {
               label="Account Email"
               onEnter={handleForgot}
             />
-            <Button onClick={handleForgot} innerText="Send Email"/>
+            <Button onClick={handleForgot} innerText="Send Email" wide/>
           </div>
         </div>
       )}

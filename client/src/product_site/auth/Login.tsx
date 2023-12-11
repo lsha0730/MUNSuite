@@ -45,6 +45,7 @@ function Login() {
           }
           innerText="Log In"
           onClick={handleLogin}
+          wide
         />
       </div>
 
