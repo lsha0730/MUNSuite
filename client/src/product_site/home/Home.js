@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Home.scoped.css";
 
-import formTab from "../../common/assets/images/mockups/form_tab.png";
-import inboxTab from "../../common/assets/images/mockups/inbox_tab.png";
 import delside from "../../common/assets/images/mockups/delside.png";
 import delegations from "../../common/assets/images/mockups/delegations.png";
 import form from "../../common/assets/images/mockups/form.png";
@@ -17,108 +15,16 @@ import { FaHistory } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
 import FeatureItem from "./feature_item/FeatureItem";
 import { appContext } from "../../common/Context";
-import GradientAnimation from "../../common/components/gradient/GradientAnimation";
-import Hoverable from "../../common/components/hover/Hover";
-
-const TRUSTING_CONFS = [
-  {
-    name: "Horizons",
-    img: require("../../common/assets/images/customer_logos/horizons.png"),
-    url: "https://horizons.cahsmun.org",
-  },
-  {
-    name: "CAHSMUN",
-    img: require("../../common/assets/images/customer_logos/cahsmun.png"),
-    url: "https://cahsmun.org",
-  },
-  {
-    name: "VMUN",
-    img: require("../../common/assets/images/customer_logos/vmun.png"),
-    url: "https://vmun.com",
-  },
-  {
-    name: "TMUN",
-    img: require("../../common/assets/images/customer_logos/tmun.png"),
-    url: "https://tmun.ca",
-  },
-];
+import HomeTop from "./top/HomeTop";
+import TrustedBy from "./trusted_by/TrustedBy";
 
 function Home() {
   const { user, isPortrait } = useContext(appContext);
 
-  const adwords = [
-    "Simplified",
-    "Modernized",
-    "Streamlined",
-    "Innovated",
-    "Reimagined",
-  ];
-  const [adwordIndex, setAdwordIndex] = useState(0);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setAdwordIndex(adwordIndex == adwords.length - 1 ? 0 : adwordIndex + 1);
-    }, 3000);
-  }, [adwordIndex]);
-
   return (
     <div className="home-container">
-      {/*Top Section*/}
-      <div className="home-top">
-        <GradientAnimation className="top-gradient" />
-        <div className="home-top-container">
-          <div className="top-left">
-            <img
-              src={inboxTab}
-              alt="Inbox Page Preview"
-              className="mockup-inbox"
-            />
-            <img
-              src={formTab}
-              alt="Form Page Preview"
-              className="mockup-form"
-            />
-          </div>
-          <div className="top-right">
-            <p className="top-heading">
-              MUN
-              <br />
-              Directives,
-              <br />
-              <span className="adword">{adwords[adwordIndex]}.</span>
-            </p>
-            <p className="top-subheading">
-              The 21st century solution to directive chaos
-            </p>
-            {isPortrait ? (
-              <div className="btt-try-free">Available on Desktop</div>
-            ) : user ? (
-              <Link to={`/app/${user.uid}`} className="btt-try-free">
-                Launch App
-              </Link>
-            ) : (
-              <Link to="/register" className="btt-try-free">
-                Try MUNSuite Free
-              </Link>
-            )}
-          </div>
-        </div>
-      </div>
-
-      <div className="trusted-container">
-        <div className="trusted-logos">
-          {TRUSTING_CONFS.map((conf) => (
-            <Hoverable
-              message={conf.name}
-              href={conf.url}
-              messageStyle={{ width: 75, textAlign: "center", padding: 0 }}
-              pos={{ bottom: -20 }}
-            >
-              <img src={conf.img} className="trusted-logo" />
-            </Hoverable>
-          ))}
-        </div>
-      </div>
+      <HomeTop />
+      <TrustedBy />
 
       {/*Features Section*/}
       <div className="home-features">
