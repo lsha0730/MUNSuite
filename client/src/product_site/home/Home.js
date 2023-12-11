@@ -17,7 +17,7 @@ import { FaHistory } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
 import FeatureItem from "./feature_item/FeatureItem";
 import { appContext } from "../../common/Context";
-import GradientAnimation from "./gradient/GradientAnimation";
+import GradientAnimation from "../../common/components/gradient/GradientAnimation";
 import Hoverable from "../../common/components/hover/Hover";
 
 const TRUSTING_CONFS = [

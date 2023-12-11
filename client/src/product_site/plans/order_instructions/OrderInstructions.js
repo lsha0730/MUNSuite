@@ -2,7 +2,7 @@ import React from "react";
 import { BsFillInboxFill, BsSendExclamationFill } from "react-icons/bs";
 import { FaHandPointer } from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
-import GradientAnimation from "../../home/gradient/GradientAnimation";
+import GradientAnimation from "../../../common/components/gradient/GradientAnimation";
 import "./OrderInstructions.scoped.css";
 
 const OrderInstructions = () => {
