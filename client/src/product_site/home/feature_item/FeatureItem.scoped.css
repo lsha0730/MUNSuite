@@ -27,12 +27,7 @@
   width: 500px;
   display: flex;
   flex-direction: column;
-}
-
-.icon-heading-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
+  gap: 1.2rem;
 }
 
 .heading {

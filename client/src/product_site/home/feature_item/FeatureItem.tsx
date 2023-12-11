@@ -1,7 +1,16 @@
 import "./FeatureItem.scoped.css";
 import { classNames } from "../../../common/utils/utils";
+import { ReactNode } from "react";
 
-function FeatureItem({ textPosition, img, heading, subheading, icon }) {
+type Props = {
+  textPosition: "left" | "right";
+  img: string;
+  heading: string;
+  subheading: string;
+  icon: ReactNode;
+};
+
+function FeatureItem({ textPosition, img, heading, subheading, icon }: Props) {
   return (
     <div
       className={classNames(
@@ -11,10 +20,8 @@ function FeatureItem({ textPosition, img, heading, subheading, icon }) {
     >
       <img src={img} className="image" />
       <div className="text">
-        <div className="icon-heading-group">
-          {icon}
-          <p className="heading">{heading}</p>
-        </div>
+        {icon}
+        <p className="heading">{heading}</p>
         <p className="subheading">{subheading}</p>
       </div>
     </div>
