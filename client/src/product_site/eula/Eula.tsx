@@ -1,4 +1,3 @@
-import React from "react";
 import "./Eula.scoped.css";
 
 const Eula = () => {
