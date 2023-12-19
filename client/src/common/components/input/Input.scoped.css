@@ -66,6 +66,7 @@
   cursor: pointer;
   border: none;
   transition: 200ms;
+  font-weight: 600;
 }
 
 .wide {
@@ -75,15 +76,26 @@
 
 .md {
   font-size: 14px;
-  font-weight: 700;
   border-radius: 0.3rem;
 }
 
 .lg {
   font-size: 1.1rem;
-  font-weight: 600;
   border-radius: 0.5rem;
   white-space: nowrap;
+}
+
+.black {
+  background-color: #ffffff;
+  color: #000000;
+}
+.black:hover {
+  background-color: #f3f3f3;
+  color: #000000;
+}
+.black_secondary {
+  background-color: rgba(0, 0, 0, 0);
+  color: #000000;
 }
 
 .dark {
@@ -94,6 +106,10 @@
   background-color: #6c92af;
   color: #ffffff;
 }
+.dark_secondary {
+  background-color: rgba(0, 0, 0, 0);
+  color: #4b6980;
+}
 
 .light {
   background-color: #bae4fa;
@@ -103,6 +119,10 @@
   background-color: #4bb4ff;
   color: #ffffff;
 }
+.light_secondary {
+  background-color: rgba(0, 0, 0, 0);
+  color: #00a3ff;
+}
 
 .white {
   background-color: rgba(256, 256, 256, 0.3);
@@ -110,5 +130,8 @@
 }
 .white:hover {
   background-color: rgba(256, 256, 256, 0.5);
+}
+.white_secondary {
+  background-color: rgba(0, 0, 0, 0);
   color: #ffffff;
 }
