@@ -2,20 +2,22 @@ import { MouseEventHandler, ReactNode } from "react";
 import "./Input.scoped.css";
 import { classNames } from "../../utils/utils";
 
+export type ButtonType =
+  | "black"
+  | "black_secondary"
+  | "dark"
+  | "dark_secondary"
+  | "light"
+  | "light_secondary"
+  | "white"
+  | "white_secondary";
+
 type Props = {
   onClick: MouseEventHandler;
   innerText: string;
   label?: string | ReactNode;
   style?: Record<string, string | number>;
-  type?:
-    | "black"
-    | "black_secondary"
-    | "dark"
-    | "dark_secondary"
-    | "light"
-    | "light_secondary"
-    | "white"
-    | "white_secondary";
+  type?: ButtonType;
   size?: "md" | "lg";
   wide?: boolean;
 };
