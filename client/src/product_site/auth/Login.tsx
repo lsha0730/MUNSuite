@@ -67,8 +67,8 @@ function Login() {
       return
     }
     if (auth) signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        navigate(`/app/${user?.uid}`);
+      .then((creds) => {
+        navigate(`/app/${creds.user.uid}`);
       })
       .catch((error) => {
         if (error.code == "auth/wrong-password") setFadingWarning("Wrong Password");

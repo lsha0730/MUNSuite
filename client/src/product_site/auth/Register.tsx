@@ -98,8 +98,8 @@ function Register() {
       eula: Boolean(eulaRef.current?.checked),
     };
     registerAccount(auth, submission)
-      .then(() => {
-        if (user) navigate(`/app/${user.uid}`);
+      .then((creds) => {
+        navigate(`/app/${creds.user.uid}`);
       })
       .catch(e => {setFadingWarning(e.message)});
   }

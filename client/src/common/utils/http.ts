@@ -1,7 +1,11 @@
 import axios from "axios";
 import { CUSTOM_BACKEND_URL } from "../constants";
 import { StaffAccountInfo } from "../../staff_side/StaffApp";
-import { Auth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  Auth,
+  UserCredential,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { syntaxCheckEmail } from "./utils";
 
 /**
@@ -40,18 +44,19 @@ export type RegistrationObject = {
 export async function registerAccount(
   auth: Auth,
   registrationObject: RegistrationObject
-) {
+): Promise<UserCredential> {
   if (!validateRegistrationObject(registrationObject))
     throw new Error("Invalid registration info");
   const url = `${CUSTOM_BACKEND_URL}/register/newuser`;
   const body = { registrationObject };
   const { data: resultMessage }: { data: string } = await axios.post(url, body);
   if (resultMessage == "Success") {
-    await signInWithEmailAndPassword(
+    const userCreds = await signInWithEmailAndPassword(
       auth,
       registrationObject.email,
       registrationObject.password
     );
+    return userCreds;
   } else {
     throw new Error(resultMessage);
   }
