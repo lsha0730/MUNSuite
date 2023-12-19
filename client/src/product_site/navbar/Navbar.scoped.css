@@ -1,4 +1,4 @@
-.navbar-container {
+.container {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -6,7 +6,14 @@
   z-index: 10;
 }
 
-.navbar {
+.noselect {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+.content {
   width: 60%;
   height: 80px;
   margin: auto;
@@ -16,11 +23,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Standard */
 }
 
 .logo {
@@ -124,7 +126,7 @@
 }
 
 @media (max-width: 641px) {
-  .navbar {
+  .content {
     margin: 0px;
     margin-top: 30px;
     height: 50px;
