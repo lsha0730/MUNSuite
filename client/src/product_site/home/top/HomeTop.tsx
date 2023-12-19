@@ -6,22 +6,7 @@ import GradientAnimation from "../../../common/components/gradient/GradientAnima
 import Button from "../../../common/components/input/Button";
 import formTab from "../../../common/assets/images/mockups/form_tab.png";
 import inboxTab from "../../../common/assets/images/mockups/inbox_tab.png";
-
-const ADWORDS = [
-  "Optimized",
-  "Revamped",
-  "Upgraded",
-  "Modernized",
-  "Innovated",
-  "Simplified",
-  "Transformed",
-  "Overhauled",
-  "Streamlined",
-  "Enhanced",
-  "Reimagined",
-  "Digitalized",
-  "Accelerated",
-];
+import { ADWORDS } from "../homeData";
 
 const HomeTop = () => {
   const navigate = useNavigate();

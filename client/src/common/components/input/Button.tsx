@@ -7,7 +7,7 @@ type Props = {
   innerText: string;
   label?: string | ReactNode;
   style?: Record<string, string | number>;
-  type?: "dark" | "light";
+  type?: "dark" | "light" | "white";
   size?: "md" | "lg";
   wide?: boolean;
 };

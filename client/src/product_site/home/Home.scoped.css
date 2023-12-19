@@ -7,8 +7,26 @@
   align-items: center;
 }
 
+/* Trusted By */
+.trusted_by {
+  width: 70%;
+  max-width: 600px;
+  z-index: 100;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 5rem;
+}
+
+.logo {
+  height: auto;
+  width: 75px;
+}
+
 /* Features */
-.home-features {
+.features {
   width: 100%;
   height: fit-content;
   background: #f6f9fc;
@@ -22,14 +40,14 @@
   padding-bottom: 50px;
 }
 
-.features-icon {
+.features_icon {
   min-width: 50px;
   fill: #47667d;
   text-shadow: -10px 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-/*---------MODERNIZE SECTION---------*/
-.home-modernize {
+/* Modernize Section */
+.lets-modernize {
   width: 100vw;
   height: 600px;
   background: linear-gradient(-45deg, #78aed7, #7aa5c6);
@@ -57,73 +75,19 @@
   text-shadow: -10px 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.btt-see-options {
-  width: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 18px;
-  font-weight: 700;
-
-  padding: 7px;
-  padding-left: 15px;
-  padding-right: 15px;
-
-  background-color: rgba(256, 256, 256, 0.3);
-  text-decoration: none;
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
-}
-.btt-see-options:hover {
-  background-color: rgba(256, 256, 256, 0.5);
-  color: #ffffff;
-  transition: 200ms;
-}
-
 @media (max-width: 641px) {
-  .home-features {
+  .logo {
+    height: auto;
+    width: 50px;
+    z-index: 100;
+  }
+  .features {
     padding-top: 100px;
-  }
-  .home-feature-group-imgText {
-    flex-direction: column-reverse;
-    transform: none;
-    width: 100%;
-    padding-left: 40px;
-    padding-right: 40px;
-    margin-bottom: 120px;
-  }
-  .home-feature-group-textImg {
-    flex-direction: column-reverse;
-    transform: none;
-    width: 100%;
-    padding-left: 40px;
-    padding-right: 40px;
-    margin-bottom: 120px;
-  }
-  .feature-text-group {
-    width: 100%;
-    margin-top: 40px;
-  }
-  .features-icon-heading-group {
-    align-items: flex-start;
   }
   .features-icon {
     height: 30px;
   }
-  .feature-text-heading {
-    font-size: 28px;
-  }
-  .feature-text-subheading {
-    font-size: 16px;
-    margin-bottom: 30px;
-  }
-  .features-image {
-    width: 110%;
-  }
-
-  .home-modernize {
+  .lets-modernize {
     height: 700px;
   }
   .modernize-header {
@@ -134,11 +98,5 @@
   }
   .modernize-image {
     width: 250px;
-  }
-  .btt-see-options {
-    display: none;
-  }
-  .btt-try-free:hover {
-    opacity: 1;
   }
 }

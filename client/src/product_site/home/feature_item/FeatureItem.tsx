@@ -15,7 +15,7 @@ function FeatureItem({ textPosition, img, heading, subheading, icon }: Props) {
     <div
       className={classNames(
         "container",
-        textPosition == "right" ? "img-text" : "text-img"
+        textPosition == "right" ? "img_text" : "text_img"
       )}
     >
       <img src={img} className="image" />
