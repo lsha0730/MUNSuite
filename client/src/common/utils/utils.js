@@ -204,3 +204,7 @@ export const syntaxCheckEmail = (email) =>
   /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
 
 export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+export function pasteToClipboard(text) {
+  navigator.clipboard.writeText(text);
+}
