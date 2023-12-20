@@ -6,7 +6,7 @@ import LogoWhite from "../../common/assets/images/logos/logo_white.png";
 import { appContext } from "../../common/Context";
 import Button from "../../common/components/input/Button";
 
-function Navbar() {
+const Navbar = () => {
   const { user, auth } = useContext(appContext);
   const { pathname } = useLocation();
   const [showBar, setShowBar] = useState(false);
@@ -90,6 +90,6 @@ function Navbar() {
       </div>
     )
   );
-}
+};
 
 export default Navbar;

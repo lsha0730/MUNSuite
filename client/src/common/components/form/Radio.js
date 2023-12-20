@@ -3,7 +3,7 @@ import "./PreviewComponents.scoped.css";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp, IoIosLock } from "react-icons/io";
 
-function Radio({
+const Radio = ({
   variant,
   id,
   required,
@@ -15,7 +15,7 @@ function Radio({
   updateForm,
   updateSubmission,
   locked,
-}) {
+}) => {
   const [selected, setSelected] = useState(); // Stores the index of selected in options
 
   useEffect(() => {
@@ -77,6 +77,6 @@ function Radio({
         ))}
     </div>
   );
-}
+};
 
 export default Radio;

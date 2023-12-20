@@ -8,7 +8,7 @@ import TMUN from "../../common/assets/images/customer_logos/tmun.png";
 
 const CUSTOMER_LOGOS = [Horizons, CAHSMUN, VMUN, TMUN];
 
-function Plans() {
+const Plans = () => {
   return (
     <div className="container">
       <div className="top">
@@ -64,6 +64,6 @@ function Plans() {
       </div>
     </div>
   );
-}
+};
 
 export default Plans;

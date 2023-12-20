@@ -10,7 +10,7 @@ import Notice from "../../common/components/notice/Notice";
 
 const MESSAGE_DURATION_MS = 3000
 
-function Login() {
+const Login = () => {
   const navigate = useNavigate();
   const { auth, user } = useContext(appContext);
   const [error, setError] = useState<string>("");

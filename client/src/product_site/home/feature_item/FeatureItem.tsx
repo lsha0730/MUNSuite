@@ -10,7 +10,13 @@ type Props = {
   icon: ReactNode;
 };
 
-function FeatureItem({ textPosition, img, heading, subheading, icon }: Props) {
+const FeatureItem = ({
+  textPosition,
+  img,
+  heading,
+  subheading,
+  icon,
+}: Props) => {
   return (
     <div
       className={classNames(
@@ -26,6 +32,6 @@ function FeatureItem({ textPosition, img, heading, subheading, icon }: Props) {
       </div>
     </div>
   );
-}
+};
 
 export default FeatureItem;

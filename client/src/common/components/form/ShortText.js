@@ -3,7 +3,7 @@ import "./PreviewComponents.scoped.css";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp, IoIosLock } from "react-icons/io";
 
-function ShortText({
+const ShortText = ({
   variant,
   id,
   required,
@@ -14,7 +14,7 @@ function ShortText({
   updateForm,
   updateSubmission,
   locked,
-}) {
+}) => {
   return (
     <div style={{ display: "flex", flexDirection: "row-reverse" }}>
       <div
@@ -60,6 +60,6 @@ function ShortText({
         ))}
     </div>
   );
-}
+};
 
 export default ShortText;
