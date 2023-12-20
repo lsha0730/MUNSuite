@@ -16,6 +16,7 @@ export const CUSTOM_BACKEND_URL = "https://munsuite-backend.onrender.com";
 export const LINCOLN_LINKEDIN =
   "https://www.linkedin.com/in/lincoln-seungha-lee/";
 export const INQUIRY_EMAIL = "info@munsuite.com";
+export const STRIPE_PURCHASE_LINK = "https://buy.stripe.com/bIY8z09RUfnPg0MeUU";
 
 // Blank Types
 export const BLANK_DELEGATIONS: Delegate[] = [];
