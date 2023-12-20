@@ -1,6 +1,7 @@
 import { MouseEventHandler, ReactNode } from "react";
 import "./Input.scoped.css";
 import { classNames } from "../../utils/utils";
+import ConditionalWrapper from "../misc/ConditionalWrapper";
 
 export type ButtonType =
   | "black"
@@ -20,6 +21,7 @@ type Props = {
   type?: ButtonType;
   size?: "md" | "lg";
   wide?: boolean;
+  full?: boolean;
 };
 
 const Button = ({
@@ -30,17 +32,27 @@ const Button = ({
   type = "dark",
   size = "md",
   wide,
+  full,
 }: Props) => {
+  const toggleClasses = ["wide", "full"].filter((_, i) => [wide, full][i]);
+
   return (
-    <div className="container" style={style}>
+    <ConditionalWrapper
+      condition={Boolean(label)}
+      wrapper={(c) => (
+        <div className="container" style={style}>
+          {c}
+        </div>
+      )}
+    >
       {label && <p className="label">{label}</p>}
       <button
-        className={classNames("button", type, size, wide ? "wide" : "")}
+        className={classNames("button", type, size, ...toggleClasses)}
         onClick={onClick}
       >
         {innerText}
       </button>
-    </div>
+    </ConditionalWrapper>
   );
 };
 

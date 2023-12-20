@@ -74,6 +74,10 @@
   padding-right: 4rem;
 }
 
+.full {
+  width: 100%;
+}
+
 .md {
   font-size: 14px;
   border-radius: 0.3rem;
