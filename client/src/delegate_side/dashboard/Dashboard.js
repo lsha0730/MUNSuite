@@ -2,14 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { delegateContext } from "../../common/Context";
 import "./Dashboard.scoped.css";
-
-import { MAX_SUBMISSIONS } from "../../staff_side/plan/Plan";
 import Banner from "../../staff_side/plan/banner/Banner";
 
 import { FaPaperPlane } from "react-icons/fa";
 import Sidebar from "./sidebar/Sidebar";
 import Form from "./form/Form";
 import { AccountType } from "../../common/types/types";
+import { MAX_SUBMISSIONS } from "../../common/constants";
 
 function Dashboard(props) {
   const {

@@ -142,3 +142,10 @@
   height: 45px;
   filter: grayscale(100%) brightness(130%);
 }
+
+/* Tier Cards */
+.tiercards {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}

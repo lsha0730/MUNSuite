@@ -1,14 +1,13 @@
-import React, { useState, useContext, useRef, useEffect } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 import { appContext, staffContext } from "../../common/Context";
 import "./Plan.scoped.css";
 import axios from "axios";
 
-import PlanCards from "../../product_site/plans/cards/PlanCards";
 import { RedeemConfirmation } from "../modals";
 import { HiBadgeCheck } from "react-icons/hi";
 import MockupSplash from "./mockup_splash/MockupSplash";
-
-export const MAX_SUBMISSIONS = 100;
+import { MAX_SUBMISSIONS } from "../../common/constants";
+import TierCard from "../../product_site/plans/tier_card/TierCard";
 
 const Plan = () => {
   const { user } = useContext(appContext);
@@ -145,9 +144,13 @@ const Plan = () => {
                 width: "100%",
                 display: "flex",
                 justifyContent: "center",
+                marginTop: "2rem",
+                marginBottom: "1rem",
+                gap: "3rem",
               }}
             >
-              <PlanCards page="app" />
+              <TierCard tier="starter" />
+              <TierCard tier="premium" />
             </div>
 
             <div className="redeem">

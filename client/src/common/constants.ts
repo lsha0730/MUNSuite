@@ -67,3 +67,18 @@ export const BLANK_DELEGATEAPI: DelegateAPI = {
   setUser: (u) => {},
   hostAccountInfo: BLANK_HOST_ACCOUNT_INFO,
 };
+
+// Plan Details
+export const MAX_SUBMISSIONS = 100;
+
+export const STARTER_FEATURES = [
+  `Store up to ${MAX_SUBMISSIONS} submissions`,
+  "Email support",
+];
+
+export const PREMIUM_FEATURES = [
+  "Unlimited submissions storage",
+  "Spreadsheet import delegates",
+  "Export directives history & notes to csv",
+  "Remove starter banner",
+];

@@ -1,6 +1,5 @@
-import React from "react";
 import "./Plans.scoped.css";
-import PlanCards from "./cards/PlanCards";
+import TierCard from "./tier_card/TierCard";
 
 import Horizons from "../../common/assets/images/customer_logos/horizons.png";
 import CAHSMUN from "../../common/assets/images/customer_logos/cahsmun.png";
@@ -30,7 +29,10 @@ function Plans() {
             </div>
           </div>
 
-          <PlanCards page={"plan"} />
+          <div className="tiercards">
+            <TierCard tier="starter" />
+            <TierCard tier="premium" />
+          </div>
         </div>
       </div>
 

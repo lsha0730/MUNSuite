@@ -202,3 +202,5 @@ export const filterFalsies = (arr) => arr.filter((e) => Boolean(e));
 
 export const syntaxCheckEmail = (email) =>
   /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+
+export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);

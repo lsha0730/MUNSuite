@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { staffContext } from "../../../common/Context";
 import "./Banner.scoped.css";
-import { MAX_SUBMISSIONS } from "../Plan";
 import { StaffPageKey } from "../../../common/types/types";
+import { MAX_SUBMISSIONS } from "../../../common/constants";
 
 const Banner = ({ totalSubmissions, page }) => {
   const {
