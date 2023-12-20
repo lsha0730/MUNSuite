@@ -139,3 +139,18 @@
   background-color: rgba(0, 0, 0, 0);
   color: #ffffff;
 }
+
+.white_outlined {
+  background-color: #ffffff;
+  color: #707070;
+  border: solid 0.15rem #eaeaea;
+}
+.white_outlined:hover {
+  background-color: #f3f3f3;
+}
+
+.bricked {
+  background-color: #eaeaea;
+  color: #bcbcbc;
+  cursor: not-allowed;
+}

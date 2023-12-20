@@ -4,6 +4,7 @@ import { classNames } from "../../utils/utils";
 import ConditionalWrapper from "../misc/ConditionalWrapper";
 
 export type ButtonType =
+  | "bricked"
   | "black"
   | "black_secondary"
   | "dark"
@@ -11,7 +12,8 @@ export type ButtonType =
   | "light"
   | "light_secondary"
   | "white"
-  | "white_secondary";
+  | "white_secondary"
+  | "white_outlined";
 
 type Props = {
   onClick: MouseEventHandler;
