@@ -31,20 +31,7 @@
 }
 
 .selected {
-  flex-grow: 1;
-  height: 100%;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-
-  background-color: #ffffff;
-  border-radius: 10px;
-
   background-color: #bae4fa;
-  transition: 200ms;
-  cursor: pointer;
 }
 .selected:hover {
   background-color: #7fb5db;

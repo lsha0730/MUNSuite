@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import "./Delegations.scoped.css";
 import {
   AddUNCountries,
@@ -6,14 +6,14 @@ import {
   SpreadsheetAdd,
   Confirmation,
 } from "../modals/index.js";
-import Delbar from "./delbar/Delbar.js";
 import * as BsIcons from "react-icons/bs";
 import { appContext, staffContext } from "../../common/Context";
 import axios from "axios";
 import { IoIosLock } from "react-icons/io";
-import { exportToCsv } from "../../common/utils/utils";
+import { exportToCsv, generateUniqueDelCode } from "../../common/utils/utils";
 import { firebaseWrite } from "../../common/utils/firebase";
 import { AccountType, FirebaseDataTarget } from "../../common/types/types";
+import Delbar from "./delbar/Delbar";
 
 function Delegations() {
   const { database, user } = useContext(appContext);
@@ -40,37 +40,15 @@ function Delegations() {
     }, 100);
   };
 
-  function makeUniqueCode(size, existingDels) {
-    function makeCode(length) {
-      var result = "";
-      var characters =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      var charactersLength = characters.length;
-      for (var i = 0; i < length; i++) {
-        result += characters.charAt(
-          Math.floor(Math.random() * charactersLength)
-        );
-      }
-      return result;
-    }
-
-    let codes = existingDels.map((delegate) => {
-      return delegate.name;
-    });
-    let code = makeCode(size);
-    while (codes.includes(code)) {
-      code = makeCode(size);
-    }
-    return code;
-  }
-
   const addDelegates = (newDels) => {
     const objectArr = [];
     newDels.forEach((name) => {
       objectArr.push({
         id: delegations.length + objectArr.length,
         name: name,
-        code: makeUniqueCode(5, delegations.concat(objectArr)),
+        code: generateUniqueDelCode(
+          delegations.concat(objectArr.map((e) => e.code))
+        ),
       });
     });
 
@@ -244,15 +222,15 @@ function Delegations() {
       delegate.id = i;
     }
 
-    function handleClick(country) {
-      if (selections.includes(country)) {
+    function handleClick({ name }) {
+      if (selections.includes(name)) {
         setSelections(
           selections.filter((item) => {
-            return item !== country;
+            return item !== name;
           })
         );
       } else {
-        setSelections(selections.concat(country));
+        setSelections(selections.concat(name));
       }
     }
 
@@ -261,10 +239,9 @@ function Delegations() {
         delegations.map((delegate) => {
           return (
             <Delbar
+              delegate={delegate}
+              onClick={handleClick}
               selected={selections.includes(delegate.name)}
-              delegate={delegate.name}
-              code={delegate.code}
-              handleClick={handleClick}
             />
           );
         })
