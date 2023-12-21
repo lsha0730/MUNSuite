@@ -50,23 +50,24 @@
   margin-right: 5px;
 
   border-radius: 10px;
-  background-color: #eeeeee;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-weight: 400;
-
   transition: 200ms;
   cursor: pointer;
 }
-.code:hover {
+
+.code_unselected {
+  background-color: #eeeeee;
+}
+.code_unselected:hover {
   background-color: #cccccc;
-  transition: 200ms;
 }
 
 .code_selected {
   background-color: #bae4fa;
-  opacity: 80%;
+}
+.code_selected:hover {
+  background-color: #7fb5db;
 }

@@ -25,7 +25,10 @@ const Delbar = ({ delegate, onClick, selected }: Props) => {
       </div>
 
       <div
-        className={classNames("code", selected ? "code_selected" : "")}
+        className={classNames(
+          "code",
+          selected ? "code_selected" : "code_unselected"
+        )}
         onClick={copyCode}
       >
         <p>{delegate.code}</p>
