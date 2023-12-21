@@ -7,6 +7,6 @@ type Props = {
 };
 
 const ConditionalWrapper = ({ condition, wrapper, children }: Props) =>
-  condition ? wrapper(children) : children;
+  (condition ? wrapper(children) : children) as JSX.Element;
 
 export default ConditionalWrapper;
