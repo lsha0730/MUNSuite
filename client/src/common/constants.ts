@@ -83,3 +83,6 @@ export const PREMIUM_FEATURES = [
   "Export directives history & notes to csv",
   "Remove starter banner",
 ];
+
+// Misc
+export const DELCODE_LENGTH = 5;

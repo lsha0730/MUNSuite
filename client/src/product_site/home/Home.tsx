@@ -9,7 +9,7 @@ import Button from "../../common/components/input/Button";
 import Hoverable from "../../common/components/hover/Hover";
 import { FEATURES, IMAGES, TRUSTING_CONFS } from "./homeData";
 
-function Home() {
+const Home = () => {
   const navigate = useNavigate();
   const { user, isPortrait } = useContext(appContext);
 
@@ -69,6 +69,6 @@ function Home() {
       </div>
     </div>
   );
-}
+};
 
 export default Home;

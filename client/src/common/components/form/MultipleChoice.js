@@ -3,7 +3,7 @@ import "./PreviewComponents.scoped.css";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
-function MultipleChoice({
+const MultipleChoice = ({
   variant,
   id,
   required,
@@ -15,7 +15,7 @@ function MultipleChoice({
   updateForm,
   updateSubmission,
   locked,
-}) {
+}) => {
   const [selected, setSelected] = useState([]); // Stores the indices of selected in options
 
   function handleClick(e) {
@@ -84,6 +84,6 @@ function MultipleChoice({
       )}
     </div>
   );
-}
+};
 
 export default MultipleChoice;

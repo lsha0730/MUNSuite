@@ -10,7 +10,7 @@ import Notice from "../../common/components/notice/Notice";
 
 const MESSAGE_DURATION_MS = 3000;
 
-function Forgot() {
+const Forgot = () => {
   const { auth } = useContext(appContext);
   const [error, setError] = useState("");
   const [emailSent, setEmailSent] = useState(false);

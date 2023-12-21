@@ -4,7 +4,7 @@ import { GoTriangleDown } from "react-icons/go";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
-function Dropdown({
+const Dropdown = ({
   variant,
   id,
   required,
@@ -16,7 +16,7 @@ function Dropdown({
   updateForm,
   updateSubmission,
   locked,
-}) {
+}) => {
   const [value, setValue] = useState(); // Stores the index of the item in options
   const [dropVisible, setDropVisible] = useState(false);
   const sortedOptions = options.sort((a, b) => a.localeCompare(b));
@@ -89,6 +89,6 @@ function Dropdown({
       )}
     </div>
   );
-}
+};
 
 export default Dropdown;

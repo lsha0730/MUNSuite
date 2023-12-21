@@ -4,7 +4,7 @@ import { GoSearch } from "react-icons/go";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp, IoIosLock } from "react-icons/io";
 
-function SelectMultiple({
+const SelectMultiple = ({
   variant,
   id,
   required,
@@ -17,7 +17,7 @@ function SelectMultiple({
   updateForm,
   updateSubmission,
   locked,
-}) {
+}) => {
   const [choices, setChoices] = useState(options);
   const [search, setSearch] = useState("");
   const [isShowingOptions, setIsShowingOptions] = useState(false);
@@ -166,6 +166,6 @@ function SelectMultiple({
         ))}
     </div>
   );
-}
+};
 
 export default SelectMultiple;

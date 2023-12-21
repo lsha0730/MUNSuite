@@ -3,7 +3,7 @@ import { FaLinkedin } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
 import { INQUIRY_EMAIL, LINCOLN_LINKEDIN } from "../../common/constants";
 
-function Footer() {
+const Footer = () => {
   const { pathname } = useLocation();
   const onAppPage = /\/app\/\w*/i.test(pathname);
   const onDelegatePage = /\/form\/\w*/i.test(pathname);
@@ -26,6 +26,6 @@ function Footer() {
       </div>
     )
   );
-}
+};
 
 export default Footer;

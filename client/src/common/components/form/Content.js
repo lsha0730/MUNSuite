@@ -4,7 +4,7 @@ import { getStorage, ref, deleteObject } from "firebase/storage";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
-function Content({
+const Content = ({
   variant,
   id,
   required,
@@ -15,7 +15,7 @@ function Content({
   setEditing,
   updateForm,
   locked,
-}) {
+}) => {
   const storage = getStorage();
 
   return (
@@ -87,6 +87,6 @@ function Content({
       }
     });
   }
-}
+};
 
 export default Content;

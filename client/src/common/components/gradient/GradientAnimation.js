@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./GradientAnimation.scoped.css";
 
-function GradientAnimation({ ...other }) {
+const GradientAnimation = ({ ...other }) => {
   useEffect(() => {
     initializeGradient();
   }, []);
@@ -11,7 +11,7 @@ function GradientAnimation({ ...other }) {
       <canvas id="gradient-canvas" />
     </div>
   );
-}
+};
 
 export default GradientAnimation;
 

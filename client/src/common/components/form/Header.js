@@ -4,7 +4,7 @@ import { getStorage, ref, deleteObject } from "firebase/storage";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp, IoIosLock } from "react-icons/io";
 
-function Header({
+const Header = ({
   variant,
   id,
   imgPath,
@@ -15,7 +15,7 @@ function Header({
   setEditing,
   updateForm,
   locked,
-}) {
+}) => {
   const storage = getStorage();
 
   return (
@@ -68,6 +68,6 @@ function Header({
       deleteObject(ref(storage, imgPath));
     }
   }
-}
+};
 
 export default Header;

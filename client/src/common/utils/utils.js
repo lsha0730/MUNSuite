@@ -1,3 +1,5 @@
+import { DELCODE_LENGTH } from "../constants";
+
 /**
  * Estimates the pixel width of a string.
  *
@@ -204,3 +206,28 @@ export const syntaxCheckEmail = (email) =>
   /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
 
 export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+export function pasteToClipboard(text) {
+  navigator.clipboard.writeText(text);
+}
+
+export function generateUniqueDelCode(exclusions) {
+  const existing = new Set(exclusions || []);
+  let result = generateDelCode();
+  while (existing.has(result)) result = generateDelCode();
+  return result;
+}
+
+export function generateDelCode() {
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
+
+  for (let i = 0; i < DELCODE_LENGTH; i++) {
+    const random = Math.floor(Math.random() * characters.length);
+    const char = characters[random];
+    result += char;
+  }
+
+  return result;
+}

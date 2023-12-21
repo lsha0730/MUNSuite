@@ -3,7 +3,7 @@ import "./PreviewComponents.scoped.css";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
-function LongText({
+const LongText = ({
   variant,
   id,
   required,
@@ -15,7 +15,7 @@ function LongText({
   updateForm,
   updateSubmission,
   locked,
-}) {
+}) => {
   const [textState, setTextState] = useState("");
   const textareaRef = useRef();
 
@@ -69,6 +69,6 @@ function LongText({
       )}
     </div>
   );
-}
+};
 
 export default LongText;
