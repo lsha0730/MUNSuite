@@ -55,7 +55,7 @@ const OrderInstructions = () => {
           }}
           innerText="Get Started"
           type="light"
-          full
+          fullWidth
         />
       </div>
     </div>

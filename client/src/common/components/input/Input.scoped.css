@@ -7,15 +7,19 @@
   font-size: 14px;
   font-weight: 600;
   color: #707070;
-  margin-top: 15px;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.full_width {
+  width: 100%;
 }
 
 /* Short Text */
 .shorttext {
-  width: 300px;
+  min-width: 300px;
   height: 30px;
 
-  margin-top: 5px;
   padding-left: 10px;
   padding-right: 10px;
 
@@ -72,10 +76,6 @@
 .wide {
   padding-left: 4rem;
   padding-right: 4rem;
-}
-
-.full {
-  width: 100%;
 }
 
 .md {

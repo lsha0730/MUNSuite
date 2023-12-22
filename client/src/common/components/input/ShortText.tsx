@@ -1,6 +1,7 @@
 import { ForwardedRef, forwardRef } from "react";
 import "./Input.scoped.css";
 import ConditionalWrapper from "../misc/ConditionalWrapper";
+import { classNames } from "../../utils/utils";
 
 type Props = {
   onEnter?: () => void;
@@ -8,18 +9,20 @@ type Props = {
   type?: "text" | "password";
   placeholder?: string;
   style?: Record<string, string | number>;
+  fullWidth?: boolean;
 };
 
 const ShortText = forwardRef(
   (
-    { onEnter, label, type = "text", placeholder, style }: Props,
+    { onEnter, label, type = "text", placeholder, style, fullWidth }: Props,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
+    const fw = fullWidth ? "full_width" : "";
     return (
       <ConditionalWrapper
         condition={Boolean(label)}
         wrapper={(c) => (
-          <div className="container" style={style}>
+          <div className={classNames("container", fw)} style={style}>
             {c}
           </div>
         )}
@@ -28,7 +31,7 @@ const ShortText = forwardRef(
         <input
           ref={ref}
           type={type}
-          className="shorttext"
+          className={classNames("shorttext", fw)}
           onKeyDown={(e) => {
             if (e.key === "Enter" && onEnter) onEnter();
           }}

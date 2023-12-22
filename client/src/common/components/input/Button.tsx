@@ -23,7 +23,7 @@ type Props = {
   type?: ButtonType;
   size?: "md" | "lg";
   wide?: boolean;
-  full?: boolean;
+  fullWidth?: boolean;
 };
 
 const Button = ({
@@ -34,22 +34,23 @@ const Button = ({
   type = "dark",
   size = "md",
   wide,
-  full,
+  fullWidth,
 }: Props) => {
-  const toggleClasses = ["wide", "full"].filter((_, i) => [wide, full][i]);
+  const wd = wide ? "wide" : "";
+  const fw = fullWidth ? "full_width" : "";
 
   return (
     <ConditionalWrapper
       condition={Boolean(label)}
       wrapper={(c) => (
-        <div className="container" style={style}>
+        <div className={classNames("container", fw)} style={style}>
           {c}
         </div>
       )}
     >
       {label && <p className="label">{label}</p>}
       <button
-        className={classNames("button", type, size, ...toggleClasses)}
+        className={classNames("button", type, size, wd, fw)}
         onClick={onClick}
       >
         {innerText}
