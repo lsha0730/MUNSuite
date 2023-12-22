@@ -124,7 +124,7 @@ function DelegateApp() {
       user && delegateIsInDelegateList(user) ? (
         <Dashboard key="dashboard" submit={submit} />
       ) : (
-        <LoginPage attemptLogin={attemptLogin} />
+        <LoginPage />
       ),
     invalid: <InvalidLink />,
   };
@@ -137,16 +137,6 @@ function DelegateApp() {
 
   function delegateIsInDelegateList({ name }: Delegate) {
     return delegations.map((d) => d.name).includes(name);
-  }
-
-  function attemptLogin(input: any) {
-    for (let i = 0; i < delegations.length; i++) {
-      if (delegations[i].code == input) {
-        setUser(delegations[i]);
-        sessionStorage.setItem("code", delegations[i].code);
-        break;
-      }
-    }
   }
 
   function submit(submissionObj: any) {
