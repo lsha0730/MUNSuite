@@ -2,7 +2,7 @@ import express = require("express");
 const analyticsRouter = express.Router();
 analyticsRouter.use(express.json());
 
-const { incrementAnalytics } = require("../utils");
+const { incrementAnalytics } = require("../utils/utils");
 
 analyticsRouter.post("/", (req: express.Request, res: express.Response) => {
   const type: string = req.body.type;

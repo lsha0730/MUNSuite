@@ -1,11 +1,11 @@
-const { db, auth } = require("../firebase");
+const { db, auth } = require("../utils/firebase");
 
 import express = require("express");
 const accountRouter = express.Router();
 accountRouter.use(express.json());
 
-const { getUTCTimestamp, updateAccountType } = require("../utils");
-import { AccountsLog, CodesLog } from "../types";
+const { getUTCTimestamp, updateAccountType } = require("../utils/utils");
+import { AccountsLog, CodesLog } from "../utils/types";
 
 // Read product codes & account types from database
 let validCodes: CodesLog = {};
