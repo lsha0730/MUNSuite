@@ -30,7 +30,7 @@ const Plan = () => {
 
   const handleRedeem = () => {
     axios
-      .post("https://munsuite-backend.onrender.com/account/redeem", {
+      .post(`${process.env.BACKEND_URL}/account/redeem`, {
         code: codeRef?.current?.value,
         uid: userID,
       })
@@ -39,7 +39,7 @@ const Plan = () => {
         if (data === "Success") {
           // Check account status again
           axios
-            .post("https://munsuite-backend.onrender.com/account/info", {
+            .post(`${process.env.BACKEND_URL}/account/info`, {
               uid: userID,
             })
             .then((response) => {
@@ -58,7 +58,7 @@ const Plan = () => {
 
   useEffect(() => {
     axios
-      .post("https://munsuite-backend.onrender.com/account/info", {
+      .post(`${process.env.BACKEND_URL}/account/info`, {
         uid: userID,
       })
       .then((response) => {

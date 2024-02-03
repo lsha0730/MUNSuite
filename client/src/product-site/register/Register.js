@@ -123,7 +123,7 @@ function Register() {
     };
 
     axios
-      .post("https://munsuite-backend.onrender.com/register/newuser", {
+      .post(`${process.env.REACT_APP_BACKEND_URL}/register/newuser`, {
         registrationObject: submission,
       })
       .then((response) => {

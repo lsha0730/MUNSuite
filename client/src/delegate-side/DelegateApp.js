@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
     // Get user account info
     axios
-      .post("https://munsuite-backend.onrender.com/account/info", {
+      .post(`${process.env.BACKEND_URL}/account/info`, {
         uid: userID,
       })
       .then((response) => {
