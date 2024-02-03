@@ -1,3 +1,5 @@
+const https = require("https");
+const fs = require("fs");
 import express = require("express");
 const { registerRouter } = require("../routes/register");
 const { purchaseRouter } = require("../routes/purchase");
@@ -30,8 +32,13 @@ async function initializeServer(port: number) {
   app.use("/account", accountRouter);
   app.use("/analytics", analyticsRouter);
 
-  app.listen(port);
-  console.log(`App listening at port ${port}`);
+  const privateKey = fs.readFileSync(process.env.SSL_PRIVATEKEY_PATH, "utf8");
+  const certificate = fs.readFileSync(process.env.SSL_PUBLICKEY_PATH, "utf8");
+  const credentials = { key: privateKey, cert: certificate };
+
+  const httpsServer = https.createServer(credentials, app);
+  await httpsServer.listen(port);
+  console.log(`Server running on port ${port}`);
 }
 
 function initializeSweeper(cron: string) {
