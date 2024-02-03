@@ -33,7 +33,7 @@ async function initializeServer(port: number) {
   app.use("/analytics", analyticsRouter);
 
   const privateKey = fs.readFileSync(process.env.SSL_PRIVATEKEY_PATH, "utf8");
-  const certificate = fs.readFileSync(process.env.SSL_PUBLICKEY_PATH, "utf8");
+  const certificate = fs.readFileSync(process.env.SSL_CERT_PATH, "utf8");
   const credentials = { key: privateKey, cert: certificate };
 
   const httpsServer = https.createServer(credentials, app);
