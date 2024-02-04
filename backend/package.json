@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "start": "nodemon src/index.ts"
+    "build": "tsc && npm run copy-files",
+    "start": "nodemon src/index.ts",
+    "copy-files": "ncp src/serviceAccountKey.json build/serviceAccountKey.json"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +27,7 @@
     "@types/express": "^4.17.15",
     "@types/node": "^18.11.17",
     "@types/node-schedule": "^2.1.0",
+    "ncp": "^2.0.0",
     "nodemon": "^2.0.20",
     "typescript": "^4.9.4"
   }
