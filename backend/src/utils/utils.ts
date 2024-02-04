@@ -31,6 +31,9 @@ async function initializeServer(port: number) {
   app.use("/purchase", purchaseRouter);
   app.use("/account", accountRouter);
   app.use("/analytics", analyticsRouter);
+  app.post("/test", (req, res) => {
+    res.json("It works!");
+  });
 
   const privateKey = fs.readFileSync(process.env.SSL_PRIVATEKEY_PATH, "utf8");
   const certificate = fs.readFileSync(process.env.SSL_CERT_PATH, "utf8");
