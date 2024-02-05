@@ -30,7 +30,7 @@ async function initializeServer(port: number) {
   app.use("/account", accountRouter);
   app.use("/analytics", analyticsRouter);
   app.get("/test", (req, res) => {
-    res.json("It works!");
+    res.send("It works!");
   });
 
   await app.listen(port);
