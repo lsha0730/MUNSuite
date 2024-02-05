@@ -1,5 +1,3 @@
-const https = require("https");
-const fs = require("fs");
 import express = require("express");
 const { registerRouter } = require("../routes/register");
 const { purchaseRouter } = require("../routes/purchase");
@@ -35,12 +33,7 @@ async function initializeServer(port: number) {
     res.json("It works!");
   });
 
-  const privateKey = fs.readFileSync(process.env.SSL_PRIVATEKEY_PATH, "utf8");
-  const certificate = fs.readFileSync(process.env.SSL_CERT_PATH, "utf8");
-  const credentials = { key: privateKey, cert: certificate };
-
-  const httpsServer = https.createServer(credentials, app);
-  await httpsServer.listen(port);
+  await app.listen(port);
   console.log(`Server running on port ${port}`);
 }
 
