@@ -29,7 +29,7 @@ async function initializeServer(port: number) {
   app.use("/purchase", purchaseRouter);
   app.use("/account", accountRouter);
   app.use("/analytics", analyticsRouter);
-  app.post("/test", (req, res) => {
+  app.get("/test", (req, res) => {
     res.json("It works!");
   });
 
