@@ -34,7 +34,7 @@ function App() {
   useEffect(() => {
     // Get user account info
     axios
-      .post(`${process.env.BACKEND_URL}/account/info`, {
+      .post(`${process.env.REACT_APP_BACKEND_URL}/account/info`, {
         uid: userID,
       })
       .then((response) => {

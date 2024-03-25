@@ -75,7 +75,7 @@ function Delegations() {
     });
 
     writeToFirebase("delegations", delegations.concat(objectArr));
-    axios.post(`${process.env.BACKEND_URL}/analytics`, {
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/analytics`, {
       type: "add_dels",
       count: newDels.length,
     });
