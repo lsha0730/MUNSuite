@@ -1,16 +1,16 @@
-const { auth } = require("../firebase");
+const { auth } = require("../utils/firebase");
 
 import express = require("express");
 const registerRouter = express.Router();
 registerRouter.use(express.json());
 
-import { RegistrationObject } from "../types";
+import { RegistrationObject } from "../utils/types";
 const {
   getUTCTimestamp,
   writeToUser,
   updateAccountType,
   incrementAnalytics,
-} = require("../utils");
+} = require("../utils/utils");
 const { defaultFormData } = require("../data/defaultFormData");
 
 // Request handlers

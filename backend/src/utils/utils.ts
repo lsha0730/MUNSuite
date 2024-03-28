@@ -1,3 +1,10 @@
+import express = require("express");
+const { registerRouter } = require("../routes/register");
+const { purchaseRouter } = require("../routes/purchase");
+const { accountRouter } = require("../routes/account");
+const { analyticsRouter } = require("../routes/analytics");
+
+const schedule = require("node-schedule");
 const { db } = require("./firebase");
 import {
   AccountType,
@@ -6,6 +13,32 @@ import {
   Deadlines,
   AnalyticsType,
 } from "./types";
+
+async function initializeServer(port: number) {
+  const app = express();
+
+  app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "https://munsuite.com");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
+  app.use("/register", registerRouter);
+  app.use("/purchase", purchaseRouter);
+  app.use("/account", accountRouter);
+  app.use("/analytics", analyticsRouter);
+
+  app.listen(port);
+  console.log(`App listening at port ${port}`);
+}
+
+function initializeSweeper(cron: string) {
+  return schedule.scheduleJob(cron, () => {
+    expireAccounts();
+  });
+}
 
 /* Returns the current UTC time as a string in the format
     YYYY-MM-DD HH:MM:SS UTC
@@ -97,4 +130,6 @@ module.exports = {
   updateAccountType,
   expireAccounts,
   incrementAnalytics,
+  initializeServer,
+  initializeSweeper,
 };

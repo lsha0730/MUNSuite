@@ -198,7 +198,7 @@ function Dashboard(props) {
     );
 
     // Add analytics
-    axios.post("https://munsuite-backend.onrender.com/analytics", {
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/analytics`, {
       type: "submit_directive",
     });
     gtag("event", "submit_directive");

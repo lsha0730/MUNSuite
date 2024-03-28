@@ -22,17 +22,17 @@ const Plan = () => {
 
   const handleRedeem = () => {
     axios
-      .post("https://munsuite-backend.onrender.com/account/redeem", {
+      .post(`${process.env.REACT_APP_BACKEND_URL}/account/redeem`, {
         code: codeRef?.current?.value,
-        uid: user,
+        uid: user.uid,
       })
       .then((response) => {
         const data = response.data;
         if (data === "Success") {
           // Check account status again
           axios
-            .post("https://munsuite-backend.onrender.com/account/info", {
-              uid: user,
+            .post(`${process.env.REACT_APP_BACKEND_URL}/account/info`, {
+              uid: user.uid,
             })
             .then((response) => {
               const data = response.data;
@@ -50,8 +50,8 @@ const Plan = () => {
 
   useEffect(() => {
     axios
-      .post("https://munsuite-backend.onrender.com/account/info", {
-        uid: user,
+      .post(`${process.env.REACT_APP_BACKEND_URL}/account/info`, {
+        uid: user?.uid || "",
       })
       .then((response) => {
         const data = response.data;

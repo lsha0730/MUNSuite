@@ -2,11 +2,11 @@ import express = require("express");
 import { Stripe } from "stripe";
 const purchaseRouter = express.Router();
 
-const { getUTCTimestamp } = require("../utils");
+const { getUTCTimestamp } = require("../utils/utils");
 const { v4: uuidv4 } = require("uuid");
 
 // Set up Firebase
-const { db } = require("../firebase");
+const { db } = require("../utils/firebase");
 const validRef = db.ref("adminData/accessCodes/valid");
 const orderLogsRef = db.ref("adminData/orderLogs");
 
@@ -20,7 +20,7 @@ const apiKey = SibClient.authentications["api-key"];
 apiKey.apiKey = process.env.SibKey;
 const tranEmailApi = new Sib.TransactionalEmailsApi();
 import { SendCodeTemplate } from "../data/sendCodeEmailHTML";
-import { OrderDetails } from "../types";
+import { OrderDetails } from "../utils/types";
 
 // Request handlers
 purchaseRouter.post(

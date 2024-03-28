@@ -58,7 +58,7 @@ function Delegations() {
       FirebaseDataTarget.Delegations,
       delegations.concat(objectArr)
     );
-    axios.post("https://munsuite-backend.onrender.com/analytics", {
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/analytics`, {
       type: "add_dels",
       count: newDels.length,
     });
