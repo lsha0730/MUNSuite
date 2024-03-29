@@ -12,7 +12,7 @@
 }
 
 .full_width {
-  width: 100%;
+  width: 100% !important;
 }
 
 /* Short Text */
