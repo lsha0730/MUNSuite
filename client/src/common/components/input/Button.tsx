@@ -14,6 +14,7 @@ export type ButtonType =
   | "white"
   | "white_secondary"
   | "white_outlined"
+  | "gray"
   | "yellow"
   | "red";
 

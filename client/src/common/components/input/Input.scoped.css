@@ -174,3 +174,11 @@
   color: #ffffff;
   transition: 200ms;
 }
+
+.gray {
+  background-color: #eeeeee;
+}
+.gray:hover {
+  background-color: #d9d9d9;
+  transition: 200ms;
+}
