@@ -1,4 +1,4 @@
-import { MouseEventHandler, ReactNode } from "react";
+import React, { MouseEventHandler, ReactNode } from "react";
 import "./Input.scoped.css";
 import { classNames } from "../../utils/utils";
 import ConditionalWrapper from "../misc/ConditionalWrapper";
@@ -20,24 +20,26 @@ export type ButtonType =
 
 type Props = {
   onClick: MouseEventHandler;
-  innerText: string;
   label?: string | ReactNode;
-  style?: Record<string, string | number>;
+  wrapperStyle?: React.CSSProperties;
+  style?: React.CSSProperties;
   type?: ButtonType;
   size?: "md" | "lg";
   wide?: boolean;
   fullWidth?: boolean;
+  children: ReactNode;
 };
 
 const Button = ({
   onClick,
-  innerText,
   label,
+  wrapperStyle,
   style,
   type = "dark",
   size = "md",
   wide,
   fullWidth,
+  children,
 }: Props) => {
   const wd = wide ? "wide" : "";
   const fw = fullWidth ? "full_width" : "";
@@ -46,7 +48,7 @@ const Button = ({
     <ConditionalWrapper
       condition={Boolean(label)}
       wrapper={(c) => (
-        <div className={classNames("container", fw)} style={style}>
+        <div className={classNames("container", fw)} style={wrapperStyle}>
           {c}
         </div>
       )}
@@ -55,8 +57,9 @@ const Button = ({
       <button
         className={classNames("button", type, size, wd, fw)}
         onClick={onClick}
+        style={style}
       >
-        {innerText}
+        {children}
       </button>
     </ConditionalWrapper>
   );

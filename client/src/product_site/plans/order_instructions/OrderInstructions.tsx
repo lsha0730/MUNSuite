@@ -53,10 +53,11 @@ const OrderInstructions = () => {
           onClick={() => {
             window.open(STRIPE_PURCHASE_LINK, "_blank");
           }}
-          innerText="Get Started"
           type="light"
           fullWidth
-        />
+        >
+          Get Started
+        </Button>
       </div>
     </div>
   );

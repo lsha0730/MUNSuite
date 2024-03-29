@@ -35,55 +35,61 @@ const Navbar = () => {
               onClick={() => {
                 navigate("/");
               }}
-              innerText="Home"
               type={whiteBar ? "white_secondary" : "black_secondary"}
               size="md"
-            />
+            >
+              Home
+            </Button>
             <Button
               onClick={() => {
                 navigate("/plans");
               }}
-              innerText="Plans"
               type={whiteBar ? "white_secondary" : "black_secondary"}
               size="md"
-            />
+            >
+              Plans
+            </Button>
             {user ? (
               <Button
                 onClick={() => {
                   if (auth) auth.signOut();
                 }}
-                innerText="Sign Out"
                 type={whiteBar ? "white" : "light"}
                 size="md"
-              />
+              >
+                Sign Out
+              </Button>
             ) : (
               <Button
                 onClick={() => {
                   navigate("/login");
                 }}
-                innerText="Login"
                 type={whiteBar ? "white_secondary" : "black_secondary"}
                 size="md"
-              />
+              >
+                Login
+              </Button>
             )}
             {user ? (
               <Button
                 onClick={() => {
                   navigate(`/app/${user.uid}`);
                 }}
-                innerText="Launch App"
                 type={whiteBar ? "white" : "light"}
                 size="md"
-              />
+              >
+                Launch App
+              </Button>
             ) : (
               <Button
                 onClick={() => {
                   navigate("/register");
                 }}
-                innerText="Try MUNSuite Free"
                 type={whiteBar ? "white" : "light"}
                 size="md"
-              />
+              >
+                Try MUNSuite Free
+              </Button>
             )}
           </div>
         </div>

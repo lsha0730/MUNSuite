@@ -49,17 +49,16 @@ const HomeTop = () => {
               if (!isPortrait)
                 navigate(user ? `/app/${user.uid}` : "/register");
             }}
-            innerText={
-              isPortrait
-                ? "Available on Desktop"
-                : user
-                ? "Launch App"
-                : "Try MUNSuite Free"
-            }
             type="light"
             size="lg"
             wide={!isPortrait}
-          />
+          >
+            {isPortrait
+              ? "Available on Desktop"
+              : user
+              ? "Launch App"
+              : "Try MUNSuite Free"}
+          </Button>
         </div>
       </div>
     </div>

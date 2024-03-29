@@ -103,12 +103,9 @@ const TierCard = ({ tier }: Props) => {
           ))}
         </div>
 
-        <Button
-          onClick={onClick}
-          innerText={action}
-          type={buttonType}
-          fullWidth
-        />
+        <Button onClick={onClick} type={buttonType} fullWidth>
+          {action}
+        </Button>
       </div>
     </div>
   );

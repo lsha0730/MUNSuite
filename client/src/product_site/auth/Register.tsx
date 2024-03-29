@@ -52,10 +52,9 @@ const Register = () => {
                 </Link>
               </p>
             }
-            innerText="Register"
             onClick={handleRegister}
             wide
-          />
+          >Register</Button>
         </div>
 
         <div className="form_col">

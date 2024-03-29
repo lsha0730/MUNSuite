@@ -34,7 +34,7 @@ const Forgot = () => {
               label="Account Email"
               onEnter={handleForgot}
             />
-            <Button onClick={handleForgot} innerText="Send Email" wide/>
+            <Button onClick={handleForgot} wide>Send Email</Button>
           </div>
         </div>
       )}

@@ -59,11 +59,12 @@ const Home = () => {
               onClick={() => {
                 navigate(user ? `/app/${user.uid}` : "/register");
               }}
-              innerText={user ? "Launch App" : "Try MUNSuite Free"}
               type="white"
               size="lg"
               wide
-            />
+            >
+              {user ? "Launch App" : "Try MUNSuite Free"}
+            </Button>
           )}
         </div>
       </div>

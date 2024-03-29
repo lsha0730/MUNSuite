@@ -40,9 +40,8 @@ const LoginPage = () => {
               const code = inputRef.current?.value || ""
               login(code)
             }}
-            innerText="Log In"
             type="light"
-          />
+          >Log In</Button>
         </div>
       </div>
     </div>

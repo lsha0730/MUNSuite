@@ -43,10 +43,9 @@ const Login = () => {
               </Link>
             </p>
           }
-          innerText="Log In"
           onClick={handleLogin}
           wide
-        />
+        >Log In</Button>
       </div>
 
       <Notice visible={Boolean(error)} message={error} type="error"/>
