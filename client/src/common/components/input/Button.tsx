@@ -13,7 +13,9 @@ export type ButtonType =
   | "light_secondary"
   | "white"
   | "white_secondary"
-  | "white_outlined";
+  | "white_outlined"
+  | "yellow"
+  | "red";
 
 type Props = {
   onClick: MouseEventHandler;

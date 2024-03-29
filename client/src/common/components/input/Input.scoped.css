@@ -154,3 +154,23 @@
   color: #bcbcbc;
   cursor: not-allowed;
 }
+
+.yellow {
+  background-color: #ffe49a;
+  color: #daa000;
+}
+.yellow:hover {
+  background-color: #ffca39;
+  color: #ffffff;
+  transition: 200ms;
+}
+
+.red {
+  background-color: #f3b9c9;
+  color: #ff4343;
+}
+.red:hover {
+  background-color: #ff7979;
+  color: #ffffff;
+  transition: 200ms;
+}
