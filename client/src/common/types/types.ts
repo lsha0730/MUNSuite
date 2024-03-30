@@ -55,9 +55,11 @@ export type Settings = {
   standardForm: boolean;
 };
 
+export type DelegateID = string | number; // TODO: Wipe out all delegates identified by number
+
 export type Delegate = {
   code: string;
-  id: number;
+  id: DelegateID; 
   name: string;
 };
 
