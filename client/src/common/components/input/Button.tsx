@@ -26,6 +26,7 @@ type Props = {
   type?: ButtonType;
   size?: "md" | "lg";
   wide?: boolean;
+  align?: "left" | "center" | "right";
   fullWidth?: boolean;
   children: ReactNode;
 };
@@ -38,6 +39,7 @@ const Button = ({
   type = "dark",
   size = "md",
   wide,
+  align = "center",
   fullWidth,
   children,
 }: Props) => {
@@ -55,7 +57,7 @@ const Button = ({
     >
       {label && <p className="label">{label}</p>}
       <button
-        className={classNames("button", type, size, wd, fw)}
+        className={classNames("button", type, size, wd, fw, align)}
         onClick={onClick}
         style={style}
       >

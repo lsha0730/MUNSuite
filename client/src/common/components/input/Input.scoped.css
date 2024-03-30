@@ -61,16 +61,30 @@
   width: fit-content;
   display: flex;
   align-items: center;
-  justify-content: center;
 
   padding: 0.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 
   cursor: pointer;
   border: none;
   transition: 200ms;
   font-weight: 600;
+  text-wrap: nowrap;
+}
+
+.left {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.center {
+  justify-content: center;
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .wide {
