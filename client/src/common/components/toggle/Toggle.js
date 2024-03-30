@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Toggle.scoped.css";
 import { classNames, getTextWidth } from "../../utils/utils";
 
@@ -13,7 +13,15 @@ const COLORS = {
   },
 };
 
-const Toggle = ({ size, color, value, onValue, label, style, ...other }) => {
+const Toggle = ({
+  size,
+  color,
+  value,
+  onValue,
+  label,
+  style = {},
+  ...other
+}) => {
   const [state, setState] = useState(Boolean(value) || false);
   const labelRight = label?.direction === "right";
   const isSmall = size === "small";
