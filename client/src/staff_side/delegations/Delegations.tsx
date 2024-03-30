@@ -308,13 +308,15 @@ function Delegations() {
 
       <div className="UI-right">
         {delegations.length > 0 ? (
-          sortedDels.map((delegate) => (
-            <Delbar
-              delegate={delegate}
-              onClick={handleClick}
-              selected={selections.includes(delegate.id)}
-            />
-          ))
+          <div className="delbars">
+            {sortedDels.map((delegate) => (
+              <Delbar
+                delegate={delegate}
+                onClick={handleClick}
+                selected={selections.includes(delegate.id)}
+              />
+            ))}
+          </div>
         ) : (
           <div className="no-dels">
             <BsFillPeopleFill color="#BCBCBC" size={36} />
