@@ -12,7 +12,7 @@ const ShortText = ({
   editing,
   setEditing,
   updateForm,
-  updateSubmission,
+  updateSubmission = null,
   locked,
 }) => {
   return (

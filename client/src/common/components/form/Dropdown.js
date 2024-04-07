@@ -14,7 +14,7 @@ const Dropdown = ({
   editing,
   setEditing,
   updateForm,
-  updateSubmission,
+  updateSubmission = null,
   locked,
 }) => {
   const [value, setValue] = useState(); // Stores the index of the item in options

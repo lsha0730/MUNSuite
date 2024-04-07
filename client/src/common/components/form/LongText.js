@@ -13,7 +13,7 @@ const LongText = ({
   editing,
   setEditing,
   updateForm,
-  updateSubmission,
+  updateSubmission = null,
   locked,
 }) => {
   const [textState, setTextState] = useState("");

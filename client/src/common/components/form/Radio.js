@@ -13,7 +13,7 @@ const Radio = ({
   editing,
   setEditing,
   updateForm,
-  updateSubmission,
+  updateSubmission = null,
   locked,
 }) => {
   const [selected, setSelected] = useState(); // Stores the index of selected in options

@@ -7,7 +7,6 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 const Content = ({
   variant,
   id,
-  required,
   heading,
   subheading,
   content,
@@ -32,7 +31,6 @@ const Content = ({
         )}
         <p className="heading">{heading}</p>
         <p className="subheading">{subheading}</p>
-        <p className={required ? "required-star" : "hidden"}>*</p>
         {(content || []).map((item) => {
           switch (item.type) {
             case "text":

@@ -13,7 +13,7 @@ const MultipleChoice = ({
   editing,
   setEditing,
   updateForm,
-  updateSubmission,
+  updateSubmission = null,
   locked,
 }) => {
   const [selected, setSelected] = useState([]); // Stores the indices of selected in options

@@ -15,7 +15,7 @@ const SelectMultiple = ({
   editing,
   setEditing,
   updateForm,
-  updateSubmission,
+  updateSubmission = null,
   locked,
 }) => {
   const [choices, setChoices] = useState(options);
