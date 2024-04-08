@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./Generic.scoped.css";
 import Toggle from "../../../common/components/toggle/Toggle";
+import { FormOperation } from "../../../common/types/types";
 
 function ShorttextEditor(props) {
   const [require, setRequire] = useState(props.required);
@@ -27,7 +28,7 @@ function ShorttextEditor(props) {
       newObj.heading = heading == "" ? false : heading;
       newObj.subheading = subheading == "" ? false : subheading;
 
-      props.updateForm("update", props.id, newObj);
+      props.updateForm(FormOperation.Update, props.id, newObj);
     } else {
       isMounted.current = true;
     }

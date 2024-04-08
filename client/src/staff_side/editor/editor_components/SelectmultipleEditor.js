@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext, useRef } from "react";
 import { staffContext } from "../../../common/Context";
 import "./Generic.scoped.css";
 import Toggle from "../../../common/components/toggle/Toggle";
+import { FormOperation } from "../../../common/types/types";
 
 function SelectmultipleEditor(props) {
   const {
@@ -50,7 +51,7 @@ function SelectmultipleEditor(props) {
       newObj.max = maxcount == "" ? false : parseInt(maxcount);
       newObj.options = useDels ? "all-delegations" : options;
 
-      props.updateForm("update", props.id, newObj);
+      props.updateForm(FormOperation.Update, props.id, newObj);
     } else {
       isMounted.current = true;
     }

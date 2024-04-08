@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import "./Generic.scoped.css";
 import Toggle from "../../../common/components/toggle/Toggle";
+import { FormOperation } from "../../../common/types/types";
 
 const MAX_CHAR_LIMIT = 10000;
 
@@ -38,7 +39,7 @@ function LongtextEditor(props) {
       newObj.subheading = subheading == "" ? false : subheading;
       newObj.maxchars = !maxchars ? false : maxchars;
 
-      props.updateForm("update", props.id, newObj);
+      props.updateForm(FormOperation.Update, props.id, newObj);
     } else {
       isMounted.current = true;
     }

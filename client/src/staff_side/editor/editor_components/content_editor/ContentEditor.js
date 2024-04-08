@@ -11,6 +11,7 @@ import "../Generic.scoped.css";
 import "./ContentEditor.scoped.css";
 import { TiDeleteOutline } from "react-icons/ti";
 import { appContext } from "../../../../common/Context";
+import { FormOperation } from "../../../../common/types/types";
 
 function ContentEditor(props) {
   const { user } = useContext(appContext);
@@ -123,7 +124,7 @@ function ContentEditor(props) {
       newObj.subheading = subheading == "" ? false : subheading;
       newObj.content = contentArr;
 
-      props.updateForm("update", props.id, newObj);
+      props.updateForm(FormOperation.Update, props.id, newObj);
     } else {
       isMounted.current = true;
     }

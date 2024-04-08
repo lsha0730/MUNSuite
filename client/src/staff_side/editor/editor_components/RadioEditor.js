@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./Generic.scoped.css";
 import Toggle from "../../../common/components/toggle/Toggle";
+import { FormOperation } from "../../../common/types/types";
 
 function RadioEditor(props) {
   const [require, setRequire] = useState(props.required);
@@ -30,7 +31,7 @@ function RadioEditor(props) {
       newObj.subheading = subheading == "" ? false : subheading;
       newObj.options = options;
 
-      props.updateForm("update", props.id, newObj);
+      props.updateForm(FormOperation.Update, props.id, newObj);
     } else {
       isMounted.current = true;
     }

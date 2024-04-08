@@ -3,6 +3,7 @@ import "./PreviewComponents.scoped.css";
 import { getStorage, ref, deleteObject } from "firebase/storage";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp, IoIosLock } from "react-icons/io";
+import { FormOperation } from "../../types/types";
 
 const Header = ({
   variant,
@@ -44,16 +45,16 @@ const Header = ({
           </div>
         ) : (
           <div id="Qmod-icons">
-            <div onClick={() => updateForm("move-up", id)}>
+            <div onClick={() => updateForm(FormOperation.MoveUp, id)}>
               <IoIosArrowUp className="btt-moveQ" />
             </div>
-            <div onClick={() => updateForm("move-down", id)}>
+            <div onClick={() => updateForm(FormOperation.MoveDown, id)}>
               <IoIosArrowDown className="btt-moveQ" />
             </div>
             <div
               onClick={() => {
                 deleteImageFile();
-                updateForm("delete", id);
+                updateForm(FormOperation.Delete, id);
               }}
             >
               <FaTrash className="btt-delQ" />

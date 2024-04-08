@@ -9,6 +9,7 @@ import {
 import "../Generic.scoped.css";
 import "./HeaderEditor.scoped.css";
 import { staffContext } from "../../../../common/Context";
+import { FormOperation } from "../../../../common/types/types";
 
 function HeaderEditor(props) {
   const { userID } = useContext(staffContext);
@@ -34,7 +35,7 @@ function HeaderEditor(props) {
       newObj.imgName = imageData.imgName || null;
       newObj.imgPath = imageData.imgPath || "";
 
-      props.updateForm("update", props.id, newObj);
+      props.updateForm(FormOperation.Update, props.id, newObj);
     } else {
       isMounted.current = true;
     }
