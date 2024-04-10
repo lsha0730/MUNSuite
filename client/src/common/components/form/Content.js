@@ -1,4 +1,3 @@
-import React from "react";
 import "./PreviewComponents.scoped.css";
 import { getStorage, ref, deleteObject } from "firebase/storage";
 import { FaTrash } from "react-icons/fa";
@@ -14,7 +13,6 @@ const Content = ({
   editing,
   setEditing,
   updateForm,
-  locked,
 }) => {
   const storage = getStorage();
 

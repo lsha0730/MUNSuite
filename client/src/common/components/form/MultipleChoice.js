@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./PreviewComponents.scoped.css";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
@@ -15,7 +15,6 @@ const MultipleChoice = ({
   setEditing,
   updateForm,
   updateSubmission = null,
-  locked,
 }) => {
   const [selected, setSelected] = useState([]); // Stores the indices of selected in options
 

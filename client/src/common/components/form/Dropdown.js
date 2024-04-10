@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./PreviewComponents.scoped.css";
 import { GoTriangleDown } from "react-icons/go";
 import { FaTrash } from "react-icons/fa";
@@ -16,7 +16,6 @@ const Dropdown = ({
   setEditing,
   updateForm,
   updateSubmission = null,
-  locked,
 }) => {
   const [value, setValue] = useState(); // Stores the index of the item in options
   const [dropVisible, setDropVisible] = useState(false);

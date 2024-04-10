@@ -1,8 +1,7 @@
-import React from "react";
 import "./PreviewComponents.scoped.css";
 import { getStorage, ref, deleteObject } from "firebase/storage";
 import { FaTrash } from "react-icons/fa";
-import { IoIosArrowDown, IoIosArrowUp, IoIosLock } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { FormOperation } from "../../types/types";
 
 const Header = ({
@@ -15,7 +14,6 @@ const Header = ({
   editing,
   setEditing,
   updateForm,
-  locked,
 }) => {
   const storage = getStorage();
 
@@ -38,29 +36,24 @@ const Header = ({
         </div>
       </div>
 
-      {variant === "staff" &&
-        (locked ? (
-          <div className="locked-icon-container">
-            <IoIosLock className="locked-icon" />
+      {variant === "staff" && (
+        <div id="Qmod-icons">
+          <div onClick={() => updateForm(FormOperation.MoveUp, id)}>
+            <IoIosArrowUp className="btt-moveQ" />
           </div>
-        ) : (
-          <div id="Qmod-icons">
-            <div onClick={() => updateForm(FormOperation.MoveUp, id)}>
-              <IoIosArrowUp className="btt-moveQ" />
-            </div>
-            <div onClick={() => updateForm(FormOperation.MoveDown, id)}>
-              <IoIosArrowDown className="btt-moveQ" />
-            </div>
-            <div
-              onClick={() => {
-                deleteImageFile();
-                updateForm(FormOperation.Delete, id);
-              }}
-            >
-              <FaTrash className="btt-delQ" />
-            </div>
+          <div onClick={() => updateForm(FormOperation.MoveDown, id)}>
+            <IoIosArrowDown className="btt-moveQ" />
           </div>
-        ))}
+          <div
+            onClick={() => {
+              deleteImageFile();
+              updateForm(FormOperation.Delete, id);
+            }}
+          >
+            <FaTrash className="btt-delQ" />
+          </div>
+        </div>
+      )}
     </div>
   );
 

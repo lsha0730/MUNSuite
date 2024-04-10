@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import "./PreviewComponents.scoped.css";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
@@ -15,7 +15,6 @@ const LongText = ({
   setEditing,
   updateForm,
   updateSubmission = null,
-  locked,
 }) => {
   const [textState, setTextState] = useState("");
   const textareaRef = useRef();
