@@ -21,7 +21,7 @@
 }
 
 .options-container {
-  width: 550px;
+  width: 500px;
   height: fit-content;
 
   padding: 10px;
@@ -32,5 +32,12 @@
 
   display: flex;
   flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.button_icon_pair {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   gap: 0.3rem;
 }
