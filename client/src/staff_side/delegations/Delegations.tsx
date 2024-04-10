@@ -85,12 +85,13 @@ function Delegations() {
 
   function addDelegates(names: string[]) {
     const toAdd: Delegate[] = [];
+    const existing = delegations.map((d) => d.code);
     for (const name of names) {
       const newDel = {
         id: uuid(),
         name: name,
         code: generateUniqueDelCode(
-          delegations.concat(toAdd.map((e: any) => e.code))
+          existing.concat(toAdd.map((e: any) => e.code))
         ),
       };
       toAdd.push(newDel);
