@@ -10,11 +10,20 @@ type Props = {
   placeholder?: string;
   style?: Record<string, string | number>;
   fullWidth?: boolean;
+  [x: string]: unknown;
 };
 
 const ShortText = forwardRef(
   (
-    { onEnter, label, type = "text", placeholder, style, fullWidth }: Props,
+    {
+      onEnter,
+      label,
+      type = "text",
+      placeholder,
+      style,
+      fullWidth,
+      ...other
+    }: Props,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     const fw = fullWidth ? "full_width" : "";
@@ -37,6 +46,7 @@ const ShortText = forwardRef(
           }}
           placeholder={placeholder}
           style={style}
+          {...other}
         />
       </ConditionalWrapper>
     );
