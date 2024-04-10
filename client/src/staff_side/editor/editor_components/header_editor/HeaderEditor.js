@@ -6,7 +6,7 @@ import {
   uploadBytes,
   listAll,
 } from "firebase/storage";
-import "../Generic.scoped.css";
+import "../QEditor.scoped.css";
 import "./HeaderEditor.scoped.css";
 import { staffContext } from "../../../../common/Context";
 import { FormOperation } from "../../../../common/types/types";

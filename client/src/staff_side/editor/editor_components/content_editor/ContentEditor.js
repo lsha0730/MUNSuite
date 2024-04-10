@@ -7,7 +7,7 @@ import {
   listAll,
   deleteObject,
 } from "firebase/storage";
-import "../Generic.scoped.css";
+import "../QEditor.scoped.css";
 import "./ContentEditor.scoped.css";
 import { TiDeleteOutline } from "react-icons/ti";
 import { appContext } from "../../../../common/Context";
