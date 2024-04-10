@@ -23,7 +23,7 @@ import { BsFillPatchCheckFill } from "react-icons/bs";
 import { FaGavel } from "react-icons/fa";
 import Tooltip from "../../common/components/tooltip/Tooltip";
 
-const STANDARDIZATION_INFO = `A 'Standard' form starts with questions regarding the directive title, type, sponsors, and signatories. Submissions using this standard form will be formatted in a more easily readable manner in your inbox compared to freeform submissions.`
+const STANDARDIZATION_INFO = `A 'Standard' form starts with questions regarding the directive title, type, sponsors, and signatories. Submissions using this standard form will be formatted in a more easily readable manner in your inbox compared to freeform submissions.`;
 
 function Editor() {
   const { database, user } = useContext(appContext);
@@ -32,7 +32,7 @@ function Editor() {
   } = useContext(staffContext);
   const formLink = `${window.location.host}/form/${user?.uid || ""}`;
 
-  const [editing, setEditing] = useState<QuestionID | null>(null);
+  const [editing, setEditing] = useState<number | null>(0);
   const [confirmation, setConfirmation] = useState<boolean>(false);
   const standardized = checkStandardized(form);
 
@@ -122,6 +122,11 @@ function Editor() {
           </div>
 
           <div className="hat-right">
+            <Tooltip
+              message={STANDARDIZATION_INFO}
+              maxWidth={400}
+              direction="left"
+            />
             <Button
               onClick={forceStandardization}
               size="md"
@@ -137,8 +142,6 @@ function Editor() {
                 </p>
               </div>
             </Button>
-
-            <Tooltip message={STANDARDIZATION_INFO} maxWidth={400} direction="left"/>
           </div>
         </div>
 
