@@ -5,17 +5,7 @@ const Hoverable = ({ message, pos, children, messageStyle = {}, ...other }) => {
   const [hover, setHover] = useState(false);
 
   return (
-    <a
-      {...other}
-      className="container"
-      onMouseEnter={() => {
-        setHover(true);
-      }}
-      onMouseLeave={() => {
-        setHover(false);
-      }}
-      target="_blank"
-    >
+    <a {...other} className="container" target="_blank">
       <div
         className="hover"
         style={Object.assign(
@@ -26,7 +16,16 @@ const Hoverable = ({ message, pos, children, messageStyle = {}, ...other }) => {
       >
         {message}
       </div>
-      {children}
+      <a
+        onMouseEnter={() => {
+          setHover(true);
+        }}
+        onMouseLeave={() => {
+          setHover(false);
+        }}
+      >
+        {children}
+      </a>
     </a>
   );
 };
