@@ -84,28 +84,31 @@ function Delegations() {
   };
 
   function addDelegates(names: string[]) {
-    const newDels: Delegate[] = [];
+    const toAdd: Delegate[] = [];
     for (const name of names) {
       const newDel = {
         id: uuid(),
         name: name,
         code: generateUniqueDelCode(
-          delegations.concat(newDels.map((e: any) => e.code))
+          delegations.concat(toAdd.map((e: any) => e.code))
         ),
       };
-      newDels.push(newDel);
+      toAdd.push(newDel);
     }
+    const newDelegations = delegations
+      .concat(toAdd)
+      .toSorted((a, b) => a.name.localeCompare(b.name));
 
     if (database && user)
       firebaseWrite(
         database,
         user.uid,
         FirebaseDataTarget.Delegations,
-        delegations.concat(newDels)
+        newDelegations
       );
     axios.post(`${process.env.REACT_APP_BACKEND_URL}/analytics`, {
       type: "add_dels",
-      count: newDels.length,
+      count: toAdd.length,
     });
   }
 
