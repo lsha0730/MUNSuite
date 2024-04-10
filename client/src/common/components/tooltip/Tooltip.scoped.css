@@ -1,0 +1,10 @@
+.icon {
+  width: 0.8rem;
+  height: 0.8rem;
+  color: #bcbcbc;
+  cursor: help;
+}
+.icon:hover {
+  color: black;
+  transition: 200ms;
+}
