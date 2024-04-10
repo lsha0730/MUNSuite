@@ -71,348 +71,111 @@ export const QuestionEditorPair = ({ controlProps, question }: Props) => {
     ),
   };
 
-  return <>{components[question.type]}</>;
+  return <div className="preview-editor-pair">{components[question.type]}</div>;
 };
 
-const HeaderPair = ({
-  id,
-  imgLink,
-  imgName,
-  imgPath,
-  heading,
-  subheading,
-  editing,
-  setEditing,
-  updateForm,
-  standardized,
-}: ControlProps & HeaderQ) => {
+const HeaderPair = (props: ControlProps & HeaderQ) => {
+  const { id } = props;
   return (
-    <div className="preview-editor-pair">
-      <Header
-        variant="staff"
-        key={`preview${id}`}
-        id={id}
-        imgPath={imgPath}
-        imgLink={imgLink}
-        heading={heading}
-        subheading={subheading}
-        editing={editing}
-        setEditing={setEditing}
-        updateForm={updateForm}
-        locked={standardized && id === 0}
-      />
-      <HeaderEditor
-        key={`editor${id}${editing}`}
-        id={id}
-        imgPath={imgPath}
-        imgLink={imgLink}
-        imgName={imgName}
-        heading={heading}
-        subheading={subheading}
-        editing={editing}
-        updateForm={updateForm}
-        locked={standardized && id === 0}
-      />
-    </div>
+    <>
+      <Header variant="staff" key={`preview${id}`} {...props} />
+      <HeaderEditor key={`editor${id}`} {...props} />
+    </>
   );
 };
 
-const RadioPair = ({
-  id,
-  required,
-  heading,
-  subheading,
-  options,
-  editing,
-  setEditing,
-  updateForm,
-  standardized,
-}: ControlProps & RadioQ) => {
+const RadioPair = (props: ControlProps & RadioQ) => {
+  const { id } = props;
   return (
-    <div className="preview-editor-pair">
-      <Radio
-        variant="staff"
-        key={`preview${id}`}
-        id={id}
-        required={required}
-        heading={heading}
-        subheading={subheading}
-        options={options || []}
-        editing={editing}
-        setEditing={setEditing}
-        updateForm={updateForm}
-        locked={standardized && id == 2}
-      />
-      <RadioEditor
-        key={`editor${id}${editing}`}
-        id={id}
-        required={required}
-        heading={heading}
-        subheading={subheading}
-        options={options || []}
-        editing={editing}
-        updateForm={updateForm}
-        locked={standardized && id == 2}
-      />
-    </div>
+    <>
+      <Radio variant="staff" key={`preview${id}`} {...props} />
+      <RadioEditor key={`editor${id}`} {...props} />
+    </>
   );
 };
 
-const MultipleChoicePair = ({
-  id,
-  required,
-  heading,
-  subheading,
-  options,
-  editing,
-  setEditing,
-  updateForm,
-  standardized,
-}: ControlProps & MultipleChoiceQ) => {
+const MultipleChoicePair = (props: ControlProps & MultipleChoiceQ) => {
+  const { id } = props;
   return (
-    <div className="preview-editor-pair">
-      <MultipleChoice
-        variant="staff"
-        key={`preview${id}`}
-        id={id}
-        required={required}
-        heading={heading}
-        subheading={subheading}
-        options={options || []}
-        editing={editing}
-        setEditing={setEditing}
-        updateForm={updateForm}
-        locked={standardized}
-      />
-      <MultiplechoiceEditor
-        key={`editor${id}${editing}`}
-        id={id}
-        required={required}
-        heading={heading}
-        subheading={subheading}
-        options={options || []}
-        editing={editing}
-        updateForm={updateForm}
-        locked={standardized}
-      />
-    </div>
+    <>
+      <MultipleChoice variant="staff" key={`preview${id}`} {...props} />
+      <MultiplechoiceEditor key={`editor${id}`} {...props} />
+    </>
   );
 };
 
-const ContentPair = ({
-  id,
-  heading,
-  subheading,
-  content,
-  editing,
-  setEditing,
-  updateForm,
-  standardized,
-}: ControlProps & ContentQ) => {
+const ContentPair = (props: ControlProps & ContentQ) => {
+  const { id } = props;
   return (
-    <div className="preview-editor-pair">
-      <Content
-        variant="staff"
-        key={`preview${id}`}
-        id={id}
-        heading={heading}
-        subheading={subheading}
-        content={content || []}
-        editing={editing}
-        setEditing={setEditing}
-        updateForm={updateForm}
-        locked={standardized}
-      />
-      <ContentEditor
-        key={`editor${id}${editing}`}
-        id={id}
-        heading={heading}
-        subheading={subheading}
-        content={content || []}
-        editing={editing}
-        updateForm={updateForm}
-        locked={standardized}
-      />
-    </div>
+    <>
+      <Content variant="staff" key={`preview${id}`} {...props} />
+      <ContentEditor key={`editor${id}`} {...props} />
+    </>
   );
 };
 
-const ShortTextPair = ({
-  id,
-  required,
-  heading,
-  subheading,
-  editing,
-  setEditing,
-  updateForm,
-  standardized,
-}: ControlProps & ShortTextQ) => {
+const ShortTextPair = (props: ControlProps & ShortTextQ) => {
+  const { id } = props;
   return (
-    <div className="preview-editor-pair">
-      <ShortText
-        variant="staff"
-        key={`preview${id}`}
-        id={id}
-        required={required}
-        heading={heading}
-        subheading={subheading}
-        editing={editing}
-        setEditing={setEditing}
-        updateForm={updateForm}
-        locked={standardized && id == 1}
-      />
-      <ShorttextEditor
-        key={`editor${id}${editing}`}
-        id={id}
-        required={required}
-        heading={heading}
-        subheading={subheading}
-        editing={editing}
-        updateForm={updateForm}
-        locked={standardized && id == 1}
-      />
-    </div>
+    <>
+      <ShortText variant="staff" key={`preview${id}`} {...props} />
+      <ShorttextEditor key={`editor${id}`} {...props} />
+    </>
   );
 };
 
-const LongTextPair = ({
-  id,
-  required,
-  heading,
-  subheading,
-  maxchars,
-  editing,
-  setEditing,
-  updateForm,
-  standardized,
-}: ControlProps & LongTextQ) => {
+const LongTextPair = (props: ControlProps & LongTextQ) => {
+  const { id } = props;
   return (
-    <div className="preview-editor-pair">
-      <LongText
-        variant="staff"
-        key={`preview${id}`}
-        id={id}
-        required={required}
-        heading={heading}
-        subheading={subheading}
-        maxchars={maxchars || false}
-        editing={editing}
-        setEditing={setEditing}
-        updateForm={updateForm}
-        locked={standardized}
-      />
-      <LongtextEditor
-        key={`editor${id}${editing}`}
-        id={id}
-        required={required}
-        heading={heading}
-        subheading={subheading}
-        maxchars={maxchars || false}
-        editing={editing}
-        updateForm={updateForm}
-        locked={standardized}
-      />
-    </div>
+    <>
+      <LongText variant="staff" key={`preview${id}`} {...props} />
+      <LongtextEditor key={`editor${id}`} {...props} />
+    </>
   );
 };
 
-const DropdownPair = ({
-  id,
-  required,
-  heading,
-  subheading,
-  options,
-  editing,
-  setEditing,
-  updateForm,
-  standardized,
-}: ControlProps & DropdownQ) => {
+const DropdownPair = (props: ControlProps & DropdownQ) => {
   const {
     firebaseData: { delegations },
   } = useContext(staffContext);
+  const { id, options } = props;
 
   return (
-    <div className="preview-editor-pair">
+    <>
       <Dropdown
         variant="staff"
         key={`preview${id}${delegations.length}`}
-        id={id}
-        required={required}
-        heading={heading}
-        subheading={subheading}
+        {...props}
         options={
           options === AllDelegations
             ? delegations.map((del) => del.name)
             : options || []
         }
-        editing={editing}
-        setEditing={setEditing}
-        updateForm={updateForm}
-        locked={standardized}
       />
-      <DropdownEditor
-        key={`editor${id}${editing}${delegations.length}`}
-        id={id}
-        required={required}
-        heading={heading}
-        subheading={subheading}
-        options={options || []}
-        editing={editing}
-        updateForm={updateForm}
-        locked={standardized}
-      />
-    </div>
+      <DropdownEditor key={`editor${id}`} {...props} />
+    </>
   );
 };
 
-const SelectMultiplePair = ({
-  id,
-  required,
-  heading,
-  subheading,
-  max,
-  options,
-  editing,
-  setEditing,
-  updateForm,
-  standardized,
-}: ControlProps & SelectMultipleQ) => {
+const SelectMultiplePair = (props: ControlProps & SelectMultipleQ) => {
   const {
     firebaseData: { delegations },
   } = useContext(staffContext);
+  const { id, options } = props;
 
   return (
-    <div className="preview-editor-pair">
+    <>
       <SelectMultiple
         variant="staff"
-        key={`preview${id}${options ? options.length : 0}${delegations.length}`}
-        id={id}
-        required={required}
-        heading={heading}
-        subheading={subheading}
-        max={max}
+        key={`preview${id}`}
+        {...props}
         options={
           options === "all-delegations"
             ? delegations.map((del) => del.name)
             : options || []
         }
-        editing={editing}
-        setEditing={setEditing}
-        updateForm={updateForm}
-        locked={standardized && (id == 3 || id == 4)}
       />
-      <SelectmultipleEditor
-        key={`editor${id}${editing}${delegations.length}`}
-        id={id}
-        required={required}
-        heading={heading}
-        subheading={subheading}
-        max={max}
-        options={options || []}
-        editing={editing}
-        updateForm={updateForm}
-        locked={standardized && (id == 3 || id == 4)}
-      />
-    </div>
+      <SelectmultipleEditor key={`editor${id}`} {...props} />
+    </>
   );
 };
