@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import "./Delegations.scoped.css";
 import {
   AddUNCountries,
@@ -10,7 +10,6 @@ import {
   BsDownload,
   BsFillFileEarmarkSpreadsheetFill,
   BsFillPeopleFill,
-  BsGlobeAmericas,
   BsTrash3Fill,
 } from "react-icons/bs";
 import { BiSolidPen, BiSolidSelectMultiple } from "react-icons/bi";
