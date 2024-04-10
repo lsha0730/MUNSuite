@@ -61,7 +61,6 @@ const Home = () => {
               }}
               type="white"
               size="lg"
-              wide
             >
               {user ? "Launch App" : "Try MUNSuite Free"}
             </Button>

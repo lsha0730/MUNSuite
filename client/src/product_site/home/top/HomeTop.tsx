@@ -51,7 +51,7 @@ const HomeTop = () => {
             }}
             type="light"
             size="lg"
-            wide={!isPortrait}
+            padding={isPortrait ? "lg" : "md"}
           >
             {isPortrait
               ? "Available on Desktop"

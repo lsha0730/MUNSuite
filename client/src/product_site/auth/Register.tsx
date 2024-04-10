@@ -53,7 +53,7 @@ const Register = () => {
               </p>
             }
             onClick={handleRegister}
-            wide
+            padding="lg"
           >Register</Button>
         </div>
 

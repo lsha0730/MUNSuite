@@ -215,6 +215,7 @@ function Delegations() {
               type="light"
               fullWidth
               align="left"
+              padding="md"
             >
               <SiUnitednations size={18} style={{ marginRight: 10 }} />
               Add UN Countries
@@ -227,6 +228,7 @@ function Delegations() {
               type="light"
               fullWidth
               align="left"
+              padding="md"
             >
               <BiSolidPen size={18} style={{ marginRight: 10 }} />
               Add Custom Country
@@ -242,6 +244,7 @@ function Delegations() {
               }
               fullWidth
               align="left"
+              padding="md"
             >
               {accountInfo.type === AccountType.Starter ? (
                 <IoIosLock size={18} style={{ marginRight: 10 }} />
@@ -272,6 +275,7 @@ function Delegations() {
                 type="yellow"
                 fullWidth
                 align="left"
+                padding="md"
               >
                 <PiSelection size={18} style={{ marginRight: 10 }} />
                 Deselect All
@@ -284,6 +288,7 @@ function Delegations() {
                 type="red"
                 fullWidth
                 align="left"
+                padding="md"
               >
                 <BsTrash3Fill size={18} style={{ marginRight: 10 }} />
                 Remove Selected

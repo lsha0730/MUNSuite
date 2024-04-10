@@ -44,7 +44,7 @@ const Login = () => {
             </p>
           }
           onClick={handleLogin}
-          wide
+          padding="lg"
         >Log In</Button>
       </div>
 

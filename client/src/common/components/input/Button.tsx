@@ -25,7 +25,7 @@ type Props = {
   style?: React.CSSProperties;
   type?: ButtonType;
   size?: "md" | "lg";
-  wide?: boolean;
+  padding?: "sm" | "md" | "lg";
   align?: "left" | "center" | "right";
   fullWidth?: boolean;
   children: ReactNode;
@@ -38,12 +38,12 @@ const Button = ({
   style,
   type = "dark",
   size = "md",
-  wide,
+  padding,
   align = "center",
   fullWidth,
   children,
 }: Props) => {
-  const wd = wide ? "wide" : "";
+  const pd = `p_${padding || size}`;
   const fw = fullWidth ? "full_width" : "";
 
   return (
@@ -57,7 +57,7 @@ const Button = ({
     >
       {label && <p className="label">{label}</p>}
       <button
-        className={classNames("button", type, size, wd, fw, align)}
+        className={classNames("button", type, size, pd, fw, align)}
         onClick={onClick}
         style={style}
       >
