@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Hover.scoped.css";
 
-const Hoverable = ({ message, pos, children, messageStyle, ...other }) => {
+const Hoverable = ({ message, pos, children, messageStyle = {}, ...other }) => {
   const [hover, setHover] = useState(false);
 
   return (
