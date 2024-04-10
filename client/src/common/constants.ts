@@ -1,7 +1,11 @@
 import { DelegateAPI } from "../delegate_side/DelegateApp";
 import { StaffAPI, StaffAccountInfo } from "../staff_side/StaffApp";
 import { Directive } from "./types/directiveTypes";
-import { Question, QuestionTypes as QT } from "./types/questionTypes";
+import {
+  Question,
+  QuestionTypes as QT,
+  AllDelegations,
+} from "./types/questionTypes";
 import {
   FirebaseDataStaff,
   Delegate,
@@ -22,6 +26,7 @@ import {
 import { BiSolidAddToQueue } from "react-icons/bi";
 import { FaHeading } from "react-icons/fa";
 import { FC } from "react";
+import { makeQuestion } from "./utils/utils";
 
 // Links
 export const CUSTOM_BACKEND_URL = "https://munsuite-backend.onrender.com";
@@ -180,3 +185,17 @@ export const DirectiveTitleLbl = "Directive Title";
 export const DirectiveTypeLbl = "Directive Type";
 export const SponsorsLbl = "Sponsors";
 export const SignatoriesLbl = "Signatories";
+
+export const STANDARD_FORM_START = [
+  makeQuestion(QT.Header, true),
+  makeQuestion(QT.ShortText, true, DirectiveTitleLbl),
+  makeQuestion(QT.Radio, true, DirectiveTypeLbl),
+  {
+    ...makeQuestion(QT.SelectMultiple, true, SponsorsLbl),
+    options: AllDelegations,
+  },
+  {
+    ...makeQuestion(QT.SelectMultiple, false, SignatoriesLbl),
+    options: AllDelegations,
+  },
+] as Question[];

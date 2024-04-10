@@ -1,4 +1,5 @@
 import {
+  DEFAULT_FORM_BASES,
   DELCODE_LENGTH,
   DirectiveTitleLbl,
   DirectiveTypeLbl,
@@ -11,7 +12,9 @@ import {
   Question,
   QuestionTypes as QT,
   StandardForm,
+  QuestionTypeMap,
 } from "../types/questionTypes";
+import { v4 as uuid } from "uuid";
 
 declare global {
   interface Navigator {
@@ -286,4 +289,23 @@ export function checkStandardized(form: Question[]): boolean {
     !formChecked[4].required &&
     formChecked[4].options === AllDelegations;
   return dirTitle && dirType && sponsors && signatories;
+}
+
+export function makeQuestion<T extends QT>(
+  type: T,
+  required?: boolean,
+  heading?: string
+): QuestionTypeMap[T] {
+  const baseBlock: Record<string, any> = {
+    type,
+    id: uuid(),
+    subheading: "",
+    required: required,
+  };
+  if (heading) baseBlock.heading = heading;
+  const combined = Object.assign(DEFAULT_FORM_BASES[type], baseBlock) as Record<
+    string,
+    any
+  >;
+  return combined as QuestionTypeMap[T];
 }
