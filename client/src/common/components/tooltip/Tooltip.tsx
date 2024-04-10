@@ -1,6 +1,6 @@
 import { BsFillQuestionCircleFill } from "react-icons/bs";
 import "./Tooltip.scoped.css";
-import Hoverable from "../hover/Hover";
+import Hoverable from "../hover/Hoverable";
 import { getTextWidth } from "../../utils/utils";
 import { useState } from "react";
 

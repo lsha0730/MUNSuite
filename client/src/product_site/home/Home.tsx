@@ -6,7 +6,7 @@ import FeatureItem from "./feature_item/FeatureItem";
 import { appContext } from "../../common/Context";
 import HomeTop from "./top/HomeTop";
 import Button from "../../common/components/input/Button";
-import Hoverable from "../../common/components/hover/Hover";
+import Hoverable from "../../common/components/hover/Hoverable";
 import { FEATURES, IMAGES, TRUSTING_CONFS } from "./homeData";
 
 const Home = () => {
