@@ -1,35 +1,29 @@
-import { QuestionTypes as QT } from "../../../common/types/questionTypes";
+import Button from "../../../common/components/input/Button";
+import { DEFAULT_QTYPE_LABELS } from "../../../common/constants";
+import { QuestionTypes } from "../../../common/types/questionTypes";
 import "./AddQuestion.scoped.css";
 
-const OPTIONS = [
-  { key: QT.ShortText, label: "Short Text" },
-  { key: QT.LongText, label: "Long Text" },
-  { key: QT.Radio, label: "Radio" },
-  { key: QT.MultipleChoice, label: "Multiple Choice" },
-  { key: QT.SelectMultiple, label: "Select Multiple" },
-  { key: QT.Dropdown, label: "Dropdown" },
-  { key: QT.Content, label: "Content Block" },
-  { key: QT.Header, label: "Header" },
-];
-
 type Props = {
-  addNewBlock: (key: QT) => void;
+  addNewBlock: (key: QuestionTypes) => void;
 };
 
 function AddQuestion({ addNewBlock }: Props) {
+  const options = Object.values(QuestionTypes);
+
   return (
     <div className="container">
       <p className="text">Add Block</p>
       <div className="options-container">
-        {OPTIONS.map((e) => (
-          <div
-            className="btt"
+        {options.map((qt: QuestionTypes) => (
+          <Button
             onClick={() => {
-              addNewBlock(e.key);
+              addNewBlock(qt);
             }}
+            type="light"
+            padding="sm"
           >
-            {e.label}
-          </div>
+            {DEFAULT_QTYPE_LABELS[qt]}
+          </Button>
         ))}
       </div>
     </div>

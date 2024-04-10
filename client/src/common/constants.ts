@@ -1,7 +1,7 @@
 import { DelegateAPI } from "../delegate_side/DelegateApp";
 import { StaffAPI, StaffAccountInfo } from "../staff_side/StaffApp";
 import { Directive } from "./types/directiveTypes";
-import { Question, QuestionTypes } from "./types/questionTypes";
+import { Question, QuestionTypes as QT } from "./types/questionTypes";
 import {
   FirebaseDataStaff,
   Delegate,
@@ -91,23 +91,34 @@ export const DELCODE_LENGTH = 5;
 // Default Form Fields
 export const DEFAULT_OPTIONS = ["Option 1", "Option 2", "Option 3"];
 
-export const DEFAULT_FORM_BASES: Record<QuestionTypes, Object> = {
+export const DEFAULT_QTYPE_LABELS = {
+  [QT.ShortText]: "Short Text",
+  [QT.LongText]: "Long Text",
+  [QT.Radio]: "Radio",
+  [QT.MultipleChoice]: "Multiple Choice",
+  [QT.SelectMultiple]: "Select Multiple",
+  [QT.Dropdown]: "Dropdown",
+  [QT.Content]: "Content Block",
+  [QT.Header]: "Header",
+};
+
+export const DEFAULT_FORM_BASES: Record<QT, Object> = {
   header: {
-    heading: "New Heading",
+    heading: `New ${DEFAULT_QTYPE_LABELS[QT.Header]}`,
     imgLink: defaultBanner,
     imgName: "Default Banner",
     imgPath: "",
   },
   radio: {
-    heading: "New Radio",
+    heading: `New ${DEFAULT_QTYPE_LABELS[QT.Radio]}`,
     options: DEFAULT_OPTIONS,
   },
   multiplechoice: {
-    heading: "New Multiple Choice",
+    heading: `New ${DEFAULT_QTYPE_LABELS[QT.MultipleChoice]}`,
     options: DEFAULT_OPTIONS,
   },
   content: {
-    heading: "New Content",
+    heading: `New ${DEFAULT_QTYPE_LABELS[QT.Content]}`,
     content: [
       {
         type: "image",
@@ -125,19 +136,19 @@ export const DEFAULT_FORM_BASES: Record<QuestionTypes, Object> = {
     ],
   },
   shorttext: {
-    heading: "New Short Text",
+    heading: `New ${DEFAULT_QTYPE_LABELS[QT.ShortText]}`,
     maxchars: false,
   },
   longtext: {
-    heading: "New Long Text",
+    heading: `New ${DEFAULT_QTYPE_LABELS[QT.LongText]}`,
     maxchars: false,
   },
   dropdown: {
-    heading: "New Dropdown",
+    heading: `New ${DEFAULT_QTYPE_LABELS[QT.Dropdown]}`,
     options: DEFAULT_OPTIONS,
   },
   "select-multiple": {
-    heading: "New Select Multiple",
+    heading: `New ${DEFAULT_QTYPE_LABELS[QT.SelectMultiple]}`,
     options: DEFAULT_OPTIONS,
     max: false,
   },
