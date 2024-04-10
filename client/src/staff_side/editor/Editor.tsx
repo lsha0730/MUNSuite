@@ -151,7 +151,7 @@ function Editor() {
           </div>
         </div>
 
-        {form.map((question, i) => (
+        {form.map((question) => (
           <QuestionEditorPair question={question} controlProps={controlProps} />
         ))}
 

@@ -18,9 +18,21 @@
 .bg_white {
   background-color: #ffffff;
 }
+.bg_white:focus {
+  background-color: #ffffff;
+}
+.bg_white:hover {
+  background-color: #f7f7f7;
+}
 
 .bg_gray {
   background-color: #f7f7f7;
+}
+.bg-gray:focus {
+  background-color: #f7f7f7;
+}
+.bg_gray:hover {
+  background-color: #f3f3f3;
 }
 
 /* Short Text */
@@ -43,10 +55,6 @@
 .shorttext:focus {
   outline: none !important;
   border-color: rgba(0, 0, 0, 0);
-  background-color: #ffffff;
-}
-.shorttext:hover {
-  background-color: #f7f7f7;
 }
 
 /* Checkbox */
