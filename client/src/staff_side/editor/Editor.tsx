@@ -2,7 +2,6 @@ import { useState, useContext } from "react";
 import "./Editor.scoped.css";
 import { appContext, staffContext } from "../../common/Context";
 import { BiLink } from "react-icons/bi";
-import Toggle from "../../common/components/toggle/Toggle";
 import AddQuestion from "./add_question/AddQuestion";
 import { firebaseWrite } from "../../common/utils/firebase";
 import { FirebaseDataTarget, FormOperation } from "../../common/types/types";
@@ -11,9 +10,7 @@ import {
   Question,
   QuestionID,
 } from "../../common/types/questionTypes";
-import {
-  STANDARD_FORM_START,
-} from "../../common/constants";
+import { STANDARD_FORM_START } from "../../common/constants";
 import { QuestionEditorPair } from "./QuestionEditorPair";
 import Button from "../../common/components/input/Button";
 import Notice from "../../common/components/notice/Notice";
@@ -22,6 +19,11 @@ import {
   makeQuestion,
   pasteToClipboard,
 } from "../../common/utils/utils";
+import { BsFillPatchCheckFill } from "react-icons/bs";
+import { FaGavel } from "react-icons/fa";
+import Tooltip from "../../common/components/tooltip/Tooltip";
+
+const STANDARDIZATION_INFO = `A 'Standard' form starts with questions regarding the directive title, type, sponsors, and signatories. Submissions using this standard form will be formatted in a more easily readable manner in your inbox compared to freeform submissions.`
 
 function Editor() {
   const { database, user } = useContext(appContext);
@@ -114,25 +116,34 @@ function Editor() {
         </div>
 
         <div className="hat-UI">
-          <div className="preview-hat">
-            <p className="preview-hat-heading">[Delegation Name]</p>
-            <p className="preview-hat-subheading">{settings.committee}</p>
+          <div className="hat-left">
+            <p className="heading">[Delegation Name]</p>
+            <p className="subheading">{settings.committee}</p>
           </div>
 
-          <Toggle
-            size="large"
-            color="green"
-            value={standardized}
-            onValue={forceStandardization}
-            label={{ on: "Standardized for MUN", off: "Custom Form" }}
-          />
+          <div className="hat-right">
+            <Button
+              onClick={forceStandardization}
+              size="md"
+              padding="sm"
+              type={standardized ? "bricked" : "light_secondary"}
+            >
+              <div className="icon-text">
+                {standardized ? <BsFillPatchCheckFill /> : <FaGavel />}
+                <p>
+                  {standardized
+                    ? "Currently Standardized"
+                    : "Standardize Format"}
+                </p>
+              </div>
+            </Button>
+
+            <Tooltip message={STANDARDIZATION_INFO} maxWidth={400} direction="left"/>
+          </div>
         </div>
 
-        {form.map((question, i) => (
-          <QuestionEditorPair
-            question={question}
-            controlProps={controlProps}
-          />
+        {form.map((question) => (
+          <QuestionEditorPair question={question} controlProps={controlProps} />
         ))}
 
         <AddQuestion addNewBlock={addQuestion} />
