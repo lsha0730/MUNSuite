@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { staffContext } from "../../../common/Context";
-import "./Generic.scoped.css";
+import "./QEditor.scoped.css";
 import Toggle from "../../../common/components/toggle/Toggle";
 import { FormOperation } from "../../../common/types/types";
 
