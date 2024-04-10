@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect } from "react";
 import "./QEditor.scoped.css";
 import Toggle from "../../../common/components/toggle/Toggle";
 import { FormOperation } from "../../../common/types/types";
