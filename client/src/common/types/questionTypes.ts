@@ -10,6 +10,7 @@ export enum QuestionTypes { // TODO: Use enums throughout codebase
 }
 
 export type QuestionID = string | number; // TODO: restrict to strings
+export type MaxCap = number | null; // TODO: Make number | null instead
 
 export type QuestionTypeMap = {
   [key in QuestionTypes]: key extends QuestionTypes.Header
@@ -53,7 +54,7 @@ export type ShortTextQ = QuestionBase & {
 
 export type LongTextQ = QuestionBase & {
   required: boolean;
-  maxchars: number | false; // TODO: Make number | null instead
+  maxchars: MaxCap;
 };
 
 export type RadioQ = QuestionBase & {
@@ -63,7 +64,7 @@ export type RadioQ = QuestionBase & {
 
 export type SelectMultipleQ = QuestionBase & {
   required: boolean;
-  max: number | false; // TODO: Make number | null instead
+  max: MaxCap;
   options: DelOptions;
 };
 

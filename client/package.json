@@ -17,6 +17,7 @@
     "firebase": "^9.8.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-hook-form": "^7.51.2",
     "react-icons": "^5.0.1",
     "react-new-window": "^1.0.1",
     "react-responsive": "^9.0.0",
