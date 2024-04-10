@@ -3,7 +3,7 @@ import "./StaffApp.scoped.css";
 
 import Sidebar from "./sidebar/Sidebar.js";
 import Delegations from "./delegations/Delegations";
-import Editor from "./editor/Editor.js";
+import Editor from "./editor/Editor";
 import Inbox from "./inbox/Inbox.js";
 import History from "./history/History.js";
 import Statistics from "./statistics/Statistics.js";

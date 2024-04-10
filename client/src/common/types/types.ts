@@ -67,3 +67,10 @@ export type IndividualNote = {
   delegate: string; // TODO: Identify notes by the delegate ID instead
   text: string;
 };
+
+export enum FormOperation { // TODO: Use enums throughout app
+  Delete = "delete",
+  Update = "update",
+  MoveUp = "move_up",
+  MoveDown = "move_down"
+}

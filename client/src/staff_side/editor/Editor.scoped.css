@@ -15,18 +15,6 @@
   flex-direction: column;
 }
 
-.fade {
-  opacity: 0%;
-  transition: 200ms;
-}
-
-.noselect {
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Standard */
-}
-
 /*----------FORM UI----------*/
 .hat-UI {
   display: flex;
@@ -71,64 +59,4 @@
   position: absolute;
   top: 30px;
   right: 30px;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
-.btt-link {
-  width: fit-content;
-  height: 35px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-left: 10px;
-
-  border-radius: 10px;
-  background-color: #bae4fa;
-
-  transition: 200ms;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-  color: #378dcc;
-}
-.btt-link:hover {
-  background-color: #7eb6df;
-  color: white;
-  transition: 200ms;
-}
-
-.btt-link:hover > .link-icon {
-  fill: white;
-  transition: 200ms;
-}
-
-.link-icon {
-  width: 20px;
-  height: 20px;
-  fill: #378dcc;
-  transition: 200ms;
-}
-
-.confirmation {
-  width: fit-content;
-
-  margin-top: 10px;
-  padding: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 5px;
-  background-color: #ffffff;
-
-  font-size: 10px;
-  font-weight: 500;
-  transition: 200ms;
 }

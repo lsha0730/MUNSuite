@@ -1,7 +1,7 @@
 import { DelegateAPI } from "../delegate_side/DelegateApp";
 import { StaffAPI, StaffAccountInfo } from "../staff_side/StaffApp";
 import { Directive } from "./types/directiveTypes";
-import { Question } from "./types/questionTypes";
+import { Question, QuestionTypes } from "./types/questionTypes";
 import {
   FirebaseDataStaff,
   Delegate,
@@ -10,6 +10,7 @@ import {
   AccountType,
   StaffPageKey,
 } from "./types/types";
+import defaultBanner from "./assets/images/default_banner.png";
 
 // Links
 export const CUSTOM_BACKEND_URL = "https://munsuite-backend.onrender.com";
@@ -86,3 +87,63 @@ export const PREMIUM_FEATURES = [
 
 // Misc
 export const DELCODE_LENGTH = 5;
+
+// Default Form Fields
+export const DEFAULT_OPTIONS = ["Option 1", "Option 2", "Option 3"];
+
+export const DEFAULT_FORM_BASES: Record<QuestionTypes, Object> = {
+  header: {
+    heading: "New Heading",
+    imgLink: defaultBanner,
+    imgName: "Default Banner",
+    imgPath: "",
+  },
+  radio: {
+    heading: "New Radio",
+    options: DEFAULT_OPTIONS,
+  },
+  multiplechoice: {
+    heading: "New Multiple Choice",
+    options: DEFAULT_OPTIONS,
+  },
+  content: {
+    heading: "New Content",
+    content: [
+      {
+        type: "image",
+        heading: "Image Heading",
+        value: defaultBanner,
+        imgName: "Default Image",
+        path: "",
+      },
+      {
+        type: "text",
+        heading: "Text Heading",
+        value:
+          "I am a body of text. Enter directions or descriptive information here!",
+      },
+    ],
+  },
+  shorttext: {
+    heading: "New Short Text",
+    maxchars: false,
+  },
+  longtext: {
+    heading: "New Long Text",
+    maxchars: false,
+  },
+  dropdown: {
+    heading: "New Dropdown",
+    options: DEFAULT_OPTIONS,
+  },
+  "select-multiple": {
+    heading: "New Select Multiple",
+    options: DEFAULT_OPTIONS,
+    max: false,
+  },
+};
+
+export const DirectiveTitleLbl = "Directive Title";
+export const DirectiveTypeLbl = "Directive Type";
+export const SponsorsLbl = "Sponsors";
+export const SignatoriesLbl = "Signatories";

@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import "./Toggle.scoped.css";
 import { classNames, getTextWidth } from "../../utils/utils";
 
@@ -22,23 +21,18 @@ const Toggle = ({
   style = {},
   ...other
 }) => {
-  const [state, setState] = useState(Boolean(value) || false);
   const labelRight = label?.direction === "right";
   const isSmall = size === "small";
   const offset = isSmall ? 20 : 25;
   const labelMargin = isSmall ? 10 : 15;
-  const darkColor = state ? COLORS[color].dark : "#aaaaaa";
-  const lightColor = state ? COLORS[color].light : "#eeeeee";
+  const darkColor = value ? COLORS[color].dark : "#aaaaaa";
+  const lightColor = value ? COLORS[color].light : "#eeeeee";
   const fontSize = isSmall ? 12 : 16;
-
-  useEffect(() => {
-    onValue(state);
-  }, [state]);
 
   return (
     <div
       className="container"
-      onClick={() => setState(!state)}
+      onClick={() => onValue(!value)}
       style={Object.assign(
         {
           flexDirection: labelRight ? "row-reverse" : "row",
@@ -64,7 +58,7 @@ const Toggle = ({
               : { marginRight: labelMargin, textAlign: "right" }
           )}
         >
-          {state ? label.on : label.off}
+          {value ? label.on : label.off}
         </p>
       )}
 
@@ -78,7 +72,7 @@ const Toggle = ({
             isSmall ? "circle-sm" : "circle-lg"
           )}
           style={{
-            left: state ? offset : 0,
+            left: value ? offset : 0,
             backgroundColor: darkColor,
           }}
         />

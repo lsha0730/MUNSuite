@@ -9,6 +9,28 @@ export enum QuestionTypes { // TODO: Use enums throughout codebase
   Content = "content",
 }
 
+export type QuestionID = string | number; // TODO: restrict to strings
+
+export type QuestionTypeMap = {
+  [key in QuestionTypes]: key extends QuestionTypes.Header
+    ? HeaderQ
+    : key extends QuestionTypes.ShortText
+    ? ShortTextQ
+    : key extends QuestionTypes.LongText
+    ? LongTextQ
+    : key extends QuestionTypes.Radio
+    ? RadioQ
+    : key extends QuestionTypes.SelectMultiple
+    ? SelectMultipleQ
+    : key extends QuestionTypes.MultipleChoice
+    ? MultipleChoiceQ
+    : key extends QuestionTypes.Dropdown
+    ? DropdownQ
+    : key extends QuestionTypes.Content
+    ? ContentQ
+    : never
+};
+
 export type Question =
   | HeaderQ
   | ShortTextQ
@@ -42,7 +64,7 @@ export type RadioQ = QuestionBase & {
 export type SelectMultipleQ = QuestionBase & {
   required: boolean;
   max: number | false; // TODO: Make number | null instead
-  options: string[] | "all-delegations";
+  options: DelOptions;
 };
 
 export type MultipleChoiceQ = QuestionBase & {
@@ -52,7 +74,7 @@ export type MultipleChoiceQ = QuestionBase & {
 
 export type DropdownQ = QuestionBase & {
   required: boolean;
-  options: string[];
+  options: DelOptions;
 };
 
 export type ContentQ = QuestionBase & {
@@ -77,8 +99,20 @@ export type TextContent = {
 };
 
 export type QuestionBase = {
-  id: number;
+  id: QuestionID;
   type: QuestionTypes;
   heading: string;
   subheading: string;
 };
+
+export const AllDelegations: "all-delegations" = "all-delegations";
+export type DelOptions = string[] | typeof AllDelegations;
+
+export type StandardForm = [
+  HeaderQ,
+  ShortTextQ,
+  RadioQ,
+  SelectMultipleQ,
+  SelectMultipleQ,
+  ...Question[]
+];
