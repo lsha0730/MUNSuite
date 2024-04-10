@@ -1,4 +1,23 @@
-import { DELCODE_LENGTH } from "../constants";
+import {
+  DELCODE_LENGTH,
+  DirectiveTitleLbl,
+  DirectiveTypeLbl,
+  SignatoriesLbl,
+  SponsorsLbl,
+} from "../constants";
+import { Directive } from "../types/directiveTypes";
+import {
+  AllDelegations,
+  Question,
+  QuestionTypes as QT,
+  StandardForm,
+} from "../types/questionTypes";
+
+declare global {
+  interface Navigator {
+    msSaveBlob?: (blob: any, defaultName?: string) => boolean;
+  }
+}
 
 /**
  * Estimates the pixel width of a string.
@@ -7,9 +26,15 @@ import { DELCODE_LENGTH } from "../constants";
  * @param {number} fontSize - The font size in use.
  * @returns {number} The estimated pixel width of the string.
  */
-export function getTextWidth(text, fontSize = 16, fontFamily = "Inter") {
+export function getTextWidth(
+  text: string,
+  fontSize = 16,
+  fontFamily = "Inter"
+) {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
+
+  if (!context) return -1;
 
   context.font = fontSize + "px " + fontFamily;
   const metrics = context.measureText(text);
@@ -18,37 +43,37 @@ export function getTextWidth(text, fontSize = 16, fontFamily = "Inter") {
   return width * 1.05;
 }
 
-export function exportToCsv(filename, rows) {
-  var processRow = function(row) {
-    var finalVal = "";
-    for (var j = 0; j < row.length; j++) {
-      var innerValue = row[j] === null ? "" : row[j].toString();
+export function exportToCsv(filename: string, rows: any[]) {
+  function processRow(row: any[]) {
+    let finalVal = "";
+    for (let j = 0; j < row.length; j++) {
+      let innerValue = row[j] === null ? "" : row[j].toString();
       if (row[j] instanceof Date) {
         innerValue = row[j].toLocaleString();
       }
-      var result = innerValue.replace(/"/g, '""');
+      let result = innerValue.replace(/"/g, '""');
       if (result.search(/("|,|\n)/g) >= 0) result = '"' + result + '"';
       if (j > 0) finalVal += ",";
       finalVal += result;
     }
     return finalVal + "\n";
-  };
+  }
 
-  var csvFile = "";
-  for (var i = 0; i < rows.length; i++) {
+  let csvFile = "";
+  for (let i = 0; i < rows.length; i++) {
     csvFile += processRow(rows[i]);
   }
 
-  var blob = new Blob([csvFile], { type: "text/csv;charset=utf-8;" });
+  let blob = new Blob([csvFile], { type: "text/csv;charset=utf-8;" });
   if (navigator.msSaveBlob) {
     // IE 10+
     navigator.msSaveBlob(blob, filename);
   } else {
-    var link = document.createElement("a");
+    let link = document.createElement("a");
     if (link.download !== undefined) {
       // feature detection
       // Browsers that support HTML5 download attribute
-      var url = URL.createObjectURL(blob);
+      let url = URL.createObjectURL(blob);
       link.setAttribute("href", url);
       link.setAttribute("download", filename);
       link.style.visibility = "hidden";
@@ -59,9 +84,9 @@ export function exportToCsv(filename, rows) {
   }
 }
 
-export const flattenToString = (input) => {
+export const flattenToString = (input: unknown) => {
   const flatIgnore = ["heading", "subheading", "type", "standard", "status"];
-  const flatten = (input, acc) => {
+  const flatten = (input: unknown, acc: string): string => {
     if (!input) return acc;
 
     switch (typeof input) {
@@ -74,14 +99,12 @@ export const flattenToString = (input) => {
         return acc.concat(` ${input}`);
       case "object":
         if (Array.isArray(input)) {
-          // Array
           return acc.concat(input.map((e) => flatten(e, "")).join(" "));
         } else {
-          // Object
           const keys = Object.keys(input);
           return keys
-            .map((key, index) => {
-              const value = input[key];
+            .map((key) => {
+              const value = (input as Record<string, any>)[key];
               if (!flatIgnore.includes(key)) {
                 return flatten(value, "");
               } else {
@@ -91,12 +114,14 @@ export const flattenToString = (input) => {
             .join(" ");
         }
     }
+
+    return "";
   };
 
   return flatten(input, "");
 };
 
-export function exportProcesseds(processed) {
+export function exportProcesseds(processed: Directive[]) {
   let dataRows = [];
   for (let i = 0; i < processed.length; i++) {
     let card = processed[i];
@@ -109,12 +134,10 @@ export function exportProcesseds(processed) {
       cardRow.push(card.title);
       cardRow.push(card.type);
       cardRow.push(
-        card.sponsors == "No Selection"
-          ? "No Sponsors"
-          : card.sponsors.join(", ")
+        card.sponsors.length === 0 ? "No Sponsors" : card.sponsors.join(", ")
       );
       cardRow.push(
-        card.signatories == "No Selection"
+        card.signatories.length === 0
           ? "No Signatories"
           : card.signatories.join(", ")
       );
@@ -160,7 +183,7 @@ export function exportProcesseds(processed) {
   exportToCsv("Directives History", rows);
 }
 
-export const highlight = (text, highlight) => {
+export const highlight = (text: string, highlight: string) => {
   // Split on highlight term and include term into parts, ignore case
   if (!text) return "";
   const inputString = typeof text == "string" ? text : JSON.stringify(text);
@@ -195,23 +218,24 @@ export const getExpiration = () => {
   return expiration;
 };
 
-export function classNames(...args) {
+export function classNames(...args: string[]) {
   if (!args || !Array.isArray(args)) return "";
   return args.join(" ");
 }
 
-export const filterFalsies = (arr) => arr.filter((e) => Boolean(e));
+export const filterFalsies = (arr: unknown[]) => arr.filter((e) => Boolean(e));
 
-export const syntaxCheckEmail = (email) =>
+export const syntaxCheckEmail = (email: string) =>
   /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
 
-export const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+export const capitalize = (str: string) =>
+  str.charAt(0).toUpperCase() + str.slice(1);
 
-export function pasteToClipboard(text) {
+export function pasteToClipboard(text: string) {
   navigator.clipboard.writeText(text);
 }
 
-export function generateUniqueDelCode(exclusions) {
+export function generateUniqueDelCode(exclusions: string[]) {
   const existing = new Set(exclusions || []);
   let result = generateDelCode();
   while (existing.has(result)) result = generateDelCode();
