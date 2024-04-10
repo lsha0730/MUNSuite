@@ -32,7 +32,7 @@ function Editor() {
   } = useContext(staffContext);
   const formLink = `${window.location.host}/form/${user?.uid || ""}`;
 
-  const [editing, setEditing] = useState<number | null>(0);
+  const [editing, setEditing] = useState<QuestionID | null>(0);
   const [confirmation, setConfirmation] = useState<boolean>(false);
   const standardized = checkStandardized(form);
 
@@ -87,7 +87,10 @@ function Editor() {
         const prevUp = copy[index - 1];
         copy[index - 1] = subjectUp;
         copy[index] = prevUp;
-        if (editing === index) setEditing(editing - 1);
+        if (editing === index) {
+          const prev = form[index - 1]?.id || null
+          setEditing(prev)
+        }
         break;
       case FormOperation.MoveDown:
         if (index < 0 || index >= copy.length) return;
@@ -95,7 +98,10 @@ function Editor() {
         const nextDown = copy[index + 1];
         copy[index + 1] = subjectDown;
         copy[index] = nextDown;
-        if (editing === index) setEditing(editing + 1);
+        if (editing === index) {
+          const next = form[index + 1]?.id || null
+          setEditing(next)
+        }
         break;
       default:
         break;
@@ -145,7 +151,7 @@ function Editor() {
           </div>
         </div>
 
-        {form.map((question) => (
+        {form.map((question, i) => (
           <QuestionEditorPair question={question} controlProps={controlProps} />
         ))}
 

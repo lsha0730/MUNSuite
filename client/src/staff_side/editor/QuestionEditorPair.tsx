@@ -38,8 +38,8 @@ import { staffContext } from "../../common/Context";
 import { FormOperation } from "../../common/types/types";
 
 export type ControlProps = {
-  editing: number | null;
-  setEditing: Dispatch<SetStateAction<number | null>>;
+  editing: QuestionID | null;
+  setEditing: Dispatch<SetStateAction<QuestionID | null>>;
   updateForm: (op: FormOperation, id: QuestionID, newValue?: Question) => void;
   standardized: boolean;
 };
