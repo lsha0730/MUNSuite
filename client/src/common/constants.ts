@@ -12,6 +12,17 @@ import {
 } from "./types/types";
 import defaultBanner from "./assets/images/default_banner.png";
 
+import { BsImages, BsTextLeft } from "react-icons/bs";
+import {
+  MdArrowDropDownCircle,
+  MdCheckBox,
+  MdOutlineRadioButtonChecked,
+  MdShortText,
+} from "react-icons/md";
+import { BiSolidAddToQueue } from "react-icons/bi";
+import { FaHeading } from "react-icons/fa";
+import { FC } from "react";
+
 // Links
 export const CUSTOM_BACKEND_URL = "https://munsuite-backend.onrender.com";
 export const LINCOLN_LINKEDIN =
@@ -91,7 +102,7 @@ export const DELCODE_LENGTH = 5;
 // Default Form Fields
 export const DEFAULT_OPTIONS = ["Option 1", "Option 2", "Option 3"];
 
-export const DEFAULT_QTYPE_LABELS = {
+export const DEFAULT_QTYPE_LABELS: Record<QT, string> = {
   [QT.ShortText]: "Short Text",
   [QT.LongText]: "Long Text",
   [QT.Radio]: "Radio",
@@ -100,6 +111,17 @@ export const DEFAULT_QTYPE_LABELS = {
   [QT.Dropdown]: "Dropdown",
   [QT.Content]: "Content Block",
   [QT.Header]: "Header",
+};
+
+export const QTYPE_ICONS: Record<QT, FC> = {
+  [QT.ShortText]: MdShortText,
+  [QT.LongText]: BsTextLeft,
+  [QT.Radio]: MdOutlineRadioButtonChecked,
+  [QT.MultipleChoice]: MdCheckBox,
+  [QT.SelectMultiple]: BiSolidAddToQueue,
+  [QT.Dropdown]: MdArrowDropDownCircle,
+  [QT.Content]: BsImages,
+  [QT.Header]: FaHeading,
 };
 
 export const DEFAULT_FORM_BASES: Record<QT, Object> = {

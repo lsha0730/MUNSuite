@@ -1,30 +1,10 @@
-import { FaHeading } from "react-icons/fa";
 import Button from "../../../common/components/input/Button";
-import { DEFAULT_QTYPE_LABELS } from "../../../common/constants";
+import { DEFAULT_QTYPE_LABELS, QTYPE_ICONS } from "../../../common/constants";
 import { QuestionTypes as QT } from "../../../common/types/questionTypes";
 import "./AddQuestion.scoped.css";
-import { BsImages, BsTextLeft } from "react-icons/bs";
-import {
-  MdArrowDropDownCircle,
-  MdCheckBox,
-  MdOutlineRadioButtonChecked,
-  MdShortText,
-} from "react-icons/md";
-import { BiSolidAddToQueue } from "react-icons/bi";
 
 type Props = {
   addNewBlock: (key: QT) => void;
-};
-
-const QTYPE_ICONS = {
-  [QT.ShortText]: MdShortText,
-  [QT.LongText]: BsTextLeft,
-  [QT.Radio]: MdOutlineRadioButtonChecked,
-  [QT.MultipleChoice]: MdCheckBox,
-  [QT.SelectMultiple]: BiSolidAddToQueue,
-  [QT.Dropdown]: MdArrowDropDownCircle,
-  [QT.Content]: BsImages,
-  [QT.Header]: FaHeading,
 };
 
 function AddQuestion({ addNewBlock }: Props) {
