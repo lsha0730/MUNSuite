@@ -4,7 +4,7 @@ import "./Navbar.scoped.css";
 import Logo from "../../common/assets/images/logos/logo.png";
 import LogoWhite from "../../common/assets/images/logos/logo_white.png";
 import { appContext } from "../../common/Context";
-import Button from "../../common/components/input/Button";
+import { Button } from "../../common/components/input";
 
 const Navbar = () => {
   const { user, auth } = useContext(appContext);

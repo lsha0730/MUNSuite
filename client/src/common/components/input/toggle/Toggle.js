@@ -1,5 +1,5 @@
 import "./Toggle.scoped.css";
-import { classNames, getTextWidth } from "../../utils/utils";
+import { classNames, getTextWidth } from "../../../utils/utils";
 
 const COLORS = {
   green: {

@@ -4,8 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import "./Auth.scoped.css";
 import { appContext } from "../../common/Context";
 import { syntaxCheckEmail } from "../../common/utils/utils";
-import ShortText from "../../common/components/input/ShortText";
-import Button from "../../common/components/input/Button";
+import { Button, ShortText } from "../../common/components/input";
 import Notice from "../../common/components/notice/Notice";
 
 const MESSAGE_DURATION_MS = 3000

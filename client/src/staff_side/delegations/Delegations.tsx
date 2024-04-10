@@ -32,7 +32,7 @@ import {
 } from "../../common/types/types";
 import Delbar from "./delbar/Delbar";
 import { v4 as uuid } from "uuid";
-import Button from "../../common/components/input/Button";
+import { Button } from "../../common/components/input";
 
 type ModalKey =
   | "add_un_countries"

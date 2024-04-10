@@ -2,8 +2,7 @@ import { useContext, useRef } from "react";
 import "./LoginPage.scoped.css";
 import { delegateContext } from "../../common/Context";
 import { IoIosLock } from "react-icons/io";
-import Button from "../../common/components/input/Button";
-import ShortText from "../../common/components/input/ShortText";
+import { Button, ShortText } from "../../common/components/input";
 
 const LoginPage = () => {
   const {

@@ -5,7 +5,7 @@ import "./Home.scoped.css";
 import FeatureItem from "./feature_item/FeatureItem";
 import { appContext } from "../../common/Context";
 import HomeTop from "./top/HomeTop";
-import Button from "../../common/components/input/Button";
+import { Button } from "../../common/components/input";
 import Hoverable from "../../common/components/hover/Hoverable";
 import { FEATURES, IMAGES, TRUSTING_CONFS } from "./homeData";
 

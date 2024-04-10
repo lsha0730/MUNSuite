@@ -3,9 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Auth.scoped.css";
 import { appContext } from "../../common/Context";
 import { registerAccount } from "../../common/utils/http";
-import ShortText from "../../common/components/input/ShortText";
-import Checkbox from "../../common/components/input/Checkbox";
-import Button from "../../common/components/input/Button";
+import { Button, ShortText, Checkbox } from "../../common/components/input";
 import Notice from "../../common/components/notice/Notice";
 
 const MESSAGE_DURATION_MS = 3000

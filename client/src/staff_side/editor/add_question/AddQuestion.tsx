@@ -1,4 +1,4 @@
-import Button from "../../../common/components/input/Button";
+import { Button } from "../../../common/components/input";
 import { DEFAULT_QTYPE_LABELS, QTYPE_ICONS } from "../../../common/constants";
 import { QuestionTypes as QT } from "../../../common/types/questionTypes";
 import "./AddQuestion.scoped.css";

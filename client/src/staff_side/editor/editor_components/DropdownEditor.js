@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { staffContext } from "../../../common/Context";
 import "./QEditor.scoped.css";
-import Toggle from "../../../common/components/toggle/Toggle";
+import { Toggle } from "../../../common/components/input";
 import { FormOperation } from "../../../common/types/types";
 
 function DropdownEditor(props) {

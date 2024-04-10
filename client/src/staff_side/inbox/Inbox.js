@@ -4,7 +4,7 @@ import { appContext, staffContext } from "../../common/Context";
 import Dropdown from "../history/dropdown/Dropdown";
 import { FaFilter } from "react-icons/fa";
 import DirectiveCard from "./card/DirectiveCard";
-import Toggle from "../../common/components/toggle/Toggle";
+import { Toggle } from "../../common/components/input";
 import { firebaseWrite } from "../../common/utils/firebase";
 import { FirebaseDataTarget } from "../../common/types/types";
 

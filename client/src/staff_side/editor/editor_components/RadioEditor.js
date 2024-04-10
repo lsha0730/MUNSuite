@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./QEditor.scoped.css";
-import Toggle from "../../../common/components/toggle/Toggle";
+import { Toggle } from "../../../common/components/input";
 import { FormOperation } from "../../../common/types/types";
 
 function RadioEditor(props) {

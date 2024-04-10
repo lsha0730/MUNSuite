@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import "./QEditor.scoped.css";
-import Toggle from "../../../common/components/toggle/Toggle";
+import { Toggle } from "../../../common/components/input";
 import { FormOperation } from "../../../common/types/types";
 import { LongTextQ, MaxCap } from "../../../common/types/questionTypes";
 import { ControlProps } from "../QuestionEditorPair";
 import { Controller, useForm } from "react-hook-form";
-import ShortText from "../../../common/components/input/ShortText";
+import { ShortText } from "../../../common/components/input";
 
 type Inputs = {
   required: boolean;

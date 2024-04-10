@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { appContext } from "../../../common/Context";
 import GradientAnimation from "../../../common/components/gradient/GradientAnimation";
-import Button from "../../../common/components/input/Button";
+import { Button } from "../../../common/components/input";
 import formTab from "../../../common/assets/images/mockups/form_tab.png";
 import inboxTab from "../../../common/assets/images/mockups/inbox_tab.png";
 import { ADWORDS } from "../homeData";

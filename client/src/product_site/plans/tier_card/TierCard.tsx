@@ -6,7 +6,7 @@ import FlyingDark from "../../../common/assets/icons/flying_dark.svg";
 import { BsCheck } from "react-icons/bs";
 import { PREMIUM_FEATURES, STARTER_FEATURES } from "../../../common/constants";
 import { classNames } from "../../../common/utils/utils";
-import Button, { ButtonType } from "../../../common/components/input/Button";
+import { Button, ButtonType } from "../../../common/components/input";
 
 type Props = {
   tier: "starter" | "premium";

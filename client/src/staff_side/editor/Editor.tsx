@@ -12,7 +12,7 @@ import {
 } from "../../common/types/questionTypes";
 import { STANDARD_FORM_START } from "../../common/constants";
 import { QuestionEditorPair } from "./QuestionEditorPair";
-import Button from "../../common/components/input/Button";
+import { Button } from "../../common/components/input";
 import Notice from "../../common/components/notice/Notice";
 import {
   checkStandardized,

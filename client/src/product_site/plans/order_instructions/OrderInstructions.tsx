@@ -5,7 +5,7 @@ import { MdAlternateEmail } from "react-icons/md";
 import GradientAnimation from "../../../common/components/gradient/GradientAnimation";
 import IconTextPair from "../../../common/components/misc/IconTextPair";
 import { STRIPE_PURCHASE_LINK } from "../../../common/constants";
-import Button from "../../../common/components/input/Button";
+import { Button } from "../../../common/components/input";
 
 const BULLET_POINTS = [
   {

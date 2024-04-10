@@ -2,10 +2,9 @@ import { useContext, useRef, useState } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
 import "./Forgot.scoped.css";
 import { BiPaperPlane } from "react-icons/bi";
-import ShortText from "../../common/components/input/ShortText";
 import { syntaxCheckEmail } from "../../common/utils/utils";
 import { appContext } from "../../common/Context";
-import Button from "../../common/components/input/Button";
+import { Button, ShortText } from "../../common/components/input";
 import Notice from "../../common/components/notice/Notice";
 
 const MESSAGE_DURATION_MS = 3000;
