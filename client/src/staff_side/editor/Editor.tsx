@@ -12,6 +12,7 @@ import { DEFAULT_FORM_BASES, DirectiveTitleLbl, DirectiveTypeLbl, SignatoriesLbl
 import { ControlProps, QuestionEditorPair } from "./QuestionEditorPair";
 import Button from "../../common/components/input/Button";
 import Notice from "../../common/components/notice/Notice";
+import { checkStandardized, pasteToClipboard } from "../../common/utils/utils";
 
 function Editor() {
   const { database, user } = useContext(appContext);
@@ -48,7 +49,7 @@ function Editor() {
   }
 
   function copyLink() {
-    navigator.clipboard.writeText(formLink);
+    pasteToClipboard(formLink);
     setConfirmation(true);
     setTimeout(() => setConfirmation(false), 3000);
   }
@@ -106,24 +107,6 @@ function Editor() {
     if (database && user) firebaseWrite(database, user.uid, FirebaseDataTarget.Form, copy);
   }
 
-  function checkStandardized(form: Question[]): boolean {
-    if (form.length < 5) return false
-
-    const expectedQTs = [QT.Header, QT.ShortText, QT.Radio, QT.SelectMultiple, QT.SelectMultiple]
-    const typeCheck = form.slice(0, expectedQTs.length).every((q, i) => q.type === expectedQTs[i])
-    if (!typeCheck) return false
-
-    const formChecked = form as StandardForm
-
-    const dirTitle = formChecked[1].heading == DirectiveTitleLbl && formChecked[1].required
-    const dirType = formChecked[2].heading === DirectiveTypeLbl && formChecked[2].required
-    const sponsors = formChecked[3].heading === SponsorsLbl && formChecked[3].required && formChecked[3].options === AllDelegations
-    const signatories = formChecked[4].heading === SignatoriesLbl && !formChecked[4].required && formChecked[4].options === AllDelegations
-    return (
-      dirTitle && dirType && sponsors && signatories
-    );
-  }
-
   return (
     <div className="editor-container">
       <div className="main-UI">
@@ -163,4 +146,4 @@ function Editor() {
   );
 }
 
-export default Editor;
+export default Editor

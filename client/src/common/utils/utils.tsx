@@ -255,3 +255,35 @@ export function generateDelCode() {
 
   return result;
 }
+
+export function checkStandardized(form: Question[]): boolean {
+  if (form.length < 5) return false;
+
+  const expectedQTs = [
+    QT.Header,
+    QT.ShortText,
+    QT.Radio,
+    QT.SelectMultiple,
+    QT.SelectMultiple,
+  ];
+  const typeCheck = form
+    .slice(0, expectedQTs.length)
+    .every((q, i) => q.type === expectedQTs[i]);
+  if (!typeCheck) return false;
+
+  const formChecked = form as StandardForm;
+
+  const dirTitle =
+    formChecked[1].heading == DirectiveTitleLbl && formChecked[1].required;
+  const dirType =
+    formChecked[2].heading === DirectiveTypeLbl && formChecked[2].required;
+  const sponsors =
+    formChecked[3].heading === SponsorsLbl &&
+    formChecked[3].required &&
+    formChecked[3].options === AllDelegations;
+  const signatories =
+    formChecked[4].heading === SignatoriesLbl &&
+    !formChecked[4].required &&
+    formChecked[4].options === AllDelegations;
+  return dirTitle && dirType && sponsors && signatories;
+}
