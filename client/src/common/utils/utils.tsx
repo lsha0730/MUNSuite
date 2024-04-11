@@ -13,6 +13,7 @@ import {
   QuestionTypes as QT,
   StandardForm,
   QuestionTypeMap,
+  MaxCap as MC,
 } from "../types/questionTypes";
 import { v4 as uuid } from "uuid";
 
@@ -308,4 +309,8 @@ export function makeQuestion<T extends QT>(
     any
   >;
   return combined as QuestionTypeMap[T];
+}
+
+export function MaxCap(num: MC): MC {
+  return num ? num : null;
 }

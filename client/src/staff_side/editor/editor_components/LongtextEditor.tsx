@@ -2,16 +2,17 @@ import { useEffect } from "react";
 import "./QEditor.scoped.css";
 import { Toggle } from "../../../common/components/input";
 import { FormOperation } from "../../../common/types/types";
-import { LongTextQ, MaxCap } from "../../../common/types/questionTypes";
+import { LongTextQ, MaxCap as MC } from "../../../common/types/questionTypes";
 import { ControlProps } from "../QuestionEditorPair";
 import { Controller, useForm } from "react-hook-form";
 import { ShortText } from "../../../common/components/input";
+import { MaxCap } from "../../../common/utils/utils";
 
 type Inputs = {
   required: boolean;
   heading: string;
   subheading: string;
-  maxchars: MaxCap;
+  maxchars: MC;
 };
 
 const MAX_CHAR_LIMIT = 10000;
@@ -50,7 +51,7 @@ function LongtextEditor({
       };
       const screened = {
         ...data,
-        maxchars: Math.min(data.maxchars || 0, MAX_CHAR_LIMIT),
+        maxchars: MaxCap(Math.min(data.maxchars || 0, MAX_CHAR_LIMIT)),
       };
       updateForm(FormOperation.Update, id, Object.assign(original, screened));
     });

@@ -48,7 +48,7 @@ const LongText = ({
             if (updateSubmission) updateSubmission(id, e.target.value);
           }}
         />
-        {maxchars && (
+        {Boolean(maxchars) && (
           <p className="maxchar-count">{`${textState.length} / ${maxchars ||
             "Unlimited"} Max`}</p>
         )}
