@@ -24,8 +24,8 @@ type Props = {
   wrapperStyle?: React.CSSProperties;
   style?: React.CSSProperties;
   type?: ButtonType;
-  size?: "md" | "lg";
-  padding?: "sm" | "md" | "lg";
+  size?: "tiny" | "sm" | "md" | "lg";
+  padding?: "tiny" | "sm" | "md" | "lg";
   align?: "left" | "center" | "right";
   fullWidth?: boolean;
   children: ReactNode;

@@ -98,6 +98,16 @@
   justify-content: flex-end;
 }
 
+.tiny {
+  font-size: 0.5rem;
+  border-radius: 0.1rem;
+}
+
+.sm {
+  font-size: 0.9rem;
+  border-radius: 0.3rem;
+}
+
 .md {
   font-size: 0.9rem;
   border-radius: 0.3rem;
@@ -109,10 +119,16 @@
   white-space: nowrap;
 }
 
+.p_tiny {
+  padding: 0.2rem;
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
+}
+
 .p_sm {
-  padding: 0.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: 0.4rem;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
 }
 
 .p_md {
