@@ -15,6 +15,11 @@
   width: 100% !important;
 }
 
+.flex_grow {
+  display: flex;
+  flex-grow: 1;
+}
+
 /* Short Text */
 .shorttext {
   height: 30px;

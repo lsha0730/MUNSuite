@@ -13,6 +13,7 @@ type Props = {
   width?: number;
   height?: number;
   fullWidth?: boolean;
+  flexGrow?: boolean;
   [x: string]: unknown;
 };
 
@@ -28,18 +29,20 @@ const ShortText = forwardRef(
       width,
       height,
       fullWidth,
+      flexGrow,
       ...other
     }: Props,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     const fw = fullWidth ? "full_width" : "";
+    const fg = flexGrow ? "flex_grow" : "";
     const bg_color = `bg_${bg}`;
 
     return (
       <ConditionalWrapper
         condition={Boolean(label)}
         wrapper={(c) => (
-          <div className={classNames("container", fw)} style={style}>
+          <div className={classNames("container", fw, fg)} style={style}>
             {c}
           </div>
         )}
@@ -48,7 +51,7 @@ const ShortText = forwardRef(
         <input
           ref={ref}
           type={type}
-          className={classNames("shorttext", fw, bg_color)}
+          className={classNames("shorttext", fw, fg, bg_color)}
           onKeyDown={(e) => {
             if (e.key === "Enter" && onEnter) onEnter();
           }}
