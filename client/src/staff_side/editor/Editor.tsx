@@ -115,7 +115,7 @@ function Editor() {
     <div className="editor-container">
       <div className="main-UI">
         <div className="link-container">
-          <Button type="light" size="md" padding="sm" onClick={copyLink}>
+          <Button type="light" size="md" onClick={copyLink}>
             <BiLink />
             <p style={{ marginLeft: 5 }}>Share</p>
           </Button>
