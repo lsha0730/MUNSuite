@@ -10,6 +10,8 @@ type Props = {
   bg?: "white" | "gray";
   placeholder?: string;
   style?: CSSProperties;
+  width?: number;
+  height?: number;
   fullWidth?: boolean;
   [x: string]: unknown;
 };
@@ -23,6 +25,8 @@ const ShortText = forwardRef(
       bg = "white",
       placeholder,
       style,
+      width,
+      height,
       fullWidth,
       ...other
     }: Props,
@@ -49,7 +53,13 @@ const ShortText = forwardRef(
             if (e.key === "Enter" && onEnter) onEnter();
           }}
           placeholder={placeholder}
-          style={style}
+          style={Object.assign(
+            {
+              width: width ? `${width}px` : undefined,
+              height: height ? `${height}px` : undefined,
+            },
+            style
+          )}
           {...other}
         />
       </ConditionalWrapper>
