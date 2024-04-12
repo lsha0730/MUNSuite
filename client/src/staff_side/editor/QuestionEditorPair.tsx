@@ -13,11 +13,11 @@ import {
   ContentEditor,
   DropdownEditor,
   HeaderEditor,
-  LongtextEditor,
-  MultiplechoiceEditor,
+  LongTextEditor,
+  MultipleChoiceEditor,
   RadioEditor,
-  SelectmultipleEditor,
-  ShorttextEditor,
+  SelectMultipleEditor,
+  ShortTextEditor,
 } from "./editor_components";
 import {
   AllDelegations,
@@ -99,7 +99,7 @@ const MultipleChoicePair = (props: ControlProps & MultipleChoiceQ) => {
   return (
     <>
       <MultipleChoice variant="staff" key={`preview${id}`} {...props} />
-      <MultiplechoiceEditor key={`editor${id}`} {...props} />
+      <MultipleChoiceEditor key={`editor${id}`} {...props} />
     </>
   );
 };
@@ -119,7 +119,7 @@ const ShortTextPair = (props: ControlProps & ShortTextQ) => {
   return (
     <>
       <ShortText variant="staff" key={`preview${id}`} {...props} />
-      <ShorttextEditor key={`editor${id}`} {...props} />
+      <ShortTextEditor key={`editor${id}`} {...props} />
     </>
   );
 };
@@ -129,7 +129,7 @@ const LongTextPair = (props: ControlProps & LongTextQ) => {
   return (
     <>
       <LongText variant="staff" key={`preview${id}`} {...props} />
-      <LongtextEditor key={`editor${id}`} {...props} />
+      <LongTextEditor key={`editor${id}`} {...props} />
     </>
   );
 };
@@ -175,7 +175,7 @@ const SelectMultiplePair = (props: ControlProps & SelectMultipleQ) => {
             : options || []
         }
       />
-      <SelectmultipleEditor key={`editor${id}`} {...props} />
+      <SelectMultipleEditor key={`editor${id}`} {...props} />
     </>
   );
 };

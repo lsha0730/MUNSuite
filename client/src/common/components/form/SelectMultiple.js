@@ -56,7 +56,7 @@ const SelectMultiple = ({
   };
 
   useEffect(() => {
-    setChoices(choices.sort((a, b) => a.localeCompare(b)));
+    setChoices(choices.sort((a, b) => a.label.localeCompare(b.label)));
   }, [selected.length]);
 
   return (
@@ -124,18 +124,18 @@ const SelectMultiple = ({
           >
             <div className="selmult-subdropfield">
               {isShowingOptions &&
-                choices.map((e) =>
+                choices.map(({ label }) =>
                   search === "" ||
-                  e.toLowerCase().includes(search.toLowerCase()) ? (
+                  label.toLowerCase().includes(search.toLowerCase()) ? (
                     <div
                       className="dropdown-option-container"
                       onClick={() => {
-                        selectOption(e);
+                        selectOption(label);
                         setIsShowingOptions(false);
                         setSearch("");
                       }}
                     >
-                      {e}
+                      {label}
                     </div>
                   ) : (
                     <></>

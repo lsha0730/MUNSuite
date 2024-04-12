@@ -2,44 +2,64 @@ import { useEffect } from "react";
 import "./QEditor.scoped.css";
 import { Toggle } from "../../../common/components/input";
 import { FormOperation } from "../../../common/types/types";
-import { Controller, useForm } from "react-hook-form";
-import { ShortTextQ } from "../../../common/types/questionTypes";
+import { LongTextQ, MaxCap as MC } from "../../../common/types/questionTypes";
 import { ControlProps } from "../QuestionEditorPair";
+import { Controller, useForm } from "react-hook-form";
 import { ShortText } from "../../../common/components/input";
+import { MaxCap } from "../../../common/utils/utils";
 
 type Inputs = {
   required: boolean;
   heading: string;
   subheading: string;
+  maxchars: MC;
 };
 
-function ShorttextEditor({
+const MAX_CHAR_LIMIT = 10000;
+
+function LongTextEditor({
   id,
   type,
   heading,
   subheading,
   required,
+  maxchars,
   editing,
   updateForm,
-}: ShortTextQ & ControlProps) {
-  const { register, control, watch } = useForm<Inputs>({
+}: LongTextQ & ControlProps) {
+  const { register, control, watch, setValue } = useForm<Inputs>({
     defaultValues: {
       required,
       heading,
       subheading,
+      maxchars,
     },
   });
 
   useEffect(() => {
     watch((data) => {
-      const original: ShortTextQ = { id, type, heading, subheading, required };
-      updateForm(FormOperation.Update, id, Object.assign(original, data));
+      if (data.maxchars && data.maxchars > MAX_CHAR_LIMIT)
+        setValue("maxchars", MAX_CHAR_LIMIT);
+
+      const original: LongTextQ = {
+        id,
+        type,
+        heading,
+        subheading,
+        required,
+        maxchars,
+      };
+      const screened = {
+        ...data,
+        maxchars: MaxCap(Math.min(data.maxchars || 0, MAX_CHAR_LIMIT)),
+      };
+      updateForm(FormOperation.Update, id, Object.assign(original, screened));
     });
   }, []);
 
   return (
-    <div className={editing == id ? "block-container" : "hidden"}>
-      <p className="heading">Short Text</p>
+    <div className={editing === id ? "block-container" : "hidden"}>
+      <p className="heading">Long Text</p>
 
       <Controller
         name="required"
@@ -78,8 +98,16 @@ function ShorttextEditor({
         bg="gray"
         {...register("subheading")}
       />
+
+      <ShortText
+        type="number"
+        label="Max Characters"
+        placeholder="No Limit"
+        bg="gray"
+        {...register("maxchars")}
+      />
     </div>
   );
 }
 
-export default ShorttextEditor;
+export default LongTextEditor;
