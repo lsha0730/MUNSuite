@@ -54,7 +54,7 @@ const MultipleChoice = ({
         <p className="subheading">{subheading}</p>
         <p className={required ? "required-star" : "hidden"}>*</p>
         <div className="mc-options-container">
-          {options.map((option, index) => (
+          {options.map(({label}, index) => (
             <div className="mc-single-container">
               <input
                 type="checkbox"
@@ -63,7 +63,7 @@ const MultipleChoice = ({
                 onChange={(e) => handleClick(e)}
                 className="clickable"
               />
-              <p className="mc-option-label">{option}</p>
+              <p className="mc-option-label">{label}</p>
             </div>
           ))}
         </div>
