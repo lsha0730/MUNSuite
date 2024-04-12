@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { Button, ShortText } from "../";
 import "./Options.scoped.css";
 import { AllDelegations, DelOptions } from "../../../types/questionTypes";
@@ -10,9 +10,10 @@ import { classNames } from "../../../utils/utils";
 type Props = {
   options: DelOptions;
   onChange: (options: DelOptions) => void;
+  canUseDels?: boolean;
 };
 
-const Options = ({ options, onChange }: Props) => {
+const Options = ({ options, onChange, canUseDels }: Props) => {
   const {
     firebaseData: { delegations },
   } = useContext(staffContext);
@@ -55,22 +56,25 @@ const Options = ({ options, onChange }: Props) => {
         <Button type="light" size="tiny" onClick={addOption}>
           Add
         </Button>
-        <Button
-          type="yellow"
-          size="tiny"
-          value={options === AllDelegations}
-          onClick={(buttonDown) => {
-            if (buttonDown) onChange(AllDelegations);
-            else
-              onChange(delegations.map((d) => ({
-                key: d.id,
-                label: d.name,
-              })) as DelOptions);
-          }}
-          isBinary
-        >
-          {options === AllDelegations ? "Using Dels" : "Use Dels"}
-        </Button>
+
+        {canUseDels && (
+          <Button
+            type="yellow"
+            size="tiny"
+            value={options === AllDelegations}
+            onClick={(buttonDown) => {
+              if (buttonDown) onChange(AllDelegations);
+              else
+                onChange(delegations.map((d) => ({
+                  key: d.id,
+                  label: d.name,
+                })) as DelOptions);
+            }}
+            isBinary
+          >
+            {options === AllDelegations ? "Using Dels" : "Use Dels"}
+          </Button>
+        )}
       </div>
 
       {optionsList.length > 0 ? (

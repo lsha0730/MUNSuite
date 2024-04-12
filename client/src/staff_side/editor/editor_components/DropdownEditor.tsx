@@ -93,7 +93,7 @@ function DropdownEditor({
         name="options"
         control={control}
         render={({ field: { onChange, value } }) => (
-          <Options options={value} onChange={onChange} />
+          <Options options={value} onChange={onChange} canUseDels />
         )}
       />
     </div>
