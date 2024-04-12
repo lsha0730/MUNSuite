@@ -40,7 +40,7 @@ const Radio = ({
         <p className="subheading">{subheading}</p>
         <p className={required ? "required-star" : "hidden"}>*</p>
         <div className="radio-options-container">
-          {options.map((option, index) => (
+          {options.map(({ label }, index) => (
             <div className="radio-single-container">
               <input
                 type="radio"
@@ -51,7 +51,7 @@ const Radio = ({
                 }}
                 className="clickable"
               />
-              <p className="radio-option-label">{option}</p>
+              <p className="radio-option-label">{label}</p>
             </div>
           ))}
         </div>

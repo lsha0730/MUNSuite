@@ -61,7 +61,7 @@ export type LongTextQ = QuestionBase & {
 
 export type RadioQ = QuestionBase & {
   required: boolean;
-  options: string[];
+  options: Option[];
 };
 
 export type SelectMultipleQ = QuestionBase & {
@@ -72,7 +72,7 @@ export type SelectMultipleQ = QuestionBase & {
 
 export type MultipleChoiceQ = QuestionBase & {
   required: boolean;
-  options: string[];
+  options: Option[];
 };
 
 export type DropdownQ = QuestionBase & {
