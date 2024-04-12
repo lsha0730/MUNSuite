@@ -13,6 +13,7 @@ import {
   Settings,
   AccountType,
   StaffPageKey,
+  Option,
 } from "./types/types";
 import defaultBanner from "./assets/images/default_banner.png";
 
@@ -105,7 +106,20 @@ export const PREMIUM_FEATURES = [
 export const DELCODE_LENGTH = 5;
 
 // Default Form Fields
-export const DEFAULT_OPTIONS = ["Option 1", "Option 2", "Option 3"];
+export const DEFAULT_OPTIONS: Option[] = [
+  {
+    key: "op1",
+    label: "Option 1",
+  },
+  {
+    key: "op2",
+    label: "Option 2",
+  },
+  {
+    key: "op3",
+    label: "Option 3",
+  },
+];
 
 export const DEFAULT_QTYPE_LABELS: Record<QT, string> = {
   [QT.ShortText]: "Short Text",
