@@ -148,7 +148,7 @@ const DropdownPair = (props: ControlProps & DropdownQ) => {
         {...props}
         options={
           options === AllDelegations
-            ? delegations.map((del) => del.name)
+            ? delegations.map((d) => ({ key: d.id, label: d.name }))
             : options || []
         }
       />
@@ -170,8 +170,8 @@ const SelectMultiplePair = (props: ControlProps & SelectMultipleQ) => {
         key={`preview${id}`}
         {...props}
         options={
-          options === "all-delegations"
-            ? delegations.map((del) => del.name)
+          options === AllDelegations
+            ? delegations.map((d) => ({ key: d.id, label: d.name }))
             : options || []
         }
       />
