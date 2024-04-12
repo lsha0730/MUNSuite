@@ -59,7 +59,7 @@ export type DelegateID = string | number; // TODO: Wipe out all delegates identi
 
 export type Delegate = {
   code: string;
-  id: DelegateID; 
+  id: DelegateID;
   name: string;
 };
 
@@ -72,5 +72,10 @@ export enum FormOperation { // TODO: Use enums throughout app
   Delete = "delete",
   Update = "update",
   MoveUp = "move_up",
-  MoveDown = "move_down"
+  MoveDown = "move_down",
 }
+
+export type Option = {
+  key: string;
+  label: string;
+};

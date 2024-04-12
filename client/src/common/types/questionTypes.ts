@@ -1,3 +1,5 @@
+import { Option } from "./types";
+
 export enum QuestionTypes { // TODO: Use enums throughout codebase
   Header = "header",
   ShortText = "shorttext",
@@ -107,7 +109,7 @@ export type QuestionBase = {
 };
 
 export const AllDelegations: "all-delegations" = "all-delegations";
-export type DelOptions = string[] | typeof AllDelegations;
+export type DelOptions = Option[] | typeof AllDelegations;
 
 export type StandardForm = [
   HeaderQ,
