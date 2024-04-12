@@ -1,7 +1,8 @@
 import React, { MouseEventHandler, ReactNode } from "react";
-import "./Input.scoped.css";
-import { classNames } from "../../utils/utils";
-import ConditionalWrapper from "../misc/ConditionalWrapper";
+import "../Input.scoped.css";
+import "./Button.scoped.css";
+import { classNames } from "../../../utils/utils";
+import ConditionalWrapper from "../../misc/ConditionalWrapper";
 
 export type ButtonType =
   | "bricked"
