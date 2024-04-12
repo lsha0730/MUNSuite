@@ -17,9 +17,9 @@ const Dropdown = ({
   updateForm,
   updateSubmission = null,
 }) => {
-  const [value, setValue] = useState(); // Stores the index of the item in options
+  const [value, setValue] = useState(null); // Stores the index of the item in options
   const [dropVisible, setDropVisible] = useState(false);
-  const sortedOptions = options.sort((a, b) => a.localeCompare(b));
+  const sortedOptions = options.sort((a, b) => a.label.localeCompare(b.label));
 
   useEffect(() => {
     if (variant === "delegate" && updateSubmission) {
@@ -51,7 +51,7 @@ const Dropdown = ({
           onClick={() => setDropVisible(!dropVisible)}
         >
           <div className="dropdown-text-container">
-            <p className="dropdown-selection-text">{options[value]}</p>
+            <p className="dropdown-selection-text">{options[value]?.label}</p>
           </div>
           <GoTriangleDown size={10} className="dropdown-triangle" />
           {dropVisible && (
@@ -65,7 +65,7 @@ const Dropdown = ({
                   }}
                 >
                   <div className="dropdown-text-container">
-                    <p className="nowrap">{option}</p>
+                    <p className="nowrap">{option.label}</p>
                   </div>
                 </div>
               ))}
