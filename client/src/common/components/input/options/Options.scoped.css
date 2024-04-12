@@ -39,9 +39,9 @@
   padding-bottom: 0.3rem;
 }
 
-.options_list_bricked {
-  pointer-events: none;
+.option_bricked {
   color: #bcbcbc !important;
+  pointer-events: none;
 }
 
 .option {

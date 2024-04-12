@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { Button, ShortText } from "../";
 import "./Options.scoped.css";
 import { AllDelegations, DelOptions } from "../../../types/questionTypes";
@@ -56,25 +56,33 @@ const Options = ({ options, onChange }: Props) => {
           Add
         </Button>
         <Button
-          type={options === AllDelegations ? "bricked" : "yellow"}
+          type="yellow"
           size="tiny"
-          onClick={() => {
-            onChange(AllDelegations);
+          value={options === AllDelegations}
+          onClick={(buttonDown) => {
+            if (buttonDown) onChange(AllDelegations);
+            else
+              onChange(delegations.map((d) => ({
+                key: d.id,
+                label: d.name,
+              })) as DelOptions);
           }}
+          isBinary
         >
-          Use Dels
+          {options === AllDelegations ? "Using Dels" : "Use Dels"}
         </Button>
       </div>
 
       {optionsList.length > 0 ? (
-        <div
-          className={classNames(
-            "options_list",
-            options === AllDelegations ? "options_list_bricked" : ""
-          )}
-        >
+        <div className="options_list">
           {optionsList.map((op) => (
-            <div className="option" onClick={() => removeOption(op.key)}>
+            <div
+              className={classNames(
+                "option",
+                options === AllDelegations ? "option_bricked" : ""
+              )}
+              onClick={() => removeOption(op.key)}
+            >
               <span className="label">{op.label}</span>
               <FaTrash className="icon" />
             </div>
