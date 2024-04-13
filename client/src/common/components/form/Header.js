@@ -7,8 +7,7 @@ import { FormOperation } from "../../types/types";
 const Header = ({
   variant,
   id,
-  imgPath,
-  imgLink,
+  image,
   heading,
   subheading,
   editing,
@@ -29,7 +28,7 @@ const Header = ({
         {variant === "staff" && (
           <div className={editing == id ? "editing-indicator" : "fade"} />
         )}
-        <img src={imgLink} alt="form-banner" className="header-image" />
+        <img src={image.link} alt="form-banner" className="header-image" />
         <div className="header-text-container">
           <p className="header-heading">{heading}</p>
           <p className="header-subheading">{subheading}</p>
@@ -58,8 +57,8 @@ const Header = ({
   );
 
   function deleteImageFile() {
-    if (imgPath !== "") {
-      deleteObject(ref(storage, imgPath));
+    if (image.path !== "") {
+      deleteObject(ref(storage, image.path));
     }
   }
 };

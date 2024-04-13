@@ -2,9 +2,11 @@ export const defaultFormData = [
   {
     heading: "New Header",
     id: 0,
-    imgLink: "/static/media/defaultBanner.dd0c5647a035bc1e3f3f.png",
-    imgName: "Default Banner",
-    imgPath: "",
+    image: {
+      link: "/static/media/defaultBanner.dd0c5647a035bc1e3f3f.png",
+      name: "Default Banner",
+      path: "",
+    },
     subheading: false,
     type: "header",
   },

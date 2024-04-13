@@ -5,6 +5,7 @@ import {
   Question,
   QuestionTypes as QT,
   AllDelegations,
+  File,
 } from "./types/questionTypes";
 import {
   FirebaseDataStaff,
@@ -143,12 +144,16 @@ export const QTYPE_ICONS: Record<QT, FC> = {
   [QT.Header]: FaHeading,
 };
 
+export const DEFAULT_IMG_FILE: File = {
+  link: defaultBanner,
+  name: "Default Banner",
+  path: "",
+};
+
 export const DEFAULT_FORM_BASES: Record<QT, Object> = {
   header: {
     heading: `New ${DEFAULT_QTYPE_LABELS[QT.Header]}`,
-    imgLink: defaultBanner,
-    imgName: "Default Banner",
-    imgPath: "",
+    image: DEFAULT_IMG_FILE,
   },
   radio: {
     heading: `New ${DEFAULT_QTYPE_LABELS[QT.Radio]}`,
@@ -164,9 +169,7 @@ export const DEFAULT_FORM_BASES: Record<QT, Object> = {
       {
         type: "image",
         heading: "Image Heading",
-        value: defaultBanner,
-        imgName: "Default Image",
-        path: "",
+        image: DEFAULT_IMG_FILE,
       },
       {
         type: "text",

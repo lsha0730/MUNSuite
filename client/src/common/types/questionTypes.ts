@@ -13,6 +13,11 @@ export enum QuestionTypes { // TODO: Use enums throughout codebase
 
 export type QuestionID = string | number; // TODO: restrict to strings
 export type MaxCap = number | null; // TODO: Make number | null instead
+export type File = {
+  link: string;
+  name: string;
+  path: string;
+};
 
 export type QuestionTypeMap = {
   [key in QuestionTypes]: key extends QuestionTypes.Header
@@ -45,9 +50,7 @@ export type Question =
   | ContentQ;
 
 export type HeaderQ = QuestionBase & {
-  imgLink: string;
-  imgName: string;
-  imgPath: string;
+  image: File;
 };
 
 export type ShortTextQ = QuestionBase & {
@@ -91,9 +94,7 @@ export enum ContentType { // TODO: Use enums throughout codebase
 export type ImageContent = {
   type: ContentType.Image;
   heading: string;
-  imgName: string;
-  path: string;
-  value: string;
+  image: File;
 };
 export type TextContent = {
   type: ContentType.Text;
