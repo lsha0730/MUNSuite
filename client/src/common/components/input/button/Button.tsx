@@ -21,7 +21,7 @@ export type ButtonType =
 
 type Props = {
   value?: boolean;
-  onClick: (buttonDown: boolean) => void;
+  onClick?: (buttonDown: boolean) => void;
   label?: string | ReactNode;
   wrapperStyle?: React.CSSProperties;
   style?: React.CSSProperties;
@@ -80,7 +80,7 @@ const Button = ({
           align
         )}
         onClick={(e) => {
-          onClick(!value);
+          if (onClick) onClick(!value);
         }}
         style={style}
       >
