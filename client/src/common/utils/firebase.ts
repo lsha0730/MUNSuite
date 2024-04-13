@@ -1,10 +1,22 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
-import { Database, getDatabase, onValue, ref, set } from "firebase/database";
+import {
+  Database,
+  getDatabase,
+  onValue,
+  ref as dbref,
+  set,
+} from "firebase/database";
 import { FirebaseDataTarget } from "../types/types";
 import { filterFalsies } from "./utils";
 import { BLANK_APPDATA } from "../constants";
+import {
+  getDownloadURL,
+  getStorage,
+  ref as storageref,
+  uploadBytes,
+} from "firebase/storage";
 
 const DB_ARRAY_NODES = [
   FirebaseDataTarget.Delegations,
@@ -52,7 +64,7 @@ export function setUpFirebaseListeners(
   targets: Target[]
 ) {
   for (const { target, onValue: callback } of targets) {
-    const dbRef = ref(db, `${baseURL}/${target}`);
+    const dbRef = dbref(db, `${baseURL}/${target}`);
     const isArrayNode = DB_ARRAY_NODES.includes(target);
 
     onValue(dbRef, (snapshot) => {
@@ -74,6 +86,14 @@ export function firebaseWrite(
   target: FirebaseDataTarget,
   content: any
 ) {
-  const dbRef = ref(db, `appdata/${userID}/livedata/${target}`);
+  const dbRef = dbref(db, `appdata/${userID}/livedata/${target}`);
   set(dbRef, content);
+}
+
+export async function firebaseUpload(file: File, location: string) {
+  const storage = getStorage();
+  await uploadBytes(storageref(storage, location), file);
+  const url = await getDownloadURL(storageref(storage, location));
+
+  return url;
 }
