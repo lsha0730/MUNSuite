@@ -1,6 +1,6 @@
 import ContentEditor from "./content_editor/ContentEditor";
 import DropdownEditor from "./DropdownEditor";
-import HeaderEditor from "./header_editor/HeaderEditor";
+import HeaderEditor from "./HeaderEditor";
 import LongTextEditor from "./LongTextEditor";
 import MultipleChoiceEditor from "./MultipleChoiceEditor";
 import RadioEditor from "./RadioEditor";
