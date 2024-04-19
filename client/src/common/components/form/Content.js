@@ -80,8 +80,8 @@ const Content = ({
 
   function deleteContentFiles() {
     if (!content) return;
-    content.forEach((item) => {
-      if (item.type == "image" && item.path !== "") {
+    content.forEach(({ value }) => {
+      if (value.type == ContentType.Image && value.path !== "") {
         deleteObject(ref(storage, item.path));
       }
     });
