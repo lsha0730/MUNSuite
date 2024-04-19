@@ -94,7 +94,7 @@ export enum ContentType { // TODO: Use enums throughout codebase
 export type ImageContent = {
   type: ContentType.Image;
   heading: string;
-  image: File;
+  value: File;
 };
 export type TextContent = {
   type: ContentType.Text;

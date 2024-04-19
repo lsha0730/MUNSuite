@@ -37,7 +37,7 @@ const Form = ({
                 variant="delegate"
                 key={`${item.id}`}
                 id={item.id}
-                image={item.image}
+                image={item.value}
                 heading={item.heading}
                 subheading={item.subheading}
               />

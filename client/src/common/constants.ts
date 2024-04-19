@@ -6,6 +6,10 @@ import {
   QuestionTypes as QT,
   AllDelegations,
   File,
+  ImageContent,
+  ContentType,
+  TextContent,
+  ContentItem,
 } from "./types/questionTypes";
 import {
   FirebaseDataStaff,
@@ -150,6 +154,33 @@ export const DEFAULT_IMG_FILE: File = {
   path: "",
 };
 
+export const DEFAULT_CONTENT: Record<ContentType, ContentItem> = {
+  [ContentType.Image]: {
+    type: ContentType.Image,
+    heading: "Image Heading",
+    value: DEFAULT_IMG_FILE,
+  },
+  [ContentType.Text]: {
+    type: ContentType.Text,
+    heading: "Text Heading",
+    value:
+      "I am a body of text. Enter directions or descriptive information here!",
+  },
+};
+
+export const DEFAULT_IMG_CONTENT: ImageContent = {
+  type: ContentType.Image,
+  heading: "Image Heading",
+  value: DEFAULT_IMG_FILE,
+};
+
+export const DEFAULT_TXT_CONTENT: TextContent = {
+  type: ContentType.Text,
+  heading: "Text Heading",
+  value:
+    "I am a body of text. Enter directions or descriptive information here!",
+};
+
 export const DEFAULT_FORM_BASES: Record<QT, Object> = {
   header: {
     heading: `New ${DEFAULT_QTYPE_LABELS[QT.Header]}`,
@@ -166,17 +197,8 @@ export const DEFAULT_FORM_BASES: Record<QT, Object> = {
   content: {
     heading: `New ${DEFAULT_QTYPE_LABELS[QT.Content]}`,
     content: [
-      {
-        type: "image",
-        heading: "Image Heading",
-        image: DEFAULT_IMG_FILE,
-      },
-      {
-        type: "text",
-        heading: "Text Heading",
-        value:
-          "I am a body of text. Enter directions or descriptive information here!",
-      },
+      DEFAULT_CONTENT[ContentType.Image],
+      DEFAULT_CONTENT[ContentType.Text],
     ],
   },
   shorttext: {
