@@ -72,6 +72,12 @@
   opacity: 0.6;
 }
 
+.subheading {
+  font-size: 14px;
+  font-weight: 600;
+  color: #707070;
+}
+
 .icon {
   position: absolute;
   top: calc(50% - 0.4rem);

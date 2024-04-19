@@ -102,7 +102,6 @@ function SelectMultipleEditor({
         {...register("max")}
       />
 
-      <p className="subheading">Options</p>
       <Controller
         name="options"
         control={control}

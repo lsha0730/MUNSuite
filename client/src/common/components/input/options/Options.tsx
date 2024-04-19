@@ -45,6 +45,7 @@ const Options = ({ options, onChange, canUseDels }: Props) => {
 
   return (
     <div className="container">
+      <p className="subheading">Options</p>
       <div className="add_new">
         <ShortText
           ref={inputRef}
@@ -56,7 +57,6 @@ const Options = ({ options, onChange, canUseDels }: Props) => {
         <Button type="light" size="tiny" onClick={addOption}>
           Add
         </Button>
-
         {canUseDels && (
           <Button
             type="yellow"

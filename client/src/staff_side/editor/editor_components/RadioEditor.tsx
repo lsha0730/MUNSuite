@@ -87,7 +87,6 @@ function RadioEditor({
         {...register("subheading")}
       />
 
-      <p className="subheading">Options</p>
       <Controller
         name="options"
         control={control}

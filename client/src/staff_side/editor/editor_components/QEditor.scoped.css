@@ -2,6 +2,9 @@
 .block-container {
   width: 400px;
   height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 
   position: absolute;
   top: 0px;
@@ -25,7 +28,6 @@
   font-size: 14px;
   font-weight: 600;
   color: #707070;
-  margin-top: 1rem;
   margin-bottom: 0.3rem;
 }
 .subheading-icon-container {
