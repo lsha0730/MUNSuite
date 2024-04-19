@@ -40,7 +40,6 @@ function ContentEditor({
         subheading,
         content,
       };
-      console.log(data);
       updateForm(FormOperation.Update, id, Object.assign(original, data));
     });
   }, []);
