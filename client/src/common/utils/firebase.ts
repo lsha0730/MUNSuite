@@ -8,15 +8,19 @@ import {
   ref as dbref,
   set,
 } from "firebase/database";
-import { FirebaseDataTarget } from "../types/types";
+import { FBStorageFolder, FirebaseDataTarget } from "../types/types";
 import { filterFalsies } from "./utils";
 import { BLANK_APPDATA } from "../constants";
 import {
+  deleteObject,
   getDownloadURL,
   getStorage,
   ref as storageref,
   uploadBytes,
 } from "firebase/storage";
+import { ChangeEvent } from "react";
+import { v4 as uuid } from "uuid"
+import { File } from "../types/questionTypes";
 
 const DB_ARRAY_NODES = [
   FirebaseDataTarget.Delegations,
@@ -90,10 +94,30 @@ export function firebaseWrite(
   set(dbRef, content);
 }
 
-export async function firebaseUpload(file: File, location: string) {
+export async function firebaseUpload(file: Blob | Uint8Array | ArrayBuffer, location: string) {
   const storage = getStorage();
   await uploadBytes(storageref(storage, location), file);
   const url = await getDownloadURL(storageref(storage, location));
 
   return url;
+}
+
+export async function firebaseDelete(location: string) {
+  const storage = getStorage();
+  await deleteObject(storageref(storage, location));
+}
+
+export async function firebaseUploadOnChange(e: ChangeEvent<HTMLInputElement>, userID: string, folder: FBStorageFolder) {
+  if (!e.target.files?.[0]) return;
+  const file = e.target.files[0];
+  const fileID = uuid();
+  const location =
+    `appdata/${userID}/livedata/${folder}/${fileID}.${file.type.slice(6)}`;
+    const url = await firebaseUpload(file, location)
+
+    return {
+      name: file.name,
+      link: url,
+      path: location
+    } as File
 }

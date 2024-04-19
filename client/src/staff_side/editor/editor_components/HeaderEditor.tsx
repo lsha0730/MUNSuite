@@ -1,13 +1,12 @@
 import { useEffect, useContext, ChangeEvent } from "react";
 import "./QEditor.scoped.css";
 import { staffContext } from "../../../common/Context";
-import { FormOperation } from "../../../common/types/types";
+import { FBStorageFolder, FormOperation } from "../../../common/types/types";
 import { HeaderQ } from "../../../common/types/questionTypes";
 import { ControlProps } from "../QuestionEditorPair";
 import { useForm } from "react-hook-form";
 import { ShortText } from "../../../common/components/input";
-import { v4 as uuid } from "uuid";
-import { firebaseUpload } from "../../../common/utils/firebase";
+import { firebaseUploadOnChange } from "../../../common/utils/firebase";
 import FileUpload from "../../../common/components/input/file_upload/FileUpload";
 
 function HeaderEditor({
@@ -37,7 +36,7 @@ function HeaderEditor({
         type,
         heading,
         subheading,
-        image
+        image,
       };
       updateForm(FormOperation.Update, id, Object.assign(original, data));
     });
@@ -47,7 +46,7 @@ function HeaderEditor({
     <div className={editing === id ? "block-container" : "hidden"}>
       <p className="heading">Header</p>
 
-      <FileUpload onChange={handleUpload} file={image} label="Image"/>
+      <FileUpload onChange={handleUpload} file={image} label="Image" />
 
       <ShortText
         label="Heading"
@@ -66,20 +65,13 @@ function HeaderEditor({
   );
 
   async function handleUpload(e: ChangeEvent<HTMLInputElement>) {
-    if (!e.target.files?.[0]) return;
-
-    const file = e.target.files[0];
-    const fileID = uuid();
-    const location =
-      image.path ||
-      `appdata/${userID}/livedata/header/${fileID}.${file.type.slice(6)}`;
-    
-    const url = await firebaseUpload(file, location)
-    setValue("image", {
-      name: file.name,
-      link: url,
-      path: location
-    })
+    if (!userID) return;
+    const file = await firebaseUploadOnChange(
+      e,
+      userID,
+      FBStorageFolder.Header
+    );
+    if (file) setValue("image", file);
   }
 }
 

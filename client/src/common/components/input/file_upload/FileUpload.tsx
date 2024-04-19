@@ -7,7 +7,7 @@ import { MdUpload } from "react-icons/md";
 
 type Props = {
   file: File;
-  onChange: ChangeEventHandler;
+  onChange: ChangeEventHandler<HTMLInputElement>;
   label?: string;
 };
 

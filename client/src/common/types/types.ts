@@ -22,6 +22,12 @@ export enum StaffPageKey {
   Signout = "signout",
 }
 
+// Firebase Storage
+export enum FBStorageFolder {
+  Header = "header",
+  Content = "content",
+}
+
 // Firebase Realtime Database
 export type FirebaseDataDelegate = {
   delegations: Delegate[];
