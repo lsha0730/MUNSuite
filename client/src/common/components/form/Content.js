@@ -45,7 +45,7 @@ const Content = ({
                   <p className="content-heading">{item.heading}</p>
                   <div>
                     <img
-                      src={item.value}
+                      src={item.value.link}
                       alt="Content Image"
                       className="content-image"
                     />
