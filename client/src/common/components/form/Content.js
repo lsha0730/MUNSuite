@@ -3,6 +3,7 @@ import { getStorage, ref, deleteObject } from "firebase/storage";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { FormOperation } from "../../types/types";
+import { ContentType } from "../../types/questionTypes";
 
 const Content = ({
   variant,
@@ -32,14 +33,14 @@ const Content = ({
         <p className="subheading">{subheading}</p>
         {(content || []).map((item) => {
           switch (item.type) {
-            case "text":
+            case ContentType.Text:
               return (
                 <div className="content-item-container">
                   <p className="content-heading">{item.heading}</p>
                   <p>{item.value}</p>
                 </div>
               );
-            case "image":
+            case ContentType.Image:
               return (
                 <div className="content-item-container">
                   <p className="content-heading">{item.heading}</p>
@@ -78,6 +79,7 @@ const Content = ({
   );
 
   function deleteContentFiles() {
+    if (!content) return;
     content.forEach((item) => {
       if (item.type == "image" && item.path !== "") {
         deleteObject(ref(storage, item.path));
