@@ -7,7 +7,7 @@ import {
   ContentType,
   File,
 } from "../../../../common/types/questionTypes";
-import { Button, ShortText } from "../../../../common/components/input";
+import { Button, TextInput } from "../../../../common/components/input";
 import {
   Control,
   Controller,
@@ -29,8 +29,6 @@ type Props = {
   setValue: UseFormSetValue<ContentQ>;
   onRemove: (index: number) => void;
 };
-
-// TODO: Finish this
 
 const ContentItem = ({
   type,
@@ -61,7 +59,14 @@ const ContentItem = ({
         name={`content.${index}.value`}
         control={control}
         render={({ field: { onChange, value } }) => (
-          <ShortText value={value} onChange={onChange} bg="gray" />
+          <TextInput
+            component="textarea"
+            fullWidth
+            value={value}
+            onChange={onChange}
+            bg="gray"
+            placeholder="Input here..."
+          />
         )}
       />
     ),
@@ -103,7 +108,7 @@ const ContentItem = ({
           </Button>
         </div>
 
-        <ShortText
+        <TextInput
           placeholder="Input here..."
           bg="gray"
           fullWidth

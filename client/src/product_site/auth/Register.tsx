@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Auth.scoped.css";
 import { appContext } from "../../common/Context";
 import { registerAccount } from "../../common/utils/http";
-import { Button, ShortText, Checkbox } from "../../common/components/input";
+import { Button, TextInput, Checkbox } from "../../common/components/input";
 import Notice from "../../common/components/notice/Notice";
 
 const MESSAGE_DURATION_MS = 3000
@@ -25,14 +25,14 @@ const Register = () => {
 
       <div className="form">
         <div className="form_col">
-          <ShortText label="Email" ref={emailRef} onEnter={handleRegister} />
-          <ShortText
+          <TextInput label="Email" ref={emailRef} onEnter={handleRegister} />
+          <TextInput
             label="Password"
             ref={passwordRef}
             onEnter={handleRegister}
             type="password"
           />
-          <ShortText
+          <TextInput
             label="Confirm Password"
             ref={confirmPassRef}
             onEnter={handleRegister}
@@ -56,12 +56,12 @@ const Register = () => {
         </div>
 
         <div className="form_col">
-          <ShortText
+          <TextInput
             label="Abbreviated Conference Name"
             ref={confNameRef}
             onEnter={handleRegister}
           />
-          <ShortText
+          <TextInput
             label="Abbreviated Committee Name"
             ref={commNameRef}
             onEnter={handleRegister}

@@ -5,7 +5,7 @@ import { FBStorageFolder, FormOperation } from "../../../common/types/types";
 import { HeaderQ } from "../../../common/types/questionTypes";
 import { ControlProps } from "../QuestionEditorPair";
 import { useForm } from "react-hook-form";
-import { ShortText } from "../../../common/components/input";
+import { TextInput } from "../../../common/components/input";
 import { firebaseUploadOnChange } from "../../../common/utils/firebase";
 import FileUpload from "../../../common/components/input/file_upload/FileUpload";
 
@@ -48,14 +48,14 @@ function HeaderEditor({
 
       <FileUpload onChange={handleUpload} file={image} label="Image" />
 
-      <ShortText
+      <TextInput
         label="Heading"
         placeholder="Input here..."
         bg="gray"
         {...register("heading")}
       />
 
-      <ShortText
+      <TextInput
         label="Subheading"
         placeholder="Input here..."
         bg="gray"

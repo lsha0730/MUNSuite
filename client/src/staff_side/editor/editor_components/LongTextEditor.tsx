@@ -5,7 +5,7 @@ import { FormOperation } from "../../../common/types/types";
 import { LongTextQ, MaxCap as MC } from "../../../common/types/questionTypes";
 import { ControlProps } from "../QuestionEditorPair";
 import { Controller, useForm } from "react-hook-form";
-import { ShortText } from "../../../common/components/input";
+import { TextInput } from "../../../common/components/input";
 import { MaxCap } from "../../../common/utils/utils";
 
 type Inputs = {
@@ -85,21 +85,21 @@ function LongTextEditor({
         )}
       />
 
-      <ShortText
+      <TextInput
         label="Heading"
         placeholder="Input here..."
         bg="gray"
         {...register("heading")}
       />
 
-      <ShortText
+      <TextInput
         label="Subheading"
         placeholder="Input here..."
         bg="gray"
         {...register("subheading")}
       />
 
-      <ShortText
+      <TextInput
         type="number"
         label="Max Characters"
         placeholder="No Limit"

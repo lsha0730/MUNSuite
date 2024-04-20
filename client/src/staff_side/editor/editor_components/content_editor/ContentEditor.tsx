@@ -5,7 +5,7 @@ import { FormOperation } from "../../../../common/types/types";
 import { ContentQ, ContentType } from "../../../../common/types/questionTypes";
 import { useFieldArray, useForm } from "react-hook-form";
 import { ControlProps } from "../../QuestionEditorPair";
-import { Button, ShortText } from "../../../../common/components/input";
+import { Button, TextInput } from "../../../../common/components/input";
 import { DEFAULT_CONTENT } from "../../../../common/constants";
 import ContentItem from "./ContentItem";
 import { firebaseDelete } from "../../../../common/utils/firebase";
@@ -63,14 +63,14 @@ function ContentEditor({
     <div className={editing === id ? "block-container" : "hidden"}>
       <p className="heading">Content Block</p>
 
-      <ShortText
+      <TextInput
         label="Heading"
         placeholder="Input here..."
         bg="gray"
         {...register("heading")}
       />
 
-      <ShortText
+      <TextInput
         label="Subheading"
         placeholder="Input here..."
         bg="gray"

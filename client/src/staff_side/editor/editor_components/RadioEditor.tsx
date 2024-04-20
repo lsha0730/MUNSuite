@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import "./QEditor.scoped.css";
-import { Options, ShortText, Toggle } from "../../../common/components/input";
+import { Options, TextInput, Toggle } from "../../../common/components/input";
 import { FormOperation, Option } from "../../../common/types/types";
 import { RadioQ } from "../../../common/types/questionTypes";
 import { ControlProps } from "../QuestionEditorPair";
@@ -73,14 +73,14 @@ function RadioEditor({
         )}
       />
 
-      <ShortText
+      <TextInput
         label="Heading"
         placeholder="Input here..."
         bg="gray"
         {...register("heading")}
       />
 
-      <ShortText
+      <TextInput
         label="Subheading"
         placeholder="Input here..."
         bg="gray"

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import "./QEditor.scoped.css";
-import { Options, ShortText, Toggle } from "../../../common/components/input";
+import { Options, TextInput, Toggle } from "../../../common/components/input";
 import { FormOperation } from "../../../common/types/types";
 import { Controller, useForm } from "react-hook-form";
 import {
@@ -80,21 +80,21 @@ function SelectMultipleEditor({
         )}
       />
 
-      <ShortText
+      <TextInput
         label="Heading"
         placeholder="Input here..."
         bg="gray"
         {...register("heading")}
       />
 
-      <ShortText
+      <TextInput
         label="Subheading"
         placeholder="Input here..."
         bg="gray"
         {...register("subheading")}
       />
 
-      <ShortText
+      <TextInput
         type="number"
         label="Max Selectable"
         placeholder="No Limit"

@@ -4,7 +4,7 @@ import "./Forgot.scoped.css";
 import { BiPaperPlane } from "react-icons/bi";
 import { syntaxCheckEmail } from "../../common/utils/utils";
 import { appContext } from "../../common/Context";
-import { Button, ShortText } from "../../common/components/input";
+import { Button, TextInput } from "../../common/components/input";
 import Notice from "../../common/components/notice/Notice";
 
 const MESSAGE_DURATION_MS = 3000;
@@ -28,7 +28,7 @@ const Forgot = () => {
           <p className="header">Reset Password</p>
 
           <div className="inputs">
-            <ShortText
+            <TextInput
               ref={emailRef}
               label="Account Email"
               onEnter={handleForgot}

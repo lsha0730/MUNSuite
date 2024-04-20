@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import "./QEditor.scoped.css";
-import { ShortText, Toggle } from "../../../common/components/input";
+import { TextInput, Toggle } from "../../../common/components/input";
 import { FormOperation } from "../../../common/types/types";
 import { Options } from "../../../common/components/input";
 import { DelOptions, DropdownQ } from "../../../common/types/questionTypes";
@@ -74,14 +74,14 @@ function DropdownEditor({
         )}
       />
 
-      <ShortText
+      <TextInput
         label="Heading"
         placeholder="Input here..."
         bg="gray"
         {...register("heading")}
       />
 
-      <ShortText
+      <TextInput
         label="Subheading"
         placeholder="Input here..."
         bg="gray"

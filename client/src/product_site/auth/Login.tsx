@@ -4,7 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import "./Auth.scoped.css";
 import { appContext } from "../../common/Context";
 import { syntaxCheckEmail } from "../../common/utils/utils";
-import { Button, ShortText } from "../../common/components/input";
+import { Button, TextInput } from "../../common/components/input";
 import Notice from "../../common/components/notice/Notice";
 
 const MESSAGE_DURATION_MS = 3000
@@ -22,8 +22,8 @@ const Login = () => {
       <p className="header">Log In</p>
 
       <div className="form_col">
-        <ShortText label="Email" ref={emailRef} onEnter={handleLogin} />
-        <ShortText label="Password" ref={passwordRef} onEnter={handleLogin} type="password"/>
+        <TextInput label="Email" ref={emailRef} onEnter={handleLogin} />
+        <TextInput label="Password" ref={passwordRef} onEnter={handleLogin} type="password"/>
         <p className="additional-text" style={{ marginTop: "10px" }}>
           <Link to="/forgot" className="additional-link">
             Forgot Password?

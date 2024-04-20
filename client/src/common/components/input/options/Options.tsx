@@ -1,5 +1,5 @@
 import { useContext, useRef } from "react";
-import { Button, ShortText } from "../";
+import { Button, TextInput } from "../";
 import "./Options.scoped.css";
 import { AllDelegations, DelOptions } from "../../../types/questionTypes";
 import { staffContext } from "../../../Context";
@@ -47,7 +47,7 @@ const Options = ({ options, onChange, canUseDels }: Props) => {
     <div className="container">
       <p className="subheading">Options</p>
       <div className="add_new">
-        <ShortText
+        <TextInput
           ref={inputRef}
           bg="gray"
           placeholder="Add new option..."

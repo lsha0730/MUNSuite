@@ -2,7 +2,7 @@ import { useContext, useRef } from "react";
 import "./LoginPage.scoped.css";
 import { delegateContext } from "../../common/Context";
 import { IoIosLock } from "react-icons/io";
-import { Button, ShortText } from "../../common/components/input";
+import { Button, TextInput } from "../../common/components/input";
 
 const LoginPage = () => {
   const {
@@ -25,7 +25,7 @@ const LoginPage = () => {
         </div>
 
         <div className="bottom">
-          <ShortText
+          <TextInput
             ref={inputRef}
             placeholder="Enter Keycode"
             onEnter={() => {

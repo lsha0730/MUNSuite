@@ -1,4 +1,11 @@
-import { CSSProperties, ForwardedRef, forwardRef } from "react";
+import {
+  CSSProperties,
+  FC,
+  ForwardedRef,
+  forwardRef,
+  KeyboardEvent,
+  ReactNode,
+} from "react";
 import "./Input.scoped.css";
 import ConditionalWrapper from "../misc/ConditionalWrapper";
 import { classNames } from "../../utils/utils";
@@ -14,10 +21,11 @@ type Props = {
   height?: number;
   fullWidth?: boolean;
   flexGrow?: boolean;
+  component?: "input" | "textarea";
   [x: string]: unknown;
 };
 
-const ShortText = forwardRef(
+const TextInput = forwardRef(
   (
     {
       onEnter,
@@ -30,13 +38,30 @@ const ShortText = forwardRef(
       height,
       fullWidth,
       flexGrow,
+      component = "input",
       ...other
     }: Props,
-    ref: ForwardedRef<HTMLInputElement>
+    ref: ForwardedRef<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const fw = fullWidth ? "full_width" : "";
     const fg = flexGrow ? "flex_grow" : "";
     const bg_color = `bg_${bg}`;
+    const inputProps = {
+      type,
+      className: classNames(component, fw, fg, bg_color),
+      onKeyDown: (e: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        if (e.key === "Enter" && onEnter) onEnter();
+      },
+      placeholder,
+      style: Object.assign(
+        {
+          width: width ? `${width}px` : undefined,
+          height: height ? `${height}px` : undefined,
+        },
+        style
+      ),
+      ...other,
+    };
 
     return (
       <ConditionalWrapper
@@ -48,26 +73,17 @@ const ShortText = forwardRef(
         )}
       >
         {label && <p className="label">{label}</p>}
-        <input
-          ref={ref}
-          type={type}
-          className={classNames("shorttext", fw, fg, bg_color)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && onEnter) onEnter();
-          }}
-          placeholder={placeholder}
-          style={Object.assign(
-            {
-              width: width ? `${width}px` : undefined,
-              height: height ? `${height}px` : undefined,
-            },
-            style
-          )}
-          {...other}
-        />
+        {component === "input" ? (
+          <input ref={ref as ForwardedRef<HTMLInputElement>} {...inputProps} />
+        ) : (
+          <textarea
+            ref={ref as ForwardedRef<HTMLTextAreaElement>}
+            {...inputProps}
+          />
+        )}
       </ConditionalWrapper>
     );
   }
 );
 
-export default ShortText;
+export default TextInput;

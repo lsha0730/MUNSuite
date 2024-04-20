@@ -5,7 +5,7 @@ import { FormOperation } from "../../../common/types/types";
 import { Controller, useForm } from "react-hook-form";
 import { ShortTextQ } from "../../../common/types/questionTypes";
 import { ControlProps } from "../QuestionEditorPair";
-import { ShortText } from "../../../common/components/input";
+import { TextInput } from "../../../common/components/input";
 
 type Inputs = {
   required: boolean;
@@ -65,14 +65,14 @@ function ShortTextEditor({
         )}
       />
 
-      <ShortText
+      <TextInput
         label="Heading"
         placeholder="Input here..."
         bg="gray"
         {...register("heading")}
       />
 
-      <ShortText
+      <TextInput
         label="Subheading"
         placeholder="Input here..."
         bg="gray"
