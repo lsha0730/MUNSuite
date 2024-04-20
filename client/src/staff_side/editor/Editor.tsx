@@ -152,7 +152,7 @@ function Editor() {
         </div>
 
         {form.map((question) => (
-          <QuestionEditorPair question={question} controlProps={controlProps} />
+          <QuestionEditorPair key={question.id} question={question} controlProps={controlProps} />
         ))}
 
         <AddQuestion addNewBlock={addQuestion} />

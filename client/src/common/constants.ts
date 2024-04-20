@@ -226,7 +226,7 @@ export const SponsorsLbl = "Sponsors";
 export const SignatoriesLbl = "Signatories";
 
 export const STANDARD_FORM_START = [
-  makeQuestion(QT.Header, true),
+  makeQuestion(QT.Header),
   makeQuestion(QT.ShortText, true, DirectiveTitleLbl),
   makeQuestion(QT.Radio, true, DirectiveTypeLbl),
   {
