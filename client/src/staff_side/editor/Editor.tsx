@@ -10,12 +10,12 @@ import {
   Question,
   QuestionID,
 } from "../../common/types/questionTypes";
-import { STANDARD_FORM_START } from "../../common/constants";
 import { QuestionEditorPair } from "./QuestionEditorPair";
 import { Button } from "../../common/components/input";
 import Notice from "../../common/components/notice/Notice";
 import {
   checkStandardized,
+  getStandardFormStart,
   makeQuestion,
   pasteToClipboard,
 } from "../../common/utils/utils";
@@ -45,7 +45,8 @@ function Editor() {
 
   function forceStandardization() {
     if (!standardized) {
-      const newForm = STANDARD_FORM_START.concat(form);
+      const standardFormStart = getStandardFormStart();
+      const newForm = standardFormStart.concat(form);
       if (database && user)
         firebaseWrite(database, user.uid, FirebaseDataTarget.Form, newForm);
     }

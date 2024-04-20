@@ -311,3 +311,19 @@ export function makeQuestion<T extends QT>(
 export function MaxCap(num: MC): MC {
   return num ? num : null;
 }
+
+export function getStandardFormStart() {
+  return [
+    makeQuestion(QT.Header),
+    makeQuestion(QT.ShortText, true, DirectiveTitleLbl),
+    makeQuestion(QT.Radio, true, DirectiveTypeLbl),
+    {
+      ...makeQuestion(QT.SelectMultiple, true, SponsorsLbl),
+      options: AllDelegations,
+    },
+    {
+      ...makeQuestion(QT.SelectMultiple, false, SignatoriesLbl),
+      options: AllDelegations,
+    },
+  ] as Question[];
+}

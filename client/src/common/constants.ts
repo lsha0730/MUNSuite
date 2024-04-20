@@ -224,17 +224,3 @@ export const DirectiveTitleLbl = "Directive Title";
 export const DirectiveTypeLbl = "Directive Type";
 export const SponsorsLbl = "Sponsors";
 export const SignatoriesLbl = "Signatories";
-
-export const STANDARD_FORM_START = [
-  makeQuestion(QT.Header),
-  makeQuestion(QT.ShortText, true, DirectiveTitleLbl),
-  makeQuestion(QT.Radio, true, DirectiveTypeLbl),
-  {
-    ...makeQuestion(QT.SelectMultiple, true, SponsorsLbl),
-    options: AllDelegations,
-  },
-  {
-    ...makeQuestion(QT.SelectMultiple, false, SignatoriesLbl),
-    options: AllDelegations,
-  },
-] as Question[];
