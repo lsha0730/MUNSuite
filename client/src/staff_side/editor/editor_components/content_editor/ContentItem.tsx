@@ -76,11 +76,6 @@ const ContentItem = ({
     staffAPI: { userID },
   } = useContext(staffContext);
 
-  useEffect(() => {
-    const defaultVal = DEFAULT_CONTENT[type].value;
-    setValue(`content.${index}.value`, defaultVal);
-  }, []);
-
   async function onImageUpload(e: ChangeEvent<HTMLInputElement>) {
     if (!userID) return;
     const file = await firebaseUploadOnChange(

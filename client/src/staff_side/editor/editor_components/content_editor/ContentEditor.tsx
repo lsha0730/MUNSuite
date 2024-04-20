@@ -52,7 +52,7 @@ function ContentEditor({
     if (index < 0 || index >= fields.length) return;
 
     const { type, value } = fields[index];
-    if (type === ContentType.Image) {
+    if (type === ContentType.Image && value.path !== "") {
       firebaseDelete(value.path);
     }
 
@@ -79,6 +79,7 @@ function ContentEditor({
 
       {fields.map((c, i) => (
         <ContentItem
+          key={c.id}
           type={c.type}
           index={i}
           control={control}
