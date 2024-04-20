@@ -1,0 +1,49 @@
+.container {
+  opacity: 0%;
+  width: fit-content;
+  height: 100%;
+
+  transform: translate(0px, -5px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.container:hover {
+  opacity: 100%;
+  transition: 200ms;
+}
+#block-container:hover ~ .container {
+  opacity: 100%;
+  transition: 200ms;
+}
+
+.mover {
+  width: 30px;
+  height: 30px;
+
+  margin-right: 20px;
+
+  fill: #cecece;
+  cursor: pointer;
+}
+.mover:hover {
+  fill: #378dcc;
+  transition: 200ms;
+}
+
+.deleter {
+  width: 25px;
+  height: 25px;
+
+  margin-top: 10px;
+  margin-right: 20px;
+
+  fill: #cecece;
+  cursor: pointer;
+}
+.deleter:hover {
+  fill: #ff7070;
+  transition: 200ms;
+}

@@ -102,57 +102,6 @@
   transition: 200ms;
 }
 
-/*Question Modifier Buttons*/
-#Qmod-icons {
-  opacity: 0%;
-  width: fit-content;
-  height: 100%;
-
-  transform: translate(0px, -5px);
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-#Qmod-icons:hover {
-  opacity: 100%;
-  transition: 200ms;
-}
-#block-container:hover ~ #Qmod-icons {
-  opacity: 100%;
-  transition: 200ms;
-}
-
-.btt-delQ {
-  width: 25px;
-  height: 25px;
-
-  margin-top: 10px;
-  margin-right: 20px;
-
-  fill: #cecece;
-  cursor: pointer;
-}
-.btt-delQ:hover {
-  fill: #ff7070;
-  transition: 200ms;
-}
-
-.btt-moveQ {
-  width: 30px;
-  height: 30px;
-
-  margin-right: 20px;
-
-  fill: #cecece;
-  cursor: pointer;
-}
-.btt-moveQ:hover {
-  fill: #378dcc;
-  transition: 200ms;
-}
-
 /*--------RADIO--------*/
 .radio-single-container {
   display: flex;
