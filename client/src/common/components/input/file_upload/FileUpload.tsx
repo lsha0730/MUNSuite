@@ -1,4 +1,3 @@
-import "../Input.scoped.css";
 import "./FileUpload.scoped.css";
 import { ChangeEventHandler, useRef } from "react";
 import { File } from "../../../types/questionTypes";
