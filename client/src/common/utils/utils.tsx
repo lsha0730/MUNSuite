@@ -301,7 +301,7 @@ export function makeQuestion<T extends QT>(
     type,
     id: uuid(),
     subheading: "",
-    required: required,
+    required: Boolean(required),
   };
   if (heading) baseBlock.heading = heading;
   const combined = { ...DEFAULT_FORM_BASES[type], ...baseBlock };
