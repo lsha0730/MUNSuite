@@ -304,10 +304,7 @@ export function makeQuestion<T extends QT>(
     required: required,
   };
   if (heading) baseBlock.heading = heading;
-  const combined = Object.assign(DEFAULT_FORM_BASES[type], baseBlock) as Record<
-    string,
-    any
-  >;
+  const combined = { ...DEFAULT_FORM_BASES[type], ...baseBlock };
   return combined as QuestionTypeMap[T];
 }
 
