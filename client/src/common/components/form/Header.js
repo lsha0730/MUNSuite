@@ -1,7 +1,6 @@
 import "./PreviewComponents.scoped.css";
 import { getStorage, ref, deleteObject } from "firebase/storage";
-import { FaTrash } from "react-icons/fa";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import QmodButtons from "./qmod_buttons/QmodButtons";
 import { FormOperation } from "../../types/types";
 
 const Header = ({
@@ -15,6 +14,12 @@ const Header = ({
   updateForm,
 }) => {
   const storage = getStorage();
+
+  function deleteImageFile() {
+    if (image.path !== "") {
+      deleteObject(ref(storage, image.path));
+    }
+  }
 
   return (
     <div style={{ display: "flex", flexDirection: "row-reverse" }}>
@@ -36,31 +41,16 @@ const Header = ({
       </div>
 
       {variant === "staff" && (
-        <div id="Qmod-icons">
-          <div onClick={() => updateForm(FormOperation.MoveUp, id)}>
-            <IoIosArrowUp className="btt-moveQ" />
-          </div>
-          <div onClick={() => updateForm(FormOperation.MoveDown, id)}>
-            <IoIosArrowDown className="btt-moveQ" />
-          </div>
-          <div
-            onClick={() => {
-              deleteImageFile();
-              updateForm(FormOperation.Delete, id);
-            }}
-          >
-            <FaTrash className="btt-delQ" />
-          </div>
-        </div>
+        <QmodButtons
+          id={id}
+          onClick={(op, id) => {
+            if (op === FormOperation.Delete) deleteImageFile();
+            updateForm(op, id);
+          }}
+        />
       )}
     </div>
   );
-
-  function deleteImageFile() {
-    if (image.path !== "") {
-      deleteObject(ref(storage, image.path));
-    }
-  }
 };
 
 export default Header;

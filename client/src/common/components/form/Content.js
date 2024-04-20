@@ -1,9 +1,8 @@
 import "./PreviewComponents.scoped.css";
 import { getStorage, ref, deleteObject } from "firebase/storage";
-import { FaTrash } from "react-icons/fa";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { FormOperation } from "../../types/types";
 import { ContentType } from "../../types/questionTypes";
+import QmodButtons from "./qmod_buttons/QmodButtons";
+import { FormOperation } from "../../types/types";
 
 const Content = ({
   variant,
@@ -16,6 +15,15 @@ const Content = ({
   updateForm,
 }) => {
   const storage = getStorage();
+
+  function deleteContentFiles() {
+    if (!content) return;
+    content.forEach(({ value }) => {
+      if (value.type == ContentType.Image && value.path !== "") {
+        deleteObject(ref(storage, item.path));
+      }
+    });
+  }
 
   return (
     <div style={{ display: "flex", flexDirection: "row-reverse" }}>
@@ -58,34 +66,16 @@ const Content = ({
       </div>
 
       {variant === "staff" && (
-        <div id="Qmod-icons">
-          <div onClick={() => updateForm(FormOperation.MoveUp, id)}>
-            <IoIosArrowUp className="btt-moveQ" />
-          </div>
-          <div onClick={() => updateForm(FormOperation.MoveDown, id)}>
-            <IoIosArrowDown className="btt-moveQ" />
-          </div>
-          <div
-            onClick={() => {
-              deleteContentFiles();
-              updateForm(FormOperation.Delete, id);
-            }}
-          >
-            <FaTrash className="btt-delQ" />
-          </div>
-        </div>
+        <QmodButtons
+          id={id}
+          onClick={(op, id) => {
+            if (op === FormOperation.Delete) deleteContentFiles();
+            updateForm(op, id);
+          }}
+        />
       )}
     </div>
   );
-
-  function deleteContentFiles() {
-    if (!content) return;
-    content.forEach(({ value }) => {
-      if (value.type == ContentType.Image && value.path !== "") {
-        deleteObject(ref(storage, item.path));
-      }
-    });
-  }
 };
 
 export default Content;

@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import "./PreviewComponents.scoped.css";
-import { FaTrash } from "react-icons/fa";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { FormOperation } from "../../types/types";
+import QmodButtons from "./qmod_buttons/QmodButtons";
 
 const MultipleChoice = ({
   variant,
@@ -54,7 +52,7 @@ const MultipleChoice = ({
         <p className="subheading">{subheading}</p>
         <p className={required ? "required-star" : "hidden"}>*</p>
         <div className="mc-options-container">
-          {options.map(({label}, index) => (
+          {options.map(({ label }, index) => (
             <div className="mc-single-container">
               <input
                 type="checkbox"
@@ -69,19 +67,7 @@ const MultipleChoice = ({
         </div>
       </div>
 
-      {variant === "staff" && (
-        <div id="Qmod-icons">
-          <div onClick={() => updateForm(FormOperation.MoveUp, id)}>
-            <IoIosArrowUp className="btt-moveQ" />
-          </div>
-          <div onClick={() => updateForm(FormOperation.MoveDown, id)}>
-            <IoIosArrowDown className="btt-moveQ" />
-          </div>
-          <div onClick={() => updateForm(FormOperation.Delete, id)}>
-            <FaTrash className="btt-delQ" />
-          </div>
-        </div>
-      )}
+      {variant === "staff" && <QmodButtons id={id} onClick={updateForm} />}
     </div>
   );
 };

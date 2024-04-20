@@ -1,8 +1,6 @@
 import { useRef, useState } from "react";
 import "./PreviewComponents.scoped.css";
-import { FaTrash } from "react-icons/fa";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { FormOperation } from "../../types/types";
+import QmodButtons from "./qmod_buttons/QmodButtons";
 
 const LongText = ({
   variant,
@@ -54,19 +52,7 @@ const LongText = ({
         )}
       </div>
 
-      {variant === "staff" && (
-        <div id="Qmod-icons">
-          <div onClick={() => updateForm(FormOperation.MoveUp, id)}>
-            <IoIosArrowUp className="btt-moveQ" />
-          </div>
-          <div onClick={() => updateForm(FormOperation.MoveDown, id)}>
-            <IoIosArrowDown className="btt-moveQ" />
-          </div>
-          <div onClick={() => updateForm(FormOperation.Delete, id)}>
-            <FaTrash className="btt-delQ" />
-          </div>
-        </div>
-      )}
+      {variant === "staff" && <QmodButtons id={id} onClick={updateForm} />}
     </div>
   );
 };
