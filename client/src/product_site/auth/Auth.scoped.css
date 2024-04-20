@@ -25,9 +25,10 @@
 }
 
 .form_col {
-  width: fit-content;
+  width: 18rem;
   display: flex;
   flex-direction: column;
+  gap: 0.7rem;
 }
 
 .additional-text {
