@@ -1,0 +1,9 @@
+services:
+  munsuite_backend:
+    image: munsuite_backend
+    build: .
+    ports:
+      - 443:4242
+    volumes:
+      - ./serviceAccountKey.json:/app/build/serviceAccountKey.json:ro
+      - ./.env:/app/.env:ro
