@@ -1,0 +1,14 @@
+.pair {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 15px;
+}
+
+.text {
+  font-weight: 500;
+  color: #707070;
+}

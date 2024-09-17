@@ -1,0 +1,44 @@
+/*--------GENERAL FORMATTING-------*/
+.fade {
+  opacity: 0%;
+  transition: 200ms;
+}
+
+.centering_container {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-bottom: 70px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 7rem;
+}
+
+.header {
+  font-size: 32px;
+  font-weight: 700;
+  color: #4b6980;
+  margin-bottom: 20px;
+}
+
+.subheader {
+  font-weight: 600;
+  color: #707070;
+}
+
+.icon {
+  fill: #4b6980;
+  margin-bottom: 10px;
+}

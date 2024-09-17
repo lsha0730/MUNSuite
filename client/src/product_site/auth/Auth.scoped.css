@@ -1,0 +1,64 @@
+/*--------GENERAL FORMATTING-------*/
+.container {
+  height: 100%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+  padding-bottom: 70px;
+  margin: auto;
+  justify-content: center;
+}
+
+.header {
+  font-size: 32px;
+  font-weight: 700;
+  color: #4b6980;
+  margin-bottom: 20px;
+}
+
+.form {
+  width: fit-content;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.1rem;
+}
+
+.form_col {
+  width: 18rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.additional-text {
+  display: flex;
+  align-items: row;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: #c4c4c4;
+}
+
+.additional-link {
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #3c8cc9;
+}
+
+.warning {
+  width: fit-content;
+  position: absolute;
+  left: 170px;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: #ff7070;
+  transition: 200ms;
+}
+
+.eula_link {
+  font-weight: 500;
+  color: #378dcc;
+}

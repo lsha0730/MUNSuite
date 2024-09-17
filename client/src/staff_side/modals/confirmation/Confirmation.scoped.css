@@ -1,0 +1,40 @@
+.container {
+  height: fit-content;
+  width: 500px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+.btt-confirm {
+  width: fit-content;
+  height: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 10px;
+  background-color: #f3b9c9;
+  color: #ff435d;
+  font-weight: 500;
+  border-radius: 5px;
+
+  transition: 200ms;
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+.btt-confirm:hover {
+  background-color: #ff7979;
+  color: #ffffff;
+  transition: 200ms;
+}

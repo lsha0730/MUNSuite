@@ -1,0 +1,155 @@
+.delegations-container {
+  width: 75%;
+  height: 80%;
+  max-width: 1600px;
+
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.full-size {
+  width: 100%;
+  height: 100%;
+}
+
+.hide {
+  opacity: 0%;
+  visibility: hidden;
+  transition: 200ms;
+}
+
+.visible {
+  opacity: 100%;
+  transition: 200ms;
+}
+
+.px18 {
+  font-size: 18px;
+}
+
+.noselect {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+/*----- Welcome -----*/
+.welcome {
+  position: absolute;
+  top: 30px;
+  left: 50px;
+  color: #bcbcbc;
+}
+
+.welcome-heading {
+  font-size: 26px;
+}
+
+.welcome-subheading {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/*-----------LEFT UI-----------*/
+.UI-left {
+  width: fit-content;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.UI-topleft {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.delbars {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.delcount {
+  width: 250px;
+  padding: 25px;
+  padding-bottom: 35px;
+
+  background-color: #ffffff;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #f7f7f7;
+
+  margin-bottom: 20px;
+}
+.delcount-num {
+  font-size: 72px;
+  font-weight: 600;
+}
+.delcount-desc {
+  font-size: 18px;
+  font-weight: 700;
+  color: #bcbcbc;
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+/*-----------RIGHT UI-----------*/
+.UI-right {
+  width: 75%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  overflow-y: auto;
+}
+.UI-right:hover::-webkit-scrollbar-track {
+  background: rgba(241, 241, 241, 1);
+  opacity: 100%;
+  transition: 200ms;
+}
+.UI-right:hover::-webkit-scrollbar-thumb {
+  background: rgba(220, 220, 220, 1);
+  opacity: 100%;
+  transition: 200ms;
+}
+.no-dels {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 10px;
+  background-color: #f3f3f3;
+  color: #bcbcbc;
+}
+.no-dels-message {
+  font-weight: 600;
+  font-size: 24px;
+}

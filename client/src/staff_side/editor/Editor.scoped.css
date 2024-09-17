@@ -1,0 +1,77 @@
+/*----------PAGE UI----------*/
+.editor-container {
+  width: fit-content;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+}
+
+.main-UI {
+  width: 1170px;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/*----------FORM UI----------*/
+.preview-editor-pair {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  overflow: visible;
+}
+
+.hat-UI {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  padding-right: 430px;
+  padding-bottom: 30px;
+  margin-top: 30px;
+}
+
+.hat-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transform: translate(50px);
+  white-space: nowrap;
+}
+.heading {
+  max-width: 400px;
+  font-size: 32px;
+  font-weight: 600;
+  color: #bcbcbc;
+}
+.subheading {
+  font-size: 18px;
+  font-weight: 500;
+  color: #bcbcbc;
+}
+
+.hat-right {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.icon-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/*----- Share Button -----*/
+.link-container {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}

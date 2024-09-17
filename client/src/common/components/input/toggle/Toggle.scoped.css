@@ -1,0 +1,53 @@
+.container {
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.bar-lg {
+  position: relative;
+  width: 45px;
+  height: 20px;
+  border-radius: 10px;
+}
+.bar-sm {
+  position: relative;
+  width: 35px;
+  height: 15px;
+  border-radius: 10px;
+}
+
+.circle-lg {
+  position: absolute;
+  top: -1px;
+  left: 0px;
+
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+}
+.circle-sm {
+  position: absolute;
+  left: 0px;
+
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+
+.transition200 {
+  transition: 200ms;
+}
+
+.label {
+  font-weight: 500;
+  transition: 200ms;
+}
+
+.noselect {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}

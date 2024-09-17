@@ -1,0 +1,57 @@
+/*-------BLOCK FORMATTING------*/
+.block-container {
+  width: 400px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 1;
+
+  background-color: white;
+  border-radius: 10px;
+
+  padding: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.heading {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.subheading {
+  font-size: 14px;
+  font-weight: 600;
+  color: #707070;
+  margin-bottom: 0.3rem;
+}
+.subheading-icon-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hidden {
+  display: none;
+}
+
+.fade {
+  opacity: 0%;
+  transition: 200ms;
+}
+
+.dummy-block {
+  height: 200px;
+  width: 100%;
+  margin: auto;
+  margin-top: 10px;
+
+  border-radius: 10px;
+  background-color: #f7f7f7;
+}
