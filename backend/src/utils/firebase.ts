@@ -1,10 +1,9 @@
 const admin = require("firebase-admin");
-
-const serviceAccount = require("../serviceAccountKey.json");
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT ?? "{}");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://munsuite-d1d0c-default-rtdb.firebaseio.com",
+  databaseURL: process.env.FIREBASE_DATABASE_URL,
 });
 
 // As an admin, the app has access to read and write all data, regardless of Security Rules
