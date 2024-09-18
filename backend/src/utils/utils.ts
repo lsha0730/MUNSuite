@@ -1,4 +1,5 @@
 import express = require("express");
+import cors = require("cors");
 const { registerRouter } = require("../routes/register");
 const { purchaseRouter } = require("../routes/purchase");
 const { accountRouter } = require("../routes/account");
@@ -17,14 +18,13 @@ import {
 async function initializeServer(port: number) {
   const app = express();
 
-  app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://munsuite.com");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-  });
+  const corsOptions = {
+    origin: ["https://munsuite.com"],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"],
+  };
+
+  app.use(cors(corsOptions));
   app.use("/register", registerRouter);
   app.use("/purchase", purchaseRouter);
   app.use("/account", accountRouter);
