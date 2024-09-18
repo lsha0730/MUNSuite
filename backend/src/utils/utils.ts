@@ -18,13 +18,15 @@ import {
 async function initializeServer(port: number) {
   const app = express();
 
-  // const corsOptions = {
-  //   origin: ["https://munsuite.com"],
-  //   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  //   allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"],
-  // };
+  const corsOptions = {
+    origin: ["https://munsuite.com"].concat(
+      process.env.mode === "dev" ? "http://localhost:3000" : []
+    ),
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"],
+  };
 
-  app.use(cors());
+  app.use(cors(corsOptions));
   app.use("/register", registerRouter);
   app.use("/purchase", purchaseRouter);
   app.use("/account", accountRouter);
