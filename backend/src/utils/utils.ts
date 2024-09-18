@@ -48,7 +48,7 @@ function initializeSweeper(cron: string) {
     YYYY-MM-DD HH:MM:SS UTC
     2022-12-25 08:01:10 UTC
 */
-const getUTCTimestamp = (offsetDays?: number): UTCString => {
+export const getUTCTimestamp = (offsetDays?: number): UTCString => {
   const date = new Date();
   date.setDate(date.getDate() + (offsetDays || 0));
 
