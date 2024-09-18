@@ -20,7 +20,7 @@ async function initializeServer(port: number) {
 
   const corsOptions = {
     origin: ["https://munsuite.com"].concat(
-      process.env.mode === "dev" ? "http://localhost:3000" : []
+      process.env.mode === "dev" ? ["http://localhost:3000"] : []
     ),
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"],
