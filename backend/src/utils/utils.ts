@@ -1,5 +1,5 @@
 import express = require("express");
-import cors = require("cors");
+const cors = require("cors");
 const { registerRouter } = require("../routes/register");
 const { purchaseRouter } = require("../routes/purchase");
 const { accountRouter } = require("../routes/account");
@@ -18,13 +18,13 @@ import {
 async function initializeServer(port: number) {
   const app = express();
 
-  const corsOptions = {
-    origin: ["https://munsuite.com"],
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"],
-  };
+  // const corsOptions = {
+  //   origin: ["https://munsuite.com"],
+  //   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  //   allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"],
+  // };
 
-  app.use(cors(corsOptions));
+  app.use(cors());
   app.use("/register", registerRouter);
   app.use("/purchase", purchaseRouter);
   app.use("/account", accountRouter);
