@@ -35,7 +35,6 @@ import { FC } from "react";
 import { makeQuestion } from "./utils/utils";
 
 // Links
-export const CUSTOM_BACKEND_URL = "https://munsuite-backend.onrender.com";
 export const LINCOLN_LINKEDIN =
   "https://www.linkedin.com/in/lincoln-seungha-lee/";
 export const INQUIRY_EMAIL = "info@munsuite.com";

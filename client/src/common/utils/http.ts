@@ -1,5 +1,4 @@
 import axios from "axios";
-import { CUSTOM_BACKEND_URL } from "../constants";
 import { StaffAccountInfo } from "../../staff_side/StaffApp";
 import {
   Auth,
@@ -18,7 +17,7 @@ export async function getHostAccountInfo(
   uid: string,
   callback: (data: StaffAccountInfo) => void
 ) {
-  const url = `${CUSTOM_BACKEND_URL}/account/info`;
+  const url = `${process.env.REACT_APP_BACKEND_URL}/account/info`;
   const body = { uid };
   const response = await axios.post(url, body);
   callback(response.data as StaffAccountInfo);
@@ -47,7 +46,7 @@ export async function registerAccount(
 ): Promise<UserCredential> {
   if (!validateRegistrationObject(registrationObject))
     throw new Error("Invalid registration info");
-  const url = `${CUSTOM_BACKEND_URL}/register/newuser`;
+  const url = `${process.env.REACT_APP_BACKEND_URL}/register/newuser`;
   const body = { registrationObject };
   const { data: resultMessage }: { data: string } = await axios.post(url, body);
   if (resultMessage == "Success") {
